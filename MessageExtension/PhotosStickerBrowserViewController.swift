@@ -19,6 +19,11 @@ class PhotosStickerBrowserViewController: MSStickerBrowserViewController
         stickerBrowserView.reloadData()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadStickers()
+    }
+    
     fileprivate func loadSticker(asset: String, localizedDescription: String) {
         
         guard let stickerURL = AppGroup.documentsURL?.appendingPathComponent(asset) else {
