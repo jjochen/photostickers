@@ -20,6 +20,10 @@
 		19B7A4F81E13C1F00074B6B1 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4F61E13C1F00074B6B1 /* MainInterface.storyboard */; };
 		19B7A4FA1E13C1F00074B6B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4F91E13C1F00074B6B1 /* Assets.xcassets */; };
 		19B7A4FE1E13C1F00074B6B1 /* MessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		19B7A5041E13C8A00074B6B1 /* PhotosStickerBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A5031E13C8A00074B6B1 /* PhotosStickerBrowserViewController.swift */; };
+		19B7A50E1E13C9E20074B6B1 /* sticker.png in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A50D1E13C9E20074B6B1 /* sticker.png */; };
+		19B7A5121E13CB800074B6B1 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A5111E13CB800074B6B1 /* AppGroup.swift */; };
+		19B7A5161E1462170074B6B1 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A5111E13CB800074B6B1 /* AppGroup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +85,11 @@
 		19B7A4F71E13C1F00074B6B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		19B7A4F91E13C1F00074B6B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19B7A4FB1E13C1F00074B6B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19B7A5031E13C8A00074B6B1 /* PhotosStickerBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosStickerBrowserViewController.swift; sourceTree = "<group>"; };
+		19B7A50D1E13C9E20074B6B1 /* sticker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sticker.png; sourceTree = "<group>"; };
+		19B7A5111E13CB800074B6B1 /* AppGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
+		19B7A5131E13CC2C0074B6B1 /* PhotoStickers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PhotoStickers.entitlements; path = ../PhotoStickers/PhotoStickers.entitlements; sourceTree = "<group>"; };
+		19B7A5141E13CC970074B6B1 /* MessageExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessageExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +128,7 @@
 		19B7A4AE1E13C14B0074B6B1 = {
 			isa = PBXGroup;
 			children = (
+				19B7A5101E13CB460074B6B1 /* Shared */,
 				19B7A4B91E13C14B0074B6B1 /* PhotoStickers */,
 				19B7A4F31E13C1F00074B6B1 /* MessageExtension */,
 				19B7A4D11E13C14B0074B6B1 /* PhotoStickersTests */,
@@ -142,6 +152,7 @@
 		19B7A4B91E13C14B0074B6B1 /* PhotoStickers */ = {
 			isa = PBXGroup;
 			children = (
+				19B7A50C1E13C9E20074B6B1 /* Resources */,
 				19B7A4BA1E13C14B0074B6B1 /* AppDelegate.swift */,
 				19B7A4BC1E13C14B0074B6B1 /* ViewController.swift */,
 				19B7A4BE1E13C14B0074B6B1 /* Main.storyboard */,
@@ -182,12 +193,31 @@
 		19B7A4F31E13C1F00074B6B1 /* MessageExtension */ = {
 			isa = PBXGroup;
 			children = (
+				19B7A5141E13CC970074B6B1 /* MessageExtension.entitlements */,
 				19B7A4F41E13C1F00074B6B1 /* MessagesViewController.swift */,
+				19B7A5031E13C8A00074B6B1 /* PhotosStickerBrowserViewController.swift */,
 				19B7A4F61E13C1F00074B6B1 /* MainInterface.storyboard */,
 				19B7A4F91E13C1F00074B6B1 /* Assets.xcassets */,
 				19B7A4FB1E13C1F00074B6B1 /* Info.plist */,
+				19B7A5131E13CC2C0074B6B1 /* PhotoStickers.entitlements */,
 			);
 			path = MessageExtension;
+			sourceTree = "<group>";
+		};
+		19B7A50C1E13C9E20074B6B1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				19B7A50D1E13C9E20074B6B1 /* sticker.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		19B7A5101E13CB460074B6B1 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				19B7A5111E13CB800074B6B1 /* AppGroup.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,6 +309,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 2TV9GXC7CB;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					19B7A4CD1E13C14B0074B6B1 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -296,6 +331,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 2TV9GXC7CB;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -328,6 +368,7 @@
 				19B7A4C81E13C14B0074B6B1 /* LaunchScreen.storyboard in Resources */,
 				19B7A4C51E13C14B0074B6B1 /* Assets.xcassets in Resources */,
 				19B7A4C01E13C14B0074B6B1 /* Main.storyboard in Resources */,
+				19B7A50E1E13C9E20074B6B1 /* sticker.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19B7A5121E13CB800074B6B1 /* AppGroup.swift in Sources */,
 				19B7A4BD1E13C14B0074B6B1 /* ViewController.swift in Sources */,
 				19B7A4C31E13C14B0074B6B1 /* PhotoStickers.xcdatamodeld in Sources */,
 				19B7A4BB1E13C14B0074B6B1 /* AppDelegate.swift in Sources */,
@@ -387,6 +429,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19B7A5041E13C8A00074B6B1 /* PhotosStickerBrowserViewController.swift in Sources */,
+				19B7A5161E1462170074B6B1 /* AppGroup.swift in Sources */,
 				19B7A4F51E13C1F00074B6B1 /* MessagesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,6 +581,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PhotoStickers/PhotoStickers.entitlements;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = PhotoStickers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -551,6 +596,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PhotoStickers/PhotoStickers.entitlements;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = PhotoStickers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -622,6 +668,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_ENTITLEMENTS = MessageExtension/MessageExtension.entitlements;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = MessageExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -636,6 +683,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_ENTITLEMENTS = MessageExtension/MessageExtension.entitlements;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = MessageExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

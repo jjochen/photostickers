@@ -12,7 +12,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+       
+        storeSticker()
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +22,24 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    func storeSticker() {
+        
+        guard let image = UIImage(named: "sticker") else {
+            return
+        }
+        guard let data = UIImagePNGRepresentation(image) else {
+            return
+        }
+        guard let filename = AppGroup.documentsURL?.appendingPathComponent("sticker.png") else
+        {
+            return
+        }
+        do {
+            try data.write(to: filename)
+        } catch {
+            print(error)
+            return
+        }
+    }
 }
 

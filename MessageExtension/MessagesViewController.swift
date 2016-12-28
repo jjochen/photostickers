@@ -10,10 +10,23 @@ import UIKit
 import Messages
 
 class MessagesViewController: MSMessagesAppViewController {
+   
+    var browserViewController: PhotosStickerBrowserViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        browserViewController = PhotosStickerBrowserViewController(stickerSize: .regular)
+        
+        addChildViewController(browserViewController)
+        browserViewController.didMove(toParentViewController: self)
+        self.view.addSubview(browserViewController.view)
+        view.addConstraint(NSLayoutConstraint(item: topLayoutGuide, attribute: .top, relatedBy: .equal, toItem: browserViewController.view, attribute: .top, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: view, attribute: .left, relatedBy: .equal, toItem: browserViewController.view, attribute: .left, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: topLayoutGuide, attribute: .right, relatedBy: .equal, toItem: browserViewController.view, attribute: .right, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: bottomLayoutGuide, attribute: .bottom, relatedBy: .equal, toItem: browserViewController.view, attribute: .bottom, multiplier: 1, constant: 0))
+        
+        browserViewController.loadStickers()
     }
     
     override func didReceiveMemoryWarning() {
