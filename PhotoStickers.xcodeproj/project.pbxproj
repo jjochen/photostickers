@@ -15,6 +15,11 @@
 		19B7A4C81E13C14B0074B6B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4C61E13C14B0074B6B1 /* LaunchScreen.storyboard */; };
 		19B7A4D31E13C14B0074B6B1 /* PhotoStickersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4D21E13C14B0074B6B1 /* PhotoStickersTests.swift */; };
 		19B7A4DE1E13C14B0074B6B1 /* PhotoStickersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4DD1E13C14B0074B6B1 /* PhotoStickersUITests.swift */; };
+		19B7A4F21E13C1F00074B6B1 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19B7A4F11E13C1F00074B6B1 /* Messages.framework */; };
+		19B7A4F51E13C1F00074B6B1 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4F41E13C1F00074B6B1 /* MessagesViewController.swift */; };
+		19B7A4F81E13C1F00074B6B1 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4F61E13C1F00074B6B1 /* MainInterface.storyboard */; };
+		19B7A4FA1E13C1F00074B6B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4F91E13C1F00074B6B1 /* Assets.xcassets */; };
+		19B7A4FE1E13C1F00074B6B1 /* MessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +37,28 @@
 			remoteGlobalIDString = 19B7A4B61E13C14B0074B6B1;
 			remoteInfo = PhotoStickers;
 		};
+		19B7A4FC1E13C1F00074B6B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 19B7A4AF1E13C14B0074B6B1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19B7A4EE1E13C1F00074B6B1;
+			remoteInfo = MessageExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		19B7A5021E13C1F00074B6B1 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				19B7A4FE1E13C1F00074B6B1 /* MessageExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		19B7A4B71E13C14B0074B6B1 /* PhotoStickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +75,12 @@
 		19B7A4D91E13C14B0074B6B1 /* PhotoStickersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoStickersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4DD1E13C14B0074B6B1 /* PhotoStickersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStickersUITests.swift; sourceTree = "<group>"; };
 		19B7A4DF1E13C14B0074B6B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		19B7A4F11E13C1F00074B6B1 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
+		19B7A4F41E13C1F00074B6B1 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		19B7A4F71E13C1F00074B6B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		19B7A4F91E13C1F00074B6B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		19B7A4FB1E13C1F00074B6B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +105,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		19B7A4EC1E13C1F00074B6B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19B7A4F21E13C1F00074B6B1 /* Messages.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -80,8 +120,10 @@
 			isa = PBXGroup;
 			children = (
 				19B7A4B91E13C14B0074B6B1 /* PhotoStickers */,
+				19B7A4F31E13C1F00074B6B1 /* MessageExtension */,
 				19B7A4D11E13C14B0074B6B1 /* PhotoStickersTests */,
 				19B7A4DC1E13C14B0074B6B1 /* PhotoStickersUITests */,
+				19B7A4F01E13C1F00074B6B1 /* Frameworks */,
 				19B7A4B81E13C14B0074B6B1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,6 +134,7 @@
 				19B7A4B71E13C14B0074B6B1 /* PhotoStickers.app */,
 				19B7A4CE1E13C14B0074B6B1 /* PhotoStickersTests.xctest */,
 				19B7A4D91E13C14B0074B6B1 /* PhotoStickersUITests.xctest */,
+				19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,6 +171,25 @@
 			path = PhotoStickersUITests;
 			sourceTree = "<group>";
 		};
+		19B7A4F01E13C1F00074B6B1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				19B7A4F11E13C1F00074B6B1 /* Messages.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		19B7A4F31E13C1F00074B6B1 /* MessageExtension */ = {
+			isa = PBXGroup;
+			children = (
+				19B7A4F41E13C1F00074B6B1 /* MessagesViewController.swift */,
+				19B7A4F61E13C1F00074B6B1 /* MainInterface.storyboard */,
+				19B7A4F91E13C1F00074B6B1 /* Assets.xcassets */,
+				19B7A4FB1E13C1F00074B6B1 /* Info.plist */,
+			);
+			path = MessageExtension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,10 +200,12 @@
 				19B7A4B31E13C14B0074B6B1 /* Sources */,
 				19B7A4B41E13C14B0074B6B1 /* Frameworks */,
 				19B7A4B51E13C14B0074B6B1 /* Resources */,
+				19B7A5021E13C1F00074B6B1 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				19B7A4FD1E13C1F00074B6B1 /* PBXTargetDependency */,
 			);
 			name = PhotoStickers;
 			productName = PhotoStickers;
@@ -184,6 +248,23 @@
 			productReference = 19B7A4D91E13C14B0074B6B1 /* PhotoStickersUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		19B7A4EE1E13C1F00074B6B1 /* MessageExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 19B7A4FF1E13C1F00074B6B1 /* Build configuration list for PBXNativeTarget "MessageExtension" */;
+			buildPhases = (
+				19B7A4EB1E13C1F00074B6B1 /* Sources */,
+				19B7A4EC1E13C1F00074B6B1 /* Frameworks */,
+				19B7A4ED1E13C1F00074B6B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MessageExtension;
+			productName = MessageExtension;
+			productReference = 19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */;
+			productType = "com.apple.product-type.app-extension.messages";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -211,6 +292,11 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 19B7A4B61E13C14B0074B6B1;
 					};
+					19B7A4EE1E13C1F00074B6B1 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 2TV9GXC7CB;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 19B7A4B21E13C14B0074B6B1 /* Build configuration list for PBXProject "PhotoStickers" */;
@@ -227,6 +313,7 @@
 			projectRoot = "";
 			targets = (
 				19B7A4B61E13C14B0074B6B1 /* PhotoStickers */,
+				19B7A4EE1E13C1F00074B6B1 /* MessageExtension */,
 				19B7A4CD1E13C14B0074B6B1 /* PhotoStickersTests */,
 				19B7A4D81E13C14B0074B6B1 /* PhotoStickersUITests */,
 			);
@@ -255,6 +342,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		19B7A4ED1E13C1F00074B6B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19B7A4FA1E13C1F00074B6B1 /* Assets.xcassets in Resources */,
+				19B7A4F81E13C1F00074B6B1 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +383,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		19B7A4EB1E13C1F00074B6B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19B7A4F51E13C1F00074B6B1 /* MessagesViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -299,6 +403,11 @@
 			isa = PBXTargetDependency;
 			target = 19B7A4B61E13C14B0074B6B1 /* PhotoStickers */;
 			targetProxy = 19B7A4DA1E13C14B0074B6B1 /* PBXContainerItemProxy */;
+		};
+		19B7A4FD1E13C1F00074B6B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 19B7A4EE1E13C1F00074B6B1 /* MessageExtension */;
+			targetProxy = 19B7A4FC1E13C1F00074B6B1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -317,6 +426,14 @@
 				19B7A4C71E13C14B0074B6B1 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		19B7A4F61E13C1F00074B6B1 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				19B7A4F71E13C1F00074B6B1 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -418,11 +535,12 @@
 		19B7A4E31E13C14B0074B6B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = PhotoStickers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.PhotoStickers";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.photo-stickers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -431,11 +549,12 @@
 		19B7A4E41E13C14B0074B6B1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = PhotoStickers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.PhotoStickers";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.photo-stickers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -499,6 +618,34 @@
 			};
 			name = Release;
 		};
+		19B7A5001E13C1F00074B6B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				DEVELOPMENT_TEAM = 2TV9GXC7CB;
+				INFOPLIST_FILE = MessageExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.photo-stickers.message-extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		19B7A5011E13C1F00074B6B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				DEVELOPMENT_TEAM = 2TV9GXC7CB;
+				INFOPLIST_FILE = MessageExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.photo-stickers.message-extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -532,6 +679,14 @@
 			buildConfigurations = (
 				19B7A4E91E13C14B0074B6B1 /* Debug */,
 				19B7A4EA1E13C14B0074B6B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		19B7A4FF1E13C1F00074B6B1 /* Build configuration list for PBXNativeTarget "MessageExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19B7A5001E13C1F00074B6B1 /* Debug */,
+				19B7A5011E13C1F00074B6B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
