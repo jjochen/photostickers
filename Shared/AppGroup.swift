@@ -9,14 +9,14 @@
 import Foundation
 
 struct AppGroup {
-    
+
     fileprivate static let appGroupID = "group.com.jochen-pfeiffer.photo-stickers"
-    
+
     public static var userDefaults: UserDefaults? {
         let defaults = UserDefaults(suiteName: appGroupID)
         return defaults
     }
-    
+
     public static var documentsURL: URL? {
         let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupID)
         return url

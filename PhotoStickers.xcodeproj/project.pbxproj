@@ -88,7 +88,7 @@
 		19B7A5031E13C8A00074B6B1 /* PhotosStickerBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosStickerBrowserViewController.swift; sourceTree = "<group>"; };
 		19B7A50D1E13C9E20074B6B1 /* sticker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sticker.png; sourceTree = "<group>"; };
 		19B7A5111E13CB800074B6B1 /* AppGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
-		19B7A5131E13CC2C0074B6B1 /* PhotoStickers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PhotoStickers.entitlements; path = ../PhotoStickers/PhotoStickers.entitlements; sourceTree = "<group>"; };
+		19B7A5131E13CC2C0074B6B1 /* PhotoStickers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoStickers.entitlements; sourceTree = "<group>"; };
 		19B7A5141E13CC970074B6B1 /* MessageExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessageExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +160,7 @@
 				19B7A4C61E13C14B0074B6B1 /* LaunchScreen.storyboard */,
 				19B7A4C91E13C14B0074B6B1 /* Info.plist */,
 				19B7A4C11E13C14B0074B6B1 /* PhotoStickers.xcdatamodeld */,
+				19B7A5131E13CC2C0074B6B1 /* PhotoStickers.entitlements */,
 			);
 			path = PhotoStickers;
 			sourceTree = "<group>";
@@ -199,7 +200,6 @@
 				19B7A4F61E13C1F00074B6B1 /* MainInterface.storyboard */,
 				19B7A4F91E13C1F00074B6B1 /* Assets.xcassets */,
 				19B7A4FB1E13C1F00074B6B1 /* Info.plist */,
-				19B7A5131E13CC2C0074B6B1 /* PhotoStickers.entitlements */,
 			);
 			path = MessageExtension;
 			sourceTree = "<group>";

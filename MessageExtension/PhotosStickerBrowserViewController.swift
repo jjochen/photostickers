@@ -10,22 +10,21 @@ import Foundation
 import UIKit
 import Messages
 
-class PhotosStickerBrowserViewController: MSStickerBrowserViewController
-{
+class PhotosStickerBrowserViewController: MSStickerBrowserViewController {
     var stickers = [MSSticker]()
-    
+
     public func loadStickers() {
         loadSticker(asset: "sticker.png", localizedDescription: "Pizza")
         stickerBrowserView.reloadData()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         loadStickers()
     }
-    
+
     fileprivate func loadSticker(asset: String, localizedDescription: String) {
-        
+
         guard let stickerURL = AppGroup.documentsURL?.appendingPathComponent(asset) else {
             return
         }
@@ -38,16 +37,12 @@ class PhotosStickerBrowserViewController: MSStickerBrowserViewController
             return
         }
     }
-    
+
     override func numberOfStickers(in stickerBrowserView: MSStickerBrowserView) -> Int {
         return stickers.count
     }
-    
+
     override func stickerBrowserView(_ stickerBrowserView: MSStickerBrowserView, stickerAt index: Int) -> MSSticker {
         return stickers[index]
     }
-    
-    
-    
-    
 }

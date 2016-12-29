@@ -12,8 +12,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
+
         storeSticker()
     }
 
@@ -23,15 +22,14 @@ class ViewController: UIViewController {
     }
 
     func storeSticker() {
-        
+
         guard let image = UIImage(named: "sticker") else {
             return
         }
         guard let data = UIImagePNGRepresentation(image) else {
             return
         }
-        guard let filename = AppGroup.documentsURL?.appendingPathComponent("sticker.png") else
-        {
+        guard let filename = AppGroup.documentsURL?.appendingPathComponent("sticker.png") else {
             return
         }
         do {
@@ -42,4 +40,3 @@ class ViewController: UIViewController {
         }
     }
 }
-
