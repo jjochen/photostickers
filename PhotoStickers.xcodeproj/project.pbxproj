@@ -227,6 +227,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19B7A4E21E13C14B0074B6B1 /* Build configuration list for PBXNativeTarget "PhotoStickers" */;
 			buildPhases = (
+				19B7A5171E1669600074B6B1 /* Run swiftformat */,
 				19B7A4B31E13C14B0074B6B1 /* Sources */,
 				19B7A4B41E13C14B0074B6B1 /* Frameworks */,
 				19B7A4B51E13C14B0074B6B1 /* Resources */,
@@ -396,6 +397,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		19B7A5171E1669600074B6B1 /* Run swiftformat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run swiftformat";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/tools/swiftformat\" \"${SRCROOT}/.\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		19B7A4B31E13C14B0074B6B1 /* Sources */ = {
