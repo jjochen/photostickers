@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1571C61326976B107B5E9DEB /* Pods_PhotoStickers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20C32C26B2F70B228F133D8 /* Pods_PhotoStickers.framework */; };
 		19B7A4BB1E13C14B0074B6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4BA1E13C14B0074B6B1 /* AppDelegate.swift */; };
 		19B7A4BD1E13C14B0074B6B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4BC1E13C14B0074B6B1 /* ViewController.swift */; };
 		19B7A4C01E13C14B0074B6B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4BE1E13C14B0074B6B1 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 		19B7A50E1E13C9E20074B6B1 /* sticker.png in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A50D1E13C9E20074B6B1 /* sticker.png */; };
 		19B7A5121E13CB800074B6B1 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A5111E13CB800074B6B1 /* AppGroup.swift */; };
 		19B7A5161E1462170074B6B1 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A5111E13CB800074B6B1 /* AppGroup.swift */; };
+		82808B248E72148F3506C32A /* Pods_PhotoStickersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9B1657CC99ADDC0880225E /* Pods_PhotoStickersTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		054833EB61F0F2A302FD3396 /* Pods-PhotoStickers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickers.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers.release.xcconfig"; sourceTree = "<group>"; };
+		09A8F93ACA6D61B62BA7C5F7 /* Pods-PhotoStickersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoStickersTests/Pods-PhotoStickersTests.release.xcconfig"; sourceTree = "<group>"; };
 		19B7A4B71E13C14B0074B6B1 /* PhotoStickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4BA1E13C14B0074B6B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19B7A4BC1E13C14B0074B6B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +94,10 @@
 		19B7A5111E13CB800074B6B1 /* AppGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
 		19B7A5131E13CC2C0074B6B1 /* PhotoStickers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoStickers.entitlements; sourceTree = "<group>"; };
 		19B7A5141E13CC970074B6B1 /* MessageExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessageExtension.entitlements; sourceTree = "<group>"; };
+		4DDF4A3EEFD815FDA288A116 /* Pods-PhotoStickers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers.debug.xcconfig"; sourceTree = "<group>"; };
+		D0909AED8BCBEE66D1F43FAA /* Pods-PhotoStickersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickersTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoStickersTests/Pods-PhotoStickersTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D20C32C26B2F70B228F133D8 /* Pods_PhotoStickers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoStickers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF9B1657CC99ADDC0880225E /* Pods_PhotoStickersTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoStickersTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1571C61326976B107B5E9DEB /* Pods_PhotoStickers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82808B248E72148F3506C32A /* Pods_PhotoStickersTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +145,7 @@
 				19B7A4DC1E13C14B0074B6B1 /* PhotoStickersUITests */,
 				19B7A4F01E13C1F00074B6B1 /* Frameworks */,
 				19B7A4B81E13C14B0074B6B1 /* Products */,
+				826EB6E406396F2B8D14EE9A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -187,6 +198,8 @@
 			isa = PBXGroup;
 			children = (
 				19B7A4F11E13C1F00074B6B1 /* Messages.framework */,
+				D20C32C26B2F70B228F133D8 /* Pods_PhotoStickers.framework */,
+				EF9B1657CC99ADDC0880225E /* Pods_PhotoStickersTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -220,6 +233,17 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		826EB6E406396F2B8D14EE9A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4DDF4A3EEFD815FDA288A116 /* Pods-PhotoStickers.debug.xcconfig */,
+				054833EB61F0F2A302FD3396 /* Pods-PhotoStickers.release.xcconfig */,
+				D0909AED8BCBEE66D1F43FAA /* Pods-PhotoStickersTests.debug.xcconfig */,
+				09A8F93ACA6D61B62BA7C5F7 /* Pods-PhotoStickersTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -227,11 +251,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19B7A4E21E13C14B0074B6B1 /* Build configuration list for PBXNativeTarget "PhotoStickers" */;
 			buildPhases = (
+				BD467AC01658010EA62EA9ED /* [CP] Check Pods Manifest.lock */,
 				19B7A5171E1669600074B6B1 /* Run swiftformat */,
 				19B7A4B31E13C14B0074B6B1 /* Sources */,
 				19B7A4B41E13C14B0074B6B1 /* Frameworks */,
 				19B7A4B51E13C14B0074B6B1 /* Resources */,
 				19B7A5021E13C1F00074B6B1 /* Embed App Extensions */,
+				2C0806DEC725B963AD47CB7C /* [CP] Embed Pods Frameworks */,
+				7BD8E88521C835A0B574DFAB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -247,9 +274,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19B7A4E51E13C14B0074B6B1 /* Build configuration list for PBXNativeTarget "PhotoStickersTests" */;
 			buildPhases = (
+				86130CB1ECEDDFD23589B58A /* [CP] Check Pods Manifest.lock */,
 				19B7A4CA1E13C14B0074B6B1 /* Sources */,
 				19B7A4CB1E13C14B0074B6B1 /* Frameworks */,
 				19B7A4CC1E13C14B0074B6B1 /* Resources */,
+				4EB84C536D4A8A76F48D0D18 /* [CP] Embed Pods Frameworks */,
+				1A880766BE39AD39903CAA1B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -413,6 +443,96 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/tools/swiftformat\" \"${SRCROOT}/.\"";
 		};
+		1A880766BE39AD39903CAA1B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoStickersTests/Pods-PhotoStickersTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2C0806DEC725B963AD47CB7C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4EB84C536D4A8A76F48D0D18 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoStickersTests/Pods-PhotoStickersTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7BD8E88521C835A0B574DFAB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		86130CB1ECEDDFD23589B58A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BD467AC01658010EA62EA9ED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -524,6 +644,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -548,6 +669,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -574,6 +696,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -591,13 +714,14 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		19B7A4E31E13C14B0074B6B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DDF4A3EEFD815FDA288A116 /* Pods-PhotoStickers.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PhotoStickers/PhotoStickers.entitlements;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
@@ -611,8 +735,8 @@
 		};
 		19B7A4E41E13C14B0074B6B1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 054833EB61F0F2A302FD3396 /* Pods-PhotoStickers.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PhotoStickers/PhotoStickers.entitlements;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
@@ -626,8 +750,8 @@
 		};
 		19B7A4E61E13C14B0074B6B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0909AED8BCBEE66D1F43FAA /* Pods-PhotoStickersTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = PhotoStickersTests/Info.plist;
@@ -641,8 +765,8 @@
 		};
 		19B7A4E71E13C14B0074B6B1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09A8F93ACA6D61B62BA7C5F7 /* Pods-PhotoStickersTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = PhotoStickersTests/Info.plist;
@@ -657,7 +781,6 @@
 		19B7A4E91E13C14B0074B6B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = PhotoStickersUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -671,7 +794,6 @@
 		19B7A4EA1E13C14B0074B6B1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = PhotoStickersUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -731,6 +853,7 @@
 				19B7A4E41E13C14B0074B6B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		19B7A4E51E13C14B0074B6B1 /* Build configuration list for PBXNativeTarget "PhotoStickersTests" */ = {
 			isa = XCConfigurationList;
@@ -739,6 +862,7 @@
 				19B7A4E71E13C14B0074B6B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		19B7A4E81E13C14B0074B6B1 /* Build configuration list for PBXNativeTarget "PhotoStickersUITests" */ = {
 			isa = XCConfigurationList;
@@ -747,6 +871,7 @@
 				19B7A4EA1E13C14B0074B6B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		19B7A4FF1E13C1F00074B6B1 /* Build configuration list for PBXNativeTarget "MessageExtension" */ = {
 			isa = XCConfigurationList;
@@ -755,6 +880,7 @@
 				19B7A5011E13C1F00074B6B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

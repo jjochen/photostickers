@@ -1,0 +1,19 @@
+language: objective-c
+os: osx
+osx_image: xcode8.2
+cache:
+  - cocoapods
+  - bundler
+xcode_workspace: PhotoStickers.xcworkspace
+xcode_scheme: PhotoStickers
+xcode_sdk: iphonesimulator
+env:
+  global:
+    - LC_CTYPE=en_US.UTF-8
+    - LANG=en_US.UTF-8
+install:
+  - gem install bundler
+  - bundle install
+  - bundle exec pod install --repo-update
+script:
+  - bundle exec fastlane test
