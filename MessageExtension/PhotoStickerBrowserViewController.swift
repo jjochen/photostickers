@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Messages
 
-class PhotosStickerBrowserViewController: MSStickerBrowserViewController {
+class PhotoStickerBrowserViewController: MSStickerBrowserViewController {
     var stickers = [MSSticker]()
 
     public func loadStickers() {

@@ -27,6 +27,17 @@ target 'PhotoStickers' do
     end
 end
 
+target 'MessageExtension' do
+    pod 'RxSwift', '~> 3.0'
+    pod 'RxCocoa', '~> 3.0'
+    pod 'RxDataSources', '~> 1.0'
+    #pod 'RxViewModel'
+    #pod 'RxOptional'
+    #pod 'RealmSwift'
+    #pod 'SnapKit'
+    pod 'Log'
+end
+
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|

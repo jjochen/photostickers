@@ -12,7 +12,7 @@
         <!--Messages View Controller-->
         <scene sceneID="7MM-of-jgj">
             <objects>
-                <viewController id="ObA-dk-sSI" customClass="MessagesViewController" customModule="MessageExtension" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MessagesViewController" id="ObA-dk-sSI" customClass="MessagesViewController" customModule="MessageExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qkL-Od-lgU"/>
                         <viewControllerLayoutGuide type="bottom" id="n38-gi-rB5"/>
@@ -43,10 +43,14 @@
             </objects>
             <point key="canvasLocation" x="137.59999999999999" y="117.84107946026987"/>
         </scene>
-        <!--Photos Sticker Browser View Controller-->
+        <!--Photo Sticker Browser View Controller-->
         <scene sceneID="OhS-TE-fuZ">
             <objects>
-                <viewController id="je6-JZ-ceA" customClass="PhotosStickerBrowserViewController" customModule="MessageExtension" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoStickerBrowserViewController" id="je6-JZ-ceA" customClass="PhotoStickerBrowserViewController" customModule="MessageExtension" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Rn6-TW-X6L"/>
+                        <viewControllerLayoutGuide type="bottom" id="3zq-oq-fpS"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rkq-Vv-FBG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="508"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
