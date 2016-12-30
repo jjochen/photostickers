@@ -11,6 +11,9 @@ import UIKit
 import Messages
 
 class PhotoStickerBrowserViewController: MSStickerBrowserViewController {
+
+    var viewModel: PhotoStickerBrowserViewModel?
+
     var stickers = [MSSticker]()
 
     public func loadStickers() {

@@ -8,8 +8,20 @@
 
 import UIKit
 import Messages
+import Log
 
 class MessagesViewController: MSMessagesAppViewController {
+
+    var viewModel = MessagesViewModel()
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let photoStickerBrowserViewController = segue.destination as? PhotoStickerBrowserViewController else {
+            Logger().error("destination should be of class PhotoStickerBrowserViewController")
+            return
+        }
+
+        photoStickerBrowserViewController.viewModel = self.viewModel.photoStickerBrowserViewModel()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
