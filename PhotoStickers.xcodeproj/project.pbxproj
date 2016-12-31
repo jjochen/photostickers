@@ -33,6 +33,7 @@
 		19D8051F1E16893C00DA25B6 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D805131E16892500DA25B6 /* ViewModel.swift */; };
 		19D805211E17026000DA25B6 /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D805201E17026000DA25B6 /* MessagesViewModel.swift */; };
 		19D805231E1702A300DA25B6 /* PhotoStickerBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D805221E1702A300DA25B6 /* PhotoStickerBrowserViewModel.swift */; };
+		19D805251E172B0E00DA25B6 /* StickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D805241E172B0E00DA25B6 /* StickerCell.swift */; };
 		4A1C83BAD4ABA95659E14D68 /* Pods_MessageExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE803BA4C4771C7D849FDA3A /* Pods_MessageExtension.framework */; };
 		82808B248E72148F3506C32A /* Pods_PhotoStickersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9B1657CC99ADDC0880225E /* Pods_PhotoStickersTests.framework */; };
 /* End PBXBuildFile section */
@@ -110,6 +111,7 @@
 		19D805131E16892500DA25B6 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		19D805201E17026000DA25B6 /* MessagesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
 		19D805221E1702A300DA25B6 /* PhotoStickerBrowserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStickerBrowserViewModel.swift; sourceTree = "<group>"; };
+		19D805241E172B0E00DA25B6 /* StickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerCell.swift; sourceTree = "<group>"; };
 		3DBE419BB3605B2621DA4646 /* Pods-MessageExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessageExtension/Pods-MessageExtension.release.xcconfig"; sourceTree = "<group>"; };
 		4DDF4A3EEFD815FDA288A116 /* Pods-PhotoStickers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers.debug.xcconfig"; sourceTree = "<group>"; };
 		89D3FDDF6091AA76E002888C /* Pods-MessageExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessageExtension/Pods-MessageExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			children = (
 				19B7A5031E13C8A00074B6B1 /* PhotoStickerBrowserViewController.swift */,
 				19D805221E1702A300DA25B6 /* PhotoStickerBrowserViewModel.swift */,
+				19D805241E172B0E00DA25B6 /* StickerCell.swift */,
 			);
 			name = PhotoStickersBrowserView;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19B7A5041E13C8A00074B6B1 /* PhotoStickerBrowserViewController.swift in Sources */,
+				19D805251E172B0E00DA25B6 /* StickerCell.swift in Sources */,
 				19D8051F1E16893C00DA25B6 /* ViewModel.swift in Sources */,
 				19D805211E17026000DA25B6 /* MessagesViewModel.swift in Sources */,
 				19D8051A1E16893C00DA25B6 /* StoryboardIdentifiers.swift in Sources */,
