@@ -112,6 +112,13 @@
 		19D805201E17026000DA25B6 /* MessagesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
 		19D805221E1702A300DA25B6 /* PhotoStickerBrowserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStickerBrowserViewModel.swift; sourceTree = "<group>"; };
 		19D805241E172B0E00DA25B6 /* StickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerCell.swift; sourceTree = "<group>"; };
+		19F69E4C1E17F57D00EEF781 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Appfile; path = fastlane/Appfile; sourceTree = "<group>"; };
+		19F69E4D1E17F57D00EEF781 /* Deliverfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Deliverfile; path = fastlane/Deliverfile; sourceTree = "<group>"; };
+		19F69E4E1E17F57D00EEF781 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Fastfile; path = fastlane/Fastfile; sourceTree = "<group>"; };
+		19F69E4F1E17F57D00EEF781 /* Scanfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Scanfile; path = fastlane/Scanfile; sourceTree = "<group>"; };
+		19F69E501E17F57D00EEF781 /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
+		19F69E511E17F57D00EEF781 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		19F69E521E17F57D00EEF781 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3DBE419BB3605B2621DA4646 /* Pods-MessageExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessageExtension/Pods-MessageExtension.release.xcconfig"; sourceTree = "<group>"; };
 		4DDF4A3EEFD815FDA288A116 /* Pods-PhotoStickers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers.debug.xcconfig"; sourceTree = "<group>"; };
 		89D3FDDF6091AA76E002888C /* Pods-MessageExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessageExtension/Pods-MessageExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -160,6 +167,8 @@
 		19B7A4AE1E13C14B0074B6B1 = {
 			isa = PBXGroup;
 			children = (
+				19F69E4B1E17F53400EEF781 /* Metadata */,
+				19F69E5C1E17F64500EEF781 /* Deployment */,
 				19B7A5101E13CB460074B6B1 /* Shared */,
 				19B7A4B91E13C14B0074B6B1 /* PhotoStickers */,
 				19B7A4F31E13C1F00074B6B1 /* MessageExtension */,
@@ -302,6 +311,43 @@
 				19D805241E172B0E00DA25B6 /* StickerCell.swift */,
 			);
 			name = PhotoStickersBrowserView;
+			sourceTree = "<group>";
+		};
+		19F69E4B1E17F53400EEF781 /* Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				19F69E521E17F57D00EEF781 /* README.md */,
+				19F69E511E17F57D00EEF781 /* LICENSE */,
+			);
+			name = Metadata;
+			sourceTree = "<group>";
+		};
+		19F69E5A1E17F58600EEF781 /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				19F69E4C1E17F57D00EEF781 /* Appfile */,
+				19F69E4D1E17F57D00EEF781 /* Deliverfile */,
+				19F69E4E1E17F57D00EEF781 /* Fastfile */,
+				19F69E4F1E17F57D00EEF781 /* Scanfile */,
+			);
+			name = fastlane;
+			sourceTree = "<group>";
+		};
+		19F69E5B1E17F59200EEF781 /* ruby gems */ = {
+			isa = PBXGroup;
+			children = (
+				19F69E501E17F57D00EEF781 /* Gemfile */,
+			);
+			name = "ruby gems";
+			sourceTree = "<group>";
+		};
+		19F69E5C1E17F64500EEF781 /* Deployment */ = {
+			isa = PBXGroup;
+			children = (
+				19F69E5A1E17F58600EEF781 /* fastlane */,
+				19F69E5B1E17F59200EEF781 /* ruby gems */,
+			);
+			name = Deployment;
 			sourceTree = "<group>";
 		};
 		826EB6E406396F2B8D14EE9A /* Pods */ = {
