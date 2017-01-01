@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16C67" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Sticker" representedClassName="Sticker" syncable="YES" codeGenerationType="class">
+    <entity name="Sticker" representedClassName=".Sticker" syncable="YES" codeGenerationType="class">
         <attribute name="originalPath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stickerPath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>

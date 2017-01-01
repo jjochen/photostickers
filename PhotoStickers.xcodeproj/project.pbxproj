@@ -12,6 +12,8 @@
 		19269D0A1E195927003D1C3E /* PhotoStickers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 19269D051E1958CA003D1C3E /* PhotoStickers.xcdatamodeld */; };
 		19269D0D1E195AFD003D1C3E /* PSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19269D0C1E195AFD003D1C3E /* PSError.swift */; };
 		19269D0E1E195AFD003D1C3E /* PSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19269D0C1E195AFD003D1C3E /* PSError.swift */; };
+		19269D361E199D0D003D1C3E /* Sticker+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19269D351E199D0D003D1C3E /* Sticker+Extensions.swift */; };
+		19269D371E199D51003D1C3E /* Sticker+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19269D351E199D0D003D1C3E /* Sticker+Extensions.swift */; };
 		19B7A4BB1E13C14B0074B6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4BA1E13C14B0074B6B1 /* AppDelegate.swift */; };
 		19B7A4BD1E13C14B0074B6B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4BC1E13C14B0074B6B1 /* ViewController.swift */; };
 		19B7A4C01E13C14B0074B6B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4BE1E13C14B0074B6B1 /* Main.storyboard */; };
@@ -88,6 +90,7 @@
 		09A8F93ACA6D61B62BA7C5F7 /* Pods-PhotoStickersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoStickersTests/Pods-PhotoStickersTests.release.xcconfig"; sourceTree = "<group>"; };
 		19269D061E1958CA003D1C3E /* PhotoStickers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoStickers.xcdatamodel; sourceTree = "<group>"; };
 		19269D0C1E195AFD003D1C3E /* PSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PSError.swift; sourceTree = "<group>"; };
+		19269D351E199D0D003D1C3E /* Sticker+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sticker+Extensions.swift"; sourceTree = "<group>"; };
 		19B7A4B71E13C14B0074B6B1 /* PhotoStickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4BA1E13C14B0074B6B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19B7A4BC1E13C14B0074B6B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -367,6 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				19269D051E1958CA003D1C3E /* PhotoStickers.xcdatamodeld */,
+				19269D351E199D0D003D1C3E /* Sticker+Extensions.swift */,
 				19F69E5D1E194BD100EEF781 /* CoreDataStack.swift */,
 				19F69E6D1E19537A00EEF781 /* SharedPersistentContainer.swift */,
 			);
@@ -721,6 +725,7 @@
 				19F69E631E194F8300EEF781 /* Logger+Shared.swift in Sources */,
 				19D805151E16892500DA25B6 /* UIStoryboard+Extensions.swift in Sources */,
 				19B7A5121E13CB800074B6B1 /* AppGroup.swift in Sources */,
+				19269D361E199D0D003D1C3E /* Sticker+Extensions.swift in Sources */,
 				19D805181E16892500DA25B6 /* StoryboardIdentifiers.swift in Sources */,
 				19B7A4BD1E13C14B0074B6B1 /* ViewController.swift in Sources */,
 				19269D0D1E195AFD003D1C3E /* PSError.swift in Sources */,
@@ -759,6 +764,7 @@
 				19F69E6F1E19537A00EEF781 /* SharedPersistentContainer.swift in Sources */,
 				19B7A5161E1462170074B6B1 /* AppGroup.swift in Sources */,
 				19269D0A1E195927003D1C3E /* PhotoStickers.xcdatamodeld in Sources */,
+				19269D371E199D51003D1C3E /* Sticker+Extensions.swift in Sources */,
 				19B7A4F51E13C1F00074B6B1 /* MessagesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
