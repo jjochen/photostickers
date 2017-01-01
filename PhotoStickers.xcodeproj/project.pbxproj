@@ -8,14 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		1571C61326976B107B5E9DEB /* Pods_PhotoStickers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20C32C26B2F70B228F133D8 /* Pods_PhotoStickers.framework */; };
+		19269D081E1958CA003D1C3E /* PhotoStickers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 19269D051E1958CA003D1C3E /* PhotoStickers.xcdatamodeld */; };
+		19269D0A1E195927003D1C3E /* PhotoStickers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 19269D051E1958CA003D1C3E /* PhotoStickers.xcdatamodeld */; };
+		19269D0D1E195AFD003D1C3E /* PSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19269D0C1E195AFD003D1C3E /* PSError.swift */; };
+		19269D0E1E195AFD003D1C3E /* PSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19269D0C1E195AFD003D1C3E /* PSError.swift */; };
 		19B7A4BB1E13C14B0074B6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4BA1E13C14B0074B6B1 /* AppDelegate.swift */; };
 		19B7A4BD1E13C14B0074B6B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4BC1E13C14B0074B6B1 /* ViewController.swift */; };
 		19B7A4C01E13C14B0074B6B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4BE1E13C14B0074B6B1 /* Main.storyboard */; };
-		19B7A4C31E13C14B0074B6B1 /* PhotoStickers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4C11E13C14B0074B6B1 /* PhotoStickers.xcdatamodeld */; };
 		19B7A4C51E13C14B0074B6B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4C41E13C14B0074B6B1 /* Assets.xcassets */; };
 		19B7A4C81E13C14B0074B6B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4C61E13C14B0074B6B1 /* LaunchScreen.storyboard */; };
-		19B7A4D31E13C14B0074B6B1 /* PhotoStickersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4D21E13C14B0074B6B1 /* PhotoStickersTests.swift */; };
-		19B7A4DE1E13C14B0074B6B1 /* PhotoStickersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4DD1E13C14B0074B6B1 /* PhotoStickersUITests.swift */; };
 		19B7A4F21E13C1F00074B6B1 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19B7A4F11E13C1F00074B6B1 /* Messages.framework */; };
 		19B7A4F51E13C1F00074B6B1 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4F41E13C1F00074B6B1 /* MessagesViewController.swift */; };
 		19B7A4F81E13C1F00074B6B1 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4F61E13C1F00074B6B1 /* MainInterface.storyboard */; };
@@ -34,6 +35,12 @@
 		19D805211E17026000DA25B6 /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D805201E17026000DA25B6 /* MessagesViewModel.swift */; };
 		19D805231E1702A300DA25B6 /* PhotoStickerBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D805221E1702A300DA25B6 /* PhotoStickerBrowserViewModel.swift */; };
 		19D805251E172B0E00DA25B6 /* StickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D805241E172B0E00DA25B6 /* StickerCell.swift */; };
+		19F69E5E1E194BD100EEF781 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F69E5D1E194BD100EEF781 /* CoreDataStack.swift */; };
+		19F69E5F1E194BD100EEF781 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F69E5D1E194BD100EEF781 /* CoreDataStack.swift */; };
+		19F69E631E194F8300EEF781 /* Logger+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F69E621E194F8300EEF781 /* Logger+Shared.swift */; };
+		19F69E641E194F8300EEF781 /* Logger+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F69E621E194F8300EEF781 /* Logger+Shared.swift */; };
+		19F69E6E1E19537A00EEF781 /* SharedPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F69E6D1E19537A00EEF781 /* SharedPersistentContainer.swift */; };
+		19F69E6F1E19537A00EEF781 /* SharedPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F69E6D1E19537A00EEF781 /* SharedPersistentContainer.swift */; };
 		4A1C83BAD4ABA95659E14D68 /* Pods_MessageExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE803BA4C4771C7D849FDA3A /* Pods_MessageExtension.framework */; };
 		82808B248E72148F3506C32A /* Pods_PhotoStickersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9B1657CC99ADDC0880225E /* Pods_PhotoStickersTests.framework */; };
 /* End PBXBuildFile section */
@@ -79,11 +86,12 @@
 /* Begin PBXFileReference section */
 		054833EB61F0F2A302FD3396 /* Pods-PhotoStickers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickers.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers.release.xcconfig"; sourceTree = "<group>"; };
 		09A8F93ACA6D61B62BA7C5F7 /* Pods-PhotoStickersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoStickersTests/Pods-PhotoStickersTests.release.xcconfig"; sourceTree = "<group>"; };
+		19269D061E1958CA003D1C3E /* PhotoStickers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoStickers.xcdatamodel; sourceTree = "<group>"; };
+		19269D0C1E195AFD003D1C3E /* PSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PSError.swift; sourceTree = "<group>"; };
 		19B7A4B71E13C14B0074B6B1 /* PhotoStickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4BA1E13C14B0074B6B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19B7A4BC1E13C14B0074B6B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		19B7A4BF1E13C14B0074B6B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		19B7A4C21E13C14B0074B6B1 /* PhotoStickers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoStickers.xcdatamodel; sourceTree = "<group>"; };
 		19B7A4C41E13C14B0074B6B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19B7A4C71E13C14B0074B6B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19B7A4C91E13C14B0074B6B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -119,6 +127,9 @@
 		19F69E501E17F57D00EEF781 /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
 		19F69E511E17F57D00EEF781 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		19F69E521E17F57D00EEF781 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		19F69E5D1E194BD100EEF781 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		19F69E621E194F8300EEF781 /* Logger+Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Logger+Shared.swift"; sourceTree = "<group>"; };
+		19F69E6D1E19537A00EEF781 /* SharedPersistentContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedPersistentContainer.swift; sourceTree = "<group>"; };
 		3DBE419BB3605B2621DA4646 /* Pods-MessageExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessageExtension/Pods-MessageExtension.release.xcconfig"; sourceTree = "<group>"; };
 		4DDF4A3EEFD815FDA288A116 /* Pods-PhotoStickers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers.debug.xcconfig"; sourceTree = "<group>"; };
 		89D3FDDF6091AA76E002888C /* Pods-MessageExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessageExtension/Pods-MessageExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -251,6 +262,9 @@
 				19D805111E16892500DA25B6 /* UIStoryboardSegue+Extensions.swift */,
 				19D805101E16892500DA25B6 /* UIViewController+Extensions.swift */,
 				19D805131E16892500DA25B6 /* ViewModel.swift */,
+				19F69E621E194F8300EEF781 /* Logger+Shared.swift */,
+				19269D0C1E195AFD003D1C3E /* PSError.swift */,
+				19F69E6C1E19535700EEF781 /* CoreData */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -279,7 +293,6 @@
 				19B7A50D1E13C9E20074B6B1 /* sticker.png */,
 				19B7A4C41E13C14B0074B6B1 /* Assets.xcassets */,
 				19B7A4C91E13C14B0074B6B1 /* Info.plist */,
-				19B7A4C11E13C14B0074B6B1 /* PhotoStickers.xcdatamodeld */,
 				19B7A5131E13CC2C0074B6B1 /* PhotoStickers.entitlements */,
 			);
 			name = Resources;
@@ -348,6 +361,16 @@
 				19F69E5B1E17F59200EEF781 /* ruby gems */,
 			);
 			name = Deployment;
+			sourceTree = "<group>";
+		};
+		19F69E6C1E19535700EEF781 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				19269D051E1958CA003D1C3E /* PhotoStickers.xcdatamodeld */,
+				19F69E5D1E194BD100EEF781 /* CoreDataStack.swift */,
+				19F69E6D1E19537A00EEF781 /* SharedPersistentContainer.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		826EB6E406396F2B8D14EE9A /* Pods */ = {
@@ -692,11 +715,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				19D805191E16892500DA25B6 /* ViewModel.swift in Sources */,
+				19F69E6E1E19537A00EEF781 /* SharedPersistentContainer.swift in Sources */,
+				19F69E5E1E194BD100EEF781 /* CoreDataStack.swift in Sources */,
+				19269D081E1958CA003D1C3E /* PhotoStickers.xcdatamodeld in Sources */,
+				19F69E631E194F8300EEF781 /* Logger+Shared.swift in Sources */,
 				19D805151E16892500DA25B6 /* UIStoryboard+Extensions.swift in Sources */,
 				19B7A5121E13CB800074B6B1 /* AppGroup.swift in Sources */,
 				19D805181E16892500DA25B6 /* StoryboardIdentifiers.swift in Sources */,
 				19B7A4BD1E13C14B0074B6B1 /* ViewController.swift in Sources */,
-				19B7A4C31E13C14B0074B6B1 /* PhotoStickers.xcdatamodeld in Sources */,
+				19269D0D1E195AFD003D1C3E /* PSError.swift in Sources */,
 				19B7A4BB1E13C14B0074B6B1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,7 +732,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19B7A4D31E13C14B0074B6B1 /* PhotoStickersTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,7 +739,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19B7A4DE1E13C14B0074B6B1 /* PhotoStickersUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,12 +748,17 @@
 			files = (
 				19B7A5041E13C8A00074B6B1 /* PhotoStickerBrowserViewController.swift in Sources */,
 				19D805251E172B0E00DA25B6 /* StickerCell.swift in Sources */,
+				19F69E641E194F8300EEF781 /* Logger+Shared.swift in Sources */,
 				19D8051F1E16893C00DA25B6 /* ViewModel.swift in Sources */,
+				19F69E5F1E194BD100EEF781 /* CoreDataStack.swift in Sources */,
 				19D805211E17026000DA25B6 /* MessagesViewModel.swift in Sources */,
 				19D8051A1E16893C00DA25B6 /* StoryboardIdentifiers.swift in Sources */,
+				19269D0E1E195AFD003D1C3E /* PSError.swift in Sources */,
 				19D805231E1702A300DA25B6 /* PhotoStickerBrowserViewModel.swift in Sources */,
 				19D8051B1E16893C00DA25B6 /* UIStoryboard+Extensions.swift in Sources */,
+				19F69E6F1E19537A00EEF781 /* SharedPersistentContainer.swift in Sources */,
 				19B7A5161E1462170074B6B1 /* AppGroup.swift in Sources */,
+				19269D0A1E195927003D1C3E /* PhotoStickers.xcdatamodeld in Sources */,
 				19B7A4F51E13C1F00074B6B1 /* MessagesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1047,12 +1077,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		19B7A4C11E13C14B0074B6B1 /* PhotoStickers.xcdatamodeld */ = {
+		19269D051E1958CA003D1C3E /* PhotoStickers.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				19B7A4C21E13C14B0074B6B1 /* PhotoStickers.xcdatamodel */,
+				19269D061E1958CA003D1C3E /* PhotoStickers.xcdatamodel */,
 			);
-			currentVersion = 19B7A4C21E13C14B0074B6B1 /* PhotoStickers.xcdatamodel */;
+			currentVersion = 19269D061E1958CA003D1C3E /* PhotoStickers.xcdatamodel */;
 			path = PhotoStickers.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

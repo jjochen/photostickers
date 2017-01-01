@@ -9,7 +9,7 @@
 import Foundation
 
 /// RxCocoa errors.
-public enum EHError
+public enum PSError
     : Swift.Error
     , CustomDebugStringConvertible {
     /// Unknown error has occurred.
@@ -22,7 +22,7 @@ public enum EHError
 
 // MARK: Debug descriptions
 
-extension EHError {
+extension PSError {
     /// A textual representation of `self`, suitable for debugging.
     public var debugDescription: String {
         switch self {
@@ -49,7 +49,7 @@ func castOptionalOrFatalError<T>(_ value: Any?) -> T? {
 
 func castOrThrow<T>(_ resultType: T.Type, _ object: Any) throws -> T {
     guard let returnValue = object as? T else {
-        throw EHError.castingError(object: object, targetType: resultType)
+        throw PSError.castingError(object: object, targetType: resultType)
     }
 
     return returnValue
@@ -61,7 +61,7 @@ func castOptionalOrThrow<T>(_ resultType: T.Type, _ object: AnyObject) throws ->
     }
 
     guard let returnValue = object as? T else {
-        throw EHError.castingError(object: object, targetType: resultType)
+        throw PSError.castingError(object: object, targetType: resultType)
     }
 
     return returnValue
@@ -70,7 +70,7 @@ func castOptionalOrThrow<T>(_ resultType: T.Type, _ object: AnyObject) throws ->
 func castOrFatalError<T>(_ value: AnyObject!, message: String) -> T {
     let maybeResult: T? = value as? T
     guard let result = maybeResult else {
-        ehFatalError(message)
+        psFatalError(message)
     }
 
     return result
@@ -79,12 +79,12 @@ func castOrFatalError<T>(_ value: AnyObject!, message: String) -> T {
 func castOrFatalError<T>(_ value: Any!) -> T {
     let maybeResult: T? = value as? T
     guard let result = maybeResult else {
-        ehFatalError("Failure converting from \(value) to \(T.self)")
+        psFatalError("Failure converting from \(value) to \(T.self)")
     }
 
     return result
 }
 
-func ehFatalError(_ lastMessage: String) -> Never {
+func psFatalError(_ lastMessage: String) -> Never {
     fatalError(lastMessage)
 }

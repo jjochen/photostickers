@@ -16,7 +16,7 @@ class MessagesViewController: MSMessagesAppViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let photoStickerBrowserViewController = segue.destination as? PhotoStickerBrowserViewController else {
-            Logger().error("destination should be of class PhotoStickerBrowserViewController")
+            Logger.shared.error("destination should be of class PhotoStickerBrowserViewController")
             return
         }
 

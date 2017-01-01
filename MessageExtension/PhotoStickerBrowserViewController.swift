@@ -32,7 +32,7 @@ class PhotoStickerBrowserViewController: UIViewController {
 
     fileprivate func setupBindings() {
         guard let _ = viewModel else {
-            Logger().error("View Model not set!")
+            Logger.shared.error("View Model not set!")
             return
         }
 
