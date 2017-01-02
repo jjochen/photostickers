@@ -88,6 +88,23 @@
                                             <outlet property="stickerView" destination="jdh-Ws-RIn" id="v4i-hC-vdd"/>
                                         </connections>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="Iyb-XD-XMs" customClass="AddMoreCell">
+                                        <rect key="frame" x="210" y="10" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AddMore" translatesAutoresizingMaskIntoConstraints="NO" id="wOq-hb-O24">
+                                                    <rect key="frame" x="20" y="20" width="60" height="60"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="wOq-hb-O24" firstAttribute="centerX" secondItem="Iyb-XD-XMs" secondAttribute="centerX" id="GFE-fV-ze0"/>
+                                            <constraint firstItem="wOq-hb-O24" firstAttribute="centerY" secondItem="Iyb-XD-XMs" secondAttribute="centerY" id="lqv-k5-4KC"/>
+                                        </constraints>
+                                    </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
@@ -108,4 +125,7 @@
             <point key="canvasLocation" x="761.60000000000002" y="108.84557721139431"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AddMore" width="60" height="60"/>
+    </resources>
 </document>

@@ -15,6 +15,7 @@ struct Sticker {
     var uuid: String
     var stickerPath: String?
     var stickerDescription: String?
+    var sortOrder: Int
 }
 
 extension Sticker {

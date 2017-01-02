@@ -21,6 +21,11 @@ Submit a new Beta Build to Apple TestFlight
 fastlane ios release
 ```
 Deploy a new version to the App Store
+### ios storyboard_ids
+```
+fastlane ios storyboard_ids
+```
+Updates the storyboard identifier Swift values.
 
 ----
 

@@ -51,6 +51,11 @@ platform :ios do
     # frameit
   end
 
+  desc "Updates the storyboard identifier Swift values."
+  lane :storyboard_ids do
+    sh "cd .. ; bundle exec sbconstants ./Shared/StoryboardIdentifiers.swift --source-dir ./ --swift"
+  end
+
   # You can define as many lanes as you want
 
   after_all do |lane|

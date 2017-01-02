@@ -48,7 +48,7 @@ class ViewController: UIViewController {
             return
         }
 
-        let sticker = Sticker(uuid: uuid, stickerPath: url.absoluteString, stickerDescription: "Pizza")
+        let sticker = Sticker(uuid: uuid, stickerPath: url.absoluteString, stickerDescription: "Pizza", sortOrder: 1)
 
         let managedObject = NSEntityDescription.insertNewObject(forEntityName: Sticker.entityName, into: CoreDataStack.shared.viewContext)
 

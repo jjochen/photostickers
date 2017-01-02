@@ -39,12 +39,14 @@ extension Sticker: Persistable {
         uuid = entity.value(forKey: "uuid") as! String
         stickerPath = entity.value(forKey: "stickerPath") as? String
         stickerDescription = entity.value(forKey: "stickerDescription") as? String
+        sortOrder = entity.value(forKey: "sortOrder") as! Int
     }
 
     func update(_ entity: T) {
         entity.setValue(uuid, forKey: "uuid")
         entity.setValue(stickerPath, forKey: "stickerPath")
         entity.setValue(stickerDescription, forKey: "stickerDescription")
+        entity.setValue(sortOrder, forKey: "sortOrder")
 
         do {
             try entity.managedObjectContext?.save()

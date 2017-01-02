@@ -12,7 +12,6 @@ import RxSwift
 import CoreData
 
 protocol PhotoStickerBrowserViewModelType {
-
     var managedObjectContext: NSManagedObjectContext { get }
     var stickers: Observable<[Sticker]> { get }
 }
@@ -31,7 +30,10 @@ class PhotoStickerBrowserViewModel: ViewModel, PhotoStickerBrowserViewModelType 
         self.managedObjectContext = managedObjectContext
 
         self.stickers = self.managedObjectContext.rx
-            .entities(Sticker.self, sortDescriptors: [NSSortDescriptor(key: "uuid", ascending: false)])
+            .entities(Sticker.self, sortDescriptors: [
+                NSSortDescriptor(key: "sortOrder", ascending: true),
+                NSSortDescriptor(key: "stickerDescription", ascending: true),
+            ])
 
         super.init()
     }

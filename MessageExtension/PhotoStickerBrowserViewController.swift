@@ -36,53 +36,44 @@ class PhotoStickerBrowserViewController: UIViewController {
             return
         }
 
+        //        let dataSource = RxCollectionViewSectionedReloadDataSource<>()
+        //
+        //        skinTableViewDataSource(dataSource)
+
         viewModel?.stickers
             .bindTo(collectionView.rx.items(cellIdentifier: CollectionViewCellReuseIdentifier.StickerCell.rawValue, cellType: StickerCell.self)) { row, sticker, cell in
                 cell.stickerView.sticker = sticker.loadSticker()
             }
             .addDisposableTo(disposeBag)
-
-        //        _ = refreshBarButtonItem.rx.tap.bindTo(viewModel!.refreshTaps)
-        //
-        //        viewModel!.availableBridges
-        //            .drive(tableView.rx.items(cellIdentifier: TableViewCellreuseIdentifier.BridgeCell.rawValue, cellType: UITableViewCell.self)) { (_, bridgeInfo, cell) in
-        //                //                cell.viewModel = self.viewModel
-        //                cell.textLabel?.text = bridgeInfo.friendlyName
-        //                cell.detailTextLabel?.text = bridgeInfo.ip
-        //            }
-        //            .addDisposableTo(disposeBag)
-        //
-        //        tableView
-        //            .rx.modelSelected(HueBridge.self)
-        //            .subscribe { hueBridge in
-        //                print("\(hueBridge)")
-        //            }
-        //            .addDisposableTo(disposeBag)
-        //
-        //        viewModel!.loading
-        //            .map({ loading in
-        //                return !loading
-        //            })
-        //            .drive(self.refreshBarButtonItem.rx.isEnabled)
-        //            .addDisposableTo(disposeBag)
-        //
-        //        viewModel!.loading
-        //            .drive(SVProgressHUD.rx_animating)
-        //            .addDisposableTo(disposeBag)
     }
 
-    //    fileprivate func loadSticker(asset: String, localizedDescription: String) {
+    //    func skinTableViewDataSource(_ dataSource: RxCollectionViewSectionedReloadDataSource<SectionModel>) {
+    //        dataSource.configureCell = { (dataSource, table, idxPath, _) in
+    //            switch dataSource[idxPath] {
+    //            case let .ImageSectionItem(image, title):
+    //                let cell: ImageTitleTableViewCell = table.dequeueReusableCell(forIndexPath: idxPath)
+    //                cell.titleLabel.text = title
+    //                cell.cellImageView.image = image
     //
-    //        guard let stickerURL = AppGroup.documentsURL?.appendingPathComponent(asset) else {
-    //            return
+    //                return cell
+    //            case let .StepperSectionItem(title):
+    //                let cell: TitleSteperTableViewCell = table.dequeueReusableCell(forIndexPath: idxPath)
+    //                cell.titleLabel.text = title
+    //
+    //                return cell
+    //            case let .ToggleableSectionItem(title, enabled):
+    //                let cell: TitleSwitchTableViewCell = table.dequeueReusableCell(forIndexPath: idxPath)
+    //                cell.switchControl.isOn = enabled
+    //                cell.titleLabel.text = title
+    //
+    //                return cell
+    //            }
     //        }
-    //        let sticker: MSSticker
-    //        do {
-    //            try sticker = MSSticker(contentsOfFileURL: stickerURL, localizedDescription: localizedDescription)
-    //            stickers.append(sticker)
-    //        } catch {
-    //            print(error)
-    //            return
+    //
+    //        dataSource.titleForHeaderInSection = { dataSource, index in
+    //            let section = dataSource[index]
+    //
+    //            return section.title
     //        }
     //    }
 }
