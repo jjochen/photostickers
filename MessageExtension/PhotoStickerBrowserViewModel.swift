@@ -7,38 +7,32 @@
 //
 
 import Foundation
-import Messages
 import RxCocoa
 import RxSwift
+import CoreData
 
-class PhotoStickerBrowserViewModel: ViewModel {
+protocol PhotoStickerBrowserViewModelType {
+
+    var managedObjectContext: NSManagedObjectContext { get }
+    var stickers: Observable<[Sticker]> { get }
+}
+
+class PhotoStickerBrowserViewModel: ViewModel, PhotoStickerBrowserViewModelType {
+
     // MARK: - Input
+
+    let managedObjectContext: NSManagedObjectContext
 
     // MARK: - Output
 
-    internal let stickers: Driver<[MSSticker]>
+    var stickers: Observable<[Sticker]>
 
-    override init() {
-        let testSticker = PhotoStickerBrowserViewModel.loadSticker(asset: "sticker.png", localizedDescription: "Pizza")
+    init(managedObjectContext: NSManagedObjectContext) {
+        self.managedObjectContext = managedObjectContext
 
-        let listOfStickers: [MSSticker] = [testSticker!]
+        self.stickers = self.managedObjectContext.rx
+            .entities(Sticker.self, sortDescriptors: [NSSortDescriptor(key: "uuid", ascending: false)])
 
-        self.stickers = Driver<[MSSticker]>.just(listOfStickers)
-    }
-
-    fileprivate static func loadSticker(asset: String, localizedDescription: String) -> MSSticker? {
-
-        guard let stickerURL = AppGroup.documentsURL?.appendingPathComponent(asset) else {
-            return nil
-        }
-        let sticker: MSSticker
-        do {
-            try sticker = MSSticker(contentsOfFileURL: stickerURL, localizedDescription: localizedDescription)
-
-        } catch {
-            print(error)
-            return nil
-        }
-        return sticker
+        super.init()
     }
 }

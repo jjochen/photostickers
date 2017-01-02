@@ -7,13 +7,16 @@
 //
 
 import Foundation
+import CoreData
 
 class MessagesViewModel: ViewModel {
-    // MARK: - Input
+
+    let managedObjectContext = CoreDataStack.shared.viewContext
 
     // MARK: - View Models
 
     func photoStickerBrowserViewModel() -> PhotoStickerBrowserViewModel {
-        return PhotoStickerBrowserViewModel()
+
+        return PhotoStickerBrowserViewModel(managedObjectContext: self.managedObjectContext)
     }
 }

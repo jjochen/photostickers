@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16C67" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Sticker" representedClassName="" syncable="YES">
+        <attribute name="stickerDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stickerPath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uuid" attributeType="String" indexed="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Sticker" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="Sticker" positionX="-63" positionY="-18" width="128" height="90"/>
     </elements>
 </model>

@@ -37,8 +37,8 @@ class PhotoStickerBrowserViewController: UIViewController {
         }
 
         viewModel?.stickers
-            .drive(collectionView.rx.items(cellIdentifier: CollectionViewCellReuseIdentifier.StickerCell.rawValue, cellType: StickerCell.self)) { _, sticker, cell in
-                cell.stickerView.sticker = sticker
+            .bindTo(collectionView.rx.items(cellIdentifier: CollectionViewCellReuseIdentifier.StickerCell.rawValue, cellType: StickerCell.self)) { row, sticker, cell in
+                cell.stickerView.sticker = sticker.loadSticker()
             }
             .addDisposableTo(disposeBag)
 

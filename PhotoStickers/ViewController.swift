@@ -7,18 +7,25 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import CoreData
+import RxCoreData
+import Log
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        storeSticker()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    @IBAction func addButtonTapped(_ sender: Any) {
+        storeSticker()
     }
 
     func storeSticker() {
@@ -29,14 +36,22 @@ class ViewController: UIViewController {
         guard let data = UIImagePNGRepresentation(image) else {
             return
         }
-        guard let filename = AppGroup.documentsURL?.appendingPathComponent("sticker.png") else {
+        let uuid = UUID().uuidString
+
+        guard let url = AppGroup.documentsURL?.appendingPathComponent("\(uuid).png") else {
             return
         }
         do {
-            try data.write(to: filename)
+            try data.write(to: url)
         } catch {
-            print(error)
+            Logger.shared.error(error)
             return
         }
+
+        let sticker = Sticker(uuid: uuid, stickerPath: url.absoluteString, stickerDescription: "Pizza")
+
+        let managedObject = NSEntityDescription.insertNewObject(forEntityName: Sticker.entityName, into: CoreDataStack.shared.viewContext)
+
+        sticker.update(managedObject)
     }
 }
