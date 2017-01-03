@@ -36,44 +36,36 @@ class PhotoStickerBrowserViewController: UIViewController {
             return
         }
 
-        //        let dataSource = RxCollectionViewSectionedReloadDataSource<>()
-        //
-        //        skinTableViewDataSource(dataSource)
+        let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>()
+        skinTableViewDataSource(dataSource)
 
-        viewModel?.stickers
-            .bindTo(collectionView.rx.items(cellIdentifier: CollectionViewCellReuseIdentifier.StickerCell.rawValue, cellType: StickerCell.self)) { row, sticker, cell in
-                cell.stickerView.sticker = sticker.loadSticker()
+        viewModel?.sectionItems
+            .map { items in
+                [StickerSection(header: "Stickers", stickers: items)]
             }
+            .bindTo(collectionView.rx.items(dataSource: dataSource))
             .addDisposableTo(disposeBag)
     }
 
-    //    func skinTableViewDataSource(_ dataSource: RxCollectionViewSectionedReloadDataSource<SectionModel>) {
-    //        dataSource.configureCell = { (dataSource, table, idxPath, _) in
-    //            switch dataSource[idxPath] {
-    //            case let .ImageSectionItem(image, title):
-    //                let cell: ImageTitleTableViewCell = table.dequeueReusableCell(forIndexPath: idxPath)
-    //                cell.titleLabel.text = title
-    //                cell.cellImageView.image = image
-    //
-    //                return cell
-    //            case let .StepperSectionItem(title):
-    //                let cell: TitleSteperTableViewCell = table.dequeueReusableCell(forIndexPath: idxPath)
-    //                cell.titleLabel.text = title
-    //
-    //                return cell
-    //            case let .ToggleableSectionItem(title, enabled):
-    //                let cell: TitleSwitchTableViewCell = table.dequeueReusableCell(forIndexPath: idxPath)
-    //                cell.switchControl.isOn = enabled
-    //                cell.titleLabel.text = title
-    //
-    //                return cell
-    //            }
-    //        }
-    //
-    //        dataSource.titleForHeaderInSection = { dataSource, index in
-    //            let section = dataSource[index]
-    //
-    //            return section.title
-    //        }
-    //    }
+    func skinTableViewDataSource(_ dataSource: RxCollectionViewSectionedReloadDataSource<StickerSection>) {
+        dataSource.configureCell = { dataSource, collectionView, indexPath, _ in
+            switch dataSource[indexPath] {
+            case .OpenAppItem:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.AddMoreCell.rawValue, for: indexPath)
+
+                return cell
+            case .StickerItem(sticker: let sticker):
+                let cell: StickerCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.StickerCell.rawValue, for: indexPath) as! StickerCell
+                cell.stickerView.sticker = sticker.loadSticker()
+
+                return cell
+            }
+        }
+
+        //        dataSource.titleForHeaderInSection = { dataSource, index in
+        //            let section = dataSource[index]
+        //
+        //            return section.title
+        //        }
+    }
 }

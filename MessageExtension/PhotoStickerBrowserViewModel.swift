@@ -13,7 +13,7 @@ import CoreData
 
 protocol PhotoStickerBrowserViewModelType {
     var managedObjectContext: NSManagedObjectContext { get }
-    var stickers: Observable<[Sticker]> { get }
+    var sectionItems: Observable<[StickerSectionItem]> { get }
 }
 
 class PhotoStickerBrowserViewModel: ViewModel, PhotoStickerBrowserViewModelType {
@@ -24,16 +24,23 @@ class PhotoStickerBrowserViewModel: ViewModel, PhotoStickerBrowserViewModelType 
 
     // MARK: - Output
 
-    var stickers: Observable<[Sticker]>
+    var sectionItems: Observable<[StickerSectionItem]>
 
     init(managedObjectContext: NSManagedObjectContext) {
         self.managedObjectContext = managedObjectContext
 
-        self.stickers = self.managedObjectContext.rx
+        self.sectionItems = managedObjectContext.rx
             .entities(Sticker.self, sortDescriptors: [
                 NSSortDescriptor(key: "sortOrder", ascending: true),
                 NSSortDescriptor(key: "stickerDescription", ascending: true),
             ])
+            .map { allStickers in
+                var items = allStickers.map { sticker in
+                    return StickerSectionItem.StickerItem(sticker: sticker)
+                }
+                items.insert(StickerSectionItem.OpenAppItem, at: 0)
+                return items
+            }
 
         super.init()
     }

@@ -36,7 +36,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addButton" destination="ynF-8j-3tg" id="zQC-fU-WOg"/>
+                        <outlet property="addButton" destination="ynF-8j-3tg" id="5i9-ID-wmE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

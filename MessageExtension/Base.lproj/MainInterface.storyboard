@@ -30,10 +30,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="4Uk-bH-Q8P" firstAttribute="top" secondItem="qkL-Od-lgU" secondAttribute="bottom" id="5hS-cG-ztS"/>
-                            <constraint firstItem="4Uk-bH-Q8P" firstAttribute="bottom" secondItem="n38-gi-rB5" secondAttribute="top" id="iTT-hs-S8I"/>
-                            <constraint firstAttribute="trailing" secondItem="4Uk-bH-Q8P" secondAttribute="trailing" id="r86-HC-pRV"/>
-                            <constraint firstItem="4Uk-bH-Q8P" firstAttribute="leading" secondItem="zMn-AG-sqS" secondAttribute="leading" id="xLM-IS-k1c"/>
+                            <constraint firstItem="4Uk-bH-Q8P" firstAttribute="leading" secondItem="zMn-AG-sqS" secondAttribute="leading" id="AHi-RG-lSb"/>
+                            <constraint firstItem="4Uk-bH-Q8P" firstAttribute="top" secondItem="qkL-Od-lgU" secondAttribute="bottom" id="Awf-dg-nU9"/>
+                            <constraint firstAttribute="trailing" secondItem="4Uk-bH-Q8P" secondAttribute="trailing" id="Ga8-d4-PMl"/>
+                            <constraint firstItem="4Uk-bH-Q8P" firstAttribute="bottom" secondItem="n38-gi-rB5" secondAttribute="top" id="m2r-YL-7gL"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -88,7 +88,7 @@
                                             <outlet property="stickerView" destination="jdh-Ws-RIn" id="v4i-hC-vdd"/>
                                         </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="Iyb-XD-XMs" customClass="AddMoreCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="Iyb-XD-XMs">
                                         <rect key="frame" x="210" y="10" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -110,10 +110,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="pWq-rX-ruZ" secondAttribute="trailing" id="0xZ-wV-9eb"/>
-                            <constraint firstItem="pWq-rX-ruZ" firstAttribute="leading" secondItem="rkq-Vv-FBG" secondAttribute="leading" id="5Eh-OY-ekf"/>
-                            <constraint firstItem="pWq-rX-ruZ" firstAttribute="bottom" secondItem="3zq-oq-fpS" secondAttribute="top" id="Ajz-Hy-Wsb"/>
-                            <constraint firstItem="pWq-rX-ruZ" firstAttribute="top" secondItem="Rn6-TW-X6L" secondAttribute="bottom" id="yo2-dO-GdD"/>
+                            <constraint firstItem="pWq-rX-ruZ" firstAttribute="bottom" secondItem="3zq-oq-fpS" secondAttribute="top" id="EiU-MF-CTe"/>
+                            <constraint firstAttribute="trailing" secondItem="pWq-rX-ruZ" secondAttribute="trailing" id="G3D-B5-IwL"/>
+                            <constraint firstItem="pWq-rX-ruZ" firstAttribute="leading" secondItem="rkq-Vv-FBG" secondAttribute="leading" id="RFB-Am-D2f"/>
+                            <constraint firstItem="pWq-rX-ruZ" firstAttribute="top" secondItem="Rn6-TW-X6L" secondAttribute="bottom" id="rW7-xn-s0Y"/>
                         </constraints>
                     </view>
                     <connections>
