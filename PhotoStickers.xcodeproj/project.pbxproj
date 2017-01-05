@@ -17,17 +17,15 @@
 		19269D421E19AE29003D1C3E /* Sticker+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19269D3F1E19AE29003D1C3E /* Sticker+Extensions.swift */; };
 		19269D431E19AE29003D1C3E /* Sticker+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19269D3F1E19AE29003D1C3E /* Sticker+Extensions.swift */; };
 		1943DECE1E1C554E00F1AADE /* StickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1943DECD1E1C554E00F1AADE /* StickerSection.swift */; };
-		195F6B0D1E1B098D00F01DC7 /* Shared.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 195F6B0C1E1B098D00F01DC7 /* Shared.xcassets */; };
-		195F6B0E1E1B098D00F01DC7 /* Shared.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 195F6B0C1E1B098D00F01DC7 /* Shared.xcassets */; };
+		195F6B0D1E1B098D00F01DC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 195F6B0C1E1B098D00F01DC7 /* Assets.xcassets */; };
+		195F6B0E1E1B098D00F01DC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 195F6B0C1E1B098D00F01DC7 /* Assets.xcassets */; };
 		19B7A4BB1E13C14B0074B6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4BA1E13C14B0074B6B1 /* AppDelegate.swift */; };
 		19B7A4BD1E13C14B0074B6B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4BC1E13C14B0074B6B1 /* ViewController.swift */; };
 		19B7A4C01E13C14B0074B6B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4BE1E13C14B0074B6B1 /* Main.storyboard */; };
-		19B7A4C51E13C14B0074B6B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4C41E13C14B0074B6B1 /* Assets.xcassets */; };
 		19B7A4C81E13C14B0074B6B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4C61E13C14B0074B6B1 /* LaunchScreen.storyboard */; };
 		19B7A4F21E13C1F00074B6B1 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19B7A4F11E13C1F00074B6B1 /* Messages.framework */; };
 		19B7A4F51E13C1F00074B6B1 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4F41E13C1F00074B6B1 /* MessagesViewController.swift */; };
 		19B7A4F81E13C1F00074B6B1 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4F61E13C1F00074B6B1 /* MainInterface.storyboard */; };
-		19B7A4FA1E13C1F00074B6B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4F91E13C1F00074B6B1 /* Assets.xcassets */; };
 		19B7A4FE1E13C1F00074B6B1 /* MessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		19B7A5041E13C8A00074B6B1 /* PhotoStickerBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A5031E13C8A00074B6B1 /* PhotoStickerBrowserViewController.swift */; };
 		19B7A50E1E13C9E20074B6B1 /* sticker.png in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A50D1E13C9E20074B6B1 /* sticker.png */; };
@@ -98,12 +96,11 @@
 		19269D3E1E19AE29003D1C3E /* Sticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sticker.swift; sourceTree = "<group>"; };
 		19269D3F1E19AE29003D1C3E /* Sticker+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sticker+Extensions.swift"; sourceTree = "<group>"; };
 		1943DECD1E1C554E00F1AADE /* StickerSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerSection.swift; sourceTree = "<group>"; };
-		195F6B0C1E1B098D00F01DC7 /* Shared.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Shared.xcassets; sourceTree = "<group>"; };
+		195F6B0C1E1B098D00F01DC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19B7A4B71E13C14B0074B6B1 /* PhotoStickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4BA1E13C14B0074B6B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19B7A4BC1E13C14B0074B6B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		19B7A4BF1E13C14B0074B6B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		19B7A4C41E13C14B0074B6B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19B7A4C71E13C14B0074B6B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19B7A4C91E13C14B0074B6B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B7A4CE1E13C14B0074B6B1 /* PhotoStickersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoStickersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,7 +113,6 @@
 		19B7A4F11E13C1F00074B6B1 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 		19B7A4F41E13C1F00074B6B1 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		19B7A4F71E13C1F00074B6B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		19B7A4F91E13C1F00074B6B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19B7A4FB1E13C1F00074B6B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B7A5031E13C8A00074B6B1 /* PhotoStickerBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStickerBrowserViewController.swift; sourceTree = "<group>"; };
 		19B7A50D1E13C9E20074B6B1 /* sticker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sticker.png; path = Resources/sticker.png; sourceTree = "<group>"; };
@@ -189,7 +185,7 @@
 		195F6B081E1B095F00F01DC7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				195F6B0C1E1B098D00F01DC7 /* Shared.xcassets */,
+				195F6B0C1E1B098D00F01DC7 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -311,7 +307,6 @@
 			isa = PBXGroup;
 			children = (
 				19B7A50D1E13C9E20074B6B1 /* sticker.png */,
-				19B7A4C41E13C14B0074B6B1 /* Assets.xcassets */,
 				19B7A4C91E13C14B0074B6B1 /* Info.plist */,
 				19B7A5131E13CC2C0074B6B1 /* PhotoStickers.entitlements */,
 			);
@@ -329,7 +324,6 @@
 		19D8050C1E1685F300DA25B6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				19B7A4F91E13C1F00074B6B1 /* Assets.xcassets */,
 				19B7A4FB1E13C1F00074B6B1 /* Info.plist */,
 				19B7A5141E13CC970074B6B1 /* MessageExtension.entitlements */,
 			);
@@ -564,8 +558,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19B7A4C81E13C14B0074B6B1 /* LaunchScreen.storyboard in Resources */,
-				195F6B0D1E1B098D00F01DC7 /* Shared.xcassets in Resources */,
-				19B7A4C51E13C14B0074B6B1 /* Assets.xcassets in Resources */,
+				195F6B0D1E1B098D00F01DC7 /* Assets.xcassets in Resources */,
 				19B7A4C01E13C14B0074B6B1 /* Main.storyboard in Resources */,
 				19B7A50E1E13C9E20074B6B1 /* sticker.png in Resources */,
 			);
@@ -589,9 +582,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19B7A4FA1E13C1F00074B6B1 /* Assets.xcassets in Resources */,
 				19B7A4F81E13C1F00074B6B1 /* MainInterface.storyboard in Resources */,
-				195F6B0E1E1B098D00F01DC7 /* Shared.xcassets in Resources */,
+				195F6B0E1E1B098D00F01DC7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
