@@ -11,17 +11,8 @@ import Messages
 import Log
 
 class MessagesViewController: MSMessagesAppViewController {
-    
-    lazy var viewModel: MessagesViewModel! = MessagesViewModel(extensionContext: self.extensionContext, managedObjectContext: CoreDataStack.shared.viewContext)
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let photoStickerBrowserViewController = segue.destination as? PhotoStickerBrowserViewController else {
-            Logger.shared.error("destination should be of class PhotoStickerBrowserViewController")
-            return
-        }
 
-        photoStickerBrowserViewController.viewModel = self.viewModel.photoStickerBrowserViewModel()
-    }
+    lazy var viewModel: MessagesViewModel! = MessagesViewModel(extensionContext: self.extensionContext, managedObjectContext: CoreDataStack.shared.viewContext)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +28,7 @@ extension MessagesViewController {
 
     override func willBecomeActive(with conversation: MSConversation) {
         super.willBecomeActive(with: conversation)
+        presentViewController(for: presentationStyle)
     }
 
     override func didResignActive(with conversation: MSConversation) {
@@ -57,9 +49,49 @@ extension MessagesViewController {
 
     override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
         super.willTransition(to: presentationStyle)
+        presentViewController(for: presentationStyle)
     }
 
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
         super.didTransition(to: presentationStyle)
+    }
+}
+
+// MARK: Child view controller presentation
+extension MessagesViewController {
+
+    fileprivate func instantiatePhotoStickerBrowserViewController() -> PhotoStickerBrowserViewController {
+        let viewController = PhotoStickerBrowserViewController.instantiateFromStoryboard(UIStoryboard.messageExtension())
+        viewController.viewModel = self.viewModel.photoStickerBrowserViewModel()
+        return viewController
+    }
+
+    fileprivate func presentViewController(for presentationStyle: MSMessagesAppPresentationStyle) {
+
+        let controller: UIViewController
+        if presentationStyle == .compact {
+            controller = instantiatePhotoStickerBrowserViewController()
+        } else {
+            controller = UIViewController()
+        }
+
+        for child in childViewControllers {
+            child.willMove(toParentViewController: nil)
+            child.view.removeFromSuperview()
+            child.removeFromParentViewController()
+        }
+
+        addChildViewController(controller)
+
+        controller.view.frame = view.bounds
+        controller.view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(controller.view)
+
+        controller.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        controller.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        controller.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        controller.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+
+        controller.didMove(toParentViewController: self)
     }
 }

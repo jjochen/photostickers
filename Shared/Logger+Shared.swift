@@ -9,6 +9,5 @@
 import Log
 
 extension Logger {
-
     static let shared = Logger(formatter: .default, theme: nil, minLevel: .trace)
 }

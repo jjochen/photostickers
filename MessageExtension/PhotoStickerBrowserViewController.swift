@@ -61,6 +61,13 @@ class PhotoStickerBrowserViewController: UIViewController {
     }
 }
 
+extension PhotoStickerBrowserViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> PhotoStickerBrowserViewController {
+        let viewController = storyboard.viewController(withID: .PhotoStickerBrowserViewController) as! PhotoStickerBrowserViewController
+        return viewController
+    }
+}
+
 // MARK: Skinning
 extension PhotoStickerBrowserViewController {
 

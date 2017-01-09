@@ -19,6 +19,10 @@
 		1943DECE1E1C554E00F1AADE /* StickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1943DECD1E1C554E00F1AADE /* StickerSection.swift */; };
 		195F6B0D1E1B098D00F01DC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 195F6B0C1E1B098D00F01DC7 /* Assets.xcassets */; };
 		195F6B0E1E1B098D00F01DC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 195F6B0C1E1B098D00F01DC7 /* Assets.xcassets */; };
+		199A788C1E23ED7C002B058E /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D805101E16892500DA25B6 /* UIViewController+Extensions.swift */; };
+		199A788D1E23ED7D002B058E /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D805101E16892500DA25B6 /* UIViewController+Extensions.swift */; };
+		199A78901E23EDFE002B058E /* UIStoryboardSegue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D805111E16892500DA25B6 /* UIStoryboardSegue+Extensions.swift */; };
+		199A78911E23EDFF002B058E /* UIStoryboardSegue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D805111E16892500DA25B6 /* UIStoryboardSegue+Extensions.swift */; };
 		19B7A4BB1E13C14B0074B6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4BA1E13C14B0074B6B1 /* AppDelegate.swift */; };
 		19B7A4BD1E13C14B0074B6B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B7A4BC1E13C14B0074B6B1 /* ViewController.swift */; };
 		19B7A4C01E13C14B0074B6B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B7A4BE1E13C14B0074B6B1 /* Main.storyboard */; };
@@ -738,9 +742,11 @@
 				19F69E631E194F8300EEF781 /* Logger+Shared.swift in Sources */,
 				19D805151E16892500DA25B6 /* UIStoryboard+Extensions.swift in Sources */,
 				19269D421E19AE29003D1C3E /* Sticker+Extensions.swift in Sources */,
+				199A78901E23EDFE002B058E /* UIStoryboardSegue+Extensions.swift in Sources */,
 				19269D401E19AE29003D1C3E /* Sticker.swift in Sources */,
 				19B7A5121E13CB800074B6B1 /* AppGroup.swift in Sources */,
 				19D805181E16892500DA25B6 /* StoryboardIdentifiers.swift in Sources */,
+				199A788C1E23ED7C002B058E /* UIViewController+Extensions.swift in Sources */,
 				19B7A4BD1E13C14B0074B6B1 /* ViewController.swift in Sources */,
 				19269D0D1E195AFD003D1C3E /* PSError.swift in Sources */,
 				19B7A4BB1E13C14B0074B6B1 /* AppDelegate.swift in Sources */,
@@ -769,6 +775,7 @@
 				19D805251E172B0E00DA25B6 /* StickerCell.swift in Sources */,
 				19F69E641E194F8300EEF781 /* Logger+Shared.swift in Sources */,
 				1943DECE1E1C554E00F1AADE /* StickerSection.swift in Sources */,
+				199A788D1E23ED7D002B058E /* UIViewController+Extensions.swift in Sources */,
 				19D8051F1E16893C00DA25B6 /* ViewModel.swift in Sources */,
 				19F69E5F1E194BD100EEF781 /* CoreDataStack.swift in Sources */,
 				19D805211E17026000DA25B6 /* MessagesViewModel.swift in Sources */,
@@ -776,6 +783,7 @@
 				19269D0E1E195AFD003D1C3E /* PSError.swift in Sources */,
 				19D805231E1702A300DA25B6 /* PhotoStickerBrowserViewModel.swift in Sources */,
 				19D8051B1E16893C00DA25B6 /* UIStoryboard+Extensions.swift in Sources */,
+				199A78911E23EDFF002B058E /* UIStoryboardSegue+Extensions.swift in Sources */,
 				19F69E6F1E19537A00EEF781 /* SharedPersistentContainer.swift in Sources */,
 				19B7A5161E1462170074B6B1 /* AppGroup.swift in Sources */,
 				19269D0A1E195927003D1C3E /* PhotoStickers.xcdatamodeld in Sources */,

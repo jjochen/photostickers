@@ -5,6 +5,10 @@ public enum CollectionViewCellReuseIdentifier: String {
     case StickerCell
 }
 
+public enum SegueIdentifier: String {
+    case EmbetPhotoStickerBrowserView
+}
+
 public enum StoryboardNames: String {
     case LaunchScreen
     case Main

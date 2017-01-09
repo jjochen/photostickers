@@ -6,6 +6,8 @@
 //  Copyright © 2016 Jochen Pfeiffer. All rights reserved.
 //
 
+import UIKit
+
 extension UIViewController {
 
     func loadViewProgrammatically() {
