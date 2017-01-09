@@ -31,6 +31,7 @@ class PhotoStickerBrowserViewController: UIViewController {
     // MARK: - Bindings
 
     fileprivate func setupBindings() {
+
         guard let _ = viewModel else {
             Logger.shared.error("View Model not set!")
             return
@@ -45,14 +46,29 @@ class PhotoStickerBrowserViewController: UIViewController {
             }
             .bindTo(collectionView.rx.items(dataSource: dataSource))
             .addDisposableTo(disposeBag)
+
+        collectionView.rx
+            .setDelegate(self)
+            .addDisposableTo(disposeBag)
+
+        collectionView.rx
+            .modelSelected(StickerSectionItem.self)
+            .filter { $0 == .OpenAppItem }
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel?.openApp()
+            })
+            .addDisposableTo(disposeBag)
     }
+}
+
+// MARK: Skinning
+extension PhotoStickerBrowserViewController {
 
     func skinTableViewDataSource(_ dataSource: RxCollectionViewSectionedReloadDataSource<StickerSection>) {
         dataSource.configureCell = { dataSource, collectionView, indexPath, _ in
             switch dataSource[indexPath] {
             case .OpenAppItem:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.AddMoreCell.rawValue, for: indexPath)
-
                 return cell
             case .StickerItem(sticker: let sticker):
                 let cell: StickerCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.StickerCell.rawValue, for: indexPath) as! StickerCell
@@ -61,11 +77,12 @@ class PhotoStickerBrowserViewController: UIViewController {
                 return cell
             }
         }
+    }
+}
 
-        //        dataSource.titleForHeaderInSection = { dataSource, index in
-        //            let section = dataSource[index]
-        //
-        //            return section.title
-        //        }
+extension PhotoStickerBrowserViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }

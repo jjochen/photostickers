@@ -14,19 +14,22 @@ import CoreData
 protocol PhotoStickerBrowserViewModelType {
     var managedObjectContext: NSManagedObjectContext { get }
     var sectionItems: Observable<[StickerSectionItem]> { get }
+    func openApp()
 }
 
 class PhotoStickerBrowserViewModel: ViewModel, PhotoStickerBrowserViewModelType {
 
     // MARK: - Input
 
+    let extensionContext: NSExtensionContext?
     let managedObjectContext: NSManagedObjectContext
 
     // MARK: - Output
 
     var sectionItems: Observable<[StickerSectionItem]>
 
-    init(managedObjectContext: NSManagedObjectContext) {
+    init(extensionContext: NSExtensionContext?, managedObjectContext: NSManagedObjectContext) {
+        self.extensionContext = extensionContext
         self.managedObjectContext = managedObjectContext
 
         self.sectionItems = managedObjectContext.rx
@@ -38,10 +41,16 @@ class PhotoStickerBrowserViewModel: ViewModel, PhotoStickerBrowserViewModelType 
                 var items = allStickers.map { sticker in
                     return StickerSectionItem.StickerItem(sticker: sticker)
                 }
-                items.insert(StickerSectionItem.OpenAppItem, at: 0)
+                items.append(StickerSectionItem.OpenAppItem)
                 return items
             }
 
         super.init()
+    }
+
+    func openApp() {
+        if let url = URL(string: "photosticker://open") {
+            self.extensionContext?.open(url, completionHandler: nil)
+        }
     }
 }

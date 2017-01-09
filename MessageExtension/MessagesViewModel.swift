@@ -11,12 +11,18 @@ import CoreData
 
 class MessagesViewModel: ViewModel {
 
-    let managedObjectContext = CoreDataStack.shared.viewContext
+    var extensionContext: NSExtensionContext?
+    var managedObjectContext: NSManagedObjectContext
+
+    init(extensionContext: NSExtensionContext?, managedObjectContext: NSManagedObjectContext) {
+        self.extensionContext = extensionContext
+        self.managedObjectContext = managedObjectContext
+        super.init()
+    }
 
     // MARK: - View Models
 
     func photoStickerBrowserViewModel() -> PhotoStickerBrowserViewModel {
-
-        return PhotoStickerBrowserViewModel(managedObjectContext: self.managedObjectContext)
+        return PhotoStickerBrowserViewModel(extensionContext: self.extensionContext, managedObjectContext: self.managedObjectContext)
     }
 }

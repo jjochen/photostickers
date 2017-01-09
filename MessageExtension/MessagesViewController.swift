@@ -11,9 +11,9 @@ import Messages
 import Log
 
 class MessagesViewController: MSMessagesAppViewController {
-
-    var viewModel = MessagesViewModel()
-
+    
+    lazy var viewModel: MessagesViewModel! = MessagesViewModel(extensionContext: self.extensionContext, managedObjectContext: CoreDataStack.shared.viewContext)
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let photoStickerBrowserViewController = segue.destination as? PhotoStickerBrowserViewController else {
             Logger.shared.error("destination should be of class PhotoStickerBrowserViewController")
@@ -29,31 +29,37 @@ class MessagesViewController: MSMessagesAppViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
+}
 
-    // MARK: - Conversation Handling
+// MARK: - Conversation Handling
+extension MessagesViewController {
 
     override func willBecomeActive(with conversation: MSConversation) {
+        super.willBecomeActive(with: conversation)
     }
 
     override func didResignActive(with conversation: MSConversation) {
+        super.didResignActive(with: conversation)
     }
 
     override func didReceive(_ message: MSMessage, conversation: MSConversation) {
+        super.didReceive(message, conversation: conversation)
     }
 
     override func didStartSending(_ message: MSMessage, conversation: MSConversation) {
+        super.didStartSending(message, conversation: conversation)
     }
 
     override func didCancelSending(_ message: MSMessage, conversation: MSConversation) {
+        super.didCancelSending(message, conversation: conversation)
     }
 
     override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        self.view.setNeedsLayout()
+        super.willTransition(to: presentationStyle)
     }
 
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        self.view.setNeedsLayout()
+        super.didTransition(to: presentationStyle)
     }
 }
