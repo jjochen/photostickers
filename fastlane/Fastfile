@@ -1,78 +1,132 @@
-# Customise this file, documentation can be found here:
-# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
-# All available actions: https://docs.fastlane.tools/actions
-# can also be listed using the `fastlane actions` command
+require 'yaml'
 
-# Change the syntax highlighting to Ruby
-# All lines starting with a # are ignored when running `fastlane`
-
-# If you want to automatically update fastlane if a new version is available:
-# update_fastlane
-
-# This is the minimum version number required.
-# Update this, if you use features of a newer version
 fastlane_version "2.3.0"
 
-default_platform :ios
+before_all do
+    ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "2"
+end
 
-platform :ios do
-  before_all do
-    ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "2"    
-  end
-
-  desc "Runs all the tests"
-  lane :test do
+desc "Runs all the tests"
+lane :test do
     scan
-  end
+end
 
-  desc "Submit a new Beta Build to Apple TestFlight"
-  lane :beta do
-    # match(type: "appstore") # more information: https://codesigning.guide
-    bundle_install
-    cocoapods
-    increment_build_number
+desc "Submit a new Beta Build to Apple TestFlight"
+lane :beta do
+    # match(type: "appstore") ???
+    
+    # Increment build number to current date
+    build_number = Time.new.strftime("%Y.%m.%d")
+    increment_build_number build_number: build_number
+    
+    # Grab the latest profiles from Apple
+    sigh
+    
+    ENV["PROFILE_UDID"] = lane_context[SharedValues::SIGH_UDID]
+    
     gym(
-      scheme: "PhotoStickers"
+        scheme: "PhotoStickers"
     )
     pilot(skip_waiting_for_build_processing: true)
-  end
+end
 
-  desc "Deploy a new version to the App Store"
-  lane :release do
-    # match(type: "appstore")
-    # snapshot
-    bundle_install
-    cocoapods
-    increment_build_number
+desc "Deploy a new version to the App Store"
+lane :release do |options|
+    
+    version = options[:version]
+    raise "You must specify a version in A.B.X format to deploy." if version.nil? || version.scan(/\d+\.\d+\.\d+/).length == 0
+    
+    # Make sure we start off with a clean slate
+    ensure_git_status_clean
+    
+    # Increment build number to current date
+    build_number = Time.new.strftime("%Y.%m.%d")
+    increment_build_number build_number: build_number
+    
+    # Generate release notes from CHANGELOG
+    changelog_filename = '../CHANGELOG.yml'
+    changelog_yaml = YAML.load_file(changelog_filename)
+    release_notes = changelog_yaml['upcoming'].map{ |note| note.prepend '- ' }.join("\n")
+    
+    # Increment to the specified version number
+    increment_version_number version_number: version
+    
+    # Add a changelog entry for this version
+    
+    changelog_contents = File.read(changelog_filename)
+    existing_releases = changelog_contents.split('releases:').last
+    this_release = changelog_yaml['upcoming'].map{ |note| note.prepend '  ' }.join("\n")
+    changelog_contents = <<-EOS
+upcoming:
+
+releases:
+- version: #{version}
+  date: #{Time.new.strftime("%Y-%m-%d")}
+  notes:
+#{this_release}
+#{existing_releases}
+EOS
+
+    File.open(changelog_filename, 'w') { |file| file.puts changelog_contents }
+    
+    # match(type: "appstore") ???
+    
+    # Grab the latest profiles from Apple
+    sigh
+    
+    ENV["PROFILE_UDID"] = lane_context[SharedValues::SIGH_UDID]
+    
+    # Build
     gym(
-      scheme: "PhotoStickers"
+        scheme: "PhotoStickers",
     )
+    
     deliver(force: true)
     # frameit
-  end
-
-  desc "Updates the storyboard identifier Swift values."
-  lane :storyboard_ids do
-    sh "cd .. ; bundle exec sbconstants ./Shared/StoryboardIdentifiers.swift --source-dir ./ --swift"
-  end
-
-  # You can define as many lanes as you want
-
-  after_all do |lane|
     
-  end
-
-  error do |lane, exception|
-    # slack(
-    #   message: exception.message,
-    #   success: false
-    # )
-  end
+    # Make sure our directory is clean, except for changes Fastlane has made
+    clean_build_artifacts
+                     
+    # Tag release and push to GitHub
+    sh "git add .. ; git commit -m 'Deploying version #{version}.'" # Can't use commit_version_bump to include changelog changes
+    add_git_tag tag: version
+    push_to_git_remote
 end
 
 
-# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
-# All available actions: https://docs.fastlane.tools/actions
+desc "Updates the storyboard identifier Swift values."
+lane :storyboard_ids do
+    sh "cd .. ; bundle exec sbconstants ./Shared/StoryboardIdentifiers.swift --source-dir ./ --swift"
+end
 
-# fastlane reports which actions are used
-# No personal data is recorded. Learn more at https://github.com/fastlane/enhancer
+desc "Install dependencies (gems, cocoapods)"
+lane :install_dependencies do
+    bundle_install
+    cocoapods(
+        repo_update: true,
+    )
+end
+
+desc "Update dependencies (bundler, gems, cocoapods)"
+lane :update_dependencies do
+    sh "gem install bundler"
+    sh "bundle update"
+    sh "bundle exec pod update"
+end
+
+desc "Delete cocoapods from the project and reinstall"
+lane :reintegrate do
+    sh "bundle update"
+    sh "bundle exec pod deintegrate PhotoStickers.xcodeproj"
+    sh "bundle exec pod clean"
+    cocoapods
+end
+
+
+error do |lane, exception|
+    if lane == :release
+        puts "Unable to release, resetting git repository."
+        clean_build_artifacts
+        reset_git_repo
+    end
+end

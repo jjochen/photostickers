@@ -25,8 +25,13 @@
     }
 
     extension Reactive where Base: UITextView {
-        /// Reactive wrapper for `text` property.
+        /// Reactive wrapper for `text` property
         public var text: ControlProperty<String?> {
+            return value
+        }
+
+        /// Reactive wrapper for `text` property.
+        public var value: ControlProperty<String?> {
             let source: Observable<String?> = Observable.deferred { [weak textView = self.base] in
                 let text = textView?.text
 

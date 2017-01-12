@@ -11,5 +11,5 @@ import Foundation
 public protocol AnimatableSectionModelType
     : SectionModelType
     , IdentifiableType {
-    associatedtype Item: IdentifiableType, Equatable
+    associatedtype Item : IdentifiableType, Equatable
 }

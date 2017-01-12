@@ -72,7 +72,7 @@ extension MessagesViewController {
         if presentationStyle == .compact {
             controller = instantiatePhotoStickerBrowserViewController()
         } else {
-            controller = UIViewController()
+            controller = instantiatePhotoStickerBrowserViewController()
         }
 
         for child in childViewControllers {

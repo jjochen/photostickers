@@ -8,16 +8,16 @@
 
 import Foundation
 #if !RX_NO_MODULE
-    import RxSwift
+import RxSwift
 #endif
 
 extension ObservableConvertibleType {
     /**
-     Converts anything convertible to `Observable` to `Driver` unit.
-
-     - parameter onErrorJustReturn: Element to return in case of error and after that complete the sequence.
-     - returns: Driving observable sequence.
-     */
+    Converts anything convertible to `Observable` to `Driver` unit.
+    
+    - parameter onErrorJustReturn: Element to return in case of error and after that complete the sequence.
+    - returns: Driving observable sequence.
+    */
     public func asDriver(onErrorJustReturn: E) -> Driver<E> {
         let source = self
             .asObservable()
@@ -25,13 +25,13 @@ extension ObservableConvertibleType {
             .catchErrorJustReturn(onErrorJustReturn)
         return Driver(source)
     }
-
+    
     /**
-     Converts anything convertible to `Observable` to `Driver` unit.
-
-     - parameter onErrorDriveWith: Driver that continues to drive the sequence in case of error.
-     - returns: Driving observable sequence.
-     */
+    Converts anything convertible to `Observable` to `Driver` unit.
+    
+    - parameter onErrorDriveWith: Driver that continues to drive the sequence in case of error.
+    - returns: Driving observable sequence.
+    */
     public func asDriver(onErrorDriveWith: Driver<E>) -> Driver<E> {
         let source = self
             .asObservable()
@@ -43,11 +43,11 @@ extension ObservableConvertibleType {
     }
 
     /**
-     Converts anything convertible to `Observable` to `Driver` unit.
-
-     - parameter onErrorRecover: Calculates driver that continues to drive the sequence in case of error.
-     - returns: Driving observable sequence.
-     */
+    Converts anything convertible to `Observable` to `Driver` unit.
+    
+    - parameter onErrorRecover: Calculates driver that continues to drive the sequence in case of error.
+    - returns: Driving observable sequence.
+    */
     public func asDriver(onErrorRecover: @escaping (_ error: Swift.Error) -> Driver<E>) -> Driver<E> {
         let source = self
             .asObservable()

@@ -1,8 +1,8 @@
 //
-//  RxTabBarDelegateProxy.swift
+//  RxTabBarControllerDelegateProxy.swift
 //  RxCocoa
 //
-//  Created by Jesse Farless on 5/14/16.
+//  Created by Yusuke Kita on 2016/12/07.
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
 //
 
@@ -15,27 +15,27 @@
     #endif
 
     /// For more information take a look at `DelegateProxyType`.
-    public class RxTabBarDelegateProxy
+    public class RxTabBarControllerDelegateProxy
         : DelegateProxy
-        , UITabBarDelegate
+        , UITabBarControllerDelegate
         , DelegateProxyType {
 
         /// For more information take a look at `DelegateProxyType`.
         public class func currentDelegateFor(_ object: AnyObject) -> AnyObject? {
-            let tabBar: UITabBar = castOrFatalError(object)
-            return tabBar.delegate
+            let tabBarController: UITabBarController = castOrFatalError(object)
+            return tabBarController.delegate
         }
 
         /// For more information take a look at `DelegateProxyType`.
         public class func setCurrentDelegate(_ delegate: AnyObject?, toObject object: AnyObject) {
-            let tabBar: UITabBar = castOrFatalError(object)
-            tabBar.delegate = castOptionalOrFatalError(delegate)
+            let tabBarController: UITabBarController = castOrFatalError(object)
+            tabBarController.delegate = castOptionalOrFatalError(delegate)
         }
 
         /// For more information take a look at `DelegateProxyType`.
         public override class func createProxyForObject(_ object: AnyObject) -> AnyObject {
-            let tabBar: UITabBar = castOrFatalError(object)
-            return tabBar.createRxDelegateProxy()
+            let tabBarController: UITabBarController = castOrFatalError(object)
+            return tabBarController.createRxDelegateProxy()
         }
     }
 

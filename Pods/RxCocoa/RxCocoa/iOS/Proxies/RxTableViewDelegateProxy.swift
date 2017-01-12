@@ -26,7 +26,7 @@
         ///
         /// - parameter parentObject: Parent object for delegate proxy.
         public required init(parentObject: AnyObject) {
-            self.tableView = (parentObject as! UITableView)
+            self.tableView = castOrFatalError(parentObject)
             super.init(parentObject: parentObject)
         }
     }

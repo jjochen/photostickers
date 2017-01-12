@@ -1,3 +1,5 @@
+[![Travis CI](https://travis-ci.org/RxSwiftCommunity/RxDataSources.svg?branch=master)](https://travis-ci.org/RxSwiftCommunity/RxDataSources)
+
 Table and Collection view data sources
 ======================================
 
@@ -121,7 +123,7 @@ Observable.just(sections)
 ### Animations
 To implement animations with RxDataSources, the same steps are required as with non-animated data, execept:
 - SectionOfCustomData needs to conform to `AnimatableSectionModelType`
-- dataSource needs to be an instance of `RxTableViewSectionedAnimatedDataSource` or `RxTableViewSectionedAnimatedDataSource`
+- dataSource needs to be an instance of `RxTableViewSectionedAnimatedDataSource` or `RxCollectionViewSectionedAnimatedDataSource`
 
 
 ## Requirements

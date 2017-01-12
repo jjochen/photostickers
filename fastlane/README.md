@@ -5,27 +5,41 @@ fastlane documentation
 sudo gem install fastlane
 ```
 # Available Actions
-## iOS
-### ios test
+### test
 ```
-fastlane ios test
+fastlane test
 ```
 Runs all the tests
-### ios beta
+### beta
 ```
-fastlane ios beta
+fastlane beta
 ```
 Submit a new Beta Build to Apple TestFlight
-### ios release
+### release
 ```
-fastlane ios release
+fastlane release
 ```
 Deploy a new version to the App Store
-### ios storyboard_ids
+### storyboard_ids
 ```
-fastlane ios storyboard_ids
+fastlane storyboard_ids
 ```
 Updates the storyboard identifier Swift values.
+### install_dependencies
+```
+fastlane install_dependencies
+```
+Install dependencies (gems, cocoapods)
+### update_dependencies
+```
+fastlane update_dependencies
+```
+Update dependencies (bundler, gems, cocoapods)
+### reintegrate
+```
+fastlane reintegrate
+```
+Delete cocoapods from the project and reinstall
 
 ----
 
