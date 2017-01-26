@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 #if !RX_NO_MODULE
-    import RxSwift
-    import RxCocoa
+import RxSwift
+import RxCocoa
 #endif
 
 open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
     : TableViewSectionedDataSource<S>
     , RxTableViewDataSourceType {
-
+    
     public typealias Element = [S]
     public var animationConfiguration = AnimationConfiguration()
 
@@ -35,7 +35,8 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
                 self.dataSet = true
                 dataSource.setSections(newSections)
                 tableView.reloadData()
-            } else {
+            }
+            else {
                 DispatchQueue.main.async {
                     // if view is not in view hierarchy, performing batch updates will crash the app
                     if tableView.window == nil {
@@ -51,7 +52,8 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
 
                             tableView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
                         }
-                    } catch let e {
+                    }
+                    catch let e {
                         rxDebugFatalError(e)
                         self.setSections(newSections)
                         tableView.reloadData()

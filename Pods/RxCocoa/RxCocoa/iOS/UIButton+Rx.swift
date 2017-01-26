@@ -8,57 +8,59 @@
 
 #if os(iOS)
 
-    import Foundation
-    #if !RX_NO_MODULE
-        import RxSwift
-    #endif
-    import UIKit
+import Foundation
+#if !RX_NO_MODULE
+import RxSwift
+#endif
+import UIKit
 
-    extension Reactive where Base: UIButton {
-
-        /**
-         Reactive wrapper for `TouchUpInside` control event.
-         */
-        public var tap: ControlEvent<Void> {
-            return controlEvent(.touchUpInside)
-        }
+extension Reactive where Base: UIButton {
+    
+    /**
+    Reactive wrapper for `TouchUpInside` control event.
+    */
+    public var tap: ControlEvent<Void> {
+        return controlEvent(.touchUpInside)
     }
+}
 
 #endif
 
 #if os(tvOS)
 
-    import Foundation
-    #if !RX_NO_MODULE
-        import RxSwift
-    #endif
-    import UIKit
+import Foundation
+#if !RX_NO_MODULE
+    import RxSwift
+#endif
+import UIKit
 
-    extension Reactive where Base: UIButton {
+extension Reactive where Base: UIButton {
 
-        /// Reactive wrapper for `PrimaryActionTriggered` control event.
-        public var primaryAction: ControlEvent<Void> {
-            return controlEvent(.primaryActionTriggered)
-        }
+    /// Reactive wrapper for `PrimaryActionTriggered` control event.
+    public var primaryAction: ControlEvent<Void> {
+        return controlEvent(.primaryActionTriggered)
     }
+
+}
 
 #endif
 
 #if os(iOS) || os(tvOS)
 
     import Foundation
-    #if !RX_NO_MODULE
-        import RxSwift
-    #endif
+#if !RX_NO_MODULE
+    import RxSwift
+#endif
     import UIKit
 
-    extension Reactive where Base: UIButton {
-
-        /// Reactive wrapper for `setTitle(_:controlState:)`
-        public func title(for controlState: UIControlState = []) -> UIBindingObserver<Base, String?> {
-            return UIBindingObserver<Base, String?>(UIElement: self.base) { (button, title) -> Void in
-                button.setTitle(title, for: controlState)
-            }
+extension Reactive where Base: UIButton {
+    
+    /// Reactive wrapper for `setTitle(_:controlState:)`
+    public func title(for controlState: UIControlState = []) -> UIBindingObserver<Base, String?> {
+        return UIBindingObserver<Base, String?>(UIElement: self.base) { (button, title) -> () in
+            button.setTitle(title, for: controlState)
         }
     }
+    
+}
 #endif

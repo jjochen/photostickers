@@ -27,17 +27,17 @@ internal extension String {
     var lastPathComponent: String {
         return NSString(string: self).lastPathComponent
     }
-
+    
     /// A new string made by deleting the extension from the receiver.
     var stringByDeletingPathExtension: String {
         return NSString(string: self).deletingPathExtension
     }
-
+    
     /**
      Returns a string colored with the specified color.
-
+     
      - parameter color: The string representation of the color.
-
+     
      - returns: A string colored with the specified color.
      */
     func withColor(_ color: String) -> String {

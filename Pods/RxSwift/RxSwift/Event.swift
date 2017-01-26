@@ -10,7 +10,7 @@ import Foundation
 
 /// Represents a sequence event.
 ///
-/// Sequence grammar:
+/// Sequence grammar: 
 /// **next\* (error | completed)**
 public enum Event<Element> {
     /// Next element is produced.
@@ -23,7 +23,7 @@ public enum Event<Element> {
     case completed
 }
 
-extension Event: CustomDebugStringConvertible {
+extension Event : CustomDebugStringConvertible {
     /// - returns: Description of event.
     public var debugDescription: String {
         switch self {
@@ -76,7 +76,8 @@ extension Event {
             case .completed:
                 return .completed
             }
-        } catch let e {
+        }
+        catch let e {
             return .error(e)
         }
     }

@@ -14,7 +14,7 @@ private let disposeScheduledDisposable: (ScheduledDisposable) -> Disposable = { 
 }
 
 /// Represents a disposable resource whose disposal invocation will be scheduled on the specified scheduler.
-public final class ScheduledDisposable: Cancelable {
+public final class ScheduledDisposable : Cancelable {
     public let scheduler: ImmediateSchedulerType
 
     private var _isDisposed: AtomicInt = 0
@@ -28,11 +28,11 @@ public final class ScheduledDisposable: Cancelable {
     }
 
     /**
-     Initializes a new instance of the `ScheduledDisposable` that uses a `scheduler` on which to dispose the `disposable`.
+    Initializes a new instance of the `ScheduledDisposable` that uses a `scheduler` on which to dispose the `disposable`.
 
-     - parameter scheduler: Scheduler where the disposable resource will be disposed on.
-     - parameter disposable: Disposable resource to dispose on the given scheduler.
-     */
+    - parameter scheduler: Scheduler where the disposable resource will be disposed on.
+    - parameter disposable: Disposable resource to dispose on the given scheduler.
+    */
     public init(scheduler: ImmediateSchedulerType, disposable: Disposable) {
         self.scheduler = scheduler
         _disposable = disposable
@@ -40,7 +40,7 @@ public final class ScheduledDisposable: Cancelable {
 
     /// Disposes the wrapped disposable on the provided scheduler.
     public func dispose() {
-        _ = scheduler.schedule(self, action: disposeScheduledDisposable)
+        let _ = scheduler.schedule(self, action: disposeScheduledDisposable)
     }
 
     func disposeInner() {

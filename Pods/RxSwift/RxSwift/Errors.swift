@@ -8,7 +8,7 @@
 
 import Foundation
 
-let RxErrorDomain = "RxErrorDomain"
+let RxErrorDomain       = "RxErrorDomain"
 let RxCompositeFailures = "RxCompositeFailures"
 
 /// Generic Rx error codes.

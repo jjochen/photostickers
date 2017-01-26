@@ -8,8 +8,8 @@
 
 import Foundation
 
-class Empty<Element>: Producer<Element> {
-    override func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == Element {
+class Empty<Element> : Producer<Element> {
+    override func subscribe<O : ObserverType>(_ observer: O) -> Disposable where O.E == Element {
         observer.on(.completed)
         return Disposables.create()
     }

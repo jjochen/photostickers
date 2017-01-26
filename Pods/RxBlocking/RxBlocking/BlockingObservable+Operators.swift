@@ -77,7 +77,7 @@ extension BlockingObservable {
         defer {
             d.dispose()
         }
-
+        
         let lock = RunLoopLock(timeout: timeout)
 
         lock.dispatch {
@@ -131,7 +131,7 @@ extension BlockingObservable {
         defer {
             d.dispose()
         }
-
+        
         let lock = RunLoopLock(timeout: timeout)
 
         lock.dispatch {
@@ -155,13 +155,13 @@ extension BlockingObservable {
 
             d.setDisposable(subscription)
         }
-
+        
         try lock.run()
-
+        
         if let error = error {
             throw error
         }
-
+        
         return element
     }
 }
@@ -184,17 +184,17 @@ extension BlockingObservable {
     /// - returns: Returns the only element of an sequence that satisfies the condition in the predicate, and reports an error if there is not exactly one element in the sequence.
     public func single(_ predicate: @escaping (E) throws -> Bool) throws -> E? {
         var element: E?
-
+        
         var error: Swift.Error?
-
+        
         let d = SingleAssignmentDisposable()
 
         defer {
             d.dispose()
         }
-
+        
         let lock = RunLoopLock(timeout: timeout)
-
+        
         lock.dispatch {
             let subscription = self.source.subscribe { e in
                 if d.isDisposed {
@@ -231,13 +231,13 @@ extension BlockingObservable {
 
             d.setDisposable(subscription)
         }
-
+        
         try lock.run()
 
         if let error = error {
             throw error
         }
-
+        
         return element
     }
 }

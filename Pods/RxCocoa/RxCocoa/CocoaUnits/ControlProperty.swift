@@ -8,42 +8,42 @@
 
 import Foundation
 #if !RX_NO_MODULE
-    import RxSwift
+import RxSwift
 #endif
 
 /// Protocol that enables extension of `ControlProperty`.
-public protocol ControlPropertyType: ObservableType, ObserverType {
+public protocol ControlPropertyType : ObservableType, ObserverType {
 
     /// - returns: `ControlProperty` interface
     func asControlProperty() -> ControlProperty<E>
 }
 
 /**
- Unit for `Observable`/`ObservableType` that represents property of UI element.
+    Unit for `Observable`/`ObservableType` that represents property of UI element.
+ 
+    Sequence of values only represents initial control value and user initiated value changes.
+    Programatic value changes won't be reported.
 
- Sequence of values only represents initial control value and user initiated value changes.
- Programatic value changes won't be reported.
+    It's properties are:
 
- It's properties are:
+    - it never fails
+    - `shareReplay(1)` behavior
+        - it's stateful, upon subscription (calling subscribe) last element is immediately replayed if it was produced
+    - it will `Complete` sequence on control being deallocated
+    - it never errors out
+    - it delivers events on `MainScheduler.instance`
 
- - it never fails
- - `shareReplay(1)` behavior
- - it's stateful, upon subscription (calling subscribe) last element is immediately replayed if it was produced
- - it will `Complete` sequence on control being deallocated
- - it never errors out
- - it delivers events on `MainScheduler.instance`
+    **The implementation of `ControlProperty` will ensure that sequence of values is being subscribed on main scheduler
+    (`subscribeOn(ConcurrentMainScheduler.instance)` behavior).**
 
- **The implementation of `ControlProperty` will ensure that sequence of values is being subscribed on main scheduler
- (`subscribeOn(ConcurrentMainScheduler.instance)` behavior).**
+    **It is implementor's responsibility to make sure that that all other properties enumerated above are satisfied.**
 
- **It is implementor's responsibility to make sure that that all other properties enumerated above are satisfied.**
+    **If they aren't, then using this unit communicates wrong properties and could potentially break someone's code.**
 
- **If they aren't, then using this unit communicates wrong properties and could potentially break someone's code.**
-
- **In case `values` observable sequence that is being passed into initializer doesn't satisfy all enumerated
- properties, please don't use this unit.**
- */
-public struct ControlProperty<PropertyType>: ControlPropertyType {
+    **In case `values` observable sequence that is being passed into initializer doesn't satisfy all enumerated
+    properties, please don't use this unit.**
+*/
+public struct ControlProperty<PropertyType> : ControlPropertyType {
     public typealias E = PropertyType
 
     let _values: Observable<PropertyType>
@@ -65,7 +65,7 @@ public struct ControlProperty<PropertyType>: ControlPropertyType {
     ///
     /// - parameter observer: Observer to subscribe to property values.
     /// - returns: Disposable object that can be used to unsubscribe the observer from receiving control property values.
-    public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == E {
+    public func subscribe<O : ObserverType>(_ observer: O) -> Disposable where O.E == E {
         return _values.subscribe(observer)
     }
 
@@ -80,7 +80,9 @@ public struct ControlProperty<PropertyType>: ControlPropertyType {
     /// adjacent sequence values need to be different (e.g. because of interaction between programatic and user updates,
     /// or for any other reason).
     public var changed: ControlEvent<PropertyType> {
-        return ControlEvent(events: _values.skip(1))
+        get {
+            return ControlEvent(events: _values.skip(1))
+        }
     }
 
     /// - returns: `Observable` interface.

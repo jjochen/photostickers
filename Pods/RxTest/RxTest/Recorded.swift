@@ -19,7 +19,7 @@ public struct Recorded<Value>
 
     /// Gets the recorded value.
     public let value: Value
-
+    
     public init(time: TestTime, value: Value) {
         self.time = time
         self.value = value

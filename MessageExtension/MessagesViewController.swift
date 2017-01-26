@@ -9,10 +9,15 @@
 import UIKit
 import Messages
 import Log
+import RealmSwift
 
 class MessagesViewController: MSMessagesAppViewController {
 
-    lazy var viewModel: MessagesViewModel! = MessagesViewModel(extensionContext: self.extensionContext, managedObjectContext: CoreDataStack.shared.viewContext)
+    lazy var viewModel: MessagesViewModel! = {
+        Realm.configureForAppGroup()
+        let realm = try! Realm()
+        return MessagesViewModel(extensionContext: self.extensionContext, realmContext: realm)
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()

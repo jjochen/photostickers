@@ -7,14 +7,29 @@
 //
 
 import Foundation
+import RealmSwift
 import Messages
 import Log
 
-struct Sticker {
-    var uuid: String
-    var stickerPath: String?
-    var stickerDescription: String?
-    var sortOrder: Int
+class Sticker: Object {
+    dynamic var uuid = ""
+    dynamic var stickerPath: String?
+    dynamic var stickerDescription: String?
+    dynamic var sortOrder = 0
+}
+
+extension Sticker {
+    override static func primaryKey() -> String? {
+        return "uuid"
+    }
+
+    override static func indexedProperties() -> [String] {
+        return ["sortOrder"]
+    }
+
+    override static func ignoredProperties() -> [String] {
+        return []
+    }
 }
 
 extension Sticker {
@@ -35,7 +50,7 @@ extension Sticker {
 }
 
 extension Sticker {
-    public func loadSticker() -> MSSticker? {
+    public func loadMSSticker() -> MSSticker? {
         let stickerURL: URL? = self.stickerURL
         let localizedDescription: String! = self.localizedDescription
         guard stickerURL != nil else {

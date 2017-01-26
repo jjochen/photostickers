@@ -16,7 +16,7 @@ protocol Lock {
 // https://lists.swift.org/pipermail/swift-dev/Week-of-Mon-20151214/000321.html
 typealias SpinLock = NSRecursiveLock
 
-extension NSRecursiveLock: Lock {
+extension NSRecursiveLock : Lock {
     @inline(__always)
     func performLocked(_ action: () -> Void) {
         lock(); defer { unlock() }

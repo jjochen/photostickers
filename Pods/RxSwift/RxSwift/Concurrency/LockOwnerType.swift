@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol LockOwnerType: class, Lock {
+protocol LockOwnerType : class, Lock {
     var _lock: NSRecursiveLock { get }
 }
 

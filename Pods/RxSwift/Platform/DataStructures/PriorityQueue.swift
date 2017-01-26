@@ -74,7 +74,7 @@ struct PriorityQueue<Element> {
         while unbalancedIndex > 0 {
             let parentIndex = (unbalancedIndex - 1) / 2
             guard _hasHigherPriority(_elements[unbalancedIndex], _elements[parentIndex]) else { break }
-
+            
             swap(&_elements[unbalancedIndex], &_elements[parentIndex])
             unbalancedIndex = parentIndex
         }
@@ -107,7 +107,7 @@ struct PriorityQueue<Element> {
     }
 }
 
-extension PriorityQueue: CustomDebugStringConvertible {
+extension PriorityQueue : CustomDebugStringConvertible {
     var debugDescription: String {
         return _elements.debugDescription
     }

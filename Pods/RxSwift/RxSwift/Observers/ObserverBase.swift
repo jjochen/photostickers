@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ObserverBase<ElementType>: Disposable, ObserverType {
+class ObserverBase<ElementType> : Disposable, ObserverType {
     typealias E = ElementType
 
     private var _isStopped: AtomicInt = 0

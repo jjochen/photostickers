@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct AnonymousInvocable: InvocableType {
-    private let _action: () -> Void
+struct AnonymousInvocable : InvocableType {
+    private let _action: () -> ()
 
-    init(_ action: @escaping () -> Void) {
+    init(_ action: @escaping () -> ()) {
         _action = action
     }
 

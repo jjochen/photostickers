@@ -22,7 +22,7 @@ class DebounceSink<O: ObserverType>
 
     // state
     private var _id = 0 as UInt64
-    private var _value: Element?
+    private var _value: Element? = nil
 
     let cancellable = SerialDisposable()
 
@@ -48,6 +48,7 @@ class DebounceSink<O: ObserverType>
             _id = _id &+ 1
             let currentId = _id
             _value = element
+
 
             let scheduler = _parent._scheduler
             let dueTime = _parent._dueTime
@@ -82,7 +83,7 @@ class DebounceSink<O: ObserverType>
     }
 }
 
-class Debounce<Element>: Producer<Element> {
+class Debounce<Element> : Producer<Element> {
 
     fileprivate let _source: Observable<Element>
     fileprivate let _dueTime: RxTimeInterval
@@ -99,4 +100,5 @@ class Debounce<Element>: Producer<Element> {
         let subscription = sink.run()
         return (sink: sink, subscription: subscription)
     }
+    
 }

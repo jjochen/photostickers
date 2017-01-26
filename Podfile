@@ -7,21 +7,22 @@ inhibit_all_warnings!
 
 
 target 'PhotoStickers' do
-    pod 'RxSwift', '~> 3.0'
-    pod 'RxCocoa', '~> 3.0'
-    pod 'RxDataSources', '~> 1.0'
-    pod 'RxCoreData'
+    pod 'RxSwift'
+    pod 'RxCocoa'
+    pod 'RxDataSources'
+    pod 'RealmSwift'
+    pod 'RxRealm'
+#    pod 'RxCoreData'
     #pod 'RxViewModel'
     #pod 'RxOptional'
-    #pod 'RealmSwift'
     #pod 'SnapKit'
     pod 'Log'
     pod 'Toaster'
 
     target 'PhotoStickersTests' do
         inherit! :search_paths
-        pod 'RxTest',     '~> 3.0'
-        pod 'RxBlocking', '~> 3.0'
+        pod 'RxTest'
+        pod 'RxBlocking'
         #pod 'Quick'
         #pod 'Nimble'
         #pod 'RxNimble'
@@ -29,14 +30,11 @@ target 'PhotoStickers' do
 end
 
 target 'MessageExtension' do
-    pod 'RxSwift', '~> 3.0'
-    pod 'RxCocoa', '~> 3.0'
-    pod 'RxDataSources', '~> 1.0'
-    pod 'RxCoreData'
-    #pod 'RxViewModel'
-    #pod 'RxOptional'
-    #pod 'RealmSwift'
-    #pod 'SnapKit'
+    pod 'RxSwift'
+    pod 'RxCocoa'
+    pod 'RxDataSources'
+    pod 'RealmSwift'
+    pod 'RxRealm'
     pod 'Log'
 end
 

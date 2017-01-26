@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct InvocableScheduledItem<I: InvocableWithValueType>: InvocableType {
+struct InvocableScheduledItem<I: InvocableWithValueType> : InvocableType {
 
     let _invocable: I
     let _state: I.Value

@@ -9,11 +9,11 @@
 import Foundation
 
 #if os(iOS)
-    import UIKit
+  import UIKit
 
-    #if !RX_NO_MODULE
-        import RxSwift
-    #endif
+#if !RX_NO_MODULE
+  import RxSwift
+#endif
 
     extension Reactive where Base: UIViewController {
 
@@ -23,5 +23,6 @@ import Foundation
                 viewController.title = title
             }
         }
+    
     }
 #endif

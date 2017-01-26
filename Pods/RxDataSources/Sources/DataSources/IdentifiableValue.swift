@@ -17,7 +17,7 @@ extension IdentifiableValue
 
     public typealias Identity = Value
 
-    public var identity: Identity {
+    public var identity : Identity {
         return value
     }
 }

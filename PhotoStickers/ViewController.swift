@@ -9,8 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import CoreData
-import RxCoreData
+import RealmSwift
 import Log
 
 class ViewController: UIViewController {
@@ -49,10 +48,16 @@ class ViewController: UIViewController {
             return
         }
 
-        let sticker = Sticker(uuid: uuid, stickerPath: url.absoluteString, stickerDescription: "Pizza", sortOrder: 1)
+        let sticker = Sticker()
+        sticker.uuid = uuid
+        sticker.stickerPath = url.absoluteString
+        sticker.stickerDescription = "Pizza"
+        sticker.sortOrder = 1
 
-        let managedObject = NSEntityDescription.insertNewObject(forEntityName: Sticker.entityName, into: CoreDataStack.shared.viewContext)
-
-        sticker.update(managedObject)
+        Realm.configureForAppGroup()
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(sticker)
+        }
     }
 }

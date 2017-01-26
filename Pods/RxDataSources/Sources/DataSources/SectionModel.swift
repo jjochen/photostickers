@@ -22,7 +22,7 @@ extension SectionModel
     : SectionModelType {
     public typealias Identity = Section
     public typealias Item = ItemType
-
+    
     public var identity: Section {
         return model
     }

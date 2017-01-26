@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 #if !RX_NO_MODULE
-    import RxSwift
-    import RxCocoa
+import RxSwift
+import RxCocoa
 #endif
 
 open class RxCollectionViewSectionedReloadDataSource<S: SectionModelType>
     : CollectionViewSectionedDataSource<S>
     , RxCollectionViewDataSourceType {
-
+    
     public typealias Element = [S]
 
     public override init() {

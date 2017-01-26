@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AnonymousObservableSink<O: ObserverType>: Sink<O>, ObserverType {
+class AnonymousObservableSink<O: ObserverType> : Sink<O>, ObserverType {
     typealias E = O.E
     typealias Parent = AnonymousObservable<E>
 
@@ -39,7 +39,7 @@ class AnonymousObservableSink<O: ObserverType>: Sink<O>, ObserverType {
     }
 }
 
-class AnonymousObservable<Element>: Producer<Element> {
+class AnonymousObservable<Element> : Producer<Element> {
     typealias SubscribeHandler = (AnyObserver<Element>) -> Disposable
 
     let _subscribeHandler: SubscribeHandler
@@ -48,7 +48,7 @@ class AnonymousObservable<Element>: Producer<Element> {
         _subscribeHandler = subscribeHandler
     }
 
-    override func run<O: ObserverType>(_ observer: O, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where O.E == Element {
+    override func run<O : ObserverType>(_ observer: O, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where O.E == Element {
         let sink = AnonymousObservableSink(observer: observer, cancel: cancel)
         let subscription = sink.run(self)
         return (sink: sink, subscription: subscription)

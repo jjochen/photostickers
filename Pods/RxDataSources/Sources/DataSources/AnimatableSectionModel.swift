@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct AnimatableSectionModel < Section: IdentifiableType, ItemType: IdentifiableType & Equatable> {
+public struct AnimatableSectionModel<Section: IdentifiableType, ItemType: IdentifiableType & Equatable> {
     public var model: Section
     public var items: [Item]
 
@@ -16,6 +16,7 @@ public struct AnimatableSectionModel < Section: IdentifiableType, ItemType: Iden
         self.model = model
         self.items = items
     }
+    
 }
 
 extension AnimatableSectionModel
@@ -31,11 +32,12 @@ extension AnimatableSectionModel
         self.model = original.model
         self.items = items
     }
-
+    
     public var hashValue: Int {
         return self.model.identity.hashValue
     }
 }
+
 
 extension AnimatableSectionModel
     : CustomStringConvertible {
@@ -43,4 +45,5 @@ extension AnimatableSectionModel
     public var description: String {
         return "HashableSectionModel(model: \"\(self.model)\", items: \(items))"
     }
+
 }

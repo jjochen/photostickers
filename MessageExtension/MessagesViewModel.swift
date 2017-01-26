@@ -7,22 +7,22 @@
 //
 
 import Foundation
-import CoreData
+import RealmSwift
 
 class MessagesViewModel: ViewModel {
 
     var extensionContext: NSExtensionContext?
-    var managedObjectContext: NSManagedObjectContext
+    var realmContext: Realm!
 
-    init(extensionContext: NSExtensionContext?, managedObjectContext: NSManagedObjectContext) {
+    init(extensionContext: NSExtensionContext?, realmContext: Realm!) {
         self.extensionContext = extensionContext
-        self.managedObjectContext = managedObjectContext
+        self.realmContext = realmContext
         super.init()
     }
 
     // MARK: - View Models
 
     func photoStickerBrowserViewModel() -> PhotoStickerBrowserViewModel {
-        return PhotoStickerBrowserViewModel(extensionContext: self.extensionContext, managedObjectContext: self.managedObjectContext)
+        return PhotoStickerBrowserViewModel(extensionContext: self.extensionContext, realmContext: self.realmContext)
     }
 }

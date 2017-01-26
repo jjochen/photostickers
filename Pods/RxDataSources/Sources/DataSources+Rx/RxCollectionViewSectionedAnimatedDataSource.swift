@@ -9,20 +9,20 @@
 import Foundation
 import UIKit
 #if !RX_NO_MODULE
-    import RxSwift
-    import RxCocoa
+import RxSwift
+import RxCocoa
 #endif
 
 /*
- This is commented becuse collection view has bugs when doing animated updates.
+ This is commented becuse collection view has bugs when doing animated updates. 
  Take a look at randomized sections.
- */
+*/
 open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
     : CollectionViewSectionedDataSource<S>
     , RxCollectionViewDataSourceType {
     public typealias Element = [S]
     public var animationConfiguration = AnimationConfiguration()
-
+    
     // For some inexplicable reason, when doing animated updates first time
     // it crashes. Still need to figure out that one.
     var dataSet = false
@@ -52,7 +52,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
     /**
      This method exists because collection view updates are throttled because of internal collection view bugs.
      Collection view behaves poorly during fast updates, so this should remedy those issues.
-     */
+    */
     open func collectionView(_ collectionView: UICollectionView, throttledObservedEvent event: Event<Element>) {
         UIBindingObserver(UIElement: self) { dataSource, newSections in
             let oldSections = dataSource.sectionModels
@@ -69,7 +69,8 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
 
                     collectionView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
                 }
-            } catch let e {
+            }
+            catch let e {
                 #if DEBUG
                     print("Error while binding data animated: \(e)\nFallback to normal `reloadData` behavior.")
                     rxDebugFatalError(e)
@@ -89,7 +90,8 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
                 self.dataSet = true
                 dataSource.setSections(newSections)
                 collectionView.reloadData()
-            } else {
+            }
+            else {
                 let element = (collectionView, observedEvent)
                 dataSource.partialUpdateEvent.on(.next(element))
             }

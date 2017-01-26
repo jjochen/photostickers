@@ -9,14 +9,14 @@
 import Foundation
 
 /**
- Represents a disposable resource which only allows a single assignment of its underlying disposable resource.
+Represents a disposable resource which only allows a single assignment of its underlying disposable resource.
 
- If an underlying disposable resource has already been set, future attempts to set the underlying disposable resource will throw an exception.
- */
-public class SingleAssignmentDisposable: DisposeBase, Disposable, Cancelable {
-    #if os(Linux)
-        fileprivate let _lock = SpinLock()
-    #endif
+If an underlying disposable resource has already been set, future attempts to set the underlying disposable resource will throw an exception.
+*/
+public class SingleAssignmentDisposable : DisposeBase, Disposable, Cancelable {
+#if os(Linux)
+    fileprivate let _lock = SpinLock()
+#endif
 
     fileprivate enum DisposeState: UInt32 {
         case disposed = 1
@@ -50,15 +50,15 @@ public class SingleAssignmentDisposable: DisposeBase, Disposable, Cancelable {
         _disposable = disposable
 
         #if os(Linux)
-            _lock.lock()
-            let previousState = Int32(_state)
-            _state = _state | DisposeState.disposableSet.rawValue
-            // We know about `defer { _lock.unlock() }`, but this resolves Swift compiler bug. Using `defer` here causes anomaly.
-            _lock.unlock()
+        _lock.lock()
+        let previousState = Int32(_state)
+        _state = _state | DisposeState.disposableSet.rawValue
+        // We know about `defer { _lock.unlock() }`, but this resolves Swift compiler bug. Using `defer` here causes anomaly.
+        _lock.unlock()
         #else
-            let previousState = OSAtomicOr32OrigBarrier(DisposeState.disposableSet.rawValue, &_state)
+        let previousState = OSAtomicOr32OrigBarrier(DisposeState.disposableSet.rawValue, &_state)
         #endif
-
+        
         if (previousState & DisposeStateInt32.disposableSet.rawValue) != 0 {
             rxFatalError("oldState.disposable != nil")
         }
@@ -72,13 +72,13 @@ public class SingleAssignmentDisposable: DisposeBase, Disposable, Cancelable {
     /// Disposes the underlying disposable.
     public func dispose() {
         #if os(Linux)
-            _lock.lock()
-            let previousState = Int32(_state)
-            _state = _state | DisposeState.disposed.rawValue
-            // We know about `defer { _lock.unlock() }`, but this resolves Swift compiler bug. Using `defer` here causes anomaly.
-            _lock.unlock()
+        _lock.lock()
+        let previousState = Int32(_state)
+        _state = _state | DisposeState.disposed.rawValue
+        // We know about `defer { _lock.unlock() }`, but this resolves Swift compiler bug. Using `defer` here causes anomaly.
+        _lock.unlock()
         #else
-            let previousState = OSAtomicOr32OrigBarrier(DisposeState.disposed.rawValue, &_state)
+        let previousState = OSAtomicOr32OrigBarrier(DisposeState.disposed.rawValue, &_state)
         #endif
 
         if (previousState & DisposeStateInt32.disposed.rawValue) != 0 {
@@ -93,4 +93,5 @@ public class SingleAssignmentDisposable: DisposeBase, Disposable, Cancelable {
             _disposable = nil
         }
     }
+
 }

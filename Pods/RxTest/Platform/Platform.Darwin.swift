@@ -20,21 +20,22 @@
     extension Thread {
 
         static func setThreadLocalStorageValue<T: AnyObject>(_ value: T?, forKey key: String
-        ) {
+            ) {
             let currentThread = Thread.current
             let threadDictionary = currentThread.threadDictionary
 
             if let newValue = value {
                 threadDictionary[key] = newValue
-            } else {
+            }
+            else {
                 threadDictionary[key] = nil
             }
-        }
 
+        }
         static func getThreadLocalStorageValueForKey<T>(_ key: String) -> T? {
             let currentThread = Thread.current
             let threadDictionary = currentThread.threadDictionary
-
+            
             return threadDictionary[key] as? T
         }
     }
@@ -44,5 +45,5 @@
             return self
         }
     }
-
+    
 #endif

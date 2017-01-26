@@ -6,7 +6,7 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-class SkipWhileSink<O: ObserverType>: Sink<O>, ObserverType {
+class SkipWhileSink<O: ObserverType> : Sink<O>, ObserverType {
 
     typealias Element = O.E
     typealias Parent = SkipWhile<Element>
@@ -42,7 +42,7 @@ class SkipWhileSink<O: ObserverType>: Sink<O>, ObserverType {
     }
 }
 
-class SkipWhileSinkWithIndex<O: ObserverType>: Sink<O>, ObserverType {
+class SkipWhileSinkWithIndex<O: ObserverType> : Sink<O>, ObserverType {
 
     typealias Element = O.E
     typealias Parent = SkipWhile<Element>
@@ -62,7 +62,7 @@ class SkipWhileSinkWithIndex<O: ObserverType>: Sink<O>, ObserverType {
             if !_running {
                 do {
                     _running = try !_parent._predicateWithIndex(value, _index)
-                    _ = try incrementChecked(&_index)
+                    let _ = try incrementChecked(&_index)
                 } catch let e {
                     forwardOn(.error(e))
                     dispose()
@@ -100,12 +100,13 @@ class SkipWhile<Element>: Producer<Element> {
         _predicateWithIndex = predicate
     }
 
-    override func run<O: ObserverType>(_ observer: O, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where O.E == Element {
+    override func run<O : ObserverType>(_ observer: O, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where O.E == Element {
         if let _ = _predicate {
             let sink = SkipWhileSink(parent: self, observer: observer, cancel: cancel)
             let subscription = _source.subscribe(sink)
             return (sink: sink, subscription: subscription)
-        } else {
+        }
+        else {
             let sink = SkipWhileSinkWithIndex(parent: self, observer: observer, cancel: cancel)
             let subscription = _source.subscribe(sink)
             return (sink: sink, subscription: subscription)

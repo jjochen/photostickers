@@ -31,33 +31,35 @@ extension DifferentiatorError {
     }
 }
 
-fileprivate enum EditEvent: CustomDebugStringConvertible {
-    case inserted // can't be found in old sections
-    case insertedAutomatically // Item inside section being inserted
-    case deleted // Was in old, not in new, in it's place is something "not new" :(, otherwise it's Updated
-    case deletedAutomatically // Item inside section that is being deleted
-    case moved // same item, but was on different index, and needs explicit move
+fileprivate enum EditEvent : CustomDebugStringConvertible {
+    case inserted           // can't be found in old sections
+    case insertedAutomatically           // Item inside section being inserted
+    case deleted            // Was in old, not in new, in it's place is something "not new" :(, otherwise it's Updated
+    case deletedAutomatically            // Item inside section that is being deleted
+    case moved              // same item, but was on different index, and needs explicit move
     case movedAutomatically // don't need to specify any changes for those rows
     case untouched
 }
 
 extension EditEvent {
     fileprivate var debugDescription: String {
-        switch self {
-        case .inserted:
-            return "Inserted"
-        case .insertedAutomatically:
-            return "InsertedAutomatically"
-        case .deleted:
-            return "Deleted"
-        case .deletedAutomatically:
-            return "DeletedAutomatically"
-        case .moved:
-            return "Moved"
-        case .movedAutomatically:
-            return "MovedAutomatically"
-        case .untouched:
-            return "Untouched"
+        get {
+            switch self {
+            case .inserted:
+                return "Inserted"
+            case .insertedAutomatically:
+                return "InsertedAutomatically"
+            case .deleted:
+                return "Deleted"
+            case .deletedAutomatically:
+                return "DeletedAutomatically"
+            case .moved:
+                return "Moved"
+            case .movedAutomatically:
+                return "MovedAutomatically"
+            case .untouched:
+                return "Untouched"
+            }
         }
     }
 }
@@ -69,9 +71,11 @@ fileprivate struct SectionAssociatedData {
     var itemCount: Int
 }
 
-extension SectionAssociatedData: CustomDebugStringConvertible {
+extension SectionAssociatedData : CustomDebugStringConvertible {
     fileprivate var debugDescription: String {
-        return "\(event), \(indexAfterDelete)"
+        get {
+            return "\(event), \(indexAfterDelete)"
+        }
     }
 }
 
@@ -87,20 +91,22 @@ fileprivate struct ItemAssociatedData {
     var moveIndex: ItemPath?
 }
 
-extension ItemAssociatedData: CustomDebugStringConvertible {
+extension ItemAssociatedData : CustomDebugStringConvertible {
     fileprivate var debugDescription: String {
-        return "\(event) \(indexAfterDelete)"
+        get {
+            return "\(event) \(indexAfterDelete)"
+        }
     }
 }
 
 extension ItemAssociatedData {
-    static var initial: ItemAssociatedData {
+    static var initial : ItemAssociatedData {
         return ItemAssociatedData(event: .untouched, indexAfterDelete: nil, moveIndex: nil)
     }
 }
 
-fileprivate func indexSections<S: AnimatableSectionModelType>(_ sections: [S]) throws -> [S.Identity: Int] {
-    var indexedSections: [S.Identity: Int] = [:]
+fileprivate func indexSections<S: AnimatableSectionModelType>(_ sections: [S]) throws -> [S.Identity : Int] {
+    var indexedSections: [S.Identity : Int] = [:]
     for (i, section) in sections.enumerated() {
         guard indexedSections[section.identity] == nil else {
             #if DEBUG
@@ -112,7 +118,7 @@ fileprivate func indexSections<S: AnimatableSectionModelType>(_ sections: [S]) t
         }
         indexedSections[section.identity] = i
     }
-
+    
     return indexedSections
 }
 
@@ -132,6 +138,7 @@ fileprivate struct OptimizedIdentity<E: Hashable> {
 }
 
 extension OptimizedIdentity: Hashable {
+
 }
 
 fileprivate func == <E: Hashable>(lhs: OptimizedIdentity<E>, rhs: OptimizedIdentity<E>) -> Bool {
@@ -149,7 +156,7 @@ fileprivate func == <E: Hashable>(lhs: OptimizedIdentity<E>, rhs: OptimizedIdent
 fileprivate func calculateAssociatedData<Item: IdentifiableType>(
     initialItemCache: ContiguousArray<ContiguousArray<Item>>,
     finalItemCache: ContiguousArray<ContiguousArray<Item>>
-) throws
+    ) throws
     -> (ContiguousArray<ContiguousArray<ItemAssociatedData>>, ContiguousArray<ContiguousArray<ItemAssociatedData>>) {
 
     typealias Identity = Item.Identity
@@ -177,7 +184,7 @@ fileprivate func calculateAssociatedData<Item: IdentifiableType>(
         return ContiguousArray<ItemAssociatedData>(repeating: ItemAssociatedData.initial, count: items.count)
     })
 
-    try initialIdentities.withUnsafeBufferPointer { (identitiesBuffer: UnsafeBufferPointer<Identity>) -> Void in
+    try initialIdentities.withUnsafeBufferPointer { (identitiesBuffer: UnsafeBufferPointer<Identity>) -> () in
         var dictionary: [OptimizedIdentity<Identity>: Int] = Dictionary(minimumCapacity: totalInitialItems * 2)
 
         for i in 0 ..< initialIdentities.count {
@@ -189,7 +196,7 @@ fileprivate func calculateAssociatedData<Item: IdentifiableType>(
                 let itemPath = initialItemPaths[existingValueItemPathIndex]
                 let item = initialItemCache[itemPath.sectionIndex][itemPath.itemIndex]
                 #if DEBUG
-                    print("Item \(item) has already been indexed at \(itemPath)")
+                    print("Item \(item) has already been indexed at \(itemPath)" )
                 #endif
                 throw DifferentiatorError.duplicateItem(item: item)
             }
@@ -225,103 +232,103 @@ fileprivate func calculateAssociatedData<Item: IdentifiableType>(
 
 /*
 
- I've uncovered this case during random stress testing of logic.
- This is the hardest generic update case that causes two passes, first delete, and then move/insert
+I've uncovered this case during random stress testing of logic.
+This is the hardest generic update case that causes two passes, first delete, and then move/insert
 
- [
- NumberSection(model: "1", items: [1111]),
- NumberSection(model: "2", items: [2222]),
- ]
+[
+NumberSection(model: "1", items: [1111]),
+NumberSection(model: "2", items: [2222]),
+]
 
- [
- NumberSection(model: "2", items: [0]),
- NumberSection(model: "1", items: []),
- ]
+[
+NumberSection(model: "2", items: [0]),
+NumberSection(model: "1", items: []),
+]
 
- If update is in the form
+If update is in the form
 
- * Move section from 2 to 1
- * Delete Items at paths 0 - 0, 1 - 0
- * Insert Items at paths 0 - 0
+* Move section from 2 to 1
+* Delete Items at paths 0 - 0, 1 - 0
+* Insert Items at paths 0 - 0
 
- or
+or
 
- * Move section from 2 to 1
- * Delete Items at paths 0 - 0
- * Reload Items at paths 1 - 0
+* Move section from 2 to 1
+* Delete Items at paths 0 - 0
+* Reload Items at paths 1 - 0
 
- or
+or
 
- * Move section from 2 to 1
- * Delete Items at paths 0 - 0
- * Reload Items at paths 0 - 0
+* Move section from 2 to 1
+* Delete Items at paths 0 - 0
+* Reload Items at paths 0 - 0
 
- it crashes table view.
+it crashes table view.
 
- No matter what change is performed, it fails for me.
- If anyone knows how to make this work for one Changeset, PR is welcome.
+No matter what change is performed, it fails for me.
+If anyone knows how to make this work for one Changeset, PR is welcome.
 
- */
+*/
 
 // If you are considering working out your own algorithm, these are tricky
 // transition cases that you can use.
 
 // case 1
 /*
- from = [
- NumberSection(model: "section 4", items: [10, 11, 12]),
- NumberSection(model: "section 9", items: [25, 26, 27]),
- ]
- to = [
- HashableSectionModel(model: "section 9", items: [11, 26, 27]),
- HashableSectionModel(model: "section 4", items: [10, 12])
- ]
- */
+from = [
+    NumberSection(model: "section 4", items: [10, 11, 12]),
+    NumberSection(model: "section 9", items: [25, 26, 27]),
+]
+to = [
+    HashableSectionModel(model: "section 9", items: [11, 26, 27]),
+    HashableSectionModel(model: "section 4", items: [10, 12])
+]
+*/
 
 // case 2
 /*
- from = [
- HashableSectionModel(model: "section 10", items: [26]),
- HashableSectionModel(model: "section 7", items: [5, 29]),
- HashableSectionModel(model: "section 1", items: [14]),
- HashableSectionModel(model: "section 5", items: [16]),
- HashableSectionModel(model: "section 4", items: []),
- HashableSectionModel(model: "section 8", items: [3, 15, 19, 23]),
- HashableSectionModel(model: "section 3", items: [20])
- ]
- to = [
- HashableSectionModel(model: "section 10", items: [26]),
- HashableSectionModel(model: "section 1", items: [14]),
- HashableSectionModel(model: "section 9", items: [3]),
- HashableSectionModel(model: "section 5", items: [16, 8]),
- HashableSectionModel(model: "section 8", items: [15, 19, 23]),
- HashableSectionModel(model: "section 3", items: [20]),
- HashableSectionModel(model: "Section 2", items: [7])
- ]
- */
+from = [
+    HashableSectionModel(model: "section 10", items: [26]),
+    HashableSectionModel(model: "section 7", items: [5, 29]),
+    HashableSectionModel(model: "section 1", items: [14]),
+    HashableSectionModel(model: "section 5", items: [16]),
+    HashableSectionModel(model: "section 4", items: []),
+    HashableSectionModel(model: "section 8", items: [3, 15, 19, 23]),
+    HashableSectionModel(model: "section 3", items: [20])
+]
+to = [
+    HashableSectionModel(model: "section 10", items: [26]),
+    HashableSectionModel(model: "section 1", items: [14]),
+    HashableSectionModel(model: "section 9", items: [3]),
+    HashableSectionModel(model: "section 5", items: [16, 8]),
+    HashableSectionModel(model: "section 8", items: [15, 19, 23]),
+    HashableSectionModel(model: "section 3", items: [20]),
+    HashableSectionModel(model: "Section 2", items: [7])
+]
+*/
 
 // case 3
 /*
- from = [
- HashableSectionModel(model: "section 4", items: [5]),
- HashableSectionModel(model: "section 6", items: [20, 14]),
- HashableSectionModel(model: "section 9", items: []),
- HashableSectionModel(model: "section 2", items: [2, 26]),
- HashableSectionModel(model: "section 8", items: [23]),
- HashableSectionModel(model: "section 10", items: [8, 18, 13]),
- HashableSectionModel(model: "section 1", items: [28, 25, 6, 11, 10, 29, 24, 7, 19])
- ]
- to = [
- HashableSectionModel(model: "section 4", items: [5]),
- HashableSectionModel(model: "section 6", items: [20, 14]),
- HashableSectionModel(model: "section 9", items: [16]),
- HashableSectionModel(model: "section 7", items: [17, 15, 4]),
- HashableSectionModel(model: "section 2", items: [2, 26, 23]),
- HashableSectionModel(model: "section 8", items: []),
- HashableSectionModel(model: "section 10", items: [8, 18, 13]),
- HashableSectionModel(model: "section 1", items: [28, 25, 6, 11, 10, 29, 24, 7, 19])
- ]
- */
+from = [
+    HashableSectionModel(model: "section 4", items: [5]),
+    HashableSectionModel(model: "section 6", items: [20, 14]),
+    HashableSectionModel(model: "section 9", items: []),
+    HashableSectionModel(model: "section 2", items: [2, 26]),
+    HashableSectionModel(model: "section 8", items: [23]),
+    HashableSectionModel(model: "section 10", items: [8, 18, 13]),
+    HashableSectionModel(model: "section 1", items: [28, 25, 6, 11, 10, 29, 24, 7, 19])
+]
+to = [
+    HashableSectionModel(model: "section 4", items: [5]),
+    HashableSectionModel(model: "section 6", items: [20, 14]),
+    HashableSectionModel(model: "section 9", items: [16]),
+    HashableSectionModel(model: "section 7", items: [17, 15, 4]),
+    HashableSectionModel(model: "section 2", items: [2, 26, 23]),
+    HashableSectionModel(model: "section 8", items: []),
+    HashableSectionModel(model: "section 10", items: [8, 18, 13]),
+    HashableSectionModel(model: "section 1", items: [28, 25, 6, 11, 10, 29, 24, 7, 19])
+]
+*/
 
 // Generates differential changes suitable for sectioned view consumption.
 // It will not only detect changes between two states, but it will also try to compress those changes into
@@ -363,6 +370,7 @@ public func differencesForSectionedView<S: AnimatableSectionModelType>(
     return result
 }
 
+
 @available(*, deprecated, renamed: "differencesForSectionedView(initialSections:finalSections:)")
 public func differencesForSectionedView<S: AnimatableSectionModelType>(
     _ initialSections: [S],
@@ -395,7 +403,7 @@ fileprivate struct CommandGenerator<S: AnimatableSectionModelType> {
 
     let initialItemCache: ContiguousArray<ContiguousArray<Item>>
     let finalItemCache: ContiguousArray<ContiguousArray<Item>>
-
+    
     static func generatorForInitialSections(
         _ initialSections: [S],
         finalSections: [S]
@@ -410,14 +418,14 @@ fileprivate struct CommandGenerator<S: AnimatableSectionModelType> {
         let finalItemCache = ContiguousArray(finalSections.map {
             ContiguousArray($0.items)
         })
-
+        
         let (initialItemData, finalItemData) = try calculateItemMovements(
             initialItemCache: initialItemCache,
             finalItemCache: finalItemCache,
             initialSectionData: initialSectionData,
             finalSectionData: finalSectionData
         )
-
+        
         return CommandGenerator<S>(
             initialSections: initialSections,
             finalSections: finalSections,
@@ -507,7 +515,9 @@ fileprivate struct CommandGenerator<S: AnimatableSectionModelType> {
                 if initialSectionData[originalIndex.sectionIndex].event == .deleted {
                     finalItemData[i][j].event = .inserted
                     continue
-                } else if initialSectionData[originalIndex.sectionIndex].event == .inserted {
+                }
+                // original section can't be inserted
+                else if initialSectionData[originalIndex.sectionIndex].event == .inserted {
                     try rxPrecondition(false, "New section in initial sections, that is wrong")
                 }
 
@@ -592,7 +602,8 @@ fileprivate struct CommandGenerator<S: AnimatableSectionModelType> {
 
                 finalSectionData[i].event = moveType
                 initialSectionData[oldSectionIndex].event = moveType
-            } else {
+            }
+            else {
                 finalSectionData[i].event = .inserted
             }
         }
@@ -603,7 +614,7 @@ fileprivate struct CommandGenerator<S: AnimatableSectionModelType> {
                 _ = finalSectionData[i].event == .inserted
             }
         }
-
+        
         return (initialSectionData, finalSectionData)
     }
 
@@ -689,21 +700,22 @@ fileprivate struct CommandGenerator<S: AnimatableSectionModelType> {
             }
         }
 
-        if insertedSections.count == 0 && movedSections.count == 0 {
+        if insertedSections.count ==  0 && movedSections.count == 0 {
             return []
         }
 
         // sections should be in place, but items should be original without deleted ones
         let sectionsAfterChange: [S] = try self.finalSections.enumerated().map { i, s -> S in
             let event = self.finalSectionData[i].event
-
+            
             if event == .inserted {
                 // it's already set up
                 return s
-            } else if event == .moved || event == .movedAutomatically {
+            }
+            else if event == .moved || event == .movedAutomatically {
                 let originalSectionIndex = try finalSectionData[i].moveIndex.unwrap()
                 let originalSection = initialSections[originalSectionIndex]
-
+                
                 var items: [S.Item] = []
                 items.reserveCapacity(originalSection.items.count)
                 let itemAssociatedData = self.initialItemData[originalSectionIndex]
@@ -721,11 +733,12 @@ fileprivate struct CommandGenerator<S: AnimatableSectionModelType> {
 
                     items.append(finalItemCache[finalIndex.sectionIndex][finalIndex.itemIndex])
                 }
-
+                
                 let modifiedSection = try S(safeOriginal: s, safeItems: items)
 
                 return modifiedSection
-            } else {
+            }
+            else {
                 try rxPrecondition(false, "This is weird, this shouldn't happen")
                 return s
             }
@@ -733,7 +746,7 @@ fileprivate struct CommandGenerator<S: AnimatableSectionModelType> {
 
         return [Changeset(
             finalSections: sectionsAfterChange,
-            insertedSections: insertedSections,
+            insertedSections:  insertedSections,
             movedSections: movedSections
         )]
     }
@@ -746,16 +759,16 @@ fileprivate struct CommandGenerator<S: AnimatableSectionModelType> {
         // 3rd stage
         for i in 0 ..< finalSections.count {
             let finalSection = finalSections[i]
-
+            
             let sectionEvent = finalSectionData[i].event
             // new and deleted sections cause reload automatically
             if sectionEvent != .moved && sectionEvent != .movedAutomatically {
                 continue
             }
-
+            
             for j in 0 ..< finalSection.items.count {
                 let currentItemEvent = finalItemData[i][j].event
-
+                
                 try rxPrecondition(currentItemEvent != .untouched, "Current event is not untouched")
 
                 let event = finalItemData[i][j].event

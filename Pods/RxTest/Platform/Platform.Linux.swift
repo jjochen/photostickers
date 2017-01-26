@@ -23,11 +23,10 @@
         fileprivate var _lock = NSRecursiveLock()
 
         func lock() {
-            _lock.lock()
+          _lock.lock()
         }
-
         func unlock() {
-            _lock.unlock()
+          _lock.unlock()
         }
 
         func valueSnapshot() -> Int32 {
@@ -41,11 +40,10 @@
             self.value = Int32(value)
         }
     }
-
+    
     func >(lhs: AtomicInt, rhs: Int32) -> Bool {
         return lhs.value > rhs
     }
-
     func ==(lhs: AtomicInt, rhs: Int32) -> Bool {
         return lhs.value == rhs
     }
@@ -80,7 +78,8 @@
 
             if let newValue = value {
                 threadDictionary[key] = newValue
-            } else {
+            }
+            else {
                 threadDictionary[key] = nil
             }
 

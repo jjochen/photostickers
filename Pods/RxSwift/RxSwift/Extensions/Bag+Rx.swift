@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 // MARK: forEach
 
 extension Bag where T: ObserverType {

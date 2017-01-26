@@ -8,12 +8,12 @@
 
 import Foundation
 
-enum RxDataSourceError: Error {
+enum RxDataSourceError : Error {
     case unwrappingOptional
     case preconditionFailed(message: String)
 }
 
-func rxPrecondition(_ condition: Bool, _ message: @autoclosure () -> String) throws -> Void {
+func rxPrecondition(_ condition: Bool, _ message: @autoclosure() -> String) throws -> () {
     if condition {
         return
     }

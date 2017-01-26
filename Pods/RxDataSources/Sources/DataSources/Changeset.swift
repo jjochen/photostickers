@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 #if !RX_NO_MODULE
-    import RxSwift
-    import RxCocoa
+import RxSwift
+import RxCocoa
 #endif
 
 public struct Changeset<S: SectionModelType> {
@@ -32,17 +32,17 @@ public struct Changeset<S: SectionModelType> {
     public let updatedItems: [ItemPath]
 
     init(reloadData: Bool = false,
-         originalSections: [S] = [],
-         finalSections: [S] = [],
-         insertedSections: [Int] = [],
-         deletedSections: [Int] = [],
-         movedSections: [(from: Int, to: Int)] = [],
-         updatedSections: [Int] = [],
+        originalSections: [S] = [],
+        finalSections: [S] = [],
+        insertedSections: [Int] = [],
+        deletedSections: [Int] = [],
+        movedSections: [(from: Int, to: Int)] = [],
+        updatedSections: [Int] = [],
 
-         insertedItems: [ItemPath] = [],
-         deletedItems: [ItemPath] = [],
-         movedItems: [(from: ItemPath, to: ItemPath)] = [],
-         updatedItems: [ItemPath] = []
+        insertedItems: [ItemPath] = [],
+        deletedItems: [ItemPath] = [],
+        movedItems: [(from: ItemPath, to: ItemPath)] = [],
+        updatedItems: [ItemPath] = []
     ) {
         self.reloadData = reloadData
 
@@ -71,7 +71,7 @@ public struct Changeset<S: SectionModelType> {
 
 extension ItemPath
     : CustomDebugStringConvertible {
-    public var debugDescription: String {
+    public var debugDescription : String {
         return "(\(sectionIndex), \(itemIndex))"
     }
 }
@@ -79,19 +79,19 @@ extension ItemPath
 extension Changeset
     : CustomDebugStringConvertible {
 
-    public var debugDescription: String {
+    public var debugDescription : String {
         let serializedSections = "[\n" + finalSections.map { "\($0)" }.joined(separator: ",\n") + "\n]\n"
         return " >> Final sections"
-            + "   \n\(serializedSections)"
-            + (insertedSections.count > 0 || deletedSections.count > 0 || movedSections.count > 0 || updatedSections.count > 0 ? "\nSections:" : "")
-            + (insertedSections.count > 0 ? "\ninsertedSections:\n\t\(insertedSections)" : "")
-            + (deletedSections.count > 0 ? "\ndeletedSections:\n\t\(deletedSections)" : "")
-            + (movedSections.count > 0 ? "\nmovedSections:\n\t\(movedSections)" : "")
-            + (updatedSections.count > 0 ? "\nupdatesSections:\n\t\(updatedSections)" : "")
+        + "   \n\(serializedSections)"
+        + (insertedSections.count > 0 || deletedSections.count > 0 || movedSections.count > 0 || updatedSections.count > 0 ? "\nSections:" : "")
+        + (insertedSections.count > 0 ? "\ninsertedSections:\n\t\(insertedSections)" : "")
+        + (deletedSections.count > 0 ?  "\ndeletedSections:\n\t\(deletedSections)" : "")
+        + (movedSections.count > 0 ? "\nmovedSections:\n\t\(movedSections)" : "")
+        + (updatedSections.count > 0 ? "\nupdatesSections:\n\t\(updatedSections)" : "")
             + (insertedItems.count > 0 || deletedItems.count > 0 || movedItems.count > 0 || updatedItems.count > 0 ? "\nItems:" : "")
-            + (insertedItems.count > 0 ? "\ninsertedItems:\n\t\(insertedItems)" : "")
-            + (deletedItems.count > 0 ? "\ndeletedItems:\n\t\(deletedItems)" : "")
-            + (movedItems.count > 0 ? "\nmovedItems:\n\t\(movedItems)" : "")
-            + (updatedItems.count > 0 ? "\nupdatedItems:\n\t\(updatedItems)" : "")
+        + (insertedItems.count > 0 ? "\ninsertedItems:\n\t\(insertedItems)" : "")
+        + (deletedItems.count > 0 ? "\ndeletedItems:\n\t\(deletedItems)" : "")
+        + (movedItems.count > 0 ? "\nmovedItems:\n\t\(movedItems)" : "")
+        + (updatedItems.count > 0 ? "\nupdatedItems:\n\t\(updatedItems)" : "")
     }
 }

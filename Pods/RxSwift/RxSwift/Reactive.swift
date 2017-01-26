@@ -71,4 +71,4 @@ extension ReactiveCompatible {
 import Foundation
 
 /// Extend NSObject with `rx` proxy.
-extension NSObject: ReactiveCompatible {}
+extension NSObject: ReactiveCompatible { }

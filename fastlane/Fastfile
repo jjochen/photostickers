@@ -1,4 +1,4 @@
-require 'yaml'
+fastlane_require 'yaml'
 
 fastlane_version "2.3.0"
 
@@ -117,8 +117,8 @@ end
 desc "Delete cocoapods from the project and reinstall"
 lane :reintegrate do
     sh "bundle update"
-    sh "bundle exec pod deintegrate PhotoStickers.xcodeproj"
-    sh "bundle exec pod clean"
+    sh "cd ..; bundle exec pod deintegrate PhotoStickers.xcodeproj"
+    #sh "bundle exec pod clean"
     cocoapods
 end
 

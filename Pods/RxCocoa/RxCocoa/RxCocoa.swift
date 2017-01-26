@@ -8,7 +8,7 @@
 
 import Foundation
 #if !RX_NO_MODULE
-    import RxSwift
+import RxSwift
 #endif
 #if os(iOS)
     import UIKit
@@ -34,6 +34,7 @@ public enum RxCocoaError
     case castingError(object: Any, targetType: Any.Type)
 }
 
+
 // MARK: Debug descriptions
 
 extension RxCocoaError {
@@ -58,24 +59,26 @@ extension RxCocoaError {
     }
 }
 
+
+
 // MARK: Error binding policies
 
 func bindingErrorToInterface(_ error: Swift.Error) {
     let error = "Binding error to UI: \(error)"
-    #if DEBUG
-        rxFatalError(error)
-    #else
-        print(error)
-    #endif
+#if DEBUG
+    rxFatalError(error)
+#else
+    print(error)
+#endif
 }
 
 // MARK: Abstract methods
 
-func rxAbstractMethodWithMessage(_ message: String) -> Swift.Never {
+func rxAbstractMethodWithMessage(_ message: String) -> Swift.Never  {
     rxFatalError(message)
 }
 
-func rxAbstractMethod() -> Swift.Never {
+func rxAbstractMethod() -> Swift.Never  {
     rxFatalError("Abstract method")
 }
 
@@ -115,7 +118,7 @@ func castOrFatalError<T>(_ value: AnyObject!, message: String) -> T {
     guard let result = maybeResult else {
         rxFatalError(message)
     }
-
+    
     return result
 }
 
@@ -124,7 +127,7 @@ func castOrFatalError<T>(_ value: Any!) -> T {
     guard let result = maybeResult else {
         rxFatalError("Failure converting from \(value) to \(T.self)")
     }
-
+    
     return result
 }
 
@@ -137,9 +140,9 @@ let delegateNotSet = "Delegate not set"
 
 #if !RX_NO_MODULE
 
-    func rxFatalError(_ lastMessage: String) -> Never {
-        // The temptation to comment this line is great, but please don't, it's for your own good. The choice is yours.
-        fatalError(lastMessage)
-    }
+func rxFatalError(_ lastMessage: String) -> Never  {
+    // The temptation to comment this line is great, but please don't, it's for your own good. The choice is yours.
+    fatalError(lastMessage)
+}
 
 #endif

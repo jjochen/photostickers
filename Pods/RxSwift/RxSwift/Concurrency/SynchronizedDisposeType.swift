@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SynchronizedDisposeType: class, Disposable, Lock {
+protocol SynchronizedDisposeType : class, Disposable, Lock {
     func _synchronized_dispose()
 }
 

@@ -12,13 +12,13 @@ import Foundation
 #endif
 
 /**
- `BlockingObservable` is a variety of `Observable` that provides blocking operators.
+`BlockingObservable` is a variety of `Observable` that provides blocking operators. 
 
- It can be useful for testing and demo purposes, but is generally inappropriate for production applications.
+It can be useful for testing and demo purposes, but is generally inappropriate for production applications.
 
- If you think you need to use a `BlockingObservable` this is usually a sign that you should rethink your
- design.
- */
+If you think you need to use a `BlockingObservable` this is usually a sign that you should rethink your
+design.
+*/
 public struct BlockingObservable<E> {
     let timeout: RxTimeInterval?
     let source: Observable<E>

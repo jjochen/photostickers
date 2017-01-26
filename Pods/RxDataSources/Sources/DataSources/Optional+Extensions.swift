@@ -12,9 +12,10 @@ extension Optional {
     func unwrap() throws -> Wrapped {
         if let unwrapped = self {
             return unwrapped
-        } else {
+        }
+        else {
             rxDebugFatalError("Error during unwrapping optional")
             throw RxDataSourceError.unwrappingOptional
         }
-    }
+   }
 }

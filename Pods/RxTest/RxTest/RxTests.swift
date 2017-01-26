@@ -10,3 +10,4 @@ import Foundation
 
 /// Virtual time type.
 public typealias TestTime = Int
+

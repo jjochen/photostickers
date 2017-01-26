@@ -13,16 +13,16 @@ import Dispatch
 #endif
 
 /**
- Observer that enforces interface binding rules:
+Observer that enforces interface binding rules:
  * can't bind errors (in debug builds binding of errors causes `fatalError` in release builds errors are being logged)
  * ensures binding is performed on main thread
-
- `UIBindingObserver` doesn't retain target interface and in case owned interface element is released, element isn't bound.
-
+ 
+`UIBindingObserver` doesn't retain target interface and in case owned interface element is released, element isn't bound.
+ 
  In case event binding is attempted from non main dispatch queue, event binding will be dispatched async to main dispatch
  queue.
- */
-public class UIBindingObserver<UIElementType, Value>: ObserverType where UIElementType: AnyObject {
+*/
+public class UIBindingObserver<UIElementType, Value> : ObserverType where UIElementType: AnyObject {
     public typealias E = Value
 
     weak var UIElement: UIElementType?

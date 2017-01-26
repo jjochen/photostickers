@@ -39,7 +39,7 @@ func abstractMethod() -> Swift.Never {
     rxFatalError("Abstract method")
 }
 
-func rxFatalError(_ lastMessage: String) -> Swift.Never {
+func rxFatalError(_ lastMessage: String) -> Swift.Never  {
     // The temptation to comment this line is great, but please don't, it's for your own good. The choice is yours.
     fatalError(lastMessage)
 }

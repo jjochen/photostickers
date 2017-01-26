@@ -8,38 +8,38 @@
 
 import Foundation
 #if !RX_NO_MODULE
-    import RxSwift
+import RxSwift
 #endif
 
 /// Protocol that enables extension of `ControlEvent`.
-public protocol ControlEventType: ObservableType {
+public protocol ControlEventType : ObservableType {
 
     /// - returns: `ControlEvent` interface
     func asControlEvent() -> ControlEvent<E>
 }
 
 /**
- Unit for `Observable`/`ObservableType` that represents event on UI element.
+    Unit for `Observable`/`ObservableType` that represents event on UI element.
 
- It's properties are:
+    It's properties are:
 
- - it never fails
- - it won't send any initial value on subscription
- - it will `Complete` sequence on control being deallocated
- - it never errors out
- - it delivers events on `MainScheduler.instance`
+    - it never fails
+    - it won't send any initial value on subscription
+    - it will `Complete` sequence on control being deallocated
+    - it never errors out
+    - it delivers events on `MainScheduler.instance`
 
- **The implementation of `ControlEvent` will ensure that sequence of events is being subscribed on main scheduler
- (`subscribeOn(ConcurrentMainScheduler.instance)` behavior).**
+    **The implementation of `ControlEvent` will ensure that sequence of events is being subscribed on main scheduler
+     (`subscribeOn(ConcurrentMainScheduler.instance)` behavior).**
 
- **It is implementor's responsibility to make sure that that all other properties enumerated above are satisfied.**
+    **It is implementor's responsibility to make sure that that all other properties enumerated above are satisfied.**
 
- **If they aren't, then using this unit communicates wrong properties and could potentially break someone's code.**
+    **If they aren't, then using this unit communicates wrong properties and could potentially break someone's code.**
 
- **In case `events` observable sequence that is being passed into initializer doesn't satisfy all enumerated
- properties, please don't use this unit.**
- */
-public struct ControlEvent<PropertyType>: ControlEventType {
+    **In case `events` observable sequence that is being passed into initializer doesn't satisfy all enumerated
+     properties, please don't use this unit.**
+*/
+public struct ControlEvent<PropertyType> : ControlEventType {
     public typealias E = PropertyType
 
     let _events: Observable<PropertyType>
@@ -56,7 +56,7 @@ public struct ControlEvent<PropertyType>: ControlEventType {
     ///
     /// - parameter observer: Observer to subscribe to events.
     /// - returns: Disposable object that can be used to unsubscribe the observer from receiving control events.
-    public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == E {
+    public func subscribe<O : ObserverType>(_ observer: O) -> Disposable where O.E == E {
         return _events.subscribe(observer)
     }
 

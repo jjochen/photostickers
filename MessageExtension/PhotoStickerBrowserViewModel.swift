@@ -9,10 +9,11 @@
 import Foundation
 import RxCocoa
 import RxSwift
-import CoreData
+import RealmSwift
+import RxRealm
 
 protocol PhotoStickerBrowserViewModelType {
-    var managedObjectContext: NSManagedObjectContext { get }
+    var realmContext: Realm! { get }
     var sectionItems: Observable<[StickerSectionItem]> { get }
     func openApp()
 }
@@ -22,21 +23,20 @@ class PhotoStickerBrowserViewModel: ViewModel, PhotoStickerBrowserViewModelType 
     // MARK: - Input
 
     let extensionContext: NSExtensionContext?
-    let managedObjectContext: NSManagedObjectContext
+    let realmContext: Realm!
 
     // MARK: - Output
 
     var sectionItems: Observable<[StickerSectionItem]>
 
-    init(extensionContext: NSExtensionContext?, managedObjectContext: NSManagedObjectContext) {
+    init(extensionContext: NSExtensionContext?, realmContext: Realm!) {
         self.extensionContext = extensionContext
-        self.managedObjectContext = managedObjectContext
+        self.realmContext = realmContext
 
-        self.sectionItems = managedObjectContext.rx
-            .entities(Sticker.self, sortDescriptors: [
-                NSSortDescriptor(key: "sortOrder", ascending: true),
-                NSSortDescriptor(key: "stickerDescription", ascending: true),
-            ])
+        let stickers = self.realmContext.objects(Sticker.self)
+
+        self.sectionItems = Observable
+            .array(from: stickers)
             .map { allStickers in
                 var items = allStickers.map { sticker in
                     return StickerSectionItem.StickerItem(sticker: sticker)

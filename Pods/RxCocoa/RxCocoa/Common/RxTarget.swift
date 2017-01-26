@@ -8,37 +8,37 @@
 
 import Foundation
 #if !RX_NO_MODULE
-    import RxSwift
+import RxSwift
 #endif
 
-class RxTarget: NSObject
-    , Disposable {
-
+class RxTarget : NSObject
+               , Disposable {
+    
     private var retainSelf: RxTarget?
-
+    
     override init() {
         super.init()
         self.retainSelf = self
 
-        #if TRACE_RESOURCES
-            _ = Resources.incrementTotal()
-        #endif
+#if TRACE_RESOURCES
+        _ = Resources.incrementTotal()
+#endif
 
-        #if DEBUG
-            MainScheduler.ensureExecutingOnScheduler()
-        #endif
+#if DEBUG
+        MainScheduler.ensureExecutingOnScheduler()
+#endif
     }
-
+    
     func dispose() {
-        #if DEBUG
-            MainScheduler.ensureExecutingOnScheduler()
-        #endif
+#if DEBUG
+        MainScheduler.ensureExecutingOnScheduler()
+#endif
         self.retainSelf = nil
     }
 
-    #if TRACE_RESOURCES
-        deinit {
-            _ = Resources.decrementTotal()
-        }
-    #endif
+#if TRACE_RESOURCES
+    deinit {
+        _ = Resources.decrementTotal()
+    }
+#endif
 }

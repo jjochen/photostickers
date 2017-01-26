@@ -23,7 +23,7 @@ class HotObservable<Element>
 
     override init(testScheduler: TestScheduler, recordedEvents: [Recorded<Event<Element>>]) {
         _observers = Bag()
-
+        
         super.init(testScheduler: testScheduler, recordedEvents: recordedEvents)
 
         for recordedEvent in recordedEvents {
@@ -36,18 +36,19 @@ class HotObservable<Element>
     }
 
     /// Subscribes `observer` to receive events for this sequence.
-    override func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == Element {
+    override func subscribe<O : ObserverType>(_ observer: O) -> Disposable where O.E == Element {
         let key = _observers.insert(AnyObserver(observer))
         subscriptions.append(Subscription(self.testScheduler.clock))
-
+        
         let i = self.subscriptions.count - 1
-
+        
         return Disposables.create {
             let removed = self._observers.removeKey(key)
             assert(removed != nil)
-
+            
             let existing = self.subscriptions[i]
             self.subscriptions[i] = Subscription(existing.subscribe, self.testScheduler.clock)
         }
     }
 }
+

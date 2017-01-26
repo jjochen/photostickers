@@ -30,7 +30,7 @@ func == <T>(lhs: AnyEquatable<T>, rhs: AnyEquatable<T>) -> Bool {
 
 extension AnyEquatable
     : CustomDebugStringConvertible
-    , CustomStringConvertible {
+    , CustomStringConvertible  {
     var description: String {
         return "\(_target)"
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SynchronizedOnType: class, ObserverType, Lock {
+protocol SynchronizedOnType : class, ObserverType, Lock {
     func _synchronized_on(_ event: Event<E>)
 }
 

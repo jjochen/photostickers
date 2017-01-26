@@ -7,32 +7,34 @@
 //
 
 #if os(iOS)
-    import UIKit
+import UIKit
 
-    #if !RX_NO_MODULE
-        import RxSwift
-    #endif
+#if !RX_NO_MODULE
+import RxSwift
+#endif
 
-    public class RxWebViewDelegateProxy
-        : DelegateProxy
-        , DelegateProxyType
-        , UIWebViewDelegate {
+public class RxWebViewDelegateProxy
+    : DelegateProxy
+    , DelegateProxyType
+    , UIWebViewDelegate {
 
-        /**
-         For more information take a look at `DelegateProxyType`.
-         */
-        public class func setCurrentDelegate(_ delegate: AnyObject?, toObject object: AnyObject) {
-            let webView: UIWebView = castOrFatalError(object)
-            webView.delegate = castOptionalOrFatalError(delegate)
-        }
-
-        /**
-         For more information take a look at `DelegateProxyType`.
-         */
-        public class func currentDelegateFor(_ object: AnyObject) -> AnyObject? {
-            let webView: UIWebView = castOrFatalError(object)
-            return webView.delegate
-        }
+    /**
+     For more information take a look at `DelegateProxyType`.
+     */
+    public class func setCurrentDelegate(_ delegate: AnyObject?, toObject object: AnyObject) {
+        let webView: UIWebView = castOrFatalError(object)
+        webView.delegate = castOptionalOrFatalError(delegate)
     }
+
+    /**
+     For more information take a look at `DelegateProxyType`.
+     */
+    public class func currentDelegateFor(_ object: AnyObject) -> AnyObject? {
+        let webView: UIWebView = castOrFatalError(object)
+        return webView.delegate
+    }
+
+
+}
 
 #endif

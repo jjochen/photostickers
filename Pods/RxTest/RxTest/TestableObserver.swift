@@ -13,12 +13,12 @@ import RxSwift
 public class TestableObserver<ElementType>
     : ObserverType {
     public typealias Element = ElementType
-
+    
     fileprivate let _scheduler: TestScheduler
 
     /// Recorded events.
-    fileprivate(set) public var events = [Recorded<Event<Element>>]()
-
+    public fileprivate(set) var events = [Recorded<Event<Element>>]()
+    
     init(scheduler: TestScheduler) {
         _scheduler = scheduler
     }

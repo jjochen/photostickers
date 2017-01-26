@@ -8,7 +8,7 @@
 
 import Foundation
 
-class JustScheduledSink<O: ObserverType>: Sink<O> {
+class JustScheduledSink<O: ObserverType> : Sink<O> {
     typealias Parent = JustScheduled<O.E>
 
     private let _parent: Parent
@@ -30,7 +30,7 @@ class JustScheduledSink<O: ObserverType>: Sink<O> {
     }
 }
 
-class JustScheduled<Element>: Producer<Element> {
+class JustScheduled<Element> : Producer<Element> {
     fileprivate let _scheduler: ImmediateSchedulerType
     fileprivate let _element: Element
 
@@ -39,21 +39,21 @@ class JustScheduled<Element>: Producer<Element> {
         _element = element
     }
 
-    override func run<O: ObserverType>(_ observer: O, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where O.E == E {
+    override func run<O : ObserverType>(_ observer: O, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where O.E == E {
         let sink = JustScheduledSink(parent: self, observer: observer, cancel: cancel)
         let subscription = sink.run()
         return (sink: sink, subscription: subscription)
     }
 }
 
-class Just<Element>: Producer<Element> {
+class Just<Element> : Producer<Element> {
     private let _element: Element
-
+    
     init(element: Element) {
         _element = element
     }
-
-    override func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == Element {
+    
+    override func subscribe<O : ObserverType>(_ observer: O) -> Disposable where O.E == Element {
         observer.on(.next(_element))
         observer.on(.completed)
         return Disposables.create()

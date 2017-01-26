@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ObservableOptionalScheduledSink<O: ObserverType>: Sink<O> {
+class ObservableOptionalScheduledSink<O: ObserverType> : Sink<O> {
     typealias E = O.E
     typealias Parent = ObservableOptionalScheduled<E>
 
@@ -35,7 +35,7 @@ class ObservableOptionalScheduledSink<O: ObserverType>: Sink<O> {
     }
 }
 
-class ObservableOptionalScheduled<E>: Producer<E> {
+class ObservableOptionalScheduled<E> : Producer<E> {
     fileprivate let _optional: E?
     fileprivate let _scheduler: ImmediateSchedulerType
 
@@ -44,7 +44,7 @@ class ObservableOptionalScheduled<E>: Producer<E> {
         _scheduler = scheduler
     }
 
-    override func run<O: ObserverType>(_ observer: O, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where O.E == E {
+    override func run<O : ObserverType>(_ observer: O, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where O.E == E {
         let sink = ObservableOptionalScheduledSink(parent: self, observer: observer, cancel: cancel)
         let subscription = sink.run()
         return (sink: sink, subscription: subscription)
@@ -53,12 +53,12 @@ class ObservableOptionalScheduled<E>: Producer<E> {
 
 class ObservableOptional<E>: Producer<E> {
     private let _optional: E?
-
+    
     init(optional: E?) {
         _optional = optional
     }
-
-    override func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == E {
+    
+    override func subscribe<O : ObserverType>(_ observer: O) -> Disposable where O.E == E {
         if let element = _optional {
             observer.on(.next(element))
         }

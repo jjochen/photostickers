@@ -11,12 +11,12 @@ import Foundation
 #if os(iOS)
     import UIKit
 
-    #if !RX_NO_MODULE
-        import RxSwift
-    #endif
+#if !RX_NO_MODULE
+    import RxSwift
+#endif
 
     extension Reactive where Base: UIApplication {
-
+        
         /// Bindable sink for `networkActivityIndicatorVisible`.
         public var isNetworkActivityIndicatorVisible: UIBindingObserver<Base, Bool> {
             return UIBindingObserver(UIElement: self.base) { application, active in
@@ -25,3 +25,4 @@ import Foundation
         }
     }
 #endif
+

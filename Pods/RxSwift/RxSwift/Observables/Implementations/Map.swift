@@ -8,14 +8,14 @@
 
 import Foundation
 
-class MapSink<SourceType, O: ObserverType>: Sink<O>, ObserverType {
+class MapSink<SourceType, O : ObserverType> : Sink<O>, ObserverType {
     typealias Transform = (SourceType) throws -> ResultType
 
     typealias ResultType = O.E
     typealias Element = SourceType
 
     private let _transform: Transform
-
+    
     init(transform: @escaping Transform, observer: O, cancel: Cancelable) {
         _transform = transform
         super.init(observer: observer, cancel: cancel)
@@ -27,7 +27,8 @@ class MapSink<SourceType, O: ObserverType>: Sink<O>, ObserverType {
             do {
                 let mappedElement = try _transform(element)
                 forwardOn(.next(mappedElement))
-            } catch let e {
+            }
+            catch let e {
                 forwardOn(.error(e))
                 dispose()
             }
@@ -41,13 +42,13 @@ class MapSink<SourceType, O: ObserverType>: Sink<O>, ObserverType {
     }
 }
 
-class MapWithIndexSink<SourceType, O: ObserverType>: Sink<O>, ObserverType {
+class MapWithIndexSink<SourceType, O : ObserverType> : Sink<O>, ObserverType {
     typealias Selector = (SourceType, Int) throws -> ResultType
 
     typealias ResultType = O.E
     typealias Element = SourceType
     typealias Parent = MapWithIndex<SourceType, ResultType>
-
+    
     private let _selector: Selector
 
     private var _index = 0
@@ -63,7 +64,8 @@ class MapWithIndexSink<SourceType, O: ObserverType>: Sink<O>, ObserverType {
             do {
                 let mappedElement = try _selector(element, try incrementChecked(&_index))
                 forwardOn(.next(mappedElement))
-            } catch let e {
+            }
+            catch let e {
                 forwardOn(.error(e))
                 dispose()
             }
@@ -77,7 +79,7 @@ class MapWithIndexSink<SourceType, O: ObserverType>: Sink<O>, ObserverType {
     }
 }
 
-class MapWithIndex<SourceType, ResultType>: Producer<ResultType> {
+class MapWithIndex<SourceType, ResultType> : Producer<ResultType> {
     typealias Selector = (SourceType, Int) throws -> ResultType
 
     private let _source: Observable<SourceType>
@@ -116,9 +118,9 @@ class Map<SourceType, ResultType>: Producer<ResultType> {
         _source = source
         _transform = transform
 
-        #if TRACE_RESOURCES
-            _ = AtomicIncrement(&_numberOfMapOperators)
-        #endif
+#if TRACE_RESOURCES
+        let _ = AtomicIncrement(&_numberOfMapOperators)
+#endif
     }
 
     override func composeMap<R>(_ selector: @escaping (ResultType) throws -> R) -> Observable<R> {
@@ -128,7 +130,7 @@ class Map<SourceType, ResultType>: Producer<ResultType> {
             return try selector(r)
         })
     }
-
+    
     override func run<O: ObserverType>(_ observer: O, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where O.E == ResultType {
         let sink = MapSink(transform: _transform, observer: observer, cancel: cancel)
         let subscription = _source.subscribe(sink)
@@ -136,8 +138,8 @@ class Map<SourceType, ResultType>: Producer<ResultType> {
     }
 
     #if TRACE_RESOURCES
-        deinit {
-            _ = AtomicDecrement(&_numberOfMapOperators)
-        }
+    deinit {
+        let _ = AtomicDecrement(&_numberOfMapOperators)
+    }
     #endif
 }

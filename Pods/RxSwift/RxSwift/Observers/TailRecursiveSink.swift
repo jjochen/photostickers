@@ -70,19 +70,19 @@ class TailRecursiveSink<S: Sequence, O: ObserverType>
     // should be done on gate locked
 
     private func moveNextCommand() {
-        var next: Observable<E>?
+        var next: Observable<E>? = nil
 
         repeat {
             guard let (g, left) = _generators.last else {
                 break
             }
-
+            
             if _isDisposed {
                 return
             }
 
             _generators.removeLast()
-
+            
             var e = g
 
             guard let nextCandidate = e.next()?.asObservable() else {
@@ -102,7 +102,8 @@ class TailRecursiveSink<S: Sequence, O: ObserverType>
                 if knownOriginalLeft - 1 >= 1 {
                     _generators.append((e, knownOriginalLeft - 1))
                 }
-            } else {
+            }
+            else {
                 _generators.append((e, nil))
             }
 
@@ -115,12 +116,13 @@ class TailRecursiveSink<S: Sequence, O: ObserverType>
                         maxTailRecursiveSinkStackSize = _generators.count
                     }
                 #endif
-            } else {
+            }
+            else {
                 next = nextCandidate
             }
         } while next == nil
 
-        if next == nil {
+        if next == nil  {
             done()
             return
         }
@@ -141,9 +143,10 @@ class TailRecursiveSink<S: Sequence, O: ObserverType>
 
     override func dispose() {
         super.dispose()
-
+        
         _subscription.dispose()
-
+        
         schedule(.dispose)
     }
 }
+

@@ -33,14 +33,15 @@ class RunLoopLock {
         _currentRunLoop = CFRunLoopGetCurrent()
     }
 
-    func dispatch(_ action: @escaping () -> Void) {
+    func dispatch(_ action: @escaping () -> ()) {
         CFRunLoopPerformBlock(_currentRunLoop, runLoopModeRaw) {
             if CurrentThreadScheduler.isScheduleRequired {
                 _ = CurrentThreadScheduler.instance.schedule(()) { _ in
                     action()
                     return Disposables.create()
                 }
-            } else {
+            }
+            else {
                 action()
             }
         }
@@ -87,7 +88,8 @@ class RunLoopLock {
                     throw RxError.timeout
                 }
             #endif
-        } else {
+        }
+        else {
             CFRunLoopRun()
         }
     }
