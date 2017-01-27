@@ -67,16 +67,26 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "1"
+         BundleIdentifier = "com.apple.MobileSMS">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "19B7A4B61E13C14B0074B6B1"
-            BuildableName = "PhotoStickers.app"
-            BlueprintName = "PhotoStickers"
+            BlueprintIdentifier = "19B7A4EE1E13C1F00074B6B1"
+            BuildableName = "MessageExtension.appex"
+            BlueprintName = "MessageExtension"
             ReferencedContainer = "container:PhotoStickers.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "19B7A4EE1E13C1F00074B6B1"
+            BuildableName = "MessageExtension.appex"
+            BlueprintName = "MessageExtension"
+            ReferencedContainer = "container:PhotoStickers.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

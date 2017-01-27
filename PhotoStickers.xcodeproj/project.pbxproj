@@ -45,6 +45,8 @@
 		19D805251E172B0E00DA25B6 /* StickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D805241E172B0E00DA25B6 /* StickerCell.swift */; };
 		19E0B15C1E3A3A5F00315647 /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E0B15B1E3A3A5F00315647 /* Realm+Extensions.swift */; };
 		19E0B15D1E3A3A5F00315647 /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E0B15B1E3A3A5F00315647 /* Realm+Extensions.swift */; };
+		19E2F53C1E3A598D005CC834 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E2F53B1E3A598D005CC834 /* Appearance.swift */; };
+		19E2F53D1E3A598D005CC834 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E2F53B1E3A598D005CC834 /* Appearance.swift */; };
 		19F69E631E194F8300EEF781 /* Logger+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F69E621E194F8300EEF781 /* Logger+Shared.swift */; };
 		19F69E641E194F8300EEF781 /* Logger+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F69E621E194F8300EEF781 /* Logger+Shared.swift */; };
 		2558FD07BC50C7AD6AD41C76 /* Pods_MessageExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B39E22591049F520A696201 /* Pods_MessageExtension.framework */; };
@@ -127,6 +129,7 @@
 		19D805221E1702A300DA25B6 /* PhotoStickerBrowserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStickerBrowserViewModel.swift; sourceTree = "<group>"; };
 		19D805241E172B0E00DA25B6 /* StickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerCell.swift; sourceTree = "<group>"; };
 		19E0B15B1E3A3A5F00315647 /* Realm+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Realm+Extensions.swift"; sourceTree = "<group>"; };
+		19E2F53B1E3A598D005CC834 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		19F69E4C1E17F57D00EEF781 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Appfile; path = fastlane/Appfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		19F69E4D1E17F57D00EEF781 /* Deliverfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Deliverfile; path = fastlane/Deliverfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		19F69E4E1E17F57D00EEF781 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Fastfile; path = fastlane/Fastfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -271,6 +274,7 @@
 		19B7A5101E13CB460074B6B1 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				19E2F53B1E3A598D005CC834 /* Appearance.swift */,
 				19B7A5111E13CB800074B6B1 /* AppGroup.swift */,
 				19D805121E16892500DA25B6 /* StoryboardIdentifiers.swift */,
 				19F69E621E194F8300EEF781 /* Logger+Shared.swift */,
@@ -742,6 +746,7 @@
 				19D805181E16892500DA25B6 /* StoryboardIdentifiers.swift in Sources */,
 				199A788C1E23ED7C002B058E /* UIViewController+Extensions.swift in Sources */,
 				19B7A4BD1E13C14B0074B6B1 /* ViewController.swift in Sources */,
+				19E2F53C1E3A598D005CC834 /* Appearance.swift in Sources */,
 				19269D0D1E195AFD003D1C3E /* PSError.swift in Sources */,
 				19B7A4BB1E13C14B0074B6B1 /* AppDelegate.swift in Sources */,
 			);
@@ -766,6 +771,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19B7A5041E13C8A00074B6B1 /* PhotoStickerBrowserViewController.swift in Sources */,
+				19E2F53D1E3A598D005CC834 /* Appearance.swift in Sources */,
 				19D805251E172B0E00DA25B6 /* StickerCell.swift in Sources */,
 				19F69E641E194F8300EEF781 /* Logger+Shared.swift in Sources */,
 				1943DECE1E1C554E00F1AADE /* StickerSection.swift in Sources */,
