@@ -14,23 +14,43 @@ import Log
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    fileprivate let disposeBag = DisposeBag()
 
     @IBOutlet weak var addButton: UIButton!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupBindings()
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func addButtonTapped(_ sender: Any) {
-        storeSticker()
+    func setupBindings() {
+        addButton.rx.tap
+            .flatMapLatest { [weak self] _ in
+                return UIImagePickerController.rx.createWithParent(self) { picker in
+                    picker.sourceType = .photoLibrary
+                    picker.allowsEditing = false
+                }
+                .flatMap {
+                    $0.rx.didFinishPickingMediaWithInfo
+                }
+                .take(1)
+            }
+            .map { info in
+                return info[UIImagePickerControllerOriginalImage] as? UIImage
+            }
+            .subscribe(onNext: { image in
+                self.storeSticker(with: image)
+            })
+            .addDisposableTo(disposeBag)
     }
 
-    func storeSticker() {
+    func storeSticker(with image: UIImage?) {
 
-        guard let image = UIImage(named: "sticker") else {
+        guard let image = image else {
             return
         }
         guard let data = UIImagePNGRepresentation(image) else {
