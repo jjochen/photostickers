@@ -15,9 +15,9 @@ extension UIViewController {
         self.endAppearanceTransition()
     }
 
-    func performSegue(_ identifier: SegueIdentifier) {
-        self.performSegue(withIdentifier: identifier.rawValue, sender: self)
-    }
+    //    func performSegue(_ identifier: SegueIdentifier) {
+    //        self.performSegue(withIdentifier: identifier.rawValue, sender: self)
+    //    }
 
     func findChildViewControllerOfType(_ klass: AnyClass) -> UIViewController? {
         for child in childViewControllers {

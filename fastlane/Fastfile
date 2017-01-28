@@ -96,7 +96,7 @@ end
 
 desc "Updates the storyboard identifier Swift values."
 lane :storyboard_ids do
-    sh "cd .. ; bundle exec sbconstants ./Shared/StoryboardIdentifiers.swift --source-dir ./ --swift"
+    sh "cd .. ; bundle exec sbconstants ./Shared/Services/StoryboardIdentifiers.swift --source-dir ./ --swift"
 end
 
 desc "Install dependencies (gems, cocoapods)"

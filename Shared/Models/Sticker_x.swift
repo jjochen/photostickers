@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import Messages
 import Log
+import RxDataSources
 
 class Sticker: Object {
     dynamic var uuid = ""
@@ -65,4 +66,14 @@ extension Sticker {
         }
         return sticker
     }
+}
+
+func == (lhs: Sticker, rhs: Sticker) -> Bool {
+    return lhs.uuid == rhs.uuid // check
+}
+
+extension Sticker: IdentifiableType {
+    typealias Identity = String
+
+    var identity: Identity { return uuid }
 }

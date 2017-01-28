@@ -5,14 +5,10 @@ public enum CollectionViewCellReuseIdentifier: String {
     case StickerCell
 }
 
-public enum SegueIdentifier: String {
-    case EmbetPhotoStickerBrowserView
-}
-
 public enum StoryboardNames: String {
+    case App
     case LaunchScreen
-    case Main
-    case MainInterface
+    case MessageExtension
 }
 
 public enum ViewControllerStoryboardIdentifier: String {
