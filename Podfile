@@ -12,17 +12,18 @@ target 'PhotoStickers' do
     pod 'RxDataSources'
     pod 'RealmSwift'
     pod 'RxRealm'
-#    pod 'RxCoreData'
+    pod 'Log'
+    #pod 'RxSwiftExt'
+    #pod 'RxCoreData'
     #pod 'RxViewModel'
     #pod 'RxOptional'
     #pod 'SnapKit'
-    pod 'Log'
-    pod 'Toaster'
+    #pod 'Toaster'
 
     target 'PhotoStickersTests' do
         inherit! :search_paths
         pod 'RxTest'
-        pod 'RxBlocking'
+        #pod 'RxBlocking'
         #pod 'Quick'
         #pod 'Nimble'
         #pod 'RxNimble'
