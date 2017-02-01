@@ -8,17 +8,49 @@
 
 import Foundation
 import RealmSwift
-import Messages
-import Log
 import RxDataSources
 
+// MARK: Realm Object
 class Sticker: Object {
     dynamic var uuid = ""
-    dynamic var stickerPath: String?
-    dynamic var stickerDescription: String?
+    dynamic var renderedStickerFilePath: String?
+    dynamic var originalImageFilePath: String?
+    dynamic var localizedDescription: String?
     dynamic var sortOrder = 0
 }
 
+// MARK: Equitable
+func == (lhs: Sticker, rhs: Sticker) -> Bool {
+    return lhs.uuid == rhs.uuid
+}
+
+extension Sticker {
+    public var localizedDescriptionOrPlaceholder: String! {
+        guard let description = self.localizedDescription else {
+            return "Sticker"
+        }
+        return description
+    }
+
+    public var stickerURL: URL? {
+        // ToDo
+        self.renderSticker()
+
+        guard let filePath = self.renderedStickerFilePath else {
+            return nil
+        }
+        let stickerURL = URL(string: filePath)
+        return stickerURL
+    }
+
+    private func renderSticker() {
+        // ToDo
+
+        self.renderedStickerFilePath = self.originalImageFilePath
+    }
+}
+
+// MARK: Realm Specifications
 extension Sticker {
     override static func primaryKey() -> String? {
         return "uuid"
@@ -33,45 +65,7 @@ extension Sticker {
     }
 }
 
-extension Sticker {
-    public var localizedDescription: String! {
-        guard let localizedDescription = self.stickerDescription else {
-            return "Sticker"
-        }
-        return localizedDescription
-    }
-
-    public var stickerURL: URL? {
-        guard let filePath = stickerPath else {
-            return nil
-        }
-        let stickerURL = URL(string: filePath)
-        return stickerURL
-    }
-}
-
-extension Sticker {
-    public func loadMSSticker() -> MSSticker? {
-        let stickerURL: URL? = self.stickerURL
-        let localizedDescription: String! = self.localizedDescription
-        guard stickerURL != nil else {
-            return nil
-        }
-        let sticker: MSSticker
-        do {
-            try sticker = MSSticker(contentsOfFileURL: stickerURL!, localizedDescription: localizedDescription)
-        } catch {
-            Logger.shared.error(error)
-            return nil
-        }
-        return sticker
-    }
-}
-
-func == (lhs: Sticker, rhs: Sticker) -> Bool {
-    return lhs.uuid == rhs.uuid // check
-}
-
+// MARK: RxDataSource Methods
 extension Sticker: IdentifiableType {
     typealias Identity = String
 

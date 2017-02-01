@@ -80,8 +80,7 @@ extension PhotoStickerBrowserViewController {
                 return cell
             case .StickerItem(sticker: let sticker):
                 let cell: StickerCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.StickerCell.rawValue, for: indexPath) as! StickerCell
-                cell.stickerView.sticker = sticker.loadMSSticker()
-
+                cell.stickerView.sticker = MSSticker.load(sticker)
                 return cell
             }
         }

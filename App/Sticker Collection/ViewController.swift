@@ -70,8 +70,8 @@ class ViewController: UIViewController {
 
         let sticker = Sticker()
         sticker.uuid = uuid
-        sticker.stickerPath = url.absoluteString
-        sticker.stickerDescription = "Pizza"
+        sticker.originalImageFilePath = url.absoluteString
+        sticker.localizedDescription = "Sticker"
         sticker.sortOrder = 1
 
         Realm.configureForAppGroup()

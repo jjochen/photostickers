@@ -45,12 +45,13 @@
 		194621711E3CFE56000F09CE /* PhotoStickerBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621671E3CFE55000F09CE /* PhotoStickerBrowserViewModel.swift */; };
 		194621721E3CFE56000F09CE /* StickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621681E3CFE55000F09CE /* StickerCell.swift */; };
 		194621731E3CFE56000F09CE /* StickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621691E3CFE55000F09CE /* StickerSection.swift */; };
-		1946217F1E3CFF40000F09CE /* PhotoStickersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946217C1E3CFF40000F09CE /* PhotoStickersTests.swift */; };
 		194621851E3CFF4F000F09CE /* PhotoStickersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621821E3CFF4F000F09CE /* PhotoStickersUITests.swift */; };
 		1946218C1E3D1460000F09CE /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621891E3D1460000F09CE /* Sticker.swift */; };
 		1946218D1E3D1460000F09CE /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621891E3D1460000F09CE /* Sticker.swift */; };
 		1946218F1E3D1485000F09CE /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946218E1E3D1485000F09CE /* ViewModel.swift */; };
 		194621901E3D1485000F09CE /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946218E1E3D1485000F09CE /* ViewModel.swift */; };
+		194621921E3FE8A1000F09CE /* StickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621911E3FE8A1000F09CE /* StickerTests.swift */; };
+		194621951E40E74C000F09CE /* MSSticker+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621941E40E74C000F09CE /* MSSticker+Extensions.swift */; };
 		19B7A4F21E13C1F00074B6B1 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19B7A4F11E13C1F00074B6B1 /* Messages.framework */; };
 		19B7A4FE1E13C1F00074B6B1 /* MessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2558FD07BC50C7AD6AD41C76 /* Pods_MessageExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B39E22591049F520A696201 /* Pods_MessageExtension.framework */; };
@@ -124,12 +125,13 @@
 		194621691E3CFE55000F09CE /* StickerSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerSection.swift; sourceTree = "<group>"; };
 		1946216B1E3CFE55000F09CE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1946216C1E3CFE56000F09CE /* MessageExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = MessageExtension.entitlements; sourceTree = "<group>"; };
-		1946217C1E3CFF40000F09CE /* PhotoStickersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStickersTests.swift; sourceTree = "<group>"; };
 		1946217E1E3CFF40000F09CE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		194621821E3CFF4F000F09CE /* PhotoStickersUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStickersUITests.swift; sourceTree = "<group>"; };
 		194621841E3CFF4F000F09CE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		194621891E3D1460000F09CE /* Sticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sticker.swift; sourceTree = "<group>"; };
 		1946218E1E3D1485000F09CE /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		194621911E3FE8A1000F09CE /* StickerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerTests.swift; sourceTree = "<group>"; };
+		194621941E40E74C000F09CE /* MSSticker+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MSSticker+Extensions.swift"; sourceTree = "<group>"; };
 		199A78921E264480002B058E /* CHANGELOG.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.yml; sourceTree = "<group>"; };
 		19B7A4B71E13C14B0074B6B1 /* PhotoStickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4CE1E13C14B0074B6B1 /* PhotoStickersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoStickersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,6 +296,7 @@
 			children = (
 				194621621E3CFE55000F09CE /* Main */,
 				194621651E3CFE55000F09CE /* Sticker Browser */,
+				194621931E40E727000F09CE /* Extensions */,
 				194621751E3CFE66000F09CE /* Storyboards */,
 				1946216A1E3CFE55000F09CE /* Supporting Files */,
 			);
@@ -340,7 +343,7 @@
 		1946217B1E3CFF40000F09CE /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				1946217C1E3CFF40000F09CE /* PhotoStickersTests.swift */,
+				194621911E3FE8A1000F09CE /* StickerTests.swift */,
 				1946217D1E3CFF40000F09CE /* Supporting Files */,
 			);
 			path = Tests;
@@ -379,6 +382,14 @@
 			name = Models;
 			path = Shared/Models;
 			sourceTree = SOURCE_ROOT;
+		};
+		194621931E40E727000F09CE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				194621941E40E74C000F09CE /* MSSticker+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
 		};
 		19B7A4AE1E13C14B0074B6B1 = {
 			isa = PBXGroup;
@@ -819,7 +830,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1946217F1E3CFF40000F09CE /* PhotoStickersTests.swift in Sources */,
+				194621921E3FE8A1000F09CE /* StickerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -839,6 +850,7 @@
 				194621211E3CFDA1000F09CE /* UIStoryboardSegue+Extensions.swift in Sources */,
 				1946212D1E3CFDA1000F09CE /* UIImagePickerController+Rx.swift in Sources */,
 				194621351E3CFDA1000F09CE /* PSError.swift in Sources */,
+				194621951E40E74C000F09CE /* MSSticker+Extensions.swift in Sources */,
 				1946211B1E3CFDA1000F09CE /* Logger+Shared.swift in Sources */,
 				194621311E3CFDA1000F09CE /* Appearance.swift in Sources */,
 				194621711E3CFE56000F09CE /* PhotoStickerBrowserViewModel.swift in Sources */,
