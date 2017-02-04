@@ -53,24 +53,11 @@ class ViewController: UIViewController {
         guard let image = image else {
             return
         }
-        guard let data = UIImagePNGRepresentation(image) else {
-            return
-        }
         let uuid = UUID().uuidString
-
-        guard let url = AppGroup.documentsURL?.appendingPathComponent("\(uuid).png") else {
-            return
-        }
-        do {
-            try data.write(to: url)
-        } catch {
-            Logger.shared.error(error)
-            return
-        }
 
         let sticker = Sticker()
         sticker.uuid = uuid
-        sticker.originalImageFilePath = url.absoluteString
+        sticker.originalImage = image
         sticker.localizedDescription = "Sticker"
         sticker.sortOrder = 1
 
