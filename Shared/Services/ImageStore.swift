@@ -12,44 +12,63 @@ import Log
 
 struct ImageStore {
 
-    static func storeImage(_ image: UIImage!, forKey key: String!, inCategory category: String!) -> URL? {
+    static func storeImage(_ image: UIImage!, forKey key: String!, inCategory category: String!) {
         guard let data = UIImagePNGRepresentation(image) else {
-            return nil
+            Logger.shared.error("PNG representation not possible: \(image)")
+            return
         }
 
-        guard let url = self.imageURL(forKey: key, inCategory: category) else {
-            return nil
+        guard let url = self.constructImageURL(forKey: key, inCategory: category) else {
+            Logger.shared.error("No image url for key \(key) in category \(category)")
+            return
         }
 
         if !self.createSubfolderForCategory(category) {
-            return nil
+            Logger.shared.error("Could not create subfolder for category \(category)")
+            return
         }
 
         do {
             try data.write(to: url, options: .atomic)
-            return url
         } catch {
             Logger.shared.error(error)
-            return nil
         }
     }
 
     static func image(forKey key: String!, inCategory category: String!) -> UIImage? {
-        guard let url = self.imageURL(forKey: key, inCategory: category) else {
+        guard let url = self.constructImageURL(forKey: key, inCategory: category) else {
+            Logger.shared.error("No image url for key \(key) in category \(category)")
             return nil
         }
-        return UIImage(contentsOfFile: url.absoluteString)
+        return UIImage(contentsOfFile: url.path)
     }
 
+    static func imageExists(forKey key: String!, inCategory category: String!) -> Bool {
+        guard let url = self.constructImageURL(forKey: key, inCategory: category) else {
+            Logger.shared.error("No image url for key \(key) in category \(category)")
+            return false
+        }
+        return FileManager.default.fileExists(atPath: url.path)
+    }
+
+    static func imageURL(forKey key: String!, inCategory category: String!) -> URL? {
+        guard self.imageExists(forKey: key, inCategory: category) else {
+            return nil
+        }
+        return self.constructImageURL(forKey: key, inCategory: category)
+    }
+}
+
+extension ImageStore {
+
     fileprivate static func createSubfolderForCategory(_ category: String!) -> Bool {
-        guard let url = self.categoryURL(category) else {
+        guard let url = self.constructCategoryURL(category) else {
+            Logger.shared.error("No category url for \(category)")
             return false
         }
 
-        let fileManager = FileManager.default
-
         do {
-            try fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
             return true
         } catch {
             Logger.shared.error(error)
@@ -57,11 +76,11 @@ struct ImageStore {
         }
     }
 
-    fileprivate static func categoryURL(_ category: String!) -> URL? {
+    fileprivate static func constructCategoryURL(_ category: String!) -> URL? {
         return AppGroup.documentsURL?.appendingPathComponent(category, isDirectory: true)
     }
 
-    fileprivate static func imageURL(forKey key: String!, inCategory category: String!) -> URL? {
-        return self.categoryURL(category)?.appendingPathComponent(key).appendingPathExtension("png")
+    fileprivate static func constructImageURL(forKey key: String!, inCategory category: String!) -> URL? {
+        return self.constructCategoryURL(category)?.appendingPathComponent(key).appendingPathExtension("png")
     }
 }

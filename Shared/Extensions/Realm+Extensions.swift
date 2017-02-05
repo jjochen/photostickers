@@ -7,13 +7,25 @@
 //
 
 import RealmSwift
+import Log
 
 extension Realm {
     static func configureForAppGroup() {
         var config = Realm.Configuration()
-        if let newURL = AppGroup.documentsURL {
-            config.fileURL = newURL.appendingPathComponent("photo-stickers.realm")
+        guard let appGroupDirectory = AppGroup.documentsURL else {
+            Logger.shared.error("No app group directory")
+            return
         }
+        let realmPath = appGroupDirectory.appendingPathComponent("photo-stickers.realm")
+        config.fileURL = realmPath
         Realm.Configuration.defaultConfiguration = config
+        #if DEBUG
+            do {
+                try _ = Realm()
+            } catch {
+                Logger.shared.error("Realm not readable. Will delete \(realmPath).")
+                try! FileManager.default.removeItem(at: realmPath)
+            }
+        #endif
     }
 }

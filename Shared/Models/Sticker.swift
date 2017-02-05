@@ -13,8 +13,6 @@ import RxDataSources
 // MARK: Realm Object
 class Sticker: Object {
     dynamic var uuid = ""
-    dynamic var renderedStickerFilePath: String?
-    dynamic var originalImageFilePath: String?
     dynamic var localizedDescription = ""
     dynamic var cropBoundsX: Double = 0
     dynamic var cropBoundsY: Double = 0
@@ -42,52 +40,52 @@ func == (lhs: Sticker, rhs: Sticker) -> Bool {
 
 extension Sticker {
     static let renderedSize = CGSize(width: 300, height: 300)
-    static let stickersSubfolder = "stickers"
-    static let originalsSubfolder = "originals"
 }
 
+// MARK: Image Storage
 extension Sticker {
-    var renderedStickerURL: URL? {
-        guard let path = self.renderedStickerFilePath else {
-            return nil
-        }
-        let url = URL(string: path)
-        return url
-    }
 
-    var originalImageURL: URL? {
-        guard let path = self.originalImageFilePath else {
-            return nil
-        }
-        let url = URL(string: path)
-        return url
-    }
+    private static let renderedStickerCategory = "stickers"
 
     var renderedSticker: UIImage? {
         get {
-            guard let path = self.renderedStickerFilePath else {
-                return nil
-            }
-            let image = UIImage(contentsOfFile: path)
-            return image
+            return ImageStore.image(forKey: self.uuid, inCategory: Sticker.renderedStickerCategory)
         }
         set(image) {
-            self.renderedStickerFilePath = ImageStore.storeImage(image, forKey: self.uuid, inCategory: Sticker.stickersSubfolder)?.absoluteString
+            ImageStore.storeImage(image, forKey: self.uuid, inCategory: Sticker.renderedStickerCategory)
         }
     }
 
+    var renderedStickerURL: URL? {
+        return ImageStore.imageURL(forKey: self.uuid, inCategory: Sticker.renderedStickerCategory)
+    }
+
+    var hasRenderedSticker: Bool {
+        return ImageStore.imageExists(forKey: self.uuid, inCategory: Sticker.renderedStickerCategory)
+    }
+
+    private static let originalImageCategory = "originals"
+
     var originalImage: UIImage? {
         get {
-            guard let path = self.originalImageFilePath else {
-                return nil
-            }
-            let image = UIImage(contentsOfFile: path)
-            return image
+            return ImageStore.image(forKey: self.uuid, inCategory: Sticker.originalImageCategory)
         }
         set(image) {
-            self.originalImageFilePath = ImageStore.storeImage(image, forKey: self.uuid, inCategory: Sticker.originalsSubfolder)?.absoluteString
+            ImageStore.storeImage(image, forKey: self.uuid, inCategory: Sticker.originalImageCategory)
         }
     }
+
+    var originalImageURL: URL? {
+        return ImageStore.imageURL(forKey: self.uuid, inCategory: Sticker.originalImageCategory)
+    }
+
+    var hasOriginalImage: Bool {
+        return ImageStore.imageExists(forKey: self.uuid, inCategory: Sticker.originalImageCategory)
+    }
+}
+
+// MARK: Bounds
+extension Sticker {
 
     var cropBounds: CGRect {
         get {

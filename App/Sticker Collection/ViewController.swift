@@ -60,6 +60,9 @@ class ViewController: UIViewController {
         sticker.originalImage = image
         sticker.localizedDescription = "Sticker"
         sticker.sortOrder = 1
+        sticker.cropBounds = CGRect(x: 0, y: 0, width: 600, height: 600)
+
+        StickerRenderer.render(sticker)
 
         Realm.configureForAppGroup()
         let realm = try! Realm()
