@@ -8,7 +8,6 @@
 
 #if os(iOS) || os(tvOS)
 
-import Foundation
 import UIKit
 #if !RX_NO_MODULE
 import RxSwift
@@ -16,7 +15,7 @@ import RxSwift
 
 let collectionViewDataSourceNotSet = CollectionViewDataSourceNotSet()
 
-class CollectionViewDataSourceNotSet
+final class CollectionViewDataSourceNotSet
     : NSObject
     , UICollectionViewDataSource {
 

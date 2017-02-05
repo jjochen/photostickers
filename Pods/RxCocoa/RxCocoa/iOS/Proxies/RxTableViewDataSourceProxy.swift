@@ -8,7 +8,6 @@
 
 #if os(iOS) || os(tvOS)
 
-import Foundation
 import UIKit
 #if !RX_NO_MODULE
 import RxSwift
@@ -16,7 +15,7 @@ import RxSwift
 
 let tableViewDataSourceNotSet = TableViewDataSourceNotSet()
 
-class TableViewDataSourceNotSet
+final class TableViewDataSourceNotSet
     : NSObject
     , UITableViewDataSource {
 
@@ -43,11 +42,11 @@ public class RxTableViewDataSourceProxy
     private var _commitForRowAtSequenceSentMessage: CachedCommitForRowAt? = nil
     private var _commitForRowAtSequenceMethodInvoked: CachedCommitForRowAt? = nil
 
-    fileprivate class Counter {
+    fileprivate final class Counter {
         var hasObservers: Bool = false
     }
     
-    fileprivate class CachedCommitForRowAt {
+    fileprivate final class CachedCommitForRowAt {
         let sequence: Observable<[Any]>
         let counter: Counter
 

@@ -6,7 +6,6 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-import Foundation
 import RxSwift
 
 /// A representation of hot observable sequence.
@@ -14,7 +13,7 @@ import RxSwift
 /// Recorded events are replayed at absolute times no matter is there any subscriber.
 ///
 /// Event times represent absolute `TestScheduler` time.
-class HotObservable<Element>
+final class HotObservable<Element>
     : TestableObservable<Element> {
     typealias Observer = AnyObserver<Element>
 
