@@ -1,6 +1,0 @@
-framework module Pods_PhotoStickersTests {
-  umbrella header "Pods-PhotoStickersTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
