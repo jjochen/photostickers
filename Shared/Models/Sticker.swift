@@ -73,7 +73,7 @@ extension Sticker {
             return ImageStore.image(forKey: self.uuid, inCategory: Sticker.originalImageCategory)
         }
         set(image) {
-            ImageStore.storeImage(image, forKey: self.uuid, inCategory: Sticker.originalImageCategory)
+            _ = ImageStore.storeImage(image, forKey: self.uuid, inCategory: Sticker.originalImageCategory)
         }
     }
 

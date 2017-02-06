@@ -37,7 +37,7 @@
 		194621591E3CFE16000F09CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946214F1E3CFE16000F09CE /* AppDelegate.swift */; };
 		1946215A1E3CFE16000F09CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194621501E3CFE16000F09CE /* LaunchScreen.storyboard */; };
 		1946215B1E3CFE16000F09CE /* App.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194621521E3CFE16000F09CE /* App.storyboard */; };
-		1946215C1E3CFE16000F09CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621551E3CFE16000F09CE /* ViewController.swift */; };
+		1946215C1E3CFE16000F09CE /* StickerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621551E3CFE16000F09CE /* StickerCollectionViewController.swift */; };
 		1946216D1E3CFE56000F09CE /* MessageExtension.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194621601E3CFE55000F09CE /* MessageExtension.storyboard */; };
 		1946216E1E3CFE56000F09CE /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621631E3CFE55000F09CE /* MessagesViewController.swift */; };
 		1946216F1E3CFE56000F09CE /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621641E3CFE55000F09CE /* MessagesViewModel.swift */; };
@@ -58,6 +58,7 @@
 		194621A41E43569C000F09CE /* UIImage+RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621A11E43569C000F09CE /* UIImage+RoundedCorner.swift */; };
 		194621A81E45346F000F09CE /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621A71E45346F000F09CE /* ImageStore.swift */; };
 		194621A91E453476000F09CE /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621A71E45346F000F09CE /* ImageStore.swift */; };
+		194621AF1E4928C8000F09CE /* StickerCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621AE1E4928C8000F09CE /* StickerCollectionViewModel.swift */; };
 		19B7A4F21E13C1F00074B6B1 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19B7A4F11E13C1F00074B6B1 /* Messages.framework */; };
 		19B7A4FE1E13C1F00074B6B1 /* MessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2558FD07BC50C7AD6AD41C76 /* Pods_MessageExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B39E22591049F520A696201 /* Pods_MessageExtension.framework */; };
@@ -119,7 +120,7 @@
 		1946214F1E3CFE16000F09CE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		194621511E3CFE16000F09CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		194621531E3CFE16000F09CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/App.storyboard; sourceTree = "<group>"; };
-		194621551E3CFE16000F09CE /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		194621551E3CFE16000F09CE /* StickerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerCollectionViewController.swift; sourceTree = "<group>"; };
 		194621571E3CFE16000F09CE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		194621581E3CFE16000F09CE /* PhotoStickers.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = PhotoStickers.entitlements; sourceTree = "<group>"; };
 		194621611E3CFE55000F09CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MessageExtension.storyboard; sourceTree = "<group>"; };
@@ -143,6 +144,7 @@
 		194621A01E43569C000F09CE /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		194621A11E43569C000F09CE /* UIImage+RoundedCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+RoundedCorner.swift"; sourceTree = "<group>"; };
 		194621A71E45346F000F09CE /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
+		194621AE1E4928C8000F09CE /* StickerCollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerCollectionViewModel.swift; sourceTree = "<group>"; };
 		199A78921E264480002B058E /* CHANGELOG.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.yml; sourceTree = "<group>"; };
 		19B7A4B71E13C14B0074B6B1 /* PhotoStickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4CE1E13C14B0074B6B1 /* PhotoStickersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoStickersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,10 +210,10 @@
 			children = (
 				194621871E3D1460000F09CE /* Models */,
 				194621051E3CFDA1000F09CE /* Extensions */,
-				1946210E1E3CFDA1000F09CE /* Resources */,
 				194621101E3CFDA1000F09CE /* RxExtensions */,
 				194621141E3CFDA1000F09CE /* Services */,
 				194621191E3CFDA1000F09CE /* Views */,
+				1946210E1E3CFDA1000F09CE /* Resources */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -249,12 +251,12 @@
 		194621141E3CFDA1000F09CE /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				194621A71E45346F000F09CE /* ImageStore.swift */,
-				1946218E1E3D1485000F09CE /* ViewModel.swift */,
 				194621151E3CFDA1000F09CE /* Appearance.swift */,
 				194621161E3CFDA1000F09CE /* AppGroup.swift */,
+				194621A71E45346F000F09CE /* ImageStore.swift */,
 				194621171E3CFDA1000F09CE /* PSError.swift */,
 				194621181E3CFDA1000F09CE /* StoryboardIdentifiers.swift */,
+				1946218E1E3D1485000F09CE /* ViewModel.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -283,7 +285,8 @@
 		194621541E3CFE16000F09CE /* Sticker Collection */ = {
 			isa = PBXGroup;
 			children = (
-				194621551E3CFE16000F09CE /* ViewController.swift */,
+				194621551E3CFE16000F09CE /* StickerCollectionViewController.swift */,
+				194621AE1E4928C8000F09CE /* StickerCollectionViewModel.swift */,
 			);
 			path = "Sticker Collection";
 			sourceTree = "<group>";
@@ -300,8 +303,8 @@
 		1946215E1E3CFE23000F09CE /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				194621501E3CFE16000F09CE /* LaunchScreen.storyboard */,
 				194621521E3CFE16000F09CE /* App.storyboard */,
+				194621501E3CFE16000F09CE /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -859,13 +862,14 @@
 				1946218F1E3D1485000F09CE /* ViewModel.swift in Sources */,
 				194621361E3CFDA1000F09CE /* StoryboardIdentifiers.swift in Sources */,
 				194621301E3CFDA1000F09CE /* Appearance.swift in Sources */,
+				194621AF1E4928C8000F09CE /* StickerCollectionViewModel.swift in Sources */,
 				194621A21E43569C000F09CE /* UIImage+Alpha.swift in Sources */,
 				1946212C1E3CFDA1000F09CE /* UIImagePickerController+Rx.swift in Sources */,
 				194621221E3CFDA1000F09CE /* UIViewController+Extensions.swift in Sources */,
 				1946212A1E3CFDA1000F09CE /* RxImagePickerDelegateProxy.swift in Sources */,
 				194621A31E43569C000F09CE /* UIImage+Resize.swift in Sources */,
 				1946212E1E3CFDA1000F09CE /* UIImagePickerController+RxCreate.swift in Sources */,
-				1946215C1E3CFE16000F09CE /* ViewController.swift in Sources */,
+				1946215C1E3CFE16000F09CE /* StickerCollectionViewController.swift in Sources */,
 				1946218C1E3D1460000F09CE /* Sticker.swift in Sources */,
 				194621201E3CFDA1000F09CE /* UIStoryboardSegue+Extensions.swift in Sources */,
 			);

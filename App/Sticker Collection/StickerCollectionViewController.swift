@@ -12,11 +12,12 @@ import RxCocoa
 import RealmSwift
 import Log
 
-class ViewController: UIViewController {
+class StickerCollectionViewController: UIViewController {
 
     fileprivate let disposeBag = DisposeBag()
 
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var addButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
