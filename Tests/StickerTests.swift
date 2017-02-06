@@ -15,11 +15,6 @@ class StickerTests: XCTestCase {
 extension StickerTests {
     func testStickerCreation() {
         let sticker = Sticker()
-        sticker.uuid = "1234-5678"
-        sticker.originalImageFilePath = "some/path"
-        sticker.localizedDescription = "awesome sticker"
-        sticker.sortOrder = 42
-
         XCTAssertNotNil(sticker)
     }
 
@@ -34,8 +29,7 @@ extension StickerTests {
         sticker2.uuid = uuid
         XCTAssertTrue(sticker1 == sticker2)
 
-        let path = "path"
-        sticker1.originalImageFilePath = path
+        sticker1.cropBounds = CGRect(x: 1, y: 2, width: 3, height: 4)
         XCTAssertTrue(sticker1 == sticker2)
     }
 }
