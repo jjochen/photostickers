@@ -14,6 +14,7 @@ import RxDataSources
 class Sticker: Object {
     dynamic var uuid = ""
     dynamic var localizedDescription = ""
+    dynamic var hasRenderedSticker = false
     dynamic var cropBoundsX: Double = 0
     dynamic var cropBoundsY: Double = 0
     dynamic var cropBoundsWidth: Double = 0
@@ -52,7 +53,8 @@ extension Sticker {
             return ImageStore.image(forKey: self.uuid, inCategory: Sticker.renderedStickerCategory)
         }
         set(image) {
-            ImageStore.storeImage(image, forKey: self.uuid, inCategory: Sticker.renderedStickerCategory)
+            let success = ImageStore.storeImage(image, forKey: self.uuid, inCategory: Sticker.renderedStickerCategory)
+            self.hasRenderedSticker = success || self.hasStoredRenderedSticker
         }
     }
 
@@ -60,7 +62,7 @@ extension Sticker {
         return ImageStore.imageURL(forKey: self.uuid, inCategory: Sticker.renderedStickerCategory)
     }
 
-    var hasRenderedSticker: Bool {
+    var hasStoredRenderedSticker: Bool {
         return ImageStore.imageExists(forKey: self.uuid, inCategory: Sticker.renderedStickerCategory)
     }
 
@@ -79,7 +81,7 @@ extension Sticker {
         return ImageStore.imageURL(forKey: self.uuid, inCategory: Sticker.originalImageCategory)
     }
 
-    var hasOriginalImage: Bool {
+    var hasStoredOriginalImage: Bool {
         return ImageStore.imageExists(forKey: self.uuid, inCategory: Sticker.originalImageCategory)
     }
 }

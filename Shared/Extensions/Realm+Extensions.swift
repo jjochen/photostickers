@@ -23,8 +23,9 @@ extension Realm {
             do {
                 try _ = Realm()
             } catch {
-                Logger.shared.error("Realm not readable. Will delete \(realmPath).")
-                try! FileManager.default.removeItem(at: realmPath)
+                Logger.shared.error(error, "Will reset app!")
+                try! FileManager.default.removeItem(at: appGroupDirectory)
+                fatalError("Restart needed after reset")
             }
         #endif
     }

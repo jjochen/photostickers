@@ -42,7 +42,8 @@ class ViewController: UIViewController {
             .map { info in
                 return info[UIImagePickerControllerOriginalImage] as? UIImage
             }
-            .subscribe(onNext: { image in
+            .asDriver(onErrorJustReturn: nil)
+            .drive(onNext: { image in
                 self.storeSticker(with: image)
             })
             .addDisposableTo(disposeBag)
@@ -50,14 +51,14 @@ class ViewController: UIViewController {
 
     func storeSticker(with image: UIImage?) {
 
-        guard let image = image else {
+        guard let originalImage = image else {
             return
         }
         let uuid = UUID().uuidString
 
         let sticker = Sticker()
         sticker.uuid = uuid
-        sticker.originalImage = image
+        sticker.originalImage = originalImage
         sticker.localizedDescription = "Sticker"
         sticker.sortOrder = 1
         sticker.cropBounds = CGRect(x: 0, y: 0, width: 600, height: 600)

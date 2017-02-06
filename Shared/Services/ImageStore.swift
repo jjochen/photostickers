@@ -12,27 +12,30 @@ import Log
 
 struct ImageStore {
 
-    static func storeImage(_ image: UIImage!, forKey key: String!, inCategory category: String!) {
+    static func storeImage(_ image: UIImage!, forKey key: String!, inCategory category: String!) -> Bool {
         guard let data = UIImagePNGRepresentation(image) else {
             Logger.shared.error("PNG representation not possible: \(image)")
-            return
+            return false
         }
 
         guard let url = self.constructImageURL(forKey: key, inCategory: category) else {
             Logger.shared.error("No image url for key \(key) in category \(category)")
-            return
+            return false
         }
 
         if !self.createSubfolderForCategory(category) {
             Logger.shared.error("Could not create subfolder for category \(category)")
-            return
+            return false
         }
 
+        var success = false
         do {
             try data.write(to: url, options: .atomic)
+            success = true
         } catch {
             Logger.shared.error(error)
         }
+        return success
     }
 
     static func image(forKey key: String!, inCategory category: String!) -> UIImage? {
