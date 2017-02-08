@@ -10,6 +10,6 @@ import Foundation
 import UIKit
 import Messages
 
-class StickerCell: UICollectionViewCell {
+class StickerBrowserCell: UICollectionViewCell {
     @IBOutlet weak var stickerView: MSStickerView!
 }

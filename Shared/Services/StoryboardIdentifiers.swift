@@ -2,7 +2,8 @@
 
 public enum CollectionViewCellReuseIdentifier: String {
     case AddMoreCell
-    case StickerCell
+    case StickerBrowserCell
+    case StickerCollectionCell
 }
 
 public enum StoryboardNames: String {
@@ -14,4 +15,5 @@ public enum StoryboardNames: String {
 public enum ViewControllerStoryboardIdentifier: String {
     case MessagesViewController
     case PhotoStickerBrowserViewController
+    case StickerCollectionViewController
 }

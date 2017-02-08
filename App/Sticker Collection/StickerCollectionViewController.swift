@@ -10,14 +10,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Log
+import RxDataSources
 
 class StickerCollectionViewController: UIViewController {
 
     var viewModel: StickerCollectionViewModel?
     fileprivate let disposeBag = DisposeBag()
 
-    @IBOutlet weak var editButton: UIBarButtonItem!
-    @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var stickerCollectionView: UICollectionView!
+    @IBOutlet weak var addButtonItem: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,7 @@ class StickerCollectionViewController: UIViewController {
             return
         }
 
-        self.addButton.rx.tap
+        self.addButtonItem.rx.tap
             .bindTo(self.viewModel!.addButtonItemDidTap)
             .addDisposableTo(self.disposeBag)
 
@@ -54,5 +55,39 @@ class StickerCollectionViewController: UIViewController {
             }
             .bindTo(self.viewModel!.imagePicked)
             .addDisposableTo(self.disposeBag)
+
+        self.viewModel!.stickerCellModels
+            .bindTo(self.stickerCollectionView.rx.items(cellIdentifier: CollectionViewCellReuseIdentifier.StickerCollectionCell.rawValue)) { index, model, cell in
+                guard let stickerCell = cell as? StickerCollectionCell else {
+                    return
+                }
+                stickerCell.configure(model)
+            }
+            .addDisposableTo(disposeBag)
+
+        self.stickerCollectionView.rx
+            .setDelegate(self)
+            .addDisposableTo(disposeBag)
+
+        self.stickerCollectionView.rx
+            .modelSelected(StickerCollectionCellModel.self)
+            .subscribe(onNext: { [weak self] _ in
+
+            })
+            .addDisposableTo(disposeBag)
+    }
+}
+
+extension StickerCollectionViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> StickerCollectionViewController {
+        let viewController = storyboard.viewController(withID: .StickerCollectionViewController) as! StickerCollectionViewController
+        return viewController
+    }
+}
+
+extension StickerCollectionViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }

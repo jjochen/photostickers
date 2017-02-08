@@ -23,16 +23,22 @@ class StickerCollectionViewModel: ViewModel {
     let imagePicked = PublishSubject<UIImage?>()
 
     // MARK: Output
-    let stickers: Driver<[Sticker]>
+    let stickerCellModels: Observable<[StickerCollectionCellModel]>
     let presentImagePicker: Observable<UIImagePickerControllerSourceType>
 
     init(realmContext: Realm!) {
         self.realmContext = realmContext
 
         let stickers = self.realmContext.objects(Sticker.self)
-        self.stickers = Observable
+        self.stickerCellModels = Observable
             .array(from: stickers)
-            .asDriver(onErrorJustReturn: [])
+            .map { listOfStickers in
+                let listOfViewModels = listOfStickers.map { sticker in
+                    return StickerCollectionCellModel(sticker)
+                }
+                return listOfViewModels
+            }
+        //            .asDriver(onErrorJustReturn: [])
 
         self.presentImagePicker = self.addButtonItemDidTap
             .map {
