@@ -41,7 +41,7 @@ class PhotoStickerBrowserViewController: UIViewController {
         let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>()
         skinTableViewDataSource(dataSource)
 
-        viewModel?.sectionItems
+        viewModel!.sectionItems
             .map { items in
                 [StickerSection(header: "Stickers", stickers: items)]
             }

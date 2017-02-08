@@ -210,7 +210,7 @@
 			children = (
 				194621871E3D1460000F09CE /* Models */,
 				194621051E3CFDA1000F09CE /* Extensions */,
-				194621101E3CFDA1000F09CE /* RxExtensions */,
+				194621101E3CFDA1000F09CE /* Rx */,
 				194621141E3CFDA1000F09CE /* Services */,
 				194621191E3CFDA1000F09CE /* Views */,
 				1946210E1E3CFDA1000F09CE /* Resources */,
@@ -238,13 +238,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		194621101E3CFDA1000F09CE /* RxExtensions */ = {
+		194621101E3CFDA1000F09CE /* Rx */ = {
 			isa = PBXGroup;
 			children = (
 				194621111E3CFDA1000F09CE /* RxImagePickerDelegateProxy.swift */,
 				194621121E3CFDA1000F09CE /* UIImagePickerController+Rx.swift */,
 				194621131E3CFDA1000F09CE /* UIImagePickerController+RxCreate.swift */,
 			);
+			name = Rx;
 			path = RxExtensions;
 			sourceTree = "<group>";
 		};

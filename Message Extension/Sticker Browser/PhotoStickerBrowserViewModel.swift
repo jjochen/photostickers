@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RxCocoa
 import RxSwift
 import RealmSwift
 import RxRealm
@@ -21,19 +20,17 @@ protocol PhotoStickerBrowserViewModelType {
 class PhotoStickerBrowserViewModel: ViewModel, PhotoStickerBrowserViewModelType {
 
     // MARK: - Input
-
     let extensionContext: NSExtensionContext?
     let realmContext: Realm!
 
     // MARK: - Output
-
     var sectionItems: Observable<[StickerSectionItem]>
 
     init(extensionContext: NSExtensionContext?, realmContext: Realm!) {
         self.extensionContext = extensionContext
         self.realmContext = realmContext
 
-        let stickers = self.realmContext.objects(Sticker.self)
+        let stickers = self.realmContext.objects(Sticker.self).filter(NSPredicate(format: "hasRenderedSticker == true"))
 
         self.sectionItems = Observable
             .array(from: stickers)

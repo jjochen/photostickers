@@ -9,11 +9,11 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import RealmSwift
 import Log
 
 class StickerCollectionViewController: UIViewController {
 
+    var viewModel: StickerCollectionViewModel?
     fileprivate let disposeBag = DisposeBag()
 
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -29,10 +29,19 @@ class StickerCollectionViewController: UIViewController {
     }
 
     func setupBindings() {
-        addButton.rx.tap
-            .flatMapLatest { [weak self] _ in
+        guard let _ = self.viewModel else {
+            Logger.shared.error("View Model not set!")
+            return
+        }
+
+        self.addButton.rx.tap
+            .bindTo(self.viewModel!.addButtonItemDidTap)
+            .addDisposableTo(self.disposeBag)
+
+        self.viewModel!.presentImagePicker
+            .flatMapLatest { [weak self] sourceType in
                 return UIImagePickerController.rx.createWithParent(self) { picker in
-                    picker.sourceType = .photoLibrary
+                    picker.sourceType = sourceType
                     picker.allowsEditing = false
                 }
                 .flatMap {
@@ -43,33 +52,7 @@ class StickerCollectionViewController: UIViewController {
             .map { info in
                 return info[UIImagePickerControllerOriginalImage] as? UIImage
             }
-            .asDriver(onErrorJustReturn: nil)
-            .drive(onNext: { image in
-                self.storeSticker(with: image)
-            })
-            .addDisposableTo(disposeBag)
-    }
-
-    func storeSticker(with image: UIImage?) {
-
-        guard let originalImage = image else {
-            return
-        }
-        let uuid = UUID().uuidString
-
-        let sticker = Sticker()
-        sticker.uuid = uuid
-        sticker.originalImage = originalImage
-        sticker.localizedDescription = "Sticker"
-        sticker.sortOrder = 1
-        sticker.cropBounds = CGRect(x: 0, y: 0, width: 600, height: 600)
-
-        StickerRenderer.render(sticker)
-
-        Realm.configureForAppGroup()
-        let realm = try! Realm()
-        try! realm.write {
-            realm.add(sticker)
-        }
+            .bindTo(self.viewModel!.imagePicked)
+            .addDisposableTo(self.disposeBag)
     }
 }
