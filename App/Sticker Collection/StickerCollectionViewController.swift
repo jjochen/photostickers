@@ -71,8 +71,8 @@ class StickerCollectionViewController: UIViewController {
 
         self.stickerCollectionView.rx
             .modelSelected(StickerCollectionCellModel.self)
-            .subscribe(onNext: { [weak self] _ in
-
+            .subscribe(onNext: { _ in
+                Logger.shared.info("Sticker selected")
             })
             .addDisposableTo(disposeBag)
     }
