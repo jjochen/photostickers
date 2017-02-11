@@ -10,5 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ViewModel: NSObject {
+class BaseViewModel {
+    init() {
+    }
 }

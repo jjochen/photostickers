@@ -17,7 +17,7 @@ protocol PhotoStickerBrowserViewModelType {
     func openApp()
 }
 
-class PhotoStickerBrowserViewModel: ViewModel, PhotoStickerBrowserViewModelType {
+class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelType {
 
     // MARK: - Input
     let extensionContext: NSExtensionContext?

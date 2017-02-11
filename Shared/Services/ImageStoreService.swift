@@ -6,39 +6,55 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Log
 
-struct ImageStore {
+protocol ImageStoreServiceType {
+    func storeImage(_ image: UIImage!, forKey key: String!, inCategory category: String!) -> URL?
+    func image(forKey key: String!, inCategory category: String!) -> UIImage?
+    func imageExists(forKey key: String!, inCategory category: String!) -> Bool
+    func imageURL(forKey key: String!, inCategory category: String!) -> URL?
+}
 
-    static func storeImage(_ image: UIImage!, forKey key: String!, inCategory category: String!) -> Bool {
+class ImageStoreService: BaseService, ImageStoreServiceType {
+
+    fileprivate let storeURL: URL?
+
+    init(provider: ServiceProviderType, url: URL?) {
+        self.storeURL = url
+        super.init(provider: provider)
+    }
+}
+
+extension ImageStoreService {
+
+    func storeImage(_ image: UIImage!, forKey key: String!, inCategory category: String!) -> URL? {
         guard let data = UIImagePNGRepresentation(image) else {
             Logger.shared.error("PNG representation not possible: \(image)")
-            return false
+            return nil
         }
 
         guard let url = self.constructImageURL(forKey: key, inCategory: category) else {
             Logger.shared.error("No image url for key \(key) in category \(category)")
-            return false
+            return nil
         }
 
         if !self.createSubfolderForCategory(category) {
             Logger.shared.error("Could not create subfolder for category \(category)")
-            return false
+            return nil
         }
 
-        var success = false
+        var result: URL?
         do {
             try data.write(to: url, options: .atomic)
-            success = true
+            result = url
         } catch {
             Logger.shared.error(error)
         }
-        return success
+        return result
     }
 
-    static func image(forKey key: String!, inCategory category: String!) -> UIImage? {
+    func image(forKey key: String!, inCategory category: String!) -> UIImage? {
         guard let url = self.constructImageURL(forKey: key, inCategory: category) else {
             Logger.shared.error("No image url for key \(key) in category \(category)")
             return nil
@@ -46,7 +62,7 @@ struct ImageStore {
         return UIImage(contentsOfFile: url.path)
     }
 
-    static func imageExists(forKey key: String!, inCategory category: String!) -> Bool {
+    func imageExists(forKey key: String!, inCategory category: String!) -> Bool {
         guard let url = self.constructImageURL(forKey: key, inCategory: category) else {
             Logger.shared.error("No image url for key \(key) in category \(category)")
             return false
@@ -54,7 +70,7 @@ struct ImageStore {
         return FileManager.default.fileExists(atPath: url.path)
     }
 
-    static func imageURL(forKey key: String!, inCategory category: String!) -> URL? {
+    func imageURL(forKey key: String!, inCategory category: String!) -> URL? {
         guard self.imageExists(forKey: key, inCategory: category) else {
             return nil
         }
@@ -62,9 +78,9 @@ struct ImageStore {
     }
 }
 
-extension ImageStore {
+extension ImageStoreService {
 
-    fileprivate static func createSubfolderForCategory(_ category: String!) -> Bool {
+    fileprivate func createSubfolderForCategory(_ category: String!) -> Bool {
         guard let url = self.constructCategoryURL(category) else {
             Logger.shared.error("No category url for \(category)")
             return false
@@ -79,11 +95,11 @@ extension ImageStore {
         }
     }
 
-    fileprivate static func constructCategoryURL(_ category: String!) -> URL? {
-        return AppGroup.documentsURL?.appendingPathComponent(category, isDirectory: true)
+    fileprivate func constructCategoryURL(_ category: String!) -> URL? {
+        return self.storeURL?.appendingPathComponent(category, isDirectory: true)
     }
 
-    fileprivate static func constructImageURL(forKey key: String!, inCategory category: String!) -> URL? {
+    fileprivate func constructImageURL(forKey key: String!, inCategory category: String!) -> URL? {
         return self.constructCategoryURL(category)?.appendingPathComponent(key).appendingPathExtension("png")
     }
 }

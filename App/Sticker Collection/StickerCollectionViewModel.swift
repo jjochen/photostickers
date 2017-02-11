@@ -9,13 +9,11 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import RealmSwift
-import RxRealm
 
-class StickerCollectionViewModel: ViewModel {
+class StickerCollectionViewModel: BaseViewModel {
 
     // MARK: Dependencies
-    let realmContext: Realm!
+    let provider: ServiceProviderType!
 
     // MARK: Input
 
@@ -26,12 +24,10 @@ class StickerCollectionViewModel: ViewModel {
     let stickerCellModels: Observable<[StickerCollectionCellModel]>
     let presentImagePicker: Observable<UIImagePickerControllerSourceType>
 
-    init(realmContext: Realm!) {
-        self.realmContext = realmContext
+    init(provider: ServiceProviderType) {
+        self.provider = provider
 
-        let stickers = self.realmContext.objects(Sticker.self)
-        self.stickerCellModels = Observable
-            .array(from: stickers)
+        self.stickerCellModels = provider.realmService.fetchStickers()
             .map { listOfStickers in
                 let listOfViewModels = listOfStickers.map { sticker in
                     return StickerCollectionCellModel(sticker)
@@ -57,22 +53,28 @@ class StickerCollectionViewModel: ViewModel {
 
     fileprivate func storeSticker(withOriginalImage originalImage: UIImage?) {
 
-        guard let _ = originalImage else {
+        guard let originalImage = originalImage else {
             return
         }
 
+        let uuid = UUID().uuidString
+        let originalImageURL = self.provider.imageStoreService.storeImage(originalImage, forKey: uuid, inCategory: "originals")
+
+        let imageSize = originalImage.size
+        let sideLength = min(imageSize.width, imageSize.height)
+
         let sticker = Sticker()
-        sticker.uuid = UUID().uuidString
-        sticker.originalImage = originalImage
+        sticker.uuid = uuid
+        sticker.originalImageFilePath = originalImageURL?.path
         sticker.localizedDescription = "Sticker"
         sticker.sortOrder = 1
-        sticker.cropBounds = CGRect(x: 0, y: 0, width: 600, height: 600)
+        sticker.cropBounds = CGRect(x: (imageSize.width - sideLength) / 2, y: (imageSize.height - sideLength) / 2, width: sideLength, height: sideLength)
 
-        StickerRenderer.render(sticker)
+        let renderedSticker = StickerRenderer.render(sticker)
 
-        try! realmContext.write {
-            realmContext.add(sticker)
-        }
+        let renderedStickerURL = self.provider.imageStoreService.storeImage(renderedSticker, forKey: uuid, inCategory: "stickers")
+        sticker.renderedStickerFilePath = renderedStickerURL?.path
+        self.provider.realmService.add(sticker: sticker)
     }
 
     // MARK: - View Models

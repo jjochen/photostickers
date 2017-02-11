@@ -14,7 +14,8 @@ import RxDataSources
 class Sticker: Object {
     dynamic var uuid = ""
     dynamic var localizedDescription = ""
-    dynamic var hasRenderedSticker = false
+    dynamic var originalImageFilePath: String?
+    dynamic var renderedStickerFilePath: String?
     dynamic var cropBoundsX: Double = 0
     dynamic var cropBoundsY: Double = 0
     dynamic var cropBoundsWidth: Double = 0
@@ -43,46 +44,28 @@ extension Sticker {
     static let renderedSize = CGSize(width: 300, height: 300)
 }
 
-// MARK: Image Storage
+// MARK: Images
 extension Sticker {
 
-    private static let renderedStickerCategory = "stickers"
+    var originalImage: UIImage? {
+        guard let path = self.originalImageFilePath else {
+            return nil
+        }
+        return UIImage(contentsOfFile: path)
+    }
 
     var renderedSticker: UIImage? {
-        get {
-            return ImageStore.image(forKey: self.uuid, inCategory: Sticker.renderedStickerCategory)
+        guard let path = self.renderedStickerFilePath else {
+            return nil
         }
-        set(image) {
-            let success = ImageStore.storeImage(image, forKey: self.uuid, inCategory: Sticker.renderedStickerCategory)
-            self.hasRenderedSticker = success || self.hasStoredRenderedSticker
-        }
+        return UIImage(contentsOfFile: path)
     }
 
     var renderedStickerURL: URL? {
-        return ImageStore.imageURL(forKey: self.uuid, inCategory: Sticker.renderedStickerCategory)
-    }
-
-    var hasStoredRenderedSticker: Bool {
-        return ImageStore.imageExists(forKey: self.uuid, inCategory: Sticker.renderedStickerCategory)
-    }
-
-    private static let originalImageCategory = "originals"
-
-    var originalImage: UIImage? {
-        get {
-            return ImageStore.image(forKey: self.uuid, inCategory: Sticker.originalImageCategory)
+        guard let path = self.renderedStickerFilePath else {
+            return nil
         }
-        set(image) {
-            _ = ImageStore.storeImage(image, forKey: self.uuid, inCategory: Sticker.originalImageCategory)
-        }
-    }
-
-    var originalImageURL: URL? {
-        return ImageStore.imageURL(forKey: self.uuid, inCategory: Sticker.originalImageCategory)
-    }
-
-    var hasStoredOriginalImage: Bool {
-        return ImageStore.imageExists(forKey: self.uuid, inCategory: Sticker.originalImageCategory)
+        return URL(fileURLWithPath: path)
     }
 }
 

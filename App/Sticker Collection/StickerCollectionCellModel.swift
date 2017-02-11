@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StickerCollectionCellModel: ViewModel {
+class StickerCollectionCellModel: BaseViewModel {
     let image: UIImage?
     init(_ sticker: Sticker) {
         image = sticker.renderedSticker

@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class MessagesViewModel: ViewModel {
+class MessagesViewModel: BaseViewModel {
 
     var extensionContext: NSExtensionContext?
     var realmContext: Realm!

@@ -18,17 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if let _ = NSClassFromString("XCTest") { return true }
 
+        self.window?.backgroundColor = UIColor.white
         self.window?.tintColor = Appearance.tintColor
 
-        // todo: move into serviceProvider
-        Realm.configureForAppGroup()
-        let realm = try! Realm()
+        let provider = ServiceProvider()
 
         let storyboard = UIStoryboard.app()
         let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
         let stickerCollectionViewController = navigationController?.topViewController as? StickerCollectionViewController
-        stickerCollectionViewController?.viewModel = StickerCollectionViewModel(realmContext: realm)
-        //        viewController?.provider = provider
+        stickerCollectionViewController?.viewModel = StickerCollectionViewModel(provider: provider)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
 
