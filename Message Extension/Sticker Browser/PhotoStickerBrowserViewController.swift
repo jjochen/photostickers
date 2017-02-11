@@ -16,7 +16,7 @@ import RxDataSources
 
 class PhotoStickerBrowserViewController: UIViewController {
 
-    var viewModel: PhotoStickerBrowserViewModel?
+    var viewModel: PhotoStickerBrowserViewModelType?
     fileprivate let disposeBag = DisposeBag()
 
     // MARK: Outlets / Actions

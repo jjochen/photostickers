@@ -12,17 +12,17 @@ import RealmSwift
 class MessagesViewModel: BaseViewModel {
 
     var extensionContext: NSExtensionContext?
-    var realmContext: Realm!
+    var provider: ServiceProviderType
 
-    init(extensionContext: NSExtensionContext?, realmContext: Realm!) {
+    init(provider: ServiceProviderType, extensionContext: NSExtensionContext?) {
+        self.provider = provider
         self.extensionContext = extensionContext
-        self.realmContext = realmContext
         super.init()
     }
 
     // MARK: - View Models
 
     func photoStickerBrowserViewModel() -> PhotoStickerBrowserViewModel {
-        return PhotoStickerBrowserViewModel(extensionContext: self.extensionContext, realmContext: self.realmContext)
+        return PhotoStickerBrowserViewModel(provider: self.provider, extensionContext: self.extensionContext)
     }
 }

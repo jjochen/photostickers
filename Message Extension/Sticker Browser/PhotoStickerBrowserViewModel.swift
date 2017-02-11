@@ -12,7 +12,7 @@ import RealmSwift
 import RxRealm
 
 protocol PhotoStickerBrowserViewModelType {
-    var realmContext: Realm! { get }
+    var provider: ServiceProviderType { get }
     var sectionItems: Observable<[StickerSectionItem]> { get }
     func openApp()
 }
@@ -21,19 +21,18 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
 
     // MARK: - Input
     let extensionContext: NSExtensionContext?
-    let realmContext: Realm!
+    let provider: ServiceProviderType
 
     // MARK: - Output
     var sectionItems: Observable<[StickerSectionItem]>
 
-    init(extensionContext: NSExtensionContext?, realmContext: Realm!) {
+    init(provider: ServiceProviderType, extensionContext: NSExtensionContext?) {
+        self.provider = provider
         self.extensionContext = extensionContext
-        self.realmContext = realmContext
 
-        let stickers = self.realmContext.objects(Sticker.self).filter(NSPredicate(format: "hasRenderedSticker == true"))
-
-        self.sectionItems = Observable
-            .array(from: stickers)
+        let predicate = NSPredicate(format: "renderedStickerFilePath != nil")
+        self.sectionItems = provider.realmService
+            .fetchStickers(withPredicate: predicate)
             .map { allStickers in
                 var items = allStickers.map { sticker in
                     return StickerSectionItem.StickerItem(sticker: sticker)

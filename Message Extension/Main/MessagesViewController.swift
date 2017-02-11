@@ -14,9 +14,8 @@ import RealmSwift
 class MessagesViewController: MSMessagesAppViewController {
 
     lazy var viewModel: MessagesViewModel! = {
-        Realm.configureForAppGroup()
-        let realm = try! Realm()
-        return MessagesViewModel(extensionContext: self.extensionContext, realmContext: realm)
+        let provider = ServiceProvider()
+        return MessagesViewModel(provider: provider, extensionContext: self.extensionContext)
     }()
 
     override func viewDidLoad() {
