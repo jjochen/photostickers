@@ -14,7 +14,7 @@ import RxDataSources
 
 class StickerCollectionViewController: UIViewController {
 
-    var viewModel: StickerCollectionViewModel?
+    var viewModel: StickerCollectionViewModelType?
 
     fileprivate let disposeBag = DisposeBag()
 

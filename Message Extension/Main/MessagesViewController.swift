@@ -13,7 +13,7 @@ import RealmSwift
 
 class MessagesViewController: MSMessagesAppViewController {
 
-    lazy var viewModel: MessagesViewModel! = {
+    lazy var viewModel: MessagesViewModelType! = {
         let stickerService = StickerService(realmURL: AppGroup.realmURL)
         return MessagesViewModel(stickerService: stickerService, extensionContext: self.extensionContext)
     }()

@@ -10,12 +10,19 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class StickerCollectionViewModel: BaseViewModel {
+protocol StickerCollectionViewModelType {
+    var addButtonItemDidTap: PublishSubject<Void> { get }
+    var imagePicked: PublishSubject<UIImage?> { get }
+    var stickerCellModels: Observable<[StickerCollectionCellModel]> { get }
+    var presentImagePicker: Observable<UIImagePickerControllerSourceType> { get }
+}
+
+class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType {
 
     // MARK: Dependencies
-    let imageStoreService: ImageStoreServiceType
-    let stickerService: StickerServiceType
-    let stickerRenderService: StickerRenderServiceType
+    fileprivate let imageStoreService: ImageStoreServiceType
+    fileprivate let stickerService: StickerServiceType
+    fileprivate let stickerRenderService: StickerRenderServiceType
 
     // MARK: Input
 

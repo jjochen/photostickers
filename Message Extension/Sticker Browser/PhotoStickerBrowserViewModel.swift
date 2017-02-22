@@ -19,11 +19,11 @@ protocol PhotoStickerBrowserViewModelType {
 
 class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelType {
 
-    // MARK: - Input
+    // MARK: Dependencies
     let extensionContext: NSExtensionContext?
     let stickerService: StickerServiceType
 
-    // MARK: - Output
+    // MARK: Output
     var sectionItems: Observable<[StickerSectionItem]>
 
     init(stickerService: StickerServiceType, extensionContext: NSExtensionContext?) {
@@ -45,7 +45,7 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
     }
 
     func openApp() {
-        if let url = URL(string: "photosticker://open") {
+        if let url = URL(string: "photosticker://create") {
             self.extensionContext?.open(url, completionHandler: nil)
         }
     }
