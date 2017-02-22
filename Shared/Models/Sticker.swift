@@ -10,6 +10,18 @@ import Foundation
 import RealmSwift
 import RxDataSources
 
+enum StickerProperty: String {
+    case uuid
+    case localizedDescription
+    case originalImageFilePath
+    case renderedStickerFilePath
+    case cropBoundsX
+    case cropBoundsY
+    case cropBoundsWidth
+    case cropBoundsHeight
+    case sortOrder
+}
+
 // MARK: Realm Object
 class Sticker: Object {
     dynamic var uuid = ""
@@ -23,11 +35,11 @@ class Sticker: Object {
     dynamic var sortOrder = 0
 
     override static func primaryKey() -> String? {
-        return "uuid"
+        return StickerProperty.uuid.rawValue
     }
 
     override static func indexedProperties() -> [String] {
-        return ["sortOrder"]
+        return [StickerProperty.sortOrder.rawValue]
     }
 
     override static func ignoredProperties() -> [String] {

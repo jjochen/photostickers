@@ -44,7 +44,7 @@ extension StickerService {
 
     func fetchStickers(withPredicate predicate: NSPredicate) -> Observable<[Sticker]> {
         let sortDescriptors = [
-            SortDescriptor(keyPath: "sortOrder", ascending: true),
+            SortDescriptor(keyPath: StickerProperty.sortOrder.rawValue, ascending: true),
         ]
         let results = self.currentRealm()
             .objects(Sticker.self)
@@ -61,7 +61,7 @@ extension StickerService {
         }
         let realm = self.currentRealm()
 
-        let maxSortOrder = realm.objects(Sticker.self).max(ofProperty: "sortOrder") ?? 0
+        let maxSortOrder = realm.objects(Sticker.self).max(ofProperty: StickerProperty.sortOrder.rawValue) ?? 0
         sticker.sortOrder = maxSortOrder + 1
 
         try! realm.write {
