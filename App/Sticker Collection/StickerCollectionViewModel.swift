@@ -45,16 +45,25 @@ class StickerCollectionViewModel: BaseViewModel {
 
         super.init()
 
+        let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
+
         _ = self.imagePicked
-            .subscribe(onNext: { image in
-                self.storeSticker(withOriginalImage: image)
+            .observeOn(backgroundScheduler)
+            .map { [weak self] image in
+                return self?.createDefaultSticker(withOriginalImage: image)
+            }
+            .flatMap { (sticker: Sticker?) -> Driver<Sticker?> in
+                return provider.stickerRenderService.render(sticker).asDriver(onErrorJustReturn: sticker)
+            }
+            .subscribe(onNext: { sticker in
+                provider.realmService.addOrUpdate(sticker)
             })
     }
 
-    fileprivate func storeSticker(withOriginalImage originalImage: UIImage?) {
+    fileprivate func createDefaultSticker(withOriginalImage image: UIImage?) -> Sticker? {
 
-        guard let originalImage = originalImage else {
-            return
+        guard let originalImage = image else {
+            return nil
         }
 
         let uuid = UUID().uuidString
@@ -62,19 +71,15 @@ class StickerCollectionViewModel: BaseViewModel {
 
         let imageSize = originalImage.size
         let sideLength = min(imageSize.width, imageSize.height)
+        let cropBounds = CGRect(x: (imageSize.width - sideLength) / 2, y: (imageSize.height - sideLength) / 2, width: sideLength, height: sideLength)
 
         let sticker = Sticker()
         sticker.uuid = uuid
         sticker.originalImageFilePath = originalImageURL?.path
         sticker.localizedDescription = "Sticker"
-        sticker.sortOrder = 1
-        sticker.cropBounds = CGRect(x: (imageSize.width - sideLength) / 2, y: (imageSize.height - sideLength) / 2, width: sideLength, height: sideLength)
+        sticker.cropBounds = cropBounds
 
-        let renderedSticker = StickerRenderer.render(sticker)
-
-        let renderedStickerURL = self.provider.imageStoreService.storeImage(renderedSticker, forKey: uuid, inCategory: "stickers")
-        sticker.renderedStickerFilePath = renderedStickerURL?.path
-        self.provider.realmService.add(sticker: sticker)
+        return sticker
     }
 
     // MARK: - View Models

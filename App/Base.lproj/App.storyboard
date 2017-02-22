@@ -52,6 +52,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="ReS-VE-pYf" id="ceT-BG-veG"/>
+                                            <segue destination="mHK-wh-jhb" kind="showDetail" identifier="EditStickerSegue" id="zTr-hO-1AW"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -72,9 +73,44 @@
             <point key="canvasLocation" x="853.60000000000002" y="44.527736131934034"/>
         </scene>
         <!--Navigation Controller-->
+        <scene sceneID="8s5-LR-Lwg">
+            <objects>
+                <navigationController storyboardIdentifier="EditStickerNavigationController" id="mHK-wh-jhb" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ezs-dE-6ca">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="xY5-ie-FY6" kind="relationship" relationship="rootViewController" id="ygY-c0-Ghu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FpY-Oa-yRr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="854" y="794"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="fky-Nl-cnS">
+            <objects>
+                <viewController storyboardIdentifier="EditStickerViewController" id="xY5-ie-FY6" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="asa-D8-eDb"/>
+                        <viewControllerLayoutGuide type="bottom" id="EuG-up-7tU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="63h-fZ-lFi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3cS-n0-mdI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nqs-PS-TGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1606" y="794"/>
+        </scene>
+        <!--Navigation Controller-->
         <scene sceneID="gbp-ZZ-OD8">
             <objects>
-                <navigationController id="7oO-ML-e6r" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainNavigationController" id="7oO-ML-e6r" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AEa-As-IWY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

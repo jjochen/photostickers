@@ -8,7 +8,6 @@
 
 import Foundation
 
-/// RxCocoa errors.
 public enum PSError
     : Swift.Error
     , CustomDebugStringConvertible {

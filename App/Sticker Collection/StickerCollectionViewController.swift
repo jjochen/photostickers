@@ -30,16 +30,16 @@ class StickerCollectionViewController: UIViewController {
     }
 
     func setupBindings() {
-        guard let _ = self.viewModel else {
+        guard let viewModel = self.viewModel else {
             Logger.shared.error("View Model not set!")
             return
         }
 
         self.addButtonItem.rx.tap
-            .bindTo(self.viewModel!.addButtonItemDidTap)
-            .addDisposableTo(self.disposeBag)
+            .bindTo(viewModel.addButtonItemDidTap)
+            .disposed(by: self.disposeBag)
 
-        self.viewModel!.presentImagePicker
+        viewModel.presentImagePicker
             .flatMapLatest { [weak self] sourceType in
                 return UIImagePickerController.rx.createWithParent(self) { picker in
                     picker.sourceType = sourceType
@@ -53,8 +53,8 @@ class StickerCollectionViewController: UIViewController {
             .map { info in
                 return info[UIImagePickerControllerOriginalImage] as? UIImage
             }
-            .bindTo(self.viewModel!.imagePicked)
-            .addDisposableTo(self.disposeBag)
+            .bindTo(viewModel.imagePicked)
+            .disposed(by: self.disposeBag)
 
         self.viewModel!.stickerCellModels
             .bindTo(self.stickerCollectionView.rx.items(cellIdentifier: CollectionViewCellReuseIdentifier.StickerCollectionCell.rawValue)) { index, model, cell in
@@ -63,18 +63,18 @@ class StickerCollectionViewController: UIViewController {
                 }
                 stickerCell.configure(model)
             }
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         self.stickerCollectionView.rx
             .setDelegate(self)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         self.stickerCollectionView.rx
             .modelSelected(StickerCollectionCellModel.self)
             .subscribe(onNext: { _ in
                 Logger.shared.info("Sticker selected")
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 

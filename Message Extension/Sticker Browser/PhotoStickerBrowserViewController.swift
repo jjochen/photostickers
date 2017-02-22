@@ -46,11 +46,11 @@ class PhotoStickerBrowserViewController: UIViewController {
                 [StickerSection(header: "Stickers", stickers: items)]
             }
             .bindTo(collectionView.rx.items(dataSource: dataSource))
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         collectionView.rx
             .setDelegate(self)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         collectionView.rx
             .modelSelected(StickerSectionItem.self)
@@ -58,7 +58,7 @@ class PhotoStickerBrowserViewController: UIViewController {
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel?.openApp()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 

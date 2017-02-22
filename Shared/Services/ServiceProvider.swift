@@ -11,6 +11,7 @@ import Foundation
 protocol ServiceProviderType: class {
     var imageStoreService: ImageStoreServiceType { get }
     var realmService: RealmServiceType { get }
+    var stickerRenderService: StickerRenderService { get }
 }
 
 final class ServiceProvider: ServiceProviderType {
@@ -22,5 +23,9 @@ final class ServiceProvider: ServiceProviderType {
     var realmService: RealmServiceType {
         let url = AppGroup.documentsURL?.appendingPathComponent("photo-stickers.realm")
         return RealmService(provider: self, url: url)
+    }
+
+    var stickerRenderService: StickerRenderService {
+        return StickerRenderService(provider: self)
     }
 }

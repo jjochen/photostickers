@@ -15,7 +15,7 @@ import Log
 protocol RealmServiceType {
     func fetchStickers(withPredicate predicate: NSPredicate) -> Observable<[Sticker]>
     func fetchStickers() -> Observable<[Sticker]>
-    func add(sticker: Sticker)
+    func addOrUpdate(_ sticker: Sticker?)
 }
 
 class RealmService: BaseService, RealmServiceType {
@@ -52,10 +52,13 @@ extension RealmService {
         return stickers
     }
 
-    func add(sticker: Sticker) {
+    func addOrUpdate(_ sticker: Sticker?) {
+        guard let sticker = sticker else {
+            return
+        }
         let realm = self.currentRealm()
         try! realm.write {
-            realm.add(sticker)
+            realm.add(sticker, update: true)
         }
     }
 }
