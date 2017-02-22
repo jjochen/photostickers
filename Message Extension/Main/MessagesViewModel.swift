@@ -12,10 +12,10 @@ import RealmSwift
 class MessagesViewModel: BaseViewModel {
 
     var extensionContext: NSExtensionContext?
-    var provider: ServiceProviderType
+    var stickerService: StickerServiceType
 
-    init(provider: ServiceProviderType, extensionContext: NSExtensionContext?) {
-        self.provider = provider
+    init(stickerService: StickerServiceType, extensionContext: NSExtensionContext?) {
+        self.stickerService = stickerService
         self.extensionContext = extensionContext
         super.init()
     }
@@ -23,6 +23,6 @@ class MessagesViewModel: BaseViewModel {
     // MARK: - View Models
 
     func photoStickerBrowserViewModel() -> PhotoStickerBrowserViewModel {
-        return PhotoStickerBrowserViewModel(provider: self.provider, extensionContext: self.extensionContext)
+        return PhotoStickerBrowserViewModel(stickerService: stickerService, extensionContext: extensionContext)
     }
 }

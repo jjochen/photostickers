@@ -21,4 +21,14 @@ struct AppGroup {
         let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupID)
         return url
     }
+
+    public static var imagesURL: URL? {
+        let url = documentsURL?.appendingPathComponent("images")
+        return url
+    }
+
+    public static var realmURL: URL? {
+        let url = documentsURL?.appendingPathComponent("stickers.realm")
+        return url
+    }
 }

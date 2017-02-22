@@ -16,13 +16,12 @@ protocol ImageStoreServiceType {
     func imageURL(forKey key: String!, inCategory category: String!) -> URL?
 }
 
-class ImageStoreService: BaseService, ImageStoreServiceType {
+class ImageStoreService: ImageStoreServiceType {
 
     fileprivate let storeURL: URL?
 
-    init(provider: ServiceProviderType, url: URL?) {
+    init(url: URL?) {
         self.storeURL = url
-        super.init(provider: provider)
     }
 }
 

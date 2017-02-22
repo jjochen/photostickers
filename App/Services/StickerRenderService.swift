@@ -15,7 +15,13 @@ protocol StickerRenderServiceType {
     func render(_ sticker: Sticker?) -> Observable<Sticker?>
 }
 
-class StickerRenderService: BaseService, StickerRenderServiceType {
+class StickerRenderService: StickerRenderServiceType {
+
+    let imageStoreService: ImageStoreServiceType
+
+    init(imageStoreService: ImageStoreServiceType) {
+        self.imageStoreService = imageStoreService
+    }
 
     func render(_ sticker: Sticker?) -> Observable<Sticker?> {
         return Observable<Sticker?>.create({ (observer) -> Disposable in
@@ -34,7 +40,7 @@ class StickerRenderService: BaseService, StickerRenderServiceType {
             Logger.shared.error("Could not render image for sticker: \(sticker)")
             return
         }
-        guard let url = provider.imageStoreService.storeImage(renderedImage, forKey: sticker.uuid, inCategory: "stickers") else {
+        guard let url = imageStoreService.storeImage(renderedImage, forKey: sticker.uuid, inCategory: "stickers") else {
             Logger.shared.error("Could not store image for sticker: \(sticker)")
             return
         }

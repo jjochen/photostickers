@@ -13,7 +13,9 @@ import RxCocoa
 class StickerCollectionViewModel: BaseViewModel {
 
     // MARK: Dependencies
-    let provider: ServiceProviderType!
+    let imageStoreService: ImageStoreServiceType
+    let stickerService: StickerServiceType
+    let stickerRenderService: StickerRenderServiceType
 
     // MARK: Input
 
@@ -24,10 +26,15 @@ class StickerCollectionViewModel: BaseViewModel {
     let stickerCellModels: Observable<[StickerCollectionCellModel]>
     let presentImagePicker: Observable<UIImagePickerControllerSourceType>
 
-    init(provider: ServiceProviderType) {
-        self.provider = provider
+    init(imageStoreService: ImageStoreServiceType,
+         stickerService: StickerServiceType,
+         stickerRenderService: StickerRenderServiceType) {
 
-        self.stickerCellModels = provider.realmService.fetchStickers()
+        self.imageStoreService = imageStoreService
+        self.stickerService = stickerService
+        self.stickerRenderService = stickerRenderService
+
+        self.stickerCellModels = stickerService.fetchStickers()
             .map { listOfStickers in
                 let listOfViewModels = listOfStickers.map { sticker in
                     return StickerCollectionCellModel(sticker)
@@ -53,10 +60,10 @@ class StickerCollectionViewModel: BaseViewModel {
                 return self?.createDefaultSticker(withOriginalImage: image)
             }
             .flatMap { (sticker: Sticker?) -> Driver<Sticker?> in
-                return provider.stickerRenderService.render(sticker).asDriver(onErrorJustReturn: sticker)
+                return stickerRenderService.render(sticker).asDriver(onErrorJustReturn: sticker)
             }
             .subscribe(onNext: { sticker in
-                provider.realmService.addOrUpdate(sticker)
+                stickerService.add(sticker)
             })
     }
 
@@ -67,7 +74,7 @@ class StickerCollectionViewModel: BaseViewModel {
         }
 
         let uuid = UUID().uuidString
-        let originalImageURL = self.provider.imageStoreService.storeImage(originalImage, forKey: uuid, inCategory: "originals")
+        let originalImageURL = imageStoreService.storeImage(originalImage, forKey: uuid, inCategory: "originals")
 
         let imageSize = originalImage.size
         let sideLength = min(imageSize.width, imageSize.height)

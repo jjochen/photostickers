@@ -14,8 +14,8 @@ import RealmSwift
 class MessagesViewController: MSMessagesAppViewController {
 
     lazy var viewModel: MessagesViewModel! = {
-        let provider = ServiceProvider()
-        return MessagesViewModel(provider: provider, extensionContext: self.extensionContext)
+        let stickerService = StickerService(realmURL: AppGroup.realmURL)
+        return MessagesViewModel(stickerService: stickerService, extensionContext: self.extensionContext)
     }()
 
     override func viewDidLoad() {

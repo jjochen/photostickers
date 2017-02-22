@@ -21,12 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = UIColor.white
         self.window?.tintColor = Appearance.tintColor
 
-        let provider = ServiceProvider()
+        let imageStoreService = ImageStoreService(url: AppGroup.imagesURL)
+        let stickerService = StickerService(realmURL: AppGroup.realmURL)
+        let stickerRenderService = StickerRenderService(imageStoreService: imageStoreService)
 
         let storyboard = UIStoryboard.app()
         let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
         let stickerCollectionViewController = navigationController?.topViewController as? StickerCollectionViewController
-        stickerCollectionViewController?.viewModel = StickerCollectionViewModel(provider: provider)
+        stickerCollectionViewController?.viewModel = StickerCollectionViewModel(imageStoreService: imageStoreService, stickerService: stickerService, stickerRenderService: stickerRenderService)
+
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
 

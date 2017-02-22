@@ -1,5 +1,5 @@
 //
-//  realmService.swift
+//  StickerService.swift
 //  PhotoStickers
 //
 //  Created by Jochen Pfeiffer on 09/02/2017.
@@ -12,29 +12,26 @@ import RxSwift
 import RxRealm
 import Log
 
-protocol RealmServiceType {
+protocol StickerServiceType {
     func fetchStickers(withPredicate predicate: NSPredicate) -> Observable<[Sticker]>
     func fetchStickers() -> Observable<[Sticker]>
-    func addOrUpdate(_ sticker: Sticker?)
+    func add(_ sticker: Sticker?)
 }
 
-class RealmService: BaseService, RealmServiceType {
+class StickerService: StickerServiceType {
 
     fileprivate let mainThreadRealm: Realm!
 
-    init(provider: ServiceProviderType, url: URL?) {
-
+    init(realmURL: URL?) {
         var config = Realm.Configuration()
-        config.fileURL = url
+        config.fileURL = realmURL
         Realm.Configuration.defaultConfiguration = config
 
         self.mainThreadRealm = try! Realm()
-
-        super.init(provider: provider)
     }
 }
 
-extension RealmService {
+extension StickerService {
     func fetchStickers() -> Observable<[Sticker]> {
         return fetchStickers(withPredicate: NSPredicate(value: true))
     }
@@ -52,7 +49,7 @@ extension RealmService {
         return stickers
     }
 
-    func addOrUpdate(_ sticker: Sticker?) {
+    func add(_ sticker: Sticker?) {
         guard let sticker = sticker else {
             return
         }
@@ -63,7 +60,7 @@ extension RealmService {
     }
 }
 
-extension RealmService {
+extension StickerService {
     fileprivate func currentRealm() -> Realm {
         if Thread.current.isMainThread {
             return self.mainThreadRealm
