@@ -27,6 +27,12 @@ class StickerService: StickerServiceType {
         config.fileURL = realmURL
         Realm.Configuration.defaultConfiguration = config
 
+        if let path = realmURL?.path {
+            Logger.shared.info("Realm: \(path)")
+        } else {
+            Logger.shared.warning("Realm: URL not set!")
+        }
+
         self.mainThreadRealm = try! Realm()
     }
 }
@@ -54,6 +60,10 @@ extension StickerService {
             return
         }
         let realm = self.currentRealm()
+
+        let maxSortOrder = realm.objects(Sticker.self).max(ofProperty: "sortOrder") ?? 0
+        sticker.sortOrder = maxSortOrder + 1
+
         try! realm.write {
             realm.add(sticker, update: true)
         }
