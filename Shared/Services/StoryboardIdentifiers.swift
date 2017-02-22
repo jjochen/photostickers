@@ -6,6 +6,15 @@ public enum CollectionViewCellReuseIdentifier: String {
     case StickerCollectionCell
 }
 
+public enum NavigationControllerStoryboardIdentifier: String {
+    case EditStickerNavigationController
+    case MainNavigationController
+}
+
+public enum SegueIdentifier: String {
+    case EditStickerSegue
+}
+
 public enum StoryboardNames: String {
     case App
     case LaunchScreen
@@ -13,6 +22,7 @@ public enum StoryboardNames: String {
 }
 
 public enum ViewControllerStoryboardIdentifier: String {
+    case EditStickerViewController
     case MessagesViewController
     case PhotoStickerBrowserViewController
     case StickerCollectionViewController
