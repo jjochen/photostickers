@@ -1,13 +1,13 @@
 PODS:
   - Log (1.0)
-  - Realm (2.4.2):
-    - Realm/Headers (= 2.4.2)
-  - Realm/Headers (2.4.2)
-  - RealmSwift (2.4.2):
-    - Realm (= 2.4.2)
+  - Realm (2.4.3):
+    - Realm/Headers (= 2.4.3)
+  - Realm/Headers (2.4.3)
+  - RealmSwift (2.4.3):
+    - Realm (= 2.4.3)
   - RxCocoa (3.2.0):
     - RxSwift (~> 3.1)
-  - RxDataSources (1.0.2):
+  - RxDataSources (1.0.3):
     - RxCocoa (~> 3.0)
     - RxSwift (~> 3.0)
   - RxRealm (0.5.1):
@@ -28,10 +28,10 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Log: 5e368c9528db07517d18d2d04ff5fe2b6f5a1e21
-  Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
-  RealmSwift: 9556c0fe0f0cfecacfb755ae9e68ff379fc6bead
+  Realm: e08d60b0048ccccd3949c8c28a92c4db5712d7e9
+  RealmSwift: 30d49739ccb3385d201242736ca4dda56aec9dfc
   RxCocoa: ccdf43101a70407097a29082f648ba1676075b30
-  RxDataSources: 1de77880bf5b7fcee42102adcd5a5d65e5b81541
+  RxDataSources: a021a0e944ba5f7991259829d973afdbfa719c0b
   RxRealm: c80d17d42fc362f4d8af4ac62de360b014be5c3f
   RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
   RxTest: 85fdd6f753e8e62635a58d37bbdd3ce7d5abbef3
