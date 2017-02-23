@@ -8,10 +8,15 @@
 
 import UIKit
 
-class StickerCollectionCellModel: BaseViewModel {
-    let image: UIImage?
+protocol StickerCollectionCellModelType {
+    var sticker: Sticker { get }
+}
+
+class StickerCollectionCellModel: BaseViewModel, StickerCollectionCellModelType {
+    let sticker: Sticker
+
     init(_ sticker: Sticker) {
-        image = sticker.renderedSticker
+        self.sticker = sticker
         super.init()
     }
 }

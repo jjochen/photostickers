@@ -26,43 +26,18 @@ class StickerCollectionViewController: UIViewController {
         self.setupBindings()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
     func setupBindings() {
         guard let viewModel = self.viewModel else {
             Logger.shared.error("View Model not set!")
             return
         }
 
-        self.addButtonItem.rx.tap
-            .bindTo(viewModel.addButtonItemDidTap)
-            .disposed(by: self.disposeBag)
-
-        viewModel.presentImagePicker
-            .flatMapLatest { [weak self] sourceType in
-                return UIImagePickerController.rx.createWithParent(self) { picker in
-                    picker.sourceType = sourceType
-                    picker.allowsEditing = false
-                }
-                .flatMap {
-                    $0.rx.didFinishPickingMediaWithInfo
-                }
-                .take(1)
-            }
-            .map { info in
-                return info[UIImagePickerControllerOriginalImage] as? UIImage
-            }
-            .bindTo(viewModel.imagePicked)
-            .disposed(by: self.disposeBag)
-
-        self.viewModel!.stickerCellModels
+        viewModel.stickerCellModels
             .bindTo(self.stickerCollectionView.rx.items(cellIdentifier: CollectionViewCellReuseIdentifier.StickerCollectionCell.rawValue)) { index, model, cell in
                 guard let stickerCell = cell as? StickerCollectionCell else {
                     return
                 }
-                stickerCell.configure(model)
+                stickerCell.viewModel = model
             }
             .disposed(by: disposeBag)
 
@@ -83,6 +58,37 @@ extension StickerCollectionViewController {
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> StickerCollectionViewController {
         let viewController = storyboard.viewController(withID: .StickerCollectionViewController) as! StickerCollectionViewController
         return viewController
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let viewModel = self.viewModel else {
+            Logger.shared.error("View Model not set!")
+            return
+        }
+
+        func getEditStickerViewController(from segue: UIStoryboardSegue) -> EditStickerViewController! {
+            let navigationController = segue.destination as! UINavigationController
+            let viewController = navigationController.topViewController as! EditStickerViewController
+            return viewController
+        }
+
+        if segue == .EditStickerSegue {
+            let cell = sender as! StickerCollectionCell
+            guard let sticker = cell.viewModel?.sticker else {
+                Logger.shared.error("Cell has no sticker!")
+                return
+            }
+            guard let viewController = getEditStickerViewController(from: segue) else {
+                return
+            }
+            viewController.viewModel = viewModel.editStickerViewModel(for: sticker)
+
+        } else if segue == .AddStickerSeque {
+            guard let viewController = getEditStickerViewController(from: segue) else {
+                return
+            }
+            viewController.viewModel = viewModel.addStickerViewModel()
+        }
     }
 }
 

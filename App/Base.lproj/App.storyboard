@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -61,7 +62,11 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="tGu-nI-cYD">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="SxV-cq-Vib"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="SxV-cq-Vib">
+                            <connections>
+                                <segue destination="mHK-wh-jhb" kind="showDetail" identifier="AddStickerSeque" id="jbz-Sz-vci"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addButtonItem" destination="SxV-cq-Vib" id="93M-bf-tCa"/>
@@ -75,11 +80,15 @@
         <!--Navigation Controller-->
         <scene sceneID="8s5-LR-Lwg">
             <objects>
-                <navigationController storyboardIdentifier="EditStickerNavigationController" id="mHK-wh-jhb" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="EditStickerNavigationController" toolbarHidden="NO" id="mHK-wh-jhb" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ezs-dE-6ca">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="aLN-pi-8yX">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="xY5-ie-FY6" kind="relationship" relationship="rootViewController" id="ygY-c0-Ghu"/>
                     </connections>
@@ -88,10 +97,10 @@
             </objects>
             <point key="canvasLocation" x="854" y="794"/>
         </scene>
-        <!--View Controller-->
+        <!--Edit Sticker View Controller-->
         <scene sceneID="fky-Nl-cnS">
             <objects>
-                <viewController storyboardIdentifier="EditStickerViewController" id="xY5-ie-FY6" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditStickerViewController" id="xY5-ie-FY6" customClass="EditStickerViewController" customModule="PhotoStickers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="asa-D8-eDb"/>
                         <viewControllerLayoutGuide type="bottom" id="EuG-up-7tU"/>
@@ -99,13 +108,45 @@
                     <view key="view" contentMode="scaleToFill" id="63h-fZ-lFi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="USh-D3-KYh">
+                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="USh-D3-KYh" secondAttribute="height" multiplier="1:1" id="5oU-qa-UQr"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="USh-D3-KYh" firstAttribute="left" secondItem="63h-fZ-lFi" secondAttribute="left" id="4mL-x0-gif"/>
+                            <constraint firstItem="USh-D3-KYh" firstAttribute="width" relation="lessThanOrEqual" secondItem="63h-fZ-lFi" secondAttribute="width" id="Db6-dz-bQD"/>
+                            <constraint firstItem="USh-D3-KYh" firstAttribute="height" relation="lessThanOrEqual" secondItem="63h-fZ-lFi" secondAttribute="height" id="Fhl-2c-faM"/>
+                            <constraint firstItem="USh-D3-KYh" firstAttribute="height" secondItem="63h-fZ-lFi" secondAttribute="height" priority="750" id="Pk9-cF-yUP"/>
+                            <constraint firstItem="USh-D3-KYh" firstAttribute="width" secondItem="63h-fZ-lFi" secondAttribute="width" priority="750" id="WMq-Vj-m5w"/>
+                            <constraint firstItem="USh-D3-KYh" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="toh-b9-upw"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="3cS-n0-mdI"/>
+                    <toolbarItems>
+                        <barButtonItem systemItem="trash" id="UY9-Yv-yfg"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="4Ef-qB-gCQ"/>
+                        <barButtonItem systemItem="camera" id="zho-8l-mAf"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="3cS-n0-mdI">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="HGg-xK-bhk"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ylz-y4-7pV"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="cancelButtonItem" destination="HGg-xK-bhk" id="blY-Q7-uzJ"/>
+                        <outlet property="deleteButtonItem" destination="UY9-Yv-yfg" id="FL6-hG-PZe"/>
+                        <outlet property="imageView" destination="USh-D3-KYh" id="DvC-o9-91L"/>
+                        <outlet property="photosButtonItem" destination="zho-8l-mAf" id="RAP-D3-gzV"/>
+                        <outlet property="saveButtonItem" destination="ylz-y4-7pV" id="Ycn-K0-Sya"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nqs-PS-TGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1606" y="794"/>
+            <point key="canvasLocation" x="1605.5999999999999" y="793.8530734632684"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gbp-ZZ-OD8">
@@ -124,4 +165,7 @@
             <point key="canvasLocation" x="87" y="45"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="jbz-Sz-vci"/>
+    </inferredMetricsTieBreakers>
 </document>

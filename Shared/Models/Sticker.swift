@@ -45,6 +45,12 @@ class Sticker: Object {
     override static func ignoredProperties() -> [String] {
         return ["renderedSticker", "originalImage", "cropBounds"]
     }
+
+    static func newSticker() -> Sticker! {
+        let sticker = Sticker()
+        sticker.uuid = UUID().uuidString
+        return sticker
+    }
 }
 
 // MARK: Equitable

@@ -11,9 +11,21 @@ import UIKit
 import Messages
 
 class StickerCollectionCell: UICollectionViewCell {
+
     @IBOutlet weak var imageView: UIImageView!
 
-    func configure(_ viewModel: StickerCollectionCellModel) {
-        imageView.image = viewModel.image
+    var viewModel: StickerCollectionCellModelType? {
+        didSet {
+            configure()
+        }
+    }
+
+    func configure() {
+        imageView.image = self.viewModel?.sticker.renderedSticker
+    }
+
+    override func prepareForReuse() {
+        viewModel = nil
+        imageView.image = nil
     }
 }

@@ -11,10 +11,9 @@ import RxSwift
 import RxCocoa
 
 protocol StickerCollectionViewModelType {
-    var addButtonItemDidTap: PublishSubject<Void> { get }
-    var imagePicked: PublishSubject<UIImage?> { get }
     var stickerCellModels: Observable<[StickerCollectionCellModel]> { get }
-    var presentImagePicker: Observable<UIImagePickerControllerSourceType> { get }
+    func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType
+    func addStickerViewModel() -> EditStickerViewModelType
 }
 
 class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType {
@@ -26,12 +25,8 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
 
     // MARK: Input
 
-    let addButtonItemDidTap = PublishSubject<Void>()
-    let imagePicked = PublishSubject<UIImage?>()
-
     // MARK: Output
     let stickerCellModels: Observable<[StickerCollectionCellModel]>
-    let presentImagePicker: Observable<UIImagePickerControllerSourceType>
 
     init(imageStoreService: ImageStoreServiceType,
          stickerService: StickerServiceType,
@@ -50,28 +45,7 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
             }
         //            .asDriver(onErrorJustReturn: [])
 
-        self.presentImagePicker = self.addButtonItemDidTap
-            .map {
-                return .photoLibrary
-            }
-            .observeOn(MainScheduler.instance)
-            .subscribeOn(ConcurrentMainScheduler.instance)
-
         super.init()
-
-        let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
-
-        _ = self.imagePicked
-            .observeOn(backgroundScheduler)
-            .map { [weak self] image in
-                return self?.createDefaultSticker(withOriginalImage: image)
-            }
-            .flatMap { (sticker: Sticker?) -> Driver<Sticker?> in
-                return stickerRenderService.render(sticker).asDriver(onErrorJustReturn: sticker)
-            }
-            .subscribe(onNext: { sticker in
-                stickerService.add(sticker)
-            })
     }
 
     fileprivate func createDefaultSticker(withOriginalImage image: UIImage?) -> Sticker? {
@@ -97,4 +71,15 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
     }
 
     // MARK: - View Models
+
+    func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType {
+        return EditStickerViewModel(sticker: sticker,
+                                    imageStoreService: self.imageStoreService,
+                                    stickerService: self.stickerService,
+                                    stickerRenderService: self.stickerRenderService)
+    }
+
+    func addStickerViewModel() -> EditStickerViewModelType {
+        return editStickerViewModel(for: Sticker.newSticker())
+    }
 }
