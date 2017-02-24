@@ -61,8 +61,10 @@ extension StickerService {
         }
         let realm = self.currentRealm()
 
-        let maxSortOrder = realm.objects(Sticker.self).max(ofProperty: StickerProperty.sortOrder.rawValue) ?? 0
-        sticker.sortOrder = maxSortOrder + 1
+        if sticker.sortOrder == 0 {
+            let maxSortOrder: Int = realm.objects(Sticker.self).max(ofProperty: StickerProperty.sortOrder.rawValue) ?? 0
+            sticker.sortOrder = maxSortOrder + 1
+        }
 
         try! realm.write {
             realm.add(sticker, update: true)

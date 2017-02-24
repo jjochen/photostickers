@@ -50,6 +50,12 @@ class EditStickerViewController: UIViewController {
             .bindTo(viewModel.deleteButtonItemDidTap)
             .disposed(by: self.disposeBag)
 
+        viewModel.stickerInfo
+            .originalImage
+            .asDriver()
+            .drive(self.imageView.rx.image)
+            .disposed(by: self.disposeBag)
+
         viewModel.presentImagePicker
             .flatMapLatest { [weak self] sourceType in
                 return UIImagePickerController.rx.createWithParent(self) { picker in
