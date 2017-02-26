@@ -19,6 +19,7 @@ protocol EditStickerViewModelType {
     var photosButtonItemDidTap: PublishSubject<Void> { get }
     var imagePicked: PublishSubject<UIImage?> { get }
     var presentImagePicker: Observable<UIImagePickerControllerSourceType> { get }
+    var dismissViewController: Observable<Void> { get }
 }
 
 class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
@@ -38,6 +39,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
     // MARK: Output
     let presentImagePicker: Observable<UIImagePickerControllerSourceType>
+    let dismissViewController: Observable<Void>
 
     init(sticker: Sticker!,
          imageStoreService: ImageStoreServiceType!,
@@ -56,13 +58,28 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .observeOn(MainScheduler.instance)
             .subscribeOn(ConcurrentMainScheduler.instance)
 
+        let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
+        let didRender = self.saveButtonItemDidTap
+            .observeOn(backgroundScheduler)
+        //            .flatMap {
+        //                return stickerRenderService.render(sticker).asDriver(onErrorJustReturn: nil)
+        //            }
+        //            .filterNil()
+        //            .map { sticker in
+        //                stickerService.add(sticker)
+        //            }
+
+        self.dismissViewController = Observable
+            .of(self.cancelButtonItemDidTap, didRender)
+            .merge()
+            .observeOn(MainScheduler.instance)
+            .subscribeOn(ConcurrentMainScheduler.instance)
+
         super.init()
 
         _ = self.imagePicked
             .filterNil()
             .bindTo(stickerInfo.originalImage)
-
-        //        let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
 
         //        _ = self.imagePicked
         //            .observeOn(backgroundScheduler)

@@ -72,5 +72,11 @@ class EditStickerViewController: UIViewController {
             }
             .bindTo(viewModel.imagePicked)
             .disposed(by: self.disposeBag)
+
+        viewModel.dismissViewController
+            .subscribe(onNext: { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            })
+            .addDisposableTo(self.disposeBag)
     }
 }

@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.tintColor = Appearance.tintColor
 
         let imageStoreService = ImageStoreService(url: AppGroup.imagesURL)
-        let stickerService = StickerService(realmURL: AppGroup.realmURL)
+        let stickerService = StickerService(realmURL: AppGroup.realmURL, imageStoreService: imageStoreService)
         let stickerRenderService = StickerRenderService(imageStoreService: imageStoreService)
 
         let storyboard = UIStoryboard.app()
