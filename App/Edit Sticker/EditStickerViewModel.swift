@@ -46,7 +46,8 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
          stickerService: StickerServiceType!,
          stickerRenderService: StickerRenderServiceType!) {
 
-        self.stickerInfo = StickerInfo(sticker: sticker)
+        let stickerInfo = StickerInfo(sticker: sticker)
+        self.stickerInfo = stickerInfo
         self.imageStoreService = imageStoreService
         self.stickerService = stickerService
         self.stickerRenderService = stickerRenderService
@@ -59,15 +60,18 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .subscribeOn(ConcurrentMainScheduler.instance)
 
         let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
-        let didRender = self.saveButtonItemDidTap
+        _ = self.saveButtonItemDidTap
             .observeOn(backgroundScheduler)
-        //            .flatMap {
-        //                return stickerRenderService.render(sticker).asDriver(onErrorJustReturn: nil)
-        //            }
-        //            .filterNil()
-        //            .map { sticker in
-        //                stickerService.add(sticker)
-        //            }
+            .flatMap {
+                return stickerRenderService.render(stickerInfo).asDriver(onErrorJustReturn: nil)
+            }
+            .filterNil()
+            .bindTo(self.stickerInfo.renderedSticker)
+
+        let didRender = self.stickerInfo.renderedSticker
+            .asObservable()
+            .skip(1)
+            .map { _ in Void() }
 
         self.dismissViewController = Observable
             .of(self.cancelButtonItemDidTap, didRender)
@@ -80,17 +84,5 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
         _ = self.imagePicked
             .filterNil()
             .bindTo(stickerInfo.originalImage)
-
-        //        _ = self.imagePicked
-        //            .observeOn(backgroundScheduler)
-        //            .map { [weak self] image in
-        //                return self?.createDefaultSticker(withOriginalImage: image)
-        //            }
-        //            .flatMap { (sticker: Sticker?) -> Driver<Sticker?> in
-        //                return stickerRenderService.render(sticker).asDriver(onErrorJustReturn: sticker)
-        //            }
-        //            .subscribe(onNext: { sticker in
-        //                stickerService.add(sticker)
-        //            })
     }
 }

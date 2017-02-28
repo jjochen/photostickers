@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let imageStoreService = ImageStoreService(url: AppGroup.imagesURL)
         let stickerService = StickerService(realmURL: AppGroup.realmURL, imageStoreService: imageStoreService)
-        let stickerRenderService = StickerRenderService(imageStoreService: imageStoreService)
+        let stickerRenderService = StickerRenderService()
 
         let storyboard = UIStoryboard.app()
         let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController

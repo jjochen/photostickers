@@ -45,12 +45,12 @@ class StickerCollectionViewController: UIViewController {
             .setDelegate(self)
             .disposed(by: disposeBag)
 
-//        self.stickerCollectionView.rx
-//            .modelSelected(StickerCollectionCellModel.self)
-//            .subscribe(onNext: { _ in
-//                Logger.shared.info("Sticker selected")
-//            })
-//            .disposed(by: disposeBag)
+        //        self.stickerCollectionView.rx
+        //            .modelSelected(StickerCollectionCellModel.self)
+        //            .subscribe(onNext: { _ in
+        //                Logger.shared.info("Sticker selected")
+        //            })
+        //            .disposed(by: disposeBag)
     }
 }
 
