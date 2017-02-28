@@ -66,7 +66,7 @@ extension StickerCollectionViewController {
             return
         }
 
-        func getEditStickerViewController(from segue: UIStoryboardSegue) -> EditStickerViewController! {
+        func getEditStickerViewController(from segue: UIStoryboardSegue) -> EditStickerViewController {
             let navigationController = segue.destination as! UINavigationController
             let viewController = navigationController.topViewController as! EditStickerViewController
             return viewController
@@ -78,15 +78,11 @@ extension StickerCollectionViewController {
                 Logger.shared.error("Cell has no sticker!")
                 return
             }
-            guard let viewController = getEditStickerViewController(from: segue) else {
-                return
-            }
+            let viewController = getEditStickerViewController(from: segue)
             viewController.viewModel = viewModel.editStickerViewModel(for: sticker)
 
         } else if segue == .AddStickerSeque {
-            guard let viewController = getEditStickerViewController(from: segue) else {
-                return
-            }
+            let viewController = getEditStickerViewController(from: segue)
             viewController.viewModel = viewModel.addStickerViewModel()
         }
     }

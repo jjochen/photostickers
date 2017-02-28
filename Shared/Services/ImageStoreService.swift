@@ -10,10 +10,10 @@ import UIKit
 import Log
 
 protocol ImageStoreServiceType {
-    func storeImage(_ image: UIImage!, forKey key: String!, inCategory category: String!) -> URL?
-    func image(forKey key: String!, inCategory category: String!) -> UIImage?
-    func imageExists(forKey key: String!, inCategory category: String!) -> Bool
-    func imageURL(forKey key: String!, inCategory category: String!) -> URL?
+    func storeImage(_ image: UIImage, forKey key: String, inCategory category: String) -> URL?
+    func image(forKey key: String, inCategory category: String) -> UIImage?
+    func imageExists(forKey key: String, inCategory category: String) -> Bool
+    func imageURL(forKey key: String, inCategory category: String) -> URL?
 }
 
 class ImageStoreService: ImageStoreServiceType {
@@ -27,7 +27,7 @@ class ImageStoreService: ImageStoreServiceType {
 
 extension ImageStoreService {
 
-    func storeImage(_ image: UIImage!, forKey key: String!, inCategory category: String!) -> URL? {
+    func storeImage(_ image: UIImage, forKey key: String, inCategory category: String) -> URL? {
         guard let data = UIImagePNGRepresentation(image) else {
             Logger.shared.error("PNG representation not possible: \(image)")
             return nil
@@ -53,7 +53,7 @@ extension ImageStoreService {
         return result
     }
 
-    func image(forKey key: String!, inCategory category: String!) -> UIImage? {
+    func image(forKey key: String, inCategory category: String) -> UIImage? {
         guard let url = self.constructImageURL(forKey: key, inCategory: category) else {
             Logger.shared.error("No image url for key \(key) in category \(category)")
             return nil
@@ -61,7 +61,7 @@ extension ImageStoreService {
         return UIImage(contentsOfFile: url.path)
     }
 
-    func imageExists(forKey key: String!, inCategory category: String!) -> Bool {
+    func imageExists(forKey key: String, inCategory category: String) -> Bool {
         guard let url = self.constructImageURL(forKey: key, inCategory: category) else {
             Logger.shared.error("No image url for key \(key) in category \(category)")
             return false
@@ -69,7 +69,7 @@ extension ImageStoreService {
         return FileManager.default.fileExists(atPath: url.path)
     }
 
-    func imageURL(forKey key: String!, inCategory category: String!) -> URL? {
+    func imageURL(forKey key: String, inCategory category: String) -> URL? {
         guard self.imageExists(forKey: key, inCategory: category) else {
             return nil
         }
@@ -79,7 +79,7 @@ extension ImageStoreService {
 
 extension ImageStoreService {
 
-    fileprivate func createSubfolderForCategory(_ category: String!) -> Bool {
+    fileprivate func createSubfolderForCategory(_ category: String) -> Bool {
         guard let url = self.constructCategoryURL(category) else {
             Logger.shared.error("No category url for \(category)")
             return false
@@ -94,11 +94,11 @@ extension ImageStoreService {
         }
     }
 
-    fileprivate func constructCategoryURL(_ category: String!) -> URL? {
+    fileprivate func constructCategoryURL(_ category: String) -> URL? {
         return self.storeURL?.appendingPathComponent(category, isDirectory: true)
     }
 
-    fileprivate func constructImageURL(forKey key: String!, inCategory category: String!) -> URL? {
+    fileprivate func constructImageURL(forKey key: String, inCategory category: String) -> URL? {
         return self.constructCategoryURL(category)?.appendingPathComponent(key).appendingPathExtension("png")
     }
 }

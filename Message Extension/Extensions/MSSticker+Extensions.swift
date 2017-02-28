@@ -13,10 +13,10 @@ import Log
 extension MSSticker {
 
     static func load(_ sticker: Sticker?) -> MSSticker? {
-        guard let stickerURL = sticker?.renderedStickerURL as URL! else {
+        guard let stickerURL = sticker?.renderedStickerURL else {
             return nil
         }
-        guard let localizedDescription = sticker?.localizedDescription as String! else {
+        guard let localizedDescription = sticker?.localizedDescription else {
             return nil
         }
 

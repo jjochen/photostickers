@@ -20,7 +20,7 @@ protocol StickerServiceType {
 
 class StickerService: StickerServiceType {
 
-    fileprivate let mainThreadRealm: Realm!
+    fileprivate let mainThreadRealm: Realm
     fileprivate let imageStoreService: ImageStoreServiceType
 
     init(realmURL: URL?, imageStoreService: ImageStoreServiceType) {
@@ -96,10 +96,8 @@ extension StickerService {
 
 extension StickerService {
 
-    fileprivate func sticker(withInfo info: StickerInfo, inRealm realm: Realm) throws -> Sticker? {
-        guard let sticker = try realm.sticker(withUUID: info.uuid.value) else {
-            return nil
-        }
+    fileprivate func sticker(withInfo info: StickerInfo, inRealm realm: Realm) throws -> Sticker {
+        let sticker = try realm.sticker(withUUID: info.uuid.value)
         try self.update(sticker: sticker, withInfo: info)
         return sticker
     }
@@ -133,7 +131,7 @@ extension StickerService {
         }
     }
 
-    fileprivate func storeImage(_ image: UIImage?, forKey key: String?, inCategory category: String!) -> URL? {
+    fileprivate func storeImage(_ image: UIImage?, forKey key: String?, inCategory category: String) -> URL? {
         guard let image = image else {
             return nil
         }
@@ -151,7 +149,7 @@ extension StickerService {
 }
 
 extension Realm {
-    fileprivate func sticker(withUUID uuid: String?) throws -> Sticker! {
+    fileprivate func sticker(withUUID uuid: String?) throws -> Sticker {
         return try fetchSticker(withUUID: uuid) ?? newSticker()
     }
 

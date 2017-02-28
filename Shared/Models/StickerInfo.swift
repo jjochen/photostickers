@@ -59,13 +59,32 @@ class StickerInfo {
                   sortOrder: 0)
     }
 
-    convenience init(sticker: Sticker!) {
+    convenience init(sticker: Sticker) {
         self.init(uuid: sticker.uuid,
                   localizedDescription: sticker.localizedDescription,
                   originalImage: sticker.originalImage,
                   renderedSticker: sticker.renderedSticker,
                   cropBounds: sticker.cropBounds,
                   sortOrder: sticker.sortOrder)
+    }
+
+    // MARK: Observers
+    var originalImageIsNil: Observable<Bool> {
+        return self.originalImage
+            .asObservable()
+            .map { $0 == nil }
+    }
+
+    var renderedStickerIsNil: Observable<Bool> {
+        return self.renderedSticker
+            .asObservable()
+            .map { $0 == nil }
+    }
+
+    var cropBoundsAreEmpty: Observable<Bool> {
+        return self.cropBounds
+            .asObservable()
+            .map { $0.isNull || $0.isEmpty }
     }
 
     // MARK: canges

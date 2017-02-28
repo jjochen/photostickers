@@ -33,7 +33,7 @@ class PhotoStickerBrowserViewController: UIViewController {
 
     fileprivate func setupBindings() {
 
-        guard let _ = viewModel else {
+        guard let viewModel = self.viewModel else {
             Logger.shared.error("View Model not set!")
             return
         }
@@ -41,7 +41,7 @@ class PhotoStickerBrowserViewController: UIViewController {
         let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>()
         skinTableViewDataSource(dataSource)
 
-        viewModel!.sectionItems
+        viewModel.sectionItems
             .map { items in
                 [StickerSection(header: "Stickers", stickers: items)]
             }

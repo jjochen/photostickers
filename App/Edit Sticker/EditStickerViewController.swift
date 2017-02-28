@@ -50,6 +50,10 @@ class EditStickerViewController: UIViewController {
             .bindTo(viewModel.deleteButtonItemDidTap)
             .disposed(by: self.disposeBag)
 
+        viewModel.saveButtonItemEnabled
+            .drive(self.saveButtonItem.rx.isEnabled)
+            .disposed(by: self.disposeBag)
+
         viewModel.stickerInfo
             .originalImage
             .asDriver()
