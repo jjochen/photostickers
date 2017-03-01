@@ -118,7 +118,7 @@ extension StickerService {
                 }
             }
             if info.renderedStickerDidChange {
-                if let url = storeImage(info.renderedSticker.value, forKey: sticker.uuid, inCategory: "originals") {
+                if let url = storeImage(info.renderedSticker.value, forKey: sticker.uuid, inCategory: "stickers") {
                     sticker.renderedStickerFilePath = url.path
                 }
             }
