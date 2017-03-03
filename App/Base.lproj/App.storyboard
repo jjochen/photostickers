@@ -100,7 +100,7 @@
         <!--Sticker-->
         <scene sceneID="fky-Nl-cnS">
             <objects>
-                <viewController storyboardIdentifier="EditStickerViewController" id="xY5-ie-FY6" customClass="EditStickerViewController" customModule="PhotoStickers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditStickerViewController" automaticallyAdjustsScrollViewInsets="NO" id="xY5-ie-FY6" customClass="EditStickerViewController" customModule="PhotoStickers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="asa-D8-eDb"/>
                         <viewControllerLayoutGuide type="bottom" id="EuG-up-7tU"/>
@@ -109,21 +109,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="USh-D3-KYh">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.10000000000000001" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="Jlx-aC-2O3" customClass="ImageScrollView" customModule="PhotoStickers" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="375" height="375"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="USh-D3-KYh" secondAttribute="height" multiplier="1:1" id="5oU-qa-UQr"/>
+                                    <constraint firstAttribute="width" secondItem="Jlx-aC-2O3" secondAttribute="height" multiplier="1:1" id="2o9-Gt-lwd"/>
                                 </constraints>
-                            </imageView>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="USh-D3-KYh" firstAttribute="left" secondItem="63h-fZ-lFi" secondAttribute="left" id="4mL-x0-gif"/>
-                            <constraint firstItem="USh-D3-KYh" firstAttribute="width" relation="lessThanOrEqual" secondItem="63h-fZ-lFi" secondAttribute="width" id="Db6-dz-bQD"/>
-                            <constraint firstItem="USh-D3-KYh" firstAttribute="height" relation="lessThanOrEqual" secondItem="63h-fZ-lFi" secondAttribute="height" id="Fhl-2c-faM"/>
-                            <constraint firstItem="USh-D3-KYh" firstAttribute="height" secondItem="63h-fZ-lFi" secondAttribute="height" priority="750" id="Pk9-cF-yUP"/>
-                            <constraint firstItem="USh-D3-KYh" firstAttribute="width" secondItem="63h-fZ-lFi" secondAttribute="width" priority="750" id="WMq-Vj-m5w"/>
-                            <constraint firstItem="USh-D3-KYh" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="toh-b9-upw"/>
+                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="width" secondItem="63h-fZ-lFi" secondAttribute="width" priority="750" id="7cc-Gr-EzC"/>
+                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="FsC-Ii-6dV"/>
+                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="height" relation="lessThanOrEqual" secondItem="63h-fZ-lFi" secondAttribute="height" id="MY1-jI-FU9"/>
+                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="height" secondItem="63h-fZ-lFi" secondAttribute="height" priority="750" id="Otn-pE-boa"/>
+                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="width" relation="lessThanOrEqual" secondItem="63h-fZ-lFi" secondAttribute="width" id="cyk-zn-eNh"/>
+                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="left" secondItem="63h-fZ-lFi" secondAttribute="left" id="zPD-MS-oN7"/>
                         </constraints>
                     </view>
                     <toolbarItems>
@@ -139,7 +139,7 @@
                     <connections>
                         <outlet property="cancelButtonItem" destination="HGg-xK-bhk" id="blY-Q7-uzJ"/>
                         <outlet property="deleteButtonItem" destination="UY9-Yv-yfg" id="FL6-hG-PZe"/>
-                        <outlet property="imageView" destination="USh-D3-KYh" id="DvC-o9-91L"/>
+                        <outlet property="imageView" destination="Jlx-aC-2O3" id="Uzy-7V-pGT"/>
                         <outlet property="photosButtonItem" destination="zho-8l-mAf" id="RAP-D3-gzV"/>
                         <outlet property="saveButtonItem" destination="ylz-y4-7pV" id="Ycn-K0-Sya"/>
                     </connections>

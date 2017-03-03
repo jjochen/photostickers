@@ -21,10 +21,11 @@ class EditStickerViewController: UIViewController {
     @IBOutlet weak var cancelButtonItem: UIBarButtonItem!
     @IBOutlet weak var photosButtonItem: UIBarButtonItem!
     @IBOutlet weak var deleteButtonItem: UIBarButtonItem!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: ImageScrollView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.imageView.minimumZoomedImageSize = Sticker.renderedSize
         self.setupBindings()
     }
 
@@ -48,6 +49,10 @@ class EditStickerViewController: UIViewController {
 
         self.deleteButtonItem.rx.tap
             .bindTo(viewModel.deleteButtonItemDidTap)
+            .disposed(by: self.disposeBag)
+
+        self.imageView.rx.didZoomToVisibleRect
+            .bindTo(viewModel.stickerInfo.cropBounds)
             .disposed(by: self.disposeBag)
 
         viewModel.saveButtonItemEnabled
