@@ -324,6 +324,7 @@
 				194621501E3CFE16000F09CE /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		1946215F1E3CFE55000F09CE /* Message Extension */ = {
@@ -374,6 +375,7 @@
 				194621601E3CFE55000F09CE /* MessageExtension.storyboard */,
 			);
 			name = Storyboards;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		1946217B1E3CFF40000F09CE /* Tests */ = {
@@ -417,8 +419,8 @@
 				19A6C6051E6310F8009B8922 /* StickerInfo.swift */,
 			);
 			name = Models;
-			path = Shared/Models;
-			sourceTree = SOURCE_ROOT;
+			path = Models;
+			sourceTree = "<group>";
 		};
 		194621931E40E727000F09CE /* Extensions */ = {
 			isa = PBXGroup;
@@ -1023,6 +1025,7 @@
 				194621511E3CFE16000F09CE /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		194621521E3CFE16000F09CE /* App.storyboard */ = {
@@ -1031,6 +1034,7 @@
 				194621531E3CFE16000F09CE /* Base */,
 			);
 			name = App.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		194621601E3CFE55000F09CE /* MessageExtension.storyboard */ = {
@@ -1039,6 +1043,7 @@
 				194621611E3CFE55000F09CE /* Base */,
 			);
 			name = MessageExtension.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
