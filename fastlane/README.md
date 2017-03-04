@@ -48,6 +48,11 @@ Deploy a new version to the App Store
 fastlane storyboard_ids
 ```
 Updates the storyboard identifier Swift values.
+### reorganize_project_folder
+```
+fastlane reorganize_project_folder
+```
+Reorganizes Xcode project folder to match Xcode groups.
 ### install_dependencies
 ```
 fastlane install_dependencies

@@ -101,7 +101,7 @@ end
 
 desc "Reorganizes Xcode project folder to match Xcode groups."
 lane :reorganize_project_folder do
-    sh "cd .. ; bundle exec synx PhotoStickers.xcodeproj"
+    sh "cd .. ; bundle exec synx --exclusion Metadata --exclusion Deployment --no-sort-by-name PhotoStickers.xcodeproj"
 end
 
 desc "Install dependencies (gems, cocoapods)"
