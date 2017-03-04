@@ -10,7 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-// MARK: - Rx
 extension Reactive where Base: ImageScrollView {
 
     var didZoomToVisibleRect: ControlEvent<CGRect> {

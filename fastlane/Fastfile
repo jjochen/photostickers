@@ -99,6 +99,11 @@ lane :storyboard_ids do
     sh "cd .. ; bundle exec sbconstants ./Shared/Services/StoryboardIdentifiers.swift --source-dir ./ --swift"
 end
 
+desc "Reorganizes Xcode project folder to match Xcode groups."
+lane :reorganize_project_folder do
+    sh "cd .. ; bundle exec synx PhotoStickers.xcodeproj"
+end
+
 desc "Install dependencies (gems, cocoapods)"
 lane :install_dependencies do
     bundle_install
