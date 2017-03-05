@@ -50,6 +50,7 @@
 		19A6C60A1E633DEE009B8922 /* ImageStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C6081E633DD9009B8922 /* ImageStoreService.swift */; };
 		19A6C60C1E67704C009B8922 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C60B1E67704C009B8922 /* ImageScrollView.swift */; };
 		19AA564E1E6AD186005BDD23 /* ImageScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AA564D1E6AD186005BDD23 /* ImageScrollView+Rx.swift */; };
+		19AA56501E6C7218005BDD23 /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 19AA564F1E6C7218005BDD23 /* .env */; };
 		19B7A4F21E13C1F00074B6B1 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19B7A4F11E13C1F00074B6B1 /* Messages.framework */; };
 		19B7A4FE1E13C1F00074B6B1 /* MessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		19F6DC731E4D250400CAE9D0 /* StickerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F6DC721E4D250400CAE9D0 /* StickerService.swift */; };
@@ -163,6 +164,7 @@
 		19A6C60B1E67704C009B8922 /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		19AA564B1E68A0FA005BDD23 /* NOTES */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES; sourceTree = "<group>"; };
 		19AA564D1E6AD186005BDD23 /* ImageScrollView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageScrollView+Rx.swift"; sourceTree = "<group>"; };
+		19AA564F1E6C7218005BDD23 /* .env */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .env; path = fastlane/.env; sourceTree = "<group>"; };
 		19B7A4B71E13C14B0074B6B1 /* PhotoStickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4CE1E13C14B0074B6B1 /* PhotoStickersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoStickersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4D91E13C14B0074B6B1 /* PhotoStickersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoStickersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -323,7 +325,6 @@
 				194621521E3CFE16000F09CE /* App.storyboard */,
 				194621501E3CFE16000F09CE /* LaunchScreen.storyboard */,
 			);
-			name = Storyboards;
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
@@ -374,7 +375,6 @@
 			children = (
 				194621601E3CFE55000F09CE /* MessageExtension.storyboard */,
 			);
-			name = Storyboards;
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
@@ -418,7 +418,6 @@
 				194621891E3D1460000F09CE /* Sticker.swift */,
 				19A6C6051E6310F8009B8922 /* StickerInfo.swift */,
 			);
-			name = Models;
 			path = Models;
 			sourceTree = "<group>";
 		};
@@ -524,6 +523,7 @@
 		19F69E5A1E17F58600EEF781 /* fastlane */ = {
 			isa = PBXGroup;
 			children = (
+				19AA564F1E6C7218005BDD23 /* .env */,
 				19F69E4C1E17F57D00EEF781 /* Appfile */,
 				19F69E4D1E17F57D00EEF781 /* Deliverfile */,
 				19F69E4E1E17F57D00EEF781 /* Fastfile */,
@@ -746,6 +746,7 @@
 				1946215A1E3CFE16000F09CE /* LaunchScreen.storyboard in Resources */,
 				1946215B1E3CFE16000F09CE /* App.storyboard in Resources */,
 				194621281E3CFDA1000F09CE /* Assets.xcassets in Resources */,
+				19AA56501E6C7218005BDD23 /* .env in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1072,7 +1073,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 2017.03.05.2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1124,7 +1125,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 2017.03.05.2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

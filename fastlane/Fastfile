@@ -13,21 +13,26 @@ end
 
 desc "Submit a new Beta Build to Apple TestFlight"
 lane :beta do
-    # match(type: "appstore") ???
-    
-    # Increment build number to current date
     build_number = Time.new.strftime("%Y.%m.%d")
     increment_build_number build_number: build_number
     
-    # Grab the latest profiles from Apple
-    sigh
+    sigh(
+         adhoc: false,
+         force: true
+    )
     
     ENV["PROFILE_UDID"] = lane_context[SharedValues::SIGH_UDID]
     
     gym(
+        configuration: "Release",
         scheme: "PhotoStickers"
     )
-    pilot(skip_waiting_for_build_processing: true)
+    
+    pilot(
+          skip_submission: false,
+          distribute_external: false,
+          skip_waiting_for_build_processing: false
+    )
 end
 
 desc "Deploy a new version to the App Store"
