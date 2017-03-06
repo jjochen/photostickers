@@ -50,7 +50,8 @@
 		19A6C60A1E633DEE009B8922 /* ImageStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C6081E633DD9009B8922 /* ImageStoreService.swift */; };
 		19A6C60C1E67704C009B8922 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C60B1E67704C009B8922 /* ImageScrollView.swift */; };
 		19AA564E1E6AD186005BDD23 /* ImageScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AA564D1E6AD186005BDD23 /* ImageScrollView+Rx.swift */; };
-		19AA56501E6C7218005BDD23 /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 19AA564F1E6C7218005BDD23 /* .env */; };
+		19AA56561E6D7BC5005BDD23 /* original.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19AA56541E6D7A45005BDD23 /* original.jpg */; };
+		19AA56591E6D83A9005BDD23 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AA56571E6D8387005BDD23 /* SnapshotHelper.swift */; };
 		19B7A4F21E13C1F00074B6B1 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19B7A4F11E13C1F00074B6B1 /* Messages.framework */; };
 		19B7A4FE1E13C1F00074B6B1 /* MessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		19F6DC731E4D250400CAE9D0 /* StickerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F6DC721E4D250400CAE9D0 /* StickerService.swift */; };
@@ -164,16 +165,33 @@
 		19A6C60B1E67704C009B8922 /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		19AA564B1E68A0FA005BDD23 /* NOTES */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES; sourceTree = "<group>"; };
 		19AA564D1E6AD186005BDD23 /* ImageScrollView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageScrollView+Rx.swift"; sourceTree = "<group>"; };
-		19AA564F1E6C7218005BDD23 /* .env */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .env; path = fastlane/.env; sourceTree = "<group>"; };
+		19AA564F1E6C7218005BDD23 /* .env */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; name = .env; path = fastlane/.env; sourceTree = "<group>"; };
+		19AA56541E6D7A45005BDD23 /* original.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = original.jpg; sourceTree = "<group>"; };
+		19AA56571E6D8387005BDD23 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		19AA565B1E6D84DE005BDD23 /* copyright.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = copyright.txt; sourceTree = "<group>"; };
+		19AA565D1E6D84DE005BDD23 /* description.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = description.txt; sourceTree = "<group>"; };
+		19AA565E1E6D84DE005BDD23 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
+		19AA565F1E6D84DE005BDD23 /* marketing_url.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = marketing_url.txt; sourceTree = "<group>"; };
+		19AA56601E6D84DE005BDD23 /* name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = name.txt; sourceTree = "<group>"; };
+		19AA56611E6D84DE005BDD23 /* privacy_url.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = privacy_url.txt; sourceTree = "<group>"; };
+		19AA56621E6D84DE005BDD23 /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
+		19AA56631E6D84DE005BDD23 /* support_url.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = support_url.txt; sourceTree = "<group>"; };
+		19AA56641E6D84DE005BDD23 /* primary_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = primary_category.txt; sourceTree = "<group>"; };
+		19AA56651E6D84DE005BDD23 /* primary_first_sub_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = primary_first_sub_category.txt; sourceTree = "<group>"; };
+		19AA56661E6D84DE005BDD23 /* primary_second_sub_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = primary_second_sub_category.txt; sourceTree = "<group>"; };
+		19AA56671E6D84DE005BDD23 /* secondary_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = secondary_category.txt; sourceTree = "<group>"; };
+		19AA56681E6D84DE005BDD23 /* secondary_first_sub_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = secondary_first_sub_category.txt; sourceTree = "<group>"; };
+		19AA56691E6D84DE005BDD23 /* secondary_second_sub_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = secondary_second_sub_category.txt; sourceTree = "<group>"; };
+		19AA566A1E6D84DE005BDD23 /* Snapfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; name = Snapfile; path = fastlane/Snapfile; sourceTree = "<group>"; };
 		19B7A4B71E13C14B0074B6B1 /* PhotoStickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4CE1E13C14B0074B6B1 /* PhotoStickersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoStickersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4D91E13C14B0074B6B1 /* PhotoStickersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoStickersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4F11E13C1F00074B6B1 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
-		19F69E4C1E17F57D00EEF781 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Appfile; path = fastlane/Appfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		19F69E4D1E17F57D00EEF781 /* Deliverfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Deliverfile; path = fastlane/Deliverfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		19F69E4E1E17F57D00EEF781 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Fastfile; path = fastlane/Fastfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		19F69E4F1E17F57D00EEF781 /* Scanfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Scanfile; path = fastlane/Scanfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		19F69E4C1E17F57D00EEF781 /* Appfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; name = Appfile; path = fastlane/Appfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		19F69E4D1E17F57D00EEF781 /* Deliverfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; name = Deliverfile; path = fastlane/Deliverfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		19F69E4E1E17F57D00EEF781 /* Fastfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; name = Fastfile; path = fastlane/Fastfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		19F69E4F1E17F57D00EEF781 /* Scanfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; name = Scanfile; path = fastlane/Scanfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		19F69E501E17F57D00EEF781 /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		19F69E511E17F57D00EEF781 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		19F69E521E17F57D00EEF781 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; lineEnding = 0; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
@@ -382,6 +400,7 @@
 			isa = PBXGroup;
 			children = (
 				194621911E3FE8A1000F09CE /* StickerTests.swift */,
+				19AA56531E6D79C0005BDD23 /* Resources */,
 				1946217D1E3CFF40000F09CE /* Supporting Files */,
 			);
 			path = Tests;
@@ -399,6 +418,7 @@
 			isa = PBXGroup;
 			children = (
 				194621821E3CFF4F000F09CE /* PhotoStickersUITests.swift */,
+				19AA567C1E6D8709005BDD23 /* Snapshots */,
 				194621831E3CFF4F000F09CE /* Supporting Files */,
 			);
 			path = UITests;
@@ -472,6 +492,52 @@
 			path = Rx;
 			sourceTree = "<group>";
 		};
+		19AA56531E6D79C0005BDD23 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				19AA56541E6D7A45005BDD23 /* original.jpg */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		19AA565A1E6D84DE005BDD23 /* metadata */ = {
+			isa = PBXGroup;
+			children = (
+				19AA565B1E6D84DE005BDD23 /* copyright.txt */,
+				19AA565C1E6D84DE005BDD23 /* en-US */,
+				19AA56641E6D84DE005BDD23 /* primary_category.txt */,
+				19AA56651E6D84DE005BDD23 /* primary_first_sub_category.txt */,
+				19AA56661E6D84DE005BDD23 /* primary_second_sub_category.txt */,
+				19AA56671E6D84DE005BDD23 /* secondary_category.txt */,
+				19AA56681E6D84DE005BDD23 /* secondary_first_sub_category.txt */,
+				19AA56691E6D84DE005BDD23 /* secondary_second_sub_category.txt */,
+			);
+			name = metadata;
+			path = fastlane/metadata;
+			sourceTree = "<group>";
+		};
+		19AA565C1E6D84DE005BDD23 /* en-US */ = {
+			isa = PBXGroup;
+			children = (
+				19AA565D1E6D84DE005BDD23 /* description.txt */,
+				19AA565E1E6D84DE005BDD23 /* keywords.txt */,
+				19AA565F1E6D84DE005BDD23 /* marketing_url.txt */,
+				19AA56601E6D84DE005BDD23 /* name.txt */,
+				19AA56611E6D84DE005BDD23 /* privacy_url.txt */,
+				19AA56621E6D84DE005BDD23 /* release_notes.txt */,
+				19AA56631E6D84DE005BDD23 /* support_url.txt */,
+			);
+			path = "en-US";
+			sourceTree = "<group>";
+		};
+		19AA567C1E6D8709005BDD23 /* Snapshots */ = {
+			isa = PBXGroup;
+			children = (
+				19AA56571E6D8387005BDD23 /* SnapshotHelper.swift */,
+			);
+			name = Snapshots;
+			sourceTree = "<group>";
+		};
 		19B7A4AE1E13C14B0074B6B1 = {
 			isa = PBXGroup;
 			children = (
@@ -527,7 +593,9 @@
 				19F69E4C1E17F57D00EEF781 /* Appfile */,
 				19F69E4D1E17F57D00EEF781 /* Deliverfile */,
 				19F69E4E1E17F57D00EEF781 /* Fastfile */,
+				19AA565A1E6D84DE005BDD23 /* metadata */,
 				19F69E4F1E17F57D00EEF781 /* Scanfile */,
+				19AA566A1E6D84DE005BDD23 /* Snapfile */,
 			);
 			name = fastlane;
 			sourceTree = "<group>";
@@ -746,7 +814,7 @@
 				1946215A1E3CFE16000F09CE /* LaunchScreen.storyboard in Resources */,
 				1946215B1E3CFE16000F09CE /* App.storyboard in Resources */,
 				194621281E3CFDA1000F09CE /* Assets.xcassets in Resources */,
-				19AA56501E6C7218005BDD23 /* .env in Resources */,
+				19AA56561E6D7BC5005BDD23 /* original.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -964,6 +1032,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				194621851E3CFF4F000F09CE /* PhotoStickersUITests.swift in Sources */,
+				19AA56591E6D83A9005BDD23 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

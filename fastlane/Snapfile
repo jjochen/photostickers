@@ -1,0 +1,24 @@
+
+devices([
+   "iPhone 7",
+   "iPhone 7 Plus",
+   "iPhone 5",
+   "iPad Pro (12.9 inch)",
+   "iPad Pro (9.7 inch)"
+])
+
+languages([
+  "en-US",
+  #"de-DE"
+])
+
+scheme "PhotoStickersUITests"
+
+output_directory "./screenshots"
+
+#clear_previous_screenshots true
+
+workspace "./PhotoStickers.xcworkspace"
+
+# See https://github.com/fastlane/snapshot#launch-arguments
+# launch_arguments(["-favColor red"])

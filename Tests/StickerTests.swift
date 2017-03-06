@@ -32,4 +32,35 @@ extension StickerTests {
         sticker1.cropBounds = CGRect(x: 1, y: 2, width: 3, height: 4)
         XCTAssertTrue(sticker1 == sticker2)
     }
+
+    func testOriginalImage() {
+        let originalImage = UIImage(named: "original.jpg")
+        let filePath = Bundle.main.path(forResource: "original", ofType: "jpg")
+        let sticker = Sticker()
+        sticker.originalImageFilePath = filePath
+
+        XCTAssertNotNil(originalImage)
+        XCTAssertNotNil(sticker.originalImage)
+
+        let testImageData = UIImagePNGRepresentation(originalImage!)
+        let stickerImageData = UIImagePNGRepresentation(sticker.originalImage!)
+
+        XCTAssertEqual(testImageData, stickerImageData)
+    }
+
+    func testCropBounds() {
+        let bounds = CGRect(x: 11, y: 22, width: 33, height: 44)
+        let sticker = Sticker()
+        sticker.cropBounds = bounds
+
+        XCTAssert(Double(bounds.minX) == sticker.cropBoundsX)
+        XCTAssert(Double(bounds.minY) == sticker.cropBoundsY)
+        XCTAssert(Double(bounds.width) == sticker.cropBoundsWidth)
+        XCTAssert(Double(bounds.height) == sticker.cropBoundsHeight)
+    }
+
+    func testNewStickerShouldHaveUUID() {
+        let sticker = Sticker.newSticker()
+        XCTAssertNotNil(sticker.uuid)
+    }
 }

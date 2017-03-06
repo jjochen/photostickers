@@ -13,23 +13,37 @@ class PhotoStickersUITests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
 
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        let app = XCUIApplication()
+        setupSnapshot(app)
+        app.launch()
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+
         super.tearDown()
     }
 
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func NOtestExample() {
+
+        let app = XCUIApplication()
+
+        snapshot("Sticker Collection")
+
+        app.navigationBars["Photo Stickers"].buttons["Add"].tap()
+        app.collectionViews["PhotosGridView"].cells["Photo, Landscape, March 13, 2011, 1:17 AM"].tap()
+
+        snapshot("Edit Sticker")
+
+        let element = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element
+        element.swipeRight()
+        element.swipeRight()
+        element.swipeLeft()
+
+        let stickerNavigationBar = app.navigationBars["Sticker"]
+        stickerNavigationBar.buttons["Save"].tap()
+        app.collectionViews.images["/Users/jochen/Library/Developer/CoreSimulator/Devices/904D0533-331B-4B67-86DD-C92C219FDB2A/data/Containers/Shared/AppGroup/D976DD70-7D49-4FF3-A9D2-70BF05143BC0/images/stickers/D0B455F6-CA77-4CD7-BB9C-A347606965C6.png"].tap()
+        stickerNavigationBar.buttons["Cancel"].tap()
     }
 }

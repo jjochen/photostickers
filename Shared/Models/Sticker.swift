@@ -46,7 +46,7 @@ class Sticker: Object {
         return ["renderedSticker", "originalImage", "cropBounds"]
     }
 
-    static func newSticker() -> Sticker! {
+    static func newSticker() -> Sticker {
         let sticker = Sticker()
         sticker.uuid = UUID().uuidString
         return sticker
