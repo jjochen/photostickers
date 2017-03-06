@@ -536,6 +536,7 @@
 				19AA56571E6D8387005BDD23 /* SnapshotHelper.swift */,
 			);
 			name = Snapshots;
+			path = Snapshots;
 			sourceTree = "<group>";
 		};
 		19B7A4AE1E13C14B0074B6B1 = {
