@@ -24,6 +24,9 @@ class EditStickerViewController: UIViewController {
     @IBOutlet weak var imageView: ImageScrollView!
     @IBOutlet weak var maskView: MaskView!
 
+    @IBOutlet var portraitConstraints: [NSLayoutConstraint]!
+    @IBOutlet var landscapeConstraints: [NSLayoutConstraint]!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imageView.minimumZoomedImageSize = Sticker.renderedSize
@@ -96,5 +99,27 @@ class EditStickerViewController: UIViewController {
                 self?.dismiss(animated: true, completion: nil)
             })
             .addDisposableTo(self.disposeBag)
+    }
+}
+
+extension EditStickerViewController {
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+
+        coordinator.animate(alongsideTransition: { context in
+
+            self.view.removeConstraints(self.portraitConstraints)
+            self.view.removeConstraints(self.landscapeConstraints)
+
+            if UIApplication.shared.statusBarOrientation.isPortrait {
+                self.view.addConstraints(self.portraitConstraints)
+            } else {
+                self.view.addConstraints(self.landscapeConstraints)
+            }
+        },
+        completion: { context in
+
+        })
+        super.viewWillTransition(to: size, with: coordinator)
     }
 }

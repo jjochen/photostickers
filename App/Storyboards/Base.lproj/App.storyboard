@@ -106,34 +106,43 @@
                         <viewControllerLayoutGuide type="bottom" id="EuG-up-7tU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="63h-fZ-lFi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.10000000000000001" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="Jlx-aC-2O3" userLabel="Original Image Scroll View" customClass="ImageScrollView" customModule="PhotoStickers" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
+                                <rect key="frame" x="37.5" y="44" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Jlx-aC-2O3" secondAttribute="height" multiplier="1:1" id="2o9-Gt-lwd"/>
+                                    <constraint firstAttribute="width" priority="999" constant="300" id="6Em-rk-igt"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="EKq-1Y-XiA"/>
                                 </constraints>
                             </scrollView>
                             <view userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o6U-nq-xdI" userLabel="Edit Sticker Mask View" customClass="MaskView" customModule="PhotoStickers" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
+                                <rect key="frame" x="37.5" y="44" width="300" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="o6U-nq-xdI" firstAttribute="top" secondItem="Jlx-aC-2O3" secondAttribute="top" id="2eY-I9-pEk"/>
+                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="centerY" secondItem="63h-fZ-lFi" secondAttribute="centerY" id="4OR-cE-IiS"/>
                             <constraint firstItem="o6U-nq-xdI" firstAttribute="right" secondItem="Jlx-aC-2O3" secondAttribute="right" id="6W7-2a-de0"/>
-                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="width" secondItem="63h-fZ-lFi" secondAttribute="width" priority="750" id="7cc-Gr-EzC"/>
-                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="FsC-Ii-6dV"/>
+                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="centerX" secondItem="63h-fZ-lFi" secondAttribute="centerX" id="IPf-yo-xHm"/>
                             <constraint firstItem="o6U-nq-xdI" firstAttribute="left" secondItem="Jlx-aC-2O3" secondAttribute="left" id="LvD-Gr-RzT"/>
-                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="height" relation="lessThanOrEqual" secondItem="63h-fZ-lFi" secondAttribute="height" id="MY1-jI-FU9"/>
-                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="height" secondItem="63h-fZ-lFi" secondAttribute="height" priority="750" id="Otn-pE-boa"/>
+                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="left" secondItem="63h-fZ-lFi" secondAttribute="left" constant="44" id="TnW-7w-aJY"/>
                             <constraint firstItem="o6U-nq-xdI" firstAttribute="bottom" secondItem="Jlx-aC-2O3" secondAttribute="bottom" id="ToH-AD-n6r"/>
-                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="width" relation="lessThanOrEqual" secondItem="63h-fZ-lFi" secondAttribute="width" id="cyk-zn-eNh"/>
-                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="left" secondItem="63h-fZ-lFi" secondAttribute="left" id="zPD-MS-oN7"/>
+                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" constant="44" id="UNW-lj-gEz"/>
+                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="width" relation="lessThanOrEqual" secondItem="63h-fZ-lFi" secondAttribute="width" constant="-40" id="hUH-Zd-03k"/>
+                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="height" relation="lessThanOrEqual" secondItem="63h-fZ-lFi" secondAttribute="height" constant="-40" id="hb7-ff-Spr"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="4OR-cE-IiS"/>
+                                <exclude reference="TnW-7w-aJY"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems>
                         <barButtonItem systemItem="trash" id="UY9-Yv-yfg" userLabel="Delete Button"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="4Ef-qB-gCQ"/>
@@ -151,11 +160,15 @@
                         <outlet property="maskView" destination="o6U-nq-xdI" id="YqB-32-N6R"/>
                         <outlet property="photosButtonItem" destination="zho-8l-mAf" id="RAP-D3-gzV"/>
                         <outlet property="saveButtonItem" destination="ylz-y4-7pV" id="Ycn-K0-Sya"/>
+                        <outletCollection property="portraitConstraints" destination="UNW-lj-gEz" collectionClass="NSMutableArray" id="3qv-7l-XF1"/>
+                        <outletCollection property="landscapeConstraints" destination="TnW-7w-aJY" collectionClass="NSMutableArray" id="6eP-7o-ODQ"/>
+                        <outletCollection property="portraitConstraints" destination="IPf-yo-xHm" collectionClass="NSMutableArray" id="fSJ-PK-v2Q"/>
+                        <outletCollection property="landscapeConstraints" destination="4OR-cE-IiS" collectionClass="NSMutableArray" id="BPZ-c3-Vnq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nqs-PS-TGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1605.5999999999999" y="793.8530734632684"/>
+            <point key="canvasLocation" x="1578" y="794"/>
         </scene>
         <!--Sticker Collection Navigation Controller-->
         <scene sceneID="gbp-ZZ-OD8">
