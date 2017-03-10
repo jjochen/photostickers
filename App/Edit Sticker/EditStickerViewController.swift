@@ -22,6 +22,7 @@ class EditStickerViewController: UIViewController {
     @IBOutlet weak var photosButtonItem: UIBarButtonItem!
     @IBOutlet weak var deleteButtonItem: UIBarButtonItem!
     @IBOutlet weak var imageView: ImageScrollView!
+    @IBOutlet weak var maskView: MaskView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +61,13 @@ class EditStickerViewController: UIViewController {
                 return ImageWithVisibleRect(image: image, visibleRect: bounds)
             }
             .drive(self.imageView.rx.imageWithVisibleRect)
+            .disposed(by: self.disposeBag)
+
+        viewModel.mask
+            .map { mask in
+                return mask.path(in: self.maskView.bounds)
+            }
+            .drive(self.maskView.rx.path)
             .disposed(by: self.disposeBag)
 
         viewModel.saveButtonItemEnabled

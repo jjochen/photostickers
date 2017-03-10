@@ -148,6 +148,7 @@
                         <outlet property="cancelButtonItem" destination="HGg-xK-bhk" id="blY-Q7-uzJ"/>
                         <outlet property="deleteButtonItem" destination="UY9-Yv-yfg" id="FL6-hG-PZe"/>
                         <outlet property="imageView" destination="Jlx-aC-2O3" id="Uzy-7V-pGT"/>
+                        <outlet property="maskView" destination="o6U-nq-xdI" id="YqB-32-N6R"/>
                         <outlet property="photosButtonItem" destination="zho-8l-mAf" id="RAP-D3-gzV"/>
                         <outlet property="saveButtonItem" destination="ylz-y4-7pV" id="Ycn-K0-Sya"/>
                     </connections>

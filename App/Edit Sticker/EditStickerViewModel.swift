@@ -20,6 +20,7 @@ protocol EditStickerViewModelType {
     var didZoomToVisibleRect: PublishSubject<CGRect> { get }
 
     var originalImageWithBounds: Driver<(UIImage?, CGRect)> { get }
+    var mask: Driver<Mask> { get }
     var saveButtonItemEnabled: Driver<Bool> { get }
     var presentImagePicker: Observable<UIImagePickerControllerSourceType> { get }
     var dismissViewController: Observable<Void> { get }
@@ -45,6 +46,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
     // MARK: Output
     let originalImageWithBounds: Driver<(UIImage?, CGRect)>
+    let mask: Driver<Mask>
     let saveButtonItemEnabled: Driver<Bool>
     let presentImagePicker: Observable<UIImagePickerControllerSourceType>
     let dismissViewController: Observable<Void>
@@ -74,15 +76,9 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
                 return (image, stickerInfo.cropBounds.value)
             }
 
-        //        self.stickerInfo
-        //            .originalImage
-        //            .asObservable()
-        //            .filterNil()
-        //            .map { image in
-        //                let imageSize = image.size
-        //                let sideLength = min(imageSize.width, imageSize.height)
-        //                return CGRect(x: (imageSize.width - sideLength) / 2, y: (imageSize.height - sideLength) / 2, width: sideLength, height: sideLength)
-        //            }
+        self.mask = self.stickerInfo
+            .mask
+            .asDriver()
 
         let originalImageIsNil = self.stickerInfo
             .originalImageIsNil

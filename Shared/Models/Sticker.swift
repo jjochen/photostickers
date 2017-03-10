@@ -19,6 +19,7 @@ enum StickerProperty: String {
     case cropBoundsY
     case cropBoundsWidth
     case cropBoundsHeight
+    case mask
     case sortOrder
 }
 
@@ -32,6 +33,7 @@ class Sticker: Object {
     dynamic var cropBoundsY: Double = 0
     dynamic var cropBoundsWidth: Double = 0
     dynamic var cropBoundsHeight: Double = 0
+    dynamic var maskType: Int = Mask.circle.rawValue
     dynamic var sortOrder = 0
 
     override static func primaryKey() -> String? {
@@ -99,6 +101,19 @@ extension Sticker {
             self.cropBoundsY = Double(bounds.origin.y)
             self.cropBoundsWidth = Double(bounds.size.width)
             self.cropBoundsHeight = Double(bounds.size.height)
+        }
+    }
+}
+
+// MARK: Mask
+extension Sticker {
+
+    var mask: Mask {
+        get {
+            return Mask(rawValue: self.maskType) ?? .circle
+        }
+        set(mask) {
+            self.maskType = mask.rawValue
         }
     }
 }

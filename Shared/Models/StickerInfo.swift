@@ -17,6 +17,7 @@ class StickerInfo {
     let initialOriginalImage: UIImage?
     let initialRenderedSticker: UIImage?
     let initialCropBounds: CGRect
+    let initialMask: Mask
     let initialSortOrder: Int
 
     // MARK: updated values
@@ -25,6 +26,7 @@ class StickerInfo {
     let originalImage: Variable<UIImage?>
     let renderedSticker: Variable<UIImage?>
     let cropBounds: Variable<CGRect>
+    let mask: Variable<Mask>
     let sortOrder: Variable<Int>
 
     // MARK: initilizer
@@ -33,6 +35,7 @@ class StickerInfo {
          originalImage: UIImage?,
          renderedSticker: UIImage?,
          cropBounds: CGRect,
+         mask: Mask,
          sortOrder: Int) {
 
         self.initialUUID = uuid
@@ -40,6 +43,7 @@ class StickerInfo {
         self.initialOriginalImage = originalImage
         self.initialRenderedSticker = renderedSticker
         self.initialCropBounds = cropBounds
+        self.initialMask = mask
         self.initialSortOrder = sortOrder
 
         self.uuid = Variable(uuid)
@@ -47,6 +51,7 @@ class StickerInfo {
         self.originalImage = Variable(originalImage)
         self.renderedSticker = Variable(renderedSticker)
         self.cropBounds = Variable(cropBounds)
+        self.mask = Variable(mask)
         self.sortOrder = Variable(sortOrder)
     }
 
@@ -56,6 +61,7 @@ class StickerInfo {
                   originalImage: nil,
                   renderedSticker: nil,
                   cropBounds: CGRect.zero,
+                  mask: Mask.circle,
                   sortOrder: 0)
     }
 
@@ -65,6 +71,7 @@ class StickerInfo {
                   originalImage: sticker.originalImage,
                   renderedSticker: sticker.renderedSticker,
                   cropBounds: sticker.cropBounds,
+                  mask: sticker.mask,
                   sortOrder: sticker.sortOrder)
     }
 
@@ -106,6 +113,10 @@ class StickerInfo {
 
     var cropBoundsDidChange: Bool {
         return self.cropBounds.value != self.initialCropBounds
+    }
+
+    var maskDidChange: Bool {
+        return self.mask.value != self.initialMask
     }
 
     var sortOrderDidChange: Bool {

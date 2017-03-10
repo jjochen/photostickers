@@ -125,6 +125,9 @@ extension StickerService {
             if info.cropBoundsDidChange {
                 sticker.cropBounds = info.cropBounds.value
             }
+            if info.maskDidChange {
+                sticker.mask = info.mask.value
+            }
             if info.sortOrderDidChange {
                 sticker.sortOrder = info.sortOrder.value
             }

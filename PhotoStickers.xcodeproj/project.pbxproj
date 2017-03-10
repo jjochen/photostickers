@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1237E380319BE40A860FC623 /* Pods_PhotoStickersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394EA5E241F8BED0EF9FE8E7 /* Pods_PhotoStickersTests.framework */; };
+		1918E63A1E72CC2A007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
+		1918E63B1E72CC4C007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
+		1918E63D1E72D834007DFFE7 /* MaskView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E63C1E72D834007DFFE7 /* MaskView+Rx.swift */; };
 		1946211A1E3CFDA1000F09CE /* Logger+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621061E3CFDA1000F09CE /* Logger+Shared.swift */; };
 		1946211C1E3CFDA1000F09CE /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621071E3CFDA1000F09CE /* Realm+Extensions.swift */; };
 		1946211E1E3CFDA1000F09CE /* UIStoryboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621081E3CFDA1000F09CE /* UIStoryboard+Extensions.swift */; };
@@ -119,6 +122,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1918E6391E72CC2A007DFFE7 /* Mask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mask.swift; path = Mask.swift; sourceTree = "<group>"; };
+		1918E63C1E72D834007DFFE7 /* MaskView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MaskView+Rx.swift"; sourceTree = "<group>"; };
 		194621061E3CFDA1000F09CE /* Logger+Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Logger+Shared.swift"; sourceTree = "<group>"; };
 		194621071E3CFDA1000F09CE /* Realm+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Realm+Extensions.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		194621081E3CFDA1000F09CE /* UIStoryboard+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extensions.swift"; sourceTree = "<group>"; };
@@ -439,6 +444,7 @@
 			children = (
 				194621891E3D1460000F09CE /* Sticker.swift */,
 				19A6C6051E6310F8009B8922 /* StickerInfo.swift */,
+				1918E6391E72CC2A007DFFE7 /* Mask.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -491,6 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				19AA564D1E6AD186005BDD23 /* ImageScrollView+Rx.swift */,
+				1918E63C1E72D834007DFFE7 /* MaskView+Rx.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -992,11 +999,13 @@
 				19F6DC791E4F237D00CAE9D0 /* RxImagePickerDelegateProxy.swift in Sources */,
 				1946211A1E3CFDA1000F09CE /* Logger+Shared.swift in Sources */,
 				1946219E1E435205000F09CE /* StickerRenderService.swift in Sources */,
+				1918E63A1E72CC2A007DFFE7 /* Mask.swift in Sources */,
 				1946211C1E3CFDA1000F09CE /* Realm+Extensions.swift in Sources */,
 				19F6DC801E4F238F00CAE9D0 /* BaseViewModel.swift in Sources */,
 				194621341E3CFDA1000F09CE /* PSError.swift in Sources */,
 				194621591E3CFE16000F09CE /* AppDelegate.swift in Sources */,
 				19A6C6091E633DD9009B8922 /* ImageStoreService.swift in Sources */,
+				1918E63D1E72D834007DFFE7 /* MaskView+Rx.swift in Sources */,
 				19A6C5FB1E5EFCE2009B8922 /* EditStickerViewController.swift in Sources */,
 				1946211E1E3CFDA1000F09CE /* UIStoryboard+Extensions.swift in Sources */,
 				194621321E3CFDA1000F09CE /* AppGroup.swift in Sources */,
@@ -1069,6 +1078,7 @@
 				194621721E3CFE56000F09CE /* StickerBrowserCell.swift in Sources */,
 				19F6DC951E4F23BD00CAE9D0 /* AppGroup.swift in Sources */,
 				19F6DC881E4F23BD00CAE9D0 /* Sticker.swift in Sources */,
+				1918E63B1E72CC4C007DFFE7 /* Mask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
