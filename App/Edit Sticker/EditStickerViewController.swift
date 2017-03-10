@@ -51,18 +51,19 @@ class EditStickerViewController: UIViewController {
             .bindTo(viewModel.deleteButtonItemDidTap)
             .disposed(by: self.disposeBag)
 
-        self.imageView.rx.didZoomToVisibleRect
-            .bindTo(viewModel.stickerInfo.cropBounds)
+        self.imageView.rx.visibleRect
+            .bindTo(viewModel.didZoomToVisibleRect)
+            .disposed(by: self.disposeBag)
+
+        viewModel.originalImageWithBounds
+            .map { image, bounds in
+                return ImageWithVisibleRect(image: image, visibleRect: bounds)
+            }
+            .drive(self.imageView.rx.imageWithVisibleRect)
             .disposed(by: self.disposeBag)
 
         viewModel.saveButtonItemEnabled
             .drive(self.saveButtonItem.rx.isEnabled)
-            .disposed(by: self.disposeBag)
-
-        viewModel.stickerInfo
-            .originalImage
-            .asDriver()
-            .drive(self.imageView.rx.image)
             .disposed(by: self.disposeBag)
 
         viewModel.presentImagePicker
@@ -79,7 +80,7 @@ class EditStickerViewController: UIViewController {
             .map { info in
                 return info[UIImagePickerControllerOriginalImage] as? UIImage
             }
-            .bindTo(viewModel.imagePicked)
+            .bindTo(viewModel.didPickImage)
             .disposed(by: self.disposeBag)
 
         viewModel.dismissViewController

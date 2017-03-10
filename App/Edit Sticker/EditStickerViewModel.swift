@@ -12,13 +12,14 @@ import RxCocoa
 import Log
 
 protocol EditStickerViewModelType {
-    var stickerInfo: StickerInfo { get }
     var saveButtonItemDidTap: PublishSubject<Void> { get }
     var cancelButtonItemDidTap: PublishSubject<Void> { get }
     var deleteButtonItemDidTap: PublishSubject<Void> { get }
     var photosButtonItemDidTap: PublishSubject<Void> { get }
-    var imagePicked: PublishSubject<UIImage?> { get }
+    var didPickImage: PublishSubject<UIImage?> { get }
+    var didZoomToVisibleRect: PublishSubject<CGRect> { get }
 
+    var originalImageWithBounds: Driver<(UIImage?, CGRect)> { get }
     var saveButtonItemEnabled: Driver<Bool> { get }
     var presentImagePicker: Observable<UIImagePickerControllerSourceType> { get }
     var dismissViewController: Observable<Void> { get }
@@ -29,7 +30,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let disposeBag = DisposeBag()
 
     // MARK: Dependencies
-    let stickerInfo: StickerInfo
+    fileprivate let stickerInfo: StickerInfo
     fileprivate let imageStoreService: ImageStoreServiceType
     fileprivate let stickerService: StickerServiceType
     fileprivate let stickerRenderService: StickerRenderServiceType
@@ -39,9 +40,11 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let cancelButtonItemDidTap = PublishSubject<Void>()
     let deleteButtonItemDidTap = PublishSubject<Void>()
     let photosButtonItemDidTap = PublishSubject<Void>()
-    let imagePicked = PublishSubject<UIImage?>()
+    let didPickImage = PublishSubject<UIImage?>()
+    let didZoomToVisibleRect = PublishSubject<CGRect>()
 
     // MARK: Output
+    let originalImageWithBounds: Driver<(UIImage?, CGRect)>
     let saveButtonItemEnabled: Driver<Bool>
     let presentImagePicker: Observable<UIImagePickerControllerSourceType>
     let dismissViewController: Observable<Void>
@@ -63,6 +66,23 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
         .startWith(false)
         .distinctUntilChanged()
         .asDriver(onErrorJustReturn: false)
+
+        self.originalImageWithBounds = self.stickerInfo
+            .originalImage
+            .asDriver()
+            .map { (image: UIImage?) -> (UIImage?, CGRect) in
+                return (image, stickerInfo.cropBounds.value)
+            }
+
+        //        self.stickerInfo
+        //            .originalImage
+        //            .asObservable()
+        //            .filterNil()
+        //            .map { image in
+        //                let imageSize = image.size
+        //                let sideLength = min(imageSize.width, imageSize.height)
+        //                return CGRect(x: (imageSize.width - sideLength) / 2, y: (imageSize.height - sideLength) / 2, width: sideLength, height: sideLength)
+        //            }
 
         let originalImageIsNil = self.stickerInfo
             .originalImageIsNil
@@ -99,9 +119,13 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
         super.init()
 
-        self.imagePicked
+        self.didPickImage
             .filterNil()
             .bindTo(stickerInfo.originalImage)
+            .disposed(by: self.disposeBag)
+
+        self.didZoomToVisibleRect
+            .bindTo(stickerInfo.cropBounds)
             .disposed(by: self.disposeBag)
 
         let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
@@ -114,18 +138,6 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             }
             .filterNil()
             .bindTo(self.stickerInfo.renderedSticker)
-            .disposed(by: self.disposeBag)
-
-        self.stickerInfo
-            .originalImage
-            .asObservable()
-            .filterNil()
-            .map { image in
-                let imageSize = image.size
-                let sideLength = min(imageSize.width, imageSize.height)
-                return CGRect(x: (imageSize.width - sideLength) / 2, y: (imageSize.height - sideLength) / 2, width: sideLength, height: sideLength)
-            }
-            .bindTo(self.stickerInfo.cropBounds)
             .disposed(by: self.disposeBag)
     }
 }

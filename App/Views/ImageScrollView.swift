@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct ImageWithVisibleRect {
+    let image: UIImage?
+    let visibleRect: CGRect
+}
+
 class ImageScrollView: UIScrollView, UIScrollViewDelegate {
 
     override init(frame: CGRect) {
@@ -35,15 +40,33 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
             return self.imageView.image
         }
         set(image) {
-            self.imageView.image = image
-            self.imageView.frame = CGRect(origin: .zero, size: self.imageSize)
-            self.configure()
+            self.setImage(image)
         }
     }
 
     var visibleRect: CGRect {
-        let visibleRect = self.convert(self.bounds, to: self.imageView)
-        return visibleRect.intersection(self.imageView.bounds)
+        get {
+            let visibleRect = self.convert(self.bounds, to: self.imageView)
+            return visibleRect.intersection(self.imageView.bounds)
+        }
+        set(visibleRect) {
+            self.zoom(to: visibleRect, animated: false)
+        }
+    }
+
+    func setImage(_ image: UIImage?, visibleRect: CGRect = .zero) {
+        self.imageView.image = image
+        self.imageView.frame = CGRect(origin: .zero, size: self.imageSize)
+        self.configure(withVisibleRect: visibleRect)
+    }
+
+    var imageWithVisibleRect: ImageWithVisibleRect {
+        get {
+            return ImageWithVisibleRect(image: self.image, visibleRect: self.visibleRect)
+        }
+        set(imageWithVisibleRect) {
+            self.setImage(imageWithVisibleRect.image, visibleRect: imageWithVisibleRect.visibleRect)
+        }
     }
 
     var minimumZoomedImageSize: CGSize?
@@ -70,13 +93,19 @@ extension ImageScrollView {
 // MARK: - UIScrollView configuration
 extension ImageScrollView {
 
-    fileprivate func configure() {
-        self.zoomScale = 1 // needed because of weird behavior
+    fileprivate func configure(withVisibleRect visibleRect: CGRect) {
+        self.zoomScale = 1 // needed because of some weird scroll view behavior
+        self.contentOffset = .zero
+        self.contentInset = .zero
         self.contentSize = self.imageSize
 
         self.setMaxMinZoomScalesForCurrentBounds()
-        self.setInitialZoomScale()
-        self.setInitialContentOffset()
+        if visibleRect.isEmpty {
+            self.setInitialZoomScale()
+            self.setInitialContentOffset()
+        } else {
+            self.visibleRect = visibleRect
+        }
     }
 
     fileprivate func setMaxMinZoomScalesForCurrentBounds() {
