@@ -19,7 +19,7 @@ enum StickerProperty: String {
     case cropBoundsY
     case cropBoundsWidth
     case cropBoundsHeight
-    case mask
+    case maskType
     case sortOrder
 }
 

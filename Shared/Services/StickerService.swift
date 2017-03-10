@@ -24,9 +24,8 @@ class StickerService: StickerServiceType {
     fileprivate let imageStoreService: ImageStoreServiceType
 
     init(realmURL: URL?, imageStoreService: ImageStoreServiceType) {
-        var config = Realm.Configuration()
-        config.fileURL = realmURL
-        Realm.Configuration.defaultConfiguration = config
+
+        Realm.Configuration.defaultConfiguration = Realm.stickerConfiguration(with: realmURL)
 
         if let path = realmURL?.path {
             Logger.shared.info("Realm: \(path)")
@@ -173,5 +172,18 @@ extension Realm {
     fileprivate func nextSortOrder() -> Int {
         let maxSortOrder = objects(Sticker.self).max(ofProperty: StickerProperty.sortOrder.rawValue) ?? 0
         return maxSortOrder + 1
+    }
+}
+
+extension Realm {
+    fileprivate static func stickerConfiguration(with fileURL: URL?) -> Configuration {
+        return Configuration(
+            fileURL: fileURL,
+            schemaVersion: 1,
+            migrationBlock: { migration, oldSchemaVersion in
+                if oldSchemaVersion < 1 {
+                    // nothing to do (use default value for maskType)
+                }
+        })
     }
 }
