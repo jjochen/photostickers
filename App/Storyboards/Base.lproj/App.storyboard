@@ -22,9 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hbw-nh-cGe" userLabel="Sticker Collection View">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hbw-nh-cGe" userLabel="Sticker Collection View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cGr-di-2hY">
                                     <size key="itemSize" width="100" height="100"/>
@@ -60,6 +59,12 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Hbw-nh-cGe" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="1UH-yu-tc0"/>
+                            <constraint firstItem="Hbw-nh-cGe" firstAttribute="left" secondItem="8bC-Xf-vdC" secondAttribute="left" id="GrN-TL-7pR"/>
+                            <constraint firstAttribute="right" secondItem="Hbw-nh-cGe" secondAttribute="right" id="PeS-2W-JHe"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Hbw-nh-cGe" secondAttribute="bottom" id="trK-z2-CVx"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Photo Stickers" id="tGu-nI-cYD" userLabel="Sticker Collection Navigation Bar">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="SxV-cq-Vib" userLabel="Add Button">
@@ -109,36 +114,53 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.10000000000000001" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="Jlx-aC-2O3" userLabel="Original Image Scroll View" customClass="ImageScrollView" customModule="PhotoStickers" customModuleProvider="target">
-                                <rect key="frame" x="37.5" y="44" width="300" height="300"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9po-yP-Rhs" userLabel="Sticker Container">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.10000000000000001" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="Jlx-aC-2O3" userLabel="Original Image Scroll View" customClass="ImageScrollView" customModule="PhotoStickers" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                    </scrollView>
+                                    <view userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o6U-nq-xdI" userLabel="Edit Sticker Mask View" customClass="MaskView" customModule="PhotoStickers" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Jlx-aC-2O3" secondAttribute="height" multiplier="1:1" id="2o9-Gt-lwd"/>
-                                    <constraint firstAttribute="width" priority="999" constant="300" id="6Em-rk-igt"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="EKq-1Y-XiA"/>
+                                    <constraint firstItem="Jlx-aC-2O3" firstAttribute="trailing" secondItem="o6U-nq-xdI" secondAttribute="trailing" id="0lC-x3-Qkm"/>
+                                    <constraint firstAttribute="bottom" secondItem="Jlx-aC-2O3" secondAttribute="bottom" id="FEG-SK-QYe"/>
+                                    <constraint firstAttribute="width" secondItem="9po-yP-Rhs" secondAttribute="height" multiplier="1:1" id="Qwf-lr-gAw"/>
+                                    <constraint firstItem="Jlx-aC-2O3" firstAttribute="top" secondItem="o6U-nq-xdI" secondAttribute="top" id="ZOE-If-Z9N"/>
+                                    <constraint firstItem="Jlx-aC-2O3" firstAttribute="leading" secondItem="o6U-nq-xdI" secondAttribute="leading" id="aMQ-BU-r2h"/>
+                                    <constraint firstAttribute="trailing" secondItem="Jlx-aC-2O3" secondAttribute="trailing" id="d39-H4-u73"/>
+                                    <constraint firstItem="Jlx-aC-2O3" firstAttribute="bottom" secondItem="o6U-nq-xdI" secondAttribute="bottom" id="t95-so-hEH"/>
+                                    <constraint firstItem="Jlx-aC-2O3" firstAttribute="top" secondItem="9po-yP-Rhs" secondAttribute="top" id="uDf-9P-0YH"/>
+                                    <constraint firstItem="Jlx-aC-2O3" firstAttribute="leading" secondItem="9po-yP-Rhs" secondAttribute="leading" id="wpq-Rf-YAp"/>
                                 </constraints>
-                            </scrollView>
-                            <view userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o6U-nq-xdI" userLabel="Edit Sticker Mask View" customClass="MaskView" customModule="PhotoStickers" customModuleProvider="target">
-                                <rect key="frame" x="37.5" y="44" width="300" height="300"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t1I-EN-sfQ" userLabel="Tools Container">
+                                <rect key="frame" x="0.0" y="375" width="375" height="184"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="o6U-nq-xdI" firstAttribute="top" secondItem="Jlx-aC-2O3" secondAttribute="top" id="2eY-I9-pEk"/>
-                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="centerY" secondItem="63h-fZ-lFi" secondAttribute="centerY" id="4OR-cE-IiS"/>
-                            <constraint firstItem="o6U-nq-xdI" firstAttribute="right" secondItem="Jlx-aC-2O3" secondAttribute="right" id="6W7-2a-de0"/>
-                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="centerX" secondItem="63h-fZ-lFi" secondAttribute="centerX" id="IPf-yo-xHm"/>
-                            <constraint firstItem="o6U-nq-xdI" firstAttribute="left" secondItem="Jlx-aC-2O3" secondAttribute="left" id="LvD-Gr-RzT"/>
-                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="left" secondItem="63h-fZ-lFi" secondAttribute="left" constant="44" id="TnW-7w-aJY"/>
-                            <constraint firstItem="o6U-nq-xdI" firstAttribute="bottom" secondItem="Jlx-aC-2O3" secondAttribute="bottom" id="ToH-AD-n6r"/>
-                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" constant="44" id="UNW-lj-gEz"/>
-                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="width" relation="lessThanOrEqual" secondItem="63h-fZ-lFi" secondAttribute="width" constant="-40" id="hUH-Zd-03k"/>
-                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="height" relation="lessThanOrEqual" secondItem="63h-fZ-lFi" secondAttribute="height" constant="-40" id="hb7-ff-Spr"/>
+                            <constraint firstItem="t1I-EN-sfQ" firstAttribute="leading" secondItem="9po-yP-Rhs" secondAttribute="trailing" id="2jr-3g-eZL" userLabel="L: Tools Container.leading = Sticker Container.trailing"/>
+                            <constraint firstItem="EuG-up-7tU" firstAttribute="top" secondItem="9po-yP-Rhs" secondAttribute="bottom" id="5xB-df-Bix" userLabel="L: Bottom Layout Guide.top = Sticker Container.bottom"/>
+                            <constraint firstAttribute="trailing" secondItem="9po-yP-Rhs" secondAttribute="trailing" id="8nV-Sf-jRC" userLabel="P: trailing = Sticker Container.trailing"/>
+                            <constraint firstItem="t1I-EN-sfQ" firstAttribute="top" secondItem="9po-yP-Rhs" secondAttribute="bottom" id="HbK-Ws-XBL" userLabel="P: Tools Container.top = Sticker Container.bottom"/>
+                            <constraint firstAttribute="trailing" secondItem="t1I-EN-sfQ" secondAttribute="trailing" id="KU5-0c-wEV"/>
+                            <constraint firstItem="t1I-EN-sfQ" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="PoI-uq-yCD" userLabel="P: Tools Container.leading = leading"/>
+                            <constraint firstItem="t1I-EN-sfQ" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="kop-b0-Ejh" userLabel="L: Tools Container.top = Top Layout Guide.bottom"/>
+                            <constraint firstItem="t1I-EN-sfQ" firstAttribute="bottom" secondItem="EuG-up-7tU" secondAttribute="top" id="mQE-XQ-hcr"/>
+                            <constraint firstItem="9po-yP-Rhs" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="rNi-1h-05P"/>
+                            <constraint firstItem="9po-yP-Rhs" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="xV9-xx-cKx"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="4OR-cE-IiS"/>
-                                <exclude reference="TnW-7w-aJY"/>
+                                <exclude reference="2jr-3g-eZL"/>
+                                <exclude reference="kop-b0-Ejh"/>
+                                <exclude reference="5xB-df-Bix"/>
                             </mask>
                         </variation>
                     </view>
@@ -160,15 +182,17 @@
                         <outlet property="maskView" destination="o6U-nq-xdI" id="YqB-32-N6R"/>
                         <outlet property="photosButtonItem" destination="zho-8l-mAf" id="RAP-D3-gzV"/>
                         <outlet property="saveButtonItem" destination="ylz-y4-7pV" id="Ycn-K0-Sya"/>
-                        <outletCollection property="portraitConstraints" destination="UNW-lj-gEz" collectionClass="NSMutableArray" id="3qv-7l-XF1"/>
-                        <outletCollection property="landscapeConstraints" destination="TnW-7w-aJY" collectionClass="NSMutableArray" id="6eP-7o-ODQ"/>
-                        <outletCollection property="portraitConstraints" destination="IPf-yo-xHm" collectionClass="NSMutableArray" id="fSJ-PK-v2Q"/>
-                        <outletCollection property="landscapeConstraints" destination="4OR-cE-IiS" collectionClass="NSMutableArray" id="BPZ-c3-Vnq"/>
+                        <outletCollection property="portraitConstraints" destination="PoI-uq-yCD" collectionClass="NSMutableArray" id="9ki-aK-RVQ"/>
+                        <outletCollection property="portraitConstraints" destination="8nV-Sf-jRC" collectionClass="NSMutableArray" id="kM9-BT-tzT"/>
+                        <outletCollection property="portraitConstraints" destination="HbK-Ws-XBL" collectionClass="NSMutableArray" id="dsB-Zf-dZ7"/>
+                        <outletCollection property="landscapeConstraints" destination="2jr-3g-eZL" collectionClass="NSMutableArray" id="Psg-qG-AqI"/>
+                        <outletCollection property="landscapeConstraints" destination="kop-b0-Ejh" collectionClass="NSMutableArray" id="ZoQ-JB-3LY"/>
+                        <outletCollection property="landscapeConstraints" destination="5xB-df-Bix" collectionClass="NSMutableArray" id="Hyb-aH-oaY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nqs-PS-TGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1578" y="794"/>
+            <point key="canvasLocation" x="1576.8" y="793.8530734632684"/>
         </scene>
         <!--Sticker Collection Navigation Controller-->
         <scene sceneID="gbp-ZZ-OD8">

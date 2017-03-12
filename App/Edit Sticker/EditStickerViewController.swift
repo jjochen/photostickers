@@ -31,6 +31,7 @@ class EditStickerViewController: UIViewController {
         super.viewDidLoad()
         self.imageView.minimumZoomedImageSize = Sticker.renderedSize
         self.setupBindings()
+        self.configureLayoutConstraints()
     }
 
     func setupBindings() {
@@ -104,18 +105,32 @@ class EditStickerViewController: UIViewController {
 
 extension EditStickerViewController {
 
+    fileprivate func configureLayoutConstraints() {
+
+        guard let portraitConstraints = self.portraitConstraints else {
+            return
+        }
+
+        guard let landscapeConstraints = self.landscapeConstraints else {
+            return
+        }
+
+        self.view.removeConstraints(portraitConstraints)
+        self.view.removeConstraints(landscapeConstraints)
+
+        if UIApplication.shared.statusBarOrientation.isPortrait {
+            self.view.addConstraints(portraitConstraints)
+        } else {
+            self.view.addConstraints(landscapeConstraints)
+        }
+
+        super.updateViewConstraints()
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 
         coordinator.animate(alongsideTransition: { context in
-
-            self.view.removeConstraints(self.portraitConstraints)
-            self.view.removeConstraints(self.landscapeConstraints)
-
-            if UIApplication.shared.statusBarOrientation.isPortrait {
-                self.view.addConstraints(self.portraitConstraints)
-            } else {
-                self.view.addConstraints(self.landscapeConstraints)
-            }
+            self.configureLayoutConstraints()
         },
         completion: { context in
 
