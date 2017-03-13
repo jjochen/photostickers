@@ -30,7 +30,7 @@ lane :beta do
     
     pilot(
           skip_submission: false,
-          distribute_external: false,
+          distribute_external: true,
           skip_waiting_for_build_processing: false
     )
 end
