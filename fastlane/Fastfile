@@ -25,13 +25,14 @@ lane :beta do
     
     gym(
         configuration: "Release",
-        scheme: "PhotoStickers"
+        scheme: "PhotoStickers",
     )
     
     pilot(
           skip_submission: false,
           distribute_external: true,
-          skip_waiting_for_build_processing: false
+          changelog: "New build",
+          skip_waiting_for_build_processing: false,
     )
 end
 
@@ -83,7 +84,9 @@ EOS
     
     # Build
     gym(
+        configuration: "Release",
         scheme: "PhotoStickers",
+        include_bitcode: true,
     )
     
     deliver(force: true)

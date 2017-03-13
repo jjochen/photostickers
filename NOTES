@@ -1,0 +1,19 @@
+app_review_information(
+first_name: "Rob",
+last_name: "MY_NAME",
+phone_number: "MY_NUMBER",
+email_address: "MY_EMAIL",
+demo_user: "",
+demo_password: "",
+notes: ""
+)
+
+submission_information({
+add_id_info_uses_idfa: true,
+add_id_info_serves_ads: true,
+add_id_info_tracks_action: false,
+add_id_info_tracks_install: false,
+add_id_info_limits_tracking: true,
+export_compliance_uses_encryption: false,
+export_compliance_encryption_updated: false
+})
