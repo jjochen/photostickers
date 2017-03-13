@@ -68,10 +68,7 @@ class EditStickerViewController: UIViewController {
             .disposed(by: self.disposeBag)
 
         viewModel.mask
-            .map { mask in
-                return mask.path(in: self.maskView.bounds)
-            }
-            .drive(self.maskView.rx.path)
+            .drive(self.maskView.rx.maskPath)
             .disposed(by: self.disposeBag)
 
         viewModel.saveButtonItemEnabled

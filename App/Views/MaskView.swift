@@ -11,7 +11,7 @@ import CoreGraphics
 
 class MaskView: UIView {
 
-    var path: UIBezierPath?
+    var maskPath: Mask?
 
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -30,6 +30,6 @@ class MaskView: UIView {
     }
 
     fileprivate func currentPath(forRect rect: CGRect) -> UIBezierPath {
-        return self.path ?? UIBezierPath(ovalIn: rect)
+        return self.maskPath?.path(in: rect) ?? UIBezierPath(ovalIn: rect)
     }
 }
