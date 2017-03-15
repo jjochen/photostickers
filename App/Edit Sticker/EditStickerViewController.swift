@@ -23,6 +23,7 @@ class EditStickerViewController: UIViewController {
     @IBOutlet weak var deleteButtonItem: UIBarButtonItem!
     @IBOutlet weak var imageView: ImageScrollView!
     @IBOutlet weak var maskView: MaskView!
+    @IBOutlet weak var stickerPlaceholder: UIView!
 
     @IBOutlet var portraitConstraints: [NSLayoutConstraint]!
     @IBOutlet var landscapeConstraints: [NSLayoutConstraint]!
@@ -58,6 +59,18 @@ class EditStickerViewController: UIViewController {
 
         self.imageView.rx.visibleRect
             .bindTo(viewModel.didZoomToVisibleRect)
+            .disposed(by: self.disposeBag)
+
+        // ToDo: Better observe viewWillTransition(to and viewWillApear/Load
+        let stickerRect = self.stickerPlaceholder.rx.observeWeakly(CGRect.self, "layer.frame")
+            .map { [weak self] rect in
+                return self?.stickerPlaceholder.convertBounds(to: self?.maskView)
+            }
+            .filterNil()
+            .distinctUntilChanged()
+
+        stickerRect
+            .bindTo(self.maskView.rx.maskRect)
             .disposed(by: self.disposeBag)
 
         viewModel.originalImageWithBounds

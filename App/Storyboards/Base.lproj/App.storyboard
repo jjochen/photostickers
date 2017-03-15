@@ -111,60 +111,39 @@
                         <viewControllerLayoutGuide type="bottom" id="EuG-up-7tU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="63h-fZ-lFi">
-                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9po-yP-Rhs" userLabel="Sticker Container">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
-                                <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.10000000000000001" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="Jlx-aC-2O3" userLabel="Original Image Scroll View" customClass="ImageScrollView" customModule="PhotoStickers" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
-                                    </scrollView>
-                                    <view userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o6U-nq-xdI" userLabel="Edit Sticker Mask View" customClass="MaskView" customModule="PhotoStickers" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.10000000000000001" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="Jlx-aC-2O3" userLabel="Original Image Scroll View" customClass="ImageScrollView" customModule="PhotoStickers" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </scrollView>
+                            <view userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o6U-nq-xdI" userLabel="Edit Sticker Mask View" customClass="MaskView" customModule="PhotoStickers" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="Jlx-aC-2O3" firstAttribute="trailing" secondItem="o6U-nq-xdI" secondAttribute="trailing" id="0lC-x3-Qkm"/>
-                                    <constraint firstAttribute="bottom" secondItem="Jlx-aC-2O3" secondAttribute="bottom" id="FEG-SK-QYe"/>
-                                    <constraint firstAttribute="width" secondItem="9po-yP-Rhs" secondAttribute="height" multiplier="1:1" id="Qwf-lr-gAw"/>
-                                    <constraint firstItem="Jlx-aC-2O3" firstAttribute="top" secondItem="o6U-nq-xdI" secondAttribute="top" id="ZOE-If-Z9N"/>
-                                    <constraint firstItem="Jlx-aC-2O3" firstAttribute="leading" secondItem="o6U-nq-xdI" secondAttribute="leading" id="aMQ-BU-r2h"/>
-                                    <constraint firstAttribute="trailing" secondItem="Jlx-aC-2O3" secondAttribute="trailing" id="d39-H4-u73"/>
-                                    <constraint firstItem="Jlx-aC-2O3" firstAttribute="bottom" secondItem="o6U-nq-xdI" secondAttribute="bottom" id="t95-so-hEH"/>
-                                    <constraint firstItem="Jlx-aC-2O3" firstAttribute="top" secondItem="9po-yP-Rhs" secondAttribute="top" id="uDf-9P-0YH"/>
-                                    <constraint firstItem="Jlx-aC-2O3" firstAttribute="leading" secondItem="9po-yP-Rhs" secondAttribute="leading" id="wpq-Rf-YAp"/>
-                                </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t1I-EN-sfQ" userLabel="Tools Container">
-                                <rect key="frame" x="0.0" y="375" width="375" height="184"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="awW-7x-eU3" userLabel="Sticker Placeholder">
+                                <rect key="frame" x="20" y="84" width="335" height="335"/>
+                                <color key="backgroundColor" red="0.29736699379999998" green="0.90196079019999997" blue="0.097715655390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="awW-7x-eU3" secondAttribute="height" multiplier="1:1" id="of7-on-L7y"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="t1I-EN-sfQ" firstAttribute="leading" secondItem="9po-yP-Rhs" secondAttribute="trailing" id="2jr-3g-eZL" userLabel="L: Tools Container.leading = Sticker Container.trailing"/>
-                            <constraint firstItem="EuG-up-7tU" firstAttribute="top" secondItem="9po-yP-Rhs" secondAttribute="bottom" id="5xB-df-Bix" userLabel="L: Bottom Layout Guide.top = Sticker Container.bottom"/>
-                            <constraint firstAttribute="trailing" secondItem="9po-yP-Rhs" secondAttribute="trailing" id="8nV-Sf-jRC" userLabel="P: trailing = Sticker Container.trailing"/>
-                            <constraint firstItem="t1I-EN-sfQ" firstAttribute="top" secondItem="9po-yP-Rhs" secondAttribute="bottom" id="HbK-Ws-XBL" userLabel="P: Tools Container.top = Sticker Container.bottom"/>
-                            <constraint firstAttribute="trailing" secondItem="t1I-EN-sfQ" secondAttribute="trailing" id="KU5-0c-wEV"/>
-                            <constraint firstItem="t1I-EN-sfQ" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="PoI-uq-yCD" userLabel="P: Tools Container.leading = leading"/>
-                            <constraint firstItem="t1I-EN-sfQ" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="kop-b0-Ejh" userLabel="L: Tools Container.top = Top Layout Guide.bottom"/>
-                            <constraint firstItem="t1I-EN-sfQ" firstAttribute="bottom" secondItem="EuG-up-7tU" secondAttribute="top" id="mQE-XQ-hcr"/>
-                            <constraint firstItem="9po-yP-Rhs" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="rNi-1h-05P"/>
-                            <constraint firstItem="9po-yP-Rhs" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="xV9-xx-cKx"/>
+                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="0Xx-Y1-eD8"/>
+                            <constraint firstAttribute="trailing" secondItem="awW-7x-eU3" secondAttribute="trailing" constant="20" id="3VS-Mr-GE8"/>
+                            <constraint firstAttribute="trailing" secondItem="o6U-nq-xdI" secondAttribute="trailing" id="A4R-LP-Lpe"/>
+                            <constraint firstItem="awW-7x-eU3" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" constant="20" id="Dw6-os-CRy"/>
+                            <constraint firstItem="Jlx-aC-2O3" firstAttribute="top" secondItem="63h-fZ-lFi" secondAttribute="top" id="Hpx-rZ-x60"/>
+                            <constraint firstItem="EuG-up-7tU" firstAttribute="top" secondItem="o6U-nq-xdI" secondAttribute="bottom" id="Lhg-aQ-Lw5"/>
+                            <constraint firstItem="awW-7x-eU3" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" constant="20" id="Uc5-yu-eTr"/>
+                            <constraint firstAttribute="trailing" secondItem="Jlx-aC-2O3" secondAttribute="trailing" id="Z5z-Vp-de5"/>
+                            <constraint firstItem="o6U-nq-xdI" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="mFs-gT-2xk"/>
+                            <constraint firstItem="o6U-nq-xdI" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="pqz-Vo-478"/>
+                            <constraint firstAttribute="bottom" secondItem="Jlx-aC-2O3" secondAttribute="bottom" id="xoP-Ua-Bwq"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="2jr-3g-eZL"/>
-                                <exclude reference="kop-b0-Ejh"/>
-                                <exclude reference="5xB-df-Bix"/>
-                            </mask>
-                        </variation>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems>
                         <barButtonItem systemItem="trash" id="UY9-Yv-yfg" userLabel="Delete Button"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="4Ef-qB-gCQ"/>
@@ -182,12 +161,7 @@
                         <outlet property="maskView" destination="o6U-nq-xdI" id="YqB-32-N6R"/>
                         <outlet property="photosButtonItem" destination="zho-8l-mAf" id="RAP-D3-gzV"/>
                         <outlet property="saveButtonItem" destination="ylz-y4-7pV" id="Ycn-K0-Sya"/>
-                        <outletCollection property="portraitConstraints" destination="PoI-uq-yCD" collectionClass="NSMutableArray" id="9ki-aK-RVQ"/>
-                        <outletCollection property="portraitConstraints" destination="8nV-Sf-jRC" collectionClass="NSMutableArray" id="kM9-BT-tzT"/>
-                        <outletCollection property="portraitConstraints" destination="HbK-Ws-XBL" collectionClass="NSMutableArray" id="dsB-Zf-dZ7"/>
-                        <outletCollection property="landscapeConstraints" destination="2jr-3g-eZL" collectionClass="NSMutableArray" id="Psg-qG-AqI"/>
-                        <outletCollection property="landscapeConstraints" destination="kop-b0-Ejh" collectionClass="NSMutableArray" id="ZoQ-JB-3LY"/>
-                        <outletCollection property="landscapeConstraints" destination="5xB-df-Bix" collectionClass="NSMutableArray" id="Hyb-aH-oaY"/>
+                        <outlet property="stickerPlaceholder" destination="awW-7x-eU3" id="NhH-Oy-wkG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nqs-PS-TGi" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -12,6 +12,8 @@ import CoreGraphics
 class MaskView: UIView {
 
     var maskPath: Mask?
+    var maskRect: CGRect?
+    var color: UIColor?
 
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -20,16 +22,19 @@ class MaskView: UIView {
             return
         }
 
-        UIColor.white.setFill()
+        let fillColor = self.color ?? UIColor.white
+        fillColor.setFill()
         UIRectFill(rect)
 
         context.setBlendMode(.destinationOut)
-        let path = self.currentPath(forRect: rect)
+        let path = self.maskPath(forRect: rect)
         path.fill()
         context.setBlendMode(.normal)
     }
 
-    fileprivate func currentPath(forRect rect: CGRect) -> UIBezierPath {
-        return self.maskPath?.path(in: rect) ?? UIBezierPath(ovalIn: rect)
+    fileprivate func maskPath(forRect rect: CGRect) -> UIBezierPath {
+        let maskRect = self.maskRect ?? rect
+        let path = self.maskPath?.path(in: maskRect) ?? UIBezierPath(ovalIn: maskRect)
+        return path
     }
 }

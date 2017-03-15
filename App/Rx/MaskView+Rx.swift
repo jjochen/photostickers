@@ -12,9 +12,15 @@ import RxCocoa
 
 extension Reactive where Base: MaskView {
 
-    var maskPath: UIBindingObserver<Base, Mask> {
+    var maskPath: UIBindingObserver<Base, Mask?> {
         return UIBindingObserver(UIElement: base) { maskView, maskPath in
             maskView.maskPath = maskPath
+        }
+    }
+
+    var maskRect: UIBindingObserver<Base, CGRect?> {
+        return UIBindingObserver(UIElement: base) { maskView, maskRect in
+            maskView.maskRect = maskRect
         }
     }
 }
