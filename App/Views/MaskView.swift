@@ -9,32 +9,53 @@
 import UIKit
 import CoreGraphics
 
-class MaskView: UIView {
+class MaskView: UIVisualEffectView {
 
-    var maskPath: Mask?
-    var maskRect: CGRect?
-    var color: UIColor?
-
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-
-        guard let context = UIGraphicsGetCurrentContext() else {
-            return
+    var maskPath: Mask? {
+        didSet {
+            self.updateMask()
         }
-
-        let fillColor = self.color ?? UIColor.white
-        fillColor.setFill()
-        UIRectFill(rect)
-
-        context.setBlendMode(.destinationOut)
-        let path = self.maskPath(forRect: rect)
-        path.fill()
-        context.setBlendMode(.normal)
     }
 
-    fileprivate func maskPath(forRect rect: CGRect) -> UIBezierPath {
-        let maskRect = self.maskRect ?? rect
-        let path = self.maskPath?.path(in: maskRect) ?? UIBezierPath(ovalIn: maskRect)
-        return path
+    var maskRect: CGRect? {
+        didSet {
+            self.updateMask()
+        }
+    }
+
+    fileprivate var maskLayer: CAShapeLayer?
+
+    override init(effect: UIVisualEffect?) {
+        super.init(effect: effect)
+        commonInit()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+
+    fileprivate func commonInit() {
+        self.backgroundColor = UIColor.clear
+        self.maskLayer = CAShapeLayer()
+        self.maskLayer?.fillRule = kCAFillRuleEvenOdd
+        self.layer.mask = self.maskLayer
+        self.effect = UIBlurEffect(style: UIBlurEffectStyle.prominent)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.updateMask()
+    }
+
+    fileprivate func updateMask() {
+        let maskRect = self.maskRect ?? self.bounds
+        let clipPath = self.maskPath?.path(in: maskRect) ?? UIBezierPath(ovalIn: maskRect)
+
+        let path = CGMutablePath()
+        path.addRect(self.bounds)
+        path.addPath(clipPath.cgPath)
+
+        self.maskLayer?.path = path
     }
 }
