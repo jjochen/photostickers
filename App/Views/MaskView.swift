@@ -23,32 +23,22 @@ class MaskView: UIVisualEffectView {
         }
     }
 
-    fileprivate var maskLayer: CAShapeLayer?
-
-    override init(effect: UIVisualEffect?) {
-        super.init(effect: effect)
-        commonInit()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-
-    fileprivate func commonInit() {
-        self.backgroundColor = UIColor.clear
-        self.maskLayer = CAShapeLayer()
-        self.maskLayer?.fillRule = kCAFillRuleEvenOdd
-        self.layer.mask = self.maskLayer
-        self.effect = UIBlurEffect(style: UIBlurEffectStyle.light)
-    }
-
     override func layoutSubviews() {
         super.layoutSubviews()
         self.updateMask()
     }
 
+    fileprivate lazy var maskLayer: CAShapeLayer = {
+        let mask = CAShapeLayer()
+        mask.fillRule = kCAFillRuleEvenOdd
+        return mask
+    }()
+
     fileprivate func updateMask() {
+        if self.layer.mask == nil {
+            self.layer.mask = self.maskLayer
+        }
+
         let maskRect = self.maskRect ?? self.bounds
         let clipPath = self.maskPath?.path(in: maskRect) ?? UIBezierPath(ovalIn: maskRect)
 
@@ -56,6 +46,6 @@ class MaskView: UIVisualEffectView {
         path.addRect(self.bounds)
         path.addPath(clipPath.cgPath)
 
-        self.maskLayer?.path = path
+        self.maskLayer.path = path
     }
 }

@@ -117,10 +117,27 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.10000000000000001" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="Jlx-aC-2O3" userLabel="Original Image Scroll View" customClass="ImageScrollView" customModule="PhotoStickers" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </scrollView>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o6U-nq-xdI" userLabel="Edit Sticker Mask View" customClass="MaskView" customModule="PhotoStickers" customModuleProvider="target">
+                            <visualEffectView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OVX-LH-6St" userLabel="Mask View" customClass="MaskView" customModule="PhotoStickers" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" id="QQJ-22-Aw0">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Mc-Kk-Hc0">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" ambiguous="YES" id="AQi-MI-LMr">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="light"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                             <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="awW-7x-eU3" userLabel="Sticker Placeholder">
                                 <rect key="frame" x="20" y="84" width="335" height="335"/>
                                 <color key="backgroundColor" red="0.29736699379999998" green="0.90196079019999997" blue="0.097715655390000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -133,14 +150,14 @@
                         <constraints>
                             <constraint firstItem="Jlx-aC-2O3" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="0Xx-Y1-eD8"/>
                             <constraint firstAttribute="trailing" secondItem="awW-7x-eU3" secondAttribute="trailing" constant="20" id="3VS-Mr-GE8"/>
-                            <constraint firstAttribute="trailing" secondItem="o6U-nq-xdI" secondAttribute="trailing" id="A4R-LP-Lpe"/>
                             <constraint firstItem="awW-7x-eU3" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" constant="20" id="Dw6-os-CRy"/>
                             <constraint firstItem="Jlx-aC-2O3" firstAttribute="top" secondItem="63h-fZ-lFi" secondAttribute="top" id="Hpx-rZ-x60"/>
-                            <constraint firstItem="EuG-up-7tU" firstAttribute="top" secondItem="o6U-nq-xdI" secondAttribute="bottom" id="Lhg-aQ-Lw5"/>
+                            <constraint firstItem="OVX-LH-6St" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="TJJ-Uk-9vk"/>
+                            <constraint firstItem="EuG-up-7tU" firstAttribute="top" secondItem="OVX-LH-6St" secondAttribute="bottom" id="TPq-03-s3K"/>
                             <constraint firstItem="awW-7x-eU3" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" constant="20" id="Uc5-yu-eTr"/>
                             <constraint firstAttribute="trailing" secondItem="Jlx-aC-2O3" secondAttribute="trailing" id="Z5z-Vp-de5"/>
-                            <constraint firstItem="o6U-nq-xdI" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="mFs-gT-2xk"/>
-                            <constraint firstItem="o6U-nq-xdI" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="pqz-Vo-478"/>
+                            <constraint firstAttribute="trailing" secondItem="OVX-LH-6St" secondAttribute="trailing" id="qra-Ga-23B"/>
+                            <constraint firstItem="OVX-LH-6St" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="vP2-Aa-Wec"/>
                             <constraint firstAttribute="bottom" secondItem="Jlx-aC-2O3" secondAttribute="bottom" id="xoP-Ua-Bwq"/>
                         </constraints>
                     </view>
@@ -158,7 +175,7 @@
                         <outlet property="cancelButtonItem" destination="HGg-xK-bhk" id="blY-Q7-uzJ"/>
                         <outlet property="deleteButtonItem" destination="UY9-Yv-yfg" id="FL6-hG-PZe"/>
                         <outlet property="imageView" destination="Jlx-aC-2O3" id="Uzy-7V-pGT"/>
-                        <outlet property="maskView" destination="o6U-nq-xdI" id="YqB-32-N6R"/>
+                        <outlet property="maskView" destination="OVX-LH-6St" id="bze-4N-QkN"/>
                         <outlet property="photosButtonItem" destination="zho-8l-mAf" id="RAP-D3-gzV"/>
                         <outlet property="saveButtonItem" destination="ylz-y4-7pV" id="Ycn-K0-Sya"/>
                         <outlet property="stickerPlaceholder" destination="awW-7x-eU3" id="NhH-Oy-wkG"/>
