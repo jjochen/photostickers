@@ -27,4 +27,10 @@ extension Reactive where Base: ImageScrollView {
             imageScrollView.imageWithVisibleRect = imageWithVisibleRect
         }
     }
+
+    var cropRect: UIBindingObserver<Base, CGRect> {
+        return UIBindingObserver(UIElement: base) { imageScrollView, cropRect in
+            imageScrollView.cropRect = cropRect
+        }
+    }
 }

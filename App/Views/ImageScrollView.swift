@@ -14,7 +14,6 @@ struct ImageWithVisibleRect {
 }
 
 class ImageScrollView: UIScrollView, UIScrollViewDelegate {
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setup()
@@ -35,6 +34,12 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         self.delegate = self
     }
 
+    fileprivate lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        self.addSubview(imageView)
+        return imageView
+    }()
+
     var image: UIImage? {
         get {
             return self.imageView.image
@@ -44,20 +49,23 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
 
+    var cropRect: CGRect?
+
     var visibleRect: CGRect {
         get {
-            let visibleRect = self.convert(self.bounds, to: self.imageView)
+            let visibleRect = self.convert(self.cropBounds, to: self.imageView)
             return visibleRect.intersection(self.imageView.bounds)
         }
         set(visibleRect) {
-            self.zoom(to: visibleRect, animated: false)
+            self.setZoomScale(for: visibleRect)
+            self.setContentOffset(for: visibleRect)
         }
     }
 
     func setImage(_ image: UIImage?, visibleRect: CGRect = .zero) {
         self.imageView.image = image
         self.imageView.frame = CGRect(origin: .zero, size: self.imageSize)
-        self.configure(withVisibleRect: visibleRect)
+        self.configure(for: visibleRect)
     }
 
     var imageWithVisibleRect: ImageWithVisibleRect {
@@ -70,45 +78,56 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     }
 
     var minimumZoomedImageSize: CGSize?
-
-    fileprivate lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        self.addSubview(imageView)
-        return imageView
-    }()
 }
 
 // MARK: - Helper
 extension ImageScrollView {
-
     fileprivate var imageSize: CGSize {
         return self.image?.size ?? .zero
     }
 
+    fileprivate var cropBounds: CGRect {
+        guard let cropRect = self.cropRect else {
+            return self.bounds
+        }
+        let cropBounds = cropRect
+            .offsetBy(dx: self.bounds.minX, dy: self.bounds.minY)
+            .intersection(self.bounds)
+        return cropBounds
+    }
+
     fileprivate var _minimumZoomedImageSize: CGSize {
-        return self.minimumZoomedImageSize ?? self.bounds.size // check: multiply by image scale?
+        return self.minimumZoomedImageSize ?? self.cropBounds.size
     }
 }
 
 // MARK: - UIScrollView configuration
 extension ImageScrollView {
-
-    fileprivate func configure(withVisibleRect visibleRect: CGRect) {
+    fileprivate func configure(for visibleRect: CGRect) {
         self.zoomScale = 1 // needed because of some weird scroll view behavior
         self.contentOffset = .zero
-        self.contentInset = .zero
         self.contentSize = self.imageSize
 
-        self.setMaxMinZoomScalesForCurrentBounds()
-        if visibleRect.isEmpty {
-            self.setInitialZoomScale()
-            self.setInitialContentOffset()
-        } else {
-            self.visibleRect = visibleRect
-        }
+        self.configureContentInset()
+        self.configureMaxMinZoomScales()
+        self.visibleRect = visibleRect
     }
 
-    fileprivate func setMaxMinZoomScalesForCurrentBounds() {
+    fileprivate func configureContentInset() {
+        guard let cropRect = self.cropRect else {
+            self.contentInset = .zero
+            return
+        }
+        var insets = UIEdgeInsets()
+        insets.left = cropRect.minX
+        insets.top = cropRect.minY
+        insets.right = self.bounds.size.width - cropRect.maxX
+        insets.bottom = self.bounds.height - cropRect.maxY
+
+        self.contentInset = insets
+    }
+
+    fileprivate func configureMaxMinZoomScales() {
         let minScale = self.minScale
         let maxScale = self.maxScale
 
@@ -116,27 +135,53 @@ extension ImageScrollView {
         self.minimumZoomScale = min(minScale, maxScale)
     }
 
-    fileprivate func setInitialZoomScale() {
-        self.zoomScale = self.minScale
+    fileprivate func setZoomScale(for visibleRect: CGRect) {
+        guard visibleRect.width > 0 && visibleRect.height > 0 else {
+            self.zoomScale = self.initialZoomScale
+            return
+        }
+
+        let boundsSize = self.cropBounds.size
+
+        let xScale = boundsSize.width / visibleRect.width
+        let yScale = boundsSize.height / visibleRect.height
+        var scale = min(xScale, yScale)
+        scale = max(scale, self.minScale)
+        scale = min(scale, self.maxScale)
+
+        self.zoomScale = scale
     }
 
-    fileprivate func setInitialContentOffset() {
-
-        let boundsSize = self.bounds.size
-        let imageSize = self.imageSize
-        let scale = self.minScale
-        let scaledImageSize = CGSize(width: imageSize.width * scale, height: imageSize.height * scale)
+    fileprivate func setContentOffset(for visibleRect: CGRect) {
+        let visibleRect = visibleRect.isEmpty ? self.initialVisibleRect : visibleRect
+        let scale = self.zoomScale
+        let cropRectOrigin = self.cropRect?.origin ?? .zero
 
         var contentOffset = CGPoint()
-        contentOffset.x = max(0, (scaledImageSize.width - boundsSize.width) * 0.5)
-        contentOffset.y = max(0, (scaledImageSize.height - boundsSize.height) * 0.5)
+        contentOffset.x = visibleRect.minX * scale - cropRectOrigin.x
+        contentOffset.y = visibleRect.minY * scale - cropRectOrigin.y
 
         self.contentOffset = contentOffset
     }
 
-    fileprivate var minScale: CGFloat {
+    fileprivate var initialZoomScale: CGFloat {
+        return self.minScale
+    }
 
-        let boundsSize = self.bounds.size
+    fileprivate var initialVisibleRect: CGRect {
+        let imageSize = self.imageSize
+        let minSideLength = min(imageSize.width, imageSize.height)
+
+        var visibleRect = CGRect()
+        visibleRect.size = imageSize
+        visibleRect.origin.x = (imageSize.width - minSideLength) / 2.0
+        visibleRect.origin.y = (imageSize.height - minSideLength) / 2.0
+
+        return visibleRect
+    }
+
+    fileprivate var minScale: CGFloat {
+        let boundsSize = self.cropBounds.size
         let imageSize = self.imageSize
 
         guard imageSize.width > 0 && imageSize.height > 0 else {
@@ -150,8 +195,7 @@ extension ImageScrollView {
     }
 
     fileprivate var maxScale: CGFloat {
-
-        let boundsSize = self.bounds.size
+        let boundsSize = self.cropBounds.size
         let minimumZoomedImageSize = self._minimumZoomedImageSize
 
         guard minimumZoomedImageSize.width > 0 && minimumZoomedImageSize.height > 0 else {
@@ -167,7 +211,6 @@ extension ImageScrollView {
 
 // MARK: - UIScrollViewDelegate
 extension ImageScrollView {
-
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.imageView
     }

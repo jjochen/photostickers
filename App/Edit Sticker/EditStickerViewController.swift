@@ -63,14 +63,26 @@ class EditStickerViewController: UIViewController {
 
         // ToDo: Better observe viewWillTransition(to and viewWillApear/Load
         let stickerRect = self.stickerPlaceholder.rx.observeWeakly(CGRect.self, "layer.frame")
+            .filterNil()
+            .distinctUntilChanged()
+            .shareReplay(1)
+
+        stickerRect
             .map { [weak self] rect in
                 return self?.stickerPlaceholder.convertBounds(to: self?.maskView)
             }
             .filterNil()
             .distinctUntilChanged()
+            .bindTo(self.maskView.rx.maskRect)
+            .disposed(by: self.disposeBag)
 
         stickerRect
-            .bindTo(self.maskView.rx.maskRect)
+            .map { [weak self] rect in
+                return self?.stickerPlaceholder.convertBounds(to: self?.imageView)
+            }
+            .filterNil()
+            .distinctUntilChanged()
+            .bindTo(self.imageView.rx.cropRect)
             .disposed(by: self.disposeBag)
 
         viewModel.originalImageWithBounds
