@@ -40,7 +40,7 @@ class MaskView: UIVisualEffectView {
         self.maskLayer = CAShapeLayer()
         self.maskLayer?.fillRule = kCAFillRuleEvenOdd
         self.layer.mask = self.maskLayer
-        self.effect = UIBlurEffect(style: UIBlurEffectStyle.prominent)
+        self.effect = UIBlurEffect(style: UIBlurEffectStyle.light)
     }
 
     override func layoutSubviews() {
