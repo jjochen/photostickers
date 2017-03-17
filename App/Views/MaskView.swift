@@ -11,6 +11,14 @@ import CoreGraphics
 
 class MaskView: UIVisualEffectView {
 
+    override init(effect: UIVisualEffect?) {
+        super.init(effect: effect)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
     var maskPath: Mask? {
         didSet {
             self.updateMask()
@@ -23,22 +31,24 @@ class MaskView: UIVisualEffectView {
         }
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.updateMask()
-    }
-
     fileprivate lazy var maskLayer: CAShapeLayer = {
         let mask = CAShapeLayer()
         mask.fillRule = kCAFillRuleEvenOdd
         return mask
     }()
 
-    fileprivate func updateMask() {
-        if self.layer.mask == nil {
-            self.layer.mask = self.maskLayer
-        }
+    fileprivate lazy var theMaskView: UIView = {
+        let maskView = UIView()
+        maskView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        maskView.isUserInteractionEnabled = false
+        maskView.backgroundColor = UIColor.black
+        return maskView
+    }()
 
+    fileprivate func updateMask() {
+
+        theMaskView.frame = self.bounds
+        theMaskView.layer.mask = maskLayer
         let maskRect = self.maskRect ?? self.bounds
         let clipPath = self.maskPath?.path(in: maskRect) ?? UIBezierPath(ovalIn: maskRect)
 
@@ -46,6 +56,7 @@ class MaskView: UIVisualEffectView {
         path.addRect(self.bounds)
         path.addPath(clipPath.cgPath)
 
-        self.maskLayer.path = path
+        maskLayer.path = path
+        self.mask = theMaskView
     }
 }
