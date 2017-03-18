@@ -146,7 +146,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Jlx-aC-2O3" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="0Xx-Y1-eD8"/>
                             <constraint firstAttribute="trailing" secondItem="awW-7x-eU3" secondAttribute="trailing" constant="20" id="3VS-Mr-GE8"/>
@@ -166,8 +166,16 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="4Ef-qB-gCQ"/>
                         <barButtonItem systemItem="camera" id="zho-8l-mAf" userLabel="Photo Library Button"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Sticker" id="3cS-n0-mdI" userLabel="Edit Sticker Navigation Bar">
+                    <navigationItem key="navigationItem" id="3cS-n0-mdI" userLabel="Edit Sticker Navigation Bar">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="HGg-xK-bhk" userLabel="Cancel Button"/>
+                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Photo Sticker" textAlignment="center" minimumFontSize="17" id="dt1-g2-TIx" userLabel="Sticker Title Text Field">
+                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="ylz-y4-7pV" userLabel="Save Button"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -179,6 +187,7 @@
                         <outlet property="photosButtonItem" destination="zho-8l-mAf" id="RAP-D3-gzV"/>
                         <outlet property="saveButtonItem" destination="ylz-y4-7pV" id="Ycn-K0-Sya"/>
                         <outlet property="stickerPlaceholder" destination="awW-7x-eU3" id="NhH-Oy-wkG"/>
+                        <outlet property="stickerTitleTextField" destination="dt1-g2-TIx" id="Nr1-N4-DiT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nqs-PS-TGi" userLabel="First Responder" sceneMemberID="firstResponder"/>

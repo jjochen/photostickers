@@ -16,6 +16,7 @@ protocol StickerServiceType {
     func fetchStickers(withPredicate predicate: NSPredicate) -> Observable<[Sticker]>
     func fetchStickers() -> Observable<[Sticker]>
     func storeSticker(withInfo stickerInfo: StickerInfo) -> Observable<Sticker>
+    func deleteSticker(withUUID uuid: String) -> Observable<Void>
 }
 
 class StickerService: StickerServiceType {
@@ -88,6 +89,45 @@ extension StickerService {
             }
 
             observer.on(.next(nextSticker))
+            observer.on(.completed)
+            return Disposables.create()
+        }
+    }
+
+    func deleteSticker(withUUID uuid: String) -> Observable<Void> {
+        return Observable.create { [weak self] observer in
+            guard let realm = self?.currentRealm() else {
+                observer.on(.error(PSError.unknown)) // todo
+                return Disposables.create()
+            }
+
+            guard let sticker = realm.object(ofType: Sticker.self, forPrimaryKey: uuid) else {
+                observer.on(.error(PSError.unknown)) // todo
+                return Disposables.create()
+            }
+
+            do {
+                if let originalImageFilePath = sticker.originalImageFilePath {
+                    try FileManager.default.removeItem(atPath: originalImageFilePath)
+                }
+                if let renderedStickerFilePath = sticker.renderedStickerFilePath {
+                    try FileManager.default.removeItem(atPath: renderedStickerFilePath)
+                }
+            } catch let error {
+                Logger.shared.error(error)
+            }
+
+            do {
+                try realm.write {
+                    realm.delete(sticker)
+                }
+            } catch let error {
+                observer.on(.error(error))
+                return Disposables.create()
+            }
+
+            observer.on(.next())
+            observer.on(.completed)
             return Disposables.create()
         }
     }
@@ -96,7 +136,7 @@ extension StickerService {
 extension StickerService {
 
     fileprivate func sticker(withInfo info: StickerInfo, inRealm realm: Realm) throws -> Sticker {
-        let sticker = try realm.sticker(withUUID: info.uuid.value)
+        let sticker = try realm.sticker(withUUID: info.uuid)
         try self.update(sticker: sticker, withInfo: info)
         return sticker
     }

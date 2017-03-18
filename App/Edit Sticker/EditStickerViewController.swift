@@ -24,6 +24,7 @@ class EditStickerViewController: UIViewController {
     @IBOutlet weak var imageView: ImageScrollView!
     @IBOutlet weak var maskView: MaskView!
     @IBOutlet weak var stickerPlaceholder: UIView!
+    @IBOutlet weak var stickerTitleTextField: UITextField!
 
     @IBOutlet var portraitConstraints: [NSLayoutConstraint]!
     @IBOutlet var landscapeConstraints: [NSLayoutConstraint]!
@@ -59,6 +60,10 @@ class EditStickerViewController: UIViewController {
 
         self.imageView.rx.visibleRect
             .bindTo(viewModel.didZoomToVisibleRect)
+            .disposed(by: self.disposeBag)
+
+        self.stickerTitleTextField.rx.text
+            .bindTo(viewModel.stickerTitle)
             .disposed(by: self.disposeBag)
 
         // ToDo: Better observe viewWillTransition(to and viewWillApear/Load
@@ -98,6 +103,10 @@ class EditStickerViewController: UIViewController {
 
         viewModel.saveButtonItemEnabled
             .drive(self.saveButtonItem.rx.isEnabled)
+            .disposed(by: self.disposeBag)
+
+        viewModel.deleteButtonItemEnabled
+            .drive(self.deleteButtonItem.rx.isEnabled)
             .disposed(by: self.disposeBag)
 
         viewModel.presentImagePicker

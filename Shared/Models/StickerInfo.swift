@@ -11,8 +11,9 @@ import RxSwift
 
 class StickerInfo {
 
+    let uuid: String
+
     // MARK: initial values
-    let initialUUID: String
     let initialLocalizedDescription: String
     let initialOriginalImage: UIImage?
     let initialRenderedSticker: UIImage?
@@ -21,7 +22,6 @@ class StickerInfo {
     let initialSortOrder: Int
 
     // MARK: updated values
-    let uuid: Variable<String>
     let localizedDescription: Variable<String>
     let originalImage: Variable<UIImage?>
     let renderedSticker: Variable<UIImage?>
@@ -38,7 +38,8 @@ class StickerInfo {
          mask: Mask,
          sortOrder: Int) {
 
-        self.initialUUID = uuid
+        self.uuid = uuid
+
         self.initialLocalizedDescription = localizedDescription
         self.initialOriginalImage = originalImage
         self.initialRenderedSticker = renderedSticker
@@ -46,7 +47,6 @@ class StickerInfo {
         self.initialMask = mask
         self.initialSortOrder = sortOrder
 
-        self.uuid = Variable(uuid)
         self.localizedDescription = Variable(localizedDescription)
         self.originalImage = Variable(originalImage)
         self.renderedSticker = Variable(renderedSticker)
@@ -95,9 +95,6 @@ class StickerInfo {
     }
 
     // MARK: canges
-    var uuidDidChange: Bool {
-        return self.uuid.value != self.initialUUID
-    }
 
     var localizedDescriptionDidChange: Bool {
         return self.localizedDescription.value != self.initialLocalizedDescription

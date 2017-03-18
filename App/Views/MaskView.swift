@@ -31,6 +31,16 @@ class MaskView: UIVisualEffectView {
         }
     }
 
+    override var frame: CGRect {
+        get {
+            return super.frame
+        }
+        set(frame) {
+            super.frame = frame
+            self.updateMask()
+        }
+    }
+
     fileprivate lazy var maskLayer: CAShapeLayer = {
         let mask = CAShapeLayer()
         mask.fillRule = kCAFillRuleEvenOdd
