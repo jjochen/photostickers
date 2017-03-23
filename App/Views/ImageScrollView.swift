@@ -40,6 +40,12 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         return imageView
     }()
 
+    var cropRect: CGRect?
+    var minimumZoomedImageSize: CGSize?
+}
+
+extension ImageScrollView {
+
     var image: UIImage? {
         get {
             return self.imageView.image
@@ -48,8 +54,6 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
             self.setImage(image)
         }
     }
-
-    var cropRect: CGRect?
 
     var visibleRect: CGRect {
         get {
@@ -76,8 +80,6 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
             self.setImage(imageWithVisibleRect.image, visibleRect: imageWithVisibleRect.visibleRect)
         }
     }
-
-    var minimumZoomedImageSize: CGSize?
 }
 
 // MARK: - Helper

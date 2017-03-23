@@ -15,6 +15,15 @@ enum Mask: Int {
 }
 
 extension Mask {
+
+    func maskPath(in rect: CGRect, maskRect: CGRect) -> UIBezierPath {
+        let maskPath = UIBezierPath(rect: rect)
+        maskPath.usesEvenOddFillRule = true
+        let path = self.path(in: maskRect)
+        maskPath.append(path)
+        return maskPath
+    }
+
     func path(in rect: CGRect) -> UIBezierPath {
         switch self {
         case .rectangle:
@@ -29,7 +38,8 @@ extension Mask {
 
 extension Mask {
     fileprivate func rectanglePath(in rect: CGRect) -> UIBezierPath {
-        return UIBezierPath(rect: rect)
+        let minSideLength = min(rect.width, rect.height)
+        return UIBezierPath(roundedRect: rect, cornerRadius: minSideLength / 8.0)
     }
 
     fileprivate func circlePath(in rect: CGRect) -> UIBezierPath {

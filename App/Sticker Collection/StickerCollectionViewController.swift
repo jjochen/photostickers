@@ -39,11 +39,11 @@ class StickerCollectionViewController: UIViewController {
                 }
                 stickerCell.viewModel = model
             }
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
 
         self.stickerCollectionView.rx
             .setDelegate(self)
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
 
         //        self.stickerCollectionView.rx
         //            .modelSelected(StickerCollectionCellModel.self)
@@ -92,5 +92,11 @@ extension StickerCollectionViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+    }
+}
+
+extension StickerCollectionViewController {
+    fileprivate func updateFlowLayout() {
+        //  todo
     }
 }
