@@ -17,13 +17,14 @@ protocol EditStickerViewModelType {
     var deleteButtonItemDidTap: PublishSubject<Void> { get }
     var photosButtonItemDidTap: PublishSubject<Void> { get }
     var didPickImage: PublishSubject<UIImage?> { get }
-    var didZoomToVisibleRect: PublishSubject<CGRect> { get }
-    var stickerTitle: PublishSubject<String?> { get }
+    var visibleRectDidChange: PublishSubject<CGRect> { get }
+    var stickerTitleDidChange: PublishSubject<String?> { get }
 
-    var originalImageWithBounds: Driver<(UIImage?, CGRect)> { get }
+    var imageWithVisibleRect: Driver<(UIImage?, CGRect)> { get }
     var mask: Driver<Mask> { get }
     var saveButtonItemEnabled: Driver<Bool> { get }
     var deleteButtonItemEnabled: Driver<Bool> { get }
+    var stickerPlaceholderHidden: Driver<Bool> { get }
     var presentImagePicker: Observable<UIImagePickerControllerSourceType> { get }
     var dismissViewController: Observable<Void> { get }
 }
@@ -44,14 +45,15 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let deleteButtonItemDidTap = PublishSubject<Void>()
     let photosButtonItemDidTap = PublishSubject<Void>()
     let didPickImage = PublishSubject<UIImage?>()
-    let didZoomToVisibleRect = PublishSubject<CGRect>()
-    let stickerTitle = PublishSubject<String?>()
+    let visibleRectDidChange = PublishSubject<CGRect>()
+    let stickerTitleDidChange = PublishSubject<String?>()
 
     // MARK: Output
-    let originalImageWithBounds: Driver<(UIImage?, CGRect)>
+    let imageWithVisibleRect: Driver<(UIImage?, CGRect)>
     let mask: Driver<Mask>
     let saveButtonItemEnabled: Driver<Bool>
     let deleteButtonItemEnabled: Driver<Bool>
+    let stickerPlaceholderHidden: Driver<Bool>
     let presentImagePicker: Observable<UIImagePickerControllerSourceType>
     let dismissViewController: Observable<Void>
 
@@ -80,7 +82,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: false)
 
-        self.originalImageWithBounds = self.stickerInfo
+        self.imageWithVisibleRect = self.stickerInfo
             .originalImage
             .asDriver()
             .map { (image: UIImage?) -> (UIImage?, CGRect) in
@@ -91,13 +93,18 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .mask
             .asDriver()
 
-        let originalImageIsNil = self.stickerInfo
+        self.stickerPlaceholderHidden = self.stickerInfo
+            .originalImageIsNil
+            .map { !$0 }
+            .asDriver(onErrorJustReturn: false)
+
+        let originalImageIsSetToNil = self.stickerInfo
             .originalImageIsNil
             .filter { $0 }
             .map { _ in Void() }
 
         self.presentImagePicker = Observable
-            .of(self.photosButtonItemDidTap, originalImageIsNil)
+            .of(self.photosButtonItemDidTap, originalImageIsSetToNil)
             .merge()
             .map {
                 return .photoLibrary
@@ -133,14 +140,14 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .bindTo(stickerInfo.originalImage)
             .disposed(by: self.disposeBag)
 
-        self.stickerTitle
+        self.stickerTitleDidChange
             .map { title in
                 return title?.trimmingCharacters(in: .whitespaces) ?? ""
             }
             .bindTo(stickerInfo.localizedDescription)
             .disposed(by: self.disposeBag)
 
-        self.didZoomToVisibleRect
+        self.visibleRectDidChange
             .bindTo(stickerInfo.cropBounds)
             .disposed(by: self.disposeBag)
 

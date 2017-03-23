@@ -13,10 +13,18 @@ class MaskView: UIVisualEffectView {
 
     override init(effect: UIVisualEffect?) {
         super.init(effect: effect)
+        self.commonInit()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.commonInit()
+    }
+
+    func commonInit() {
+        self.theMaskView.layer.mask = self.maskLayer
+        self.mask = self.theMaskView
+        self.updateMask()
     }
 
     var maskPath: Mask? {
@@ -31,34 +39,29 @@ class MaskView: UIVisualEffectView {
         }
     }
 
-    override var frame: CGRect {
-        get {
-            return super.frame
-        }
-        set(frame) {
-            super.frame = frame
-            self.updateMask()
-        }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        //        self.theMaskView.frame = self.bounds
+        //        self.updateMask()
     }
 
     fileprivate lazy var maskLayer: CAShapeLayer = {
-        let mask = CAShapeLayer()
-        mask.fillRule = kCAFillRuleEvenOdd
-        return mask
+        let maskLayer = CAShapeLayer()
+        maskLayer.fillRule = kCAFillRuleEvenOdd
+        return maskLayer
     }()
 
     fileprivate lazy var theMaskView: UIView = {
         let maskView = UIView()
-        maskView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         maskView.isUserInteractionEnabled = false
         maskView.backgroundColor = UIColor.black
         return maskView
     }()
 
     fileprivate func updateMask() {
+        self.theMaskView.frame = self.bounds
+        self.maskLayer.frame = self.theMaskView.bounds
 
-        theMaskView.frame = self.bounds
-        theMaskView.layer.mask = maskLayer
         let maskRect = self.maskRect ?? self.bounds
         let clipPath = self.maskPath?.path(in: maskRect) ?? UIBezierPath(ovalIn: maskRect)
 
@@ -66,7 +69,6 @@ class MaskView: UIVisualEffectView {
         path.addRect(self.bounds)
         path.addPath(clipPath.cgPath)
 
-        maskLayer.path = path
-        self.mask = theMaskView
+        self.maskLayer.path = path
     }
 }
