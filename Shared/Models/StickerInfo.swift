@@ -40,12 +40,12 @@ class StickerInfo {
 
         self.uuid = uuid
 
-        self.initialLocalizedDescription = localizedDescription
-        self.initialOriginalImage = originalImage
-        self.initialRenderedSticker = renderedSticker
-        self.initialCropBounds = cropBounds
-        self.initialMask = mask
-        self.initialSortOrder = sortOrder
+        initialLocalizedDescription = localizedDescription
+        initialOriginalImage = originalImage
+        initialRenderedSticker = renderedSticker
+        initialCropBounds = cropBounds
+        initialMask = mask
+        initialSortOrder = sortOrder
 
         self.localizedDescription = Variable(localizedDescription)
         self.originalImage = Variable(originalImage)
@@ -77,19 +77,19 @@ class StickerInfo {
 
     // MARK: Observers
     var originalImageIsNil: Observable<Bool> {
-        return self.originalImage
+        return originalImage
             .asObservable()
             .map { $0 == nil }
     }
 
     var renderedStickerIsNil: Observable<Bool> {
-        return self.renderedSticker
+        return renderedSticker
             .asObservable()
             .map { $0 == nil }
     }
 
     var cropBoundsAreEmpty: Observable<Bool> {
-        return self.cropBounds
+        return cropBounds
             .asObservable()
             .map { $0.isNull || $0.isEmpty }
     }
@@ -97,26 +97,26 @@ class StickerInfo {
     // MARK: canges
 
     var localizedDescriptionDidChange: Bool {
-        return self.localizedDescription.value != self.initialLocalizedDescription
+        return localizedDescription.value != initialLocalizedDescription
     }
 
     var originalImageDidChange: Bool {
-        return self.originalImage.value != self.initialOriginalImage
+        return originalImage.value != initialOriginalImage
     }
 
     var renderedStickerDidChange: Bool {
-        return self.renderedSticker.value != self.initialRenderedSticker
+        return renderedSticker.value != initialRenderedSticker
     }
 
     var cropBoundsDidChange: Bool {
-        return self.cropBounds.value != self.initialCropBounds
+        return cropBounds.value != initialCropBounds
     }
 
     var maskDidChange: Bool {
-        return self.mask.value != self.initialMask
+        return mask.value != initialMask
     }
 
     var sortOrderDidChange: Bool {
-        return self.sortOrder.value != self.initialSortOrder
+        return sortOrder.value != initialSortOrder
     }
 }

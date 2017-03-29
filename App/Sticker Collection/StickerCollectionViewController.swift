@@ -23,7 +23,7 @@ class StickerCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupBindings()
+        setupBindings()
     }
 
     func setupBindings() {
@@ -33,17 +33,17 @@ class StickerCollectionViewController: UIViewController {
         }
 
         viewModel.stickerCellModels
-            .bindTo(self.stickerCollectionView.rx.items(cellIdentifier: CollectionViewCellReuseIdentifier.StickerCollectionCell.rawValue)) { index, model, cell in
+            .bindTo(stickerCollectionView.rx.items(cellIdentifier: CollectionViewCellReuseIdentifier.StickerCollectionCell.rawValue)) { _, model, cell in
                 guard let stickerCell = cell as? StickerCollectionCell else {
                     return
                 }
                 stickerCell.viewModel = model
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.stickerCollectionView.rx
+        stickerCollectionView.rx
             .setDelegate(self)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
         //        self.stickerCollectionView.rx
         //            .modelSelected(StickerCollectionCellModel.self)
@@ -97,6 +97,6 @@ extension StickerCollectionViewController: UICollectionViewDelegate {
 
 extension StickerCollectionViewController {
     fileprivate func updateFlowLayout() {
-        //  todo
+        // TODO:
     }
 }

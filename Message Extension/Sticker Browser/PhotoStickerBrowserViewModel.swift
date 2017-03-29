@@ -31,7 +31,7 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
         self.extensionContext = extensionContext
 
         let predicate = NSPredicate(format: "renderedStickerFilePath != nil")
-        self.sectionItems = stickerService
+        sectionItems = stickerService
             .fetchStickers(withPredicate: predicate)
             .map { allStickers in
                 var items = allStickers.map { sticker in
@@ -46,7 +46,7 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
 
     func openApp() {
         if let url = URL(string: "photosticker://create") {
-            self.extensionContext?.open(url, completionHandler: nil)
+            extensionContext?.open(url, completionHandler: nil)
         }
     }
 }

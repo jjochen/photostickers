@@ -42,36 +42,46 @@ class EditStickerViewController: UIViewController {
         return maskLayer
     }()
 
-    fileprivate var mask: Mask = .circle
+    var maskPath: UIBezierPath? {
+        didSet {
+            updateMask()
+        }
+    }
+
+    fileprivate let didEndDecelerating = PublishSubject<Void>()
+    fileprivate let didEndDraggingWithoutDecelaration = PublishSubject<Void>()
+    fileprivate let scrollViewDidMove = PublishSubject<Void>()
 }
 
+// MASK: - UIViewController override
 extension EditStickerViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupBindings()
         self.configureLayoutConstraints()
-        self.updateMask()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        self.updateMask()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.maskView.frame = self.blurView.bounds
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 
-        coordinator.animate(alongsideTransition: { context in
+        coordinator.animate(alongsideTransition: { _ in
             self.configureLayoutConstraints()
         },
-        completion: { context in
+        completion: { _ in
 
         })
         super.viewWillTransition(to: size, with: coordinator)
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension EditStickerViewController: UIScrollViewDelegate {
+    func viewForZooming(in _: UIScrollView) -> UIView? {
+        return self.imageView
     }
 }
 
@@ -91,52 +101,54 @@ fileprivate extension EditStickerViewController {
             .bindTo(viewModel.cancelButtonItemDidTap)
             .disposed(by: self.disposeBag)
 
-        self.photosButtonItem.rx.tap
-            .bindTo(viewModel.photosButtonItemDidTap)
-            .disposed(by: self.disposeBag)
-
         self.deleteButtonItem.rx.tap
             .bindTo(viewModel.deleteButtonItemDidTap)
             .disposed(by: self.disposeBag)
 
-        Observable.of(scrollView.rx.didScroll, scrollView.rx.didZoom)
-            .merge()
-            .map { () -> CGRect in
-                return self.visibleImageRect
+        self.photosButtonItem.rx.tap
+            .bindTo(viewModel.photosButtonItemDidTap)
+            .disposed(by: self.disposeBag)
+
+        self.scrollView.rx
+            .didEndDecelerating
+            .bindTo(self.didEndDecelerating)
+            .disposed(by: self.disposeBag)
+
+        self.scrollView.rx
+            .didEndDragging.filter { willDecelerate in
+                return !willDecelerate
             }
-            .bindTo(viewModel.visibleRectDidChange)
+            .map { _ in Void() }
+            .bindTo(self.didEndDraggingWithoutDecelaration)
+            .disposed(by: self.disposeBag)
+
+        Observable
+            .of(self.didEndDraggingWithoutDecelaration, self.didEndDecelerating)
+            .merge()
+            .bindTo(self.scrollViewDidMove)
+            .disposed(by: self.disposeBag)
+
+        Observable.of(self.scrollViewDidMove, self.rx.viewDidLayoutSubviews)
+            .merge()
+            .map { _ in self.scrollView.bounds }
+            .distinctUntilChanged()
+            .bindTo(viewModel.scrollViewBoundsDidChange)
+            .disposed(by: self.disposeBag)
+
+        self.rx.viewDidLayoutSubviews
+            .map {
+                return self.maskView.bounds
+            }
+            .distinctUntilChanged()
+            .bindTo(viewModel.maskViewBoundsDidChange)
             .disposed(by: self.disposeBag)
 
         self.stickerTitleTextField.rx.text
             .bindTo(viewModel.stickerTitleDidChange)
             .disposed(by: self.disposeBag)
 
-        //        // ToDo: Better observe viewWillTransition(to and viewWillApear/Load
-        //        Observable.of(self.stickerPlaceholder.rx.observeWeakly(CGRect.self, "bounds").map { _ in Void() },
-        //                      self.stickerPlaceholder.rx.observeWeakly(CGPoint.self, "center").map { _ in Void() })
-        //            .merge()
-        //            .map { _ in
-        //                return self.stickerPlaceholder.convertBounds(to: self.imageView)
-        //            }
-        //            .distinctUntilChanged()
-        //            .asDriver(onErrorJustReturn: .zero)
-        //            .debug()
-        //            .drive(self.imageView.rx.cropRect)
-        //            .disposed(by: self.disposeBag)
-
-        viewModel.imageWithVisibleRect
-            .asObservable()
-            .subscribe(onNext: { image, visibleRect in
-                self.setImage(image, visibleRect: visibleRect)
-            })
-            .disposed(by: self.disposeBag)
-
-        viewModel.mask.asObservable()
-            .subscribe(onNext: { mask in
-                self.mask = mask
-                //                self.updateMask()
-            })
-            .disposed(by: self.disposeBag)
+        self.stickerTitleTextField.text = viewModel.stickerTitle
+        self.stickerTitleTextField.placeholder = viewModel.stickerTitlePlaceholder
 
         viewModel.saveButtonItemEnabled
             .drive(self.saveButtonItem.rx.isEnabled)
@@ -150,8 +162,36 @@ fileprivate extension EditStickerViewController {
             .drive(self.stickerPlaceholder.rx.isHidden)
             .disposed(by: self.disposeBag)
 
+        viewModel.image
+            .drive(self.imageView.rx.image)
+            .disposed(by: self.disposeBag)
+
+        viewModel.contentInset
+            .drive(self.scrollView.rx.contentInset)
+            .disposed(by: self.disposeBag)
+
+        viewModel.maximumZoomScale
+            .drive(self.scrollView.rx.maximumZoomScale)
+            .disposed(by: self.disposeBag)
+
+        viewModel.minimumZoomScale
+            .drive(self.scrollView.rx.minimumZoomScale)
+            .disposed(by: self.disposeBag)
+
+        viewModel.zoomScale
+            .drive(self.scrollView.rx.zoomScale)
+            .disposed(by: self.disposeBag)
+
+        viewModel.contentOffset
+            .drive(self.scrollView.rx.contentOffset)
+            .disposed(by: self.disposeBag)
+
+        viewModel.maskPath
+            .drive(self.rx.maskPath)
+            .disposed(by: self.disposeBag)
+
         viewModel.presentImagePicker
-            .flatMapLatest { [weak self] sourceType in
+            .flatMapLatest { sourceType in
                 return UIImagePickerController.rx.createWithParent(self) { picker in
                     picker.sourceType = sourceType
                     picker.allowsEditing = false
@@ -160,37 +200,56 @@ fileprivate extension EditStickerViewController {
                     imagePicker.rx.didFinishPickingMediaWithInfo
                 }
                 .take(1)
+                .asDriver(onErrorJustReturn: [:])
             }
             .map { info in
                 return info[UIImagePickerControllerOriginalImage] as? UIImage
             }
-            .bindTo(viewModel.didPickImage)
+            .drive(viewModel.didPickImage)
             .disposed(by: self.disposeBag)
 
-        viewModel.dismissViewController
-            .subscribe(onNext: { [weak self] in
+        viewModel.dismiss
+            .drive(onNext: { [weak self] in
                 self?.dismiss(animated: true, completion: nil)
             })
             .addDisposableTo(self.disposeBag)
     }
 }
 
-// MARK: - Layout
+// MARK: - Configuration
 fileprivate extension EditStickerViewController {
-    func updateMask() {
+    //    func configure() {
+    //        guard let configuration = self.configuration else {
+    //            return
+    //        }
+    //
+    //        self.scrollView.zoomScale = 1
+    //        self.imageView.image = configuration.image
+    //        self.scrollView.contentSize = configuration.image?.size ?? .zero
+    //
+    //        self.scrollView.contentInset = configuration.contentInset
+    //        self.scrollView.minimumZoomScale = configuration.minimumZoomScale
+    //        self.scrollView.maximumZoomScale = configuration.maximumZoomScale
+    //        self.scrollView.zoomScale = configuration.zoomScale
+    //        self.scrollView.contentOffset = configuration.contentOffset
+    //
+    //        self.view.setNeedsLayout()
+    //        self.view.layoutIfNeeded()
+    //    }
 
-        self.maskView.frame = self.view.bounds
-        let bounds = self.maskView.bounds
-        let minBoundsSideLength = min(bounds.width, bounds.height)
-        let sideLength = minBoundsSideLength * 0.85
-        let offset = (minBoundsSideLength - sideLength) / 2
-        let maskRect = CGRect(x: offset, y: offset, width: sideLength, height: sideLength)
-        let path = self.mask.maskPath(in: bounds, maskRect: maskRect)
+    func updateMask() {
+        guard let path = self.maskPath else {
+            return
+        }
 
         self.maskLayer.path = path.cgPath
         self.maskView.layer.mask = self.maskLayer
         self.blurView.mask = self.maskView
     }
+}
+
+// MARK: - Layout
+fileprivate extension EditStickerViewController {
 
     func configureLayoutConstraints() {
 
@@ -215,174 +274,12 @@ fileprivate extension EditStickerViewController {
     }
 }
 
-// MARK: - Helper
-fileprivate extension EditStickerViewController {
+// MARK: - Rx
+fileprivate extension Reactive where Base: EditStickerViewController {
 
-    var image: UIImage? {
-        get {
-            return self.imageView.image
+    var maskPath: UIBindingObserver<Base, UIBezierPath> {
+        return UIBindingObserver(UIElement: self.base) { UIElement, value in
+            UIElement.maskPath = value
         }
-        set(image) {
-            self.setImage(image)
-        }
-    }
-
-    var cropSize: CGSize {
-        let cropSize = self.stickerCropView.frame.size
-        return cropSize
-    }
-
-    var cropRect: CGRect {
-        var cropRect = self.stickerCropView.convertBounds(to: self.view)
-        cropRect.origin.x -= self.scrollView.frame.origin.x
-        cropRect.origin.y -= self.scrollView.frame.origin.y
-        return cropRect
-    }
-
-    var visibleImageRect: CGRect {
-        get {
-            let visibleRect = self.stickerCropView.convertBounds(to: self.imageView)
-            return visibleRect.intersection(self.imageView.bounds)
-        }
-        set(visibleRect) {
-            self.setZoomScale(for: visibleRect)
-            self.setContentOffset(for: visibleRect)
-        }
-    }
-
-    func setImage(_ image: UIImage?, visibleRect: CGRect = .zero) {
-        self.imageView.image = image
-        self.scrollView.setNeedsLayout()
-        self.scrollView.layoutIfNeeded()
-        self.configureScrollView(for: visibleRect)
-    }
-
-    var imageWithVisibleRect: ImageWithVisibleRect {
-        get {
-            return ImageWithVisibleRect(image: self.image, visibleRect: self.visibleImageRect)
-        }
-        set(imageWithVisibleRect) {
-            self.setImage(imageWithVisibleRect.image, visibleRect: imageWithVisibleRect.visibleRect)
-        }
-    }
-
-    var imageSize: CGSize {
-        return self.image?.size ?? .zero
-    }
-
-    var minimumZoomedImageSize: CGSize {
-        return Sticker.renderedSize // !!! make configurable !!!
-    }
-}
-
-// MARK: - UIScrollView configuration
-fileprivate extension EditStickerViewController {
-    func configureScrollView(for visibleImageRect: CGRect) {
-        self.scrollView.zoomScale = 1 // needed because of some weird scroll view behavior
-        self.scrollView.contentOffset = .zero
-
-        self.configureContentInset()
-        self.configureMaxMinZoomScales()
-        self.visibleImageRect = visibleImageRect
-    }
-
-    func configureContentInset() {
-        let cropRect = self.cropRect
-        let bounds = self.scrollView.bounds
-        var insets = UIEdgeInsets()
-        insets.left = cropRect.minX
-        insets.top = cropRect.minY
-        insets.right = bounds.width - cropRect.maxX
-        insets.bottom = bounds.height - cropRect.maxY
-
-        self.scrollView.contentInset = insets
-    }
-
-    func configureMaxMinZoomScales() {
-        let minScale = self.minScale
-        let maxScale = self.maxScale
-
-        self.scrollView.maximumZoomScale = max(minScale, maxScale)
-        self.scrollView.minimumZoomScale = min(minScale, maxScale)
-    }
-
-    func setZoomScale(for visibleImageRect: CGRect) {
-        guard visibleImageRect.width > 0 && visibleImageRect.height > 0 else {
-            self.scrollView.zoomScale = self.initialZoomScale
-            return
-        }
-
-        let cropSize = self.cropSize
-
-        let xScale = cropSize.width / visibleImageRect.width
-        let yScale = cropSize.height / visibleImageRect.height
-        var scale = min(xScale, yScale)
-        scale = max(scale, self.minScale)
-        scale = min(scale, self.maxScale)
-
-        self.scrollView.zoomScale = scale
-    }
-
-    func setContentOffset(for visibleRect: CGRect) {
-        let visibleRect = visibleRect.isEmpty ? self.initialVisibleRect : visibleRect
-        let scale = self.scrollView.zoomScale
-        let cropRectOrigin = self.cropRect.origin // check
-
-        var contentOffset = CGPoint()
-        contentOffset.x = visibleRect.minX * scale - cropRectOrigin.x
-        contentOffset.y = visibleRect.minY * scale - cropRectOrigin.y
-
-        self.scrollView.contentOffset = contentOffset
-    }
-
-    var initialZoomScale: CGFloat {
-        return self.minScale
-    }
-
-    var initialVisibleRect: CGRect {
-        let imageSize = self.imageSize
-        let minSideLength = min(imageSize.width, imageSize.height)
-
-        var visibleRect = CGRect()
-        visibleRect.size = imageSize
-        visibleRect.origin.x = (imageSize.width - minSideLength) / 2.0
-        visibleRect.origin.y = (imageSize.height - minSideLength) / 2.0
-
-        return visibleRect
-    }
-
-    var minScale: CGFloat {
-        let cropSize = self.cropSize
-        let imageSize = self.imageSize
-
-        guard imageSize.width > 0 && imageSize.height > 0 else {
-            return 1
-        }
-
-        let xScale = cropSize.width / imageSize.width
-        let yScale = cropSize.height / imageSize.height
-        let minScale = max(xScale, yScale)
-        return minScale
-    }
-
-    var maxScale: CGFloat {
-        let cropSize = self.cropSize
-        let minimumZoomedImageSize = self.minimumZoomedImageSize
-
-        guard minimumZoomedImageSize.width > 0 && minimumZoomedImageSize.height > 0 else {
-            return 1
-        }
-
-        let xScale = cropSize.width / minimumZoomedImageSize.width
-        let yScale = cropSize.height / minimumZoomedImageSize.height
-        let maxScale = min(xScale, yScale)
-        return maxScale
-    }
-}
-
-// MARK: - UIScrollViewDelegate
-extension EditStickerViewController: UIScrollViewDelegate {
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return self.imageView
     }
 }

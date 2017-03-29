@@ -130,10 +130,10 @@ open class Snapshot: NSObject {
 extension XCUIElement {
     var isLoadingIndicator: Bool {
         let whiteListedLoaders = ["GeofenceLocationTrackingOn", "StandardLocationTrackingOn"]
-        if whiteListedLoaders.contains(self.identifier) {
+        if whiteListedLoaders.contains(identifier) {
             return false
         }
-        return self.frame.size == CGSize(width: 10, height: 20)
+        return frame.size == CGSize(width: 10, height: 20)
     }
 }
 

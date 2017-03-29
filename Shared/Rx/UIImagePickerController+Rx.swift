@@ -29,7 +29,7 @@ extension Reactive where Base: UIImagePickerController {
         return delegate
             .methodInvoked(#selector(UIImagePickerControllerDelegate.imagePickerController(_:didFinishPickingMediaWithInfo:)))
             .map({ a in
-                return try castOrThrow(Dictionary<String, Any>.self, a[1])
+                try castOrThrow(Dictionary<String, Any>.self, a[1])
             })
     }
 

@@ -1,6 +1,10 @@
 
 # Created by https://www.gitignore.io/api/swift,xcode,fastlane
 
+### General ###
+*.bkp
+
+
 ### Swift ###
 # Xcode
 #

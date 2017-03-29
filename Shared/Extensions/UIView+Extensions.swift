@@ -10,6 +10,6 @@ import UIKit
 
 extension UIView {
     func convertBounds(to view: UIView?) -> CGRect {
-        return self.convert(self.bounds, to: view)
+        return convert(bounds, to: view)
     }
 }

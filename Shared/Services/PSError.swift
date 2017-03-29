@@ -29,7 +29,7 @@ extension PSError {
             return "Unknown error occurred."
         case let .invalidOperation(object):
             return "Invalid operation was attempted on `\(object)`."
-        case .castingError(let object, let targetType):
+        case let .castingError(object, targetType):
             return "Error casting `\(object)` to `\(targetType)`"
         }
     }

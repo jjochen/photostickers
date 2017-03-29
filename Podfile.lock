@@ -16,6 +16,7 @@ PODS:
   - RxSwift (3.3.1)
   - RxTest (3.3.1):
     - RxSwift (~> 3.3)
+  - SwiftFormat/CLI (0.28.0)
 
 DEPENDENCIES:
   - Log
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - RxRealm
   - RxSwift
   - RxTest
+  - SwiftFormat/CLI
 
 SPEC CHECKSUMS:
   Log: 5e368c9528db07517d18d2d04ff5fe2b6f5a1e21
@@ -35,7 +37,8 @@ SPEC CHECKSUMS:
   RxRealm: df024f04e64c3a9723dab63a6ec8621b3db6473f
   RxSwift: 8fc9f2de6275a9101d518444e00bf32f1a42caac
   RxTest: f4e7360033fafa743f2f85097efa958402ed442a
+  SwiftFormat: 1eae8f6e3080ed1633af90c57f12faac8bb8eda5
 
-PODFILE CHECKSUM: a0e5dc4f9d2d8144cf50a5e8c1379bc540ce7f05
+PODFILE CHECKSUM: 8cba277a6023600969b390d9fcd5a17b43b613b5
 
 COCOAPODS: 1.2.0

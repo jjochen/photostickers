@@ -34,7 +34,7 @@ class StickerService: StickerServiceType {
             Logger.shared.warning("Realm: URL not set!")
         }
 
-        self.mainThreadRealm = try! Realm()
+        mainThreadRealm = try! Realm()
 
         self.imageStoreService = imageStoreService
     }
@@ -43,7 +43,7 @@ class StickerService: StickerServiceType {
 extension StickerService {
     fileprivate func currentRealm() -> Realm {
         if Thread.current.isMainThread {
-            return self.mainThreadRealm
+            return mainThreadRealm
         } else {
             return try! Realm()
         }
@@ -71,7 +71,8 @@ extension StickerService {
     func storeSticker(withInfo stickerInfo: StickerInfo) -> Observable<Sticker> {
         return Observable.create { [weak self] observer in
             guard let realm = self?.currentRealm() else {
-                observer.on(.error(PSError.unknown)) // todo
+                observer.on(.error(PSError.unknown))
+                // TODO: new error types
                 return Disposables.create()
             }
 
@@ -84,7 +85,8 @@ extension StickerService {
             }
 
             guard let nextSticker = sticker else {
-                observer.on(.error(PSError.unknown)) // todo
+                observer.on(.error(PSError.unknown))
+                // TODO: new error types
                 return Disposables.create()
             }
 
@@ -97,12 +99,14 @@ extension StickerService {
     func deleteSticker(withUUID uuid: String) -> Observable<Void> {
         return Observable.create { [weak self] observer in
             guard let realm = self?.currentRealm() else {
-                observer.on(.error(PSError.unknown)) // todo
+                observer.on(.error(PSError.unknown))
+                // TODO: new error types
                 return Disposables.create()
             }
 
             guard let sticker = realm.object(ofType: Sticker.self, forPrimaryKey: uuid) else {
-                observer.on(.error(PSError.unknown)) // todo
+                observer.on(.error(PSError.unknown))
+                // TODO: new error types
                 return Disposables.create()
             }
 
@@ -137,14 +141,15 @@ extension StickerService {
 
     fileprivate func sticker(withInfo info: StickerInfo, inRealm realm: Realm) throws -> Sticker {
         let sticker = try realm.sticker(withUUID: info.uuid)
-        try self.update(sticker: sticker, withInfo: info)
+        try update(sticker: sticker, withInfo: info)
         return sticker
     }
 
     fileprivate func update(sticker: Sticker, withInfo info: StickerInfo) throws {
         guard let realm = sticker.realm else {
             Logger.shared.error("update sticker only works with stickers in realm")
-            throw PSError.unknown // todo
+            throw PSError.unknown
+            // TODO: new error types
         }
 
         try realm.write {
@@ -186,7 +191,7 @@ extension StickerService {
             return nil
         }
 
-        return self.imageStoreService.storeImage(image, forKey: key, inCategory: category)
+        return imageStoreService.storeImage(image, forKey: key, inCategory: category)
     }
 }
 
@@ -220,7 +225,7 @@ extension Realm {
         return Configuration(
             fileURL: fileURL,
             schemaVersion: 1,
-            migrationBlock: { migration, oldSchemaVersion in
+            migrationBlock: { _, oldSchemaVersion in
                 if oldSchemaVersion < 1 {
                     // nothing to do (use default value for maskType)
                 }

@@ -21,7 +21,7 @@ class ImageStoreService: ImageStoreServiceType {
     fileprivate let storeURL: URL?
 
     init(url: URL?) {
-        self.storeURL = url
+        storeURL = url
     }
 }
 
@@ -38,7 +38,7 @@ extension ImageStoreService {
             return nil
         }
 
-        if !self.createSubfolderForCategory(category) {
+        if !createSubfolderForCategory(category) {
             Logger.shared.error("Could not create subfolder for category \(category)")
             return nil
         }
@@ -70,10 +70,10 @@ extension ImageStoreService {
     }
 
     func imageURL(forKey key: String, inCategory category: String) -> URL? {
-        guard self.imageExists(forKey: key, inCategory: category) else {
+        guard imageExists(forKey: key, inCategory: category) else {
             return nil
         }
-        return self.constructImageURL(forKey: key, inCategory: category)
+        return constructImageURL(forKey: key, inCategory: category)
     }
 }
 
@@ -95,10 +95,10 @@ extension ImageStoreService {
     }
 
     fileprivate func constructCategoryURL(_ category: String) -> URL? {
-        return self.storeURL?.appendingPathComponent(category, isDirectory: true)
+        return storeURL?.appendingPathComponent(category, isDirectory: true)
     }
 
     fileprivate func constructImageURL(forKey key: String, inCategory category: String) -> URL? {
-        return self.constructCategoryURL(category)?.appendingPathComponent(key).appendingPathExtension("png")
+        return constructCategoryURL(category)?.appendingPathComponent(key).appendingPathExtension("png")
     }
 }

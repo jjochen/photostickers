@@ -10,7 +10,7 @@
 		1237E380319BE40A860FC623 /* Pods_PhotoStickersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394EA5E241F8BED0EF9FE8E7 /* Pods_PhotoStickersTests.framework */; };
 		1918E63A1E72CC2A007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
 		1918E63B1E72CC4C007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
-		1918E63D1E72D834007DFFE7 /* MaskView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E63C1E72D834007DFFE7 /* MaskView+Rx.swift */; };
+		191FC7CD1E8AFC990075A9FB /* UIScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */; };
 		1946211A1E3CFDA1000F09CE /* Logger+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621061E3CFDA1000F09CE /* Logger+Shared.swift */; };
 		1946211C1E3CFDA1000F09CE /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621071E3CFDA1000F09CE /* Realm+Extensions.swift */; };
 		1946211E1E3CFDA1000F09CE /* UIStoryboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621081E3CFDA1000F09CE /* UIStoryboard+Extensions.swift */; };
@@ -43,7 +43,8 @@
 		194621AF1E4928C8000F09CE /* StickerCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621AE1E4928C8000F09CE /* StickerCollectionViewModel.swift */; };
 		194621B11E4BC528000F09CE /* StickerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621B01E4BC527000F09CE /* StickerCollectionCell.swift */; };
 		194621B31E4BC97B000F09CE /* StickerCollectionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621B21E4BC97B000F09CE /* StickerCollectionCellModel.swift */; };
-		1997E34E1E8150E4008DA2A7 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1997E34D1E8150E4008DA2A7 /* TestViewController.swift */; };
+		1997E3501E852D51008DA2A7 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1997E34F1E852D51008DA2A7 /* UIViewController+Rx.swift */; };
+		1997E3511E852D51008DA2A7 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1997E34F1E852D51008DA2A7 /* UIViewController+Rx.swift */; };
 		19A6C5FB1E5EFCE2009B8922 /* EditStickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C5FA1E5EFCE2009B8922 /* EditStickerViewController.swift */; };
 		19A6C5FD1E5EFCEE009B8922 /* EditStickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C5FC1E5EFCEE009B8922 /* EditStickerViewModel.swift */; };
 		19A6C5FF1E604474009B8922 /* Observable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C5FE1E604474009B8922 /* Observable+Operators.swift */; };
@@ -52,13 +53,12 @@
 		19A6C6071E631101009B8922 /* StickerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C6051E6310F8009B8922 /* StickerInfo.swift */; };
 		19A6C6091E633DD9009B8922 /* ImageStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C6081E633DD9009B8922 /* ImageStoreService.swift */; };
 		19A6C60A1E633DEE009B8922 /* ImageStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C6081E633DD9009B8922 /* ImageStoreService.swift */; };
-		19A6C60C1E67704C009B8922 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C60B1E67704C009B8922 /* ImageScrollView.swift */; };
-		19AA564E1E6AD186005BDD23 /* ImageScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AA564D1E6AD186005BDD23 /* ImageScrollView+Rx.swift */; };
 		19AA56561E6D7BC5005BDD23 /* original.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19AA56541E6D7A45005BDD23 /* original.jpg */; };
 		19AA56591E6D83A9005BDD23 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AA56571E6D8387005BDD23 /* SnapshotHelper.swift */; };
-		19AA567E1E6D90C7005BDD23 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AA567D1E6D90C7005BDD23 /* MaskView.swift */; };
 		19B7A4F21E13C1F00074B6B1 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19B7A4F11E13C1F00074B6B1 /* Messages.framework */; };
 		19B7A4FE1E13C1F00074B6B1 /* MessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		19BD46A91E89560D003D1BA1 /* CGGeometry+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BD46A81E89560D003D1BA1 /* CGGeometry+Extensions.swift */; };
+		19BD46AA1E89560D003D1BA1 /* CGGeometry+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BD46A81E89560D003D1BA1 /* CGGeometry+Extensions.swift */; };
 		19E1EB3D1E78199F005637C4 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1EB3C1E78199F005637C4 /* StyleKit.swift */; };
 		19E1EB3E1E7819C5005637C4 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1EB3C1E78199F005637C4 /* StyleKit.swift */; };
 		19E1EB401E792F0E005637C4 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1EB3F1E792F0E005637C4 /* UIView+Extensions.swift */; };
@@ -127,7 +127,7 @@
 
 /* Begin PBXFileReference section */
 		1918E6391E72CC2A007DFFE7 /* Mask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
-		1918E63C1E72D834007DFFE7 /* MaskView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MaskView+Rx.swift"; sourceTree = "<group>"; };
+		191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Rx.swift"; sourceTree = "<group>"; };
 		194621061E3CFDA1000F09CE /* Logger+Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Logger+Shared.swift"; sourceTree = "<group>"; };
 		194621071E3CFDA1000F09CE /* Realm+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Realm+Extensions.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		194621081E3CFDA1000F09CE /* UIStoryboard+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extensions.swift"; sourceTree = "<group>"; };
@@ -166,16 +166,14 @@
 		194621AE1E4928C8000F09CE /* StickerCollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerCollectionViewModel.swift; sourceTree = "<group>"; };
 		194621B01E4BC527000F09CE /* StickerCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = StickerCollectionCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		194621B21E4BC97B000F09CE /* StickerCollectionCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerCollectionCellModel.swift; sourceTree = "<group>"; };
-		1997E34D1E8150E4008DA2A7 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		1997E34F1E852D51008DA2A7 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		199A78921E264480002B058E /* CHANGELOG.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.yml; sourceTree = "<group>"; };
 		19A6C5FA1E5EFCE2009B8922 /* EditStickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditStickerViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		19A6C5FC1E5EFCEE009B8922 /* EditStickerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditStickerViewModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		19A6C5FE1E604474009B8922 /* Observable+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Observable+Operators.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		19A6C6051E6310F8009B8922 /* StickerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = StickerInfo.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		19A6C6081E633DD9009B8922 /* ImageStoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageStoreService.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		19A6C60B1E67704C009B8922 /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		19AA564B1E68A0FA005BDD23 /* NOTES */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES; sourceTree = "<group>"; };
-		19AA564D1E6AD186005BDD23 /* ImageScrollView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageScrollView+Rx.swift"; sourceTree = "<group>"; };
 		19AA564F1E6C7218005BDD23 /* .env */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; name = .env; path = fastlane/.env; sourceTree = "<group>"; };
 		19AA56541E6D7A45005BDD23 /* original.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = original.jpg; sourceTree = "<group>"; };
 		19AA56571E6D8387005BDD23 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -194,12 +192,12 @@
 		19AA56681E6D84DE005BDD23 /* secondary_first_sub_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = secondary_first_sub_category.txt; sourceTree = "<group>"; };
 		19AA56691E6D84DE005BDD23 /* secondary_second_sub_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = secondary_second_sub_category.txt; sourceTree = "<group>"; };
 		19AA566A1E6D84DE005BDD23 /* Snapfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; name = Snapfile; path = fastlane/Snapfile; sourceTree = "<group>"; };
-		19AA567D1E6D90C7005BDD23 /* MaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		19B7A4B71E13C14B0074B6B1 /* PhotoStickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4CE1E13C14B0074B6B1 /* PhotoStickersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoStickersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4D91E13C14B0074B6B1 /* PhotoStickersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoStickersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B7A4F11E13C1F00074B6B1 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
+		19BD46A81E89560D003D1BA1 /* CGGeometry+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGGeometry+Extensions.swift"; sourceTree = "<group>"; };
 		19E1EB3C1E78199F005637C4 /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		19E1EB3F1E792F0E005637C4 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		19E1EB431E7C1344005637C4 /* UIImage+Average.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Average.swift"; sourceTree = "<group>"; };
@@ -285,6 +283,7 @@
 				194621091E3CFDA1000F09CE /* UIStoryboardSegue+Extensions.swift */,
 				1946210A1E3CFDA1000F09CE /* UIViewController+Extensions.swift */,
 				19E1EB3F1E792F0E005637C4 /* UIView+Extensions.swift */,
+				19BD46A81E89560D003D1BA1 /* CGGeometry+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -478,8 +477,6 @@
 		1946219B1E4350C6000F09CE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				19A6C60B1E67704C009B8922 /* ImageScrollView.swift */,
-				19AA567D1E6D90C7005BDD23 /* MaskView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -500,7 +497,6 @@
 			children = (
 				19A6C5FA1E5EFCE2009B8922 /* EditStickerViewController.swift */,
 				19A6C5FC1E5EFCEE009B8922 /* EditStickerViewModel.swift */,
-				1997E34D1E8150E4008DA2A7 /* TestViewController.swift */,
 			);
 			path = "Edit Sticker";
 			sourceTree = "<group>";
@@ -508,8 +504,7 @@
 		19AA564C1E6AD15D005BDD23 /* Rx */ = {
 			isa = PBXGroup;
 			children = (
-				19AA564D1E6AD186005BDD23 /* ImageScrollView+Rx.swift */,
-				1918E63C1E72D834007DFFE7 /* MaskView+Rx.swift */,
+				191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -647,6 +642,7 @@
 				19F6DC761E4F237D00CAE9D0 /* RxImagePickerDelegateProxy.swift */,
 				19F6DC771E4F237D00CAE9D0 /* UIImagePickerController+Rx.swift */,
 				19F6DC781E4F237D00CAE9D0 /* UIImagePickerController+RxCreate.swift */,
+				1997E34F1E852D51008DA2A7 /* UIViewController+Rx.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -923,7 +919,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Tools/swiftformat\" \"${SRCROOT}/Shared\" \"${SRCROOT}/App\" \"${SRCROOT}/Message Extension\" \"${SRCROOT}/Tests\" \"${SRCROOT}/UITests\"";
+			shellScript = "\"${SRCROOT}/Pods/SwiftFormat/CommandLineTool/swiftformat\" \"${SRCROOT}/Shared\" \"${SRCROOT}/App\" \"${SRCROOT}/Message Extension\" \"${SRCROOT}/Tests\" \"${SRCROOT}/UITests\"";
 		};
 		3FF0887124FE39A67D4237E4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1011,14 +1007,13 @@
 				19F6DC791E4F237D00CAE9D0 /* RxImagePickerDelegateProxy.swift in Sources */,
 				1946211A1E3CFDA1000F09CE /* Logger+Shared.swift in Sources */,
 				1946219E1E435205000F09CE /* StickerRenderService.swift in Sources */,
+				19BD46A91E89560D003D1BA1 /* CGGeometry+Extensions.swift in Sources */,
 				1918E63A1E72CC2A007DFFE7 /* Mask.swift in Sources */,
 				1946211C1E3CFDA1000F09CE /* Realm+Extensions.swift in Sources */,
-				1997E34E1E8150E4008DA2A7 /* TestViewController.swift in Sources */,
 				19F6DC801E4F238F00CAE9D0 /* BaseViewModel.swift in Sources */,
 				194621341E3CFDA1000F09CE /* PSError.swift in Sources */,
 				194621591E3CFE16000F09CE /* AppDelegate.swift in Sources */,
 				19A6C6091E633DD9009B8922 /* ImageStoreService.swift in Sources */,
-				1918E63D1E72D834007DFFE7 /* MaskView+Rx.swift in Sources */,
 				19A6C5FB1E5EFCE2009B8922 /* EditStickerViewController.swift in Sources */,
 				1946211E1E3CFDA1000F09CE /* UIStoryboard+Extensions.swift in Sources */,
 				194621321E3CFDA1000F09CE /* AppGroup.swift in Sources */,
@@ -1026,7 +1021,6 @@
 				19F6DC731E4D250400CAE9D0 /* StickerService.swift in Sources */,
 				194621361E3CFDA1000F09CE /* StoryboardIdentifiers.swift in Sources */,
 				194621B31E4BC97B000F09CE /* StickerCollectionCellModel.swift in Sources */,
-				19AA567E1E6D90C7005BDD23 /* MaskView.swift in Sources */,
 				19F6DC7B1E4F237D00CAE9D0 /* UIImagePickerController+RxCreate.swift in Sources */,
 				194621301E3CFDA1000F09CE /* Appearance.swift in Sources */,
 				194621AF1E4928C8000F09CE /* StickerCollectionViewModel.swift in Sources */,
@@ -1034,14 +1028,14 @@
 				19A6C6061E6310F9009B8922 /* StickerInfo.swift in Sources */,
 				19F6DC7A1E4F237D00CAE9D0 /* UIImagePickerController+Rx.swift in Sources */,
 				194621221E3CFDA1000F09CE /* UIViewController+Extensions.swift in Sources */,
-				19AA564E1E6AD186005BDD23 /* ImageScrollView+Rx.swift in Sources */,
 				19A6C5FD1E5EFCEE009B8922 /* EditStickerViewModel.swift in Sources */,
+				1997E3501E852D51008DA2A7 /* UIViewController+Rx.swift in Sources */,
 				19E1EB3D1E78199F005637C4 /* StyleKit.swift in Sources */,
 				194621A31E43569C000F09CE /* UIImage+Resize.swift in Sources */,
+				191FC7CD1E8AFC990075A9FB /* UIScrollView+Rx.swift in Sources */,
 				19E1EB401E792F0E005637C4 /* UIView+Extensions.swift in Sources */,
 				19A6C5FF1E604474009B8922 /* Observable+Operators.swift in Sources */,
 				1946215C1E3CFE16000F09CE /* StickerCollectionViewController.swift in Sources */,
-				19A6C60C1E67704C009B8922 /* ImageScrollView.swift in Sources */,
 				1946218C1E3D1460000F09CE /* Sticker.swift in Sources */,
 				194621201E3CFDA1000F09CE /* UIStoryboardSegue+Extensions.swift in Sources */,
 			);
@@ -1074,6 +1068,7 @@
 				19F6DC8F1E4F23BD00CAE9D0 /* UIImagePickerController+Rx.swift in Sources */,
 				19F6DC961E4F23BD00CAE9D0 /* PSError.swift in Sources */,
 				194621951E40E74C000F09CE /* MSSticker+Extensions.swift in Sources */,
+				1997E3511E852D51008DA2A7 /* UIViewController+Rx.swift in Sources */,
 				194621711E3CFE56000F09CE /* PhotoStickerBrowserViewModel.swift in Sources */,
 				19F6DC941E4F23BD00CAE9D0 /* Appearance.swift in Sources */,
 				194621701E3CFE56000F09CE /* PhotoStickerBrowserViewController.swift in Sources */,
@@ -1085,6 +1080,7 @@
 				19A6C6071E631101009B8922 /* StickerInfo.swift in Sources */,
 				19A6C6001E604474009B8922 /* Observable+Operators.swift in Sources */,
 				1946216F1E3CFE56000F09CE /* MessagesViewModel.swift in Sources */,
+				19BD46AA1E89560D003D1BA1 /* CGGeometry+Extensions.swift in Sources */,
 				194621731E3CFE56000F09CE /* StickerSection.swift in Sources */,
 				19F6DC8C1E4F23BD00CAE9D0 /* UIStoryboardSegue+Extensions.swift in Sources */,
 				19F6DC931E4F23BD00CAE9D0 /* StickerService.swift in Sources */,

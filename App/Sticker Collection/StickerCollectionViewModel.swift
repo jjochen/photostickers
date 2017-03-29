@@ -36,7 +36,7 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
         self.stickerService = stickerService
         self.stickerRenderService = stickerRenderService
 
-        self.stickerCellModels = stickerService.fetchStickers()
+        stickerCellModels = stickerService.fetchStickers()
             .map { listOfStickers in
                 let listOfViewModels = listOfStickers.map { sticker in
                     return StickerCollectionCellModel(sticker)
@@ -53,9 +53,9 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
     func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType {
 
         return EditStickerViewModel(sticker: sticker,
-                                    imageStoreService: self.imageStoreService,
-                                    stickerService: self.stickerService,
-                                    stickerRenderService: self.stickerRenderService)
+                                    imageStoreService: imageStoreService,
+                                    stickerService: stickerService,
+                                    stickerRenderService: stickerRenderService)
     }
 
     func addStickerViewModel() -> EditStickerViewModelType {

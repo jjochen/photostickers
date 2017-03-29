@@ -15,12 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         if let _ = NSClassFromString("XCTest") { return true }
 
-        self.window?.backgroundColor = UIColor.white
-        self.window?.tintColor = Appearance.tintColor
+        window?.backgroundColor = UIColor.white
+        window?.tintColor = Appearance.tintColor
 
         let imageStoreService = ImageStoreService(url: AppGroup.imagesURL)
         let stickerService = StickerService(realmURL: AppGroup.realmURL, imageStoreService: imageStoreService)
@@ -37,10 +37,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+    func application(_: UIApplication, open url: URL, options _: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
         if url.absoluteString == "photosticker://create" {
             Logger.shared.info("oppened from message extension")
-            // todo
+            // TODO:
         }
         return false
     }

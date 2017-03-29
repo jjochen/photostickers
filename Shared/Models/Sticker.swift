@@ -94,13 +94,13 @@ extension Sticker {
 
     var cropBounds: CGRect {
         get {
-            return CGRect(x: self.cropBoundsX, y: self.cropBoundsY, width: self.cropBoundsWidth, height: self.cropBoundsHeight)
+            return CGRect(x: cropBoundsX, y: cropBoundsY, width: cropBoundsWidth, height: cropBoundsHeight)
         }
         set(bounds) {
-            self.cropBoundsX = Double(bounds.origin.x)
-            self.cropBoundsY = Double(bounds.origin.y)
-            self.cropBoundsWidth = Double(bounds.size.width)
-            self.cropBoundsHeight = Double(bounds.size.height)
+            cropBoundsX = Double(bounds.origin.x)
+            cropBoundsY = Double(bounds.origin.y)
+            cropBoundsWidth = Double(bounds.size.width)
+            cropBoundsHeight = Double(bounds.size.height)
         }
     }
 }
