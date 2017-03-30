@@ -42,12 +42,6 @@ class EditStickerViewController: UIViewController {
         return maskLayer
     }()
 
-    var maskPath: UIBezierPath? {
-        didSet {
-            updateMask()
-        }
-    }
-
     fileprivate let didEndDecelerating = PublishSubject<Void>()
     fileprivate let didEndDraggingWithoutDecelaration = PublishSubject<Void>()
     fileprivate let scrollViewDidMove = PublishSubject<Void>()
@@ -57,13 +51,13 @@ class EditStickerViewController: UIViewController {
 extension EditStickerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupBindings()
-        self.configureLayoutConstraints()
+        setupBindings()
+        configureLayoutConstraints()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.maskView.frame = self.blurView.bounds
+        maskView.frame = blurView.bounds
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -81,7 +75,7 @@ extension EditStickerViewController {
 // MARK: - UIScrollViewDelegate
 extension EditStickerViewController: UIScrollViewDelegate {
     func viewForZooming(in _: UIScrollView) -> UIView? {
-        return self.imageView
+        return imageView
     }
 }
 
@@ -93,102 +87,115 @@ fileprivate extension EditStickerViewController {
             return
         }
 
-        self.saveButtonItem.rx.tap
+        saveButtonItem.rx.tap
             .bindTo(viewModel.saveButtonItemDidTap)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.cancelButtonItem.rx.tap
+        cancelButtonItem.rx.tap
             .bindTo(viewModel.cancelButtonItemDidTap)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.deleteButtonItem.rx.tap
+        deleteButtonItem.rx.tap
             .bindTo(viewModel.deleteButtonItemDidTap)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.photosButtonItem.rx.tap
+        photosButtonItem.rx.tap
             .bindTo(viewModel.photosButtonItemDidTap)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.scrollView.rx
+        scrollView.rx
             .didEndDecelerating
-            .bindTo(self.didEndDecelerating)
-            .disposed(by: self.disposeBag)
+            .bindTo(didEndDecelerating)
+            .disposed(by: disposeBag)
 
-        self.scrollView.rx
+        scrollView.rx
             .didEndDragging.filter { willDecelerate in
                 return !willDecelerate
             }
             .map { _ in Void() }
-            .bindTo(self.didEndDraggingWithoutDecelaration)
-            .disposed(by: self.disposeBag)
+            .bindTo(didEndDraggingWithoutDecelaration)
+            .disposed(by: disposeBag)
 
         Observable
-            .of(self.didEndDraggingWithoutDecelaration, self.didEndDecelerating)
+            .of(scrollView.rx.didZoom.map { _ in Void() }, didEndDraggingWithoutDecelaration, didEndDecelerating)
             .merge()
-            .bindTo(self.scrollViewDidMove)
-            .disposed(by: self.disposeBag)
+            .bindTo(scrollViewDidMove)
+            .disposed(by: disposeBag)
 
-        Observable.of(self.scrollViewDidMove, self.rx.viewDidLayoutSubviews)
+        Observable.of(scrollViewDidMove, rx.viewDidLayoutSubviews)
             .merge()
             .map { _ in self.scrollView.bounds }
             .distinctUntilChanged()
             .bindTo(viewModel.scrollViewBoundsDidChange)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.rx.viewDidLayoutSubviews
+        rx.viewDidLayoutSubviews
             .map {
                 return self.maskView.bounds
             }
             .distinctUntilChanged()
             .bindTo(viewModel.maskViewBoundsDidChange)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.stickerTitleTextField.rx.text
+        stickerTitleTextField.rx.text
             .bindTo(viewModel.stickerTitleDidChange)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.stickerTitleTextField.text = viewModel.stickerTitle
-        self.stickerTitleTextField.placeholder = viewModel.stickerTitlePlaceholder
+        stickerTitleTextField.text = viewModel.stickerTitle
+        stickerTitleTextField.placeholder = viewModel.stickerTitlePlaceholder
 
         viewModel.saveButtonItemEnabled
-            .drive(self.saveButtonItem.rx.isEnabled)
-            .disposed(by: self.disposeBag)
+            .drive(saveButtonItem.rx.isEnabled)
+            .disposed(by: disposeBag)
 
         viewModel.deleteButtonItemEnabled
-            .drive(self.deleteButtonItem.rx.isEnabled)
-            .disposed(by: self.disposeBag)
+            .drive(deleteButtonItem.rx.isEnabled)
+            .disposed(by: disposeBag)
 
         viewModel.stickerPlaceholderHidden
-            .drive(self.stickerPlaceholder.rx.isHidden)
-            .disposed(by: self.disposeBag)
-
-        viewModel.image
-            .drive(self.imageView.rx.image)
-            .disposed(by: self.disposeBag)
+            .drive(stickerPlaceholder.rx.isHidden)
+            .disposed(by: disposeBag)
 
         viewModel.contentInset
-            .drive(self.scrollView.rx.contentInset)
-            .disposed(by: self.disposeBag)
+            .drive(scrollView.rx.contentInset)
+            .disposed(by: disposeBag)
 
         viewModel.maximumZoomScale
-            .drive(self.scrollView.rx.maximumZoomScale)
-            .disposed(by: self.disposeBag)
+            .drive(scrollView.rx.maximumZoomScale)
+            .disposed(by: disposeBag)
 
         viewModel.minimumZoomScale
-            .drive(self.scrollView.rx.minimumZoomScale)
-            .disposed(by: self.disposeBag)
+            .drive(scrollView.rx.minimumZoomScale)
+            .disposed(by: disposeBag)
 
-        viewModel.zoomScale
-            .drive(self.scrollView.rx.zoomScale)
-            .disposed(by: self.disposeBag)
+        viewModel.zoomScaleAndContentOffset
+            .drive(onNext: { zoomScale, contentOffset in
+                self.scrollView.zoomScale = zoomScale
+                self.scrollView.contentOffset = contentOffset
+            })
+            .disposed(by: disposeBag)
 
-        viewModel.contentOffset
-            .drive(self.scrollView.rx.contentOffset)
-            .disposed(by: self.disposeBag)
+        viewModel.imageWithZoomScaleAndContentOffset
+            .drive(onNext: { image, zoomScale, contentOffset in
+                self.scrollView.zoomScale = 1
+                self.scrollView.contentOffset = .zero
+                self.imageView.image = image
+                self.scrollView.contentSize = image?.size ?? .zero
+                self.scrollView.zoomScale = zoomScale
+                self.scrollView.contentOffset = contentOffset
+
+                self.view.setNeedsLayout()
+                self.view.layoutIfNeeded()
+            })
+            .disposed(by: disposeBag)
 
         viewModel.maskPath
-            .drive(self.rx.maskPath)
-            .disposed(by: self.disposeBag)
+            .drive(onNext: { path in
+                self.maskLayer.path = path.cgPath
+                self.maskView.layer.mask = self.maskLayer
+                self.blurView.mask = self.maskView
+            })
+            .disposed(by: disposeBag)
 
         viewModel.presentImagePicker
             .flatMapLatest { sourceType in
@@ -206,13 +213,13 @@ fileprivate extension EditStickerViewController {
                 return info[UIImagePickerControllerOriginalImage] as? UIImage
             }
             .drive(viewModel.didPickImage)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
         viewModel.dismiss
             .drive(onNext: { [weak self] in
                 self?.dismiss(animated: true, completion: nil)
             })
-            .addDisposableTo(self.disposeBag)
+            .addDisposableTo(disposeBag)
     }
 }
 
@@ -236,16 +243,6 @@ fileprivate extension EditStickerViewController {
     //        self.view.setNeedsLayout()
     //        self.view.layoutIfNeeded()
     //    }
-
-    func updateMask() {
-        guard let path = self.maskPath else {
-            return
-        }
-
-        self.maskLayer.path = path.cgPath
-        self.maskView.layer.mask = self.maskLayer
-        self.blurView.mask = self.maskView
-    }
 }
 
 // MARK: - Layout
@@ -261,25 +258,15 @@ fileprivate extension EditStickerViewController {
             return
         }
 
-        self.view.removeConstraints(portraitConstraints)
-        self.view.removeConstraints(landscapeConstraints)
+        view.removeConstraints(portraitConstraints)
+        view.removeConstraints(landscapeConstraints)
 
         if UIApplication.shared.statusBarOrientation.isPortrait {
-            self.view.addConstraints(portraitConstraints)
+            view.addConstraints(portraitConstraints)
         } else {
-            self.view.addConstraints(landscapeConstraints)
+            view.addConstraints(landscapeConstraints)
         }
 
         super.updateViewConstraints()
-    }
-}
-
-// MARK: - Rx
-fileprivate extension Reactive where Base: EditStickerViewController {
-
-    var maskPath: UIBindingObserver<Base, UIBezierPath> {
-        return UIBindingObserver(UIElement: self.base) { UIElement, value in
-            UIElement.maskPath = value
-        }
     }
 }

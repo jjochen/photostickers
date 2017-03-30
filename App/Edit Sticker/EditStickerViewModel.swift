@@ -27,12 +27,11 @@ protocol EditStickerViewModelType {
     var saveButtonItemEnabled: Driver<Bool> { get }
     var deleteButtonItemEnabled: Driver<Bool> { get }
     var stickerPlaceholderHidden: Driver<Bool> { get }
-    var image: Driver<UIImage?> { get }
+    var imageWithZoomScaleAndContentOffset: Driver<(UIImage?, CGFloat, CGPoint)> { get }
+    var zoomScaleAndContentOffset: Driver<(CGFloat, CGPoint)> { get }
     var contentInset: Driver<UIEdgeInsets> { get }
     var maximumZoomScale: Driver<CGFloat> { get }
     var minimumZoomScale: Driver<CGFloat> { get }
-    var zoomScale: Driver<CGFloat> { get }
-    var contentOffset: Driver<CGPoint> { get }
     var maskPath: Driver<UIBezierPath> { get }
     var presentImagePicker: Driver<UIImagePickerControllerSourceType> { get }
     var dismiss: Driver<Void> { get }
@@ -65,23 +64,26 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let saveButtonItemEnabled: Driver<Bool>
     let deleteButtonItemEnabled: Driver<Bool>
     let stickerPlaceholderHidden: Driver<Bool>
-    var image: Driver<UIImage?>
-    var contentInset: Driver<UIEdgeInsets>
-    var maximumZoomScale: Driver<CGFloat>
-    var minimumZoomScale: Driver<CGFloat>
-    var zoomScale: Driver<CGFloat>
-    var contentOffset: Driver<CGPoint>
+    let imageWithZoomScaleAndContentOffset: Driver<(UIImage?, CGFloat, CGPoint)>
+    let zoomScaleAndContentOffset: Driver<(CGFloat, CGPoint)>
+    let contentInset: Driver<UIEdgeInsets>
+    let maximumZoomScale: Driver<CGFloat>
+    let minimumZoomScale: Driver<CGFloat>
     let maskPath: Driver<UIBezierPath>
     let presentImagePicker: Driver<UIImagePickerControllerSourceType>
     let dismiss: Driver<Void>
 
     // MARK: Internal
     fileprivate let stickerWasDeleted = PublishSubject<Void>()
-    fileprivate let maskRect: Observable<CGRect>
-    fileprivate let scrollViewBoundsSizeDidChange: Observable<CGSize>
-    fileprivate let originalImageWasSetToNil: Observable<Void>
-    fileprivate let stickerWasRendered: Observable<Void>
-    fileprivate let stickerWasSaved: Observable<Void>
+    fileprivate let maskRect: Driver<CGRect>
+    fileprivate let scrollViewBoundsSizeDidChange: Driver<CGSize>
+    fileprivate let originalImageWasSetToNil: Driver<Void>
+    fileprivate let stickerWasRendered: Driver<Void>
+    fileprivate let stickerWasSaved: Driver<Void>
+    fileprivate let shouldUpdateImage: Driver<Void>
+    fileprivate let shouldUpdateVisibleRect: Driver<Void>
+    fileprivate let zoomScale: Driver<CGFloat>
+    fileprivate let contentOffset: Driver<CGPoint>
 
     init(sticker: Sticker,
          imageStoreService: ImageStoreServiceType,
@@ -110,20 +112,17 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: false)
 
-        stickerPlaceholderHidden = self.stickerInfo
+        stickerPlaceholderHidden = stickerInfo
             .originalImageIsNil
             .map { !$0 }
             .startWith(true)
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: false)
 
-        image = self.stickerInfo
-            .originalImage
-            .asDriver()
-
         scrollViewBoundsSizeDidChange = scrollViewBoundsDidChange
             .map { $0.size }
             .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: .zero)
 
         maskRect = scrollViewBoundsSizeDidChange
             .map { size in
@@ -134,28 +133,24 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             }
             .distinctUntilChanged()
 
-        maskPath = Observable
-            .combineLatest(self.stickerInfo.mask.asObservable(),
-                           maskViewBoundsDidChange,
-                           maskRect)
-            .map { mask, bounds, maskRect in
+        maskPath = Driver
+            .combineLatest(stickerInfo.mask.asDriver(),
+                           maskViewBoundsDidChange.asDriver(onErrorJustReturn: .zero),
+                           maskRect) { mask, bounds, maskRect in
                 return mask.maskPath(in: bounds, maskRect: maskRect)
             }
-            .asDriver(onErrorJustReturn: UIBezierPath())
 
-        contentInset = Observable
-            .combineLatest(scrollViewBoundsDidChange,
-                           maskRect)
-            .map { bounds, maskRect in
+        contentInset = Driver
+            .combineLatest(scrollViewBoundsDidChange.asDriver(onErrorJustReturn: .zero),
+                           maskRect) { bounds, maskRect in
                 var contentInset = UIEdgeInsets()
                 contentInset.top = maskRect.minY
                 contentInset.left = maskRect.minX
                 contentInset.right = bounds.width - maskRect.maxX
-                contentInset.right = bounds.height - maskRect.maxY
+                contentInset.bottom = bounds.height - maskRect.maxY
                 return contentInset
             }
             .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: UIEdgeInsets.zero)
 
         maximumZoomScale = maskRect
             .map { maskRect in
@@ -170,11 +165,9 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
                 return maxScale
             }
             .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: 1)
 
-        minimumZoomScale = Observable
-            .combineLatest(self.stickerInfo.originalImage.asObservable(), maskRect)
-            .map { image, maskRect in
+        minimumZoomScale = Driver
+            .combineLatest(stickerInfo.originalImage.asDriver(), maskRect) { image, maskRect in
                 let imageSize = image?.size ?? .zero
                 guard imageSize.width > 0 && imageSize.height > 0 else {
                     return 1
@@ -186,20 +179,20 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
                 return minScale
             }
             .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: 1)
 
-        //
-        //        self.originalImageDidChange = self.stickerInfo
-        //            .originalImage
-        //            .asObservable()
-        //            .map { _ in Void() }
+        shouldUpdateImage = stickerInfo
+            .originalImage
+            .asDriver()
+            .map { _ in Void() }
 
-        zoomScale = Observable
-            .combineLatest(self.stickerInfo.cropBounds.asObservable(),
+        shouldUpdateVisibleRect = scrollViewBoundsSizeDidChange
+            .map { _ in Void() }
+
+        zoomScale = Driver
+            .combineLatest(stickerInfo.cropBounds.asDriver(),
                            maskRect,
-                           minimumZoomScale.asObservable(),
-                           maximumZoomScale.asObservable())
-            .map { maskRect, cropBounds, minimumZoomScale, maximumZoomScale in
+                           minimumZoomScale,
+                           maximumZoomScale) { maskRect, cropBounds, minimumZoomScale, maximumZoomScale in
                 guard cropBounds.width > 0 && cropBounds.height > 0 else {
                     return minimumZoomScale
                 }
@@ -214,11 +207,10 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: 1)
 
-        contentOffset = Observable
-            .combineLatest(self.stickerInfo.cropBounds.asObservable(),
+        contentOffset = Driver
+            .combineLatest(stickerInfo.cropBounds.asDriver(),
                            maskRect,
-                           zoomScale.asObservable())
-            .map { maskRect, cropBounds, zoomScale in
+                           zoomScale) { maskRect, cropBounds, zoomScale in
                 var contentOffset = CGPoint()
                 contentOffset.x = cropBounds.minX * zoomScale - maskRect.minX
                 contentOffset.y = cropBounds.minY * zoomScale - maskRect.minY
@@ -226,38 +218,42 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             }
             .distinctUntilChanged()
             .debug("contentOffset")
-            .asDriver(onErrorJustReturn: .zero)
 
-        originalImageWasSetToNil = self.stickerInfo
+        zoomScaleAndContentOffset = shouldUpdateVisibleRect
+            .withLatestFrom(Driver.combineLatest(zoomScale, contentOffset) { ($0, $1) })
+
+        imageWithZoomScaleAndContentOffset = shouldUpdateImage
+            .withLatestFrom(Driver.combineLatest(stickerInfo.originalImage.asDriver(), zoomScale, contentOffset) { ($0, $1, $2) })
+
+        originalImageWasSetToNil = stickerInfo
             .originalImageIsNil
+            .asDriver(onErrorJustReturn: true)
             .filter { $0 }
             .map { _ in Void() }
 
-        presentImagePicker = Observable
-            .of(photosButtonItemDidTap, originalImageWasSetToNil)
+        presentImagePicker = Driver
+            .of(photosButtonItemDidTap.asDriver(onErrorJustReturn: ()), originalImageWasSetToNil)
             .merge()
             .map {
                 return .photoLibrary
             }
-            .asDriver(onErrorJustReturn: .photoLibrary)
 
-        stickerWasRendered = self.stickerInfo
+        stickerWasRendered = stickerInfo
             .renderedSticker
-            .asObservable()
+            .asDriver()
             .skip(1)
             .map { _ in Void() }
 
         stickerWasSaved = stickerWasRendered
-            .asObservable()
             .flatMap {
-                return stickerService.storeSticker(withInfo: stickerInfo)
+                return stickerService.storeSticker(withInfo: stickerInfo).asDriver(onErrorDriveWith: Driver.empty())
+                // TODO: use showErrorMessageDriver
             }
             .map { _ in Void() }
 
-        dismiss = Observable
-            .of(cancelButtonItemDidTap, stickerWasSaved, stickerWasDeleted)
+        dismiss = Driver
+            .of(cancelButtonItemDidTap.asDriver(onErrorJustReturn: ()), stickerWasSaved, stickerWasDeleted.asDriver(onErrorJustReturn: ()))
             .merge()
-            .asDriver(onErrorJustReturn: Void())
 
         super.init()
 
@@ -273,15 +269,24 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .bindTo(stickerInfo.localizedDescription)
             .disposed(by: disposeBag)
 
+        Driver
+            .combineLatest(scrollViewBoundsDidChange.asDriver(onErrorJustReturn: .zero), maskRect) { bounds, maskRect in
+                var cropBounds = bounds.offsetBy(dx: maskRect.minX, dy: maskRect.minY)
+                cropBounds.size = maskRect.size
+                return cropBounds
+            }
+            .drive(stickerInfo.cropBounds)
+            .disposed(by: disposeBag)
+
         saveButtonItemDidTap
             .withLatestFrom(saveButtonItemEnabled)
             .filter { isEnabled in isEnabled }
             .observeOn(backgroundScheduler)
             .flatMap { _ in
-                return stickerRenderService.render(stickerInfo).asDriver(onErrorJustReturn: nil)
+                return stickerRenderService.render(stickerInfo)
             }
             .filterNil()
-            .bindTo(self.stickerInfo.renderedSticker)
+            .bindTo(stickerInfo.renderedSticker)
             .disposed(by: disposeBag)
 
         deleteButtonItemDidTap
@@ -289,7 +294,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .filter { isEnabled in isEnabled }
             .observeOn(backgroundScheduler)
             .flatMap { _ in
-                stickerService.deleteSticker(withUUID: stickerInfo.uuid).asDriver(onErrorJustReturn: Void())
+                stickerService.deleteSticker(withUUID: stickerInfo.uuid)
             }
             .bindTo(stickerWasDeleted)
             .disposed(by: disposeBag)
