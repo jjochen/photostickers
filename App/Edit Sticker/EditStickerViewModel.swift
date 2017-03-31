@@ -22,6 +22,7 @@ protocol EditStickerViewModelType {
     var contentOffsetDidChange: PublishSubject<CGPoint> { get }
     var scrollViewBoundsDidChange: PublishSubject<CGRect> { get }
     var maskViewBoundsDidChange: PublishSubject<CGRect> { get }
+    var viewDidTransitionToSize: PublishSubject<CGSize> { get }
     var stickerTitleDidChange: PublishSubject<String?> { get }
 
     var stickerTitlePlaceholder: String { get }
@@ -60,6 +61,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let contentOffsetDidChange = PublishSubject<CGPoint>()
     let scrollViewBoundsDidChange = PublishSubject<CGRect>()
     let maskViewBoundsDidChange = PublishSubject<CGRect>()
+    let viewDidTransitionToSize = PublishSubject<CGSize>()
     let stickerTitleDidChange = PublishSubject<String?>()
 
     // MARK: Output
@@ -80,10 +82,10 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     // MARK: Internal
     fileprivate let _stickerWasDeleted = PublishSubject<Void>()
 
-    fileprivate let _maskRect: Driver<CGRect>
     fileprivate let _imageSize: Driver<CGSize>
     fileprivate let _scrollViewBoundsSize: Driver<CGSize>
 
+    fileprivate let _viewDidTransition: Driver<Void>
     fileprivate let _originalImageWasSetToNil: Driver<Void>
     fileprivate let _stickerWasRendered: Driver<Void>
     fileprivate let _stickerWasSaved: Driver<Void>
@@ -107,12 +109,6 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .startWith(.zero)
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: .zero)
-
-        _maskRect = _scrollViewBoundsSize
-            .map { boundsSize in
-                return EditStickerViewModel.maskRect(boundsSize: boundsSize)
-            }
-            .distinctUntilChanged()
 
         _imageSize = self.stickerInfo
             .originalImage
@@ -139,6 +135,11 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             }
             .map { _ in Void() }
 
+        _viewDidTransition = viewDidTransitionToSize
+            .startWith(.zero)
+            .map { _ in Void() }
+            .asDriver(onErrorDriveWith: Driver.empty())
+
         saveButtonItemEnabled = Observable
             .combineLatest(stickerInfo.originalImageIsNil, stickerInfo.cropBoundsAreEmpty) { !$0 && !$1 }
             .startWith(false)
@@ -161,7 +162,8 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
         maskPath = Driver
             .combineLatest(stickerInfo.mask.asDriver(),
-                           maskViewBoundsDidChange.asDriver(onErrorJustReturn: .zero)) { mask, maskViewBounds in
+                           maskViewBoundsDidChange.asDriver(onErrorJustReturn: .zero),
+                           _viewDidTransition) { mask, maskViewBounds, _ in
                 let maskRect = EditStickerViewModel.maskRect(boundsSize: maskViewBounds.size)
                 return mask.maskPath(in: maskViewBounds, maskRect: maskRect)
             }

@@ -60,12 +60,13 @@ extension EditStickerViewController {
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-
+        imageView.clipsToBounds = true
         coordinator.animate(alongsideTransition: { _ in
             self.configureLayoutConstraints()
         },
         completion: { _ in
-
+            self.imageView.clipsToBounds = false
+            self.viewModel?.viewDidTransitionToSize.onNext(size)
         })
         super.viewWillTransition(to: size, with: coordinator)
     }
@@ -230,28 +231,6 @@ fileprivate extension EditStickerViewController {
             })
             .addDisposableTo(disposeBag)
     }
-}
-
-// MARK: - Configuration
-fileprivate extension EditStickerViewController {
-    //    func configure() {
-    //        guard let configuration = self.configuration else {
-    //            return
-    //        }
-    //
-    //        self.scrollView.zoomScale = 1
-    //        self.imageView.image = configuration.image
-    //        self.scrollView.contentSize = configuration.image?.size ?? .zero
-    //
-    //        self.scrollView.contentInset = configuration.contentInset
-    //        self.scrollView.minimumZoomScale = configuration.minimumZoomScale
-    //        self.scrollView.maximumZoomScale = configuration.maximumZoomScale
-    //        self.scrollView.zoomScale = configuration.zoomScale
-    //        self.scrollView.contentOffset = configuration.contentOffset
-    //
-    //        self.view.setNeedsLayout()
-    //        self.view.layoutIfNeeded()
-    //    }
 }
 
 // MARK: - Layout

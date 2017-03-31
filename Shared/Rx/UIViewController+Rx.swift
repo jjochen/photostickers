@@ -39,4 +39,8 @@ extension Reactive where Base: UIViewController {
     var viewDidLayoutSubviews: Observable<Void> {
         return sentMessage(#selector(Base.viewDidLayoutSubviews)).map { _ in Void() }
     }
+
+    var viewWillTransitionToSize: Observable<CGSize> {
+        return sentMessage(#selector(Base.viewWillTransition(to:with:))).map { $0.first as? CGSize ?? .zero }
+    }
 }

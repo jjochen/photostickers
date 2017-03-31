@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7oO-ML-e6r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7oO-ML-e6r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -237,74 +237,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nqs-PS-TGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1576.8" y="793.8530734632684"/>
-        </scene>
-        <!--Test View Controller-->
-        <scene sceneID="nhI-d2-lEy">
-            <objects>
-                <viewController id="9h5-0l-GfS" customClass="TestViewController" customModule="PhotoStickers" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xd0-tg-lWq"/>
-                        <viewControllerLayoutGuide type="bottom" id="fGP-0D-sL1"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="h26-Bc-cf2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pBk-Ns-28D">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                            </imageView>
-                            <visualEffectView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7g1-Y7-llw">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="uOH-Bj-9sH">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YM0-f4-gAX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="cpy-VS-KYB">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCk-Rv-kUc">
-                                                        <rect key="frame" x="253" y="548" width="83" height="61"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" title="Star"/>
-                                                        <connections>
-                                                            <action selector="maskWithStar:" destination="9h5-0l-GfS" eventType="touchUpInside" id="Yo7-yJ-fKX"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </view>
-                                            <vibrancyEffect>
-                                                <blurEffect style="light"/>
-                                            </vibrancyEffect>
-                                        </visualEffectView>
-                                    </subviews>
-                                </view>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="pBk-Ns-28D" firstAttribute="leading" secondItem="h26-Bc-cf2" secondAttribute="leading" id="4AH-co-vcb"/>
-                            <constraint firstItem="7g1-Y7-llw" firstAttribute="leading" secondItem="h26-Bc-cf2" secondAttribute="leading" id="9r6-Ge-YXp"/>
-                            <constraint firstItem="fGP-0D-sL1" firstAttribute="top" secondItem="7g1-Y7-llw" secondAttribute="bottom" id="DhJ-yO-d85"/>
-                            <constraint firstItem="fGP-0D-sL1" firstAttribute="top" secondItem="pBk-Ns-28D" secondAttribute="bottom" id="jrq-aq-YeS"/>
-                            <constraint firstAttribute="trailing" secondItem="7g1-Y7-llw" secondAttribute="trailing" id="skm-PY-C6l"/>
-                            <constraint firstItem="pBk-Ns-28D" firstAttribute="top" secondItem="xd0-tg-lWq" secondAttribute="bottom" id="tKN-It-R8a"/>
-                            <constraint firstItem="7g1-Y7-llw" firstAttribute="top" secondItem="xd0-tg-lWq" secondAttribute="bottom" id="uLS-YL-zJ7"/>
-                            <constraint firstAttribute="trailing" secondItem="pBk-Ns-28D" secondAttribute="trailing" id="vym-dB-MfW"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="effectView" destination="7g1-Y7-llw" id="meB-0I-Dff"/>
-                        <outlet property="imageView" destination="pBk-Ns-28D" id="pHP-ts-paC"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zRC-vG-Sz3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2312.8000000000002" y="1530.5847076461771"/>
         </scene>
         <!--Sticker Collection Navigation Controller-->
         <scene sceneID="gbp-ZZ-OD8">
