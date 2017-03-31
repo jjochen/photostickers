@@ -2,7 +2,7 @@ workspace "PhotoStickers.xcworkspace"
 scheme "PhotoStickers"
 configuration "Debug"
 sdk "iphonesimulator"
-devices ["iPhone 7 (10.2)"]
+devices ["iPhone 7 (10.3)"]
 code_coverage true
 clean true
 output_types "html"
