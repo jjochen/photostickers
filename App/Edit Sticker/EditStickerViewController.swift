@@ -148,6 +148,7 @@ fileprivate extension EditStickerViewController {
             .disposed(by: disposeBag)
 
         stickerTitleTextField.rx.text
+            .skip(1)
             .bindTo(viewModel.stickerTitleDidChange)
             .disposed(by: disposeBag)
 
