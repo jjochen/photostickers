@@ -13,6 +13,7 @@ target 'PhotoStickers' do
     pod 'RealmSwift'
     pod 'RxRealm'
     pod 'Log'
+    pod 'SwiftFormat/CLI'
     #pod 'RxSwiftExt'
     #pod 'RxCoreData'
     #pod 'RxViewModel'

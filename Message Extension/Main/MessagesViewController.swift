@@ -21,7 +21,7 @@ class MessagesViewController: MSMessagesAppViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.tintColor = Appearance.tintColor
+        view.tintColor = Appearance.tintColor
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,7 +68,7 @@ extension MessagesViewController {
 
     fileprivate func instantiatePhotoStickerBrowserViewController() -> PhotoStickerBrowserViewController {
         let viewController = PhotoStickerBrowserViewController.instantiateFromStoryboard(UIStoryboard.messageExtension())
-        viewController.viewModel = self.viewModel.photoStickerBrowserViewModel()
+        viewController.viewModel = viewModel.photoStickerBrowserViewModel()
         return viewController
     }
 

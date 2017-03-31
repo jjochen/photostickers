@@ -12,7 +12,7 @@ import UIKit
 public extension UIImage {
 
     public func hasAlpha() -> Bool {
-        let alpha: CGImageAlphaInfo = (self.cgImage)!.alphaInfo
+        let alpha: CGImageAlphaInfo = cgImage!.alphaInfo
         return
             alpha == CGImageAlphaInfo.first ||
             alpha == CGImageAlphaInfo.last ||
@@ -21,11 +21,11 @@ public extension UIImage {
     }
 
     public func imageWithAlpha() -> UIImage {
-        if self.hasAlpha() {
+        if hasAlpha() {
             return self
         }
 
-        let imageRef: CGImage = self.cgImage!
+        let imageRef: CGImage = cgImage!
         let width = imageRef.width
         let height = imageRef.height
 
@@ -44,7 +44,7 @@ public extension UIImage {
     }
 
     public func transparentBorderImage(_ borderSize: Int) -> UIImage {
-        let image = self.imageWithAlpha()
+        let image = imageWithAlpha()
 
         let newRect = CGRect(
             x: 0, y: 0,
@@ -56,19 +56,19 @@ public extension UIImage {
         let bitmap: CGContext = CGContext(
             data: nil,
             width: Int(newRect.size.width), height: Int(newRect.size.height),
-            bitsPerComponent: (self.cgImage)!.bitsPerComponent,
+            bitsPerComponent: cgImage!.bitsPerComponent,
             bytesPerRow: 0,
-            space: (self.cgImage)!.colorSpace!,
-            bitmapInfo: (self.cgImage)!.bitmapInfo.rawValue
+            space: cgImage!.colorSpace!,
+            bitmapInfo: cgImage!.bitmapInfo.rawValue
         )!
 
         // Draw the image in the center of the context, leaving a gap around the edges
         let imageLocation = CGRect(x: CGFloat(borderSize), y: CGFloat(borderSize), width: image.size.width, height: image.size.height)
-        bitmap.draw(self.cgImage!, in: imageLocation)
+        bitmap.draw(cgImage!, in: imageLocation)
         let borderImageRef: CGImage = bitmap.makeImage()!
 
         // Create a mask to make the border transparent, and combine it with the image
-        let maskImageRef: CGImage = self.newBorderMask(borderSize, size: newRect.size)
+        let maskImageRef: CGImage = newBorderMask(borderSize, size: newRect.size)
         let transparentBorderImageRef: CGImage = borderImageRef.masking(maskImageRef)!
         return UIImage(cgImage: transparentBorderImageRef)
     }

@@ -14,7 +14,7 @@ class StickerInfo {
     let uuid: String
 
     // MARK: initial values
-    let initialLocalizedDescription: String
+    let initialTitle: String?
     let initialOriginalImage: UIImage?
     let initialRenderedSticker: UIImage?
     let initialCropBounds: CGRect
@@ -22,7 +22,7 @@ class StickerInfo {
     let initialSortOrder: Int
 
     // MARK: updated values
-    let localizedDescription: Variable<String>
+    let title: Variable<String?>
     let originalImage: Variable<UIImage?>
     let renderedSticker: Variable<UIImage?>
     let cropBounds: Variable<CGRect>
@@ -31,7 +31,7 @@ class StickerInfo {
 
     // MARK: initilizer
     init(uuid: String,
-         localizedDescription: String,
+         title: String?,
          originalImage: UIImage?,
          renderedSticker: UIImage?,
          cropBounds: CGRect,
@@ -40,14 +40,14 @@ class StickerInfo {
 
         self.uuid = uuid
 
-        self.initialLocalizedDescription = localizedDescription
-        self.initialOriginalImage = originalImage
-        self.initialRenderedSticker = renderedSticker
-        self.initialCropBounds = cropBounds
-        self.initialMask = mask
-        self.initialSortOrder = sortOrder
+        initialTitle = title
+        initialOriginalImage = originalImage
+        initialRenderedSticker = renderedSticker
+        initialCropBounds = cropBounds
+        initialMask = mask
+        initialSortOrder = sortOrder
 
-        self.localizedDescription = Variable(localizedDescription)
+        self.title = Variable(title)
         self.originalImage = Variable(originalImage)
         self.renderedSticker = Variable(renderedSticker)
         self.cropBounds = Variable(cropBounds)
@@ -57,7 +57,7 @@ class StickerInfo {
 
     convenience init() {
         self.init(uuid: "",
-                  localizedDescription: "",
+                  title: nil,
                   originalImage: nil,
                   renderedSticker: nil,
                   cropBounds: CGRect.zero,
@@ -67,7 +67,7 @@ class StickerInfo {
 
     convenience init(sticker: Sticker) {
         self.init(uuid: sticker.uuid,
-                  localizedDescription: sticker.localizedDescription,
+                  title: sticker.title,
                   originalImage: sticker.originalImage,
                   renderedSticker: sticker.renderedSticker,
                   cropBounds: sticker.cropBounds,
@@ -77,46 +77,46 @@ class StickerInfo {
 
     // MARK: Observers
     var originalImageIsNil: Observable<Bool> {
-        return self.originalImage
+        return originalImage
             .asObservable()
             .map { $0 == nil }
     }
 
     var renderedStickerIsNil: Observable<Bool> {
-        return self.renderedSticker
+        return renderedSticker
             .asObservable()
             .map { $0 == nil }
     }
 
     var cropBoundsAreEmpty: Observable<Bool> {
-        return self.cropBounds
+        return cropBounds
             .asObservable()
             .map { $0.isNull || $0.isEmpty }
     }
 
     // MARK: canges
 
-    var localizedDescriptionDidChange: Bool {
-        return self.localizedDescription.value != self.initialLocalizedDescription
+    var titleDidChange: Bool {
+        return title.value != initialTitle
     }
 
     var originalImageDidChange: Bool {
-        return self.originalImage.value != self.initialOriginalImage
+        return originalImage.value != initialOriginalImage
     }
 
     var renderedStickerDidChange: Bool {
-        return self.renderedSticker.value != self.initialRenderedSticker
+        return renderedSticker.value != initialRenderedSticker
     }
 
     var cropBoundsDidChange: Bool {
-        return self.cropBounds.value != self.initialCropBounds
+        return cropBounds.value != initialCropBounds
     }
 
     var maskDidChange: Bool {
-        return self.mask.value != self.initialMask
+        return mask.value != initialMask
     }
 
     var sortOrderDidChange: Bool {
-        return self.sortOrder.value != self.initialSortOrder
+        return sortOrder.value != initialSortOrder
     }
 }

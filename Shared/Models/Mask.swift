@@ -39,7 +39,7 @@ extension Mask {
 extension Mask {
     fileprivate func rectanglePath(in rect: CGRect) -> UIBezierPath {
         let minSideLength = min(rect.width, rect.height)
-        return UIBezierPath(roundedRect: rect, cornerRadius: minSideLength / 8.0)
+        return UIBezierPath(roundedRect: rect, cornerRadius: minSideLength * 0.15)
     }
 
     fileprivate func circlePath(in rect: CGRect) -> UIBezierPath {
@@ -54,8 +54,8 @@ extension Mask {
 
         let minSide = min(rect.width, rect.height)
         let center = CGPoint(x: rect.midX, y: rect.midY)
-        var angle: CGFloat = -CGFloat(M_PI / 2.0)
-        let angleIncrement = CGFloat(M_PI * 2.0 / Double(pointsOnStar))
+        var angle: CGFloat = -CGFloat(Double.pi / 2.0)
+        let angleIncrement = CGFloat(Double.pi * 2.0 / Double(pointsOnStar))
         let outerRadius = minSide / 2.0
         let innerRadius = minSide / 4.0
 

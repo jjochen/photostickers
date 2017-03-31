@@ -11,12 +11,12 @@ import UIKit
 extension UIViewController {
 
     func loadViewProgrammatically() {
-        self.beginAppearanceTransition(true, animated: false)
-        self.endAppearanceTransition()
+        beginAppearanceTransition(true, animated: false)
+        endAppearanceTransition()
     }
 
     func performSegue(_ identifier: SegueIdentifier) {
-        self.performSegue(withIdentifier: identifier.rawValue, sender: self)
+        performSegue(withIdentifier: identifier.rawValue, sender: self)
     }
 
     func findChildViewControllerOfType(_ klass: AnyClass) -> UIViewController? {

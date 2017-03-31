@@ -33,8 +33,8 @@ extension Observable where Element: OptionalType {
     }
 
     func filterNilKeepOptional() -> Observable<Element> {
-        return self.filter { (element) -> Bool in
-            return element.value != nil
+        return filter { (element) -> Bool in
+            element.value != nil
         }
     }
 

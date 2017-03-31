@@ -25,7 +25,7 @@ class PhotoStickerBrowserViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.tintColor = Appearance.tintColor
+        view.tintColor = Appearance.tintColor
         setupBindings()
     }
 
@@ -78,7 +78,7 @@ extension PhotoStickerBrowserViewController {
             case .OpenAppItem:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.AddMoreCell.rawValue, for: indexPath)
                 return cell
-            case .StickerItem(sticker: let sticker):
+            case let .StickerItem(sticker: sticker):
                 let cell: StickerBrowserCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.StickerBrowserCell.rawValue, for: indexPath) as! StickerBrowserCell
                 cell.stickerView.sticker = MSSticker.load(sticker)
                 return cell

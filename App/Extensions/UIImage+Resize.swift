@@ -15,12 +15,12 @@ public extension UIImage {
     // The bounds will be adjusted using CGRectIntegral.
     // This method ignores the image's imageOrientation setting.
     public func croppedImage(_ bounds: CGRect) -> UIImage {
-        let imageRef: CGImage = (self.cgImage)!.cropping(to: bounds)!
+        let imageRef: CGImage = cgImage!.cropping(to: bounds)!
         return UIImage(cgImage: imageRef)
     }
 
     public func thumbnailImage(_ thumbnailSize: Int, transparentBorder borderSize: Int, cornerRadius: Int, interpolationQuality quality: CGInterpolationQuality) -> UIImage {
-        let resizedImage = self.resizedImageWithContentMode(.scaleAspectFill, bounds: CGSize(width: CGFloat(thumbnailSize), height: CGFloat(thumbnailSize)), interpolationQuality: quality)
+        let resizedImage = resizedImageWithContentMode(.scaleAspectFill, bounds: CGSize(width: CGFloat(thumbnailSize), height: CGFloat(thumbnailSize)), interpolationQuality: quality)
 
         // Crop out any part of the image that's larger than the thumbnail size
         // The cropped rect must be centered on the resized image
@@ -43,24 +43,24 @@ public extension UIImage {
     public func resizedImage(_ newSize: CGSize, interpolationQuality quality: CGInterpolationQuality) -> UIImage {
         var drawTransposed: Bool
 
-        switch self.imageOrientation {
+        switch imageOrientation {
         case .left, .leftMirrored, .right, .rightMirrored:
             drawTransposed = true
         default:
             drawTransposed = false
         }
 
-        return self.resizedImage(
+        return resizedImage(
             newSize,
-            transform: self.transformForOrientation(newSize),
+            transform: transformForOrientation(newSize),
             drawTransposed: drawTransposed,
             interpolationQuality: quality
         )
     }
 
     public func resizedImageWithContentMode(_ contentMode: UIViewContentMode, bounds: CGSize, interpolationQuality quality: CGInterpolationQuality) -> UIImage {
-        let horizontalRatio = bounds.width / self.size.width
-        let verticalRatio = bounds.height / self.size.height
+        let horizontalRatio = bounds.width / size.width
+        let verticalRatio = bounds.height / size.height
         var ratio: CGFloat = 1
 
         switch contentMode {
@@ -72,8 +72,8 @@ public extension UIImage {
             fatalError("Unsupported content mode \(contentMode)")
         }
 
-        let newSize: CGSize = CGSize(width: self.size.width * ratio, height: self.size.height * ratio)
-        return self.resizedImage(newSize, interpolationQuality: quality)
+        let newSize: CGSize = CGSize(width: size.width * ratio, height: size.height * ratio)
+        return resizedImage(newSize, interpolationQuality: quality)
     }
 
     fileprivate func normalizeBitmapInfo(_ bI: CGBitmapInfo) -> UInt32 {
@@ -97,7 +97,7 @@ public extension UIImage {
     fileprivate func resizedImage(_ newSize: CGSize, transform: CGAffineTransform, drawTransposed transpose: Bool, interpolationQuality quality: CGInterpolationQuality) -> UIImage {
         let newRect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height).integral
         let transposedRect = CGRect(x: 0, y: 0, width: newRect.size.height, height: newRect.size.width)
-        let imageRef: CGImage = self.cgImage!
+        let imageRef: CGImage = cgImage!
 
         // Build a context that's the same dimensions as the new size
         let bitmap: CGContext = CGContext(
@@ -127,24 +127,24 @@ public extension UIImage {
     fileprivate func transformForOrientation(_ newSize: CGSize) -> CGAffineTransform {
         var transform: CGAffineTransform = CGAffineTransform.identity
 
-        switch self.imageOrientation {
+        switch imageOrientation {
         case .down, .downMirrored:
             // EXIF = 3 / 4
             transform = transform.translatedBy(x: newSize.width, y: newSize.height)
-            transform = transform.rotated(by: CGFloat(M_PI))
+            transform = transform.rotated(by: CGFloat.pi)
         case .left, .leftMirrored:
             // EXIF = 6 / 5
             transform = transform.translatedBy(x: newSize.width, y: 0)
-            transform = transform.rotated(by: CGFloat(M_PI_2))
+            transform = transform.rotated(by: CGFloat.pi / 2)
         case .right, .rightMirrored:
             // EXIF = 8 / 7
             transform = transform.translatedBy(x: 0, y: newSize.height)
-            transform = transform.rotated(by: -CGFloat(M_PI_2))
+            transform = transform.rotated(by: -CGFloat.pi / 2)
         default:
             break
         }
 
-        switch self.imageOrientation {
+        switch imageOrientation {
         case .upMirrored, .downMirrored:
             // EXIF = 2 / 4
             transform = transform.translatedBy(x: newSize.width, y: 0)

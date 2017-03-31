@@ -21,7 +21,7 @@ class StickerCollectionCell: UICollectionViewCell {
     }
 
     func configure() {
-        imageView.image = self.viewModel?.sticker.renderedSticker
+        imageView.image = viewModel?.sticker.renderedSticker
     }
 
     override func prepareForReuse() {

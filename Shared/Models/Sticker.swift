@@ -12,7 +12,7 @@ import RxDataSources
 
 enum StickerProperty: String {
     case uuid
-    case localizedDescription
+    case title
     case originalImageFilePath
     case renderedStickerFilePath
     case cropBoundsX
@@ -26,7 +26,7 @@ enum StickerProperty: String {
 // MARK: Realm Object
 class Sticker: Object {
     dynamic var uuid = ""
-    dynamic var localizedDescription = ""
+    dynamic var title: String?
     dynamic var originalImageFilePath: String?
     dynamic var renderedStickerFilePath: String?
     dynamic var cropBoundsX: Double = 0
@@ -62,6 +62,7 @@ func == (lhs: Sticker, rhs: Sticker) -> Bool {
 
 extension Sticker {
     static let renderedSize = CGSize(width: 300, height: 300)
+    static let titlePlaceholder = "Photo Sticker"
 }
 
 // MARK: Images
@@ -94,13 +95,13 @@ extension Sticker {
 
     var cropBounds: CGRect {
         get {
-            return CGRect(x: self.cropBoundsX, y: self.cropBoundsY, width: self.cropBoundsWidth, height: self.cropBoundsHeight)
+            return CGRect(x: cropBoundsX, y: cropBoundsY, width: cropBoundsWidth, height: cropBoundsHeight)
         }
         set(bounds) {
-            self.cropBoundsX = Double(bounds.origin.x)
-            self.cropBoundsY = Double(bounds.origin.y)
-            self.cropBoundsWidth = Double(bounds.size.width)
-            self.cropBoundsHeight = Double(bounds.size.height)
+            cropBoundsX = Double(bounds.origin.x)
+            cropBoundsY = Double(bounds.origin.y)
+            cropBoundsWidth = Double(bounds.size.width)
+            cropBoundsHeight = Double(bounds.size.height)
         }
     }
 }

@@ -30,16 +30,16 @@ extension StickerSection: SectionModelType {
     typealias Identity = String
 
     var identity: String {
-        return self.header
+        return header
     }
 
     var items: [StickerSectionItem] {
-        return self.stickers
+        return stickers
     }
 
     init(original: StickerSection, items: [Item]) {
         self = original
-        self.stickers = items
+        stickers = items
     }
 }
 
@@ -50,7 +50,7 @@ extension StickerSectionItem: IdentifiableType, Equatable {
         switch self {
         case .OpenAppItem:
             return "OpenAppItem"
-        case .StickerItem(sticker: let sticker):
+        case let .StickerItem(sticker: sticker):
             return sticker.uuid
         }
     }
