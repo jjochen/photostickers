@@ -12,7 +12,7 @@ import RxDataSources
 
 enum StickerProperty: String {
     case uuid
-    case localizedDescription
+    case title
     case originalImageFilePath
     case renderedStickerFilePath
     case cropBoundsX
@@ -26,7 +26,7 @@ enum StickerProperty: String {
 // MARK: Realm Object
 class Sticker: Object {
     dynamic var uuid = ""
-    dynamic var localizedDescription = ""
+    dynamic var title: String?
     dynamic var originalImageFilePath: String?
     dynamic var renderedStickerFilePath: String?
     dynamic var cropBoundsX: Double = 0
@@ -62,6 +62,7 @@ func == (lhs: Sticker, rhs: Sticker) -> Bool {
 
 extension Sticker {
     static let renderedSize = CGSize(width: 300, height: 300)
+    static let titlePlaceholder = "Photo Sticker"
 }
 
 // MARK: Images

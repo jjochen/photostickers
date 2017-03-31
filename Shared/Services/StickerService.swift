@@ -153,8 +153,8 @@ extension StickerService {
         }
 
         try realm.write {
-            if info.localizedDescriptionDidChange {
-                sticker.localizedDescription = info.localizedDescription.value
+            if info.titleDidChange {
+                sticker.title = info.title.value
             }
             if info.originalImageDidChange {
                 if let url = storeImage(info.originalImage.value, forKey: sticker.uuid, inCategory: "originals") {
@@ -220,15 +220,31 @@ extension Realm {
     }
 }
 
-extension Realm {
-    fileprivate static func stickerConfiguration(with fileURL: URL?) -> Configuration {
+fileprivate extension Realm {
+    static func stickerConfiguration(with fileURL: URL?) -> Configuration {
         return Configuration(
             fileURL: fileURL,
-            schemaVersion: 1,
-            migrationBlock: { _, oldSchemaVersion in
+            schemaVersion: 2,
+            migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 1 {
-                    // nothing to do (use default value for maskType)
+                    Realm.performMigrationToVersion1(migration)
+                }
+
+                if oldSchemaVersion < 2 {
+                    Realm.performMigrationToVersion2(migration)
                 }
         })
+    }
+
+    static func performMigrationToVersion1(_: Migration) {
+        // nothing to do, use default value for maskType
+    }
+
+    static func performMigrationToVersion2(_ migration: Migration) {
+        migration.enumerateObjects(ofType: Sticker.className()) { oldObject, newObject in
+            let localizedDescription: String = oldObject!["localizedDescription"] as! String
+            let title: String? = localizedDescription.isEmpty ? nil : localizedDescription
+            newObject!["title"] = title
+        }
     }
 }

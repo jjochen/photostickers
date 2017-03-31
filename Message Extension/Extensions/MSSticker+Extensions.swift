@@ -16,9 +16,7 @@ extension MSSticker {
         guard let stickerURL = sticker?.renderedStickerURL else {
             return nil
         }
-        guard let localizedDescription = sticker?.localizedDescription else {
-            return nil
-        }
+        let localizedDescription = sticker?.title ?? Sticker.titlePlaceholder
 
         var msSticker: MSSticker
         do {

@@ -44,7 +44,6 @@ class EditStickerViewController: UIViewController {
 
     fileprivate let didEndDecelerating = PublishSubject<Void>()
     fileprivate let didEndDraggingWithoutDecelaration = PublishSubject<Void>()
-    fileprivate let scrollViewDidMove = PublishSubject<Void>()
 }
 
 // MASK: - UIViewController override
@@ -117,14 +116,24 @@ fileprivate extension EditStickerViewController {
             .disposed(by: disposeBag)
 
         Observable
-            .of(scrollView.rx.didZoom.map { _ in Void() }, didEndDraggingWithoutDecelaration, didEndDecelerating)
+            .of(didEndDraggingWithoutDecelaration,
+                didEndDecelerating)
             .merge()
-            .bindTo(scrollViewDidMove)
+            .map { self.scrollView.contentOffset }
+            .bindTo(viewModel.contentOffsetDidChange)
             .disposed(by: disposeBag)
 
-        Observable.of(scrollViewDidMove, rx.viewDidLayoutSubviews)
+        scrollView.rx.didZoom
+            .map { self.scrollView.zoomScale }
+            .bindTo(viewModel.zoomScaleDidChange)
+            .disposed(by: disposeBag)
+
+        Observable.of(scrollView.rx.didZoom.map { _ in Void() },
+                      didEndDraggingWithoutDecelaration,
+                      didEndDecelerating,
+                      rx.viewDidLayoutSubviews)
             .merge()
-            .map { _ in self.scrollView.bounds }
+            .map { self.scrollView.bounds }
             .distinctUntilChanged()
             .bindTo(viewModel.scrollViewBoundsDidChange)
             .disposed(by: disposeBag)

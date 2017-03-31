@@ -14,7 +14,7 @@ class StickerInfo {
     let uuid: String
 
     // MARK: initial values
-    let initialLocalizedDescription: String
+    let initialTitle: String?
     let initialOriginalImage: UIImage?
     let initialRenderedSticker: UIImage?
     let initialCropBounds: CGRect
@@ -22,7 +22,7 @@ class StickerInfo {
     let initialSortOrder: Int
 
     // MARK: updated values
-    let localizedDescription: Variable<String>
+    let title: Variable<String?>
     let originalImage: Variable<UIImage?>
     let renderedSticker: Variable<UIImage?>
     let cropBounds: Variable<CGRect>
@@ -31,7 +31,7 @@ class StickerInfo {
 
     // MARK: initilizer
     init(uuid: String,
-         localizedDescription: String,
+         title: String?,
          originalImage: UIImage?,
          renderedSticker: UIImage?,
          cropBounds: CGRect,
@@ -40,14 +40,14 @@ class StickerInfo {
 
         self.uuid = uuid
 
-        initialLocalizedDescription = localizedDescription
+        initialTitle = title
         initialOriginalImage = originalImage
         initialRenderedSticker = renderedSticker
         initialCropBounds = cropBounds
         initialMask = mask
         initialSortOrder = sortOrder
 
-        self.localizedDescription = Variable(localizedDescription)
+        self.title = Variable(title)
         self.originalImage = Variable(originalImage)
         self.renderedSticker = Variable(renderedSticker)
         self.cropBounds = Variable(cropBounds)
@@ -57,7 +57,7 @@ class StickerInfo {
 
     convenience init() {
         self.init(uuid: "",
-                  localizedDescription: "",
+                  title: nil,
                   originalImage: nil,
                   renderedSticker: nil,
                   cropBounds: CGRect.zero,
@@ -67,7 +67,7 @@ class StickerInfo {
 
     convenience init(sticker: Sticker) {
         self.init(uuid: sticker.uuid,
-                  localizedDescription: sticker.localizedDescription,
+                  title: sticker.title,
                   originalImage: sticker.originalImage,
                   renderedSticker: sticker.renderedSticker,
                   cropBounds: sticker.cropBounds,
@@ -96,8 +96,8 @@ class StickerInfo {
 
     // MARK: canges
 
-    var localizedDescriptionDidChange: Bool {
-        return localizedDescription.value != initialLocalizedDescription
+    var titleDidChange: Bool {
+        return title.value != initialTitle
     }
 
     var originalImageDidChange: Bool {
