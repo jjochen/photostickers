@@ -53,7 +53,6 @@ class EditStickerViewController: UIViewController {
 extension EditStickerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.tintColor = Appearance.tintColor
         setupBindings()
         configureLayoutConstraints()
     }
