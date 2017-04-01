@@ -84,6 +84,9 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
     fileprivate let _imageSize: Driver<CGSize>
     fileprivate let _scrollViewBoundsSize: Driver<CGSize>
+    fileprivate let _zoomScale: Driver<CGFloat>
+    fileprivate let _contentOffset: Driver<CGPoint>
+    fileprivate let _maskViewBounds: Driver<CGRect>
 
     fileprivate let _viewDidTransition: Driver<Void>
     fileprivate let _originalImageWasSetToNil: Driver<Void>
@@ -106,6 +109,21 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
         _scrollViewBoundsSize = scrollViewBoundsDidChange
             .map { $0.size }
+            .startWith(.zero)
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: .zero)
+
+        _zoomScale = zoomScaleDidChange
+            .startWith(0)
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: 1)
+
+        _contentOffset = contentOffsetDidChange
+            .startWith(.zero)
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: .zero)
+
+        _maskViewBounds = maskViewBoundsDidChange
             .startWith(.zero)
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: .zero)
@@ -162,7 +180,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
         maskPath = Driver
             .combineLatest(stickerInfo.mask.asDriver(),
-                           maskViewBoundsDidChange.asDriver(onErrorJustReturn: .zero),
+                           _maskViewBounds,
                            _viewDidTransition) { mask, maskViewBounds, _ in
                 let maskRect = EditStickerViewModel.maskRect(boundsSize: maskViewBounds.size)
                 return mask.maskPath(in: maskViewBounds, maskRect: maskRect)
@@ -234,9 +252,14 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .disposed(by: disposeBag)
 
         Driver
-            .combineLatest(zoomScaleDidChange.asDriver(onErrorJustReturn: 1),
-                           contentOffsetDidChange.asDriver(onErrorJustReturn: .zero),
-                           _scrollViewBoundsSize) { zoomScale, contentOffset, boundsSize in
+            .combineLatest(self.stickerInfo.originalImage.asDriver(),
+                           _zoomScale,
+                           _contentOffset,
+                           _scrollViewBoundsSize) { ($0, $1, $2, $3) }
+            .filter { image, _, _, _ in
+                return image != nil
+            }
+            .map { _, zoomScale, contentOffset, boundsSize in
                 return EditStickerViewModel.cropBounds(boundsSize: boundsSize, zoomScale: zoomScale, contentOffset: contentOffset)
             }
             .drive(stickerInfo.cropBounds)
