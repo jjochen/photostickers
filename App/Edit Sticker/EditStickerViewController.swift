@@ -23,9 +23,12 @@ class EditStickerViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var stickerPlaceholder: UIImageView!
-    @IBOutlet weak var stickerCropView: UIView!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var stickerTitleTextField: UITextField!
+
+    @IBOutlet weak var circleButton: UIButton!
+    @IBOutlet weak var rectangleButton: UIButton!
+    @IBOutlet weak var starButton: UIButton!
 
     @IBOutlet var portraitConstraints: [NSLayoutConstraint]!
     @IBOutlet var landscapeConstraints: [NSLayoutConstraint]!
@@ -50,6 +53,7 @@ class EditStickerViewController: UIViewController {
 extension EditStickerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.tintColor = Appearance.tintColor
         setupBindings()
         configureLayoutConstraints()
     }
@@ -101,6 +105,18 @@ fileprivate extension EditStickerViewController {
 
         photosButtonItem.rx.tap
             .bindTo(viewModel.photosButtonItemDidTap)
+            .disposed(by: disposeBag)
+
+        circleButton.rx.tap
+            .bindTo(viewModel.circleButtonDidTap)
+            .disposed(by: disposeBag)
+
+        rectangleButton.rx.tap
+            .bindTo(viewModel.rectangleButtonDidTap)
+            .disposed(by: disposeBag)
+
+        starButton.rx.tap
+            .bindTo(viewModel.starButtonDidTap)
             .disposed(by: disposeBag)
 
         scrollView.rx

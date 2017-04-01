@@ -17,6 +17,9 @@ protocol EditStickerViewModelType {
     var cancelButtonItemDidTap: PublishSubject<Void> { get }
     var deleteButtonItemDidTap: PublishSubject<Void> { get }
     var photosButtonItemDidTap: PublishSubject<Void> { get }
+    var circleButtonDidTap: PublishSubject<Void> { get }
+    var rectangleButtonDidTap: PublishSubject<Void> { get }
+    var starButtonDidTap: PublishSubject<Void> { get }
     var didPickImage: PublishSubject<UIImage?> { get }
     var zoomScaleDidChange: PublishSubject<CGFloat> { get }
     var contentOffsetDidChange: PublishSubject<CGPoint> { get }
@@ -56,6 +59,9 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let cancelButtonItemDidTap = PublishSubject<Void>()
     let deleteButtonItemDidTap = PublishSubject<Void>()
     let photosButtonItemDidTap = PublishSubject<Void>()
+    let circleButtonDidTap = PublishSubject<Void>()
+    let rectangleButtonDidTap = PublishSubject<Void>()
+    let starButtonDidTap = PublishSubject<Void>()
     let didPickImage = PublishSubject<UIImage?>()
     let zoomScaleDidChange = PublishSubject<CGFloat>()
     let contentOffsetDidChange = PublishSubject<CGPoint>()
@@ -84,9 +90,10 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
     fileprivate let _imageSize: Driver<CGSize>
     fileprivate let _scrollViewBoundsSize: Driver<CGSize>
-    fileprivate let _zoomScale: Driver<CGFloat>
-    fileprivate let _contentOffset: Driver<CGPoint>
     fileprivate let _maskViewBounds: Driver<CGRect>
+
+    fileprivate let _zoomScale: Observable<CGFloat>
+    fileprivate let _contentOffset: Observable<CGPoint>
 
     fileprivate let _viewDidTransition: Driver<Void>
     fileprivate let _originalImageWasSetToNil: Driver<Void>
@@ -116,12 +123,10 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
         _zoomScale = zoomScaleDidChange
             .startWith(0)
             .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: 1)
 
         _contentOffset = contentOffsetDidChange
             .startWith(.zero)
             .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: .zero)
 
         _maskViewBounds = maskViewBoundsDidChange
             .startWith(.zero)
@@ -251,18 +256,18 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .bindTo(stickerInfo.title)
             .disposed(by: disposeBag)
 
-        Driver
-            .combineLatest(self.stickerInfo.originalImage.asDriver(),
+        Observable
+            .combineLatest(stickerInfo.originalImage.asObservable(),
                            _zoomScale,
                            _contentOffset,
-                           _scrollViewBoundsSize) { ($0, $1, $2, $3) }
+                           _scrollViewBoundsSize.asObservable())
             .filter { image, _, _, _ in
                 return image != nil
             }
             .map { _, zoomScale, contentOffset, boundsSize in
                 return EditStickerViewModel.cropBounds(boundsSize: boundsSize, zoomScale: zoomScale, contentOffset: contentOffset)
             }
-            .drive(stickerInfo.cropBounds)
+            .bindTo(stickerInfo.cropBounds)
             .disposed(by: disposeBag)
 
         saveButtonItemDidTap
@@ -284,6 +289,14 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
                 stickerService.deleteSticker(withUUID: stickerInfo.uuid)
             }
             .bindTo(_stickerWasDeleted)
+            .disposed(by: disposeBag)
+
+        Observable
+            .of(circleButtonDidTap.map { Mask.circle },
+                rectangleButtonDidTap.map { Mask.rectangle },
+                starButtonDidTap.map { Mask.star })
+            .merge()
+            .bindTo(stickerInfo.mask)
             .disposed(by: disposeBag)
     }
 }

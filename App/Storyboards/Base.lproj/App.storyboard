@@ -129,7 +129,6 @@
                                         <rect key="frame" x="27.5" y="27.5" width="319" height="319"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="yiw-do-MrB" firstAttribute="centerY" secondItem="Zd7-Ok-AEC" secondAttribute="centerY" id="1OJ-pq-44q"/>
                                     <constraint firstItem="pX4-f0-VAR" firstAttribute="top" secondItem="yiw-do-MrB" secondAttribute="top" id="2wW-0O-mvk"/>
@@ -179,25 +178,72 @@
                                 </view>
                                 <blurEffect style="light"/>
                             </visualEffectView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aBM-ze-byb" userLabel="Control Layout Guide">
+                                <rect key="frame" x="0.0" y="439" width="375" height="184"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBL-rL-8h5" userLabel="Button Layout Guide">
+                                        <rect key="frame" x="86.5" y="75" width="202" height="33"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKM-gO-hz8">
+                                                <rect key="frame" x="0.0" y="0.0" width="47" height="33"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <state key="normal" title="Circle"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FV4-Ui-tTt">
+                                                <rect key="frame" x="67" y="0.0" width="81" height="33"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <state key="normal" title="Rectangle"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n04-oW-6GY">
+                                                <rect key="frame" x="168" y="0.0" width="34" height="33"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <state key="normal" title="Star"/>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="n04-oW-6GY" firstAttribute="trailing" secondItem="PBL-rL-8h5" secondAttribute="trailing" id="5tT-Lj-oY4"/>
+                                            <constraint firstItem="UKM-gO-hz8" firstAttribute="leading" secondItem="PBL-rL-8h5" secondAttribute="leading" id="85S-u3-0e5"/>
+                                            <constraint firstItem="FV4-Ui-tTt" firstAttribute="top" secondItem="PBL-rL-8h5" secondAttribute="top" id="8Nx-aU-7kT"/>
+                                            <constraint firstItem="UKM-gO-hz8" firstAttribute="bottom" secondItem="PBL-rL-8h5" secondAttribute="bottom" id="8gs-rA-lUW"/>
+                                            <constraint firstItem="n04-oW-6GY" firstAttribute="leading" secondItem="FV4-Ui-tTt" secondAttribute="trailing" constant="20" id="HCN-wt-79S"/>
+                                            <constraint firstItem="UKM-gO-hz8" firstAttribute="top" secondItem="PBL-rL-8h5" secondAttribute="top" id="lRI-Sy-wmE"/>
+                                            <constraint firstItem="n04-oW-6GY" firstAttribute="bottom" secondItem="PBL-rL-8h5" secondAttribute="bottom" id="mCh-7q-QHr"/>
+                                            <constraint firstItem="n04-oW-6GY" firstAttribute="top" secondItem="PBL-rL-8h5" secondAttribute="top" id="tHg-4h-33t"/>
+                                            <constraint firstItem="FV4-Ui-tTt" firstAttribute="bottom" secondItem="PBL-rL-8h5" secondAttribute="bottom" id="tiP-Mn-x42"/>
+                                            <constraint firstItem="FV4-Ui-tTt" firstAttribute="leading" secondItem="UKM-gO-hz8" secondAttribute="trailing" constant="20" id="x5a-HG-oob"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="PBL-rL-8h5" firstAttribute="centerX" secondItem="aBM-ze-byb" secondAttribute="centerX" id="LLe-5M-hwB"/>
+                                    <constraint firstItem="PBL-rL-8h5" firstAttribute="centerY" secondItem="aBM-ze-byb" secondAttribute="centerY" id="mF1-JJ-ymB"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="aBM-ze-byb" firstAttribute="leading" secondItem="Zd7-Ok-AEC" secondAttribute="trailing" priority="999" id="2IQ-K9-yM6" userLabel="L: Control Layout Guide.leading = Sticker Layout Guide.trailing"/>
                             <constraint firstItem="Ylq-NR-HX9" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="Dne-eZ-WE8"/>
-                            <constraint firstAttribute="trailing" secondItem="Zd7-Ok-AEC" secondAttribute="trailing" id="IDl-es-lF7" userLabel="P: trailing = Sticker Layout Guide.trailing"/>
+                            <constraint firstItem="aBM-ze-byb" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" priority="750" id="F7K-xB-9qp"/>
+                            <constraint firstItem="Zd7-Ok-AEC" firstAttribute="trailing" secondItem="63h-fZ-lFi" secondAttribute="trailing" priority="750" id="IDl-es-lF7"/>
                             <constraint firstItem="ecJ-fs-vcM" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="Kjw-JG-vqY"/>
                             <constraint firstItem="Zd7-Ok-AEC" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="MnT-bi-hqY"/>
+                            <constraint firstItem="aBM-ze-byb" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" priority="750" id="S8a-M9-bSI"/>
                             <constraint firstItem="Ylq-NR-HX9" firstAttribute="trailing" secondItem="63h-fZ-lFi" secondAttribute="trailing" id="Wye-d8-nc2"/>
                             <constraint firstItem="Ylq-NR-HX9" firstAttribute="bottom" secondItem="EuG-up-7tU" secondAttribute="top" id="ebu-EP-nMK"/>
                             <constraint firstItem="ecJ-fs-vcM" firstAttribute="bottom" secondItem="EuG-up-7tU" secondAttribute="top" id="exa-xb-ZEU"/>
                             <constraint firstItem="Zd7-Ok-AEC" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="fbf-q4-d8M"/>
                             <constraint firstItem="ecJ-fs-vcM" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="laf-1m-N8x"/>
                             <constraint firstItem="ecJ-fs-vcM" firstAttribute="trailing" secondItem="63h-fZ-lFi" secondAttribute="trailing" id="mEC-Is-vkA"/>
-                            <constraint firstItem="EuG-up-7tU" firstAttribute="top" secondItem="Zd7-Ok-AEC" secondAttribute="bottom" id="sMr-4k-1PW" userLabel="L: Bottom Layout Guide.top = Sticker Layout Guide.bottom"/>
+                            <constraint firstItem="aBM-ze-byb" firstAttribute="top" secondItem="Zd7-Ok-AEC" secondAttribute="bottom" priority="999" id="nNB-7c-cMT" userLabel="P: Control Layout Guide.top = Sticker Layout Guide.bottom"/>
+                            <constraint firstItem="aBM-ze-byb" firstAttribute="bottom" secondItem="EuG-up-7tU" secondAttribute="top" id="pY2-P2-4FA"/>
+                            <constraint firstItem="Zd7-Ok-AEC" firstAttribute="bottom" secondItem="EuG-up-7tU" secondAttribute="top" priority="750" id="sMr-4k-1PW"/>
+                            <constraint firstItem="aBM-ze-byb" firstAttribute="trailing" secondItem="63h-fZ-lFi" secondAttribute="trailing" id="tu1-35-Jkh"/>
                             <constraint firstItem="Ylq-NR-HX9" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="vee-N9-N3i"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="sMr-4k-1PW"/>
+                                <exclude reference="2IQ-K9-yM6"/>
                             </mask>
                         </variation>
                     </view>
@@ -222,16 +268,18 @@
                     <connections>
                         <outlet property="blurView" destination="ecJ-fs-vcM" id="dlH-dw-9qX"/>
                         <outlet property="cancelButtonItem" destination="HGg-xK-bhk" id="blY-Q7-uzJ"/>
+                        <outlet property="circleButton" destination="UKM-gO-hz8" id="p5a-Uv-WGn"/>
                         <outlet property="deleteButtonItem" destination="UY9-Yv-yfg" id="FL6-hG-PZe"/>
                         <outlet property="imageView" destination="8nJ-XZ-tCD" id="O3S-i1-jel"/>
                         <outlet property="photosButtonItem" destination="zho-8l-mAf" id="RAP-D3-gzV"/>
+                        <outlet property="rectangleButton" destination="FV4-Ui-tTt" id="efM-ZR-6zs"/>
                         <outlet property="saveButtonItem" destination="ylz-y4-7pV" id="Ycn-K0-Sya"/>
                         <outlet property="scrollView" destination="Ylq-NR-HX9" id="0WH-r0-dh1"/>
-                        <outlet property="stickerCropView" destination="yiw-do-MrB" id="1xK-7k-ZaD"/>
+                        <outlet property="starButton" destination="n04-oW-6GY" id="9as-wu-rBj"/>
                         <outlet property="stickerPlaceholder" destination="pX4-f0-VAR" id="WWs-JN-TVl"/>
                         <outlet property="stickerTitleTextField" destination="dt1-g2-TIx" id="Nr1-N4-DiT"/>
-                        <outletCollection property="portraitConstraints" destination="IDl-es-lF7" collectionClass="NSMutableArray" id="irQ-Uv-3jg"/>
-                        <outletCollection property="landscapeConstraints" destination="sMr-4k-1PW" collectionClass="NSMutableArray" id="yuL-Mu-RXv"/>
+                        <outletCollection property="landscapeConstraints" destination="2IQ-K9-yM6" collectionClass="NSMutableArray" id="exj-15-LP6"/>
+                        <outletCollection property="portraitConstraints" destination="nNB-7c-cMT" collectionClass="NSMutableArray" id="90W-ER-PcE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nqs-PS-TGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
