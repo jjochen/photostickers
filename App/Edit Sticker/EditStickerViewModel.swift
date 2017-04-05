@@ -139,10 +139,32 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
         image = stickerInfo.originalImage
             .asDriver()
 
-        visibleRect = viewDidLayoutSubviews
-            .asDriver(onErrorDriveWith: Driver.empty())
-            .withLatestFrom(stickerInfo.cropBounds.asDriver())
+        let cropBounds = Observable
+            .combineLatest(stickerInfo.cropBounds.asObservable(),
+                           stickerInfo.originalImage.asObservable())
+            .map { cropBounds, originalImage -> CGRect in
+                guard let image = originalImage else {
+                    return CGRect.zero
+                }
+
+                guard !cropBounds.isEmpty && !cropBounds.isNull else {
+                    var initialRect = CGRect()
+                    let imageSize = image.size
+                    let sideLength = imageSize.minSideLength
+                    initialRect.size.width = sideLength
+                    initialRect.size.height = sideLength
+                    initialRect.origin.x = (imageSize.width - sideLength) / 2
+                    initialRect.origin.y = (imageSize.height - sideLength) / 2
+                    return initialRect
+                }
+
+                return cropBounds
+            }
             .filter { !$0.isEmpty }
+
+        visibleRect = viewDidLayoutSubviews
+            .withLatestFrom(cropBounds)
+            .asDriver(onErrorDriveWith: Driver.empty())
 
         presentImagePicker = Driver
             .of(photosButtonItemDidTap.asDriver(onErrorJustReturn: ()),
