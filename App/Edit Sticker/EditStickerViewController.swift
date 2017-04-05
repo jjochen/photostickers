@@ -39,6 +39,15 @@ class EditStickerViewController: UIViewController {
         return maskLayer
     }()
 
+    fileprivate lazy var shadowLayer: CAShapeLayer = {
+        let shadowLayer = CAShapeLayer()
+        shadowLayer.shadowColor = UIColor.black.cgColor
+        shadowLayer.shadowOffset = CGSize(width: 2, height: 2)
+        shadowLayer.shadowOpacity = 1
+        shadowLayer.shadowRadius = 6
+        return shadowLayer
+    }()
+
     fileprivate let didEndDecelerating = PublishSubject<Void>()
     fileprivate let didEndDraggingWithoutDecelaration = PublishSubject<Void>()
     fileprivate let didZoom = PublishSubject<Void>()
@@ -49,6 +58,7 @@ class EditStickerViewController: UIViewController {
 extension EditStickerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        coverView.layer.addSublayer(shadowLayer)
         setupBindings()
         configureLayoutConstraints()
     }
@@ -56,6 +66,7 @@ extension EditStickerViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         maskLayer.frame = coverView.bounds
+        shadowLayer.frame = coverView.bounds
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -204,9 +215,13 @@ fileprivate extension EditStickerViewController {
         viewModel.mask
             .drive(onNext: { mask in
                 let maskRect = self.scrollView.convertBounds(to: self.coverView)
-                let path = mask.maskPath(in: self.coverView.bounds, maskRect: maskRect)
-                self.maskLayer.path = path.cgPath
+                let maskPath = mask.maskPath(in: self.coverView.bounds, maskRect: maskRect)
+                self.maskLayer.path = maskPath.cgPath
                 self.coverView.layer.mask = self.maskLayer
+
+                let shadowPath = mask.path(in: maskRect)
+                self.shadowLayer.shadowPath = shadowPath.cgPath
+
             })
             .disposed(by: disposeBag)
 
@@ -217,6 +232,7 @@ fileprivate extension EditStickerViewController {
                     UIView.setAnimationDuration(0.3)
                 }
                 self.coverView.alpha = transparent ? 0.75 : 1
+                self.shadowLayer.isHidden = transparent
                 if animated {
                     UIView.commitAnimations()
                 }
