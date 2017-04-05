@@ -118,66 +118,47 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zd7-Ok-AEC" userLabel="Sticker Layout Guide">
                                 <rect key="frame" x="0.0" y="64" width="375" height="375"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yiw-do-MrB" userLabel="Sticker Crop View">
-                                        <rect key="frame" x="27.5" y="27.5" width="319" height="319"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="yiw-do-MrB" secondAttribute="height" multiplier="1:1" id="0xn-W1-Z8m"/>
-                                        </constraints>
-                                    </view>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="pX4-f0-VAR" userLabel="Sticker Placeholder">
-                                        <rect key="frame" x="27.5" y="27.5" width="319" height="319"/>
+                                        <rect key="frame" x="28" y="28" width="319" height="319"/>
                                     </imageView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.10000000000000001" maximumZoomScale="1.1000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="Ylq-NR-HX9">
+                                        <rect key="frame" x="28" y="28" width="319" height="319"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="375" translatesAutoresizingMaskIntoConstraints="NO" id="8nJ-XZ-tCD">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="8nJ-XZ-tCD" firstAttribute="top" secondItem="Ylq-NR-HX9" secondAttribute="top" id="2BL-pe-goY"/>
+                                            <constraint firstItem="8nJ-XZ-tCD" firstAttribute="leading" secondItem="Ylq-NR-HX9" secondAttribute="leading" id="Gl7-ZZ-IDD"/>
+                                            <constraint firstAttribute="bottom" secondItem="8nJ-XZ-tCD" secondAttribute="bottom" id="fUw-qR-O8O"/>
+                                            <constraint firstAttribute="trailing" secondItem="8nJ-XZ-tCD" secondAttribute="trailing" id="hXz-Sm-PGc"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="delegate" destination="xY5-ie-FY6" id="hGp-Ys-qqz"/>
+                                        </connections>
+                                    </scrollView>
+                                    <view userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MFD-Hg-Vnb" userLabel="Cover View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="yiw-do-MrB" firstAttribute="centerY" secondItem="Zd7-Ok-AEC" secondAttribute="centerY" id="1OJ-pq-44q"/>
-                                    <constraint firstItem="pX4-f0-VAR" firstAttribute="top" secondItem="yiw-do-MrB" secondAttribute="top" id="2wW-0O-mvk"/>
-                                    <constraint firstItem="yiw-do-MrB" firstAttribute="centerX" secondItem="Zd7-Ok-AEC" secondAttribute="centerX" id="Hdf-2V-iSJ"/>
-                                    <constraint firstItem="pX4-f0-VAR" firstAttribute="leading" secondItem="yiw-do-MrB" secondAttribute="leading" id="PaV-wu-ofj"/>
-                                    <constraint firstItem="pX4-f0-VAR" firstAttribute="bottom" secondItem="yiw-do-MrB" secondAttribute="bottom" id="YFX-Cy-cwp"/>
-                                    <constraint firstItem="pX4-f0-VAR" firstAttribute="trailing" secondItem="yiw-do-MrB" secondAttribute="trailing" id="apj-qk-jVg"/>
-                                    <constraint firstItem="yiw-do-MrB" firstAttribute="width" secondItem="Zd7-Ok-AEC" secondAttribute="width" multiplier="0.85" id="gud-jZ-tCK"/>
+                                    <constraint firstItem="pX4-f0-VAR" firstAttribute="bottom" secondItem="Ylq-NR-HX9" secondAttribute="bottom" id="1ft-sc-VPl"/>
+                                    <constraint firstItem="pX4-f0-VAR" firstAttribute="top" secondItem="Ylq-NR-HX9" secondAttribute="top" id="3qo-5t-1XR"/>
+                                    <constraint firstItem="MFD-Hg-Vnb" firstAttribute="leading" secondItem="Zd7-Ok-AEC" secondAttribute="leading" id="8Jr-CE-taV"/>
+                                    <constraint firstItem="pX4-f0-VAR" firstAttribute="leading" secondItem="Ylq-NR-HX9" secondAttribute="leading" id="9fW-kq-pg7"/>
+                                    <constraint firstItem="MFD-Hg-Vnb" firstAttribute="bottom" secondItem="Zd7-Ok-AEC" secondAttribute="bottom" id="Cnp-Yu-C33"/>
+                                    <constraint firstItem="Ylq-NR-HX9" firstAttribute="height" secondItem="Zd7-Ok-AEC" secondAttribute="height" multiplier="0.85" id="DUE-dQ-VEY"/>
+                                    <constraint firstItem="MFD-Hg-Vnb" firstAttribute="top" secondItem="Zd7-Ok-AEC" secondAttribute="top" id="IY8-CO-Kag"/>
+                                    <constraint firstItem="Ylq-NR-HX9" firstAttribute="centerY" secondItem="Zd7-Ok-AEC" secondAttribute="centerY" id="J5k-qI-Wb9"/>
+                                    <constraint firstItem="pX4-f0-VAR" firstAttribute="trailing" secondItem="Ylq-NR-HX9" secondAttribute="trailing" id="RJM-4f-PsO"/>
+                                    <constraint firstItem="MFD-Hg-Vnb" firstAttribute="trailing" secondItem="Zd7-Ok-AEC" secondAttribute="trailing" id="Yrt-fP-9mP"/>
+                                    <constraint firstItem="Ylq-NR-HX9" firstAttribute="centerX" secondItem="Zd7-Ok-AEC" secondAttribute="centerX" id="ZjH-TG-8tQ"/>
+                                    <constraint firstItem="Ylq-NR-HX9" firstAttribute="width" secondItem="Zd7-Ok-AEC" secondAttribute="width" multiplier="0.85" id="ghF-f5-wIc"/>
                                     <constraint firstAttribute="width" secondItem="Zd7-Ok-AEC" secondAttribute="height" multiplier="1:1" id="ks8-Py-kJd"/>
                                 </constraints>
                             </view>
-                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.10000000000000001" maximumZoomScale="1.1000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="Ylq-NR-HX9">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="375" translatesAutoresizingMaskIntoConstraints="NO" id="8nJ-XZ-tCD">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="8nJ-XZ-tCD" firstAttribute="top" secondItem="Ylq-NR-HX9" secondAttribute="top" id="2BL-pe-goY"/>
-                                    <constraint firstItem="8nJ-XZ-tCD" firstAttribute="leading" secondItem="Ylq-NR-HX9" secondAttribute="leading" id="Gl7-ZZ-IDD"/>
-                                    <constraint firstAttribute="bottom" secondItem="8nJ-XZ-tCD" secondAttribute="bottom" id="fUw-qR-O8O"/>
-                                    <constraint firstAttribute="trailing" secondItem="8nJ-XZ-tCD" secondAttribute="trailing" id="hXz-Sm-PGc"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="delegate" destination="xY5-ie-FY6" id="hGp-Ys-qqz"/>
-                                </connections>
-                            </scrollView>
-                            <visualEffectView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecJ-fs-vcM" userLabel="Blur View">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="xOc-dt-8lc">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xPe-xu-rzI">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="n9e-Fk-Tb5">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </view>
-                                            <vibrancyEffect>
-                                                <blurEffect style="light"/>
-                                            </vibrancyEffect>
-                                        </visualEffectView>
-                                    </subviews>
-                                </view>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aBM-ze-byb" userLabel="Control Layout Guide">
                                 <rect key="frame" x="0.0" y="439" width="375" height="184"/>
                                 <subviews>
@@ -223,23 +204,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="aBM-ze-byb" firstAttribute="leading" secondItem="Zd7-Ok-AEC" secondAttribute="trailing" priority="999" id="2IQ-K9-yM6" userLabel="L: Control Layout Guide.leading = Sticker Layout Guide.trailing"/>
-                            <constraint firstItem="Ylq-NR-HX9" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="Dne-eZ-WE8"/>
                             <constraint firstItem="aBM-ze-byb" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" priority="750" id="F7K-xB-9qp"/>
                             <constraint firstItem="Zd7-Ok-AEC" firstAttribute="trailing" secondItem="63h-fZ-lFi" secondAttribute="trailing" priority="750" id="IDl-es-lF7"/>
-                            <constraint firstItem="ecJ-fs-vcM" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="Kjw-JG-vqY"/>
                             <constraint firstItem="Zd7-Ok-AEC" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="MnT-bi-hqY"/>
                             <constraint firstItem="aBM-ze-byb" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" priority="750" id="S8a-M9-bSI"/>
-                            <constraint firstItem="Ylq-NR-HX9" firstAttribute="trailing" secondItem="63h-fZ-lFi" secondAttribute="trailing" id="Wye-d8-nc2"/>
-                            <constraint firstItem="Ylq-NR-HX9" firstAttribute="bottom" secondItem="EuG-up-7tU" secondAttribute="top" id="ebu-EP-nMK"/>
-                            <constraint firstItem="ecJ-fs-vcM" firstAttribute="bottom" secondItem="EuG-up-7tU" secondAttribute="top" id="exa-xb-ZEU"/>
                             <constraint firstItem="Zd7-Ok-AEC" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="fbf-q4-d8M"/>
-                            <constraint firstItem="ecJ-fs-vcM" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="laf-1m-N8x"/>
-                            <constraint firstItem="ecJ-fs-vcM" firstAttribute="trailing" secondItem="63h-fZ-lFi" secondAttribute="trailing" id="mEC-Is-vkA"/>
                             <constraint firstItem="aBM-ze-byb" firstAttribute="top" secondItem="Zd7-Ok-AEC" secondAttribute="bottom" priority="999" id="nNB-7c-cMT" userLabel="P: Control Layout Guide.top = Sticker Layout Guide.bottom"/>
                             <constraint firstItem="aBM-ze-byb" firstAttribute="bottom" secondItem="EuG-up-7tU" secondAttribute="top" id="pY2-P2-4FA"/>
                             <constraint firstItem="Zd7-Ok-AEC" firstAttribute="bottom" secondItem="EuG-up-7tU" secondAttribute="top" priority="750" id="sMr-4k-1PW"/>
                             <constraint firstItem="aBM-ze-byb" firstAttribute="trailing" secondItem="63h-fZ-lFi" secondAttribute="trailing" id="tu1-35-Jkh"/>
-                            <constraint firstItem="Ylq-NR-HX9" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="vee-N9-N3i"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -266,9 +239,9 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="blurView" destination="ecJ-fs-vcM" id="dlH-dw-9qX"/>
                         <outlet property="cancelButtonItem" destination="HGg-xK-bhk" id="blY-Q7-uzJ"/>
                         <outlet property="circleButton" destination="UKM-gO-hz8" id="p5a-Uv-WGn"/>
+                        <outlet property="coverView" destination="MFD-Hg-Vnb" id="2Se-lB-jjb"/>
                         <outlet property="deleteButtonItem" destination="UY9-Yv-yfg" id="FL6-hG-PZe"/>
                         <outlet property="imageView" destination="8nJ-XZ-tCD" id="O3S-i1-jel"/>
                         <outlet property="photosButtonItem" destination="zho-8l-mAf" id="RAP-D3-gzV"/>

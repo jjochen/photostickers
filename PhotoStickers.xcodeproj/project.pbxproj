@@ -64,6 +64,7 @@
 		19DFF0131E8E9F6000E4B36C /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 19DFF00E1E8E9F6000E4B36C /* .gitattributes */; };
 		19DFF0141E8E9F6000E4B36C /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 19DFF00F1E8E9F6000E4B36C /* .travis.yml */; };
 		19DFF0151E8E9F6000E4B36C /* .ruby-version in Resources */ = {isa = PBXBuildFile; fileRef = 19DFF0101E8E9F6000E4B36C /* .ruby-version */; };
+		19DFF01F1E93A8FB00E4B36C /* ImageRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DFF01E1E93A8FB00E4B36C /* ImageRect.swift */; };
 		19E1EB3D1E78199F005637C4 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1EB3C1E78199F005637C4 /* StyleKit.swift */; };
 		19E1EB3E1E7819C5005637C4 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1EB3C1E78199F005637C4 /* StyleKit.swift */; };
 		19E1EB401E792F0E005637C4 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1EB3F1E792F0E005637C4 /* UIView+Extensions.swift */; };
@@ -208,6 +209,7 @@
 		19DFF00E1E8E9F6000E4B36C /* .gitattributes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		19DFF00F1E8E9F6000E4B36C /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		19DFF0101E8E9F6000E4B36C /* .ruby-version */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ".ruby-version"; sourceTree = "<group>"; };
+		19DFF01E1E93A8FB00E4B36C /* ImageRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRect.swift; sourceTree = "<group>"; };
 		19E1EB3C1E78199F005637C4 /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		19E1EB3F1E792F0E005637C4 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		19E1EB431E7C1344005637C4 /* UIImage+Average.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Average.swift"; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 			children = (
 				19A6C5FA1E5EFCE2009B8922 /* EditStickerViewController.swift */,
 				19A6C5FC1E5EFCEE009B8922 /* EditStickerViewModel.swift */,
+				19DFF01E1E93A8FB00E4B36C /* ImageRect.swift */,
 			);
 			path = "Edit Sticker";
 			sourceTree = "<group>";
@@ -1066,6 +1069,7 @@
 				1946215C1E3CFE16000F09CE /* StickerCollectionViewController.swift in Sources */,
 				1946218C1E3D1460000F09CE /* Sticker.swift in Sources */,
 				194621201E3CFDA1000F09CE /* UIStoryboardSegue+Extensions.swift in Sources */,
+				19DFF01F1E93A8FB00E4B36C /* ImageRect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
