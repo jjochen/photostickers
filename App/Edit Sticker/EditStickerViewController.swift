@@ -186,12 +186,12 @@ fileprivate extension EditStickerViewController {
             })
             .disposed(by: disposeBag)
 
-        viewModel.imageRect
-            .drive(onNext: { imageRect in
+        viewModel.image
+            .drive(onNext: { image in
                 self.scrollView.zoomScale = 1
                 self.scrollView.contentOffset = .zero
-                self.imageView.image = imageRect.image
-                self.scrollView.contentSize = imageRect.image?.size ?? .zero
+                self.imageView.image = image
+                self.scrollView.contentSize = image?.size ?? .zero
 
                 self.view.setNeedsLayout()
                 self.view.layoutIfNeeded()
@@ -210,8 +210,17 @@ fileprivate extension EditStickerViewController {
             })
             .disposed(by: disposeBag)
 
-        viewModel.coverViewAlpha
-            .drive(coverView.rx.alpha)
+        viewModel.coverViewTransparentAnimated
+            .drive(onNext: { transparent, animated in
+                if animated {
+                    UIView.beginAnimations("CoverViewAlpha", context: nil)
+                    UIView.setAnimationDuration(0.3)
+                }
+                self.coverView.alpha = transparent ? 0.75 : 1
+                if animated {
+                    UIView.commitAnimations()
+                }
+            })
             .disposed(by: disposeBag)
 
         viewModel.presentImagePicker

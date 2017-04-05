@@ -31,10 +31,10 @@ protocol EditStickerViewModelType {
     var saveButtonItemEnabled: Driver<Bool> { get }
     var deleteButtonItemEnabled: Driver<Bool> { get }
     var stickerPlaceholderHidden: Driver<Bool> { get }
-    var imageRect: Driver<ImageRect> { get }
+    var image: Driver<UIImage?> { get }
     var visibleRect: Driver<CGRect> { get }
     var mask: Driver<Mask> { get }
-    var coverViewAlpha: Driver<CGFloat> { get }
+    var coverViewTransparentAnimated: Driver<(Bool, Bool)> { get }
     var presentImagePicker: Driver<UIImagePickerControllerSourceType> { get }
     var dismiss: Driver<Void> { get }
 }
@@ -70,24 +70,15 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let saveButtonItemEnabled: Driver<Bool>
     let deleteButtonItemEnabled: Driver<Bool>
     let stickerPlaceholderHidden: Driver<Bool>
-    let imageRect: Driver<ImageRect>
+    let image: Driver<UIImage?>
     let visibleRect: Driver<CGRect>
     let mask: Driver<Mask>
-    let coverViewAlpha: Driver<CGFloat>
+    let coverViewTransparentAnimated: Driver<(Bool, Bool)>
     let presentImagePicker: Driver<UIImagePickerControllerSourceType>
     let dismiss: Driver<Void>
 
     // MARK: Internal
     fileprivate let _stickerWasDeleted = PublishSubject<Void>()
-
-    //    fileprivate let _imageSize: Driver<CGSize>
-    //    fileprivate let _scrollViewBoundsSize: Driver<CGSize>
-    //    fileprivate let _maskViewBounds: Driver<CGRect>
-
-    //    fileprivate let _zoomScale: Observable<CGFloat>
-    //    fileprivate let _contentOffset: Observable<CGPoint>
-    //
-    //    fileprivate let _viewDidTransition: Driver<Void>
     fileprivate let _originalImageWasSetToNil: Driver<Void>
     fileprivate let _stickerWasRendered: Driver<Void>
     fileprivate let _stickerWasSaved: Driver<Void>
@@ -145,13 +136,8 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: false)
 
-        imageRect = stickerInfo.originalImage
+        image = stickerInfo.originalImage
             .asDriver()
-            .withLatestFrom(
-                Driver.combineLatest(stickerInfo.originalImage.asDriver(),
-                                     stickerInfo.cropBounds.asDriver()) { image, cropBounds in
-                    ImageRect(image: image, rect: cropBounds)
-            })
 
         visibleRect = viewDidLayoutSubviews
             .asDriver(onErrorDriveWith: Driver.empty())
@@ -178,19 +164,21 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .withLatestFrom(stickerInfo.mask.asObservable())
             .asDriver(onErrorJustReturn: .circle)
 
-        let alpha07 = visibleRectDidChange
-            .map { _ in CGFloat(0.7) }
+        let transparent = visibleRectDidChange
+            .map { _ in (true, false) }
 
-        let alpha1 = visibleRectDidChange
+        let opaque = visibleRectDidChange
             .debounce(1, scheduler: MainScheduler.asyncInstance)
-            .map { _ in CGFloat(1.0) }
+            .map { _ in (false, true) }
 
-        coverViewAlpha = Observable
-            .of(alpha07, alpha1)
+        coverViewTransparentAnimated = Observable
+            .of(transparent, opaque)
             .merge()
-            .startWith(1.0)
-            .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: 1.0)
+            .startWith((false, false))
+            .distinctUntilChanged { lhs, rhs in
+                lhs.0 == rhs.0 && lhs.1 == lhs.1
+            }
+            .asDriver(onErrorJustReturn: (false, false))
 
         super.init()
 
