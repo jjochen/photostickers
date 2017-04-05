@@ -178,7 +178,19 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .withLatestFrom(stickerInfo.mask.asObservable())
             .asDriver(onErrorJustReturn: .circle)
 
-        coverViewAlpha = Driver.just(1) // ToDo
+        let alpha07 = visibleRectDidChange
+            .map { _ in CGFloat(0.7) }
+
+        let alpha1 = visibleRectDidChange
+            .debounce(1, scheduler: MainScheduler.asyncInstance)
+            .map { _ in CGFloat(1.0) }
+
+        coverViewAlpha = Observable
+            .of(alpha07, alpha1)
+            .merge()
+            .startWith(1.0)
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: 1.0)
 
         super.init()
 

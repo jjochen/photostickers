@@ -42,6 +42,7 @@ class EditStickerViewController: UIViewController {
     fileprivate let didEndDecelerating = PublishSubject<Void>()
     fileprivate let didEndDraggingWithoutDecelaration = PublishSubject<Void>()
     fileprivate let didZoom = PublishSubject<Void>()
+    fileprivate let didScroll = PublishSubject<Void>()
 }
 
 // MASK: - UIViewController override
@@ -132,6 +133,14 @@ fileprivate extension EditStickerViewController {
             .disposed(by: disposeBag)
 
         scrollView.rx
+            .didScroll
+            .filter { _ in
+                return self.scrollView.isDragging || self.scrollView.isDecelerating
+            }
+            .bindTo(didScroll)
+            .disposed(by: disposeBag)
+
+        scrollView.rx
             .didZoom
             .filter { _ in
                 return self.scrollView.isZooming || self.scrollView.isZoomBouncing
@@ -140,8 +149,7 @@ fileprivate extension EditStickerViewController {
             .disposed(by: disposeBag)
 
         Observable
-            .of(didEndDraggingWithoutDecelaration,
-                didEndDecelerating,
+            .of(didScroll,
                 didZoom)
             .merge()
             .filter { _ in
