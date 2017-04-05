@@ -252,8 +252,10 @@ fileprivate extension EditStickerViewController {
                 .asDriver(onErrorJustReturn: [:])
             }
             .map { info in
-                return info[UIImagePickerControllerOriginalImage] as? UIImage
+                let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+                return image?.fixOrientation()
             }
+            .filter { $0 != nil }
             .drive(viewModel.didPickImage)
             .disposed(by: disposeBag)
 
