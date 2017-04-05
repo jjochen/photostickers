@@ -33,12 +33,6 @@ class EditStickerViewController: UIViewController {
     @IBOutlet var portraitConstraints: [NSLayoutConstraint]!
     @IBOutlet var landscapeConstraints: [NSLayoutConstraint]!
 
-    fileprivate lazy var maskView: UIView = {
-        let maskView = UIView()
-        maskView.backgroundColor = UIColor.black
-        return maskView
-    }()
-
     fileprivate lazy var maskLayer: CAShapeLayer = {
         let maskLayer = CAShapeLayer()
         maskLayer.fillRule = kCAFillRuleEvenOdd
@@ -60,7 +54,7 @@ extension EditStickerViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        maskView.frame = coverView.bounds
+        maskLayer.frame = coverView.bounds
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -87,10 +81,6 @@ fileprivate extension EditStickerViewController {
             Logger.shared.error("View Model not set!")
             return
         }
-
-        rx.viewWillLayoutSubviews
-            .bindTo(viewModel.viewWillLayoutSubviews)
-            .disposed(by: disposeBag)
 
         rx.viewDidLayoutSubviews
             .bindTo(viewModel.viewDidLayoutSubviews)
@@ -161,29 +151,6 @@ fileprivate extension EditStickerViewController {
             .bindTo(viewModel.visibleRectDidChange)
             .disposed(by: disposeBag)
 
-        //        scrollView.rx.didZoom
-        //            .map { self.scrollView.zoomScale }
-        //            .bindTo(viewModel.zoomScaleDidChange)
-        //            .disposed(by: disposeBag)
-        //
-        //        Observable.of(scrollView.rx.didZoom.map { _ in Void() },
-        //                      didEndDraggingWithoutDecelaration,
-        //                      didEndDecelerating,
-        //                      rx.viewDidLayoutSubviews)
-        //            .merge()
-        //            .map { self.scrollView.bounds }
-        //            .distinctUntilChanged()
-        //            .bindTo(viewModel.scrollViewBoundsDidChange)
-        //            .disposed(by: disposeBag)
-        //
-        //        rx.viewDidLayoutSubviews
-        //            .map {
-        //                return self.maskView.bounds
-        //            }
-        //            .distinctUntilChanged()
-        //            .bindTo(viewModel.maskViewBoundsDidChange)
-        //            .disposed(by: disposeBag)
-
         stickerTitleTextField.rx.text
             .skip(1)
             .bindTo(viewModel.stickerTitleDidChange)
@@ -231,9 +198,12 @@ fileprivate extension EditStickerViewController {
                 let maskRect = self.scrollView.convertBounds(to: self.coverView)
                 let path = mask.maskPath(in: self.coverView.bounds, maskRect: maskRect)
                 self.maskLayer.path = path.cgPath
-                self.maskView.layer.mask = self.maskLayer
-                self.coverView.mask = self.maskView
+                self.coverView.layer.mask = self.maskLayer
             })
+            .disposed(by: disposeBag)
+
+        viewModel.coverViewAlpha
+            .drive(coverView.rx.alpha)
             .disposed(by: disposeBag)
 
         viewModel.presentImagePicker
@@ -329,7 +299,9 @@ fileprivate extension EditStickerViewController {
         let minScale = max(xScale, yScale)
         return minScale
     }
+}
 
+fileprivate extension EditStickerViewController {
     func zoomScale(for visibleRect: CGRect) -> CGFloat {
         let boundsSize = scrollView.bounds.size
         let visibleRectSize = visibleRect.size

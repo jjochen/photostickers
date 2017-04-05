@@ -22,11 +22,6 @@ protocol EditStickerViewModelType {
     var starButtonDidTap: PublishSubject<Void> { get }
     var didPickImage: PublishSubject<UIImage?> { get }
     var visibleRectDidChange: PublishSubject<CGRect> { get }
-    //    var zoomScaleDidChange: PublishSubject<CGFloat> { get }
-    //    var contentOffsetDidChange: PublishSubject<CGPoint> { get }
-    //    var scrollViewBoundsDidChange: PublishSubject<CGRect> { get }
-    //    var maskViewBoundsDidChange: PublishSubject<CGRect> { get }
-    var viewWillLayoutSubviews: PublishSubject<Void> { get }
     var viewDidLayoutSubviews: PublishSubject<Void> { get }
     var viewWillTransitionToSize: PublishSubject<CGSize> { get }
     var stickerTitleDidChange: PublishSubject<String?> { get }
@@ -39,6 +34,7 @@ protocol EditStickerViewModelType {
     var imageRect: Driver<ImageRect> { get }
     var visibleRect: Driver<CGRect> { get }
     var mask: Driver<Mask> { get }
+    var coverViewAlpha: Driver<CGFloat> { get }
     var presentImagePicker: Driver<UIImagePickerControllerSourceType> { get }
     var dismiss: Driver<Void> { get }
 }
@@ -64,12 +60,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let starButtonDidTap = PublishSubject<Void>()
     let didPickImage = PublishSubject<UIImage?>()
     let visibleRectDidChange = PublishSubject<CGRect>()
-    let viewWillLayoutSubviews = PublishSubject<Void>()
     let viewDidLayoutSubviews = PublishSubject<Void>()
-    //    let zoomScaleDidChange = PublishSubject<CGFloat>()
-    //    let contentOffsetDidChange = PublishSubject<CGPoint>()
-    //    let scrollViewBoundsDidChange = PublishSubject<CGRect>()
-    //    let maskViewBoundsDidChange = PublishSubject<CGRect>()
     let viewWillTransitionToSize = PublishSubject<CGSize>()
     let stickerTitleDidChange = PublishSubject<String?>()
 
@@ -82,6 +73,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let imageRect: Driver<ImageRect>
     let visibleRect: Driver<CGRect>
     let mask: Driver<Mask>
+    let coverViewAlpha: Driver<CGFloat>
     let presentImagePicker: Driver<UIImagePickerControllerSourceType>
     let dismiss: Driver<Void>
 
@@ -113,31 +105,6 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
         stickerTitlePlaceholder = Sticker.titlePlaceholder
         stickerTitle = stickerInfo.initialTitle
-
-        //        _scrollViewBoundsSize = scrollViewBoundsDidChange
-        //            .map { $0.size }
-        //            .startWith(.zero)
-        //            .distinctUntilChanged()
-        //            .asDriver(onErrorJustReturn: .zero)
-        //
-        //        _zoomScale = zoomScaleDidChange
-        //            .startWith(0)
-        //            .distinctUntilChanged()
-        //
-        //        _contentOffset = contentOffsetDidChange
-        //            .startWith(.zero)
-        //            .distinctUntilChanged()
-        //
-        //        _maskViewBounds = maskViewBoundsDidChange
-        //            .startWith(.zero)
-        //            .distinctUntilChanged()
-        //            .asDriver(onErrorJustReturn: .zero)
-
-        //        _imageSize = self.stickerInfo
-        //            .originalImage
-        //            .asDriver()
-        //            .map { $0?.size ?? .zero }
-        //            .distinctUntilChanged()
 
         _originalImageWasSetToNil = stickerInfo
             .originalImageIsNil
@@ -178,32 +145,6 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: false)
 
-        //        maskPath = Driver
-        //            .combineLatest(stickerInfo.mask.asDriver(),
-        //                           _maskViewBounds,
-        //                           _viewDidTransition) { mask, maskViewBounds, _ in
-        //                let maskRect = EditStickerViewModel.maskRect(boundsSize: maskViewBounds.size)
-        //                return mask.maskPath(in: maskViewBounds, maskRect: maskRect)
-        //            }
-        //
-        //        contentInset = _scrollViewBoundsSize
-        //            .map { boundsSize in
-        //                return EditStickerViewModel.contentInset(boundsSize: boundsSize)
-        //            }
-        //            .distinctUntilChanged()
-        //
-        //        maximumZoomScale = _scrollViewBoundsSize
-        //            .map { size in
-        //                return EditStickerViewModel.maximumZoomScale(boundsSize: size)
-        //            }
-        //            .distinctUntilChanged()
-        //
-        //        minimumZoomScale = Driver
-        //            .combineLatest(_imageSize, _scrollViewBoundsSize) { imageSize, boundsSize in
-        //                return EditStickerViewModel.minimumZoomScale(imageSize: imageSize, boundsSize: boundsSize)
-        //            }
-        //            .distinctUntilChanged()
-
         imageRect = stickerInfo.originalImage
             .asDriver()
             .withLatestFrom(
@@ -231,8 +172,13 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
                 _stickerWasDeleted.asDriver(onErrorJustReturn: ()))
             .merge()
 
-        mask = stickerInfo.mask
-            .asDriver()
+        mask = Observable.of(viewDidLayoutSubviews,
+                             stickerInfo.mask.asObservable().map { _ in Void() })
+            .merge()
+            .withLatestFrom(stickerInfo.mask.asObservable())
+            .asDriver(onErrorJustReturn: .circle)
+
+        coverViewAlpha = Driver.just(1) // ToDo
 
         super.init()
 
@@ -251,20 +197,6 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
         visibleRectDidChange
             .bindTo(stickerInfo.cropBounds)
             .disposed(by: disposeBag)
-
-        //        Observable
-        //            .combineLatest(stickerInfo.originalImage.asObservable(),
-        //                           _zoomScale,
-        //                           _contentOffset,
-        //                           _scrollViewBoundsSize.asObservable())
-        //            .filter { image, _, _, _ in
-        //                return image != nil
-        //            }
-        //            .map { _, zoomScale, contentOffset, boundsSize in
-        //                return EditStickerViewModel.cropBounds(boundsSize: boundsSize, zoomScale: zoomScale, contentOffset: contentOffset)
-        //            }
-        //            .bindTo(stickerInfo.cropBounds)
-        //            .disposed(by: disposeBag)
 
         saveButtonItemDidTap
             .withLatestFrom(saveButtonItemEnabled)
@@ -294,110 +226,5 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .merge()
             .bindTo(stickerInfo.mask)
             .disposed(by: disposeBag)
-    }
-}
-
-fileprivate extension EditStickerViewModel {
-
-    static func maskRect(boundsSize: CGSize) -> CGRect {
-        let boundsMinSideLength = boundsSize.minSideLength
-        let sideLength = boundsMinSideLength * 0.85
-        let inset = (boundsMinSideLength - sideLength) / 2.0
-        return CGRect(x: inset, y: inset, width: sideLength, height: sideLength)
-    }
-
-    static func contentInset(boundsSize: CGSize) -> UIEdgeInsets {
-        let maskRect = self.maskRect(boundsSize: boundsSize)
-        var contentInset = UIEdgeInsets()
-        contentInset.top = maskRect.minY
-        contentInset.left = maskRect.minX
-        contentInset.right = boundsSize.width - maskRect.maxX
-        contentInset.bottom = boundsSize.height - maskRect.maxY
-        return contentInset
-    }
-
-    static func maximumZoomScale(boundsSize: CGSize) -> CGFloat {
-        let minimumZoomedImageSize = self.minimumZoomedImageSize()
-        guard minimumZoomedImageSize.width > 0 && minimumZoomedImageSize.height > 0 else {
-            return 1
-        }
-
-        let maskRect = self.maskRect(boundsSize: boundsSize)
-        let xScale = maskRect.width / minimumZoomedImageSize.width
-        let yScale = maskRect.height / minimumZoomedImageSize.height
-        let maxScale = min(xScale, yScale)
-        return maxScale
-    }
-
-    static func minimumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat {
-        guard imageSize.width > 0 && imageSize.height > 0 else {
-            return 1
-        }
-
-        let maskRect = self.maskRect(boundsSize: boundsSize)
-        let xScale = maskRect.width / imageSize.width
-        let yScale = maskRect.height / imageSize.height
-        let minScale = max(xScale, yScale)
-        return minScale
-    }
-
-    static func zoomScaleAndContentOffset(imageSize: CGSize, boundsSize: CGSize, cropBounds: CGRect) -> (CGFloat, CGPoint) {
-        let minimumZoomScale = self.minimumZoomScale(imageSize: imageSize, boundsSize: boundsSize)
-        let maximumZoomScale = self.maximumZoomScale(boundsSize: boundsSize)
-
-        let maskRect = self.maskRect(boundsSize: boundsSize)
-
-        var cropBounds = cropBounds
-        if cropBounds.isEmpty {
-            cropBounds = initialCropBounds(imageSize: imageSize)
-        }
-
-        var zoomScale: CGFloat
-        if cropBounds.width > 0 && cropBounds.height > 0 {
-            let xScale = maskRect.width / cropBounds.width
-            let yScale = maskRect.height / cropBounds.height
-            zoomScale = min(xScale, yScale)
-        } else {
-            zoomScale = 1
-        }
-
-        zoomScale = max(zoomScale, minimumZoomScale)
-        zoomScale = min(zoomScale, maximumZoomScale)
-
-        var contentOffset = CGPoint() // ToDo Check!
-        contentOffset.x = cropBounds.minX * zoomScale - maskRect.minX
-        contentOffset.y = cropBounds.minY * zoomScale - maskRect.minY
-
-        return (zoomScale, contentOffset)
-    }
-
-    static func initialCropBounds(imageSize: CGSize) -> CGRect {
-        let minSideLength = min(imageSize.width, imageSize.height)
-
-        var cropBounds = CGRect()
-        cropBounds.size.width = minSideLength
-        cropBounds.size.height = minSideLength
-        cropBounds.origin.x = (imageSize.width - minSideLength) / 2.0
-        cropBounds.origin.y = (imageSize.height - minSideLength) / 2.0
-
-        return cropBounds
-    }
-
-    static func cropBounds(boundsSize: CGSize, zoomScale: CGFloat, contentOffset: CGPoint) -> CGRect {
-        guard zoomScale > 0 else {
-            return .zero
-        }
-
-        let maskRect = self.maskRect(boundsSize: boundsSize)
-        var cropBounds = CGRect()
-        cropBounds.origin.x = (contentOffset.x + maskRect.minX) / zoomScale
-        cropBounds.origin.y = (contentOffset.y + maskRect.minY) / zoomScale
-        cropBounds.size.width = maskRect.width / zoomScale
-        cropBounds.size.height = maskRect.height / zoomScale
-        return cropBounds
-    }
-
-    static func minimumZoomedImageSize() -> CGSize {
-        return Sticker.renderedSize
     }
 }
