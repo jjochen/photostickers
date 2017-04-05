@@ -16,6 +16,10 @@ enum Mask: Int {
 
 extension Mask {
 
+    func maskPath(in rect: CGRect) -> UIBezierPath {
+        return maskPath(in: rect, maskRect: rect)
+    }
+
     func maskPath(in rect: CGRect, maskRect: CGRect) -> UIBezierPath {
         let maskPath = UIBezierPath(rect: rect)
         maskPath.usesEvenOddFillRule = true
