@@ -252,6 +252,7 @@
                         <outlet property="coverView" destination="MFD-Hg-Vnb" id="2Se-lB-jjb"/>
                         <outlet property="deleteButtonItem" destination="UY9-Yv-yfg" id="FL6-hG-PZe"/>
                         <outlet property="imageView" destination="8nJ-XZ-tCD" id="O3S-i1-jel"/>
+                        <outlet property="multiStarButton" destination="axO-aK-nfj" id="wiP-IY-DPF"/>
                         <outlet property="photosButtonItem" destination="zho-8l-mAf" id="RAP-D3-gzV"/>
                         <outlet property="rectangleButton" destination="FV4-Ui-tTt" id="efM-ZR-6zs"/>
                         <outlet property="saveButtonItem" destination="ylz-y4-7pV" id="Ycn-K0-Sya"/>
@@ -259,7 +260,6 @@
                         <outlet property="starButton" destination="n04-oW-6GY" id="9as-wu-rBj"/>
                         <outlet property="stickerPlaceholder" destination="pX4-f0-VAR" id="WWs-JN-TVl"/>
                         <outlet property="stickerTitleTextField" destination="dt1-g2-TIx" id="Nr1-N4-DiT"/>
-                        <outlet property="superStarButton" destination="axO-aK-nfj" id="wiP-IY-DPF"/>
                         <outletCollection property="landscapeConstraints" destination="2IQ-K9-yM6" collectionClass="NSMutableArray" id="exj-15-LP6"/>
                         <outletCollection property="portraitConstraints" destination="nNB-7c-cMT" collectionClass="NSMutableArray" id="90W-ER-PcE"/>
                     </connections>

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let _ = NSClassFromString("XCTest") { return true }
 
         window?.backgroundColor = UIColor.white
-        window?.tintColor = Appearance.tintColor
+        window?.tintColor = StyleKit.appColor
 
         let imageStoreService = ImageStoreService(url: AppGroup.imagesURL)
         let stickerService = StickerService(realmURL: AppGroup.realmURL, imageStoreService: imageStoreService)

@@ -21,7 +21,7 @@ class MessagesViewController: MSMessagesAppViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.tintColor = Appearance.tintColor
+        view.tintColor = StyleKit.appColor
     }
 
     override func didReceiveMemoryWarning() {

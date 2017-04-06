@@ -12,7 +12,7 @@ enum Mask: Int {
     case rectangle = 1
     case circle = 2
     case star = 3
-    case superStar = 4
+    case multiStar = 4
 }
 
 extension Mask {
@@ -37,8 +37,8 @@ extension Mask {
             return circlePath(in: rect)
         case .star:
             return starPath(in: rect, flipped: flipped)
-        case .superStar:
-            return superStarPath(in: rect, flipped: flipped)
+        case .multiStar:
+            return multiStarPath(in: rect, flipped: flipped)
         }
     }
 }
@@ -93,7 +93,7 @@ extension Mask {
         return starPath
     }
 
-    fileprivate func superStarPath(in rect: CGRect, flipped: Bool) -> UIBezierPath {
+    fileprivate func multiStarPath(in rect: CGRect, flipped: Bool) -> UIBezierPath {
 
         let originalRect = CGRect(x: 0, y: 0, width: 44, height: 44)
 
