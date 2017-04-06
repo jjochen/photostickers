@@ -44,7 +44,7 @@ class EditStickerViewController: UIViewController {
         let shadowLayer = CAShapeLayer()
         shadowLayer.shadowColor = UIColor.black.cgColor
         shadowLayer.shadowOpacity = 1
-        shadowLayer.shadowOffset = CGSize(width: 2, height: 2)
+        shadowLayer.shadowOffset = CGSize(width: 0, height: 3)
         shadowLayer.shadowRadius = 6
         return shadowLayer
     }()

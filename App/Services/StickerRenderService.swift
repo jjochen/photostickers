@@ -47,58 +47,16 @@ fileprivate extension StickerRenderService {
             return nil
         }
 
-        guard let colorSpace = croppedImageRef.colorSpace else {
-            Logger.shared.error("Couldn't get color space")
-            return nil
-        }
-
-        let renderedImageRect = CGRect(origin: .zero, size: Sticker.renderedSize).integral
-        guard let context: CGContext = CGContext(
-            data: nil,
-            width: Int(renderedImageRect.size.width),
-            height: Int(renderedImageRect.size.height),
-            bitsPerComponent: 8,
-            bytesPerRow: 0,
-            space: colorSpace,
-            bitmapInfo: 0 | CGImageAlphaInfo.premultipliedFirst.rawValue
-        ) else {
+        guard let context = context(for: croppedImageRef) else {
             Logger.shared.error("Couldn't create image context")
             return nil
         }
         context.interpolationQuality = .high
 
-        let shadowOffset = CGSize(width: 3, height: -3)
-        let shadowBlur = CGFloat(15)
-        let shadowColor = UIColor.black
+        let clipPath = mask.path(in: imageDrawRect, flipped: true).cgPath
 
-        let leftShadowInset = max(0, shadowBlur - shadowOffset.width)
-        let rightShadowInset = max(0, shadowBlur + shadowOffset.width)
-        let bottomShadowInset = max(0, shadowBlur - shadowOffset.height)
-        let topShadowInset = max(0, shadowBlur + shadowOffset.height)
-
-        var imageDrawRect = CGRect()
-        imageDrawRect.origin.x = leftShadowInset
-        imageDrawRect.origin.y = bottomShadowInset
-        imageDrawRect.size.width = CGFloat(context.width) - leftShadowInset - rightShadowInset
-        imageDrawRect.size.height = CGFloat(context.height) - bottomShadowInset - topShadowInset
-
-        let clipPath = mask.path(in: imageDrawRect, flipped: true)
-
-        context.saveGState()
-        context.beginPath()
-        context.addPath(clipPath.cgPath)
-        context.closePath()
-        context.setShadow(offset: shadowOffset, blur: shadowBlur, color: shadowColor.cgColor)
-        context.drawPath(using: .fill)
-        context.restoreGState()
-
-        context.saveGState()
-        context.beginPath()
-        context.addPath(clipPath.cgPath)
-        context.closePath()
-        context.clip()
-        context.draw(croppedImageRef, in: imageDrawRect.integral)
-        context.restoreGState()
+        drawShadow(path: clipPath, in: context)
+        drawImage(croppedImageRef, clipPath: clipPath, in: context)
 
         guard let renderedImageRef = context.makeImage() else {
             Logger.shared.error("Couldn't make image from context")
@@ -106,5 +64,81 @@ fileprivate extension StickerRenderService {
         }
 
         return UIImage(cgImage: renderedImageRef)
+    }
+
+    func drawShadow(path: CGPath, in context: CGContext) {
+        context.saveGState()
+        context.beginPath()
+        context.addPath(path)
+        context.closePath()
+        context.setShadow(offset: shadowOffset, blur: shadowBlur, color: shadowColor.cgColor)
+        context.drawPath(using: .fill)
+        context.restoreGState()
+    }
+
+    func drawImage(_ imageRef: CGImage, clipPath: CGPath, in context: CGContext) {
+        context.saveGState()
+        context.beginPath()
+        context.addPath(clipPath)
+        context.closePath()
+        context.clip()
+        context.draw(imageRef, in: imageDrawRect.integral)
+        context.restoreGState()
+    }
+
+    func context(for imageRef: CGImage) -> CGContext? {
+
+        guard let colorSpace = imageRef.colorSpace else {
+            Logger.shared.error("Couldn't get color space")
+            return nil
+        }
+
+        let context = CGContext(
+            data: nil,
+            width: Int(renderedImageRect.size.width),
+            height: Int(renderedImageRect.size.height),
+            bitsPerComponent: 8,
+            bytesPerRow: 0,
+            space: colorSpace,
+            bitmapInfo: 0 | CGImageAlphaInfo.premultipliedFirst.rawValue
+        )
+        return context
+    }
+
+    var shadowOffset: CGSize {
+        return CGSize(width: 0, height: -4)
+    }
+
+    var shadowBlur: CGFloat {
+        return CGFloat(12)
+    }
+
+    var shadowColor: UIColor {
+        return UIColor.black
+    }
+
+    var renderedImageRect: CGRect {
+        return CGRect(origin: .zero, size: Sticker.renderedSize).integral
+    }
+
+    var imageDrawRect: CGRect {
+        let leftShadowInset = max(0, shadowBlur - shadowOffset.width)
+        let rightShadowInset = max(0, shadowBlur + shadowOffset.width)
+        let bottomShadowInset = max(0, shadowBlur - shadowOffset.height)
+        let topShadowInset = max(0, shadowBlur + shadowOffset.height)
+
+        let maxWidth = renderedImageRect.width - leftShadowInset - rightShadowInset
+        let maxHeight = renderedImageRect.height - bottomShadowInset - topShadowInset
+
+        let xScale = maxWidth / renderedImageRect.width
+        let yScale = maxHeight / renderedImageRect.height
+        let scale = min(xScale, yScale)
+
+        var imageDrawRect = CGRect()
+        imageDrawRect.origin.x = leftShadowInset
+        imageDrawRect.origin.y = bottomShadowInset
+        imageDrawRect.size.width = renderedImageRect.width * scale
+        imageDrawRect.size.height = renderedImageRect.height * scale
+        return imageDrawRect.integral
     }
 }
