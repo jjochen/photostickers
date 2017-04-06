@@ -20,6 +20,7 @@ protocol EditStickerViewModelType {
     var circleButtonDidTap: PublishSubject<Void> { get }
     var rectangleButtonDidTap: PublishSubject<Void> { get }
     var starButtonDidTap: PublishSubject<Void> { get }
+    var superStarButtonDidTap: PublishSubject<Void> { get }
     var didPickImage: PublishSubject<UIImage?> { get }
     var visibleRectDidChange: PublishSubject<CGRect> { get }
     var viewDidLayoutSubviews: PublishSubject<Void> { get }
@@ -58,6 +59,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let circleButtonDidTap = PublishSubject<Void>()
     let rectangleButtonDidTap = PublishSubject<Void>()
     let starButtonDidTap = PublishSubject<Void>()
+    let superStarButtonDidTap = PublishSubject<Void>()
     let didPickImage = PublishSubject<UIImage?>()
     let visibleRectDidChange = PublishSubject<CGRect>()
     let viewDidLayoutSubviews = PublishSubject<Void>()
@@ -244,7 +246,8 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
         Observable
             .of(circleButtonDidTap.map { Mask.circle },
                 rectangleButtonDidTap.map { Mask.rectangle },
-                starButtonDidTap.map { Mask.star })
+                starButtonDidTap.map { Mask.star },
+                superStarButtonDidTap.map { Mask.superStar })
             .merge()
             .bindTo(stickerInfo.mask)
             .disposed(by: disposeBag)

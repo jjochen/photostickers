@@ -29,6 +29,7 @@ class EditStickerViewController: UIViewController {
     @IBOutlet weak var circleButton: UIButton!
     @IBOutlet weak var rectangleButton: UIButton!
     @IBOutlet weak var starButton: UIButton!
+    @IBOutlet weak var superStarButton: UIButton!
 
     @IBOutlet var portraitConstraints: [NSLayoutConstraint]!
     @IBOutlet var landscapeConstraints: [NSLayoutConstraint]!
@@ -128,6 +129,10 @@ fileprivate extension EditStickerViewController {
 
         starButton.rx.tap
             .bindTo(viewModel.starButtonDidTap)
+            .disposed(by: disposeBag)
+
+        superStarButton.rx.tap
+            .bindTo(viewModel.superStarButtonDidTap)
             .disposed(by: disposeBag)
 
         scrollView.rx

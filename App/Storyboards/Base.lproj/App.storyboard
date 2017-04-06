@@ -163,7 +163,7 @@
                                 <rect key="frame" x="0.0" y="439" width="375" height="184"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBL-rL-8h5" userLabel="Button Layout Guide">
-                                        <rect key="frame" x="86.5" y="75" width="202" height="33"/>
+                                        <rect key="frame" x="34.5" y="75" width="307" height="33"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKM-gO-hz8">
                                                 <rect key="frame" x="0.0" y="0.0" width="47" height="33"/>
@@ -175,8 +175,13 @@
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <state key="normal" title="Rectangle"/>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axO-aK-nfj" userLabel="Super Star Button">
+                                                <rect key="frame" x="168" y="0.0" width="85" height="33"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <state key="normal" title="Super Star"/>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n04-oW-6GY">
-                                                <rect key="frame" x="168" y="0.0" width="34" height="33"/>
+                                                <rect key="frame" x="273" y="0.0" width="34" height="33"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <state key="normal" title="Star"/>
                                             </button>
@@ -186,11 +191,14 @@
                                             <constraint firstItem="UKM-gO-hz8" firstAttribute="leading" secondItem="PBL-rL-8h5" secondAttribute="leading" id="85S-u3-0e5"/>
                                             <constraint firstItem="FV4-Ui-tTt" firstAttribute="top" secondItem="PBL-rL-8h5" secondAttribute="top" id="8Nx-aU-7kT"/>
                                             <constraint firstItem="UKM-gO-hz8" firstAttribute="bottom" secondItem="PBL-rL-8h5" secondAttribute="bottom" id="8gs-rA-lUW"/>
-                                            <constraint firstItem="n04-oW-6GY" firstAttribute="leading" secondItem="FV4-Ui-tTt" secondAttribute="trailing" constant="20" id="HCN-wt-79S"/>
+                                            <constraint firstItem="axO-aK-nfj" firstAttribute="leading" secondItem="FV4-Ui-tTt" secondAttribute="trailing" constant="20" id="SJV-hH-gS8"/>
+                                            <constraint firstItem="n04-oW-6GY" firstAttribute="leading" secondItem="axO-aK-nfj" secondAttribute="trailing" constant="20" id="UBU-kz-SRS"/>
+                                            <constraint firstItem="axO-aK-nfj" firstAttribute="top" secondItem="PBL-rL-8h5" secondAttribute="top" id="kpd-tb-lu7"/>
                                             <constraint firstItem="UKM-gO-hz8" firstAttribute="top" secondItem="PBL-rL-8h5" secondAttribute="top" id="lRI-Sy-wmE"/>
                                             <constraint firstItem="n04-oW-6GY" firstAttribute="bottom" secondItem="PBL-rL-8h5" secondAttribute="bottom" id="mCh-7q-QHr"/>
                                             <constraint firstItem="n04-oW-6GY" firstAttribute="top" secondItem="PBL-rL-8h5" secondAttribute="top" id="tHg-4h-33t"/>
                                             <constraint firstItem="FV4-Ui-tTt" firstAttribute="bottom" secondItem="PBL-rL-8h5" secondAttribute="bottom" id="tiP-Mn-x42"/>
+                                            <constraint firstItem="axO-aK-nfj" firstAttribute="bottom" secondItem="PBL-rL-8h5" secondAttribute="bottom" id="wwO-VX-zPB"/>
                                             <constraint firstItem="FV4-Ui-tTt" firstAttribute="leading" secondItem="UKM-gO-hz8" secondAttribute="trailing" constant="20" id="x5a-HG-oob"/>
                                         </constraints>
                                     </view>
@@ -251,6 +259,7 @@
                         <outlet property="starButton" destination="n04-oW-6GY" id="9as-wu-rBj"/>
                         <outlet property="stickerPlaceholder" destination="pX4-f0-VAR" id="WWs-JN-TVl"/>
                         <outlet property="stickerTitleTextField" destination="dt1-g2-TIx" id="Nr1-N4-DiT"/>
+                        <outlet property="superStarButton" destination="axO-aK-nfj" id="wiP-IY-DPF"/>
                         <outletCollection property="landscapeConstraints" destination="2IQ-K9-yM6" collectionClass="NSMutableArray" id="exj-15-LP6"/>
                         <outletCollection property="portraitConstraints" destination="nNB-7c-cMT" collectionClass="NSMutableArray" id="90W-ER-PcE"/>
                     </connections>
