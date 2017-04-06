@@ -20,22 +20,22 @@ extension Mask {
         return maskPath(in: rect, maskRect: rect)
     }
 
-    func maskPath(in rect: CGRect, maskRect: CGRect) -> UIBezierPath {
+    func maskPath(in rect: CGRect, maskRect: CGRect, flipped: Bool = false) -> UIBezierPath {
         let maskPath = UIBezierPath(rect: rect)
         maskPath.usesEvenOddFillRule = true
-        let path = self.path(in: maskRect)
+        let path = self.path(in: maskRect, flipped: flipped)
         maskPath.append(path)
         return maskPath
     }
 
-    func path(in rect: CGRect) -> UIBezierPath {
+    func path(in rect: CGRect, flipped: Bool = false) -> UIBezierPath {
         switch self {
         case .rectangle:
             return rectanglePath(in: rect)
         case .circle:
             return circlePath(in: rect)
         case .star:
-            return starPath(in: rect)
+            return newStarPath(in: rect, flipped: flipped)
         }
     }
 }
@@ -85,6 +85,47 @@ extension Mask {
         path.close()
 
         return path
+    }
+
+    fileprivate func newStarPath(in rect: CGRect, flipped: Bool) -> UIBezierPath {
+
+        let originalRect = CGRect(x: 0, y: 0, width: 44, height: 44)
+
+        let starPath = UIBezierPath()
+        if !flipped {
+            starPath.move(to: CGPoint(x: 22, y: 2))
+            starPath.addLine(to: CGPoint(x: 29.76, y: 13.32))
+            starPath.addLine(to: CGPoint(x: 42.92, y: 17.2))
+            starPath.addLine(to: CGPoint(x: 34.55, y: 28.08))
+            starPath.addLine(to: CGPoint(x: 34.93, y: 41.8))
+            starPath.addLine(to: CGPoint(x: 22, y: 37.2))
+            starPath.addLine(to: CGPoint(x: 9.07, y: 41.8))
+            starPath.addLine(to: CGPoint(x: 9.45, y: 28.08))
+            starPath.addLine(to: CGPoint(x: 1.08, y: 17.2))
+            starPath.addLine(to: CGPoint(x: 14.24, y: 13.32))
+            starPath.close()
+        } else {
+            starPath.move(to: CGPoint(x: 22, y: -2))
+            starPath.addLine(to: CGPoint(x: 29.76, y: -13.32))
+            starPath.addLine(to: CGPoint(x: 42.92, y: -17.2))
+            starPath.addLine(to: CGPoint(x: 34.55, y: -28.08))
+            starPath.addLine(to: CGPoint(x: 34.93, y: -41.8))
+            starPath.addLine(to: CGPoint(x: 22, y: -37.2))
+            starPath.addLine(to: CGPoint(x: 9.07, y: -41.8))
+            starPath.addLine(to: CGPoint(x: 9.45, y: -28.08))
+            starPath.addLine(to: CGPoint(x: 1.08, y: -17.2))
+            starPath.addLine(to: CGPoint(x: 14.24, y: -13.32))
+            starPath.close()
+            starPath.apply(CGAffineTransform(translationX: 0, y: originalRect.height))
+        }
+
+        let ratio = min(rect.width / originalRect.width, rect.height / originalRect.height)
+        starPath.apply(CGAffineTransform(scaleX: ratio, y: ratio))
+        starPath.apply(CGAffineTransform(translationX: rect.minX, y: rect.minY))
+
+        starPath.lineCapStyle = .round
+        starPath.lineJoinStyle = .round
+        return starPath
     }
 }
 

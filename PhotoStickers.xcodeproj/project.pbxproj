@@ -289,13 +289,13 @@
 		194621051E3CFDA1000F09CE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				19BD46A81E89560D003D1BA1 /* CGGeometry+Extensions.swift */,
 				194621061E3CFDA1000F09CE /* Logger+Shared.swift */,
 				194621071E3CFDA1000F09CE /* Realm+Extensions.swift */,
 				194621081E3CFDA1000F09CE /* UIStoryboard+Extensions.swift */,
 				194621091E3CFDA1000F09CE /* UIStoryboardSegue+Extensions.swift */,
-				1946210A1E3CFDA1000F09CE /* UIViewController+Extensions.swift */,
 				19E1EB3F1E792F0E005637C4 /* UIView+Extensions.swift */,
-				19BD46A81E89560D003D1BA1 /* CGGeometry+Extensions.swift */,
+				1946210A1E3CFDA1000F09CE /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
