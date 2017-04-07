@@ -196,6 +196,22 @@ fileprivate extension EditStickerViewController {
             .drive(stickerPlaceholder.rx.isHidden)
             .disposed(by: disposeBag)
 
+        viewModel.circleButtonSelected
+            .drive(circleButton.rx.isSelected)
+            .disposed(by: disposeBag)
+
+        viewModel.rectangleButtonSelected
+            .drive(rectangleButton.rx.isSelected)
+            .disposed(by: disposeBag)
+
+        viewModel.multiStarButtonSelected
+            .drive(multiStarButton.rx.isSelected)
+            .disposed(by: disposeBag)
+
+        viewModel.starButtonSelected
+            .drive(starButton.rx.isSelected)
+            .disposed(by: disposeBag)
+
         viewModel.visibleRect
             .drive(onNext: { rect in
                 self.scrollView.zoomScale = self.zoomScale(for: rect)
@@ -304,32 +320,33 @@ fileprivate extension EditStickerViewController {
         let lineWidth = CGFloat(2)
 
         circleButton.setTitle(nil, for: UIControlState())
-        circleButton.setBackgroundImage(StyleKit.imageOfCircleButton(lineWidth: lineWidth, selected: false, highlighted: false), for: UIControlState())
-        circleButton.setBackgroundImage(StyleKit.imageOfCircleButton(lineWidth: lineWidth, selected: false, highlighted: false), for: UIControlState.normal)
-        circleButton.setBackgroundImage(StyleKit.imageOfCircleButton(lineWidth: lineWidth, selected: false, highlighted: true), for: UIControlState.highlighted)
-        circleButton.setBackgroundImage(StyleKit.imageOfCircleButton(lineWidth: lineWidth, selected: true, highlighted: false), for: UIControlState.selected)
-        circleButton.setBackgroundImage(StyleKit.imageOfCircleButton(lineWidth: lineWidth, selected: true, highlighted: true), for: [UIControlState.selected, UIControlState.highlighted])
+        circleButton.titleLabel?.isHidden = true
+        circleButton.setBackgroundImages { selected, highlighted in
+            return StyleKit.imageOfCircleButton(lineWidth: lineWidth,
+                                                selected: selected,
+                                                highlighted: highlighted)
+        }
 
         rectangleButton.setTitle(nil, for: UIControlState())
-        rectangleButton.setBackgroundImage(StyleKit.imageOfRectangleButton(lineWidth: lineWidth, selected: false, highlighted: false), for: UIControlState())
-        rectangleButton.setBackgroundImage(StyleKit.imageOfRectangleButton(lineWidth: lineWidth, selected: false, highlighted: false), for: UIControlState.normal)
-        rectangleButton.setBackgroundImage(StyleKit.imageOfRectangleButton(lineWidth: lineWidth, selected: false, highlighted: true), for: UIControlState.highlighted)
-        rectangleButton.setBackgroundImage(StyleKit.imageOfRectangleButton(lineWidth: lineWidth, selected: true, highlighted: false), for: UIControlState.selected)
-        rectangleButton.setBackgroundImage(StyleKit.imageOfRectangleButton(lineWidth: lineWidth, selected: true, highlighted: true), for: [UIControlState.selected, UIControlState.highlighted])
+        rectangleButton.setBackgroundImages { selected, highlighted in
+            return StyleKit.imageOfRectangleButton(lineWidth: lineWidth,
+                                                   selected: selected,
+                                                   highlighted: highlighted)
+        }
 
         multiStarButton.setTitle(nil, for: UIControlState())
-        multiStarButton.setBackgroundImage(StyleKit.imageOfMultiStarButton(lineWidth: lineWidth, selected: false, highlighted: false), for: UIControlState())
-        multiStarButton.setBackgroundImage(StyleKit.imageOfMultiStarButton(lineWidth: lineWidth, selected: false, highlighted: false), for: UIControlState.normal)
-        multiStarButton.setBackgroundImage(StyleKit.imageOfMultiStarButton(lineWidth: lineWidth, selected: false, highlighted: true), for: UIControlState.highlighted)
-        multiStarButton.setBackgroundImage(StyleKit.imageOfMultiStarButton(lineWidth: lineWidth, selected: true, highlighted: false), for: UIControlState.selected)
-        multiStarButton.setBackgroundImage(StyleKit.imageOfMultiStarButton(lineWidth: lineWidth, selected: true, highlighted: true), for: [UIControlState.selected, UIControlState.highlighted])
+        multiStarButton.setBackgroundImages { selected, highlighted in
+            return StyleKit.imageOfMultiStarButton(lineWidth: lineWidth,
+                                                   selected: selected,
+                                                   highlighted: highlighted)
+        }
 
         starButton.setTitle(nil, for: UIControlState())
-        starButton.setBackgroundImage(StyleKit.imageOfStarButton(lineWidth: lineWidth, selected: false, highlighted: false), for: UIControlState())
-        starButton.setBackgroundImage(StyleKit.imageOfStarButton(lineWidth: lineWidth, selected: false, highlighted: false), for: UIControlState.normal)
-        starButton.setBackgroundImage(StyleKit.imageOfStarButton(lineWidth: lineWidth, selected: false, highlighted: true), for: UIControlState.highlighted)
-        starButton.setBackgroundImage(StyleKit.imageOfStarButton(lineWidth: lineWidth, selected: true, highlighted: false), for: UIControlState.selected)
-        starButton.setBackgroundImage(StyleKit.imageOfStarButton(lineWidth: lineWidth, selected: true, highlighted: true), for: [UIControlState.selected, UIControlState.highlighted])
+        starButton.setBackgroundImages { selected, highlighted in
+            return StyleKit.imageOfStarButton(lineWidth: lineWidth,
+                                              selected: selected,
+                                              highlighted: highlighted)
+        }
     }
 }
 

@@ -41,12 +41,12 @@ public class StyleKit: NSObject {
         context.scaleBy(x: resizedFrame.width / 44, y: resizedFrame.height / 44)
 
         //// Color Declarations
-        let highlightedColor = StyleKit.appColor.withSaturation(0.218)
+        let highlightedColor = StyleKit.appColor.withSaturation(0.42)
         let transparentColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.000)
 
         //// Variable Declarations
         let strokeColor = highlighted ? highlightedColor : StyleKit.appColor
-        let fillColor = selected ? strokeColor : transparentColor
+        let fillColor = selected || highlighted ? strokeColor : transparentColor
 
         //// Star Drawing
         let starPath = UIBezierPath()
@@ -82,12 +82,12 @@ public class StyleKit: NSObject {
         context.scaleBy(x: resizedFrame.width / 44, y: resizedFrame.height / 44)
 
         //// Color Declarations
-        let highlightedColor = StyleKit.appColor.withSaturation(0.218)
+        let highlightedColor = StyleKit.appColor.withSaturation(0.42)
         let transparentColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.000)
 
         //// Variable Declarations
         let strokeColor = highlighted ? highlightedColor : StyleKit.appColor
-        let fillColor = selected ? strokeColor : transparentColor
+        let fillColor = selected || highlighted ? strokeColor : transparentColor
 
         //// Star Drawing
         let starPath = UIBezierPath()
@@ -143,12 +143,12 @@ public class StyleKit: NSObject {
         context.scaleBy(x: resizedFrame.width / 44, y: resizedFrame.height / 44)
 
         //// Color Declarations
-        let highlightedColor = StyleKit.appColor.withSaturation(0.218)
+        let highlightedColor = StyleKit.appColor.withSaturation(0.42)
         let transparentColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.000)
 
         //// Variable Declarations
         let strokeColor = highlighted ? highlightedColor : StyleKit.appColor
-        let fillColor = selected ? strokeColor : transparentColor
+        let fillColor = selected || highlighted ? strokeColor : transparentColor
 
         //// Oval Drawing
         let ovalPath = UIBezierPath(ovalIn: CGRect(x: 2, y: 2, width: 40, height: 40))
@@ -173,12 +173,12 @@ public class StyleKit: NSObject {
         context.scaleBy(x: resizedFrame.width / 44, y: resizedFrame.height / 44)
 
         //// Color Declarations
-        let highlightedColor = StyleKit.appColor.withSaturation(0.218)
+        let highlightedColor = StyleKit.appColor.withSaturation(0.42)
         let transparentColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.000)
 
         //// Variable Declarations
         let strokeColor = highlighted ? highlightedColor : StyleKit.appColor
-        let fillColor = selected ? strokeColor : transparentColor
+        let fillColor = selected || highlighted ? strokeColor : transparentColor
 
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 40, height: 40), cornerRadius: 8)

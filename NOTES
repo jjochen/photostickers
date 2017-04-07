@@ -20,6 +20,8 @@ export_compliance_encryption_updated: false
 
 
 
-
-Only show blur while zooming/scrolling
-Else show shadow
+1.0 todo
+* delete confirmation
+* icons
+* strings
+* camera/library selection

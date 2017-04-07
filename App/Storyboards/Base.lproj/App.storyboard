@@ -121,7 +121,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="pX4-f0-VAR" userLabel="Sticker Placeholder">
                                         <rect key="frame" x="28" y="28" width="319" height="319"/>
                                     </imageView>
-                                    <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.10000000000000001" maximumZoomScale="1.1000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="Ylq-NR-HX9">
+                                    <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.10000000000000001" maximumZoomScale="1.1000000000000001" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="Ylq-NR-HX9">
                                         <rect key="frame" x="28" y="28" width="319" height="319"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="375" translatesAutoresizingMaskIntoConstraints="NO" id="8nJ-XZ-tCD">
@@ -134,6 +134,13 @@
                                             <constraint firstAttribute="bottom" secondItem="8nJ-XZ-tCD" secondAttribute="bottom" id="fUw-qR-O8O"/>
                                             <constraint firstAttribute="trailing" secondItem="8nJ-XZ-tCD" secondAttribute="trailing" id="hXz-Sm-PGc"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="alwaysBounceVertical" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="alwaysBounceHorizontal" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="decelerationRate">
+                                                <real key="value" value="0.98999999999999999"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="delegate" destination="xY5-ie-FY6" id="hGp-Ys-qqz"/>
                                         </connections>
@@ -163,27 +170,31 @@
                                 <rect key="frame" x="0.0" y="439" width="375" height="184"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBL-rL-8h5" userLabel="Button Layout Guide">
-                                        <rect key="frame" x="34.5" y="75" width="307" height="33"/>
+                                        <rect key="frame" x="34" y="74.5" width="308" height="34"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKM-gO-hz8">
-                                                <rect key="frame" x="0.0" y="0.0" width="47" height="33"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <state key="normal" title="Circle"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKM-gO-hz8">
+                                                <rect key="frame" x="0.0" y="0.0" width="47" height="34"/>
+                                                <state key="normal" title="Circle">
+                                                    <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FV4-Ui-tTt">
-                                                <rect key="frame" x="67" y="0.0" width="81" height="33"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <state key="normal" title="Rectangle"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FV4-Ui-tTt">
+                                                <rect key="frame" x="67" y="0.0" width="81" height="34"/>
+                                                <state key="normal" title="Rectangle">
+                                                    <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axO-aK-nfj" userLabel="Super Star Button">
-                                                <rect key="frame" x="168" y="0.0" width="85" height="33"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <state key="normal" title="Super Star"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axO-aK-nfj" userLabel="Super Star Button">
+                                                <rect key="frame" x="168" y="0.0" width="86" height="34"/>
+                                                <state key="normal" title="Super Star">
+                                                    <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n04-oW-6GY">
-                                                <rect key="frame" x="273" y="0.0" width="34" height="33"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <state key="normal" title="Star"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n04-oW-6GY">
+                                                <rect key="frame" x="274" y="0.0" width="34" height="34"/>
+                                                <state key="normal" title="Star">
+                                                    <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                             </button>
                                         </subviews>
                                         <constraints>

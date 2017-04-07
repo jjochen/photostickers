@@ -32,6 +32,10 @@ protocol EditStickerViewModelType {
     var saveButtonItemEnabled: Driver<Bool> { get }
     var deleteButtonItemEnabled: Driver<Bool> { get }
     var stickerPlaceholderHidden: Driver<Bool> { get }
+    var circleButtonSelected: Driver<Bool> { get }
+    var rectangleButtonSelected: Driver<Bool> { get }
+    var multiStarButtonSelected: Driver<Bool> { get }
+    var starButtonSelected: Driver<Bool> { get }
     var image: Driver<UIImage?> { get }
     var visibleRect: Driver<CGRect> { get }
     var mask: Driver<Mask> { get }
@@ -72,6 +76,10 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let saveButtonItemEnabled: Driver<Bool>
     let deleteButtonItemEnabled: Driver<Bool>
     let stickerPlaceholderHidden: Driver<Bool>
+    let circleButtonSelected: Driver<Bool>
+    let rectangleButtonSelected: Driver<Bool>
+    let multiStarButtonSelected: Driver<Bool>
+    let starButtonSelected: Driver<Bool>
     let image: Driver<UIImage?>
     let visibleRect: Driver<CGRect>
     let mask: Driver<Mask>
@@ -187,6 +195,26 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .merge()
             .withLatestFrom(stickerInfo.mask.asObservable())
             .asDriver(onErrorJustReturn: .circle)
+
+        circleButtonSelected = stickerInfo.mask
+            .asDriver()
+            .map { $0 == .circle }
+            .distinctUntilChanged()
+
+        rectangleButtonSelected = stickerInfo.mask
+            .asDriver()
+            .map { $0 == .rectangle }
+            .distinctUntilChanged()
+
+        multiStarButtonSelected = stickerInfo.mask
+            .asDriver()
+            .map { $0 == .multiStar }
+            .distinctUntilChanged()
+
+        starButtonSelected = stickerInfo.mask
+            .asDriver()
+            .map { $0 == .star }
+            .distinctUntilChanged()
 
         let transparent = visibleRectDidChange
             .map { _ in (true, false) }

@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,18 +23,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="qdw-gc-949">
-                                <rect key="frame" x="16" y="20" width="343" height="343"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="qdw-gc-949" secondAttribute="height" multiplier="1:1" priority="800" id="yuA-F9-V6k"/>
-                                </constraints>
+                                <rect key="frame" x="16" y="20" width="343" height="647"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="qdw-gc-949" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="0cK-Z9-Gr0"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="qdw-gc-949" secondAttribute="bottom" priority="750" id="COQ-fB-pl9"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="qdw-gc-949" secondAttribute="bottom" id="COQ-fB-pl9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qdw-gc-949" secondAttribute="trailing" id="pre-Lm-jAp"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" relation="greaterThanOrEqual" secondItem="qdw-gc-949" secondAttribute="bottom" id="qxV-8D-bbo"/>
                             <constraint firstItem="qdw-gc-949" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="uPE-Eo-5Lc"/>
                         </constraints>
                     </view>
