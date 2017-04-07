@@ -11,7 +11,12 @@ import RxSwift
 import RxCocoa
 import Log
 
-protocol EditStickerViewModelType {
+protocol EditStickerViewModelType: class {
+    var minimumZoomedImageSize: CGSize { get }
+    func maximumZoomScale(boundsSize: CGSize) -> CGFloat
+    func minimumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat
+    func zoomScale(visibleRect: CGRect, boundsSize: CGSize) -> CGFloat
+    func contentOffset(visibleRect: CGRect, boundsSize: CGSize) -> CGPoint
 
     var saveButtonItemDidTap: PublishSubject<Void> { get }
     var cancelButtonItemDidTap: PublishSubject<Void> { get }
@@ -26,6 +31,7 @@ protocol EditStickerViewModelType {
     var viewDidLayoutSubviews: PublishSubject<Void> { get }
     var viewWillTransitionToSize: PublishSubject<CGSize> { get }
     var stickerTitleDidChange: PublishSubject<String?> { get }
+    var deleteAlertDidConfirm: PublishSubject<Void> { get }
 
     var stickerTitlePlaceholder: String { get }
     var stickerTitle: String? { get }
@@ -41,6 +47,7 @@ protocol EditStickerViewModelType {
     var mask: Driver<Mask> { get }
     var coverViewTransparentAnimated: Driver<(Bool, Bool)> { get }
     var presentImagePicker: Driver<UIImagePickerControllerSourceType> { get }
+    var presentDeleteAlert: Driver<Void> { get }
     var dismiss: Driver<Void> { get }
 }
 
@@ -69,6 +76,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let viewDidLayoutSubviews = PublishSubject<Void>()
     let viewWillTransitionToSize = PublishSubject<CGSize>()
     let stickerTitleDidChange = PublishSubject<String?>()
+    let deleteAlertDidConfirm = PublishSubject<Void>()
 
     // MARK: Output
     let stickerTitlePlaceholder: String
@@ -85,6 +93,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let mask: Driver<Mask>
     let coverViewTransparentAnimated: Driver<(Bool, Bool)>
     let presentImagePicker: Driver<UIImagePickerControllerSourceType>
+    let presentDeleteAlert: Driver<Void>
     let dismiss: Driver<Void>
 
     // MARK: Internal
@@ -163,6 +172,12 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .map {
                 return .photoLibrary
             }
+
+        presentDeleteAlert = deleteButtonItemDidTap
+            .withLatestFrom(deleteButtonItemEnabled)
+            .filter { isEnabled in isEnabled }
+            .map { _ in Void() }
+            .asDriver(onErrorDriveWith: Driver.empty())
 
         dismiss = Driver
             .of(cancelButtonItemDidTap.asDriver(onErrorJustReturn: ()),
@@ -251,9 +266,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .bindTo(stickerInfo.renderedSticker)
             .disposed(by: disposeBag)
 
-        deleteButtonItemDidTap
-            .withLatestFrom(deleteButtonItemEnabled)
-            .filter { isEnabled in isEnabled }
+        deleteAlertDidConfirm
             .observeOn(backgroundScheduler)
             .flatMap { _ in
                 stickerService.deleteSticker(withUUID: stickerInfo.uuid)
@@ -269,5 +282,57 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .merge()
             .bindTo(stickerInfo.mask)
             .disposed(by: disposeBag)
+    }
+}
+
+extension EditStickerViewModel {
+    var minimumZoomedImageSize: CGSize {
+        return Sticker.renderedSize
+    }
+
+    func maximumZoomScale(boundsSize: CGSize) -> CGFloat {
+        let minimumZoomedImageSize = self.minimumZoomedImageSize
+        guard minimumZoomedImageSize.width > 0 && minimumZoomedImageSize.height > 0 else {
+            return 1
+        }
+
+        let xScale = boundsSize.width / minimumZoomedImageSize.width
+        let yScale = boundsSize.height / minimumZoomedImageSize.height
+        let maxScale = min(xScale, yScale)
+        return maxScale
+    }
+
+    func minimumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat {
+        guard imageSize.width > 0 && imageSize.height > 0 else {
+            return 1
+        }
+
+        let xScale = boundsSize.width / imageSize.width
+        let yScale = boundsSize.height / imageSize.height
+        let minScale = max(xScale, yScale)
+        return minScale
+    }
+}
+
+extension EditStickerViewModel {
+    func zoomScale(visibleRect: CGRect, boundsSize: CGSize) -> CGFloat {
+        let visibleRectSize = visibleRect.size
+
+        guard visibleRectSize.width > 0 && visibleRectSize.height > 0 else {
+            return 1
+        }
+
+        let xScale = boundsSize.width / visibleRectSize.width
+        let yScale = boundsSize.height / visibleRectSize.height
+        let zoomScale = min(xScale, yScale)
+        return zoomScale
+    }
+
+    func contentOffset(visibleRect: CGRect, boundsSize: CGSize) -> CGPoint {
+        let zoomScale = self.zoomScale(visibleRect: visibleRect, boundsSize: boundsSize)
+        var offset = visibleRect.origin
+        offset.x *= zoomScale
+        offset.y *= zoomScale
+        return offset
     }
 }

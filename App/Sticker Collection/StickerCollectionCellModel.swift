@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol StickerCollectionCellModelType {
+protocol StickerCollectionCellModelType: class {
     var sticker: Sticker { get }
 }
 

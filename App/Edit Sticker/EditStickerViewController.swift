@@ -213,29 +213,35 @@ fileprivate extension EditStickerViewController {
             .disposed(by: disposeBag)
 
         viewModel.visibleRect
-            .drive(onNext: { rect in
-                self.scrollView.zoomScale = self.zoomScale(for: rect)
-                self.scrollView.contentOffset = self.contentOffset(for: rect)
+            .drive(onNext: { [weak self, weak viewModel] rect in
+                guard let `self` = self, let viewModel = viewModel else { return }
+                let boundsSize = self.scrollView.bounds.size
+                self.scrollView.zoomScale = viewModel.zoomScale(visibleRect: rect, boundsSize: boundsSize)
+                self.scrollView.contentOffset = viewModel.contentOffset(visibleRect: rect, boundsSize: boundsSize)
             })
             .disposed(by: disposeBag)
 
         viewModel.image
-            .drive(onNext: { image in
+            .drive(onNext: { [weak self, weak viewModel] image in
+                guard let `self` = self, let viewModel = viewModel else { return }
+                let imageSize = image?.size ?? .zero
                 self.scrollView.zoomScale = 1
                 self.scrollView.contentOffset = .zero
                 self.imageView.image = image
-                self.scrollView.contentSize = image?.size ?? .zero
+                self.scrollView.contentSize = imageSize
 
                 self.view.setNeedsLayout()
                 self.view.layoutIfNeeded()
 
-                self.scrollView.minimumZoomScale = self.minimumZoomScale
-                self.scrollView.maximumZoomScale = self.maximumZoomScale
+                let boundsSize = self.scrollView.bounds.size
+                self.scrollView.minimumZoomScale = viewModel.minimumZoomScale(imageSize: imageSize, boundsSize: boundsSize)
+                self.scrollView.maximumZoomScale = viewModel.maximumZoomScale(boundsSize: boundsSize)
             })
             .disposed(by: disposeBag)
 
         viewModel.mask
-            .drive(onNext: { mask in
+            .drive(onNext: { [weak self] mask in
+                guard let `self` = self else { return }
                 let maskRect = self.scrollView.convertBounds(to: self.coverView)
                 let maskPath = mask.maskPath(in: self.coverView.bounds, maskRect: maskRect)
                 self.maskLayer.path = maskPath.cgPath
@@ -243,12 +249,12 @@ fileprivate extension EditStickerViewController {
 
                 let shadowPath = mask.path(in: maskRect)
                 self.shadowLayer.shadowPath = shadowPath.cgPath
-
             })
             .disposed(by: disposeBag)
 
         viewModel.coverViewTransparentAnimated
-            .drive(onNext: { transparent, animated in
+            .drive(onNext: { [weak self] transparent, animated in
+                guard let `self` = self else { return }
                 if animated {
                     UIView.beginAnimations("CoverViewAlpha", context: nil)
                     UIView.setAnimationDuration(0.3)
@@ -280,6 +286,30 @@ fileprivate extension EditStickerViewController {
             .filter { $0 != nil }
             .drive(viewModel.didPickImage)
             .disposed(by: disposeBag)
+
+        viewModel.presentDeleteAlert
+            .drive(onNext: { [weak self, weak viewModel] in
+                guard let `self` = self, let viewModel = viewModel else { return }
+                let alertController = UIAlertController(
+                    title: nil,
+                    message: nil,
+                    preferredStyle: .actionSheet
+                )
+
+                let deleteAction = UIAlertAction(title: "Delete",
+                                                 style: .destructive,
+                                                 handler: { _ in
+                                                     viewModel.deleteAlertDidConfirm.onNext()
+                })
+                alertController.addAction(deleteAction)
+
+                let cancelAction = UIAlertAction(title: "Cancel",
+                                                 style: .cancel,
+                                                 handler: nil)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+            })
+            .addDisposableTo(disposeBag)
 
         viewModel.dismiss
             .drive(onNext: { [weak self] in
@@ -350,69 +380,13 @@ fileprivate extension EditStickerViewController {
     }
 }
 
+// todo: move to view model
 fileprivate extension EditStickerViewController {
-
-    var minimumZoomedImageSize: CGSize { //
-        return Sticker.renderedSize
-    }
-
     var imageSize: CGSize {
         return imageView.image?.size ?? .zero
     }
 
     var visibleRect: CGRect {
         return scrollView.convertBounds(to: imageView)
-    }
-
-    var maximumZoomScale: CGFloat {
-        let minimumZoomedImageSize = self.minimumZoomedImageSize
-        let boundsSize = scrollView.bounds.size
-
-        guard minimumZoomedImageSize.width > 0 && minimumZoomedImageSize.height > 0 else {
-            return 1
-        }
-
-        let xScale = boundsSize.width / minimumZoomedImageSize.width
-        let yScale = boundsSize.height / minimumZoomedImageSize.height
-        let maxScale = min(xScale, yScale)
-        return maxScale
-    }
-
-    var minimumZoomScale: CGFloat {
-        let imageSize = self.imageSize
-        let boundsSize = scrollView.bounds.size
-
-        guard imageSize.width > 0 && imageSize.height > 0 else {
-            return 1
-        }
-
-        let xScale = boundsSize.width / imageSize.width
-        let yScale = boundsSize.height / imageSize.height
-        let minScale = max(xScale, yScale)
-        return minScale
-    }
-}
-
-fileprivate extension EditStickerViewController {
-    func zoomScale(for visibleRect: CGRect) -> CGFloat {
-        let boundsSize = scrollView.bounds.size
-        let visibleRectSize = visibleRect.size
-
-        guard visibleRectSize.width > 0 && visibleRectSize.height > 0 else {
-            return 1
-        }
-
-        let xScale = boundsSize.width / visibleRectSize.width
-        let yScale = boundsSize.height / visibleRectSize.height
-        let zoomScale = min(xScale, yScale)
-        return zoomScale
-    }
-
-    func contentOffset(for visibleRect: CGRect) -> CGPoint {
-        let zoomScale = self.zoomScale(for: visibleRect)
-        var offset = visibleRect.origin
-        offset.x *= zoomScale
-        offset.y *= zoomScale
-        return offset
     }
 }

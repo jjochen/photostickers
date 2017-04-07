@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol StickerCollectionViewModelType {
+protocol StickerCollectionViewModelType: class {
     var stickerCellModels: Observable<[StickerCollectionCellModel]> { get }
     func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType
     func addStickerViewModel() -> EditStickerViewModelType
