@@ -21,7 +21,5 @@ export_compliance_encryption_updated: false
 
 
 1.0 todo
-* delete confirmation
 * icons
 * strings
-* camera/library selection
