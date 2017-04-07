@@ -268,6 +268,9 @@ fileprivate extension EditStickerViewController {
             .disposed(by: disposeBag)
 
         viewModel.presentImagePicker
+            .filter { sourceType in
+                return UIImagePickerController.isSourceTypeAvailable(sourceType)
+            }
             .flatMapLatest { sourceType in
                 return UIImagePickerController.rx.createWithParent(self) { picker in
                     picker.sourceType = sourceType
@@ -296,14 +299,54 @@ fileprivate extension EditStickerViewController {
                     preferredStyle: .actionSheet
                 )
 
-                let deleteAction = UIAlertAction(title: "Delete",
+                let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: "generic delete"),
                                                  style: .destructive,
                                                  handler: { _ in
                                                      viewModel.deleteAlertDidConfirm.onNext()
                 })
                 alertController.addAction(deleteAction)
 
-                let cancelAction = UIAlertAction(title: "Cancel",
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "generic cancel"),
+                                                 style: .cancel,
+                                                 handler: nil)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+            })
+            .addDisposableTo(disposeBag)
+
+        viewModel.presentImageSourceAlert
+            .drive(onNext: { [weak self, weak viewModel] sourceTypes in
+                guard let `self` = self, let viewModel = viewModel else { return }
+
+                let alertController = UIAlertController(
+                    title: nil,
+                    message: nil,
+                    preferredStyle: .actionSheet
+                )
+
+                sourceTypes
+                    .map { type in
+                        var title: String?
+                        switch type {
+                        case .photoLibrary:
+                            title = NSLocalizedString("Photo Library", comment: "image picker source type photo library")
+                            break
+                        case .camera:
+                            title = NSLocalizedString("Camera", comment: "image picker source type camera")
+                            break
+                        default:
+                            title = nil
+                            break
+                        }
+
+                        let handler: (UIAlertAction) -> Void = { _ in
+                            viewModel.imageSourceAlertDidSelect.onNext(type)
+                        }
+                        return UIAlertAction(title: title, style: .default, handler: handler)
+                    }
+                    .forEach(alertController.addAction)
+
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "generic cancel"),
                                                  style: .cancel,
                                                  handler: nil)
                 alertController.addAction(cancelAction)

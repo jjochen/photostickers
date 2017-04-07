@@ -32,6 +32,7 @@ protocol EditStickerViewModelType: class {
     var viewWillTransitionToSize: PublishSubject<CGSize> { get }
     var stickerTitleDidChange: PublishSubject<String?> { get }
     var deleteAlertDidConfirm: PublishSubject<Void> { get }
+    var imageSourceAlertDidSelect: PublishSubject<UIImagePickerControllerSourceType> { get }
 
     var stickerTitlePlaceholder: String { get }
     var stickerTitle: String? { get }
@@ -48,6 +49,7 @@ protocol EditStickerViewModelType: class {
     var coverViewTransparentAnimated: Driver<(Bool, Bool)> { get }
     var presentImagePicker: Driver<UIImagePickerControllerSourceType> { get }
     var presentDeleteAlert: Driver<Void> { get }
+    var presentImageSourceAlert: Driver<[UIImagePickerControllerSourceType]> { get }
     var dismiss: Driver<Void> { get }
 }
 
@@ -77,6 +79,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let viewWillTransitionToSize = PublishSubject<CGSize>()
     let stickerTitleDidChange = PublishSubject<String?>()
     let deleteAlertDidConfirm = PublishSubject<Void>()
+    let imageSourceAlertDidSelect = PublishSubject<UIImagePickerControllerSourceType>()
 
     // MARK: Output
     let stickerTitlePlaceholder: String
@@ -94,6 +97,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let coverViewTransparentAnimated: Driver<(Bool, Bool)>
     let presentImagePicker: Driver<UIImagePickerControllerSourceType>
     let presentDeleteAlert: Driver<Void>
+    let presentImageSourceAlert: Driver<[UIImagePickerControllerSourceType]>
     let dismiss: Driver<Void>
 
     // MARK: Internal
@@ -165,13 +169,30 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .filter { !$0.isEmpty }
             .asDriver(onErrorDriveWith: Driver.empty())
 
-        presentImagePicker = Driver
-            .of(photosButtonItemDidTap.asDriver(onErrorJustReturn: ()),
+        let _shouldSelectImage = Driver
+            .of(photosButtonItemDidTap.asDriver(onErrorDriveWith: Driver.empty()),
                 _originalImageWasSetToNil)
             .merge()
-            .map {
-                return .photoLibrary
+
+        let availableTypes: [UIImagePickerControllerSourceType] = [.camera, .photoLibrary]
+            .filter { sourceType in
+                return UIImagePickerController.isSourceTypeAvailable(sourceType) || UIDevice.isSimulator
             }
+
+        if availableTypes.count > 1 {
+            presentImageSourceAlert = _shouldSelectImage
+                .map { availableTypes }
+            presentImagePicker = imageSourceAlertDidSelect
+                .asDriver(onErrorDriveWith: Driver.empty())
+        } else if let sourceType = availableTypes.first {
+            presentImageSourceAlert = Driver.empty()
+            presentImagePicker = _shouldSelectImage
+                .map { sourceType }
+        } else {
+            Logger.shared.error("No UIImagePickerControllerSourceType available")
+            presentImageSourceAlert = Driver.empty()
+            presentImagePicker = Driver.empty()
+        }
 
         presentDeleteAlert = deleteButtonItemDidTap
             .withLatestFrom(deleteButtonItemEnabled)
