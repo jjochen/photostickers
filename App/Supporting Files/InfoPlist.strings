@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  PhotoStickers
+
+  Created by Jochen Pfeiffer on 07.04.17.
+  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
+*/
+
+
+"NSPhotoLibraryUsageDescription" = "An image is needed to create a sticker.";
+"NSCameraUsageDescription" = "An image is needed to create a sticker.";
