@@ -149,31 +149,11 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
         image = stickerInfo.originalImage
             .asDriver()
 
-        let cropBounds = Observable
-            .combineLatest(stickerInfo.cropBounds.asObservable(),
-                           stickerInfo.originalImage.asObservable())
-            .map { cropBounds, originalImage -> CGRect in
-                guard let image = originalImage else {
-                    return CGRect.zero
-                }
-
-                guard !cropBounds.isEmpty && !cropBounds.isNull else {
-                    var initialRect = CGRect()
-                    let imageSize = image.size
-                    let sideLength = imageSize.minSideLength
-                    initialRect.size.width = sideLength
-                    initialRect.size.height = sideLength
-                    initialRect.origin.x = (imageSize.width - sideLength) / 2
-                    initialRect.origin.y = (imageSize.height - sideLength) / 2
-                    return initialRect
-                }
-
-                return cropBounds
-            }
+        visibleRect = Observable.of(viewDidLayoutSubviews,
+                                    stickerInfo.originalImage.asObservable().map { _ in Void() })
+            .merge()
+            .withLatestFrom(stickerInfo.cropBounds.asObservable())
             .filter { !$0.isEmpty }
-
-        visibleRect = viewDidLayoutSubviews
-            .withLatestFrom(cropBounds)
             .asDriver(onErrorDriveWith: Driver.empty())
 
         presentImagePicker = Driver
@@ -236,7 +216,17 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
         didPickImage
             .filterNil()
-            .bindTo(stickerInfo.originalImage)
+            .subscribe(onNext: { image in
+                var initialRect = CGRect()
+                let imageSize = image.size
+                let sideLength = imageSize.minSideLength
+                initialRect.size.width = sideLength
+                initialRect.size.height = sideLength
+                initialRect.origin.x = (imageSize.width - sideLength) / 2
+                initialRect.origin.y = (imageSize.height - sideLength) / 2
+                self.stickerInfo.cropBounds.value = initialRect
+                self.stickerInfo.originalImage.value = image
+            })
             .disposed(by: disposeBag)
 
         stickerTitleDidChange
