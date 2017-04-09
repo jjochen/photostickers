@@ -39,6 +39,7 @@ protocol EditStickerViewModelType: class {
     var saveButtonItemEnabled: Driver<Bool> { get }
     var deleteButtonItemEnabled: Driver<Bool> { get }
     var stickerPlaceholderHidden: Driver<Bool> { get }
+    var coverViewHidden: Driver<Bool> { get }
     var circleButtonSelected: Driver<Bool> { get }
     var rectangleButtonSelected: Driver<Bool> { get }
     var multiStarButtonSelected: Driver<Bool> { get }
@@ -87,6 +88,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let saveButtonItemEnabled: Driver<Bool>
     let deleteButtonItemEnabled: Driver<Bool>
     let stickerPlaceholderHidden: Driver<Bool>
+    let coverViewHidden: Driver<Bool>
     let circleButtonSelected: Driver<Bool>
     let rectangleButtonSelected: Driver<Bool>
     let multiStarButtonSelected: Driver<Bool>
@@ -158,6 +160,9 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .startWith(true)
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: false)
+
+        coverViewHidden = stickerPlaceholderHidden
+            .map { !$0 }
 
         image = stickerInfo.originalImage
             .asDriver()

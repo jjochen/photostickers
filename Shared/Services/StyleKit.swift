@@ -40,15 +40,15 @@ public class StyleKit: NSObject {
 
     //// Drawing Methods
 
-    public dynamic class func drawStarButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) {
+    public dynamic class func drawStarButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
         //// Resize to Target Frame
         context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 60, height: 60), target: targetFrame)
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 54, height: 54), target: targetFrame)
         context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 60, y: resizedFrame.height / 60)
+        context.scaleBy(x: resizedFrame.width / 54, y: resizedFrame.height / 54)
 
         //// Color Declarations
         let highlightedColor = StyleKit.appColor.withSaturation(0.42)
@@ -58,18 +58,18 @@ public class StyleKit: NSObject {
         let strokeColor = highlighted ? highlightedColor : StyleKit.appColor
         let fillColor = selected || highlighted ? strokeColor : transparentColor
 
-        //// Star Drawing
+        //// star Drawing
         let starPath = UIBezierPath()
-        starPath.move(to: CGPoint(x: 30, y: 3))
-        starPath.addLine(to: CGPoint(x: 39.87, y: 17.41))
-        starPath.addLine(to: CGPoint(x: 56.63, y: 22.35))
-        starPath.addLine(to: CGPoint(x: 45.98, y: 36.19))
-        starPath.addLine(to: CGPoint(x: 46.46, y: 53.65))
-        starPath.addLine(to: CGPoint(x: 30, y: 47.8))
-        starPath.addLine(to: CGPoint(x: 13.54, y: 53.65))
-        starPath.addLine(to: CGPoint(x: 14.02, y: 36.19))
-        starPath.addLine(to: CGPoint(x: 3.37, y: 22.35))
-        starPath.addLine(to: CGPoint(x: 20.13, y: 17.41))
+        starPath.move(to: CGPoint(x: 27, y: 3))
+        starPath.addLine(to: CGPoint(x: 35.82, y: 15.86))
+        starPath.addLine(to: CGPoint(x: 50.78, y: 20.27))
+        starPath.addLine(to: CGPoint(x: 41.27, y: 32.64))
+        starPath.addLine(to: CGPoint(x: 41.69, y: 48.23))
+        starPath.addLine(to: CGPoint(x: 27, y: 43))
+        starPath.addLine(to: CGPoint(x: 12.31, y: 48.23))
+        starPath.addLine(to: CGPoint(x: 12.73, y: 32.64))
+        starPath.addLine(to: CGPoint(x: 3.22, y: 20.27))
+        starPath.addLine(to: CGPoint(x: 18.18, y: 15.86))
         starPath.close()
         fillColor.setFill()
         starPath.fill()
@@ -81,15 +81,15 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawMultiStarButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) {
+    public dynamic class func drawMultiStarButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
         //// Resize to Target Frame
         context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 60, height: 60), target: targetFrame)
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 54, height: 54), target: targetFrame)
         context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 60, y: resizedFrame.height / 60)
+        context.scaleBy(x: resizedFrame.width / 54, y: resizedFrame.height / 54)
 
         //// Color Declarations
         let highlightedColor = StyleKit.appColor.withSaturation(0.42)
@@ -99,38 +99,38 @@ public class StyleKit: NSObject {
         let strokeColor = highlighted ? highlightedColor : StyleKit.appColor
         let fillColor = selected || highlighted ? strokeColor : transparentColor
 
-        //// Star Drawing
+        //// star Drawing
         let starPath = UIBezierPath()
-        starPath.move(to: CGPoint(x: 30, y: 2))
-        starPath.addLine(to: CGPoint(x: 34.66, y: 8.08))
-        starPath.addLine(to: CGPoint(x: 41.39, y: 4.42))
-        starPath.addLine(to: CGPoint(x: 43.17, y: 11.87))
-        starPath.addLine(to: CGPoint(x: 50.81, y: 11.26))
-        starPath.addLine(to: CGPoint(x: 49.41, y: 18.8))
-        starPath.addLine(to: CGPoint(x: 56.63, y: 21.35))
-        starPath.addLine(to: CGPoint(x: 52.29, y: 27.66))
-        starPath.addLine(to: CGPoint(x: 57.85, y: 32.93))
-        starPath.addLine(to: CGPoint(x: 51.31, y: 36.92))
-        starPath.addLine(to: CGPoint(x: 54.25, y: 44))
-        starPath.addLine(to: CGPoint(x: 46.65, y: 44.99))
-        starPath.addLine(to: CGPoint(x: 46.46, y: 52.65))
-        starPath.addLine(to: CGPoint(x: 39.11, y: 50.47))
-        starPath.addLine(to: CGPoint(x: 35.82, y: 57.39))
-        starPath.addLine(to: CGPoint(x: 30, y: 52.41))
-        starPath.addLine(to: CGPoint(x: 24.18, y: 57.39))
-        starPath.addLine(to: CGPoint(x: 20.89, y: 50.47))
-        starPath.addLine(to: CGPoint(x: 13.54, y: 52.65))
-        starPath.addLine(to: CGPoint(x: 13.35, y: 44.99))
-        starPath.addLine(to: CGPoint(x: 5.75, y: 44))
-        starPath.addLine(to: CGPoint(x: 8.69, y: 36.92))
-        starPath.addLine(to: CGPoint(x: 2.15, y: 32.93))
-        starPath.addLine(to: CGPoint(x: 7.71, y: 27.66))
-        starPath.addLine(to: CGPoint(x: 3.37, y: 21.35))
-        starPath.addLine(to: CGPoint(x: 10.59, y: 18.8))
-        starPath.addLine(to: CGPoint(x: 9.19, y: 11.26))
-        starPath.addLine(to: CGPoint(x: 16.83, y: 11.87))
-        starPath.addLine(to: CGPoint(x: 18.61, y: 4.42))
-        starPath.addLine(to: CGPoint(x: 25.34, y: 8.08))
+        starPath.move(to: CGPoint(x: 27, y: 2))
+        starPath.addLine(to: CGPoint(x: 31.16, y: 7.43))
+        starPath.addLine(to: CGPoint(x: 37.17, y: 4.16))
+        starPath.addLine(to: CGPoint(x: 38.76, y: 10.81))
+        starPath.addLine(to: CGPoint(x: 45.58, y: 10.27))
+        starPath.addLine(to: CGPoint(x: 44.33, y: 17))
+        starPath.addLine(to: CGPoint(x: 50.78, y: 19.27))
+        starPath.addLine(to: CGPoint(x: 46.9, y: 24.91))
+        starPath.addLine(to: CGPoint(x: 51.86, y: 29.61))
+        starPath.addLine(to: CGPoint(x: 46.03, y: 33.18))
+        starPath.addLine(to: CGPoint(x: 48.65, y: 39.5))
+        starPath.addLine(to: CGPoint(x: 41.87, y: 40.39))
+        starPath.addLine(to: CGPoint(x: 41.69, y: 47.23))
+        starPath.addLine(to: CGPoint(x: 35.14, y: 45.28))
+        starPath.addLine(to: CGPoint(x: 32.2, y: 51.45))
+        starPath.addLine(to: CGPoint(x: 27, y: 47.01))
+        starPath.addLine(to: CGPoint(x: 21.8, y: 51.45))
+        starPath.addLine(to: CGPoint(x: 18.86, y: 45.28))
+        starPath.addLine(to: CGPoint(x: 12.31, y: 47.23))
+        starPath.addLine(to: CGPoint(x: 12.13, y: 40.39))
+        starPath.addLine(to: CGPoint(x: 5.35, y: 39.5))
+        starPath.addLine(to: CGPoint(x: 7.97, y: 33.18))
+        starPath.addLine(to: CGPoint(x: 2.14, y: 29.61))
+        starPath.addLine(to: CGPoint(x: 7.1, y: 24.91))
+        starPath.addLine(to: CGPoint(x: 3.22, y: 19.27))
+        starPath.addLine(to: CGPoint(x: 9.67, y: 17))
+        starPath.addLine(to: CGPoint(x: 8.42, y: 10.27))
+        starPath.addLine(to: CGPoint(x: 15.24, y: 10.81))
+        starPath.addLine(to: CGPoint(x: 16.83, y: 4.16))
+        starPath.addLine(to: CGPoint(x: 22.84, y: 7.43))
         starPath.close()
         fillColor.setFill()
         starPath.fill()
@@ -142,15 +142,15 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawCircleButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) {
+    public dynamic class func drawCircleButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
         //// Resize to Target Frame
         context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 60, height: 60), target: targetFrame)
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 54, height: 54), target: targetFrame)
         context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 60, y: resizedFrame.height / 60)
+        context.scaleBy(x: resizedFrame.width / 54, y: resizedFrame.height / 54)
 
         //// Color Declarations
         let highlightedColor = StyleKit.appColor.withSaturation(0.42)
@@ -161,7 +161,7 @@ public class StyleKit: NSObject {
         let fillColor = selected || highlighted ? strokeColor : transparentColor
 
         //// Oval Drawing
-        let ovalPath = UIBezierPath(ovalIn: CGRect(x: 2, y: 2, width: 56, height: 56))
+        let ovalPath = UIBezierPath(ovalIn: CGRect(x: 2, y: 2, width: 50, height: 50))
         fillColor.setFill()
         ovalPath.fill()
         strokeColor.setStroke()
@@ -172,15 +172,15 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawRectangleButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) {
+    public dynamic class func drawRectangleButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
         //// Resize to Target Frame
         context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 60, height: 60), target: targetFrame)
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 54, height: 54), target: targetFrame)
         context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 60, y: resizedFrame.height / 60)
+        context.scaleBy(x: resizedFrame.width / 54, y: resizedFrame.height / 54)
 
         //// Color Declarations
         let highlightedColor = StyleKit.appColor.withSaturation(0.42)
@@ -190,8 +190,8 @@ public class StyleKit: NSObject {
         let strokeColor = highlighted ? highlightedColor : StyleKit.appColor
         let fillColor = selected || highlighted ? strokeColor : transparentColor
 
-        //// Rectangle Drawing
-        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 8)
+        //// rectangle Drawing
+        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 50, height: 50), cornerRadius: 8)
         fillColor.setFill()
         rectanglePath.fill()
         strokeColor.setStroke()
@@ -734,10 +734,94 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
+    public dynamic class func drawAddIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 56, height: 56), resizing: ResizingBehavior = .aspectFit, highlighted: Bool = false) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 56, height: 56), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 56, y: resizedFrame.height / 56)
+
+        //// Variable Declarations
+        let notHighlighted = !highlighted
+
+        if notHighlighted {
+            //// Bezier normal Drawing
+            let bezierNormalPath = UIBezierPath()
+            bezierNormalPath.move(to: CGPoint(x: 42, y: 27))
+            bezierNormalPath.addLine(to: CGPoint(x: 29, y: 27))
+            bezierNormalPath.addLine(to: CGPoint(x: 29, y: 14))
+            bezierNormalPath.addCurve(to: CGPoint(x: 28, y: 13), controlPoint1: CGPoint(x: 29, y: 13.45), controlPoint2: CGPoint(x: 28.55, y: 13))
+            bezierNormalPath.addCurve(to: CGPoint(x: 27, y: 14), controlPoint1: CGPoint(x: 27.45, y: 13), controlPoint2: CGPoint(x: 27, y: 13.45))
+            bezierNormalPath.addLine(to: CGPoint(x: 27, y: 27))
+            bezierNormalPath.addLine(to: CGPoint(x: 14, y: 27))
+            bezierNormalPath.addCurve(to: CGPoint(x: 13, y: 28), controlPoint1: CGPoint(x: 13.45, y: 27), controlPoint2: CGPoint(x: 13, y: 27.45))
+            bezierNormalPath.addCurve(to: CGPoint(x: 14, y: 29), controlPoint1: CGPoint(x: 13, y: 28.55), controlPoint2: CGPoint(x: 13.45, y: 29))
+            bezierNormalPath.addLine(to: CGPoint(x: 27, y: 29))
+            bezierNormalPath.addLine(to: CGPoint(x: 27, y: 42))
+            bezierNormalPath.addCurve(to: CGPoint(x: 28, y: 43), controlPoint1: CGPoint(x: 27, y: 42.55), controlPoint2: CGPoint(x: 27.45, y: 43))
+            bezierNormalPath.addCurve(to: CGPoint(x: 29, y: 42), controlPoint1: CGPoint(x: 28.55, y: 43), controlPoint2: CGPoint(x: 29, y: 42.55))
+            bezierNormalPath.addLine(to: CGPoint(x: 29, y: 29))
+            bezierNormalPath.addLine(to: CGPoint(x: 42, y: 29))
+            bezierNormalPath.addCurve(to: CGPoint(x: 43, y: 28), controlPoint1: CGPoint(x: 42.55, y: 29), controlPoint2: CGPoint(x: 43, y: 28.55))
+            bezierNormalPath.addCurve(to: CGPoint(x: 42, y: 27), controlPoint1: CGPoint(x: 43, y: 27.45), controlPoint2: CGPoint(x: 42.55, y: 27))
+            bezierNormalPath.close()
+            bezierNormalPath.move(to: CGPoint(x: 28, y: 0))
+            bezierNormalPath.addCurve(to: CGPoint(x: 0, y: 28), controlPoint1: CGPoint(x: 12.54, y: 0), controlPoint2: CGPoint(x: 0, y: 12.54))
+            bezierNormalPath.addCurve(to: CGPoint(x: 28, y: 56), controlPoint1: CGPoint(x: 0, y: 43.46), controlPoint2: CGPoint(x: 12.54, y: 56))
+            bezierNormalPath.addCurve(to: CGPoint(x: 56, y: 28), controlPoint1: CGPoint(x: 43.46, y: 56), controlPoint2: CGPoint(x: 56, y: 43.46))
+            bezierNormalPath.addCurve(to: CGPoint(x: 28, y: 0), controlPoint1: CGPoint(x: 56, y: 12.54), controlPoint2: CGPoint(x: 43.46, y: 0))
+            bezierNormalPath.close()
+            bezierNormalPath.move(to: CGPoint(x: 28, y: 54))
+            bezierNormalPath.addCurve(to: CGPoint(x: 2, y: 28), controlPoint1: CGPoint(x: 13.64, y: 54), controlPoint2: CGPoint(x: 2, y: 42.36))
+            bezierNormalPath.addCurve(to: CGPoint(x: 28, y: 2), controlPoint1: CGPoint(x: 2, y: 13.64), controlPoint2: CGPoint(x: 13.64, y: 2))
+            bezierNormalPath.addCurve(to: CGPoint(x: 54, y: 28), controlPoint1: CGPoint(x: 42.36, y: 2), controlPoint2: CGPoint(x: 54, y: 13.64))
+            bezierNormalPath.addCurve(to: CGPoint(x: 28, y: 54), controlPoint1: CGPoint(x: 54, y: 42.36), controlPoint2: CGPoint(x: 42.36, y: 54))
+            bezierNormalPath.close()
+            StyleKit.appColor.setFill()
+            bezierNormalPath.fill()
+        }
+
+        if highlighted {
+            //// Bezier highlighted Drawing
+            let bezierHighlightedPath = UIBezierPath()
+            bezierHighlightedPath.move(to: CGPoint(x: 28, y: 0))
+            bezierHighlightedPath.addCurve(to: CGPoint(x: 0, y: 28), controlPoint1: CGPoint(x: 12.54, y: 0), controlPoint2: CGPoint(x: 0, y: 12.54))
+            bezierHighlightedPath.addCurve(to: CGPoint(x: 28, y: 56), controlPoint1: CGPoint(x: 0, y: 43.46), controlPoint2: CGPoint(x: 12.54, y: 56))
+            bezierHighlightedPath.addCurve(to: CGPoint(x: 56, y: 28), controlPoint1: CGPoint(x: 43.46, y: 56), controlPoint2: CGPoint(x: 56, y: 43.46))
+            bezierHighlightedPath.addCurve(to: CGPoint(x: 28, y: 0), controlPoint1: CGPoint(x: 56, y: 12.54), controlPoint2: CGPoint(x: 43.46, y: 0))
+            bezierHighlightedPath.close()
+            bezierHighlightedPath.move(to: CGPoint(x: 42, y: 29))
+            bezierHighlightedPath.addLine(to: CGPoint(x: 29, y: 29))
+            bezierHighlightedPath.addLine(to: CGPoint(x: 29, y: 42))
+            bezierHighlightedPath.addCurve(to: CGPoint(x: 28, y: 43), controlPoint1: CGPoint(x: 29, y: 42.55), controlPoint2: CGPoint(x: 28.55, y: 43))
+            bezierHighlightedPath.addCurve(to: CGPoint(x: 27, y: 42), controlPoint1: CGPoint(x: 27.45, y: 43), controlPoint2: CGPoint(x: 27, y: 42.55))
+            bezierHighlightedPath.addLine(to: CGPoint(x: 27, y: 29))
+            bezierHighlightedPath.addLine(to: CGPoint(x: 14, y: 29))
+            bezierHighlightedPath.addCurve(to: CGPoint(x: 13, y: 28), controlPoint1: CGPoint(x: 13.45, y: 29), controlPoint2: CGPoint(x: 13, y: 28.55))
+            bezierHighlightedPath.addCurve(to: CGPoint(x: 14, y: 27), controlPoint1: CGPoint(x: 13, y: 27.45), controlPoint2: CGPoint(x: 13.45, y: 27))
+            bezierHighlightedPath.addLine(to: CGPoint(x: 27, y: 27))
+            bezierHighlightedPath.addLine(to: CGPoint(x: 27, y: 14))
+            bezierHighlightedPath.addCurve(to: CGPoint(x: 28, y: 13), controlPoint1: CGPoint(x: 27, y: 13.45), controlPoint2: CGPoint(x: 27.45, y: 13))
+            bezierHighlightedPath.addCurve(to: CGPoint(x: 29, y: 14), controlPoint1: CGPoint(x: 28.55, y: 13), controlPoint2: CGPoint(x: 29, y: 13.45))
+            bezierHighlightedPath.addLine(to: CGPoint(x: 29, y: 27))
+            bezierHighlightedPath.addLine(to: CGPoint(x: 42, y: 27))
+            bezierHighlightedPath.addCurve(to: CGPoint(x: 43, y: 28), controlPoint1: CGPoint(x: 42.55, y: 27), controlPoint2: CGPoint(x: 43, y: 27.45))
+            bezierHighlightedPath.addCurve(to: CGPoint(x: 42, y: 29), controlPoint1: CGPoint(x: 43, y: 28.55), controlPoint2: CGPoint(x: 42.55, y: 29))
+            bezierHighlightedPath.close()
+            StyleKit.appColor.setFill()
+            bezierHighlightedPath.fill()
+        }
+
+        context.restoreGState()
+    }
+
     //// Generated Images
 
     public dynamic class func imageOfStarButton(lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 60, height: 60), false, 0)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 54, height: 54), false, 0)
         StyleKit.drawStarButton(lineWidth: lineWidth, selected: selected, highlighted: highlighted)
 
         let imageOfStarButton = UIGraphicsGetImageFromCurrentImageContext()!
@@ -747,7 +831,7 @@ public class StyleKit: NSObject {
     }
 
     public dynamic class func imageOfMultiStarButton(lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 60, height: 60), false, 0)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 54, height: 54), false, 0)
         StyleKit.drawMultiStarButton(lineWidth: lineWidth, selected: selected, highlighted: highlighted)
 
         let imageOfMultiStarButton = UIGraphicsGetImageFromCurrentImageContext()!
@@ -757,7 +841,7 @@ public class StyleKit: NSObject {
     }
 
     public dynamic class func imageOfCircleButton(lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 60, height: 60), false, 0)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 54, height: 54), false, 0)
         StyleKit.drawCircleButton(lineWidth: lineWidth, selected: selected, highlighted: highlighted)
 
         let imageOfCircleButton = UIGraphicsGetImageFromCurrentImageContext()!
@@ -767,7 +851,7 @@ public class StyleKit: NSObject {
     }
 
     public dynamic class func imageOfRectangleButton(lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 60, height: 60), false, 0)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 54, height: 54), false, 0)
         StyleKit.drawRectangleButton(lineWidth: lineWidth, selected: selected, highlighted: highlighted)
 
         let imageOfRectangleButton = UIGraphicsGetImageFromCurrentImageContext()!
@@ -844,6 +928,16 @@ public class StyleKit: NSObject {
         UIGraphicsEndImageContext()
 
         return Cache.imageOfStickerToolbarIcon!
+    }
+
+    public dynamic class func imageOfAddIcon(highlighted: Bool = false) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 56, height: 56), false, 0)
+        StyleKit.drawAddIcon(highlighted: highlighted)
+
+        let imageOfAddIcon = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        return imageOfAddIcon
     }
 
     //// Customization Infrastructure

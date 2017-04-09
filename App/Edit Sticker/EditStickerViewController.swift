@@ -22,7 +22,7 @@ class EditStickerViewController: UIViewController {
     @IBOutlet weak var deleteButtonItem: UIBarButtonItem!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var stickerPlaceholder: UIImageView!
+    @IBOutlet weak var stickerPlaceholder: AppIconView!
     @IBOutlet weak var coverView: UIView!
     @IBOutlet weak var stickerTitleTextField: UITextField!
 
@@ -194,6 +194,10 @@ fileprivate extension EditStickerViewController {
 
         viewModel.stickerPlaceholderHidden
             .drive(stickerPlaceholder.rx.isHidden)
+            .disposed(by: disposeBag)
+
+        viewModel.coverViewHidden
+            .drive(coverView.rx.isHidden)
             .disposed(by: disposeBag)
 
         viewModel.circleButtonSelected
@@ -390,7 +394,7 @@ fileprivate extension EditStickerViewController {
 
 fileprivate extension EditStickerViewController {
     func setupButtons() {
-        let lineWidth = CGFloat(2)
+        let lineWidth = CGFloat(3)
 
         circleButton.setTitle(nil, for: UIControlState())
         circleButton.titleLabel?.isHidden = true

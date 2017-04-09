@@ -50,6 +50,11 @@
 		199546621E9997F100B2E236 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 199546651E9997F100B2E236 /* Localizable.strings */; };
 		199546631E9997F100B2E236 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 199546651E9997F100B2E236 /* Localizable.strings */; };
 		199546661E9997F800B2E236 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 199546681E9997F800B2E236 /* InfoPlist.strings */; };
+		1995466C1E9A527600B2E236 /* AppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1995466B1E9A527600B2E236 /* AppIconView.swift */; };
+		1995466D1E9A527600B2E236 /* AppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1995466B1E9A527600B2E236 /* AppIconView.swift */; };
+		1995466E1E9A5BD200B2E236 /* original.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19AA56541E6D7A45005BDD23 /* original.jpg */; };
+		199546701E9A5F6700B2E236 /* AddIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1995466F1E9A5F6700B2E236 /* AddIconView.swift */; };
+		199546711E9A5F6700B2E236 /* AddIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1995466F1E9A5F6700B2E236 /* AddIconView.swift */; };
 		1997E3501E852D51008DA2A7 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1997E34F1E852D51008DA2A7 /* UIViewController+Rx.swift */; };
 		1997E3511E852D51008DA2A7 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1997E34F1E852D51008DA2A7 /* UIViewController+Rx.swift */; };
 		19A6C5FB1E5EFCE2009B8922 /* EditStickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C5FA1E5EFCE2009B8922 /* EditStickerViewController.swift */; };
@@ -60,7 +65,6 @@
 		19A6C6071E631101009B8922 /* StickerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C6051E6310F8009B8922 /* StickerInfo.swift */; };
 		19A6C6091E633DD9009B8922 /* ImageStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C6081E633DD9009B8922 /* ImageStoreService.swift */; };
 		19A6C60A1E633DEE009B8922 /* ImageStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C6081E633DD9009B8922 /* ImageStoreService.swift */; };
-		19AA56561E6D7BC5005BDD23 /* original.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19AA56541E6D7A45005BDD23 /* original.jpg */; };
 		19AA56591E6D83A9005BDD23 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AA56571E6D8387005BDD23 /* SnapshotHelper.swift */; };
 		19B7A4F21E13C1F00074B6B1 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19B7A4F11E13C1F00074B6B1 /* Messages.framework */; };
 		19B7A4FE1E13C1F00074B6B1 /* MessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -184,6 +188,8 @@
 		199546671E9997F800B2E236 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		199546691E99988B00B2E236 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1995466A1E99988B00B2E236 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1995466B1E9A527600B2E236 /* AppIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIconView.swift; sourceTree = "<group>"; };
+		1995466F1E9A5F6700B2E236 /* AddIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIconView.swift; sourceTree = "<group>"; };
 		1997E34F1E852D51008DA2A7 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		199A78921E264480002B058E /* CHANGELOG.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.yml; sourceTree = "<group>"; };
 		19A6C5FA1E5EFCE2009B8922 /* EditStickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditStickerViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -338,6 +344,8 @@
 		194621191E3CFDA1000F09CE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1995466B1E9A527600B2E236 /* AppIconView.swift */,
+				1995466F1E9A5F6700B2E236 /* AddIconView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -879,7 +887,6 @@
 				194621281E3CFDA1000F09CE /* Assets.xcassets in Resources */,
 				19DFF0131E8E9F6000E4B36C /* .gitattributes in Resources */,
 				19DFF0121E8E9F6000E4B36C /* _config.yml in Resources */,
-				19AA56561E6D7BC5005BDD23 /* original.jpg in Resources */,
 				19DFF0151E8E9F6000E4B36C /* .ruby-version in Resources */,
 				199546661E9997F800B2E236 /* InfoPlist.strings in Resources */,
 			);
@@ -889,6 +896,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1995466E1E9A5BD200B2E236 /* original.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1053,6 +1061,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				199546701E9A5F6700B2E236 /* AddIconView.swift in Sources */,
 				194621A41E43569C000F09CE /* UIImage+RoundedCorner.swift in Sources */,
 				19F6DC791E4F237D00CAE9D0 /* RxImagePickerDelegateProxy.swift in Sources */,
 				1946211A1E3CFDA1000F09CE /* Logger+Shared.swift in Sources */,
@@ -1073,6 +1082,7 @@
 				19F6DC731E4D250400CAE9D0 /* StickerService.swift in Sources */,
 				194621361E3CFDA1000F09CE /* StoryboardIdentifiers.swift in Sources */,
 				194621B31E4BC97B000F09CE /* StickerCollectionCellModel.swift in Sources */,
+				1995466C1E9A527600B2E236 /* AppIconView.swift in Sources */,
 				19F6DC7B1E4F237D00CAE9D0 /* UIImagePickerController+RxCreate.swift in Sources */,
 				194621AF1E4928C8000F09CE /* StickerCollectionViewModel.swift in Sources */,
 				194621A21E43569C000F09CE /* UIImage+Alpha.swift in Sources */,
@@ -1121,6 +1131,7 @@
 				199100B01E97745200972602 /* UIButton+Extensions.swift in Sources */,
 				19F6DC8F1E4F23BD00CAE9D0 /* UIImagePickerController+Rx.swift in Sources */,
 				19F6DC961E4F23BD00CAE9D0 /* PSError.swift in Sources */,
+				199546711E9A5F6700B2E236 /* AddIconView.swift in Sources */,
 				194621951E40E74C000F09CE /* MSSticker+Extensions.swift in Sources */,
 				1997E3511E852D51008DA2A7 /* UIViewController+Rx.swift in Sources */,
 				194621711E3CFE56000F09CE /* PhotoStickerBrowserViewModel.swift in Sources */,
@@ -1144,6 +1155,7 @@
 				19F6DC951E4F23BD00CAE9D0 /* AppGroup.swift in Sources */,
 				19F6DC881E4F23BD00CAE9D0 /* Sticker.swift in Sources */,
 				1918E63B1E72CC4C007DFFE7 /* Mask.swift in Sources */,
+				1995466D1E9A527600B2E236 /* AppIconView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

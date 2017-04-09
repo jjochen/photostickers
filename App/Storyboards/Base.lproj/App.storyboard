@@ -27,21 +27,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cGr-di-2hY">
-                                    <size key="itemSize" width="100" height="100"/>
+                                    <size key="itemSize" width="90" height="90"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StickerCollectionCell" id="Wd8-aV-45r" userLabel="Sticker Collection Cell" customClass="StickerCollectionCell" customModule="PhotoStickers" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="10" width="100" height="100"/>
+                                        <rect key="frame" x="10" y="10" width="90" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ReS-VE-pYf" userLabel="Sticker Image View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="91"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
@@ -123,9 +123,10 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zd7-Ok-AEC" userLabel="Sticker Layout Guide">
                                 <rect key="frame" x="0.0" y="64" width="375" height="375"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="pX4-f0-VAR" userLabel="Sticker Placeholder">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wdy-tE-NEY" userLabel="Sticker Placeholder" customClass="AppIconView" customModule="PhotoStickers" customModuleProvider="target">
                                         <rect key="frame" x="28" y="28" width="319" height="319"/>
-                                    </imageView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.10000000000000001" maximumZoomScale="1.1000000000000001" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="Ylq-NR-HX9">
                                         <rect key="frame" x="28" y="28" width="319" height="319"/>
                                         <subviews>
@@ -156,19 +157,19 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="pX4-f0-VAR" firstAttribute="bottom" secondItem="Ylq-NR-HX9" secondAttribute="bottom" id="1ft-sc-VPl"/>
-                                    <constraint firstItem="pX4-f0-VAR" firstAttribute="top" secondItem="Ylq-NR-HX9" secondAttribute="top" id="3qo-5t-1XR"/>
+                                    <constraint firstItem="Wdy-tE-NEY" firstAttribute="centerX" secondItem="Ylq-NR-HX9" secondAttribute="centerX" id="85U-C0-lcm"/>
                                     <constraint firstItem="MFD-Hg-Vnb" firstAttribute="leading" secondItem="Zd7-Ok-AEC" secondAttribute="leading" id="8Jr-CE-taV"/>
-                                    <constraint firstItem="pX4-f0-VAR" firstAttribute="leading" secondItem="Ylq-NR-HX9" secondAttribute="leading" id="9fW-kq-pg7"/>
                                     <constraint firstItem="MFD-Hg-Vnb" firstAttribute="bottom" secondItem="Zd7-Ok-AEC" secondAttribute="bottom" id="Cnp-Yu-C33"/>
                                     <constraint firstItem="Ylq-NR-HX9" firstAttribute="height" secondItem="Zd7-Ok-AEC" secondAttribute="height" multiplier="0.85" id="DUE-dQ-VEY"/>
+                                    <constraint firstItem="Wdy-tE-NEY" firstAttribute="width" secondItem="Ylq-NR-HX9" secondAttribute="width" id="Hxz-pa-fJS"/>
                                     <constraint firstItem="MFD-Hg-Vnb" firstAttribute="top" secondItem="Zd7-Ok-AEC" secondAttribute="top" id="IY8-CO-Kag"/>
                                     <constraint firstItem="Ylq-NR-HX9" firstAttribute="centerY" secondItem="Zd7-Ok-AEC" secondAttribute="centerY" id="J5k-qI-Wb9"/>
-                                    <constraint firstItem="pX4-f0-VAR" firstAttribute="trailing" secondItem="Ylq-NR-HX9" secondAttribute="trailing" id="RJM-4f-PsO"/>
                                     <constraint firstItem="MFD-Hg-Vnb" firstAttribute="trailing" secondItem="Zd7-Ok-AEC" secondAttribute="trailing" id="Yrt-fP-9mP"/>
                                     <constraint firstItem="Ylq-NR-HX9" firstAttribute="centerX" secondItem="Zd7-Ok-AEC" secondAttribute="centerX" id="ZjH-TG-8tQ"/>
                                     <constraint firstItem="Ylq-NR-HX9" firstAttribute="width" secondItem="Zd7-Ok-AEC" secondAttribute="width" multiplier="0.85" id="ghF-f5-wIc"/>
+                                    <constraint firstItem="Wdy-tE-NEY" firstAttribute="height" secondItem="Ylq-NR-HX9" secondAttribute="height" id="kfw-Mo-wkR"/>
                                     <constraint firstAttribute="width" secondItem="Zd7-Ok-AEC" secondAttribute="height" multiplier="1:1" id="ks8-Py-kJd"/>
+                                    <constraint firstItem="Wdy-tE-NEY" firstAttribute="centerY" secondItem="Ylq-NR-HX9" secondAttribute="centerY" id="w9d-7P-C8I"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aBM-ze-byb" userLabel="Control Layout Guide">
@@ -256,7 +257,7 @@
                             <rect key="frame" x="75" y="7" width="239" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <nil key="textColor"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                         </textField>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="ylz-y4-7pV" userLabel="Save Button"/>
@@ -274,7 +275,7 @@
                         <outlet property="saveButtonItem" destination="ylz-y4-7pV" id="Ycn-K0-Sya"/>
                         <outlet property="scrollView" destination="Ylq-NR-HX9" id="0WH-r0-dh1"/>
                         <outlet property="starButton" destination="n04-oW-6GY" id="9as-wu-rBj"/>
-                        <outlet property="stickerPlaceholder" destination="pX4-f0-VAR" id="WWs-JN-TVl"/>
+                        <outlet property="stickerPlaceholder" destination="Wdy-tE-NEY" id="q2a-IQ-oKq"/>
                         <outlet property="stickerTitleTextField" destination="dt1-g2-TIx" id="Nr1-N4-DiT"/>
                         <outletCollection property="landscapeConstraints" destination="2IQ-K9-yM6" collectionClass="NSMutableArray" id="exj-15-LP6"/>
                         <outletCollection property="portraitConstraints" destination="nNB-7c-cMT" collectionClass="NSMutableArray" id="90W-ER-PcE"/>
@@ -307,9 +308,6 @@
             <point key="canvasLocation" x="87" y="45"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="AppIcon" width="120" height="120"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jbz-Sz-vci"/>
     </inferredMetricsTieBreakers>
