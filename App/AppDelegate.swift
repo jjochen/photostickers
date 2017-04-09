@@ -38,8 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_: UIApplication, open url: URL, options _: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
-        if url.absoluteString == "photosticker://create" {
-            Logger.shared.info("oppened from message extension")
+        if url.absoluteString.contains("create") {
+            Logger.shared.info("should create new sticker")
             // TODO:
         }
         return false

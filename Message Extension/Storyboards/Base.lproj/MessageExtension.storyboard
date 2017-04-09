@@ -59,7 +59,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jdh-Ws-RIn" customClass="MSStickerView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="100"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
@@ -74,30 +74,28 @@
                                             <outlet property="stickerView" destination="jdh-Ws-RIn" id="v4i-hC-vdd"/>
                                         </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="Iyb-XD-XMs">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="Iyb-XD-XMs" customClass="AddStickerCell" customModule="MessageExtension" customModuleProvider="target">
                                         <rect key="frame" x="143" y="10" width="90" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tlF-hK-hFI" customClass="AddIconView" customModule="MessageExtension" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="56" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="zcV-wh-1zh">
                                                     <rect key="frame" x="17" y="17" width="56" height="56"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <accessibility key="accessibilityConfiguration">
-                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                        <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                                     </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="56" id="iOh-1f-e88"/>
-                                                        <constraint firstAttribute="height" constant="56" id="icg-l5-apu"/>
-                                                    </constraints>
-                                                </view>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="tlF-hK-hFI" firstAttribute="centerY" secondItem="Iyb-XD-XMs" secondAttribute="centerY" id="OpI-sj-uBK"/>
-                                            <constraint firstItem="tlF-hK-hFI" firstAttribute="centerX" secondItem="Iyb-XD-XMs" secondAttribute="centerX" id="YZP-yd-07E"/>
+                                            <constraint firstItem="zcV-wh-1zh" firstAttribute="centerY" secondItem="Iyb-XD-XMs" secondAttribute="centerY" id="2HT-fA-tG8"/>
+                                            <constraint firstItem="zcV-wh-1zh" firstAttribute="centerX" secondItem="Iyb-XD-XMs" secondAttribute="centerX" id="VAc-Dh-qyj"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="zcV-wh-1zh" id="VKP-Jl-t26"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
