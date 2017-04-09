@@ -137,15 +137,15 @@ extension StickerService {
     }
 }
 
-extension StickerService {
+fileprivate extension StickerService {
 
-    fileprivate func sticker(withInfo info: StickerInfo, inRealm realm: Realm) throws -> Sticker {
+    func sticker(withInfo info: StickerInfo, inRealm realm: Realm) throws -> Sticker {
         let sticker = try realm.sticker(withUUID: info.uuid)
         try update(sticker: sticker, withInfo: info)
         return sticker
     }
 
-    fileprivate func update(sticker: Sticker, withInfo info: StickerInfo) throws {
+    func update(sticker: Sticker, withInfo info: StickerInfo) throws {
         guard let realm = sticker.realm else {
             Logger.shared.error("update sticker only works with stickers in realm")
             throw PSError.unknown
@@ -178,7 +178,7 @@ extension StickerService {
         }
     }
 
-    fileprivate func storeImage(_ image: UIImage?, forKey key: String?, inCategory category: String) -> URL? {
+    func storeImage(_ image: UIImage?, forKey key: String?, inCategory category: String) -> URL? {
         guard let image = image else {
             return nil
         }
@@ -195,16 +195,16 @@ extension StickerService {
     }
 }
 
-extension Realm {
-    fileprivate func sticker(withUUID uuid: String?) throws -> Sticker {
+fileprivate extension Realm {
+    func sticker(withUUID uuid: String?) throws -> Sticker {
         return try fetchSticker(withUUID: uuid) ?? newSticker()
     }
 
-    fileprivate func fetchSticker(withUUID uuid: String?) -> Sticker? {
+    func fetchSticker(withUUID uuid: String?) -> Sticker? {
         return object(ofType: Sticker.self, forPrimaryKey: uuid)
     }
 
-    fileprivate func newSticker() throws -> Sticker {
+    func newSticker() throws -> Sticker {
         let sticker = Sticker()
         sticker.uuid = NSUUID().uuidString
         sticker.sortOrder = nextSortOrder()
@@ -214,9 +214,13 @@ extension Realm {
         return sticker
     }
 
-    fileprivate func nextSortOrder() -> Int {
+    func nextSortOrder() -> Int {
         let maxSortOrder = objects(Sticker.self).max(ofProperty: StickerProperty.sortOrder.rawValue) ?? 0
         return maxSortOrder + 1
+    }
+
+    func numberOfStickers(with predicate: NSPredicate) -> Int {
+        return objects(Sticker.self).filter(predicate).count
     }
 }
 

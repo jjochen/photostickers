@@ -49,6 +49,36 @@ class StickerCollectionViewController: UIViewController {
         stickerCollectionView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
+
+        viewModel.presentFirstStickerAlert
+            .drive(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.presentFirstStickerAlert()
+            })
+            .addDisposableTo(disposeBag)
+    }
+}
+
+fileprivate extension StickerCollectionViewController {
+    func presentFirstStickerAlert() {
+        guard presentedViewController == nil else {
+            DispatchQueue.main.async {
+                self.presentFirstStickerAlert()
+            }
+            return
+        }
+        let alertController = UIAlertController(
+            title: "FirstStickerAlertTitle".localized,
+            message: "FirstStickerAlertMessage".localized,
+            preferredStyle: .alert
+        )
+
+        let okAction = UIAlertAction(title: "OK".localized,
+                                     style: .default,
+                                     handler: nil)
+        alertController.addAction(okAction)
+
+        present(alertController, animated: true, completion: nil)
     }
 }
 

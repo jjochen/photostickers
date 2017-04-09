@@ -1,5 +1,7 @@
 "Cancel" = "Cancel";
 "Delete" = "Delete";
+"FirstStickerAlertMessage" = "Open the Photo Stickers iMessage App within your iOS Messages App.";
+"FirstStickerAlertTitle" = "Your stickers are now available in Messages";
 /* image picker source type: camera */
 "ImagePickerSourceTypeCamera" = "Camera";
 /* image picker source type: photo library */

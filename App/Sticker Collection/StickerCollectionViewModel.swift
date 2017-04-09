@@ -12,6 +12,7 @@ import RxCocoa
 
 protocol StickerCollectionViewModelType: class {
     var stickerCellModels: Driver<[StickerCollectionCellModel]> { get }
+    var presentFirstStickerAlert: Driver<Void> { get }
     func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType
     func addStickerViewModel() -> EditStickerViewModelType
 }
@@ -27,6 +28,7 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
 
     // MARK: Output
     let stickerCellModels: Driver<[StickerCollectionCellModel]>
+    let presentFirstStickerAlert: Driver<Void>
 
     init(imageStoreService: ImageStoreServiceType,
          stickerService: StickerServiceType,
@@ -36,7 +38,23 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
         self.stickerService = stickerService
         self.stickerRenderService = stickerRenderService
 
-        stickerCellModels = stickerService.fetchStickers()
+        let stickers = stickerService
+            .fetchStickers()
+            .shareReplay(1)
+
+        presentFirstStickerAlert = stickers // might change to: sticker was added and message was not shown yet
+            .map { allStickers in
+                return allStickers.count
+            }
+            .distinctUntilChanged()
+            .scan([]) { lastSlice, newValue -> [Int] in
+                return Array(Array(lastSlice + [newValue]).suffix(2))
+            }
+            .filter { $0 == [0, 1] }
+            .map { _ in Void() }
+            .asDriver(onErrorDriveWith: Driver.empty())
+
+        stickerCellModels = stickers
             .map { listOfStickers in
                 let listOfViewModels = listOfStickers.map { sticker in
                     return StickerCollectionCellModel(sticker)
