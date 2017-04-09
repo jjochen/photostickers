@@ -299,14 +299,14 @@ fileprivate extension EditStickerViewController {
                     preferredStyle: .actionSheet
                 )
 
-                let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: "generic delete"),
+                let deleteAction = UIAlertAction(title: "Delete".localized,
                                                  style: .destructive,
                                                  handler: { _ in
                                                      viewModel.deleteAlertDidConfirm.onNext()
                 })
                 alertController.addAction(deleteAction)
 
-                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "generic cancel"),
+                let cancelAction = UIAlertAction(title: "Cancel".localized,
                                                  style: .cancel,
                                                  handler: nil)
                 alertController.addAction(cancelAction)
@@ -329,10 +329,10 @@ fileprivate extension EditStickerViewController {
                         var title: String?
                         switch type {
                         case .photoLibrary:
-                            title = NSLocalizedString("Photo Library", comment: "image picker source type photo library")
+                            title = "ImagePickerSourceTypePhotoLibrary".localized
                             break
                         case .camera:
-                            title = NSLocalizedString("Camera", comment: "image picker source type camera")
+                            title = "ImagePickerSourceTypeCamera".localized
                             break
                         default:
                             title = nil
@@ -346,7 +346,7 @@ fileprivate extension EditStickerViewController {
                     }
                     .forEach(alertController.addAction)
 
-                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "generic cancel"),
+                let cancelAction = UIAlertAction(title: "Cancel".localized,
                                                  style: .cancel,
                                                  handler: nil)
                 alertController.addAction(cancelAction)
@@ -402,23 +402,26 @@ fileprivate extension EditStickerViewController {
 
         rectangleButton.setTitle(nil, for: UIControlState())
         rectangleButton.setBackgroundImages { selected, highlighted in
-            return StyleKit.imageOfRectangleButton(lineWidth: lineWidth,
-                                                   selected: selected,
-                                                   highlighted: highlighted)
+            return StyleKit.imageOfRectangleButton(
+                lineWidth: lineWidth,
+                selected: selected,
+                highlighted: highlighted)
         }
 
         multiStarButton.setTitle(nil, for: UIControlState())
         multiStarButton.setBackgroundImages { selected, highlighted in
-            return StyleKit.imageOfMultiStarButton(lineWidth: lineWidth,
-                                                   selected: selected,
-                                                   highlighted: highlighted)
+            return StyleKit.imageOfMultiStarButton(
+                lineWidth: lineWidth,
+                selected: selected,
+                highlighted: highlighted)
         }
 
         starButton.setTitle(nil, for: UIControlState())
         starButton.setBackgroundImages { selected, highlighted in
-            return StyleKit.imageOfStarButton(lineWidth: lineWidth,
-                                              selected: selected,
-                                              highlighted: highlighted)
+            return StyleKit.imageOfStarButton(
+                lineWidth: lineWidth,
+                selected: selected,
+                highlighted: highlighted)
         }
     }
 }

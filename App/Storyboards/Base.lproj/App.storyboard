@@ -68,7 +68,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Photo Stickers" id="tGu-nI-cYD" userLabel="Sticker Collection Navigation Bar">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="SxV-cq-Vib" userLabel="Add Button">
+                        <barButtonItem key="rightBarButtonItem" id="SxV-cq-Vib" userLabel="Add Button">
                             <connections>
                                 <segue destination="mHK-wh-jhb" kind="showDetail" identifier="AddStickerSeque" id="jbz-Sz-vci"/>
                             </connections>
@@ -80,6 +80,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <customObject id="66f-R0-Nvv" customClass="StyleKit" customModule="PhotoStickers" customModuleProvider="target">
+                    <connections>
+                        <outletCollection property="addToolbarIconTargets" destination="SxV-cq-Vib" collectionClass="NSMutableArray" id="nlI-8y-2mG"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="853.60000000000002" y="44.527736131934034"/>
         </scene>
@@ -170,7 +175,7 @@
                                 <rect key="frame" x="0.0" y="439" width="375" height="184"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBL-rL-8h5" userLabel="Button Layout Guide">
-                                        <rect key="frame" x="34" y="74.5" width="308" height="34"/>
+                                        <rect key="frame" x="40.5" y="74.5" width="295" height="34"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKM-gO-hz8">
                                                 <rect key="frame" x="0.0" y="0.0" width="47" height="34"/>
@@ -185,13 +190,13 @@
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axO-aK-nfj" userLabel="Super Star Button">
-                                                <rect key="frame" x="168" y="0.0" width="86" height="34"/>
-                                                <state key="normal" title="Super Star">
+                                                <rect key="frame" x="168" y="0.0" width="73" height="34"/>
+                                                <state key="normal" title="MultiStar">
                                                     <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n04-oW-6GY">
-                                                <rect key="frame" x="274" y="0.0" width="34" height="34"/>
+                                                <rect key="frame" x="261" y="0.0" width="34" height="34"/>
                                                 <state key="normal" title="Star">
                                                     <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -240,9 +245,9 @@
                         </variation>
                     </view>
                     <toolbarItems>
-                        <barButtonItem systemItem="trash" id="UY9-Yv-yfg" userLabel="Delete Button"/>
+                        <barButtonItem id="UY9-Yv-yfg" userLabel="Delete Button"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="4Ef-qB-gCQ"/>
-                        <barButtonItem systemItem="camera" id="zho-8l-mAf" userLabel="Photo Library Button"/>
+                        <barButtonItem id="zho-8l-mAf" userLabel="Photo Library Button"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="3cS-n0-mdI" userLabel="Edit Sticker Navigation Bar">
                         <nil key="title"/>
@@ -276,6 +281,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nqs-PS-TGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="KND-SN-UDl" customClass="StyleKit" customModule="PhotoStickers" customModuleProvider="target">
+                    <connections>
+                        <outletCollection property="photoToolbarIconTargets" destination="zho-8l-mAf" collectionClass="NSMutableArray" id="cG8-9A-d1u"/>
+                        <outletCollection property="trashToolbarIconTargets" destination="UY9-Yv-yfg" collectionClass="NSMutableArray" id="lsj-AY-Dk1"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="1576.8" y="793.8530734632684"/>
         </scene>

@@ -1,0 +1,6 @@
+"Cancel" = "Cancel";
+"Delete" = "Delete";
+/* image picker source type: camera */
+"ImagePickerSourceTypeCamera" = "Camera";
+/* image picker source type: photo library */
+"ImagePickerSourceTypePhotoLibrary" = "Photo Library";
