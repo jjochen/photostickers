@@ -66,6 +66,8 @@
 		19A6C6071E631101009B8922 /* StickerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C6051E6310F8009B8922 /* StickerInfo.swift */; };
 		19A6C6091E633DD9009B8922 /* ImageStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C6081E633DD9009B8922 /* ImageStoreService.swift */; };
 		19A6C60A1E633DEE009B8922 /* ImageStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C6081E633DD9009B8922 /* ImageStoreService.swift */; };
+		19A918D41E9ABE7100168FA9 /* StickerFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A918D31E9ABE7100168FA9 /* StickerFlowLayout.swift */; };
+		19A918D51E9ABE7100168FA9 /* StickerFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A918D31E9ABE7100168FA9 /* StickerFlowLayout.swift */; };
 		19AA56591E6D83A9005BDD23 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AA56571E6D8387005BDD23 /* SnapshotHelper.swift */; };
 		19B7A4F21E13C1F00074B6B1 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19B7A4F11E13C1F00074B6B1 /* Messages.framework */; };
 		19B7A4FE1E13C1F00074B6B1 /* MessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19B7A4EF1E13C1F00074B6B1 /* MessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -199,6 +201,7 @@
 		19A6C5FE1E604474009B8922 /* Observable+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Observable+Operators.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		19A6C6051E6310F8009B8922 /* StickerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = StickerInfo.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		19A6C6081E633DD9009B8922 /* ImageStoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageStoreService.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		19A918D31E9ABE7100168FA9 /* StickerFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerFlowLayout.swift; sourceTree = "<group>"; };
 		19AA564B1E68A0FA005BDD23 /* NOTES */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES; sourceTree = "<group>"; };
 		19AA564F1E6C7218005BDD23 /* .env */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; name = .env; path = fastlane/.env; sourceTree = "<group>"; };
 		19AA56541E6D7A45005BDD23 /* original.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = original.jpg; sourceTree = "<group>"; };
@@ -339,6 +342,7 @@
 				19F6DC721E4D250400CAE9D0 /* StickerService.swift */,
 				194621181E3CFDA1000F09CE /* StoryboardIdentifiers.swift */,
 				19E1EB3C1E78199F005637C4 /* StyleKit.swift */,
+				19A918D31E9ABE7100168FA9 /* StickerFlowLayout.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1066,6 +1070,7 @@
 			files = (
 				199546701E9A5F6700B2E236 /* AddIconView.swift in Sources */,
 				194621A41E43569C000F09CE /* UIImage+RoundedCorner.swift in Sources */,
+				19A918D41E9ABE7100168FA9 /* StickerFlowLayout.swift in Sources */,
 				19F6DC791E4F237D00CAE9D0 /* RxImagePickerDelegateProxy.swift in Sources */,
 				1946211A1E3CFDA1000F09CE /* Logger+Shared.swift in Sources */,
 				1946219E1E435205000F09CE /* StickerRenderService.swift in Sources */,
@@ -1143,6 +1148,7 @@
 				19F6DC8E1E4F23BD00CAE9D0 /* RxImagePickerDelegateProxy.swift in Sources */,
 				19F6DC871E4F23BD00CAE9D0 /* BaseViewModel.swift in Sources */,
 				19F6DC8D1E4F23BD00CAE9D0 /* UIViewController+Extensions.swift in Sources */,
+				19A918D51E9ABE7100168FA9 /* StickerFlowLayout.swift in Sources */,
 				19F6DC891E4F23BD00CAE9D0 /* Logger+Shared.swift in Sources */,
 				19A6C6071E631101009B8922 /* StickerInfo.swift in Sources */,
 				199546741E9A825000B2E236 /* AddStickerCell.swift in Sources */,

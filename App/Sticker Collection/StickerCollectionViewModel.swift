@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 protocol StickerCollectionViewModelType: class {
-    var stickerCellModels: Observable<[StickerCollectionCellModel]> { get }
+    var stickerCellModels: Driver<[StickerCollectionCellModel]> { get }
     func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType
     func addStickerViewModel() -> EditStickerViewModelType
 }
@@ -26,7 +26,7 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
     // MARK: Input
 
     // MARK: Output
-    let stickerCellModels: Observable<[StickerCollectionCellModel]>
+    let stickerCellModels: Driver<[StickerCollectionCellModel]>
 
     init(imageStoreService: ImageStoreServiceType,
          stickerService: StickerServiceType,
@@ -43,7 +43,7 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
                 }
                 return listOfViewModels
             }
-        //            .asDriver(onErrorJustReturn: [])
+            .asDriver(onErrorJustReturn: [])
 
         super.init()
     }

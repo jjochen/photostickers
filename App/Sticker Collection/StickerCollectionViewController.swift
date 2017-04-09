@@ -26,6 +26,11 @@ class StickerCollectionViewController: UIViewController {
         setupBindings()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        stickerCollectionView.collectionViewLayout.invalidateLayout()
+    }
+
     func setupBindings() {
         guard let viewModel = self.viewModel else {
             Logger.shared.error("View Model not set!")
@@ -33,7 +38,7 @@ class StickerCollectionViewController: UIViewController {
         }
 
         viewModel.stickerCellModels
-            .bindTo(stickerCollectionView.rx.items(cellIdentifier: CollectionViewCellReuseIdentifier.StickerCollectionCell.rawValue)) { _, model, cell in
+            .drive(stickerCollectionView.rx.items(cellIdentifier: CollectionViewCellReuseIdentifier.StickerCollectionCell.rawValue)) { _, model, cell in
                 guard let stickerCell = cell as? StickerCollectionCell else {
                     return
                 }
@@ -44,13 +49,6 @@ class StickerCollectionViewController: UIViewController {
         stickerCollectionView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
-
-        //        self.stickerCollectionView.rx
-        //            .modelSelected(StickerCollectionCellModel.self)
-        //            .subscribe(onNext: { _ in
-        //                Logger.shared.info("Sticker selected")
-        //            })
-        //            .disposed(by: disposeBag)
     }
 }
 
@@ -89,14 +87,25 @@ extension StickerCollectionViewController {
 }
 
 extension StickerCollectionViewController: UICollectionViewDelegate {
-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
-extension StickerCollectionViewController {
-    fileprivate func updateFlowLayout() {
-        // TODO:
+extension StickerCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
+        return StickerFlowLayout.itemSize(in: collectionView.bounds)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, insetForSectionAt _: Int) -> UIEdgeInsets {
+        return StickerFlowLayout.sectionInsets(in: collectionView.bounds)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, minimumLineSpacingForSectionAt _: Int) -> CGFloat {
+        return StickerFlowLayout.minimumLineSpacing(in: collectionView.bounds)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, minimumInteritemSpacingForSectionAt _: Int) -> CGFloat {
+        return StickerFlowLayout.minimumLineSpacing(in: collectionView.bounds)
     }
 }
