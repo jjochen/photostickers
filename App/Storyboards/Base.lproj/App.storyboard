@@ -41,7 +41,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ReS-VE-pYf" userLabel="Sticker Image View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="91"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
@@ -69,6 +69,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Photo Stickers" id="tGu-nI-cYD" userLabel="Sticker Collection Navigation Bar">
                         <barButtonItem key="rightBarButtonItem" id="SxV-cq-Vib" userLabel="Add Button">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="AddButton"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <segue destination="mHK-wh-jhb" kind="showDetail" identifier="AddStickerSeque" id="jbz-Sz-vci"/>
                             </connections>
@@ -180,24 +183,28 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKM-gO-hz8">
                                                 <rect key="frame" x="0.0" y="0.0" width="47" height="34"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="CircleButton"/>
                                                 <state key="normal" title="Circle">
                                                     <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FV4-Ui-tTt">
                                                 <rect key="frame" x="67" y="0.0" width="81" height="34"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="RectangleButton"/>
                                                 <state key="normal" title="Rectangle">
                                                     <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axO-aK-nfj" userLabel="Super Star Button">
                                                 <rect key="frame" x="168" y="0.0" width="73" height="34"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="MultiStarButton"/>
                                                 <state key="normal" title="MultiStar">
                                                     <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n04-oW-6GY">
                                                 <rect key="frame" x="261" y="0.0" width="34" height="34"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="StarButton"/>
                                                 <state key="normal" title="Star">
                                                     <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>

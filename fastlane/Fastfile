@@ -13,7 +13,11 @@ end
 
 desc "Submit a new Beta Build to Apple TestFlight"
 lane :beta do
+    
     build_number = Time.new.strftime("%Y.%m.%d")
+    # build_number_extended = Time.new.strftime("%Y.%m.%d.%H.%M")
+    # latest_build_number = latest_testflight_build_number
+    # build_number = latest_build_number.start_with?(build_number_short) ? build_number_extended : build_number_short
     increment_build_number build_number: build_number
     
     sigh(

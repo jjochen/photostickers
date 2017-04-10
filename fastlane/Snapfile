@@ -1,24 +1,30 @@
 
 devices([
-   "iPhone 7",
-   "iPhone 7 Plus",
-   "iPhone 5",
-   "iPad Pro (12.9 inch)",
-   "iPad Pro (9.7 inch)"
-])
+        "iPhone 7",
+        "iPhone 7 Plus",
+        "iPhone 5",
+        "iPad Air",
+        "iPad Pro (12.9 inch)",
+        "iPad Pro (9.7 inch)"
+        ])
 
 languages([
-  "en-US",
-  #"de-DE"
-])
+          "de-DE",
+          "en-US",
+          ])
 
-scheme "PhotoStickersUITests"
-
-output_directory "./screenshots"
-
-#clear_previous_screenshots true
-
+scheme "PhotoStickers"
 workspace "./PhotoStickers.xcworkspace"
 
-# See https://github.com/fastlane/snapshot#launch-arguments
-# launch_arguments(["-favColor red"])
+clear_previous_screenshots true
+reinstall_app true
+localize_simulator true
+
+#launch_arguments([]) # See https://github.com/fastlane/snapshot#launch-arguments
+#output_simulator_logs false
+#skip_open_summary false
+#skip_helper_version_check false
+#erase_simulator false
+#clean false
+#number_of_retries 1
+#stop_after_first_error false
