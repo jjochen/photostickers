@@ -58,7 +58,7 @@ class PhotoStickerBrowserViewController: UIViewController {
 
         collectionView.rx
             .modelSelected(StickerSectionItem.self)
-            .filter { $0 == .OpenAppItem }
+            .filter { $0 == .openAppItem }
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel?.openApp()
             })
@@ -78,10 +78,10 @@ extension PhotoStickerBrowserViewController {
     func skinTableViewDataSource(_ dataSource: RxCollectionViewSectionedReloadDataSource<StickerSection>) {
         dataSource.configureCell = { dataSource, collectionView, indexPath, _ in
             switch dataSource[indexPath] {
-            case .OpenAppItem:
+            case .openAppItem:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.AddMoreCell.rawValue, for: indexPath)
                 return cell
-            case let .StickerItem(sticker: sticker):
+            case let .stickerItem(sticker: sticker):
                 let cell: StickerBrowserCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.StickerBrowserCell.rawValue, for: indexPath) as! StickerBrowserCell
                 cell.stickerView.sticker = MSSticker.load(sticker)
                 return cell

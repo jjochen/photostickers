@@ -11,13 +11,14 @@
 		1918E63A1E72CC2A007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
 		1918E63B1E72CC4C007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
 		191FC7CD1E8AFC990075A9FB /* UIScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */; };
+		193DCBB61E9C2E2200479B29 /* StickerService+UITestSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193DCBB51E9C2E2200479B29 /* StickerService+UITestSetup.swift */; };
+		193DCBB71E9CB51400479B29 /* original.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19AA56541E6D7A45005BDD23 /* original.jpg */; };
 		1946211A1E3CFDA1000F09CE /* Logger+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621061E3CFDA1000F09CE /* Logger+Shared.swift */; };
-		1946211C1E3CFDA1000F09CE /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621071E3CFDA1000F09CE /* Realm+Extensions.swift */; };
 		1946211E1E3CFDA1000F09CE /* UIStoryboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621081E3CFDA1000F09CE /* UIStoryboard+Extensions.swift */; };
 		194621201E3CFDA1000F09CE /* UIStoryboardSegue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621091E3CFDA1000F09CE /* UIStoryboardSegue+Extensions.swift */; };
 		194621221E3CFDA1000F09CE /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946210A1E3CFDA1000F09CE /* UIViewController+Extensions.swift */; };
 		194621281E3CFDA1000F09CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1946210F1E3CFDA1000F09CE /* Assets.xcassets */; };
-		194621321E3CFDA1000F09CE /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621161E3CFDA1000F09CE /* AppGroup.swift */; };
+		194621321E3CFDA1000F09CE /* DataFolderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621161E3CFDA1000F09CE /* DataFolderService.swift */; };
 		194621341E3CFDA1000F09CE /* PSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621171E3CFDA1000F09CE /* PSError.swift */; };
 		194621361E3CFDA1000F09CE /* StoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621181E3CFDA1000F09CE /* StoryboardIdentifiers.swift */; };
 		194621591E3CFE16000F09CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946214F1E3CFE16000F09CE /* AppDelegate.swift */; };
@@ -42,6 +43,7 @@
 		194621AF1E4928C8000F09CE /* StickerCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621AE1E4928C8000F09CE /* StickerCollectionViewModel.swift */; };
 		194621B11E4BC528000F09CE /* StickerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621B01E4BC527000F09CE /* StickerCollectionCell.swift */; };
 		194621B31E4BC97B000F09CE /* StickerCollectionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621B21E4BC97B000F09CE /* StickerCollectionCellModel.swift */; };
+		198C50E21E9BF754002D331E /* original.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19AA56541E6D7A45005BDD23 /* original.jpg */; };
 		199100AB1E9599A600972602 /* UIImage+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199100AA1E9599A600972602 /* UIImage+Orientation.swift */; };
 		199100AF1E97745200972602 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199100AE1E97745200972602 /* UIButton+Extensions.swift */; };
 		199100B01E97745200972602 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199100AE1E97745200972602 /* UIButton+Extensions.swift */; };
@@ -54,7 +56,6 @@
 		1995466D1E9A527600B2E236 /* AppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1995466B1E9A527600B2E236 /* AppIconView.swift */; };
 		199546701E9A5F6700B2E236 /* AddIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1995466F1E9A5F6700B2E236 /* AddIconView.swift */; };
 		199546711E9A5F6700B2E236 /* AddIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1995466F1E9A5F6700B2E236 /* AddIconView.swift */; };
-		199546721E9A6E9C00B2E236 /* original.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19AA56541E6D7A45005BDD23 /* original.jpg */; };
 		199546741E9A825000B2E236 /* AddStickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199546731E9A825000B2E236 /* AddStickerCell.swift */; };
 		1997E3501E852D51008DA2A7 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1997E34F1E852D51008DA2A7 /* UIViewController+Rx.swift */; };
 		1997E3511E852D51008DA2A7 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1997E34F1E852D51008DA2A7 /* UIViewController+Rx.swift */; };
@@ -89,7 +90,6 @@
 		19F6DC871E4F23BD00CAE9D0 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F6DC7E1E4F238F00CAE9D0 /* BaseViewModel.swift */; };
 		19F6DC881E4F23BD00CAE9D0 /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621891E3D1460000F09CE /* Sticker.swift */; };
 		19F6DC891E4F23BD00CAE9D0 /* Logger+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621061E3CFDA1000F09CE /* Logger+Shared.swift */; };
-		19F6DC8A1E4F23BD00CAE9D0 /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621071E3CFDA1000F09CE /* Realm+Extensions.swift */; };
 		19F6DC8B1E4F23BD00CAE9D0 /* UIStoryboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621081E3CFDA1000F09CE /* UIStoryboard+Extensions.swift */; };
 		19F6DC8C1E4F23BD00CAE9D0 /* UIStoryboardSegue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621091E3CFDA1000F09CE /* UIStoryboardSegue+Extensions.swift */; };
 		19F6DC8D1E4F23BD00CAE9D0 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946210A1E3CFDA1000F09CE /* UIViewController+Extensions.swift */; };
@@ -97,7 +97,7 @@
 		19F6DC8F1E4F23BD00CAE9D0 /* UIImagePickerController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F6DC771E4F237D00CAE9D0 /* UIImagePickerController+Rx.swift */; };
 		19F6DC901E4F23BD00CAE9D0 /* UIImagePickerController+RxCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F6DC781E4F237D00CAE9D0 /* UIImagePickerController+RxCreate.swift */; };
 		19F6DC931E4F23BD00CAE9D0 /* StickerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F6DC721E4D250400CAE9D0 /* StickerService.swift */; };
-		19F6DC951E4F23BD00CAE9D0 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621161E3CFDA1000F09CE /* AppGroup.swift */; };
+		19F6DC951E4F23BD00CAE9D0 /* DataFolderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621161E3CFDA1000F09CE /* DataFolderService.swift */; };
 		19F6DC961E4F23BD00CAE9D0 /* PSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621171E3CFDA1000F09CE /* PSError.swift */; };
 		19F6DC971E4F23BD00CAE9D0 /* StoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621181E3CFDA1000F09CE /* StoryboardIdentifiers.swift */; };
 		19F6DC981E4F23BD00CAE9D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1946210F1E3CFDA1000F09CE /* Assets.xcassets */; };
@@ -146,13 +146,13 @@
 /* Begin PBXFileReference section */
 		1918E6391E72CC2A007DFFE7 /* Mask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
 		191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Rx.swift"; sourceTree = "<group>"; };
+		193DCBB51E9C2E2200479B29 /* StickerService+UITestSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StickerService+UITestSetup.swift"; sourceTree = "<group>"; };
 		194621061E3CFDA1000F09CE /* Logger+Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Logger+Shared.swift"; sourceTree = "<group>"; };
-		194621071E3CFDA1000F09CE /* Realm+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Realm+Extensions.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		194621081E3CFDA1000F09CE /* UIStoryboard+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extensions.swift"; sourceTree = "<group>"; };
 		194621091E3CFDA1000F09CE /* UIStoryboardSegue+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboardSegue+Extensions.swift"; sourceTree = "<group>"; };
 		1946210A1E3CFDA1000F09CE /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		1946210F1E3CFDA1000F09CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		194621161E3CFDA1000F09CE /* AppGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
+		194621161E3CFDA1000F09CE /* DataFolderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFolderService.swift; sourceTree = "<group>"; };
 		194621171E3CFDA1000F09CE /* PSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PSError.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		194621181E3CFDA1000F09CE /* StoryboardIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiers.swift; sourceTree = "<group>"; };
 		1946214F1E3CFE16000F09CE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -313,7 +313,6 @@
 			children = (
 				19BD46A81E89560D003D1BA1 /* CGGeometry+Extensions.swift */,
 				194621061E3CFDA1000F09CE /* Logger+Shared.swift */,
-				194621071E3CFDA1000F09CE /* Realm+Extensions.swift */,
 				199546601E9997BF00B2E236 /* String+Extensions.swift */,
 				199100AE1E97745200972602 /* UIButton+Extensions.swift */,
 				199546511E980F4C00B2E236 /* UIDevice+Extensions.swift */,
@@ -336,13 +335,13 @@
 		194621141E3CFDA1000F09CE /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				194621161E3CFDA1000F09CE /* AppGroup.swift */,
+				194621161E3CFDA1000F09CE /* DataFolderService.swift */,
 				19A6C6081E633DD9009B8922 /* ImageStoreService.swift */,
 				194621171E3CFDA1000F09CE /* PSError.swift */,
+				19A918D31E9ABE7100168FA9 /* StickerFlowLayout.swift */,
 				19F6DC721E4D250400CAE9D0 /* StickerService.swift */,
 				194621181E3CFDA1000F09CE /* StoryboardIdentifiers.swift */,
 				19E1EB3C1E78199F005637C4 /* StyleKit.swift */,
-				19A918D31E9ABE7100168FA9 /* StickerFlowLayout.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -531,6 +530,7 @@
 				194621A11E43569C000F09CE /* UIImage+RoundedCorner.swift */,
 				19E1EB431E7C1344005637C4 /* UIImage+Average.swift */,
 				199100AA1E9599A600972602 /* UIImage+Orientation.swift */,
+				193DCBB51E9C2E2200479B29 /* StickerService+UITestSetup.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -894,7 +894,7 @@
 				194621281E3CFDA1000F09CE /* Assets.xcassets in Resources */,
 				19DFF0131E8E9F6000E4B36C /* .gitattributes in Resources */,
 				19DFF0121E8E9F6000E4B36C /* _config.yml in Resources */,
-				199546721E9A6E9C00B2E236 /* original.jpg in Resources */,
+				193DCBB71E9CB51400479B29 /* original.jpg in Resources */,
 				19DFF0151E8E9F6000E4B36C /* .ruby-version in Resources */,
 				199546661E9997F800B2E236 /* InfoPlist.strings in Resources */,
 			);
@@ -904,6 +904,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				198C50E21E9BF754002D331E /* original.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1076,7 +1077,6 @@
 				1946219E1E435205000F09CE /* StickerRenderService.swift in Sources */,
 				19BD46A91E89560D003D1BA1 /* CGGeometry+Extensions.swift in Sources */,
 				1918E63A1E72CC2A007DFFE7 /* Mask.swift in Sources */,
-				1946211C1E3CFDA1000F09CE /* Realm+Extensions.swift in Sources */,
 				19F6DC801E4F238F00CAE9D0 /* BaseViewModel.swift in Sources */,
 				199100AB1E9599A600972602 /* UIImage+Orientation.swift in Sources */,
 				194621341E3CFDA1000F09CE /* PSError.swift in Sources */,
@@ -1085,7 +1085,7 @@
 				19A6C5FB1E5EFCE2009B8922 /* EditStickerViewController.swift in Sources */,
 				199100AF1E97745200972602 /* UIButton+Extensions.swift in Sources */,
 				1946211E1E3CFDA1000F09CE /* UIStoryboard+Extensions.swift in Sources */,
-				194621321E3CFDA1000F09CE /* AppGroup.swift in Sources */,
+				194621321E3CFDA1000F09CE /* DataFolderService.swift in Sources */,
 				194621B11E4BC528000F09CE /* StickerCollectionCell.swift in Sources */,
 				19F6DC731E4D250400CAE9D0 /* StickerService.swift in Sources */,
 				194621361E3CFDA1000F09CE /* StoryboardIdentifiers.swift in Sources */,
@@ -1097,6 +1097,7 @@
 				19A6C6061E6310F9009B8922 /* StickerInfo.swift in Sources */,
 				19F6DC7A1E4F237D00CAE9D0 /* UIImagePickerController+Rx.swift in Sources */,
 				194621221E3CFDA1000F09CE /* UIViewController+Extensions.swift in Sources */,
+				193DCBB61E9C2E2200479B29 /* StickerService+UITestSetup.swift in Sources */,
 				19A6C5FD1E5EFCEE009B8922 /* EditStickerViewModel.swift in Sources */,
 				1997E3501E852D51008DA2A7 /* UIViewController+Rx.swift in Sources */,
 				199546521E980F4C00B2E236 /* UIDevice+Extensions.swift in Sources */,
@@ -1133,7 +1134,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19F6DC8A1E4F23BD00CAE9D0 /* Realm+Extensions.swift in Sources */,
 				1946216E1E3CFE56000F09CE /* MessagesViewController.swift in Sources */,
 				19F6DC971E4F23BD00CAE9D0 /* StoryboardIdentifiers.swift in Sources */,
 				199100B01E97745200972602 /* UIButton+Extensions.swift in Sources */,
@@ -1162,7 +1162,7 @@
 				19A6C60A1E633DEE009B8922 /* ImageStoreService.swift in Sources */,
 				19F6DC901E4F23BD00CAE9D0 /* UIImagePickerController+RxCreate.swift in Sources */,
 				194621721E3CFE56000F09CE /* StickerBrowserCell.swift in Sources */,
-				19F6DC951E4F23BD00CAE9D0 /* AppGroup.swift in Sources */,
+				19F6DC951E4F23BD00CAE9D0 /* DataFolderService.swift in Sources */,
 				19F6DC881E4F23BD00CAE9D0 /* Sticker.swift in Sources */,
 				1918E63B1E72CC4C007DFFE7 /* Mask.swift in Sources */,
 				1995466D1E9A527600B2E236 /* AppIconView.swift in Sources */,

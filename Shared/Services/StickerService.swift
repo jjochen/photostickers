@@ -12,6 +12,11 @@ import RxSwift
 import RxRealm
 import Log
 
+enum RealmType {
+    case inMemory
+    case onDisk(url: URL?)
+}
+
 protocol StickerServiceType {
     func fetchStickers(withPredicate predicate: NSPredicate) -> Observable<[Sticker]>
     func fetchStickers() -> Observable<[Sticker]>
@@ -21,31 +26,48 @@ protocol StickerServiceType {
 
 class StickerService: StickerServiceType {
 
-    fileprivate let mainThreadRealm: Realm
     fileprivate let imageStoreService: ImageStoreServiceType
+    fileprivate let realmType: RealmType
 
-    init(realmURL: URL?, imageStoreService: ImageStoreServiceType) {
+    fileprivate lazy var mainThreadRealm: Realm = {
+        let realm = self.newRealm()
+        return realm
+    }()
 
-        Realm.Configuration.defaultConfiguration = Realm.stickerConfiguration(with: realmURL)
-
-        if let path = realmURL?.path {
-            Logger.shared.info("Realm: \(path)")
-        } else {
-            Logger.shared.warning("Realm: URL not set!")
-        }
-
-        mainThreadRealm = try! Realm()
-
+    init(realmType: RealmType, imageStoreService: ImageStoreServiceType) {
+        self.realmType = realmType
         self.imageStoreService = imageStoreService
+
+        switch realmType {
+        case .inMemory:
+            Logger.shared.info("Realm in memory only")
+            break
+        case let .onDisk(url: url):
+            if let path = url?.path {
+                Logger.shared.info("Realm: \(path)")
+            } else {
+                Logger.shared.warning("Realm: URL not set!")
+            }
+        }
     }
 }
 
 extension StickerService {
+
+    fileprivate func newRealm() -> Realm {
+        switch realmType {
+        case .inMemory:
+            return try! Realm(configuration: Realm.stickerConfigurationInMemory())
+        case let .onDisk(url: url):
+            return try! Realm(configuration: Realm.stickerConfiguration(with: url))
+        }
+    }
+
     fileprivate func currentRealm() -> Realm {
         if Thread.current.isMainThread {
             return mainThreadRealm
         } else {
-            return try! Realm()
+            return newRealm()
         }
     }
 }
@@ -133,6 +155,13 @@ extension StickerService {
             observer.on(.next())
             observer.on(.completed)
             return Disposables.create()
+        }
+    }
+
+    func deleteAll() {
+        let realm = currentRealm()
+        try! realm.write {
+            realm.deleteAll()
         }
     }
 }
@@ -238,6 +267,18 @@ fileprivate extension Realm {
                     Realm.performMigrationToVersion2(migration)
                 }
         })
+    }
+
+    static func stickerConfigurationInMemory() -> Configuration {
+        return Configuration(fileURL: nil,
+                             inMemoryIdentifier: "Tests",
+                             syncConfiguration: nil,
+                             encryptionKey: nil,
+                             readOnly: false,
+                             schemaVersion: 0,
+                             migrationBlock: nil,
+                             deleteRealmIfMigrationNeeded: true,
+                             objectTypes: nil)
     }
 
     static func performMigrationToVersion1(_: Migration) {

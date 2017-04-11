@@ -34,8 +34,9 @@ extension StickerTests {
     }
 
     func testOriginalImage() {
-        let originalImage = UIImage(named: "original.jpg")
-        let filePath = Bundle.main.path(forResource: "original", ofType: "jpg")
+        let bundle = Bundle(for: type(of: self))
+        let originalImage = UIImage(named: "original.jpg", in: bundle, compatibleWith: nil)
+        let filePath = bundle.path(forResource: "original", ofType: "jpg")
         let sticker = Sticker()
         sticker.originalImageFilePath = filePath
 

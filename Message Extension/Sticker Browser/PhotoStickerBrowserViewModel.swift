@@ -35,9 +35,9 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
             .fetchStickers(withPredicate: predicate)
             .map { allStickers in
                 var items = allStickers.map { sticker in
-                    return StickerSectionItem.StickerItem(sticker: sticker)
+                    return StickerSectionItem.stickerItem(sticker: sticker)
                 }
-                items.append(StickerSectionItem.OpenAppItem)
+                items.append(StickerSectionItem.openAppItem)
                 return items
             }
 

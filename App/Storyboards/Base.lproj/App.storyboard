@@ -51,12 +51,18 @@
                                             <constraint firstAttribute="bottom" secondItem="ReS-VE-pYf" secondAttribute="bottom" id="n8L-dr-Edw"/>
                                             <constraint firstItem="ReS-VE-pYf" firstAttribute="leading" secondItem="Wd8-aV-45r" secondAttribute="leading" id="xPV-Ae-okg"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="StickerCollectionCell"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="imageView" destination="ReS-VE-pYf" id="ceT-BG-veG"/>
                                             <segue destination="mHK-wh-jhb" kind="showDetail" identifier="EditStickerSegue" id="zTr-hO-1AW"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="StickerCollectionView"/>
+                                </userDefinedRuntimeAttributes>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -68,9 +74,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Photo Stickers" id="tGu-nI-cYD" userLabel="Sticker Collection Navigation Bar">
-                        <barButtonItem key="rightBarButtonItem" id="SxV-cq-Vib" userLabel="Add Button">
+                        <barButtonItem key="rightBarButtonItem" id="SxV-cq-Vib" userLabel="Add Button Item">
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="AddButton"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="AddButtonItem"/>
                             </userDefinedRuntimeAttributes>
                             <connections>
                                 <segue destination="mHK-wh-jhb" kind="showDetail" identifier="AddStickerSeque" id="jbz-Sz-vci"/>
@@ -95,13 +101,19 @@
         <scene sceneID="8s5-LR-Lwg">
             <objects>
                 <navigationController storyboardIdentifier="EditStickerNavigationController" toolbarHidden="NO" id="mHK-wh-jhb" userLabel="Edit Sticker Navigation Controller" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ezs-dE-6ca">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ezs-dE-6ca" userLabel="Edit Sticker Navigation Bar">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="EditStickerNavigationBar"/>
+                        </userDefinedRuntimeAttributes>
                     </navigationBar>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="aLN-pi-8yX">
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="aLN-pi-8yX" userLabel="Edit Sticker Toolbar">
                         <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="EditStickerToolbar"/>
+                        </userDefinedRuntimeAttributes>
                     </toolbar>
                     <connections>
                         <segue destination="xY5-ie-FY6" kind="relationship" relationship="rootViewController" id="ygY-c0-Ghu"/>
@@ -129,12 +141,18 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wdy-tE-NEY" userLabel="Sticker Placeholder" customClass="AppIconView" customModule="PhotoStickers" customModuleProvider="target">
                                         <rect key="frame" x="28" y="28" width="319" height="319"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="StickerPlaceholderView">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                     </view>
                                     <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.10000000000000001" maximumZoomScale="1.1000000000000001" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="Ylq-NR-HX9">
                                         <rect key="frame" x="28" y="28" width="319" height="319"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="375" translatesAutoresizingMaskIntoConstraints="NO" id="8nJ-XZ-tCD">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="StickerImageView">
+                                                    <bool key="isElement" value="YES"/>
+                                                </accessibility>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -149,6 +167,7 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="decelerationRate">
                                                 <real key="value" value="0.98999999999999999"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="StickerScrollView"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="delegate" destination="xY5-ie-FY6" id="hGp-Ys-qqz"/>
@@ -157,6 +176,10 @@
                                     <view userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MFD-Hg-Vnb" userLabel="Cover View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="StickerCoverView">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -253,21 +276,38 @@
                         </variation>
                     </view>
                     <toolbarItems>
-                        <barButtonItem id="UY9-Yv-yfg" userLabel="Delete Button"/>
+                        <barButtonItem id="UY9-Yv-yfg" userLabel="Delete Button Item">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="DeleteButtonItem"/>
+                            </userDefinedRuntimeAttributes>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="4Ef-qB-gCQ"/>
-                        <barButtonItem id="zho-8l-mAf" userLabel="Photo Library Button"/>
+                        <barButtonItem id="zho-8l-mAf" userLabel="Photo Button Item">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="PhotoButtonItem"/>
+                            </userDefinedRuntimeAttributes>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="3cS-n0-mdI" userLabel="Edit Sticker Navigation Bar">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="HGg-xK-bhk" userLabel="Cancel Button"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="HGg-xK-bhk" userLabel="Cancel Button Item">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="CancelButtonItem"/>
+                            </userDefinedRuntimeAttributes>
+                        </barButtonItem>
                         <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Photo Sticker" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" id="dt1-g2-TIx" userLabel="Sticker Title Text Field">
                             <rect key="frame" x="75" y="7" width="239" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <accessibility key="accessibilityConfiguration" identifier="StickerTitleTextField"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                         </textField>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ylz-y4-7pV" userLabel="Save Button"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ylz-y4-7pV" userLabel="Save Button Item">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="SaveButtonItem"/>
+                            </userDefinedRuntimeAttributes>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -302,9 +342,12 @@
         <scene sceneID="gbp-ZZ-OD8">
             <objects>
                 <navigationController storyboardIdentifier="MainNavigationController" id="7oO-ML-e6r" userLabel="Sticker Collection Navigation Controller" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AEa-As-IWY">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AEa-As-IWY" userLabel="Sticker Collection Navigtion Bar">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="StickerCollectionNavigtionBar"/>
+                        </userDefinedRuntimeAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="BMd-BQ-rjz"/>

@@ -327,32 +327,40 @@ fileprivate extension EditStickerViewController {
                     message: nil,
                     preferredStyle: .actionSheet
                 )
+                alertController.accessibilityLabel = "ImageSourceAlert"
 
                 sourceTypes
                     .map { type in
                         var title: String?
+                        var accessibilityLabel: String?
                         switch type {
                         case .photoLibrary:
                             title = "ImagePickerSourceTypePhotoLibrary".localized
+                            accessibilityLabel = "ImageSourceAlertButtonPhotoLibrary"
                             break
                         case .camera:
                             title = "ImagePickerSourceTypeCamera".localized
+                            accessibilityLabel = "ImageSourceAlertButtonCamera"
                             break
                         default:
                             title = nil
+                            accessibilityLabel = nil
                             break
                         }
 
                         let handler: (UIAlertAction) -> Void = { _ in
                             viewModel.imageSourceAlertDidSelect.onNext(type)
                         }
-                        return UIAlertAction(title: title, style: .default, handler: handler)
+                        let action = UIAlertAction(title: title, style: .default, handler: handler)
+                        action.accessibilityLabel = accessibilityLabel
+                        return action
                     }
                     .forEach(alertController.addAction)
 
                 let cancelAction = UIAlertAction(title: "Cancel".localized,
                                                  style: .cancel,
                                                  handler: nil)
+                cancelAction.accessibilityLabel = "ImageSourceAlertButtonCancel"
                 alertController.addAction(cancelAction)
                 self.present(alertController, animated: true, completion: nil)
             })
