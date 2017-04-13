@@ -11,6 +11,21 @@
 		1918E63A1E72CC2A007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
 		1918E63B1E72CC4C007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
 		191FC7CD1E8AFC990075A9FB /* UIScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */; };
+		19360B7D1E9F5BC2003E9252 /* description.txt in Resources */ = {isa = PBXBuildFile; fileRef = 19360B6D1E9F5BC2003E9252 /* description.txt */; };
+		19360B7E1E9F5BC2003E9252 /* keywords.txt in Resources */ = {isa = PBXBuildFile; fileRef = 19360B6E1E9F5BC2003E9252 /* keywords.txt */; };
+		19360B7F1E9F5BC2003E9252 /* marketing_url.txt in Resources */ = {isa = PBXBuildFile; fileRef = 19360B6F1E9F5BC2003E9252 /* marketing_url.txt */; };
+		19360B801E9F5BC2003E9252 /* name.txt in Resources */ = {isa = PBXBuildFile; fileRef = 19360B701E9F5BC2003E9252 /* name.txt */; };
+		19360B811E9F5BC2003E9252 /* privacy_url.txt in Resources */ = {isa = PBXBuildFile; fileRef = 19360B711E9F5BC2003E9252 /* privacy_url.txt */; };
+		19360B821E9F5BC2003E9252 /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 19360B721E9F5BC2003E9252 /* release_notes.txt */; };
+		19360B831E9F5BC2003E9252 /* support_url.txt in Resources */ = {isa = PBXBuildFile; fileRef = 19360B731E9F5BC2003E9252 /* support_url.txt */; };
+		19360B841E9F5BC2003E9252 /* demo_password.txt in Resources */ = {isa = PBXBuildFile; fileRef = 19360B751E9F5BC2003E9252 /* demo_password.txt */; };
+		19360B851E9F5BC2003E9252 /* demo_user.txt in Resources */ = {isa = PBXBuildFile; fileRef = 19360B761E9F5BC2003E9252 /* demo_user.txt */; };
+		19360B861E9F5BC2003E9252 /* email_address.txt in Resources */ = {isa = PBXBuildFile; fileRef = 19360B771E9F5BC2003E9252 /* email_address.txt */; };
+		19360B871E9F5BC2003E9252 /* first_name.txt in Resources */ = {isa = PBXBuildFile; fileRef = 19360B781E9F5BC2003E9252 /* first_name.txt */; };
+		19360B881E9F5BC2003E9252 /* last_name.txt in Resources */ = {isa = PBXBuildFile; fileRef = 19360B791E9F5BC2003E9252 /* last_name.txt */; };
+		19360B891E9F5BC2003E9252 /* notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 19360B7A1E9F5BC2003E9252 /* notes.txt */; };
+		19360B8A1E9F5BC2003E9252 /* phone_number.txt in Resources */ = {isa = PBXBuildFile; fileRef = 19360B7B1E9F5BC2003E9252 /* phone_number.txt */; };
+		19360B8B1E9F5BC2003E9252 /* app_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19360B7C1E9F5BC2003E9252 /* app_icon.jpg */; };
 		193DCBB61E9C2E2200479B29 /* StickerService+UITestSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193DCBB51E9C2E2200479B29 /* StickerService+UITestSetup.swift */; };
 		193DCBB71E9CB51400479B29 /* original.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19AA56541E6D7A45005BDD23 /* original.jpg */; };
 		1946211A1E3CFDA1000F09CE /* Logger+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621061E3CFDA1000F09CE /* Logger+Shared.swift */; };
@@ -146,6 +161,21 @@
 /* Begin PBXFileReference section */
 		1918E6391E72CC2A007DFFE7 /* Mask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
 		191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Rx.swift"; sourceTree = "<group>"; };
+		19360B6D1E9F5BC2003E9252 /* description.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = description.txt; sourceTree = "<group>"; };
+		19360B6E1E9F5BC2003E9252 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
+		19360B6F1E9F5BC2003E9252 /* marketing_url.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = marketing_url.txt; sourceTree = "<group>"; };
+		19360B701E9F5BC2003E9252 /* name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = name.txt; sourceTree = "<group>"; };
+		19360B711E9F5BC2003E9252 /* privacy_url.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = privacy_url.txt; sourceTree = "<group>"; };
+		19360B721E9F5BC2003E9252 /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
+		19360B731E9F5BC2003E9252 /* support_url.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = support_url.txt; sourceTree = "<group>"; };
+		19360B751E9F5BC2003E9252 /* demo_password.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demo_password.txt; sourceTree = "<group>"; };
+		19360B761E9F5BC2003E9252 /* demo_user.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demo_user.txt; sourceTree = "<group>"; };
+		19360B771E9F5BC2003E9252 /* email_address.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = email_address.txt; sourceTree = "<group>"; };
+		19360B781E9F5BC2003E9252 /* first_name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = first_name.txt; sourceTree = "<group>"; };
+		19360B791E9F5BC2003E9252 /* last_name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = last_name.txt; sourceTree = "<group>"; };
+		19360B7A1E9F5BC2003E9252 /* notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = notes.txt; sourceTree = "<group>"; };
+		19360B7B1E9F5BC2003E9252 /* phone_number.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = phone_number.txt; sourceTree = "<group>"; };
+		19360B7C1E9F5BC2003E9252 /* app_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = app_icon.jpg; sourceTree = "<group>"; };
 		193DCBB51E9C2E2200479B29 /* StickerService+UITestSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StickerService+UITestSetup.swift"; sourceTree = "<group>"; };
 		194621061E3CFDA1000F09CE /* Logger+Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Logger+Shared.swift"; sourceTree = "<group>"; };
 		194621081E3CFDA1000F09CE /* UIStoryboard+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extensions.swift"; sourceTree = "<group>"; };
@@ -294,6 +324,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19360B6C1E9F5BC2003E9252 /* de-DE */ = {
+			isa = PBXGroup;
+			children = (
+				19360B6D1E9F5BC2003E9252 /* description.txt */,
+				19360B6E1E9F5BC2003E9252 /* keywords.txt */,
+				19360B6F1E9F5BC2003E9252 /* marketing_url.txt */,
+				19360B701E9F5BC2003E9252 /* name.txt */,
+				19360B711E9F5BC2003E9252 /* privacy_url.txt */,
+				19360B721E9F5BC2003E9252 /* release_notes.txt */,
+				19360B731E9F5BC2003E9252 /* support_url.txt */,
+			);
+			path = "de-DE";
+			sourceTree = "<group>";
+		};
+		19360B741E9F5BC2003E9252 /* review_information */ = {
+			isa = PBXGroup;
+			children = (
+				19360B751E9F5BC2003E9252 /* demo_password.txt */,
+				19360B761E9F5BC2003E9252 /* demo_user.txt */,
+				19360B771E9F5BC2003E9252 /* email_address.txt */,
+				19360B781E9F5BC2003E9252 /* first_name.txt */,
+				19360B791E9F5BC2003E9252 /* last_name.txt */,
+				19360B7A1E9F5BC2003E9252 /* notes.txt */,
+				19360B7B1E9F5BC2003E9252 /* phone_number.txt */,
+			);
+			path = review_information;
+			sourceTree = "<group>";
+		};
 		194621041E3CFDA1000F09CE /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -563,11 +621,14 @@
 		19AA565A1E6D84DE005BDD23 /* metadata */ = {
 			isa = PBXGroup;
 			children = (
+				19360B7C1E9F5BC2003E9252 /* app_icon.jpg */,
 				19AA565B1E6D84DE005BDD23 /* copyright.txt */,
+				19360B6C1E9F5BC2003E9252 /* de-DE */,
 				19AA565C1E6D84DE005BDD23 /* en-US */,
 				19AA56641E6D84DE005BDD23 /* primary_category.txt */,
 				19AA56651E6D84DE005BDD23 /* primary_first_sub_category.txt */,
 				19AA56661E6D84DE005BDD23 /* primary_second_sub_category.txt */,
+				19360B741E9F5BC2003E9252 /* review_information */,
 				19AA56671E6D84DE005BDD23 /* secondary_category.txt */,
 				19AA56681E6D84DE005BDD23 /* secondary_first_sub_category.txt */,
 				19AA56691E6D84DE005BDD23 /* secondary_second_sub_category.txt */,
@@ -886,15 +947,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19360B891E9F5BC2003E9252 /* notes.txt in Resources */,
 				19DFF0111E8E9F6000E4B36C /* .gitignore in Resources */,
+				19360B7E1E9F5BC2003E9252 /* keywords.txt in Resources */,
+				19360B841E9F5BC2003E9252 /* demo_password.txt in Resources */,
+				19360B8A1E9F5BC2003E9252 /* phone_number.txt in Resources */,
+				19360B7D1E9F5BC2003E9252 /* description.txt in Resources */,
 				1946215A1E3CFE16000F09CE /* LaunchScreen.storyboard in Resources */,
+				19360B861E9F5BC2003E9252 /* email_address.txt in Resources */,
+				19360B801E9F5BC2003E9252 /* name.txt in Resources */,
+				19360B851E9F5BC2003E9252 /* demo_user.txt in Resources */,
 				199546621E9997F100B2E236 /* Localizable.strings in Resources */,
+				19360B831E9F5BC2003E9252 /* support_url.txt in Resources */,
+				19360B821E9F5BC2003E9252 /* release_notes.txt in Resources */,
 				19DFF0141E8E9F6000E4B36C /* .travis.yml in Resources */,
+				19360B881E9F5BC2003E9252 /* last_name.txt in Resources */,
 				1946215B1E3CFE16000F09CE /* App.storyboard in Resources */,
 				194621281E3CFDA1000F09CE /* Assets.xcassets in Resources */,
 				19DFF0131E8E9F6000E4B36C /* .gitattributes in Resources */,
+				19360B7F1E9F5BC2003E9252 /* marketing_url.txt in Resources */,
+				19360B871E9F5BC2003E9252 /* first_name.txt in Resources */,
+				19360B8B1E9F5BC2003E9252 /* app_icon.jpg in Resources */,
 				19DFF0121E8E9F6000E4B36C /* _config.yml in Resources */,
 				193DCBB71E9CB51400479B29 /* original.jpg in Resources */,
+				19360B811E9F5BC2003E9252 /* privacy_url.txt in Resources */,
 				19DFF0151E8E9F6000E4B36C /* .ruby-version in Resources */,
 				199546661E9997F800B2E236 /* InfoPlist.strings in Resources */,
 			);

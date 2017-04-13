@@ -362,6 +362,9 @@ fileprivate extension EditStickerViewController {
                                                  handler: nil)
                 cancelAction.accessibilityLabel = "ImageSourceAlertButtonCancel"
                 alertController.addAction(cancelAction)
+                if let popoverController = alertController.popoverPresentationController {
+                    popoverController.barButtonItem = self.photosButtonItem
+                }
                 self.present(alertController, animated: true, completion: nil)
             })
             .addDisposableTo(disposeBag)
