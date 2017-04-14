@@ -1,22 +1,21 @@
 
 devices([
         "iPhone 7",
-#        "iPhone 7 Plus",
-#        "iPhone 5",
-#        "iPad Air",
-#        "iPad Pro (12.9 inch)",
-#        "iPad Pro (9.7 inch)"
+        "iPhone 7 Plus",
+        "iPhone 5",
+        "iPad Pro (12.9 inch)",
+        "iPad Pro (9.7 inch)",
         ])
 
 languages([
-          "de-DE",
           "en-US",
+          "de-DE",
           ])
 
 scheme "PhotoStickers"
 workspace "./PhotoStickers.xcworkspace"
 
-clear_previous_screenshots true
+clear_previous_screenshots false
 reinstall_app true
 localize_simulator true
 

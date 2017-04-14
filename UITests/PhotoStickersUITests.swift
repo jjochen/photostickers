@@ -29,84 +29,138 @@ class PhotoStickersUITests: XCTestCase {
     }
 
     func testSnapshots() {
-        guard let app = self.app else {
+        guard app != nil else {
             fatalError()
         }
 
-        let stickerCollectionNavigtionBar = app.navigationBars["StickerCollectionNavigtionBar"]
         XCTAssert(stickerCollectionNavigtionBar.exists)
+        XCTAssert(collectionView.exists)
 
-        let addButtonItem = stickerCollectionNavigtionBar.buttons["AddButtonItem"]
+        snapshot("1_Sticker_Collection")
+
         XCTAssert(addButtonItem.exists)
-
-        snapshot("Sticker Collection")
 
         addButtonItem.tap()
 
-        let imageSourceAlertButtonPhotoLibrary = app.sheets.buttons["ImageSourceAlertButtonPhotoLibrary"]
         XCTAssert(imageSourceAlertButtonPhotoLibrary.exists)
-
-        let imageSourceAlertButtonCamera = app.sheets.buttons["ImageSourceAlertButtonCamera"]
         XCTAssert(imageSourceAlertButtonCamera.exists)
 
-        if isIPad(app: app) {
-            app.children(matching: .window).element(boundBy: 0).tap()
+        if isIPad() {
+            appWindow.tap()
         } else {
-            let imageSourceAlertButtonCancel = app.sheets.buttons["ImageSourceAlertButtonCancel"]
             XCTAssert(imageSourceAlertButtonCancel.exists)
             imageSourceAlertButtonCancel.tap()
         }
 
-        snapshot("Edit Sticker Empty")
-
-        let circleButton = app.buttons["CircleButton"]
         XCTAssert(circleButton.exists)
-
-        let rectangleButton = app.buttons["RectangleButton"]
         XCTAssert(rectangleButton.exists)
-
-        let multiStarButton = app.buttons["MultiStarButton"]
         XCTAssert(multiStarButton.exists)
-
-        let starButton = app.buttons["StarButton"]
         XCTAssert(starButton.exists)
-
-        let editStickerNavigationBar = app.navigationBars["EditStickerNavigationBar"]
         XCTAssert(editStickerNavigationBar.exists)
-
-        let editStickerToolbar = app.toolbars["EditStickerToolbar"]
         XCTAssert(editStickerToolbar.exists)
-
-        let saveButtonItem = editStickerNavigationBar.buttons["SaveButtonItem"]
         XCTAssert(saveButtonItem.exists)
-
-        let cancelButtonItem = editStickerNavigationBar.buttons["CancelButtonItem"]
         XCTAssert(cancelButtonItem.exists)
-
-        let deleteButtonItem = editStickerToolbar.buttons["DeleteButtonItem"]
         XCTAssert(deleteButtonItem.exists)
-
-        let photoButtonItem = editStickerToolbar.buttons["PhotoButtonItem"]
         XCTAssert(photoButtonItem.exists)
 
         cancelButtonItem.tap()
 
-        let collectionView = app.collectionViews["StickerCollectionView"]
         XCTAssert(collectionView.exists)
-
-        let firstStickerCell = collectionView.cells.matching(identifier: "StickerCollectionCell").element(boundBy: 0)
         XCTAssert(firstStickerCell.exists)
 
         firstStickerCell.tap()
-
         rectangleButton.tap()
 
-        snapshot("Edit Sticker")
+        snapshot("2_Edit_Sticker")
 
         saveButtonItem.tap()
+
+        firstStickerCell.tap()
+    }
+}
+
+// MARK: UI Elements
+fileprivate extension PhotoStickersUITests {
+    var appWindow: XCUIElement {
+        return app!.children(matching: .window).element(boundBy: 0)
     }
 
-    fileprivate func isIPad(app: XCUIApplication) -> Bool {
-        return app.windows.element(boundBy: 0).horizontalSizeClass == .regular && app.windows.element(boundBy: 0).verticalSizeClass == .regular
+    var stickerCollectionNavigtionBar: XCUIElement {
+        return app!.navigationBars["StickerCollectionNavigtionBar"]
+    }
+
+    var addButtonItem: XCUIElement {
+        return stickerCollectionNavigtionBar.buttons["AddButtonItem"]
+    }
+
+    var imageSourceAlertButtonPhotoLibrary: XCUIElement {
+        return app!.sheets.buttons["ImageSourceAlertButtonPhotoLibrary"]
+    }
+
+    var imageSourceAlertButtonCamera: XCUIElement {
+        return app!.sheets.buttons["ImageSourceAlertButtonCamera"]
+    }
+
+    var imageSourceAlertButtonCancel: XCUIElement {
+        return app!.sheets.buttons["ImageSourceAlertButtonCancel"]
+    }
+
+    var circleButton: XCUIElement {
+        return app!.buttons["CircleButton"]
+    }
+
+    var rectangleButton: XCUIElement {
+        return app!.buttons["RectangleButton"]
+    }
+
+    var multiStarButton: XCUIElement {
+        return app!.buttons["MultiStarButton"]
+    }
+
+    var starButton: XCUIElement {
+        return app!.buttons["StarButton"]
+    }
+
+    var editStickerNavigationBar: XCUIElement {
+        return app!.navigationBars["EditStickerNavigationBar"]
+    }
+
+    var editStickerToolbar: XCUIElement {
+        return app!.toolbars["EditStickerToolbar"]
+    }
+
+    var saveButtonItem: XCUIElement {
+        return editStickerNavigationBar.buttons["SaveButtonItem"]
+    }
+
+    var cancelButtonItem: XCUIElement {
+        return editStickerNavigationBar.buttons["CancelButtonItem"]
+    }
+
+    var deleteButtonItem: XCUIElement {
+        return editStickerToolbar.buttons["DeleteButtonItem"]
+    }
+
+    var photoButtonItem: XCUIElement {
+        return editStickerToolbar.buttons["PhotoButtonItem"]
+    }
+
+    var collectionView: XCUIElement {
+        return app!.collectionViews["StickerCollectionView"]
+    }
+
+    var stickerCells: XCUIElementQuery {
+        return collectionView.cells.matching(identifier: "StickerCollectionCell")
+    }
+
+    var firstStickerCell: XCUIElement {
+        return stickerCells.element(boundBy: 0)
+    }
+}
+
+// MARK: Helper
+fileprivate extension PhotoStickersUITests {
+    func isIPad() -> Bool {
+        return app!.windows.element(boundBy: 0).horizontalSizeClass == .regular && app!.windows.element(boundBy: 0).verticalSizeClass == .regular
     }
 }

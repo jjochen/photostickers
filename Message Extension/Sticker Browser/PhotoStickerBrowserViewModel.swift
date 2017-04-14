@@ -32,7 +32,7 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
         self.imageStoreService = imageStoreService
         self.extensionContext = extensionContext
 
-        let predicate = NSPredicate(format: "renderedStickerFilePath != nil")
+        let predicate = NSPredicate(format: "\(StickerProperty.hasRenderedImage.rawValue) == true")
         sectionItems = stickerService
             .fetchStickers(withPredicate: predicate)
             .map { allStickers in
