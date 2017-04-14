@@ -20,23 +20,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let isRunningUITests = UserDefaults.standard.bool(forKey: "RunningUITests")
 
         if isRunningUnitTests {
-            window?.backgroundColor = UIColor.red
             return true
         }
 
         window?.backgroundColor = UIColor.white
         window?.tintColor = StyleKit.appColor
 
-        let dataFolderType: DataFolderType = isRunningUITests ? .temporary : .appGroup
+        let dataFolderType: DataFolderType = isRunningUITests ? .appGroupPrefilled(subfolder: "UITests") : .appGroup
         let dataFolder: DataFolderServiceType = DataFolderService(type: dataFolderType)
 
         let imageStoreService: ImageStoreServiceType = ImageStoreService(url: dataFolder.imagesURL)
         let stickerService: StickerServiceType = StickerService(realmType: .onDisk(url: dataFolder.realmURL), imageStoreService: imageStoreService)
         let stickerRenderService: StickerRenderServiceType = StickerRenderService()
-
-        if isRunningUITests {
-            resetDataFolder(dataFolder.url)
-        }
 
         let storyboard = UIStoryboard.app()
         let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
@@ -55,10 +50,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // TODO:
         }
         return false
-    }
-}
-
-fileprivate extension AppDelegate {
-    func resetDataFolder(_: URL?) {
     }
 }

@@ -91,19 +91,19 @@ class PhotoStickersUITests: XCTestCase {
 
         cancelButtonItem.tap()
 
-        //        photoButtonItem.tap()
-        //        app.sheets.buttons["ImageSourceAlertButtonPhotoLibrary"].tap()
-        //        //        app.alerts["“Photo Stickers” Would Like to Access Your Photos"].buttons["OK"].tap()
-        //        app.tables.cells.children(matching: .other).element.tap()
-        //        app.collectionViews.cells.children(matching: .other).element.tap()
-        //
-        //        rectangleButton.tap()
-        //        saveButtonItem.tap()
-        //        app.alerts["Your stickers are now available in Messages"].buttons["OK"].tap()
+        let collectionView = app.collectionViews["StickerCollectionView"]
+        XCTAssert(collectionView.exists)
 
-        //        app.collectionViews["StickerCollectionView"].cells["StickerCollectionCell"].children(matching: .other).element.tap()
-        //        app.buttons["RectangleButton"].tap()
-        //        app.navigationBars["EditStickerNavigationBar"].buttons["SaveButtonItem"].tap()
+        let firstStickerCell = collectionView.cells.matching(identifier: "StickerCollectionCell").element(boundBy: 0)
+        XCTAssert(firstStickerCell.exists)
+
+        firstStickerCell.tap()
+
+        rectangleButton.tap()
+
+        snapshot("Edit Sticker")
+
+        saveButtonItem.tap()
     }
 
     fileprivate func isIPad(app: XCUIApplication) -> Bool {

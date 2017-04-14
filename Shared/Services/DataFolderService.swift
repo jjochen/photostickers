@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import Log
+import Zip
 
 enum DataFolderType {
     case appGroup
     case temporary
+    case appGroupPrefilled(subfolder: String)
 }
 
 protocol DataFolderServiceType {
@@ -33,10 +36,16 @@ struct DataFolderService: DataFolderServiceType {
         case .appGroup:
             url = appGroupFolderURL()
             break
+        case let .appGroupPrefilled(subfolder: subfolder):
+            url = appGroupFolderURL(subfolder: subfolder)
+            prefill()
+            break
         case .temporary:
-            url = createTempDirectory()
+            url = temporaryDirectoryURL(subfolder: NSUUID().uuidString)
             break
         }
+
+        Logger.shared.info("Data Folder: \(url?.path ?? "not set!")")
     }
 
     var userDefaults: UserDefaults? {
@@ -53,22 +62,76 @@ struct DataFolderService: DataFolderServiceType {
         let url = self.url?.appendingPathComponent("stickers.realm")
         return url
     }
+}
 
-    fileprivate func appGroupFolderURL() -> URL? {
-        return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupID)
+fileprivate extension DataFolderService {
+    func appGroupFolderURL(subfolder: String? = nil) -> URL? {
+        var url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupID)
+        if let subfolder = subfolder, subfolder.characters.count > 0 {
+            url?.appendPathComponent(subfolder)
+        }
+        guard createDirectory(at: url) else {
+            return nil
+        }
+        return url
     }
 
-    fileprivate func createTempDirectory() -> URL? {
-        guard let tempDirURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(NSUUID().uuidString) else {
+    func temporaryDirectoryURL(subfolder: String? = nil) -> URL? {
+        var url = URL(fileURLWithPath: NSTemporaryDirectory())
+        if let subfolder = subfolder, subfolder.characters.count > 0 {
+            url.appendPathComponent(subfolder)
+        }
+        guard createDirectory(at: url) else {
             return nil
+        }
+        return url
+    }
+
+    func createDirectory(at url: URL?) -> Bool {
+        let errorMessage = "Could not create data folder!"
+
+        guard let url = url else {
+            Logger.shared.error(errorMessage, "URL is nil.")
+            return false
+        }
+
+        let fileManager = FileManager.default
+
+        if fileManager.fileExists(atPath: url.path) {
+            return true
         }
 
         do {
-            try FileManager.default.createDirectory(at: tempDirURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
         } catch {
-            return nil
+            Logger.shared.error(errorMessage, error)
+            return false
         }
 
-        return tempDirURL
+        return true
+    }
+}
+
+fileprivate extension DataFolderService {
+    func prefill() {
+        let errorMessage = "Could not prefill data folder!"
+        guard let destination = url else {
+            Logger.shared.error(errorMessage, "URL is nil.")
+            return
+        }
+        guard let prefillContent = Bundle.main.url(forResource: "prefillContent", withExtension: "zip") else {
+            Logger.shared.error(errorMessage, "No zip file available.")
+            return
+        }
+
+        let fileManager = FileManager.default
+        do {
+            try fileManager.removeItem(at: destination)
+            try fileManager.createDirectory(at: destination, withIntermediateDirectories: true, attributes: nil)
+            try Zip.unzipFile(prefillContent, destination: destination, overwrite: true, password: nil, progress: nil)
+        } catch {
+            Logger.shared.error(errorMessage, error)
+            return
+        }
     }
 }

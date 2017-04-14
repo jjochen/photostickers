@@ -8,11 +8,14 @@
 
 import Foundation
 import UIKit
-import Messages
+import RxSwift
+import RxCocoa
+import Log
 
 class StickerCollectionCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var placeholderView: AppIconView!
 
     var viewModel: StickerCollectionCellModelType? {
         didSet {
@@ -21,11 +24,17 @@ class StickerCollectionCell: UICollectionViewCell {
     }
 
     func configure() {
-        imageView.image = viewModel?.sticker.renderedSticker
+        guard let viewModel = viewModel else {
+            return
+        }
+
+        imageView.image = viewModel.image
+        placeholderView.isHidden = viewModel.placeholderHidden
     }
 
     override func prepareForReuse() {
         viewModel = nil
         imageView.image = nil
+        placeholderView.isHidden = true
     }
 }

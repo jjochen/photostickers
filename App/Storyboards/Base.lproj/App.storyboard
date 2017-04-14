@@ -42,13 +42,26 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ReS-VE-pYf" userLabel="Sticker Image View">
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tWo-rK-aVv" userLabel="Sticker Placeholder" customClass="AppIconView" customModule="PhotoStickers" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                        <bool key="isElement" value="YES"/>
+                                                    </accessibility>
+                                                </view>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="tWo-rK-aVv" secondAttribute="bottom" id="6B0-jc-rTk"/>
                                             <constraint firstItem="ReS-VE-pYf" firstAttribute="top" secondItem="Wd8-aV-45r" secondAttribute="top" id="Ghm-qn-0MS"/>
-                                            <constraint firstAttribute="trailing" secondItem="ReS-VE-pYf" secondAttribute="trailing" id="P2b-vo-d6w"/>
-                                            <constraint firstAttribute="bottom" secondItem="ReS-VE-pYf" secondAttribute="bottom" id="n8L-dr-Edw"/>
+                                            <constraint firstItem="ReS-VE-pYf" firstAttribute="trailing" secondItem="Wd8-aV-45r" secondAttribute="trailing" id="P2b-vo-d6w"/>
+                                            <constraint firstItem="tWo-rK-aVv" firstAttribute="leading" secondItem="Wd8-aV-45r" secondAttribute="leading" id="iJW-JV-bZA"/>
+                                            <constraint firstAttribute="trailing" secondItem="tWo-rK-aVv" secondAttribute="trailing" id="ikR-w1-5iq"/>
+                                            <constraint firstItem="ReS-VE-pYf" firstAttribute="bottom" secondItem="Wd8-aV-45r" secondAttribute="bottom" id="n8L-dr-Edw"/>
+                                            <constraint firstItem="tWo-rK-aVv" firstAttribute="top" secondItem="Wd8-aV-45r" secondAttribute="top" id="oKo-8e-hBK"/>
                                             <constraint firstItem="ReS-VE-pYf" firstAttribute="leading" secondItem="Wd8-aV-45r" secondAttribute="leading" id="xPV-Ae-okg"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -56,6 +69,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="imageView" destination="ReS-VE-pYf" id="ceT-BG-veG"/>
+                                            <outlet property="placeholderView" destination="tWo-rK-aVv" id="nDG-YJ-AZH"/>
                                             <segue destination="mHK-wh-jhb" kind="showDetail" identifier="EditStickerSegue" id="zTr-hO-1AW"/>
                                         </connections>
                                     </collectionViewCell>
@@ -101,7 +115,7 @@
         <scene sceneID="8s5-LR-Lwg">
             <objects>
                 <navigationController storyboardIdentifier="EditStickerNavigationController" toolbarHidden="NO" id="mHK-wh-jhb" userLabel="Edit Sticker Navigation Controller" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ezs-dE-6ca" userLabel="Edit Sticker Navigation Bar">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Ezs-dE-6ca" userLabel="Edit Sticker Navigation Bar">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <userDefinedRuntimeAttributes>
@@ -218,7 +232,7 @@
                                                     <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axO-aK-nfj" userLabel="Super Star Button">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axO-aK-nfj" userLabel="Multi Star Button">
                                                 <rect key="frame" x="168" y="0.0" width="73" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="MultiStarButton"/>
                                                 <state key="normal" title="MultiStar">
@@ -342,7 +356,7 @@
         <scene sceneID="gbp-ZZ-OD8">
             <objects>
                 <navigationController storyboardIdentifier="MainNavigationController" id="7oO-ML-e6r" userLabel="Sticker Collection Navigation Controller" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AEa-As-IWY" userLabel="Sticker Collection Navigtion Bar">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AEa-As-IWY" userLabel="Sticker Collection Navigtion Bar">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <userDefinedRuntimeAttributes>

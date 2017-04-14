@@ -33,22 +33,6 @@ extension StickerTests {
         XCTAssertTrue(sticker1 == sticker2)
     }
 
-    func testOriginalImage() {
-        let bundle = Bundle(for: type(of: self))
-        let originalImage = UIImage(named: "original.jpg", in: bundle, compatibleWith: nil)
-        let filePath = bundle.path(forResource: "original", ofType: "jpg")
-        let sticker = Sticker()
-        sticker.originalImageFilePath = filePath
-
-        XCTAssertNotNil(originalImage)
-        XCTAssertNotNil(sticker.originalImage)
-
-        let testImageData = UIImagePNGRepresentation(originalImage!)
-        let stickerImageData = UIImagePNGRepresentation(sticker.originalImage!)
-
-        XCTAssertEqual(testImageData, stickerImageData)
-    }
-
     func testCropBounds() {
         let bounds = CGRect(x: 11, y: 22, width: 33, height: 44)
         let sticker = Sticker()

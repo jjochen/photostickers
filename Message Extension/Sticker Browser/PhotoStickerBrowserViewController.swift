@@ -49,7 +49,7 @@ class PhotoStickerBrowserViewController: UIViewController {
             .map { items in
                 [StickerSection(header: "Stickers", stickers: items)]
             }
-            .bindTo(collectionView.rx.items(dataSource: dataSource))
+            .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
         collectionView.rx
@@ -81,9 +81,9 @@ extension PhotoStickerBrowserViewController {
             case .openAppItem:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.AddMoreCell.rawValue, for: indexPath)
                 return cell
-            case let .stickerItem(sticker: sticker):
+            case let .stickerItem(viewModel: cellViewModel):
                 let cell: StickerBrowserCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.StickerBrowserCell.rawValue, for: indexPath) as! StickerBrowserCell
-                cell.stickerView.sticker = MSSticker.load(sticker)
+                cell.viewModel = cellViewModel
                 return cell
             }
         }

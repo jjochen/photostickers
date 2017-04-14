@@ -14,6 +14,8 @@ target 'PhotoStickers' do
     pod 'RxRealm'
     pod 'Log'
     pod 'SwiftFormat/CLI'
+    pod 'Zip'
+    
     #pod 'RxSwiftExt'
     #pod 'RxCoreData'
     #pod 'RxViewModel'
@@ -24,6 +26,7 @@ target 'PhotoStickers' do
     target 'PhotoStickersTests' do
         inherit! :search_paths
         pod 'RxTest'
+        
         #pod 'RxBlocking'
         #pod 'Quick'
         #pod 'Nimble'
@@ -38,6 +41,7 @@ target 'MessageExtension' do
     pod 'RealmSwift'
     pod 'RxRealm'
     pod 'Log'
+    pod 'Zip'
 end
 
 post_install do |installer|

@@ -40,13 +40,11 @@ class StickerService: StickerServiceType {
 
         switch realmType {
         case .inMemory:
-            Logger.shared.info("Realm in memory only")
+            Logger.shared.warning("Realm in memory only")
             break
         case let .onDisk(url: url):
-            if let path = url?.path {
-                Logger.shared.info("Realm: \(path)")
-            } else {
-                Logger.shared.warning("Realm: URL not set!")
+            if url == nil {
+                Logger.shared.error("Realm: URL not set!")
             }
         }
     }
@@ -120,11 +118,13 @@ extension StickerService {
 
     func deleteSticker(withUUID uuid: String) -> Observable<Void> {
         return Observable.create { [weak self] observer in
-            guard let realm = self?.currentRealm() else {
+            guard let `self` = self else {
                 observer.on(.error(PSError.unknown))
                 // TODO: new error types
                 return Disposables.create()
             }
+
+            let realm = self.currentRealm()
 
             guard let sticker = realm.object(ofType: Sticker.self, forPrimaryKey: uuid) else {
                 observer.on(.error(PSError.unknown))
@@ -132,16 +132,8 @@ extension StickerService {
                 return Disposables.create()
             }
 
-            do {
-                if let originalImageFilePath = sticker.originalImageFilePath {
-                    try FileManager.default.removeItem(atPath: originalImageFilePath)
-                }
-                if let renderedStickerFilePath = sticker.renderedStickerFilePath {
-                    try FileManager.default.removeItem(atPath: renderedStickerFilePath)
-                }
-            } catch let error {
-                Logger.shared.error(error)
-            }
+            _ = sticker.deleteOrigianlImage(in: self.imageStoreService)
+            _ = sticker.deleteRenderedImage(in: self.imageStoreService)
 
             do {
                 try realm.write {
@@ -186,14 +178,12 @@ fileprivate extension StickerService {
                 sticker.title = info.title.value
             }
             if info.originalImageDidChange {
-                if let url = storeImage(info.originalImage.value, forKey: sticker.uuid, inCategory: "originals") {
-                    sticker.originalImageFilePath = url.path
-                }
+                let url = sticker.store(originalImage: info.originalImage.value, in: imageStoreService)
+                sticker.hasOriginalImage = (url != nil)
             }
             if info.renderedStickerDidChange {
-                if let url = storeImage(info.renderedSticker.value, forKey: sticker.uuid, inCategory: "stickers") {
-                    sticker.renderedStickerFilePath = url.path
-                }
+                let url = sticker.store(renderedImage: info.renderedSticker.value, in: imageStoreService)
+                sticker.hasRenderedImage = (url != nil)
             }
             if info.cropBoundsDidChange {
                 sticker.cropBounds = info.cropBounds.value
@@ -205,22 +195,6 @@ fileprivate extension StickerService {
                 sticker.sortOrder = info.sortOrder.value
             }
         }
-    }
-
-    func storeImage(_ image: UIImage?, forKey key: String?, inCategory category: String) -> URL? {
-        guard let image = image else {
-            return nil
-        }
-
-        guard let key = key else {
-            return nil
-        }
-
-        guard !key.isEmpty else {
-            return nil
-        }
-
-        return imageStoreService.storeImage(image, forKey: key, inCategory: category)
     }
 }
 
@@ -257,7 +231,7 @@ fileprivate extension Realm {
     static func stickerConfiguration(with fileURL: URL?) -> Configuration {
         return Configuration(
             fileURL: fileURL,
-            schemaVersion: 2,
+            schemaVersion: 3,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 1 {
                     Realm.performMigrationToVersion1(migration)
@@ -265,6 +239,10 @@ fileprivate extension Realm {
 
                 if oldSchemaVersion < 2 {
                     Realm.performMigrationToVersion2(migration)
+                }
+
+                if oldSchemaVersion < 3 {
+                    Realm.performMigrationToVersion3(migration)
                 }
         })
     }
@@ -290,6 +268,17 @@ fileprivate extension Realm {
             let localizedDescription: String = oldObject!["localizedDescription"] as! String
             let title: String? = localizedDescription.isEmpty ? nil : localizedDescription
             newObject!["title"] = title
+        }
+    }
+
+    static func performMigrationToVersion3(_ migration: Migration) {
+        migration.enumerateObjects(ofType: Sticker.className()) { oldObject, newObject in
+            let originalImagePath: String? = oldObject!["originalImageFilePath"] as! String?
+            let renderedImagePath: String? = oldObject!["renderedStickerFilePath"] as! String?
+            let hasOriginalImage: Bool = !(originalImagePath?.isEmpty ?? true)
+            let hasRenderedImage: Bool = !(renderedImagePath?.isEmpty ?? true)
+            newObject!["hasOriginalImage"] = hasOriginalImage
+            newObject!["hasRenderedImage"] = hasRenderedImage
         }
     }
 }

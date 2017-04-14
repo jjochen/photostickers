@@ -13,8 +13,8 @@ import RxDataSources
 enum StickerProperty: String {
     case uuid
     case title
-    case originalImageFilePath
-    case renderedStickerFilePath
+    case hasOriginalImage
+    case hasRenderedImage
     case cropBoundsX
     case cropBoundsY
     case cropBoundsWidth
@@ -27,8 +27,8 @@ enum StickerProperty: String {
 class Sticker: Object {
     dynamic var uuid = ""
     dynamic var title: String?
-    dynamic var originalImageFilePath: String?
-    dynamic var renderedStickerFilePath: String?
+    dynamic var hasOriginalImage: Bool = false
+    dynamic var hasRenderedImage: Bool = false
     dynamic var cropBoundsX: Double = 0
     dynamic var cropBoundsY: Double = 0
     dynamic var cropBoundsWidth: Double = 0
@@ -45,7 +45,7 @@ class Sticker: Object {
     }
 
     override static func ignoredProperties() -> [String] {
-        return ["renderedSticker", "originalImage", "cropBounds"]
+        return ["cropBounds"]
     }
 
     static func newSticker() -> Sticker {
@@ -63,31 +63,6 @@ func == (lhs: Sticker, rhs: Sticker) -> Bool {
 extension Sticker {
     static let renderedSize = CGSize(width: 300, height: 300)
     static let titlePlaceholder = "Photo Sticker"
-}
-
-// MARK: Images
-extension Sticker {
-
-    var originalImage: UIImage? {
-        guard let path = self.originalImageFilePath else {
-            return nil
-        }
-        return UIImage(contentsOfFile: path)
-    }
-
-    var renderedSticker: UIImage? {
-        guard let path = self.renderedStickerFilePath else {
-            return nil
-        }
-        return UIImage(contentsOfFile: path)
-    }
-
-    var renderedStickerURL: URL? {
-        guard let path = self.renderedStickerFilePath else {
-            return nil
-        }
-        return URL(fileURLWithPath: path)
-    }
 }
 
 // MARK: Bounds

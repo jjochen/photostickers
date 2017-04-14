@@ -9,7 +9,31 @@
 import Foundation
 import UIKit
 import Messages
+import Log
 
 class StickerBrowserCell: UICollectionViewCell {
+
     @IBOutlet weak var stickerView: MSStickerView!
+    @IBOutlet weak var placeholderView: AppIconView!
+
+    var viewModel: StickerBrowserCellViewModelType? {
+        didSet {
+            configure()
+        }
+    }
+
+    func configure() {
+        guard let viewModel = viewModel else {
+            return
+        }
+
+        stickerView.sticker = viewModel.msSticker
+        placeholderView.isHidden = viewModel.placeholderHidden
+    }
+
+    override func prepareForReuse() {
+        viewModel = nil
+        stickerView.sticker = nil
+        placeholderView.isHidden = true
+    }
 }

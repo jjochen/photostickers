@@ -62,15 +62,24 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdC-Rn-AuH" userLabel="Sticker Placeholder View" customClass="AppIconView" customModule="MessageExtension" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="jdh-Ws-RIn" secondAttribute="bottom" id="5eF-T7-dSM"/>
+                                            <constraint firstItem="jdh-Ws-RIn" firstAttribute="bottom" secondItem="SPh-I8-apT" secondAttribute="bottom" id="5eF-T7-dSM"/>
                                             <constraint firstItem="jdh-Ws-RIn" firstAttribute="top" secondItem="SPh-I8-apT" secondAttribute="top" id="Gmv-oc-cqs"/>
-                                            <constraint firstAttribute="trailing" secondItem="jdh-Ws-RIn" secondAttribute="trailing" id="IX5-Vk-OSo"/>
+                                            <constraint firstItem="jdh-Ws-RIn" firstAttribute="trailing" secondItem="SPh-I8-apT" secondAttribute="trailing" id="IX5-Vk-OSo"/>
+                                            <constraint firstItem="OdC-Rn-AuH" firstAttribute="top" secondItem="SPh-I8-apT" secondAttribute="top" id="J3R-BB-bBz"/>
+                                            <constraint firstItem="OdC-Rn-AuH" firstAttribute="bottom" secondItem="SPh-I8-apT" secondAttribute="bottom" id="Psi-Wz-8Nu"/>
+                                            <constraint firstItem="OdC-Rn-AuH" firstAttribute="trailing" secondItem="SPh-I8-apT" secondAttribute="trailing" id="S6i-Xe-zTj"/>
                                             <constraint firstItem="jdh-Ws-RIn" firstAttribute="leading" secondItem="SPh-I8-apT" secondAttribute="leading" id="X8L-7z-uKz"/>
+                                            <constraint firstItem="OdC-Rn-AuH" firstAttribute="leading" secondItem="SPh-I8-apT" secondAttribute="leading" id="ukF-lM-dSY"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="placeholderView" destination="OdC-Rn-AuH" id="7O5-BA-KD7"/>
                                             <outlet property="stickerView" destination="jdh-Ws-RIn" id="v4i-hC-vdd"/>
                                         </connections>
                                     </collectionViewCell>

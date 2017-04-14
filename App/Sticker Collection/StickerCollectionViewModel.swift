@@ -57,7 +57,7 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
         stickerCellModels = stickers
             .map { listOfStickers in
                 let listOfViewModels = listOfStickers.map { sticker in
-                    return StickerCollectionCellModel(sticker)
+                    return StickerCollectionCellModel(sticker: sticker, imageStoreService: imageStoreService)
                 }
                 return listOfViewModels
             }

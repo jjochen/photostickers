@@ -97,48 +97,48 @@ fileprivate extension EditStickerViewController {
         }
 
         rx.viewDidLayoutSubviews
-            .bindTo(viewModel.viewDidLayoutSubviews)
+            .bind(to: viewModel.viewDidLayoutSubviews)
             .disposed(by: disposeBag)
 
         rx.viewWillTransitionToSize
-            .bindTo(viewModel.viewWillTransitionToSize)
+            .bind(to: viewModel.viewWillTransitionToSize)
             .disposed(by: disposeBag)
 
         saveButtonItem.rx.tap
-            .bindTo(viewModel.saveButtonItemDidTap)
+            .bind(to: viewModel.saveButtonItemDidTap)
             .disposed(by: disposeBag)
 
         cancelButtonItem.rx.tap
-            .bindTo(viewModel.cancelButtonItemDidTap)
+            .bind(to: viewModel.cancelButtonItemDidTap)
             .disposed(by: disposeBag)
 
         deleteButtonItem.rx.tap
-            .bindTo(viewModel.deleteButtonItemDidTap)
+            .bind(to: viewModel.deleteButtonItemDidTap)
             .disposed(by: disposeBag)
 
         photosButtonItem.rx.tap
-            .bindTo(viewModel.photosButtonItemDidTap)
+            .bind(to: viewModel.photosButtonItemDidTap)
             .disposed(by: disposeBag)
 
         circleButton.rx.tap
-            .bindTo(viewModel.circleButtonDidTap)
+            .bind(to: viewModel.circleButtonDidTap)
             .disposed(by: disposeBag)
 
         rectangleButton.rx.tap
-            .bindTo(viewModel.rectangleButtonDidTap)
+            .bind(to: viewModel.rectangleButtonDidTap)
             .disposed(by: disposeBag)
 
         starButton.rx.tap
-            .bindTo(viewModel.starButtonDidTap)
+            .bind(to: viewModel.starButtonDidTap)
             .disposed(by: disposeBag)
 
         multiStarButton.rx.tap
-            .bindTo(viewModel.multiStarButtonDidTap)
+            .bind(to: viewModel.multiStarButtonDidTap)
             .disposed(by: disposeBag)
 
         scrollView.rx
             .didEndDecelerating
-            .bindTo(didEndDecelerating)
+            .bind(to: didEndDecelerating)
             .disposed(by: disposeBag)
 
         scrollView.rx
@@ -146,7 +146,7 @@ fileprivate extension EditStickerViewController {
                 return !willDecelerate
             }
             .map { _ in Void() }
-            .bindTo(didEndDraggingWithoutDecelaration)
+            .bind(to: didEndDraggingWithoutDecelaration)
             .disposed(by: disposeBag)
 
         scrollView.rx
@@ -154,7 +154,7 @@ fileprivate extension EditStickerViewController {
             .filter { _ in
                 return self.scrollView.isDragging || self.scrollView.isDecelerating
             }
-            .bindTo(didScroll)
+            .bind(to: didScroll)
             .disposed(by: disposeBag)
 
         scrollView.rx
@@ -162,7 +162,7 @@ fileprivate extension EditStickerViewController {
             .filter { _ in
                 return self.scrollView.isZooming || self.scrollView.isZoomBouncing
             }
-            .bindTo(didZoom)
+            .bind(to: didZoom)
             .disposed(by: disposeBag)
 
         Observable
@@ -173,12 +173,12 @@ fileprivate extension EditStickerViewController {
                 return self.imageView.image != nil
             }
             .map { self.visibleRect }
-            .bindTo(viewModel.visibleRectDidChange)
+            .bind(to: viewModel.visibleRectDidChange)
             .disposed(by: disposeBag)
 
         stickerTitleTextField.rx.text
             .skip(1)
-            .bindTo(viewModel.stickerTitleDidChange)
+            .bind(to: viewModel.stickerTitleDidChange)
             .disposed(by: disposeBag)
 
         stickerTitleTextField.text = viewModel.stickerTitle

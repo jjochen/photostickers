@@ -1,11 +1,11 @@
 
 devices([
         "iPhone 7",
-        "iPhone 7 Plus",
-        "iPhone 5",
-        "iPad Air",
-        "iPad Pro (12.9 inch)",
-        "iPad Pro (9.7 inch)"
+#        "iPhone 7 Plus",
+#        "iPhone 5",
+#        "iPad Air",
+#        "iPad Pro (12.9 inch)",
+#        "iPad Pro (9.7 inch)"
         ])
 
 languages([

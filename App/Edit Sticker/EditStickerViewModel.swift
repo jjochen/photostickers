@@ -113,7 +113,13 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
          stickerService: StickerServiceType,
          stickerRenderService: StickerRenderServiceType) {
 
-        let stickerInfo = StickerInfo(sticker: sticker)
+        let stickerInfo = StickerInfo(uuid: sticker.uuid,
+                                      title: sticker.title,
+                                      originalImage: sticker.originalImage(from: imageStoreService),
+                                      renderedSticker: sticker.renderedImage(from: imageStoreService),
+                                      cropBounds: sticker.cropBounds,
+                                      mask: sticker.mask,
+                                      sortOrder: sticker.sortOrder)
         self.stickerInfo = stickerInfo
         self.imageStoreService = imageStoreService
         self.stickerService = stickerService
@@ -274,11 +280,11 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .map { title in
                 return title?.trimmingCharacters(in: .whitespaces)
             }
-            .bindTo(stickerInfo.title)
+            .bind(to: stickerInfo.title)
             .disposed(by: disposeBag)
 
         visibleRectDidChange
-            .bindTo(stickerInfo.cropBounds)
+            .bind(to: stickerInfo.cropBounds)
             .disposed(by: disposeBag)
 
         saveButtonItemDidTap
@@ -289,7 +295,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
                 return stickerRenderService.render(stickerInfo)
             }
             .filterNil()
-            .bindTo(stickerInfo.renderedSticker)
+            .bind(to: stickerInfo.renderedSticker)
             .disposed(by: disposeBag)
 
         deleteAlertDidConfirm
@@ -297,7 +303,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .flatMap { _ in
                 stickerService.deleteSticker(withUUID: stickerInfo.uuid)
             }
-            .bindTo(_stickerWasDeleted)
+            .bind(to: _stickerWasDeleted)
             .disposed(by: disposeBag)
 
         Observable
@@ -306,7 +312,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
                 starButtonDidTap.map { Mask.star },
                 multiStarButtonDidTap.map { Mask.multiStar })
             .merge()
-            .bindTo(stickerInfo.mask)
+            .bind(to: stickerInfo.mask)
             .disposed(by: disposeBag)
     }
 }

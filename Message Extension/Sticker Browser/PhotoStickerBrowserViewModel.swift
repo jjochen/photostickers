@@ -22,20 +22,23 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
     // MARK: Dependencies
     let extensionContext: NSExtensionContext?
     let stickerService: StickerServiceType
+    let imageStoreService: ImageStoreServiceType
 
     // MARK: Output
     var sectionItems: Observable<[StickerSectionItem]>
 
-    init(stickerService: StickerServiceType, extensionContext: NSExtensionContext?) {
+    init(stickerService: StickerServiceType, imageStoreService: ImageStoreServiceType, extensionContext: NSExtensionContext?) {
         self.stickerService = stickerService
+        self.imageStoreService = imageStoreService
         self.extensionContext = extensionContext
 
         let predicate = NSPredicate(format: "renderedStickerFilePath != nil")
         sectionItems = stickerService
             .fetchStickers(withPredicate: predicate)
             .map { allStickers in
-                var items = allStickers.map { sticker in
-                    return StickerSectionItem.stickerItem(sticker: sticker)
+                var items = allStickers.map { sticker -> StickerSectionItem in
+                    let cellViewModel: StickerBrowserCellViewModelType = StickerBrowserCellViewModel(sticker: sticker, imageStore: imageStoreService)
+                    return StickerSectionItem.stickerItem(viewModel: cellViewModel)
                 }
                 items.append(StickerSectionItem.openAppItem)
                 return items

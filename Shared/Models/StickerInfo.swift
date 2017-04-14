@@ -65,16 +65,6 @@ class StickerInfo {
                   sortOrder: 0)
     }
 
-    convenience init(sticker: Sticker) {
-        self.init(uuid: sticker.uuid,
-                  title: sticker.title,
-                  originalImage: sticker.originalImage,
-                  renderedSticker: sticker.renderedSticker,
-                  cropBounds: sticker.cropBounds,
-                  mask: sticker.mask,
-                  sortOrder: sticker.sortOrder)
-    }
-
     // MARK: Observers
     var originalImageIsNil: Observable<Bool> {
         return originalImage

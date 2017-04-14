@@ -15,9 +15,9 @@ class MessagesViewController: MSMessagesAppViewController {
 
     lazy var viewModel: MessagesViewModelType = {
         let dataFolder: DataFolderServiceType = DataFolderService(type: .appGroup)
-        let imageService: ImageStoreServiceType = ImageStoreService(url: dataFolder.imagesURL)
-        let stickerService: StickerServiceType = StickerService(realmType: .onDisk(url: dataFolder.realmURL), imageStoreService: imageService)
-        return MessagesViewModel(stickerService: stickerService, extensionContext: self.extensionContext)
+        let imageStoreService: ImageStoreServiceType = ImageStoreService(url: dataFolder.imagesURL)
+        let stickerService: StickerServiceType = StickerService(realmType: .onDisk(url: dataFolder.realmURL), imageStoreService: imageStoreService)
+        return MessagesViewModel(stickerService: stickerService, imageStoreService: imageStoreService, extensionContext: self.extensionContext)
     }()
 
     override func viewDidLoad() {
