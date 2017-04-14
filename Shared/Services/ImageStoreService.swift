@@ -34,8 +34,8 @@ class ImageStoreService: ImageStoreServiceType {
 extension ImageStoreService {
 
     func storeImage(_ image: UIImage, forKey key: String, inCategory category: ImageCategory) -> URL? {
-        guard let data = UIImagePNGRepresentation(image) else {
-            Logger.shared.error("PNG representation not possible: \(image)")
+        guard let data = data(for: image, in: category) else {
+            Logger.shared.error("PNG/JPG representation not possible: \(image)")
             return nil
         }
 
@@ -104,9 +104,9 @@ extension ImageStoreService {
     }
 }
 
-extension ImageStoreService {
+fileprivate extension ImageStoreService {
 
-    fileprivate func createSubfolderForCategory(_ category: ImageCategory) -> Bool {
+    func createSubfolderForCategory(_ category: ImageCategory) -> Bool {
         guard let url = self.constructCategoryURL(category) else {
             Logger.shared.error("No category url for \(category)")
             return false
@@ -121,11 +121,20 @@ extension ImageStoreService {
         }
     }
 
-    fileprivate func constructCategoryURL(_ category: ImageCategory) -> URL? {
+    func constructCategoryURL(_ category: ImageCategory) -> URL? {
         return storeURL?.appendingPathComponent(category.rawValue, isDirectory: true)
     }
 
-    fileprivate func constructImageURL(forKey key: String, inCategory category: ImageCategory) -> URL? {
-        return constructCategoryURL(category)?.appendingPathComponent(key).appendingPathExtension("png")
+    func constructImageURL(forKey key: String, inCategory category: ImageCategory) -> URL? {
+        return constructCategoryURL(category)?.appendingPathComponent(key)
+    }
+
+    func data(for image: UIImage, in category: ImageCategory) -> Data? {
+        switch category {
+        case .stickers:
+            return UIImagePNGRepresentation(image)
+        case .originals:
+            return UIImageJPEGRepresentation(image, 1.0)
+        }
     }
 }
