@@ -239,7 +239,7 @@ fileprivate extension EditStickerViewController {
 
                 let boundsSize = self.scrollView.bounds.size
                 self.scrollView.minimumZoomScale = viewModel.minimumZoomScale(imageSize: imageSize, boundsSize: boundsSize)
-                self.scrollView.maximumZoomScale = viewModel.maximumZoomScale(boundsSize: boundsSize)
+                self.scrollView.maximumZoomScale = viewModel.maximumZoomScale(imageSize: imageSize, boundsSize: boundsSize)
             })
             .disposed(by: disposeBag)
 

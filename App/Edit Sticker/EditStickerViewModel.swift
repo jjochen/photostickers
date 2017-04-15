@@ -12,8 +12,7 @@ import RxCocoa
 import Log
 
 protocol EditStickerViewModelType: class {
-    var minimumZoomedImageSize: CGSize { get }
-    func maximumZoomScale(boundsSize: CGSize) -> CGFloat
+    func maximumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat
     func minimumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat
     func zoomScale(visibleRect: CGRect, boundsSize: CGSize) -> CGFloat
     func contentOffset(visibleRect: CGRect, boundsSize: CGSize) -> CGPoint
@@ -318,18 +317,22 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 }
 
 extension EditStickerViewModel {
-    var minimumZoomedImageSize: CGSize {
-        return Sticker.renderedSize
+    func minimumZoomedSize(forImageSize imageSize: CGSize) -> CGSize {
+        let minSideLength = imageSize.minSideLength
+        var minimumZoomedSize = CGSize()
+        minimumZoomedSize.width = min(minSideLength, Sticker.renderedSize.width)
+        minimumZoomedSize.height = min(minSideLength, Sticker.renderedSize.height)
+        return minimumZoomedSize
     }
 
-    func maximumZoomScale(boundsSize: CGSize) -> CGFloat {
-        let minimumZoomedImageSize = self.minimumZoomedImageSize
-        guard minimumZoomedImageSize.width > 0 && minimumZoomedImageSize.height > 0 else {
+    func maximumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat {
+        let minimumZoomedSize = self.minimumZoomedSize(forImageSize: imageSize)
+        guard minimumZoomedSize.width > 0 && minimumZoomedSize.height > 0 else {
             return 1
         }
 
-        let xScale = boundsSize.width / minimumZoomedImageSize.width
-        let yScale = boundsSize.height / minimumZoomedImageSize.height
+        let xScale = boundsSize.width / minimumZoomedSize.width
+        let yScale = boundsSize.height / minimumZoomedSize.height
         let maxScale = min(xScale, yScale)
         return maxScale
     }
