@@ -36,6 +36,7 @@ class StickerBrowserCellViewModel: BaseViewModel, StickerBrowserCellViewModelTyp
 
     fileprivate static func msSticker(imageURL: URL?, title: String?) -> MSSticker? {
         guard let url = imageURL else {
+            Logger.shared.error("Couldn't create a sticker from url: nil")
             return nil
         }
         let description = title ?? Sticker.titlePlaceholder

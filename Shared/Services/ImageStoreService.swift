@@ -12,6 +12,42 @@ import Log
 enum ImageCategory: String {
     case originals
     case stickers
+
+    var fileType: ImageFileType {
+        switch self {
+        case .stickers:
+            return .png
+        case .originals:
+            return .jpg
+        }
+    }
+
+    var subFolder: String {
+        return rawValue
+    }
+}
+
+enum ImageFileType: String {
+    case jpg
+    case png
+
+    func data(for image: UIImage) -> Data? {
+        switch self {
+        case .png:
+            return UIImagePNGRepresentation(image)
+        case .jpg:
+            return UIImageJPEGRepresentation(image, 1.0)
+        }
+    }
+
+    var fileExtension: String {
+        switch self {
+        case .png:
+            return "png"
+        case .jpg:
+            return "jpg"
+        }
+    }
 }
 
 protocol ImageStoreServiceType {
@@ -34,7 +70,7 @@ class ImageStoreService: ImageStoreServiceType {
 extension ImageStoreService {
 
     func storeImage(_ image: UIImage, forKey key: String, inCategory category: ImageCategory) -> URL? {
-        guard let data = data(for: image, in: category) else {
+        guard let data = category.fileType.data(for: image) else {
             Logger.shared.error("PNG/JPG representation not possible: \(image)")
             return nil
         }
@@ -122,19 +158,10 @@ fileprivate extension ImageStoreService {
     }
 
     func constructCategoryURL(_ category: ImageCategory) -> URL? {
-        return storeURL?.appendingPathComponent(category.rawValue, isDirectory: true)
+        return storeURL?.appendingPathComponent(category.subFolder, isDirectory: true)
     }
 
     func constructImageURL(forKey key: String, inCategory category: ImageCategory) -> URL? {
-        return constructCategoryURL(category)?.appendingPathComponent(key)
-    }
-
-    func data(for image: UIImage, in category: ImageCategory) -> Data? {
-        switch category {
-        case .stickers:
-            return UIImagePNGRepresentation(image)
-        case .originals:
-            return UIImageJPEGRepresentation(image, 1.0)
-        }
+        return constructCategoryURL(category)?.appendingPathComponent(key).appendingPathExtension(category.fileType.fileExtension)
     }
 }
