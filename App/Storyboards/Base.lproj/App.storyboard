@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -79,11 +80,11 @@
                                 </userDefinedRuntimeAttributes>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eml-zk-8dU" userLabel="Arrow View" customClass="ArrowView" customModule="PhotoStickers" customModuleProvider="target">
-                                <rect key="frame" x="328" y="68" width="44" height="54"/>
+                                <rect key="frame" x="335" y="68" width="28" height="14"/>
                                 <color key="backgroundColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="Z3k-V5-O9x"/>
-                                    <constraint firstAttribute="width" constant="44" id="kiJ-qu-F9m"/>
+                                    <constraint firstAttribute="height" constant="14" id="Z3k-V5-O9x"/>
+                                    <constraint firstAttribute="width" constant="28" id="kiJ-qu-F9m"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -93,7 +94,7 @@
                             <constraint firstItem="Hbw-nh-cGe" firstAttribute="left" secondItem="8bC-Xf-vdC" secondAttribute="left" id="GrN-TL-7pR"/>
                             <constraint firstItem="eml-zk-8dU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="4" id="M0K-Nr-Ooc"/>
                             <constraint firstItem="Hbw-nh-cGe" firstAttribute="right" secondItem="8bC-Xf-vdC" secondAttribute="right" id="PeS-2W-JHe"/>
-                            <constraint firstItem="eml-zk-8dU" firstAttribute="right" secondItem="8bC-Xf-vdC" secondAttribute="right" constant="-3" id="c0j-A3-TcD"/>
+                            <constraint firstItem="eml-zk-8dU" firstAttribute="right" secondItem="8bC-Xf-vdC" secondAttribute="rightMargin" constant="4" id="c0j-A3-TcD"/>
                             <constraint firstItem="Hbw-nh-cGe" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="trK-z2-CVx"/>
                         </constraints>
                     </view>

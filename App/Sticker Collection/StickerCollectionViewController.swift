@@ -103,16 +103,7 @@ fileprivate extension StickerCollectionViewController {
     func setupArrow() {
         arrowView.isHidden = true
         arrowView.backgroundColor = UIColor.clear
-    }
-
-    func hideArrow() {
-        if arrowView.isHidden {
-            return
-        }
-
-        arrowView.isHidden = true
-        arrowTimer?.invalidate()
-        arrowTimer = nil
+        arrowOffsetLayoutConstraint.constant = minArrowPosition
     }
 
     func showArrow() {
@@ -128,6 +119,24 @@ fileprivate extension StickerCollectionViewController {
         arrowTimer?.tolerance = 0.5
     }
 
+    func hideArrow() {
+        if arrowView.isHidden {
+            return
+        }
+
+        arrowView.isHidden = true
+        arrowTimer?.invalidate()
+        arrowTimer = nil
+    }
+
+    var minArrowPosition: CGFloat {
+        return 6
+    }
+
+    var maxArrowPosition: CGFloat {
+        return 16
+    }
+
     func bounceArrow() {
         if arrowView.isHidden {
             return
@@ -137,13 +146,13 @@ fileprivate extension StickerCollectionViewController {
             self.view.layoutIfNeeded()
         }
 
-        arrowOffsetLayoutConstraint.constant = 14
+        arrowOffsetLayoutConstraint.constant = maxArrowPosition
         UIView.animate(withDuration: 0.3,
                        delay: 0,
                        options: .curveEaseOut,
                        animations: layoutAnimation,
                        completion: { _ in
-                           self.arrowOffsetLayoutConstraint.constant = 4
+                           self.arrowOffsetLayoutConstraint.constant = self.minArrowPosition
                            UIView.animate(withDuration: 0.5,
                                           delay: 0,
                                           usingSpringWithDamping: 0.2,

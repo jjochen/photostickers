@@ -10,6 +10,6 @@ import UIKit
 
 class ArrowView: UIView {
     override func draw(_ rect: CGRect) {
-        StyleKit.drawArrow(frame: rect, lineWidth: 1)
+        StyleKit.drawPlainArrowUp(frame: rect, resizing: .aspectFit)
     }
 }

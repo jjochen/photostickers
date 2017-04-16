@@ -40,7 +40,7 @@ public class StyleKit: NSObject {
 
     //// Drawing Methods
 
-    public dynamic class func drawStarButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) {
+    public dynamic class func drawStarButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -81,7 +81,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawMultiStarButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) {
+    public dynamic class func drawMultiStarButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -142,7 +142,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawCircleButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) {
+    public dynamic class func drawCircleButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -172,7 +172,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawRectangleButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) {
+    public dynamic class func drawRectangleButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -818,7 +818,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawArrow(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 44, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 2) {
+    public dynamic class func drawArrowUp(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 44, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -854,9 +854,47 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
+    public dynamic class func drawPlainArrowUp(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 28, height: 14), resizing: ResizingBehavior = .aspectFit) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 28, height: 14), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 28, y: resizedFrame.height / 14)
+
+        //// Bezier Drawing
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: CGPoint(x: 27.85, y: 13.14))
+        bezierPath.addLine(to: CGPoint(x: 27.85, y: 13.14))
+        bezierPath.addLine(to: CGPoint(x: 14.35, y: 0.14))
+        bezierPath.addLine(to: CGPoint(x: 14.35, y: 0.14))
+        bezierPath.addCurve(to: CGPoint(x: 14, y: 0), controlPoint1: CGPoint(x: 14.26, y: 0.05), controlPoint2: CGPoint(x: 14.13, y: 0))
+        bezierPath.addCurve(to: CGPoint(x: 13.65, y: 0.14), controlPoint1: CGPoint(x: 13.87, y: 0), controlPoint2: CGPoint(x: 13.74, y: 0.05))
+        bezierPath.addLine(to: CGPoint(x: 13.65, y: 0.14))
+        bezierPath.addLine(to: CGPoint(x: 0.15, y: 13.14))
+        bezierPath.addLine(to: CGPoint(x: 0.15, y: 13.14))
+        bezierPath.addCurve(to: CGPoint(x: 0, y: 13.5), controlPoint1: CGPoint(x: 0.06, y: 13.23), controlPoint2: CGPoint(x: 0, y: 13.36))
+        bezierPath.addCurve(to: CGPoint(x: 0.5, y: 14), controlPoint1: CGPoint(x: 0, y: 13.78), controlPoint2: CGPoint(x: 0.22, y: 14))
+        bezierPath.addCurve(to: CGPoint(x: 0.85, y: 13.86), controlPoint1: CGPoint(x: 0.64, y: 14), controlPoint2: CGPoint(x: 0.76, y: 13.95))
+        bezierPath.addLine(to: CGPoint(x: 0.85, y: 13.86))
+        bezierPath.addLine(to: CGPoint(x: 14, y: 1.19))
+        bezierPath.addLine(to: CGPoint(x: 27.15, y: 13.86))
+        bezierPath.addLine(to: CGPoint(x: 27.15, y: 13.86))
+        bezierPath.addCurve(to: CGPoint(x: 27.5, y: 14), controlPoint1: CGPoint(x: 27.24, y: 13.95), controlPoint2: CGPoint(x: 27.36, y: 14))
+        bezierPath.addCurve(to: CGPoint(x: 28, y: 13.5), controlPoint1: CGPoint(x: 27.78, y: 14), controlPoint2: CGPoint(x: 28, y: 13.78))
+        bezierPath.addCurve(to: CGPoint(x: 27.85, y: 13.14), controlPoint1: CGPoint(x: 28, y: 13.36), controlPoint2: CGPoint(x: 27.94, y: 13.23))
+        bezierPath.close()
+        StyleKit.appColor.setFill()
+        bezierPath.fill()
+
+        context.restoreGState()
+    }
+
     //// Generated Images
 
-    public dynamic class func imageOfStarButton(lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) -> UIImage {
+    public dynamic class func imageOfStarButton(lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 54, height: 54), false, 0)
         StyleKit.drawStarButton(lineWidth: lineWidth, selected: selected, highlighted: highlighted)
 
@@ -866,7 +904,7 @@ public class StyleKit: NSObject {
         return imageOfStarButton
     }
 
-    public dynamic class func imageOfMultiStarButton(lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) -> UIImage {
+    public dynamic class func imageOfMultiStarButton(lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 54, height: 54), false, 0)
         StyleKit.drawMultiStarButton(lineWidth: lineWidth, selected: selected, highlighted: highlighted)
 
@@ -876,7 +914,7 @@ public class StyleKit: NSObject {
         return imageOfMultiStarButton
     }
 
-    public dynamic class func imageOfCircleButton(lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) -> UIImage {
+    public dynamic class func imageOfCircleButton(lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 54, height: 54), false, 0)
         StyleKit.drawCircleButton(lineWidth: lineWidth, selected: selected, highlighted: highlighted)
 
@@ -886,7 +924,7 @@ public class StyleKit: NSObject {
         return imageOfCircleButton
     }
 
-    public dynamic class func imageOfRectangleButton(lineWidth: CGFloat = 2, selected: Bool = false, highlighted: Bool = false) -> UIImage {
+    public dynamic class func imageOfRectangleButton(lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 54, height: 54), false, 0)
         StyleKit.drawRectangleButton(lineWidth: lineWidth, selected: selected, highlighted: highlighted)
 
