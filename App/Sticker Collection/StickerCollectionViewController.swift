@@ -20,9 +20,14 @@ class StickerCollectionViewController: UIViewController {
 
     @IBOutlet weak var stickerCollectionView: UICollectionView!
     @IBOutlet weak var addButtonItem: UIBarButtonItem!
+    @IBOutlet weak var arrowView: ArrowView!
+    @IBOutlet weak var arrowOffsetLayoutConstraint: NSLayoutConstraint!
+
+    fileprivate var arrowTimer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupArrow()
         setupBindings()
     }
 
@@ -49,6 +54,17 @@ class StickerCollectionViewController: UIViewController {
         stickerCollectionView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
+
+        viewModel.arrowHidden
+            .drive(onNext: { [weak self] hidden in
+                guard let `self` = self else { return }
+                if hidden {
+                    self.hideArrow()
+                } else {
+                    self.showArrow()
+                }
+            })
+            .addDisposableTo(disposeBag)
 
         viewModel.presentFirstStickerAlert
             .drive(onNext: { [weak self] in
@@ -79,6 +95,64 @@ fileprivate extension StickerCollectionViewController {
         alertController.addAction(okAction)
 
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+fileprivate extension StickerCollectionViewController {
+
+    func setupArrow() {
+        arrowView.isHidden = true
+        arrowView.backgroundColor = UIColor.clear
+    }
+
+    func hideArrow() {
+        if arrowView.isHidden {
+            return
+        }
+
+        arrowView.isHidden = true
+        arrowTimer?.invalidate()
+        arrowTimer = nil
+    }
+
+    func showArrow() {
+        arrowView.isHidden = false
+
+        if arrowTimer != nil && arrowTimer!.isValid {
+            return
+        }
+
+        arrowTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: { _ in
+            self.bounceArrow()
+        })
+        arrowTimer?.tolerance = 0.5
+    }
+
+    func bounceArrow() {
+        if arrowView.isHidden {
+            return
+        }
+
+        let layoutAnimation = {
+            self.view.layoutIfNeeded()
+        }
+
+        arrowOffsetLayoutConstraint.constant = 14
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .curveEaseOut,
+                       animations: layoutAnimation,
+                       completion: { _ in
+                           self.arrowOffsetLayoutConstraint.constant = 4
+                           UIView.animate(withDuration: 0.5,
+                                          delay: 0,
+                                          usingSpringWithDamping: 0.2,
+                                          initialSpringVelocity: 0.0,
+                                          options: .curveEaseIn,
+                                          animations: layoutAnimation,
+                                          completion: nil)
+                       }
+        )
     }
 }
 

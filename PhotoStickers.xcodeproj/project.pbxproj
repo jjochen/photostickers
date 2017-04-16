@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1237E380319BE40A860FC623 /* Pods_PhotoStickersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394EA5E241F8BED0EF9FE8E7 /* Pods_PhotoStickersTests.framework */; };
+		1913722B1EA2D1F300626085 /* ArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1913722A1EA2D1F300626085 /* ArrowView.swift */; };
 		1918E63A1E72CC2A007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
 		1918E63B1E72CC4C007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
 		191FC7CD1E8AFC990075A9FB /* UIScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */; };
@@ -149,6 +150,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1913722A1EA2D1F300626085 /* ArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowView.swift; sourceTree = "<group>"; };
 		1918E6391E72CC2A007DFFE7 /* Mask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
 		191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Rx.swift"; sourceTree = "<group>"; };
 		19360B6D1E9F5BC2003E9252 /* description.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = description.txt; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 		1946219B1E4350C6000F09CE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1913722A1EA2D1F300626085 /* ArrowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1154,6 +1157,7 @@
 				194621A21E43569C000F09CE /* UIImage+Alpha.swift in Sources */,
 				19A6C6061E6310F9009B8922 /* StickerInfo.swift in Sources */,
 				19F6DC7A1E4F237D00CAE9D0 /* UIImagePickerController+Rx.swift in Sources */,
+				1913722B1EA2D1F300626085 /* ArrowView.swift in Sources */,
 				194621221E3CFDA1000F09CE /* UIViewController+Extensions.swift in Sources */,
 				193DCBB61E9C2E2200479B29 /* StickerService+UITestSetup.swift in Sources */,
 				19A6C5FD1E5EFCEE009B8922 /* EditStickerViewModel.swift in Sources */,

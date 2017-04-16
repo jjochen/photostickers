@@ -78,13 +78,23 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="StickerCollectionView"/>
                                 </userDefinedRuntimeAttributes>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eml-zk-8dU" userLabel="Arrow View" customClass="ArrowView" customModule="PhotoStickers" customModuleProvider="target">
+                                <rect key="frame" x="328" y="68" width="44" height="54"/>
+                                <color key="backgroundColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="Z3k-V5-O9x"/>
+                                    <constraint firstAttribute="width" constant="44" id="kiJ-qu-F9m"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Hbw-nh-cGe" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="1UH-yu-tc0"/>
                             <constraint firstItem="Hbw-nh-cGe" firstAttribute="left" secondItem="8bC-Xf-vdC" secondAttribute="left" id="GrN-TL-7pR"/>
-                            <constraint firstAttribute="right" secondItem="Hbw-nh-cGe" secondAttribute="right" id="PeS-2W-JHe"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Hbw-nh-cGe" secondAttribute="bottom" id="trK-z2-CVx"/>
+                            <constraint firstItem="eml-zk-8dU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="4" id="M0K-Nr-Ooc"/>
+                            <constraint firstItem="Hbw-nh-cGe" firstAttribute="right" secondItem="8bC-Xf-vdC" secondAttribute="right" id="PeS-2W-JHe"/>
+                            <constraint firstItem="eml-zk-8dU" firstAttribute="right" secondItem="8bC-Xf-vdC" secondAttribute="right" constant="-3" id="c0j-A3-TcD"/>
+                            <constraint firstItem="Hbw-nh-cGe" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="trK-z2-CVx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Photo Stickers" id="tGu-nI-cYD" userLabel="Sticker Collection Navigation Bar">
@@ -99,6 +109,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addButtonItem" destination="SxV-cq-Vib" id="93M-bf-tCa"/>
+                        <outlet property="arrowOffsetLayoutConstraint" destination="M0K-Nr-Ooc" id="XB7-xb-Idh"/>
+                        <outlet property="arrowView" destination="eml-zk-8dU" id="fWn-5d-45r"/>
                         <outlet property="stickerCollectionView" destination="Hbw-nh-cGe" id="dcj-h0-QyC"/>
                     </connections>
                 </viewController>
@@ -115,7 +127,7 @@
         <scene sceneID="8s5-LR-Lwg">
             <objects>
                 <navigationController storyboardIdentifier="EditStickerNavigationController" toolbarHidden="NO" id="mHK-wh-jhb" userLabel="Edit Sticker Navigation Controller" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Ezs-dE-6ca" userLabel="Edit Sticker Navigation Bar">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ezs-dE-6ca" userLabel="Edit Sticker Navigation Bar">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <userDefinedRuntimeAttributes>
@@ -356,7 +368,7 @@
         <scene sceneID="gbp-ZZ-OD8">
             <objects>
                 <navigationController storyboardIdentifier="MainNavigationController" id="7oO-ML-e6r" userLabel="Sticker Collection Navigation Controller" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AEa-As-IWY" userLabel="Sticker Collection Navigtion Bar">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AEa-As-IWY" userLabel="Sticker Collection Navigtion Bar">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <userDefinedRuntimeAttributes>
