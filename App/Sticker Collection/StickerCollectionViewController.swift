@@ -101,6 +101,7 @@ fileprivate extension StickerCollectionViewController {
 fileprivate extension StickerCollectionViewController {
 
     func setupArrow() {
+        arrowView.alpha = 0
         arrowView.isHidden = true
         arrowView.backgroundColor = UIColor.clear
         arrowOffsetLayoutConstraint.constant = minArrowPosition
@@ -114,7 +115,7 @@ fileprivate extension StickerCollectionViewController {
         }
 
         arrowTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: { _ in
-            self.bounceArrow()
+            self.animateArrow()
         })
         arrowTimer?.tolerance = 0.5
     }
@@ -137,11 +138,30 @@ fileprivate extension StickerCollectionViewController {
         return 16
     }
 
-    func bounceArrow() {
+    func animateArrow() {
         if arrowView.isHidden {
             return
         }
 
+        if arrowView.alpha == 0 {
+            animateArrowAlpha()
+        } else {
+            bounceArrow()
+        }
+    }
+
+    func animateArrowAlpha() {
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .curveEaseIn,
+                       animations: {
+                           self.arrowView.alpha = 1
+                       },
+                       completion: nil
+        )
+    }
+
+    func bounceArrow() {
         let layoutAnimation = {
             self.view.layoutIfNeeded()
         }
