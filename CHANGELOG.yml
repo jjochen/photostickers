@@ -2,6 +2,6 @@ upcoming:
 - inital release
 - stickers listed in extension
 - stickers listed in app
-- edit sticker (image, crop bounds)
+- edit sticker (image, clip bounds, mask type)
 
 releases:

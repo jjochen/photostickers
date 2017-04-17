@@ -162,6 +162,8 @@
 		191372371EA4ABB700626085 /* ImageRenderServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRenderServiceMock.swift; sourceTree = "<group>"; };
 		1918E6391E72CC2A007DFFE7 /* Mask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
 		191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Rx.swift"; sourceTree = "<group>"; };
+		193003621EA51884002CA5F4 /* Icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Icon.jpg; sourceTree = "<group>"; };
+		193003631EA51884002CA5F4 /* Screenshot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Screenshot.jpg; sourceTree = "<group>"; };
 		19360B6D1E9F5BC2003E9252 /* description.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = description.txt; sourceTree = "<group>"; };
 		19360B6E1E9F5BC2003E9252 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
 		19360B6F1E9F5BC2003E9252 /* marketing_url.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = marketing_url.txt; sourceTree = "<group>"; };
@@ -334,7 +336,6 @@
 				191372351EA4A95D00626085 /* ImageStoreServiceMock.swift */,
 				191372371EA4ABB700626085 /* ImageRenderServiceMock.swift */,
 			);
-			name = Mocks;
 			path = Mocks;
 			sourceTree = "<group>";
 		};
@@ -733,6 +734,8 @@
 			isa = PBXGroup;
 			children = (
 				19F69E521E17F57D00EEF781 /* README.md */,
+				193003621EA51884002CA5F4 /* Icon.jpg */,
+				193003631EA51884002CA5F4 /* Screenshot.jpg */,
 				19F69E511E17F57D00EEF781 /* LICENSE */,
 				19AA564B1E68A0FA005BDD23 /* NOTES */,
 			);
