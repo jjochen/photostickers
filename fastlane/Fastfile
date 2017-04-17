@@ -1,6 +1,6 @@
 fastlane_require 'yaml'
-
 fastlane_version "2.3.0"
+#xcversion(version: "8.3.1")
 
 before_all do
     ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "2"
@@ -79,7 +79,8 @@ EOS
 
     File.open(changelog_filename, 'w') { |file| file.puts changelog_contents }
     
-    # match(type: "appstore") ???
+    # Test
+    scan
     
     # Grab the latest profiles from Apple
     sigh
