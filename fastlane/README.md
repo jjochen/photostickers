@@ -44,6 +44,11 @@ Submit a new Beta Build to Apple TestFlight
 fastlane release
 ```
 Deploy a new version to the App Store
+### upload_metadata
+```
+fastlane upload_metadata
+```
+Deploy a new version to the App Store
 ### storyboard_ids
 ```
 fastlane storyboard_ids

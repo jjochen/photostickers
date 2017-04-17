@@ -19,7 +19,11 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0.0</string>
 	<key>CFBundleVersion</key>
-	<string>2017.04.17.2</string>
+	<string>42</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>!!!</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionMainStoryboard</key>
@@ -29,9 +33,5 @@
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>!!!</string>
-	<key>NSCameraUsageDescription</key>
-	<string>!!!</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 </dict>
 </plist>

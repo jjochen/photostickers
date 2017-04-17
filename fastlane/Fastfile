@@ -14,11 +14,7 @@ end
 desc "Submit a new Beta Build to Apple TestFlight"
 lane :beta do
     
-    build_number = Time.new.strftime("%Y.%m.%d")
-    # build_number_extended = Time.new.strftime("%Y.%m.%d.%H.%M")
-    # latest_build_number = latest_testflight_build_number
-    # build_number = latest_build_number.start_with?(build_number_short) ? build_number_extended : build_number_short
-    increment_build_number build_number: build_number
+    increment_build_number
     
     sigh(
          adhoc: false,
@@ -46,9 +42,7 @@ lane :release do |options|
     # Make sure we start off with a clean slate
     ensure_git_status_clean
     
-    # Increment build number to current date
-    build_number = Time.new.strftime("%Y.%m.%d.2")
-    increment_build_number build_number: build_number
+    increment_build_number
     
     # Generate release notes from CHANGELOG
     changelog_filename = '../CHANGELOG.yml'
@@ -93,12 +87,21 @@ EOS
     # frameit
     
     # Make sure our directory is clean, except for changes Fastlane has made
-    clean_build_artifacts
-                     
+    #clean_build_artifacts
+
     # Tag release and push to GitHub
     sh "git add .. ; git commit -m 'Deploying version #{version}.'" # Can't use commit_version_bump to include changelog changes
     add_git_tag tag: version
     push_to_git_remote
+end
+
+
+desc "Deploy a new version to the App Store"
+lane :upload_metadata do
+    deliver(
+            skip_binary_upload: true,
+            force: true,
+            )
 end
 
 
