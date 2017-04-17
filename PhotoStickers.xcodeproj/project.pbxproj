@@ -9,13 +9,17 @@
 /* Begin PBXBuildFile section */
 		1237E380319BE40A860FC623 /* Pods_PhotoStickersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394EA5E241F8BED0EF9FE8E7 /* Pods_PhotoStickersTests.framework */; };
 		1913722B1EA2D1F300626085 /* ArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1913722A1EA2D1F300626085 /* ArrowView.swift */; };
+		1913722D1EA410C000626085 /* StickerCollectionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1913722C1EA410C000626085 /* StickerCollectionViewModelTests.swift */; };
+		1913722F1EA4A5AE00626085 /* StickerServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1913722E1EA4A5AE00626085 /* StickerServiceMock.swift */; };
+		191372341EA4A92700626085 /* sticker.png in Resources */ = {isa = PBXBuildFile; fileRef = 191372331EA4A92700626085 /* sticker.png */; };
+		191372361EA4A95D00626085 /* ImageStoreServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191372351EA4A95D00626085 /* ImageStoreServiceMock.swift */; };
+		191372381EA4ABB700626085 /* ImageRenderServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191372371EA4ABB700626085 /* ImageRenderServiceMock.swift */; };
 		1918E63A1E72CC2A007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
 		1918E63B1E72CC4C007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
 		191FC7CD1E8AFC990075A9FB /* UIScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */; };
 		19360B8D1E9FA9C4003E9252 /* prefillContent.zip in Resources */ = {isa = PBXBuildFile; fileRef = 19360B8C1E9FA9C4003E9252 /* prefillContent.zip */; };
 		19360B8E1E9FA9C4003E9252 /* prefillContent.zip in Resources */ = {isa = PBXBuildFile; fileRef = 19360B8C1E9FA9C4003E9252 /* prefillContent.zip */; };
 		193DCBB61E9C2E2200479B29 /* StickerService+UITestSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193DCBB51E9C2E2200479B29 /* StickerService+UITestSetup.swift */; };
-		193DCBB71E9CB51400479B29 /* original.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19AA56541E6D7A45005BDD23 /* original.jpg */; };
 		1946211A1E3CFDA1000F09CE /* Logger+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621061E3CFDA1000F09CE /* Logger+Shared.swift */; };
 		1946211E1E3CFDA1000F09CE /* UIStoryboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621081E3CFDA1000F09CE /* UIStoryboard+Extensions.swift */; };
 		194621201E3CFDA1000F09CE /* UIStoryboardSegue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621091E3CFDA1000F09CE /* UIStoryboardSegue+Extensions.swift */; };
@@ -151,6 +155,11 @@
 
 /* Begin PBXFileReference section */
 		1913722A1EA2D1F300626085 /* ArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowView.swift; sourceTree = "<group>"; };
+		1913722C1EA410C000626085 /* StickerCollectionViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerCollectionViewModelTests.swift; sourceTree = "<group>"; };
+		1913722E1EA4A5AE00626085 /* StickerServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerServiceMock.swift; sourceTree = "<group>"; };
+		191372331EA4A92700626085 /* sticker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sticker.png; sourceTree = "<group>"; };
+		191372351EA4A95D00626085 /* ImageStoreServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStoreServiceMock.swift; sourceTree = "<group>"; };
+		191372371EA4ABB700626085 /* ImageRenderServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRenderServiceMock.swift; sourceTree = "<group>"; };
 		1918E6391E72CC2A007DFFE7 /* Mask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
 		191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Rx.swift"; sourceTree = "<group>"; };
 		19360B6D1E9F5BC2003E9252 /* description.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = description.txt; sourceTree = "<group>"; };
@@ -318,6 +327,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		191372301EA4A5CE00626085 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				1913722E1EA4A5AE00626085 /* StickerServiceMock.swift */,
+				191372351EA4A95D00626085 /* ImageStoreServiceMock.swift */,
+				191372371EA4ABB700626085 /* ImageRenderServiceMock.swift */,
+			);
+			name = Mocks;
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		19360B6C1E9F5BC2003E9252 /* de-DE */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,8 +531,10 @@
 		1946217B1E3CFF40000F09CE /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				194621911E3FE8A1000F09CE /* StickerTests.swift */,
+				191372301EA4A5CE00626085 /* Mocks */,
 				19AA56531E6D79C0005BDD23 /* Resources */,
+				1913722C1EA410C000626085 /* StickerCollectionViewModelTests.swift */,
+				194621911E3FE8A1000F09CE /* StickerTests.swift */,
 				1946217D1E3CFF40000F09CE /* Supporting Files */,
 			);
 			path = Tests;
@@ -610,6 +632,7 @@
 		19AA56531E6D79C0005BDD23 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				191372331EA4A92700626085 /* sticker.png */,
 				19AA56541E6D7A45005BDD23 /* original.jpg */,
 			);
 			path = Resources;
@@ -953,7 +976,6 @@
 				194621281E3CFDA1000F09CE /* Assets.xcassets in Resources */,
 				19DFF0131E8E9F6000E4B36C /* .gitattributes in Resources */,
 				19DFF0121E8E9F6000E4B36C /* _config.yml in Resources */,
-				193DCBB71E9CB51400479B29 /* original.jpg in Resources */,
 				19DFF0151E8E9F6000E4B36C /* .ruby-version in Resources */,
 				199546661E9997F800B2E236 /* InfoPlist.strings in Resources */,
 			);
@@ -964,6 +986,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				198C50E21E9BF754002D331E /* original.jpg in Resources */,
+				191372341EA4A92700626085 /* sticker.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1180,7 +1203,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1913722D1EA410C000626085 /* StickerCollectionViewModelTests.swift in Sources */,
+				191372361EA4A95D00626085 /* ImageStoreServiceMock.swift in Sources */,
 				194621921E3FE8A1000F09CE /* StickerTests.swift in Sources */,
+				191372381EA4ABB700626085 /* ImageRenderServiceMock.swift in Sources */,
+				1913722F1EA4A5AE00626085 /* StickerServiceMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1328,7 +1355,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2017.04.16;
+				CURRENT_PROJECT_VERSION = 2017.04.17;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1381,7 +1408,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2017.04.16;
+				CURRENT_PROJECT_VERSION = 2017.04.17;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

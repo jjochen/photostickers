@@ -6,46 +6,49 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import XCTest
-@testable import PhotoStickers
+import Quick
+import Nimble
+@testable
+import PhotoStickers
 
-class StickerTests: XCTestCase {
-}
+class StickerTests: QuickSpec {
+    override func spec() {
 
-extension StickerTests {
-    func testStickerCreation() {
-        let sticker = Sticker()
-        XCTAssertNotNil(sticker)
-    }
+        it("is not nil") {
+            let sticker = Sticker()
+            expect(sticker).notTo(beNil())
+        }
 
-    func testStickerEquality() {
-        let sticker1 = Sticker()
-        let sticker2 = Sticker()
-        XCTAssertTrue(sticker1 == sticker2)
+        it("is equal to ohter sticker when it has the same uuid") {
+            let sticker1 = Sticker()
+            let sticker2 = Sticker()
 
-        let uuid = "uuid"
-        sticker1.uuid = uuid
-        XCTAssertFalse(sticker1 == sticker2)
-        sticker2.uuid = uuid
-        XCTAssertTrue(sticker1 == sticker2)
+            expect(sticker1 == sticker2).to(beTrue())
 
-        sticker1.cropBounds = CGRect(x: 1, y: 2, width: 3, height: 4)
-        XCTAssertTrue(sticker1 == sticker2)
-    }
+            let uuid = "uuid"
+            sticker1.uuid = uuid
+            expect(sticker1 == sticker2).to(beFalse())
+            sticker2.uuid = uuid
+            expect(sticker1 == sticker2).to(beTrue())
 
-    func testCropBounds() {
-        let bounds = CGRect(x: 11, y: 22, width: 33, height: 44)
-        let sticker = Sticker()
-        sticker.cropBounds = bounds
+            sticker1.cropBounds = CGRect(x: 1, y: 2, width: 3, height: 4)
+            expect(sticker1 == sticker2).to(beTrue())
+        }
 
-        XCTAssert(Double(bounds.minX) == sticker.cropBoundsX)
-        XCTAssert(Double(bounds.minY) == sticker.cropBoundsY)
-        XCTAssert(Double(bounds.width) == sticker.cropBoundsWidth)
-        XCTAssert(Double(bounds.height) == sticker.cropBoundsHeight)
-    }
+        it("sets the correct bounds") {
+            let bounds = CGRect(x: 11, y: 22, width: 33, height: 44)
+            let sticker = Sticker()
+            sticker.cropBounds = bounds
 
-    func testNewStickerShouldHaveUUID() {
-        let sticker = Sticker.newSticker()
-        XCTAssertNotNil(sticker.uuid)
+            expect(sticker.cropBoundsX) == Double(bounds.minX)
+            expect(sticker.cropBoundsY) == Double(bounds.minY)
+            expect(sticker.cropBoundsWidth) == Double(bounds.width)
+            expect(sticker.cropBoundsHeight) == Double(bounds.height)
+        }
+
+        it("has a uuid on creation") {
+            let sticker = Sticker.newSticker()
+            expect(sticker.uuid).notTo(beNil())
+        }
     }
 }
