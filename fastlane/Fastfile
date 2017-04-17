@@ -50,7 +50,7 @@ lane :release do |options|
     ensure_git_status_clean
     
     # Increment build number to current date
-    build_number = Time.new.strftime("%Y.%m.%d")
+    build_number = Time.new.strftime("%Y.%m.%d.2")
     increment_build_number build_number: build_number
     
     # Generate release notes from CHANGELOG
