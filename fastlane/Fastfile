@@ -27,10 +27,7 @@ lane :beta do
     
     ENV["PROFILE_UDID"] = lane_context[SharedValues::SIGH_UDID]
     
-    gym(
-        configuration: "Release",
-        scheme: "PhotoStickers",
-    )
+    gym
     
     pilot(
           skip_submission: false,
@@ -89,8 +86,6 @@ EOS
     
     # Build
     gym(
-        configuration: "Release",
-        scheme: "PhotoStickers",
         include_bitcode: true,
     )
     

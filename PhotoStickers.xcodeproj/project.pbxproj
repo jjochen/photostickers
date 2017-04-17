@@ -166,6 +166,7 @@
 		193003621EA51884002CA5F4 /* Icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Icon.jpg; sourceTree = "<group>"; };
 		193003631EA51884002CA5F4 /* Screenshot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Screenshot.jpg; sourceTree = "<group>"; };
 		193003651EA54DA6002CA5F4 /* .swift-version */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ".swift-version"; sourceTree = "<group>"; };
+		193003671EA55421002CA5F4 /* Gymfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; name = Gymfile; path = fastlane/Gymfile; sourceTree = "<group>"; };
 		19360B6D1E9F5BC2003E9252 /* description.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = description.txt; sourceTree = "<group>"; };
 		19360B6E1E9F5BC2003E9252 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
 		19360B6F1E9F5BC2003E9252 /* marketing_url.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = marketing_url.txt; sourceTree = "<group>"; };
@@ -752,6 +753,7 @@
 				19F69E4C1E17F57D00EEF781 /* Appfile */,
 				19F69E4D1E17F57D00EEF781 /* Deliverfile */,
 				19F69E4E1E17F57D00EEF781 /* Fastfile */,
+				193003671EA55421002CA5F4 /* Gymfile */,
 				19AA565A1E6D84DE005BDD23 /* metadata */,
 				19F69E4F1E17F57D00EEF781 /* Scanfile */,
 				19AA566A1E6D84DE005BDD23 /* Snapfile */,
