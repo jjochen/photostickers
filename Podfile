@@ -25,12 +25,12 @@ target 'PhotoStickers' do
 
     target 'PhotoStickersTests' do
         inherit! :search_paths
-        pod 'RxTest'
         
-        #pod 'RxBlocking'
-        #pod 'Quick'
-        #pod 'Nimble'
-        #pod 'RxNimble'
+        pod 'RxTest'
+        pod 'RxBlocking'
+        pod 'Quick'
+        pod 'Nimble'
+        pod 'RxNimble'
     end
 end
 
