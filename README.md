@@ -1,10 +1,10 @@
 # iOS Photo Stickers
 
-[![Build Status][buildstatus_icon]][buildstatus_link]
+[![Build Status](https://travis-ci.org/jjochen/photostickers.svg?branch=master)](https://travis-ci.org/jjochen/photostickers)  [<img src="https://linkmaker.itunes.apple.com/assets/shared/badges/en-us/appstore-sm.svg" height="20">](https://itunes.apple.com/us/app/easy-photo-stickers/id1190255489?ls=1&mt=8)
 
 Create iMessage Stickers from your own Photo Library.
 
-![Screenshot][screenshot]
+![Screenshot](Screenshot.jpg)
 
 
 ## Build Requirements
@@ -17,10 +17,4 @@ Create iMessage Stickers from your own Photo Library.
 
 Photo Stickers is available under the MIT license. See the LICENSE file for more info.
 
-![Icon][icon] 
-
-
-[buildstatus_icon]: https://travis-ci.org/jjochen/photostickers.svg?branch=master&style=flat
-[buildstatus_link]: https://travis-ci.org/jjochen/photostickers
-[screenshot]: Screenshot.jpg "Photo Stickers Screenshot"
-[icon]: Icon.jpg "Photo Stickers Icon"
+[![Icon](Icon.jpg)](https://itunes.apple.com/us/app/easy-photo-stickers/id1190255489?ls=1&mt=8)
