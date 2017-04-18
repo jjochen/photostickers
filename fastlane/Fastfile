@@ -79,9 +79,7 @@ EOS
     ENV["PROFILE_UDID"] = lane_context[SharedValues::SIGH_UDID]
     
     # Build
-    gym(
-        include_bitcode: true,
-    )
+    gym
     
     deliver(force: true)
     # frameit

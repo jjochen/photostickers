@@ -1,4 +1,5 @@
 upcoming:
+- handle iTC issue with bitcode
 
 releases:
 - version: 1.0.0
