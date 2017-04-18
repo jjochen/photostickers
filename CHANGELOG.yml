@@ -1,7 +1,11 @@
 upcoming:
-- handle iTC issue with bitcode
 
 releases:
+- version: 1.0.1
+  date: 2017-04-18
+  notes:
+  - handle iTC issue with bitcode
+
 - version: 1.0.0
   date: 2017-04-17
   notes:
@@ -9,5 +13,6 @@ releases:
   - stickers listed in extension
   - stickers listed in app
   - edit sticker (image, clip bounds, mask type)
+
 
 
