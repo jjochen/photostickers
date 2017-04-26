@@ -353,7 +353,6 @@
 				1930036E1EA61B7D002CA5F4 /* XCUIApplication+Extensions.h */,
 				1930036F1EA61B7D002CA5F4 /* XCUIApplication+Extensions.m */,
 			);
-			name = ObjC;
 			path = ObjC;
 			sourceTree = "<group>";
 		};
@@ -1526,7 +1525,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.PhotoStickersUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "UITests/PhotoStickersUITests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "UITests/ObjC/PhotoStickersUITests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = PhotoStickers;
@@ -1542,7 +1541,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.PhotoStickersUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "UITests/PhotoStickersUITests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "UITests/ObjC/PhotoStickersUITests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = PhotoStickers;
 			};
