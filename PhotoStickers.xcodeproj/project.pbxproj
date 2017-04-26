@@ -18,6 +18,7 @@
 		1918E63B1E72CC4C007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
 		191FC7CD1E8AFC990075A9FB /* UIScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */; };
 		193003661EA54DA7002CA5F4 /* .swift-version in Resources */ = {isa = PBXBuildFile; fileRef = 193003651EA54DA6002CA5F4 /* .swift-version */; };
+		193003701EA61B7D002CA5F4 /* XCUIApplication+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1930036F1EA61B7D002CA5F4 /* XCUIApplication+Extensions.m */; };
 		19360B8D1E9FA9C4003E9252 /* prefillContent.zip in Resources */ = {isa = PBXBuildFile; fileRef = 19360B8C1E9FA9C4003E9252 /* prefillContent.zip */; };
 		19360B8E1E9FA9C4003E9252 /* prefillContent.zip in Resources */ = {isa = PBXBuildFile; fileRef = 19360B8C1E9FA9C4003E9252 /* prefillContent.zip */; };
 		193DCBB61E9C2E2200479B29 /* StickerService+UITestSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193DCBB51E9C2E2200479B29 /* StickerService+UITestSetup.swift */; };
@@ -167,6 +168,9 @@
 		193003631EA51884002CA5F4 /* Screenshot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Screenshot.jpg; sourceTree = "<group>"; };
 		193003651EA54DA6002CA5F4 /* .swift-version */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ".swift-version"; sourceTree = "<group>"; };
 		193003671EA55421002CA5F4 /* Gymfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; name = Gymfile; path = fastlane/Gymfile; sourceTree = "<group>"; };
+		1930036A1EA61A90002CA5F4 /* PhotoStickersUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotoStickersUITests-Bridging-Header.h"; sourceTree = "<group>"; };
+		1930036E1EA61B7D002CA5F4 /* XCUIApplication+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCUIApplication+Extensions.h"; sourceTree = "<group>"; };
+		1930036F1EA61B7D002CA5F4 /* XCUIApplication+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCUIApplication+Extensions.m"; sourceTree = "<group>"; };
 		19360B6D1E9F5BC2003E9252 /* description.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = description.txt; sourceTree = "<group>"; };
 		19360B6E1E9F5BC2003E9252 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
 		19360B6F1E9F5BC2003E9252 /* marketing_url.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = marketing_url.txt; sourceTree = "<group>"; };
@@ -340,6 +344,17 @@
 				191372371EA4ABB700626085 /* ImageRenderServiceMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		193003711EA61FDD002CA5F4 /* ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				1930036A1EA61A90002CA5F4 /* PhotoStickersUITests-Bridging-Header.h */,
+				1930036E1EA61B7D002CA5F4 /* XCUIApplication+Extensions.h */,
+				1930036F1EA61B7D002CA5F4 /* XCUIApplication+Extensions.m */,
+			);
+			name = ObjC;
+			path = ObjC;
 			sourceTree = "<group>";
 		};
 		19360B6C1E9F5BC2003E9252 /* de-DE */ = {
@@ -558,6 +573,7 @@
 				194621821E3CFF4F000F09CE /* PhotoStickersUITests.swift */,
 				19AA567C1E6D8709005BDD23 /* Snapshots */,
 				194621831E3CFF4F000F09CE /* Supporting Files */,
+				193003711EA61FDD002CA5F4 /* ObjC */,
 			);
 			path = UITests;
 			sourceTree = "<group>";
@@ -933,6 +949,7 @@
 					19B7A4D81E13C14B0074B6B1 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 2TV9GXC7CB;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 19B7A4B61E13C14B0074B6B1;
 					};
@@ -1226,6 +1243,7 @@
 			files = (
 				194621851E3CFF4F000F09CE /* PhotoStickersUITests.swift in Sources */,
 				19AA56591E6D83A9005BDD23 /* SnapshotHelper.swift in Sources */,
+				193003701EA61B7D002CA5F4 /* XCUIApplication+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1502,11 +1520,14 @@
 		19B7A4E91E13C14B0074B6B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = "UITests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.PhotoStickersUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "UITests/PhotoStickersUITests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = PhotoStickers;
 			};
@@ -1515,11 +1536,13 @@
 		19B7A4EA1E13C14B0074B6B1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = "UITests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.PhotoStickersUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "UITests/PhotoStickersUITests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = PhotoStickers;
 			};

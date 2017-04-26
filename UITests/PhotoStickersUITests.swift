@@ -12,26 +12,15 @@ class PhotoStickersUITests: XCTestCase {
 
     fileprivate var app: XCUIApplication?
 
-    override func setUp() {
-        super.setUp()
-
-        continueAfterFailure = false
-
+    func testUI() {
         app = XCUIApplication()
-        app?.launchArguments += ["-RunningUITests", "true"]
-        setupSnapshot(app!)
-        app?.launch()
-    }
-
-    override func tearDown() {
-        app = nil
-        super.tearDown()
-    }
-
-    func testSnapshots() {
-        guard app != nil else {
+        guard let app = self.app else {
             fatalError()
         }
+
+        app.launchArguments += ["-RunningUITests", "true"]
+        setupSnapshot(app)
+        app.launch()
 
         XCTAssert(stickerCollectionNavigtionBar.exists)
         XCTAssert(collectionView.exists)
@@ -69,13 +58,33 @@ class PhotoStickersUITests: XCTestCase {
         XCTAssert(firstStickerCell.exists)
 
         firstStickerCell.tap()
+        starButton.tap()
+        multiStarButton.tap()
         rectangleButton.tap()
 
         snapshot("2_Edit_Sticker")
 
-        saveButtonItem.tap()
+        circleButton.tap()
 
-        firstStickerCell.tap()
+        saveButtonItem.tap()
+    }
+
+    func takeMessagesSnapshot() {
+        app = XCUIApplication.eps_iMessagesApp()
+        guard let app = self.app else {
+            fatalError()
+        }
+
+        app.launchArguments += ["-RunningUITests", "true"]
+        setupSnapshot(app)
+        app.launch()
+
+        app.tables.cells.element(boundBy: 0).tap()
+
+        app.buttons["browserButton"].tap()
+        app.children(matching: .window).element(boundBy: 0).tap()
+
+        snapshot("3_Messages")
     }
 }
 
@@ -162,5 +171,24 @@ fileprivate extension PhotoStickersUITests {
 fileprivate extension PhotoStickersUITests {
     func isIPad() -> Bool {
         return app!.windows.element(boundBy: 0).horizontalSizeClass == .regular && app!.windows.element(boundBy: 0).verticalSizeClass == .regular
+    }
+}
+
+extension XCUIElement {
+    func forceTap() {
+        if isHittable {
+            tap()
+        } else {
+            let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: CGVector(dx: 0.0, dy: 0.0))
+            coordinate.tap()
+        }
+    }
+
+    // The following is a workaround for inputting text in the
+    // simulator when the keyboard is hidden
+    func setText(_ text: String, application: XCUIApplication) {
+        UIPasteboard.general.string = text
+        doubleTap()
+        application.menuItems["Paste"].tap()
     }
 }

@@ -14,7 +14,8 @@ import RealmSwift
 class MessagesViewController: MSMessagesAppViewController {
 
     lazy var viewModel: MessagesViewModelType = {
-        let dataFolder: DataFolderServiceType = DataFolderService(type: .appGroup)
+        let dataFolderType = DataFolderType.appGroup
+        let dataFolder: DataFolderServiceType = DataFolderService(type: dataFolderType)
         let imageStoreService: ImageStoreServiceType = ImageStoreService(url: dataFolder.imagesURL)
         let stickerService: StickerServiceType = StickerService(realmType: .onDisk(url: dataFolder.realmURL), imageStoreService: imageStoreService)
         return MessagesViewModel(stickerService: stickerService, imageStoreService: imageStoreService, extensionContext: self.extensionContext)
