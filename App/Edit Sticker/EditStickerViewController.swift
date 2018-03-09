@@ -306,7 +306,7 @@ fileprivate extension EditStickerViewController {
                 let deleteAction = UIAlertAction(title: "Delete".localized,
                                                  style: .destructive,
                                                  handler: { _ in
-                                                     viewModel.deleteAlertDidConfirm.onNext()
+                                                     viewModel.deleteAlertDidConfirm.onNext(())
                 })
                 alertController.addAction(deleteAction)
 
@@ -316,7 +316,7 @@ fileprivate extension EditStickerViewController {
                 alertController.addAction(cancelAction)
                 self.present(alertController, animated: true, completion: nil)
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         viewModel.presentImageSourceAlert
             .drive(onNext: { [weak self, weak viewModel] sourceTypes in
@@ -367,13 +367,13 @@ fileprivate extension EditStickerViewController {
                 }
                 self.present(alertController, animated: true, completion: nil)
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         viewModel.dismiss
             .drive(onNext: { [weak self] in
                 self?.dismiss(animated: true, completion: nil)
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 

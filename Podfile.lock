@@ -1,31 +1,33 @@
 PODS:
+  - Differentiator (3.0.2)
   - Log (1.0)
-  - Nimble (5.1.1)
-  - Quick (1.1.0)
-  - Realm (2.5.1):
-    - Realm/Headers (= 2.5.1)
-  - Realm/Headers (2.5.1)
-  - RealmSwift (2.5.1):
-    - Realm (= 2.5.1)
-  - RxBlocking (3.4.0):
-    - RxSwift (~> 3.4)
-  - RxCocoa (3.4.0):
-    - RxSwift (~> 3.4)
-  - RxDataSources (1.0.3):
-    - RxCocoa (~> 3.0)
-    - RxSwift (~> 3.0)
-  - RxNimble (1.0.0):
-    - Nimble (~> 5.1)
-    - RxBlocking (~> 3.0)
-    - RxSwift (~> 3.0)
-  - RxRealm (0.6.0):
-    - RealmSwift (~> 2.5)
-    - RxSwift (~> 3.2)
-  - RxSwift (3.4.0)
-  - RxTest (3.4.0):
-    - RxSwift (~> 3.4)
-  - SwiftFormat/CLI (0.28.2)
-  - Zip (0.7.0)
+  - Nimble (7.0.3)
+  - Quick (1.2.0)
+  - Realm (3.1.1):
+    - Realm/Headers (= 3.1.1)
+  - Realm/Headers (3.1.1)
+  - RealmSwift (3.1.1):
+    - Realm (= 3.1.1)
+  - RxBlocking (4.1.2):
+    - RxSwift (~> 4.0)
+  - RxCocoa (4.1.2):
+    - RxSwift (~> 4.0)
+  - RxDataSources (3.0.2):
+    - Differentiator (~> 3.0)
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+  - RxNimble (4.1.0):
+    - Nimble (~> 7.0)
+    - RxBlocking (~> 4.0)
+    - RxSwift (~> 4.0)
+  - RxRealm (0.7.5):
+    - RealmSwift (~> 3.0)
+    - RxSwift (~> 4.0)
+  - RxSwift (4.1.2)
+  - RxTest (4.1.2):
+    - RxSwift (~> 4.0)
+  - SwiftFormat/CLI (0.33.4)
+  - Zip (1.1.0)
 
 DEPENDENCIES:
   - Log
@@ -43,21 +45,22 @@ DEPENDENCIES:
   - Zip
 
 SPEC CHECKSUMS:
+  Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   Log: 5e368c9528db07517d18d2d04ff5fe2b6f5a1e21
-  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
-  Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  Realm: 32f86104d37c8521f864d4274050b38ba6190733
-  RealmSwift: f719e7511c902b8908593e8f143f59e47931bdb6
-  RxBlocking: 1797b8c1a3ad7b08965145e6e2294c2e101515aa
-  RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
-  RxDataSources: a021a0e944ba5f7991259829d973afdbfa719c0b
-  RxNimble: 84bd236a9086723284231fd70ea64d9195313453
-  RxRealm: 323de579b50b5e0f4a3e087d5925021f976ffaf1
-  RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
-  RxTest: beb6beb882cf1dcac5fc9fdbd4760a5254e7f3a6
-  SwiftFormat: f000e128c6f7b61ae0d5010b7745119734adeaa1
-  Zip: e34513299ac38c0686d5b24504da7ce343799ab9
+  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  Realm: 42d1c38a5b1bbcc828b48a7ce702cb86fc68adf4
+  RealmSwift: d31937ca6a6ee54acde64ec839523c0a3c04924b
+  RxBlocking: f6054985901412fc8c02daa84e92d4ba68c61389
+  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
+  RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
+  RxNimble: e5a34bf3b18d85406fc2a6e2cbc73aa2b4a858f0
+  RxRealm: a6c6c0a07cb61f34209969ca6657734edfdfff30
+  RxSwift: e49536837d9901277638493ea537394d4b55f570
+  RxTest: e634f15fd2c2cd0e0120132ef7a4f7be69ad0393
+  SwiftFormat: f39044d75d5e58dbbc7c436c089104ec9c8f717a
+  Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: d659c2233a4be61ac9df9aaaceb488655cf592d7
+PODFILE CHECKSUM: 5c2d5d40983d88dcafd2f00dc9cc99da13021bdb
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.4.0

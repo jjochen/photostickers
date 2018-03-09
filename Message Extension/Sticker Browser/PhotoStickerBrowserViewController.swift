@@ -42,8 +42,17 @@ class PhotoStickerBrowserViewController: UIViewController {
             return
         }
 
-        let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>()
-        skinTableViewDataSource(dataSource)
+        let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>(configureCell: { dataSource, collectionView, indexPath, _ in
+            switch dataSource[indexPath] {
+            case .openAppItem:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.AddMoreCell.rawValue, for: indexPath)
+                return cell
+            case let .stickerItem(viewModel: cellViewModel):
+                let cell: StickerBrowserCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.StickerBrowserCell.rawValue, for: indexPath) as! StickerBrowserCell
+                cell.viewModel = cellViewModel
+                return cell
+            }
+        })
 
         viewModel.sectionItems
             .map { items in
@@ -75,19 +84,7 @@ extension PhotoStickerBrowserViewController {
 
 // MARK: Skinning
 extension PhotoStickerBrowserViewController {
-    func skinTableViewDataSource(_ dataSource: RxCollectionViewSectionedReloadDataSource<StickerSection>) {
-        dataSource.configureCell = { dataSource, collectionView, indexPath, _ in
-            switch dataSource[indexPath] {
-            case .openAppItem:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.AddMoreCell.rawValue, for: indexPath)
-                return cell
-            case let .stickerItem(viewModel: cellViewModel):
-                let cell: StickerBrowserCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.StickerBrowserCell.rawValue, for: indexPath) as! StickerBrowserCell
-                cell.viewModel = cellViewModel
-                return cell
-            }
-        }
-    }
+
 }
 
 extension PhotoStickerBrowserViewController: UICollectionViewDelegate {

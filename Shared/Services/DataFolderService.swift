@@ -67,7 +67,7 @@ struct DataFolderService: DataFolderServiceType {
 fileprivate extension DataFolderService {
     func appGroupFolderURL(subfolder: String? = nil) -> URL? {
         var url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupID)
-        if let subfolder = subfolder, subfolder.characters.count > 0 {
+        if let subfolder = subfolder, subfolder.count > 0 {
             url?.appendPathComponent(subfolder)
         }
         guard createDirectory(at: url) else {
@@ -78,7 +78,7 @@ fileprivate extension DataFolderService {
 
     func temporaryDirectoryURL(subfolder: String? = nil) -> URL? {
         var url = URL(fileURLWithPath: NSTemporaryDirectory())
-        if let subfolder = subfolder, subfolder.characters.count > 0 {
+        if let subfolder = subfolder, subfolder.count > 0 {
             url.appendPathComponent(subfolder)
         }
         guard createDirectory(at: url) else {

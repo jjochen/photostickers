@@ -64,14 +64,14 @@ class StickerCollectionViewController: UIViewController {
                     self.showArrow()
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         viewModel.presentFirstStickerAlert
             .drive(onNext: { [weak self] in
                 guard let `self` = self else { return }
                 self.presentFirstStickerAlert()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 

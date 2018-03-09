@@ -5,6 +5,19 @@ platform :ios, '10.0'
 use_frameworks!
 inhibit_all_warnings!
 
+#Installing Nimble 5.1.1 (was 7.0.3)
+#Installing Quick 1.1.0 (was 1.2.0)
+#Installing Realm 2.5.1 (was 3.1.1)
+#Installing RealmSwift 2.5.1 (was 3.1.1)
+#Installing RxBlocking 3.4.0 (was 4.1.2)
+#Installing RxCocoa 3.4.0 (was 4.1.2)
+#Installing RxDataSources 1.0.3 (was 3.0.2)
+#Installing RxNimble 1.0.0 (was 4.1.0)
+#Installing RxRealm 0.6.0 (was 0.7.5)
+#Installing RxSwift 3.4.0 (was 4.1.2)
+#Installing RxTest 3.4.0 (was 4.1.2)
+#Installing SwiftFormat 0.28.2 (was 0.33.4)
+#Installing Zip 0.7.0 (was 1.1.0)
 
 target 'PhotoStickers' do
     pod 'RxSwift'

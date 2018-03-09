@@ -25,16 +25,16 @@ enum StickerProperty: String {
 
 // MARK: Realm Object
 class Sticker: Object {
-    dynamic var uuid = ""
-    dynamic var title: String?
-    dynamic var hasOriginalImage: Bool = false
-    dynamic var hasRenderedImage: Bool = false
-    dynamic var cropBoundsX: Double = 0
-    dynamic var cropBoundsY: Double = 0
-    dynamic var cropBoundsWidth: Double = 0
-    dynamic var cropBoundsHeight: Double = 0
-    dynamic var maskType: Int = Mask.circle.rawValue
-    dynamic var sortOrder = 0
+    @objc dynamic var uuid = ""
+    @objc dynamic var title: String?
+    @objc dynamic var hasOriginalImage: Bool = false
+    @objc dynamic var hasRenderedImage: Bool = false
+    @objc dynamic var cropBoundsX: Double = 0
+    @objc dynamic var cropBoundsY: Double = 0
+    @objc dynamic var cropBoundsWidth: Double = 0
+    @objc dynamic var cropBoundsHeight: Double = 0
+    @objc dynamic var maskType: Int = Mask.circle.rawValue
+    @objc dynamic var sortOrder = 0
 
     override static func primaryKey() -> String? {
         return StickerProperty.uuid.rawValue

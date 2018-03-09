@@ -144,7 +144,7 @@ extension StickerService {
                 return Disposables.create()
             }
 
-            observer.on(.next())
+            observer.on(.next(()))
             observer.on(.completed)
             return Disposables.create()
         }

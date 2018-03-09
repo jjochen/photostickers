@@ -42,7 +42,7 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
 
         let stickers = stickerService
             .fetchStickers()
-            .shareReplay(1)
+            .share(replay: 1)
 
         let stickerCount = stickers
             .map { allStickers in

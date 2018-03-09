@@ -39,7 +39,7 @@ class StickerCollectionViewModelTests: QuickSpec {
                 subject.presentFirstStickerAlert
                     .map { true }
                     .drive(didShowAlert)
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             afterEach {
