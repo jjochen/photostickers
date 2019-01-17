@@ -8,9 +8,8 @@
 
 import UIKit
 
-extension UIStoryboardSegue {
-}
+extension UIStoryboardSegue {}
 
-func ==(lhs: UIStoryboardSegue, rhs: SegueIdentifier) -> Bool {
+func == (lhs: UIStoryboardSegue, rhs: SegueIdentifier) -> Bool {
     return lhs.identifier == rhs.rawValue
 }

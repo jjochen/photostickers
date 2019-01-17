@@ -7,12 +7,11 @@
 //
 
 import Foundation
-import RxSwift
 import Log
+import RxSwift
 
 extension StickerService {
     func setupUITests() {
-
         deleteAll() //todo: doesn't delete images
 
         let disposeBag = DisposeBag()

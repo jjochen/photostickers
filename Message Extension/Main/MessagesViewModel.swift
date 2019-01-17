@@ -14,7 +14,6 @@ protocol MessagesViewModelType {
 }
 
 class MessagesViewModel: BaseViewModel, MessagesViewModelType {
-
     let extensionContext: NSExtensionContext?
     let stickerService: StickerServiceType
     let imageStoreService: ImageStoreServiceType

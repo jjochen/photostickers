@@ -24,6 +24,7 @@ enum StickerProperty: String {
 }
 
 // MARK: Realm Object
+
 class Sticker: Object {
     @objc dynamic var uuid = ""
     @objc dynamic var title: String?
@@ -56,6 +57,7 @@ class Sticker: Object {
 }
 
 // MARK: Equitable
+
 func == (lhs: Sticker, rhs: Sticker) -> Bool {
     return lhs.uuid == rhs.uuid
 }
@@ -66,8 +68,8 @@ extension Sticker {
 }
 
 // MARK: Bounds
-extension Sticker {
 
+extension Sticker {
     var cropBounds: CGRect {
         get {
             return CGRect(x: cropBoundsX, y: cropBoundsY, width: cropBoundsWidth, height: cropBoundsHeight)
@@ -82,19 +84,20 @@ extension Sticker {
 }
 
 // MARK: Mask
-extension Sticker {
 
+extension Sticker {
     var mask: Mask {
         get {
-            return Mask(rawValue: self.maskType) ?? .circle
+            return Mask(rawValue: maskType) ?? .circle
         }
         set(mask) {
-            self.maskType = mask.rawValue
+            maskType = mask.rawValue
         }
     }
 }
 
 // MARK: RxDataSource Methods
+
 extension Sticker: IdentifiableType {
     typealias Identity = String
 

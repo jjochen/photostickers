@@ -6,13 +6,12 @@
 //  Copyright © 2016 Jochen Pfeiffer. All rights reserved.
 //
 
-import UIKit
-import Messages
 import Log
+import Messages
 import RealmSwift
+import UIKit
 
 class MessagesViewController: MSMessagesAppViewController {
-
     lazy var viewModel: MessagesViewModelType = {
         let dataFolderType = DataFolderType.appGroup
         let dataFolder: DataFolderServiceType = DataFolderService(type: dataFolderType)
@@ -32,8 +31,8 @@ class MessagesViewController: MSMessagesAppViewController {
 }
 
 // MARK: - Conversation Handling
-extension MessagesViewController {
 
+extension MessagesViewController {
     override func willBecomeActive(with conversation: MSConversation) {
         super.willBecomeActive(with: conversation)
         presentViewController(for: presentationStyle)
@@ -66,8 +65,8 @@ extension MessagesViewController {
 }
 
 // MARK: Child view controller presentation
-extension MessagesViewController {
 
+extension MessagesViewController {
     fileprivate func instantiatePhotoStickerBrowserViewController() -> PhotoStickerBrowserViewController {
         let viewController = PhotoStickerBrowserViewController.instantiateFromStoryboard(UIStoryboard.messageExtension())
         viewController.viewModel = viewModel.photoStickerBrowserViewModel()
@@ -75,7 +74,6 @@ extension MessagesViewController {
     }
 
     fileprivate func presentViewController(for presentationStyle: MSMessagesAppPresentationStyle) {
-
         let controller: UIViewController
         if presentationStyle == .compact {
             controller = instantiatePhotoStickerBrowserViewController()

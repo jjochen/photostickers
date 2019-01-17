@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import RxSwift
-import RxCocoa
 import Log
+import RxCocoa
+import RxSwift
 
 protocol EditStickerViewModelType: class {
     func maximumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat
@@ -54,17 +54,18 @@ protocol EditStickerViewModelType: class {
 }
 
 class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
-
     let disposeBag = DisposeBag()
     let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
 
     // MARK: Dependencies
+
     fileprivate let stickerInfo: StickerInfo
     fileprivate let imageStoreService: ImageStoreServiceType
     fileprivate let stickerService: StickerServiceType
     fileprivate let stickerRenderService: StickerRenderServiceType
 
     // MARK: Input
+
     let saveButtonItemDidTap = PublishSubject<Void>()
     let cancelButtonItemDidTap = PublishSubject<Void>()
     let deleteButtonItemDidTap = PublishSubject<Void>()
@@ -82,6 +83,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let imageSourceAlertDidSelect = PublishSubject<UIImagePickerControllerSourceType>()
 
     // MARK: Output
+
     let stickerTitlePlaceholder: String
     let stickerTitle: String?
     let saveButtonItemEnabled: Driver<Bool>
@@ -102,6 +104,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let dismiss: Driver<Void>
 
     // MARK: Internal
+
     fileprivate let _stickerWasDeleted = PublishSubject<Void>()
     fileprivate let _originalImageWasSetToNil: Driver<Void>
     fileprivate let _stickerWasRendered: Driver<Void>
@@ -111,7 +114,6 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
          imageStoreService: ImageStoreServiceType,
          stickerService: StickerServiceType,
          stickerRenderService: StickerRenderServiceType) {
-
         let stickerInfo = StickerInfo(uuid: sticker.uuid,
                                       title: sticker.title,
                                       originalImage: sticker.originalImage(from: imageStoreService),
@@ -327,7 +329,7 @@ extension EditStickerViewModel {
 
     func maximumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat {
         let minimumZoomedSize = self.minimumZoomedSize(forImageSize: imageSize)
-        guard minimumZoomedSize.width > 0 && minimumZoomedSize.height > 0 else {
+        guard minimumZoomedSize.width > 0, minimumZoomedSize.height > 0 else {
             return 1
         }
 
@@ -338,7 +340,7 @@ extension EditStickerViewModel {
     }
 
     func minimumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat {
-        guard imageSize.width > 0 && imageSize.height > 0 else {
+        guard imageSize.width > 0, imageSize.height > 0 else {
             return 1
         }
 
@@ -353,7 +355,7 @@ extension EditStickerViewModel {
     func zoomScale(visibleRect: CGRect, boundsSize: CGSize) -> CGFloat {
         let visibleRectSize = visibleRect.size
 
-        guard visibleRectSize.width > 0 && visibleRectSize.height > 0 else {
+        guard visibleRectSize.width > 0, visibleRectSize.height > 0 else {
             return 1
         }
 

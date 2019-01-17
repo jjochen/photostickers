@@ -9,7 +9,6 @@
 import UIKit
 
 class AddIconView: UIControl {
-
     override var isHighlighted: Bool {
         didSet {
             setNeedsDisplay()

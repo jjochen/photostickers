@@ -6,8 +6,8 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import UIKit
 import Log
+import UIKit
 
 enum ImageCategory: String {
     case originals
@@ -59,7 +59,6 @@ protocol ImageStoreServiceType {
 }
 
 class ImageStoreService: ImageStoreServiceType {
-
     fileprivate let storeURL: URL?
 
     init(url: URL?) {
@@ -68,7 +67,6 @@ class ImageStoreService: ImageStoreServiceType {
 }
 
 extension ImageStoreService {
-
     func storeImage(_ image: UIImage, forKey key: String, inCategory category: ImageCategory) -> URL? {
         guard let data = category.fileType.data(for: image) else {
             Logger.shared.error("PNG/JPG representation not possible: \(image)")
@@ -131,7 +129,7 @@ extension ImageStoreService {
 
         do {
             try FileManager.default.removeItem(at: url)
-        } catch let error {
+        } catch {
             Logger.shared.error(error)
             return false
         }
@@ -141,7 +139,6 @@ extension ImageStoreService {
 }
 
 fileprivate extension ImageStoreService {
-
     func createSubfolderForCategory(_ category: ImageCategory) -> Bool {
         guard let url = self.constructCategoryURL(category) else {
             Logger.shared.error("No category url for \(category)")

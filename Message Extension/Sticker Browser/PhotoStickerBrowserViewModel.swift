@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import RxSwift
 import RealmSwift
 import RxRealm
+import RxSwift
 
 protocol PhotoStickerBrowserViewModelType {
     var stickerService: StickerServiceType { get }
@@ -18,13 +18,14 @@ protocol PhotoStickerBrowserViewModelType {
 }
 
 class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelType {
-
     // MARK: Dependencies
+
     let extensionContext: NSExtensionContext?
     let stickerService: StickerServiceType
     let imageStoreService: ImageStoreServiceType
 
     // MARK: Output
+
     var sectionItems: Observable<[StickerSectionItem]>
 
     init(stickerService: StickerServiceType, imageStoreService: ImageStoreServiceType, extensionContext: NSExtensionContext?) {

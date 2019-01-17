@@ -6,30 +6,29 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import UIKit
-import RxSwift
-import RxCocoa
 import Log
+import RxCocoa
+import RxSwift
+import UIKit
 
 class EditStickerViewController: UIViewController {
-
     var viewModel: EditStickerViewModelType?
     fileprivate let disposeBag = DisposeBag()
 
-    @IBOutlet weak var saveButtonItem: UIBarButtonItem!
-    @IBOutlet weak var cancelButtonItem: UIBarButtonItem!
-    @IBOutlet weak var photosButtonItem: UIBarButtonItem!
-    @IBOutlet weak var deleteButtonItem: UIBarButtonItem!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var stickerPlaceholder: AppIconView!
-    @IBOutlet weak var coverView: UIView!
-    @IBOutlet weak var stickerTitleTextField: UITextField!
+    @IBOutlet var saveButtonItem: UIBarButtonItem!
+    @IBOutlet var cancelButtonItem: UIBarButtonItem!
+    @IBOutlet var photosButtonItem: UIBarButtonItem!
+    @IBOutlet var deleteButtonItem: UIBarButtonItem!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var stickerPlaceholder: AppIconView!
+    @IBOutlet var coverView: UIView!
+    @IBOutlet var stickerTitleTextField: UITextField!
 
-    @IBOutlet weak var circleButton: UIButton!
-    @IBOutlet weak var rectangleButton: UIButton!
-    @IBOutlet weak var starButton: UIButton!
-    @IBOutlet weak var multiStarButton: UIButton!
+    @IBOutlet var circleButton: UIButton!
+    @IBOutlet var rectangleButton: UIButton!
+    @IBOutlet var starButton: UIButton!
+    @IBOutlet var multiStarButton: UIButton!
 
     @IBOutlet var portraitConstraints: [NSLayoutConstraint]!
     @IBOutlet var landscapeConstraints: [NSLayoutConstraint]!
@@ -75,13 +74,14 @@ extension EditStickerViewController {
         coordinator.animate(alongsideTransition: { _ in
             self.configureLayoutConstraints()
         },
-        completion: { _ in
+                            completion: { _ in
         })
         super.viewWillTransition(to: size, with: coordinator)
     }
 }
 
 // MARK: - UIScrollViewDelegate
+
 extension EditStickerViewController: UIScrollViewDelegate {
     func viewForZooming(in _: UIScrollView) -> UIView? {
         return imageView
@@ -89,6 +89,7 @@ extension EditStickerViewController: UIScrollViewDelegate {
 }
 
 // MARK: - Bindings
+
 fileprivate extension EditStickerViewController {
     func setupBindings() {
         guard let viewModel = self.viewModel else {
@@ -378,10 +379,9 @@ fileprivate extension EditStickerViewController {
 }
 
 // MARK: - Layout
+
 fileprivate extension EditStickerViewController {
-
     func configureLayoutConstraints() {
-
         guard let portraitConstraints = self.portraitConstraints else {
             return
         }
@@ -420,7 +420,8 @@ fileprivate extension EditStickerViewController {
             return StyleKit.imageOfRectangleButton(
                 lineWidth: lineWidth,
                 selected: selected,
-                highlighted: highlighted)
+                highlighted: highlighted
+            )
         }
 
         multiStarButton.setTitle(nil, for: UIControlState())
@@ -428,7 +429,8 @@ fileprivate extension EditStickerViewController {
             return StyleKit.imageOfMultiStarButton(
                 lineWidth: lineWidth,
                 selected: selected,
-                highlighted: highlighted)
+                highlighted: highlighted
+            )
         }
 
         starButton.setTitle(nil, for: UIControlState())
@@ -436,7 +438,8 @@ fileprivate extension EditStickerViewController {
             return StyleKit.imageOfStarButton(
                 lineWidth: lineWidth,
                 selected: selected,
-                highlighted: highlighted)
+                highlighted: highlighted
+            )
         }
     }
 }

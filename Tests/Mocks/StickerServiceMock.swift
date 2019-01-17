@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import RxSwift
 @testable import PhotoStickers
+import RxSwift
 
 class StickerServiceMock: StickerServiceType {
-
     fileprivate let stickers = Variable<[Sticker]>([])
 
     func set(mockedStickers: [Sticker]) {

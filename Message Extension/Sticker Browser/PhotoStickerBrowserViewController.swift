@@ -7,21 +7,20 @@
 //
 
 import Foundation
-import UIKit
-import Messages
 import Log
-import RxSwift
+import Messages
 import RxCocoa
 import RxDataSources
+import RxSwift
+import UIKit
 
 class PhotoStickerBrowserViewController: UIViewController {
-
     var viewModel: PhotoStickerBrowserViewModelType?
     fileprivate let disposeBag = DisposeBag()
 
     // MARK: Outlets / Actions
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +35,6 @@ class PhotoStickerBrowserViewController: UIViewController {
     // MARK: - Bindings
 
     fileprivate func setupBindings() {
-
         guard let viewModel = self.viewModel else {
             Logger.shared.error("View Model not set!")
             return
@@ -83,9 +81,8 @@ extension PhotoStickerBrowserViewController {
 }
 
 // MARK: Skinning
-extension PhotoStickerBrowserViewController {
 
-}
+extension PhotoStickerBrowserViewController {}
 
 extension PhotoStickerBrowserViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

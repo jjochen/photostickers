@@ -6,14 +6,13 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import Quick
 import Nimble
 @testable
 import PhotoStickers
+import Quick
 
 class StickerTests: QuickSpec {
     override func spec() {
-
         it("is not nil") {
             let sticker = Sticker()
             expect(sticker).notTo(beNil())

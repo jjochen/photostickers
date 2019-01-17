@@ -9,7 +9,6 @@
 import UIKit
 
 extension Sticker {
-
     func originalImage(from imageStoreService: ImageStoreServiceType) -> UIImage? {
         return imageStoreService.image(forKey: uuid, inCategory: .originals)
     }

@@ -6,16 +6,13 @@
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
 //
 
-import RxSwift
 import RxCocoa
+import RxSwift
 import UIKit
 
 open class RxImagePickerDelegateProxy
-: RxNavigationControllerDelegateProxy, UIImagePickerControllerDelegate {
-
+    : RxNavigationControllerDelegateProxy, UIImagePickerControllerDelegate {
     public init(imagePicker: UIImagePickerController) {
         super.init(navigationController: imagePicker)
     }
-
 }
-

@@ -6,9 +6,9 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import UIKit
-import RxSwift
 @testable import PhotoStickers
+import RxSwift
+import UIKit
 
 class StickerRenderServiceMock: StickerRenderServiceType {
     fileprivate var bundle: Bundle {

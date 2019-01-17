@@ -6,8 +6,8 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import UIKit
 import CoreImage
+import UIKit
 
 func averageColor() -> UIColor {
     var bitmap = [UInt8](repeating: 0, count: 4)

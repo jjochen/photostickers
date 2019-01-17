@@ -24,7 +24,6 @@ protocol DataFolderServiceType {
 }
 
 struct DataFolderService: DataFolderServiceType {
-
     fileprivate let appGroupID = "group.com.jochen-pfeiffer.photo-stickers"
 
     fileprivate let type: DataFolderType

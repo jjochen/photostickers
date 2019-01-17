@@ -10,7 +10,6 @@
 import UIKit
 
 public extension UIImage {
-
     public func hasAlpha() -> Bool {
         let alpha: CGImageAlphaInfo = cgImage!.alphaInfo
         return
@@ -96,8 +95,8 @@ public extension UIImage {
             x: CGFloat(borderSize),
             y: CGFloat(borderSize),
             width: size.width - CGFloat(borderSize) * 2,
-            height: size.height - CGFloat(borderSize) * 2)
-        )
+            height: size.height - CGFloat(borderSize) * 2
+        ))
 
         // Get an image of the context
         return maskContext.makeImage()!

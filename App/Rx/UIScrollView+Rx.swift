@@ -6,12 +6,11 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
+import UIKit
 
 extension Reactive where Base: UIScrollView {
-
     public var contentInset: UIBindingObserver<Base, UIEdgeInsets> {
         return UIBindingObserver(UIElement: base) { scrollView, contentInset in
             scrollView.contentInset = contentInset

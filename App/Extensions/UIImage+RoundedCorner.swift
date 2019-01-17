@@ -10,7 +10,6 @@
 import UIKit
 
 public extension UIImage {
-
     // Creates a copy of this image with rounded corners
     // If borderSize is non-zero, a transparent border of the given size will also be added
     // Original author: Björn Sållarp. Used with permission. See: http://blog.sallarp.com/iphone-uiimage-round-corners/
@@ -36,7 +35,8 @@ public extension UIImage {
                 x: CGFloat(borderSize),
                 y: CGFloat(borderSize),
                 width: image.size.width - CGFloat(borderSize) * 2,
-                height: image.size.height - CGFloat(borderSize) * 2),
+                height: image.size.height - CGFloat(borderSize) * 2
+            ),
             context: context,
             ovalWidth: CGFloat(cornerSize),
             ovalHeight: CGFloat(cornerSize)

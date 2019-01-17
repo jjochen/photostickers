@@ -9,9 +9,7 @@
 import UIKit
 
 extension UIImage {
-
     func fixOrientation() -> UIImage {
-
         if imageOrientation == UIImageOrientation.up {
             return self
         }

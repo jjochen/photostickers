@@ -16,7 +16,6 @@ enum Mask: Int {
 }
 
 extension Mask {
-
     func maskPath(in rect: CGRect) -> UIBezierPath {
         return maskPath(in: rect, maskRect: rect)
     }
@@ -54,7 +53,6 @@ extension Mask {
     }
 
     fileprivate func starPath(in rect: CGRect, flipped: Bool) -> UIBezierPath {
-
         let originalRect = CGRect(x: 0, y: 0, width: 44, height: 44)
 
         let starPath = UIBezierPath()
@@ -94,7 +92,6 @@ extension Mask {
     }
 
     fileprivate func multiStarPath(in rect: CGRect, flipped: Bool) -> UIBezierPath {
-
         let originalRect = CGRect(x: 0, y: 0, width: 44, height: 44)
 
         let starPath = UIBezierPath()

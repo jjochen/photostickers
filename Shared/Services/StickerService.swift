@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import RealmSwift
-import RxSwift
-import RxRealm
 import Log
+import RealmSwift
+import RxRealm
+import RxSwift
 
 enum RealmType {
     case inMemory
@@ -25,7 +25,6 @@ protocol StickerServiceType {
 }
 
 class StickerService: StickerServiceType {
-
     fileprivate let imageStoreService: ImageStoreServiceType
     fileprivate let realmType: RealmType
 
@@ -51,7 +50,6 @@ class StickerService: StickerServiceType {
 }
 
 extension StickerService {
-
     fileprivate func newRealm() -> Realm {
         switch realmType {
         case .inMemory:
@@ -99,7 +97,7 @@ extension StickerService {
             let sticker: Sticker?
             do {
                 sticker = try self?.sticker(withInfo: stickerInfo, inRealm: realm)
-            } catch let error {
+            } catch {
                 observer.on(.error(error))
                 return Disposables.create()
             }
@@ -139,7 +137,7 @@ extension StickerService {
                 try realm.write {
                     realm.delete(sticker)
                 }
-            } catch let error {
+            } catch {
                 observer.on(.error(error))
                 return Disposables.create()
             }
@@ -159,7 +157,6 @@ extension StickerService {
 }
 
 fileprivate extension StickerService {
-
     func sticker(withInfo info: StickerInfo, inRealm realm: Realm) throws -> Sticker {
         let sticker = try realm.sticker(withUUID: info.uuid)
         try update(sticker: sticker, withInfo: info)
@@ -244,7 +241,8 @@ fileprivate extension Realm {
                 if oldSchemaVersion < 3 {
                     Realm.performMigrationToVersion3(migration)
                 }
-        })
+            }
+        )
     }
 
     static func stickerConfigurationInMemory() -> Configuration {

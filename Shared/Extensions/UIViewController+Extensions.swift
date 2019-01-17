@@ -9,7 +9,6 @@
 import UIKit
 
 extension UIViewController {
-
     func loadViewProgrammatically() {
         beginAppearanceTransition(true, animated: false)
         endAppearanceTransition()

@@ -7,27 +7,24 @@
 //
 
 import Foundation
-import UIKit
-import RxSwift
 import Log
+import RxSwift
+import UIKit
 
 protocol StickerRenderServiceType {
     func render(_ stickerInfo: StickerInfo) -> Observable<UIImage?>
 }
 
 class StickerRenderService: StickerRenderServiceType {
-
     func render(_ stickerInfo: StickerInfo) -> Observable<UIImage?> {
-        return Observable.combineLatest(stickerInfo.originalImage.asObservable(), stickerInfo.cropBounds.asObservable(), stickerInfo.mask.asObservable()) { [weak self](originalImage, cropBounds, mask) -> UIImage? in
+        return Observable.combineLatest(stickerInfo.originalImage.asObservable(), stickerInfo.cropBounds.asObservable(), stickerInfo.mask.asObservable()) { [weak self] (originalImage, cropBounds, mask) -> UIImage? in
             self?.renderedImage(originalImage, cropBounds: cropBounds, mask: mask)
         }
     }
 }
 
 fileprivate extension StickerRenderService {
-
     func renderedImage(_ originalImage: UIImage?, cropBounds: CGRect, mask: Mask) -> UIImage? {
-
         guard let image = originalImage else {
             Logger.shared.error("Couldn't render empty image")
             return nil
@@ -87,7 +84,6 @@ fileprivate extension StickerRenderService {
     }
 
     func context(for imageRef: CGImage) -> CGContext? {
-
         guard let colorSpace = imageRef.colorSpace else {
             Logger.shared.error("Couldn't get color space")
             return nil

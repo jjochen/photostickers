@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
-class BaseViewModel: NSObject {
-}
+class BaseViewModel: NSObject {}

@@ -6,13 +6,12 @@
 //  Copyright © 2016 Jochen Pfeiffer. All rights reserved.
 //
 
-import UIKit
-import RealmSwift
 import Log
+import RealmSwift
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

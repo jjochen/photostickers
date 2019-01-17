@@ -6,21 +6,19 @@
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
 //
 
-
-import RxSwift
 import RxCocoa
+import RxSwift
 import UIKit
 
 extension Reactive where Base: UIImagePickerController {
-
     /**
      Reactive wrapper for `delegate` message.
      */
-    public var didFinishPickingMediaWithInfo: Observable<[String : AnyObject]> {
+    public var didFinishPickingMediaWithInfo: Observable<[String: AnyObject]> {
         return delegate
             .methodInvoked(#selector(UIImagePickerControllerDelegate.imagePickerController(_:didFinishPickingMediaWithInfo:)))
-            .map({ (a) in
-                return try castOrThrow(Dictionary<String, AnyObject>.self, a[1])
+            .map({ a in
+                try castOrThrow(Dictionary<String, AnyObject>.self, a[1])
             })
     }
 
@@ -30,9 +28,6 @@ extension Reactive where Base: UIImagePickerController {
     public var didCancel: Observable<()> {
         return delegate
             .methodInvoked(#selector(UIImagePickerControllerDelegate.imagePickerControllerDidCancel(_:)))
-            .map {_ in () }
+            .map { _ in () }
     }
-
 }
-
-

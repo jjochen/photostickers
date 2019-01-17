@@ -6,12 +6,10 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
+import RxSwift
 import UIKit
 
-import RxSwift
-
 extension Reactive where Base: UIViewController {
-
     var viewDidLoad: Observable<Void> {
         return sentMessage(#selector(Base.viewDidLoad)).map { _ in Void() }
     }

@@ -7,14 +7,13 @@
 //
 
 import Foundation
-import UIKit
-import Messages
 import Log
+import Messages
+import UIKit
 
 class StickerBrowserCell: UICollectionViewCell {
-
-    @IBOutlet weak var stickerView: MSStickerView!
-    @IBOutlet weak var placeholderView: AppIconView!
+    @IBOutlet var stickerView: MSStickerView!
+    @IBOutlet var placeholderView: AppIconView!
 
     var viewModel: StickerBrowserCellViewModelType? {
         didSet {

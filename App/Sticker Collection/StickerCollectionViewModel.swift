@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 protocol StickerCollectionViewModelType: class {
     var stickerCellModels: Driver<[StickerCollectionCellModel]> { get }
@@ -19,8 +19,8 @@ protocol StickerCollectionViewModelType: class {
 }
 
 class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType {
-
     // MARK: Dependencies
+
     fileprivate let imageStoreService: ImageStoreServiceType
     fileprivate let stickerService: StickerServiceType
     fileprivate let stickerRenderService: StickerRenderServiceType
@@ -28,6 +28,7 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
     // MARK: Input
 
     // MARK: Output
+
     let stickerCellModels: Driver<[StickerCollectionCellModel]>
     let arrowHidden: Driver<Bool>
     let presentFirstStickerAlert: Driver<Void>
@@ -35,7 +36,6 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
     init(imageStoreService: ImageStoreServiceType,
          stickerService: StickerServiceType,
          stickerRenderService: StickerRenderServiceType) {
-
         self.imageStoreService = imageStoreService
         self.stickerService = stickerService
         self.stickerRenderService = stickerRenderService
@@ -77,7 +77,6 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
     // MARK: - View Models
 
     func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType {
-
         return EditStickerViewModel(sticker: sticker,
                                     imageStoreService: imageStoreService,
                                     stickerService: stickerService,
