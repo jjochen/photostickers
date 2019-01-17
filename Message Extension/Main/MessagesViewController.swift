@@ -81,13 +81,13 @@ extension MessagesViewController {
             controller = instantiatePhotoStickerBrowserViewController()
         }
 
-        for child in childViewControllers {
-            child.willMove(toParentViewController: nil)
+        for child in children {
+            child.willMove(toParent: nil)
             child.view.removeFromSuperview()
-            child.removeFromParentViewController()
+            child.removeFromParent()
         }
 
-        addChildViewController(controller)
+        addChild(controller)
 
         controller.view.frame = view.bounds
         controller.view.translatesAutoresizingMaskIntoConstraints = false
@@ -98,6 +98,6 @@ extension MessagesViewController {
         controller.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         controller.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
-        controller.didMove(toParentViewController: self)
+        controller.didMove(toParent: self)
     }
 }

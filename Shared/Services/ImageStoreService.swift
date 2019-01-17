@@ -34,9 +34,9 @@ enum ImageFileType: String {
     func data(for image: UIImage) -> Data? {
         switch self {
         case .png:
-            return UIImagePNGRepresentation(image)
+            return image.pngData()
         case .jpg:
-            return UIImageJPEGRepresentation(image, 1.0)
+            return image.jpegData(compressionQuality: 1.0)
         }
     }
 

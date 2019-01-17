@@ -31,7 +31,7 @@ protocol EditStickerViewModelType: class {
     var viewWillTransitionToSize: PublishSubject<CGSize> { get }
     var stickerTitleDidChange: PublishSubject<String?> { get }
     var deleteAlertDidConfirm: PublishSubject<Void> { get }
-    var imageSourceAlertDidSelect: PublishSubject<UIImagePickerControllerSourceType> { get }
+    var imageSourceAlertDidSelect: PublishSubject<UIImagePickerController.SourceType> { get }
 
     var stickerTitlePlaceholder: String { get }
     var stickerTitle: String? { get }
@@ -47,9 +47,9 @@ protocol EditStickerViewModelType: class {
     var visibleRect: Driver<CGRect> { get }
     var mask: Driver<Mask> { get }
     var coverViewTransparentAnimated: Driver<(Bool, Bool)> { get }
-    var presentImagePicker: Driver<UIImagePickerControllerSourceType> { get }
+    var presentImagePicker: Driver<UIImagePickerController.SourceType> { get }
     var presentDeleteAlert: Driver<Void> { get }
-    var presentImageSourceAlert: Driver<[UIImagePickerControllerSourceType]> { get }
+    var presentImageSourceAlert: Driver<[UIImagePickerController.SourceType]> { get }
     var dismiss: Driver<Void> { get }
 }
 
@@ -80,7 +80,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let viewWillTransitionToSize = PublishSubject<CGSize>()
     let stickerTitleDidChange = PublishSubject<String?>()
     let deleteAlertDidConfirm = PublishSubject<Void>()
-    let imageSourceAlertDidSelect = PublishSubject<UIImagePickerControllerSourceType>()
+    let imageSourceAlertDidSelect = PublishSubject<UIImagePickerController.SourceType>()
 
     // MARK: Output
 
@@ -98,9 +98,9 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let visibleRect: Driver<CGRect>
     let mask: Driver<Mask>
     let coverViewTransparentAnimated: Driver<(Bool, Bool)>
-    let presentImagePicker: Driver<UIImagePickerControllerSourceType>
+    let presentImagePicker: Driver<UIImagePickerController.SourceType>
     let presentDeleteAlert: Driver<Void>
-    let presentImageSourceAlert: Driver<[UIImagePickerControllerSourceType]>
+    let presentImageSourceAlert: Driver<[UIImagePickerController.SourceType]>
     let dismiss: Driver<Void>
 
     // MARK: Internal
@@ -186,7 +186,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
                 _originalImageWasSetToNil)
             .merge()
 
-        let availableTypes: [UIImagePickerControllerSourceType] = [.camera, .photoLibrary]
+        let availableTypes: [UIImagePickerController.SourceType] = [.camera, .photoLibrary]
             .filter { sourceType in
                 return UIImagePickerController.isSourceTypeAvailable(sourceType) || UIDevice.isSimulator
             }

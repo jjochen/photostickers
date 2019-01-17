@@ -35,7 +35,7 @@ class EditStickerViewController: UIViewController {
 
     fileprivate lazy var maskLayer: CAShapeLayer = {
         let maskLayer = CAShapeLayer()
-        maskLayer.fillRule = kCAFillRuleEvenOdd
+        maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
         return maskLayer
     }()
 
@@ -288,7 +288,7 @@ fileprivate extension EditStickerViewController {
                 .asDriver(onErrorJustReturn: [:])
             }
             .map { info in
-                let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+                let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage
                 return image?.fixOrientation()
             }
             .filter { $0 != nil }
@@ -407,7 +407,7 @@ fileprivate extension EditStickerViewController {
     func setupButtons() {
         let lineWidth = CGFloat(3)
 
-        circleButton.setTitle(nil, for: UIControlState())
+        circleButton.setTitle(nil, for: UIControl.State())
         circleButton.titleLabel?.isHidden = true
         circleButton.setBackgroundImages { selected, highlighted in
             return StyleKit.imageOfCircleButton(lineWidth: lineWidth,
@@ -415,7 +415,7 @@ fileprivate extension EditStickerViewController {
                                                 highlighted: highlighted)
         }
 
-        rectangleButton.setTitle(nil, for: UIControlState())
+        rectangleButton.setTitle(nil, for: UIControl.State())
         rectangleButton.setBackgroundImages { selected, highlighted in
             return StyleKit.imageOfRectangleButton(
                 lineWidth: lineWidth,
@@ -424,7 +424,7 @@ fileprivate extension EditStickerViewController {
             )
         }
 
-        multiStarButton.setTitle(nil, for: UIControlState())
+        multiStarButton.setTitle(nil, for: UIControl.State())
         multiStarButton.setBackgroundImages { selected, highlighted in
             return StyleKit.imageOfMultiStarButton(
                 lineWidth: lineWidth,
@@ -433,7 +433,7 @@ fileprivate extension EditStickerViewController {
             )
         }
 
-        starButton.setTitle(nil, for: UIControlState())
+        starButton.setTitle(nil, for: UIControl.State())
         starButton.setBackgroundImages { selected, highlighted in
             return StyleKit.imageOfStarButton(
                 lineWidth: lineWidth,
@@ -453,4 +453,9 @@ fileprivate extension EditStickerViewController {
     var visibleRect: CGRect {
         return scrollView.convertBounds(to: imageView)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

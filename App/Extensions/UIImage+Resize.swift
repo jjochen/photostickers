@@ -57,7 +57,7 @@ public extension UIImage {
         )
     }
 
-    public func resizedImageWithContentMode(_ contentMode: UIViewContentMode, bounds: CGSize, interpolationQuality quality: CGInterpolationQuality) -> UIImage {
+    public func resizedImageWithContentMode(_ contentMode: UIView.ContentMode, bounds: CGSize, interpolationQuality quality: CGInterpolationQuality) -> UIImage {
         let horizontalRatio = bounds.width / size.width
         let verticalRatio = bounds.height / size.height
         var ratio: CGFloat = 1
