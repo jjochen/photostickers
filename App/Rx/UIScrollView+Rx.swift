@@ -11,26 +11,26 @@ import RxSwift
 import UIKit
 
 extension Reactive where Base: UIScrollView {
-    public var contentInset: UIBindingObserver<Base, UIEdgeInsets> {
-        return UIBindingObserver(UIElement: base) { scrollView, contentInset in
+    public var contentInset: Binder<UIEdgeInsets> {
+        return Binder(self.base) { scrollView, contentInset in
             scrollView.contentInset = contentInset
         }
     }
 
-    public var maximumZoomScale: UIBindingObserver<Base, CGFloat> {
-        return UIBindingObserver(UIElement: base) { scrollView, maximumZoomScale in
+    public var maximumZoomScale: Binder<CGFloat> {
+        return Binder(self.base) { scrollView, maximumZoomScale in
             scrollView.maximumZoomScale = maximumZoomScale
         }
     }
 
-    public var minimumZoomScale: UIBindingObserver<Base, CGFloat> {
-        return UIBindingObserver(UIElement: base) { scrollView, minimumZoomScale in
+    public var minimumZoomScale: Binder<CGFloat> {
+        return Binder(self.base) { scrollView, minimumZoomScale in
             scrollView.minimumZoomScale = minimumZoomScale
         }
     }
 
-    public var zoomScale: UIBindingObserver<Base, CGFloat> {
-        return UIBindingObserver(UIElement: base) { scrollView, zoomScale in
+    public var zoomScale: Binder<CGFloat> {
+        return Binder(self.base) { scrollView, zoomScale in
             scrollView.zoomScale = zoomScale
         }
     }
