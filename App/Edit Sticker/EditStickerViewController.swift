@@ -457,5 +457,5 @@ fileprivate extension EditStickerViewController {
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-	return input.rawValue
+    return input.rawValue
 }
