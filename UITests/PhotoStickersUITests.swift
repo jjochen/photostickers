@@ -89,7 +89,7 @@ class PhotoStickersUITests: XCTestCase {
 
 // MARK: UI Elements
 
-fileprivate extension PhotoStickersUITests {
+private extension PhotoStickersUITests {
     var appWindow: XCUIElement {
         return app!.children(matching: .window).element(boundBy: 0)
     }
@@ -169,7 +169,7 @@ fileprivate extension PhotoStickersUITests {
 
 // MARK: Helper
 
-fileprivate extension PhotoStickersUITests {
+private extension PhotoStickersUITests {
     func isIPad() -> Bool {
         return app!.windows.element(boundBy: 0).horizontalSizeClass == .regular && app!.windows.element(boundBy: 0).verticalSizeClass == .regular
     }

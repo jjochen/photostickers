@@ -46,7 +46,7 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
 
         let stickerCount = stickers
             .map { allStickers in
-                return allStickers.count
+                allStickers.count
             }
             .distinctUntilChanged()
 
@@ -56,7 +56,7 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
 
         presentFirstStickerAlert = stickerCount // might change to: sticker was added and message was not shown yet
             .scan([]) { lastSlice, newValue -> [Int] in
-                return Array(Array(lastSlice + [newValue]).suffix(2))
+                Array(Array(lastSlice + [newValue]).suffix(2))
             }
             .filter { $0 == [0, 1] }
             .map { _ in Void() }
@@ -65,7 +65,7 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
         stickerCellModels = stickers
             .map { listOfStickers in
                 let listOfViewModels = listOfStickers.map { sticker in
-                    return StickerCollectionCellModel(sticker: sticker, imageStoreService: imageStoreService)
+                    StickerCollectionCellModel(sticker: sticker, imageStoreService: imageStoreService)
                 }
                 return listOfViewModels
             }

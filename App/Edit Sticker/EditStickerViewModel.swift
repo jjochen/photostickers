@@ -143,7 +143,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
         _stickerWasSaved = _stickerWasRendered
             .flatMap {
-                return stickerService.storeSticker(withInfo: stickerInfo).asDriver(onErrorDriveWith: Driver.empty())
+                stickerService.storeSticker(withInfo: stickerInfo).asDriver(onErrorDriveWith: Driver.empty())
                 // TODO: use showErrorMessageDriver
             }
             .map { _ in Void() }
@@ -188,7 +188,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
         let availableTypes: [UIImagePickerController.SourceType] = [.camera, .photoLibrary]
             .filter { sourceType in
-                return UIImagePickerController.isSourceTypeAvailable(sourceType) || UIDevice.isSimulator
+                UIImagePickerController.isSourceTypeAvailable(sourceType) || UIDevice.isSimulator
             }
 
         if availableTypes.count > 1 {
@@ -279,7 +279,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
         stickerTitleDidChange
             .map { title in
-                return title?.trimmingCharacters(in: .whitespaces)
+                title?.trimmingCharacters(in: .whitespaces)
             }
             .bind(to: stickerInfo.title)
             .disposed(by: disposeBag)
@@ -293,7 +293,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .filter { isEnabled in isEnabled }
             .observeOn(backgroundScheduler)
             .flatMap { _ in
-                return stickerRenderService.render(stickerInfo)
+                stickerRenderService.render(stickerInfo)
             }
             .filterNil()
             .bind(to: stickerInfo.renderedSticker)

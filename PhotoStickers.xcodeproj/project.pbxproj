@@ -1044,7 +1044,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/Log/Log.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
@@ -1073,7 +1073,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		19B7A5171E1669600074B6B1 /* Run swiftformat */ = {
@@ -1142,7 +1142,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PhotoStickersTests/Pods-PhotoStickersTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PhotoStickersTests/Pods-PhotoStickersTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
@@ -1165,7 +1165,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoStickersTests/Pods-PhotoStickersTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PhotoStickersTests/Pods-PhotoStickersTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EA935A923891249A30A10B98 /* [CP] Check Pods Manifest.lock */ = {

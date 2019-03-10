@@ -40,7 +40,6 @@ class StickerService: StickerServiceType {
         switch realmType {
         case .inMemory:
             Logger.shared.warning("Realm in memory only")
-            break
         case let .onDisk(url: url):
             if url == nil {
                 Logger.shared.error("Realm: URL not set!")
@@ -156,7 +155,7 @@ extension StickerService {
     }
 }
 
-fileprivate extension StickerService {
+private extension StickerService {
     func sticker(withInfo info: StickerInfo, inRealm realm: Realm) throws -> Sticker {
         let sticker = try realm.sticker(withUUID: info.uuid)
         try update(sticker: sticker, withInfo: info)
@@ -195,7 +194,7 @@ fileprivate extension StickerService {
     }
 }
 
-fileprivate extension Realm {
+private extension Realm {
     func sticker(withUUID uuid: String?) throws -> Sticker {
         return try fetchSticker(withUUID: uuid) ?? newSticker()
     }
@@ -224,7 +223,7 @@ fileprivate extension Realm {
     }
 }
 
-fileprivate extension Realm {
+private extension Realm {
     static func stickerConfiguration(with fileURL: URL?) -> Configuration {
         return Configuration(
             fileURL: fileURL,

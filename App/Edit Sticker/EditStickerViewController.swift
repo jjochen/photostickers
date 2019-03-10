@@ -90,7 +90,7 @@ extension EditStickerViewController: UIScrollViewDelegate {
 
 // MARK: - Bindings
 
-fileprivate extension EditStickerViewController {
+private extension EditStickerViewController {
     func setupBindings() {
         guard let viewModel = self.viewModel else {
             Logger.shared.error("View Model not set!")
@@ -144,7 +144,7 @@ fileprivate extension EditStickerViewController {
 
         scrollView.rx
             .didEndDragging.filter { willDecelerate in
-                return !willDecelerate
+                !willDecelerate
             }
             .map { _ in Void() }
             .bind(to: didEndDraggingWithoutDecelaration)
@@ -153,7 +153,7 @@ fileprivate extension EditStickerViewController {
         scrollView.rx
             .didScroll
             .filter { _ in
-                return self.scrollView.isDragging || self.scrollView.isDecelerating
+                self.scrollView.isDragging || self.scrollView.isDecelerating
             }
             .bind(to: didScroll)
             .disposed(by: disposeBag)
@@ -161,7 +161,7 @@ fileprivate extension EditStickerViewController {
         scrollView.rx
             .didZoom
             .filter { _ in
-                return self.scrollView.isZooming || self.scrollView.isZoomBouncing
+                self.scrollView.isZooming || self.scrollView.isZoomBouncing
             }
             .bind(to: didZoom)
             .disposed(by: disposeBag)
@@ -171,7 +171,7 @@ fileprivate extension EditStickerViewController {
                 didZoom)
             .merge()
             .filter { _ in
-                return self.imageView.image != nil
+                self.imageView.image != nil
             }
             .map { self.visibleRect }
             .bind(to: viewModel.visibleRectDidChange)
@@ -274,10 +274,10 @@ fileprivate extension EditStickerViewController {
 
         viewModel.presentImagePicker
             .filter { sourceType in
-                return UIImagePickerController.isSourceTypeAvailable(sourceType)
+                UIImagePickerController.isSourceTypeAvailable(sourceType)
             }
             .flatMapLatest { sourceType in
-                return UIImagePickerController.rx.createWithParent(self) { picker in
+                UIImagePickerController.rx.createWithParent(self) { picker in
                     picker.sourceType = sourceType
                     picker.allowsEditing = false
                 }
@@ -338,15 +338,12 @@ fileprivate extension EditStickerViewController {
                         case .photoLibrary:
                             title = "ImagePickerSourceTypePhotoLibrary".localized
                             accessibilityLabel = "ImageSourceAlertButtonPhotoLibrary"
-                            break
                         case .camera:
                             title = "ImagePickerSourceTypeCamera".localized
                             accessibilityLabel = "ImageSourceAlertButtonCamera"
-                            break
                         default:
                             title = nil
                             accessibilityLabel = nil
-                            break
                         }
 
                         let handler: (UIAlertAction) -> Void = { _ in
@@ -380,7 +377,7 @@ fileprivate extension EditStickerViewController {
 
 // MARK: - Layout
 
-fileprivate extension EditStickerViewController {
+private extension EditStickerViewController {
     func configureLayoutConstraints() {
         guard let portraitConstraints = self.portraitConstraints else {
             return
@@ -403,21 +400,21 @@ fileprivate extension EditStickerViewController {
     }
 }
 
-fileprivate extension EditStickerViewController {
+private extension EditStickerViewController {
     func setupButtons() {
         let lineWidth = CGFloat(3)
 
         circleButton.setTitle(nil, for: UIControl.State())
         circleButton.titleLabel?.isHidden = true
         circleButton.setBackgroundImages { selected, highlighted in
-            return StyleKit.imageOfCircleButton(lineWidth: lineWidth,
-                                                selected: selected,
-                                                highlighted: highlighted)
+            StyleKit.imageOfCircleButton(lineWidth: lineWidth,
+                                         selected: selected,
+                                         highlighted: highlighted)
         }
 
         rectangleButton.setTitle(nil, for: UIControl.State())
         rectangleButton.setBackgroundImages { selected, highlighted in
-            return StyleKit.imageOfRectangleButton(
+            StyleKit.imageOfRectangleButton(
                 lineWidth: lineWidth,
                 selected: selected,
                 highlighted: highlighted
@@ -426,7 +423,7 @@ fileprivate extension EditStickerViewController {
 
         multiStarButton.setTitle(nil, for: UIControl.State())
         multiStarButton.setBackgroundImages { selected, highlighted in
-            return StyleKit.imageOfMultiStarButton(
+            StyleKit.imageOfMultiStarButton(
                 lineWidth: lineWidth,
                 selected: selected,
                 highlighted: highlighted
@@ -435,7 +432,7 @@ fileprivate extension EditStickerViewController {
 
         starButton.setTitle(nil, for: UIControl.State())
         starButton.setBackgroundImages { selected, highlighted in
-            return StyleKit.imageOfStarButton(
+            StyleKit.imageOfStarButton(
                 lineWidth: lineWidth,
                 selected: selected,
                 highlighted: highlighted
@@ -445,7 +442,7 @@ fileprivate extension EditStickerViewController {
 }
 
 // todo: move to view model
-fileprivate extension EditStickerViewController {
+private extension EditStickerViewController {
     var imageSize: CGSize {
         return imageView.image?.size ?? .zero
     }
@@ -456,6 +453,6 @@ fileprivate extension EditStickerViewController {
 }
 
 // Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+private func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
     return input.rawValue
 }

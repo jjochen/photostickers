@@ -18,7 +18,7 @@ extension Reactive where Base: UIImagePickerController {
         return delegate
             .methodInvoked(#selector(UIImagePickerControllerDelegate.imagePickerController(_:didFinishPickingMediaWithInfo:)))
             .map({ a in
-                try castOrThrow(Dictionary<String, AnyObject>.self, a[1])
+                try castOrThrow([String: AnyObject].self, a[1])
             })
     }
 

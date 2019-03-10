@@ -10,7 +10,7 @@
 import UIKit
 
 public extension UIImage {
-    public func hasAlpha() -> Bool {
+    func hasAlpha() -> Bool {
         let alpha: CGImageAlphaInfo = cgImage!.alphaInfo
         return
             alpha == CGImageAlphaInfo.first ||
@@ -19,7 +19,7 @@ public extension UIImage {
             alpha == CGImageAlphaInfo.premultipliedLast
     }
 
-    public func imageWithAlpha() -> UIImage {
+    func imageWithAlpha() -> UIImage {
         if hasAlpha() {
             return self
         }
@@ -42,7 +42,7 @@ public extension UIImage {
         return UIImage(cgImage: imageRefWithAlpha)
     }
 
-    public func transparentBorderImage(_ borderSize: Int) -> UIImage {
+    func transparentBorderImage(_ borderSize: Int) -> UIImage {
         let image = imageWithAlpha()
 
         let newRect = CGRect(

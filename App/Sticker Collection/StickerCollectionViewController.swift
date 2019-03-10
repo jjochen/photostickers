@@ -74,7 +74,7 @@ class StickerCollectionViewController: UIViewController {
     }
 }
 
-fileprivate extension StickerCollectionViewController {
+private extension StickerCollectionViewController {
     func presentFirstStickerAlert() {
         guard presentedViewController == nil else {
             DispatchQueue.main.async {
@@ -97,7 +97,7 @@ fileprivate extension StickerCollectionViewController {
     }
 }
 
-fileprivate extension StickerCollectionViewController {
+private extension StickerCollectionViewController {
     func setupArrow() {
         arrowView.alpha = 0
         arrowView.isHidden = true

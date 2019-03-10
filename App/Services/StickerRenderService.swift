@@ -23,7 +23,7 @@ class StickerRenderService: StickerRenderServiceType {
     }
 }
 
-fileprivate extension StickerRenderService {
+private extension StickerRenderService {
     func renderedImage(_ originalImage: UIImage?, cropBounds: CGRect, mask: Mask) -> UIImage? {
         guard let image = originalImage else {
             Logger.shared.error("Couldn't render empty image")

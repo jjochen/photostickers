@@ -138,7 +138,7 @@ extension ImageStoreService {
     }
 }
 
-fileprivate extension ImageStoreService {
+private extension ImageStoreService {
     func createSubfolderForCategory(_ category: ImageCategory) -> Bool {
         guard let url = self.constructCategoryURL(category) else {
             Logger.shared.error("No category url for \(category)")
