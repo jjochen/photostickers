@@ -6,22 +6,21 @@
 //  Copyright © 2016 Jochen Pfeiffer. All rights reserved.
 //
 
-import UIKit
-import RxSwift
-import RxCocoa
 import Log
+import RxCocoa
 import RxDataSources
+import RxSwift
+import UIKit
 
 class StickerCollectionViewController: UIViewController {
-
     var viewModel: StickerCollectionViewModelType?
 
     fileprivate let disposeBag = DisposeBag()
 
-    @IBOutlet weak var stickerCollectionView: UICollectionView!
-    @IBOutlet weak var addButtonItem: UIBarButtonItem!
-    @IBOutlet weak var arrowView: ArrowView!
-    @IBOutlet weak var arrowOffsetLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet var stickerCollectionView: UICollectionView!
+    @IBOutlet var addButtonItem: UIBarButtonItem!
+    @IBOutlet var arrowView: ArrowView!
+    @IBOutlet var arrowOffsetLayoutConstraint: NSLayoutConstraint!
 
     fileprivate var arrowTimer: Timer?
 
@@ -64,18 +63,18 @@ class StickerCollectionViewController: UIViewController {
                     self.showArrow()
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         viewModel.presentFirstStickerAlert
             .drive(onNext: { [weak self] in
                 guard let `self` = self else { return }
                 self.presentFirstStickerAlert()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 
-fileprivate extension StickerCollectionViewController {
+private extension StickerCollectionViewController {
     func presentFirstStickerAlert() {
         guard presentedViewController == nil else {
             DispatchQueue.main.async {
@@ -98,8 +97,7 @@ fileprivate extension StickerCollectionViewController {
     }
 }
 
-fileprivate extension StickerCollectionViewController {
-
+private extension StickerCollectionViewController {
     func setupArrow() {
         arrowView.alpha = 0
         arrowView.isHidden = true
@@ -110,7 +108,7 @@ fileprivate extension StickerCollectionViewController {
     func showArrow() {
         arrowView.isHidden = false
 
-        if arrowTimer != nil && arrowTimer!.isValid {
+        if arrowTimer != nil, arrowTimer!.isValid {
             return
         }
 
@@ -157,8 +155,7 @@ fileprivate extension StickerCollectionViewController {
                        animations: {
                            self.arrowView.alpha = 1
                        },
-                       completion: nil
-        )
+                       completion: nil)
     }
 
     func bounceArrow() {
@@ -180,8 +177,7 @@ fileprivate extension StickerCollectionViewController {
                                           options: .curveEaseIn,
                                           animations: layoutAnimation,
                                           completion: nil)
-                       }
-        )
+        })
     }
 }
 

@@ -1,7 +1,6 @@
 import UIKit
 
 extension UIStoryboard {
-
     class func app() -> UIStoryboard {
         return UIStoryboard(name: StoryboardNames.App.rawValue, bundle: nil)
     }

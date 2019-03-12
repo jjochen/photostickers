@@ -6,30 +6,19 @@
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
 //
 
-import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 import UIKit
 
 extension Reactive where Base: UIImagePickerController {
-
-    /**
-     Reactive wrapper for `delegate`.
-
-     For more information take a look at `DelegateProxyType` protocol documentation.
-     */
-    public var delegate: DelegateProxy {
-        return RxImagePickerDelegateProxy.proxyForObject(base)
-    }
-
     /**
      Reactive wrapper for `delegate` message.
      */
-    public var didFinishPickingMediaWithInfo: Observable<[String: Any]> {
+    public var didFinishPickingMediaWithInfo: Observable<[String: AnyObject]> {
         return delegate
             .methodInvoked(#selector(UIImagePickerControllerDelegate.imagePickerController(_:didFinishPickingMediaWithInfo:)))
             .map({ a in
-                try castOrThrow(Dictionary<String, Any>.self, a[1])
+                try castOrThrow([String: AnyObject].self, a[1])
             })
     }
 

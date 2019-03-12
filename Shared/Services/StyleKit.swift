@@ -12,7 +12,6 @@
 import UIKit
 
 public class StyleKit: NSObject {
-
     //// Cache
 
     private struct Cache {
@@ -32,15 +31,15 @@ public class StyleKit: NSObject {
 
     //// Colors
 
-    public dynamic class var appColor: UIColor { return Cache.appColor }
+    @objc public dynamic class var appColor: UIColor { return Cache.appColor }
 
     //// Shadows
 
-    public dynamic class var stickerShadow: NSShadow { return Cache.stickerShadow }
+    @objc public dynamic class var stickerShadow: NSShadow { return Cache.stickerShadow }
 
     //// Drawing Methods
 
-    public dynamic class func drawStarButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) {
+    @objc public dynamic class func drawStarButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -81,7 +80,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawMultiStarButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) {
+    @objc public dynamic class func drawMultiStarButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -142,7 +141,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawCircleButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) {
+    @objc public dynamic class func drawCircleButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -172,7 +171,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawRectangleButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) {
+    @objc public dynamic class func drawRectangleButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 54, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -202,7 +201,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawAppIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 120, height: 110), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawAppIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 120, height: 110), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -381,7 +380,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawTrashToolbarIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 18, height: 22), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawTrashToolbarIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 18, height: 22), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -463,7 +462,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawAddToolbarIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 22, height: 22), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawAddToolbarIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 22, height: 22), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -511,7 +510,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawPhotoToolbarIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 22, height: 18), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawPhotoToolbarIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 22, height: 18), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -585,7 +584,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawEditToolbarIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 22, height: 22), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawEditToolbarIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 22, height: 22), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -658,7 +657,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawStickerToolbarIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 22, height: 20), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawStickerToolbarIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 22, height: 20), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -734,7 +733,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawAddIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 56, height: 56), resizing: ResizingBehavior = .aspectFit, highlighted: Bool = false) {
+    @objc public dynamic class func drawAddIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 56, height: 56), resizing: ResizingBehavior = .aspectFit, highlighted: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -818,7 +817,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawArrowUp(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 44, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1) {
+    @objc public dynamic class func drawArrowUp(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 44, height: 54), resizing: ResizingBehavior = .aspectFit, lineWidth: CGFloat = 1) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -854,7 +853,7 @@ public class StyleKit: NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawPlainArrowUp(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 28, height: 14), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawPlainArrowUp(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 28, height: 14), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -894,7 +893,7 @@ public class StyleKit: NSObject {
 
     //// Generated Images
 
-    public dynamic class func imageOfStarButton(lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) -> UIImage {
+    @objc public dynamic class func imageOfStarButton(lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 54, height: 54), false, 0)
         StyleKit.drawStarButton(lineWidth: lineWidth, selected: selected, highlighted: highlighted)
 
@@ -904,7 +903,7 @@ public class StyleKit: NSObject {
         return imageOfStarButton
     }
 
-    public dynamic class func imageOfMultiStarButton(lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) -> UIImage {
+    @objc public dynamic class func imageOfMultiStarButton(lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 54, height: 54), false, 0)
         StyleKit.drawMultiStarButton(lineWidth: lineWidth, selected: selected, highlighted: highlighted)
 
@@ -914,7 +913,7 @@ public class StyleKit: NSObject {
         return imageOfMultiStarButton
     }
 
-    public dynamic class func imageOfCircleButton(lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) -> UIImage {
+    @objc public dynamic class func imageOfCircleButton(lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 54, height: 54), false, 0)
         StyleKit.drawCircleButton(lineWidth: lineWidth, selected: selected, highlighted: highlighted)
 
@@ -924,7 +923,7 @@ public class StyleKit: NSObject {
         return imageOfCircleButton
     }
 
-    public dynamic class func imageOfRectangleButton(lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) -> UIImage {
+    @objc public dynamic class func imageOfRectangleButton(lineWidth: CGFloat = 1, selected: Bool = false, highlighted: Bool = false) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 54, height: 54), false, 0)
         StyleKit.drawRectangleButton(lineWidth: lineWidth, selected: selected, highlighted: highlighted)
 
@@ -934,7 +933,7 @@ public class StyleKit: NSObject {
         return imageOfRectangleButton
     }
 
-    public dynamic class var imageOfTrashToolbarIcon: UIImage {
+    @objc public dynamic class var imageOfTrashToolbarIcon: UIImage {
         if Cache.imageOfTrashToolbarIcon != nil {
             return Cache.imageOfTrashToolbarIcon!
         }
@@ -948,7 +947,7 @@ public class StyleKit: NSObject {
         return Cache.imageOfTrashToolbarIcon!
     }
 
-    public dynamic class var imageOfAddToolbarIcon: UIImage {
+    @objc public dynamic class var imageOfAddToolbarIcon: UIImage {
         if Cache.imageOfAddToolbarIcon != nil {
             return Cache.imageOfAddToolbarIcon!
         }
@@ -962,7 +961,7 @@ public class StyleKit: NSObject {
         return Cache.imageOfAddToolbarIcon!
     }
 
-    public dynamic class var imageOfPhotoToolbarIcon: UIImage {
+    @objc public dynamic class var imageOfPhotoToolbarIcon: UIImage {
         if Cache.imageOfPhotoToolbarIcon != nil {
             return Cache.imageOfPhotoToolbarIcon!
         }
@@ -976,7 +975,7 @@ public class StyleKit: NSObject {
         return Cache.imageOfPhotoToolbarIcon!
     }
 
-    public dynamic class var imageOfEditToolbarIcon: UIImage {
+    @objc public dynamic class var imageOfEditToolbarIcon: UIImage {
         if Cache.imageOfEditToolbarIcon != nil {
             return Cache.imageOfEditToolbarIcon!
         }
@@ -990,7 +989,7 @@ public class StyleKit: NSObject {
         return Cache.imageOfEditToolbarIcon!
     }
 
-    public dynamic class var imageOfStickerToolbarIcon: UIImage {
+    @objc public dynamic class var imageOfStickerToolbarIcon: UIImage {
         if Cache.imageOfStickerToolbarIcon != nil {
             return Cache.imageOfStickerToolbarIcon!
         }
@@ -1004,7 +1003,7 @@ public class StyleKit: NSObject {
         return Cache.imageOfStickerToolbarIcon!
     }
 
-    public dynamic class func imageOfAddIcon(highlighted: Bool = false) -> UIImage {
+    @objc public dynamic class func imageOfAddIcon(highlighted: Bool = false) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 56, height: 56), false, 0)
         StyleKit.drawAddIcon(highlighted: highlighted)
 
@@ -1109,37 +1108,37 @@ public class StyleKit: NSObject {
 private extension UIColor {
     func withHue(_ newHue: CGFloat) -> UIColor {
         var saturation: CGFloat = 1, brightness: CGFloat = 1, alpha: CGFloat = 1
-        self.getHue(nil, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        getHue(nil, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         return UIColor(hue: newHue, saturation: saturation, brightness: brightness, alpha: alpha)
     }
 
     func withSaturation(_ newSaturation: CGFloat) -> UIColor {
         var hue: CGFloat = 1, brightness: CGFloat = 1, alpha: CGFloat = 1
-        self.getHue(&hue, saturation: nil, brightness: &brightness, alpha: &alpha)
+        getHue(&hue, saturation: nil, brightness: &brightness, alpha: &alpha)
         return UIColor(hue: hue, saturation: newSaturation, brightness: brightness, alpha: alpha)
     }
 
     func withBrightness(_ newBrightness: CGFloat) -> UIColor {
         var hue: CGFloat = 1, saturation: CGFloat = 1, alpha: CGFloat = 1
-        self.getHue(&hue, saturation: &saturation, brightness: nil, alpha: &alpha)
+        getHue(&hue, saturation: &saturation, brightness: nil, alpha: &alpha)
         return UIColor(hue: hue, saturation: saturation, brightness: newBrightness, alpha: alpha)
     }
 
     func withAlpha(_ newAlpha: CGFloat) -> UIColor {
         var hue: CGFloat = 1, saturation: CGFloat = 1, brightness: CGFloat = 1
-        self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: nil)
+        getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: nil)
         return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: newAlpha)
     }
 
     func highlight(withLevel highlight: CGFloat) -> UIColor {
         var red: CGFloat = 1, green: CGFloat = 1, blue: CGFloat = 1, alpha: CGFloat = 1
-        self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         return UIColor(red: red * (1 - highlight) + highlight, green: green * (1 - highlight) + highlight, blue: blue * (1 - highlight) + highlight, alpha: alpha * (1 - highlight) + highlight)
     }
 
     func shadow(withLevel shadow: CGFloat) -> UIColor {
         var red: CGFloat = 1, green: CGFloat = 1, blue: CGFloat = 1, alpha: CGFloat = 1
-        self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         return UIColor(red: red * (1 - shadow), green: green * (1 - shadow), blue: blue * (1 - shadow), alpha: alpha * (1 - shadow) + shadow)
     }
 }
@@ -1147,8 +1146,8 @@ private extension UIColor {
 private extension NSShadow {
     convenience init(color: AnyObject!, offset: CGSize, blurRadius: CGFloat) {
         self.init()
-        self.shadowColor = color
-        self.shadowOffset = offset
-        self.shadowBlurRadius = blurRadius
+        shadowColor = color
+        shadowOffset = offset
+        shadowBlurRadius = blurRadius
     }
 }

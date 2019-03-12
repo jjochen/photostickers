@@ -6,16 +6,15 @@
 //  Copyright © 2016 Jochen Pfeiffer. All rights reserved.
 //
 
-import UIKit
-import RealmSwift
 import Log
+import RealmSwift
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
 
-    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let isRunningUnitTests = NSClassFromString("XCTest") != nil
         let isRunningUITests = UserDefaults.standard.bool(forKey: "RunningUITests")
 
@@ -25,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window?.backgroundColor = UIColor.white
         window?.tintColor = StyleKit.appColor
+
+        RxImagePickerDelegateProxy.register { RxImagePickerDelegateProxy(imagePicker: $0) }
 
         let dataFolderType: DataFolderType = isRunningUITests ? .appGroupPrefilled(subfolder: "UITests") : .appGroup
         let dataFolder: DataFolderServiceType = DataFolderService(type: dataFolderType)
@@ -44,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func application(_: UIApplication, open url: URL, options _: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+    func application(_: UIApplication, open url: URL, options _: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         if url.absoluteString.contains("create") {
             Logger.shared.info("should create new sticker")
             // TODO:

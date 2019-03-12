@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import RxSwift
-import RxCocoa
 import Log
+import RxCocoa
+import RxSwift
 
 protocol EditStickerViewModelType: class {
     func maximumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat
@@ -31,7 +31,7 @@ protocol EditStickerViewModelType: class {
     var viewWillTransitionToSize: PublishSubject<CGSize> { get }
     var stickerTitleDidChange: PublishSubject<String?> { get }
     var deleteAlertDidConfirm: PublishSubject<Void> { get }
-    var imageSourceAlertDidSelect: PublishSubject<UIImagePickerControllerSourceType> { get }
+    var imageSourceAlertDidSelect: PublishSubject<UIImagePickerController.SourceType> { get }
 
     var stickerTitlePlaceholder: String { get }
     var stickerTitle: String? { get }
@@ -47,24 +47,25 @@ protocol EditStickerViewModelType: class {
     var visibleRect: Driver<CGRect> { get }
     var mask: Driver<Mask> { get }
     var coverViewTransparentAnimated: Driver<(Bool, Bool)> { get }
-    var presentImagePicker: Driver<UIImagePickerControllerSourceType> { get }
+    var presentImagePicker: Driver<UIImagePickerController.SourceType> { get }
     var presentDeleteAlert: Driver<Void> { get }
-    var presentImageSourceAlert: Driver<[UIImagePickerControllerSourceType]> { get }
+    var presentImageSourceAlert: Driver<[UIImagePickerController.SourceType]> { get }
     var dismiss: Driver<Void> { get }
 }
 
 class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
-
     let disposeBag = DisposeBag()
     let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
 
     // MARK: Dependencies
+
     fileprivate let stickerInfo: StickerInfo
     fileprivate let imageStoreService: ImageStoreServiceType
     fileprivate let stickerService: StickerServiceType
     fileprivate let stickerRenderService: StickerRenderServiceType
 
     // MARK: Input
+
     let saveButtonItemDidTap = PublishSubject<Void>()
     let cancelButtonItemDidTap = PublishSubject<Void>()
     let deleteButtonItemDidTap = PublishSubject<Void>()
@@ -79,9 +80,10 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let viewWillTransitionToSize = PublishSubject<CGSize>()
     let stickerTitleDidChange = PublishSubject<String?>()
     let deleteAlertDidConfirm = PublishSubject<Void>()
-    let imageSourceAlertDidSelect = PublishSubject<UIImagePickerControllerSourceType>()
+    let imageSourceAlertDidSelect = PublishSubject<UIImagePickerController.SourceType>()
 
     // MARK: Output
+
     let stickerTitlePlaceholder: String
     let stickerTitle: String?
     let saveButtonItemEnabled: Driver<Bool>
@@ -96,12 +98,13 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
     let visibleRect: Driver<CGRect>
     let mask: Driver<Mask>
     let coverViewTransparentAnimated: Driver<(Bool, Bool)>
-    let presentImagePicker: Driver<UIImagePickerControllerSourceType>
+    let presentImagePicker: Driver<UIImagePickerController.SourceType>
     let presentDeleteAlert: Driver<Void>
-    let presentImageSourceAlert: Driver<[UIImagePickerControllerSourceType]>
+    let presentImageSourceAlert: Driver<[UIImagePickerController.SourceType]>
     let dismiss: Driver<Void>
 
     // MARK: Internal
+
     fileprivate let _stickerWasDeleted = PublishSubject<Void>()
     fileprivate let _originalImageWasSetToNil: Driver<Void>
     fileprivate let _stickerWasRendered: Driver<Void>
@@ -111,7 +114,6 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
          imageStoreService: ImageStoreServiceType,
          stickerService: StickerServiceType,
          stickerRenderService: StickerRenderServiceType) {
-
         let stickerInfo = StickerInfo(uuid: sticker.uuid,
                                       title: sticker.title,
                                       originalImage: sticker.originalImage(from: imageStoreService),
@@ -141,7 +143,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
         _stickerWasSaved = _stickerWasRendered
             .flatMap {
-                return stickerService.storeSticker(withInfo: stickerInfo).asDriver(onErrorDriveWith: Driver.empty())
+                stickerService.storeSticker(withInfo: stickerInfo).asDriver(onErrorDriveWith: Driver.empty())
                 // TODO: use showErrorMessageDriver
             }
             .map { _ in Void() }
@@ -184,9 +186,9 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
                 _originalImageWasSetToNil)
             .merge()
 
-        let availableTypes: [UIImagePickerControllerSourceType] = [.camera, .photoLibrary]
+        let availableTypes: [UIImagePickerController.SourceType] = [.camera, .photoLibrary]
             .filter { sourceType in
-                return UIImagePickerController.isSourceTypeAvailable(sourceType) || UIDevice.isSimulator
+                UIImagePickerController.isSourceTypeAvailable(sourceType) || UIDevice.isSimulator
             }
 
         if availableTypes.count > 1 {
@@ -277,7 +279,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
 
         stickerTitleDidChange
             .map { title in
-                return title?.trimmingCharacters(in: .whitespaces)
+                title?.trimmingCharacters(in: .whitespaces)
             }
             .bind(to: stickerInfo.title)
             .disposed(by: disposeBag)
@@ -291,7 +293,7 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             .filter { isEnabled in isEnabled }
             .observeOn(backgroundScheduler)
             .flatMap { _ in
-                return stickerRenderService.render(stickerInfo)
+                stickerRenderService.render(stickerInfo)
             }
             .filterNil()
             .bind(to: stickerInfo.renderedSticker)
@@ -327,7 +329,7 @@ extension EditStickerViewModel {
 
     func maximumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat {
         let minimumZoomedSize = self.minimumZoomedSize(forImageSize: imageSize)
-        guard minimumZoomedSize.width > 0 && minimumZoomedSize.height > 0 else {
+        guard minimumZoomedSize.width > 0, minimumZoomedSize.height > 0 else {
             return 1
         }
 
@@ -338,7 +340,7 @@ extension EditStickerViewModel {
     }
 
     func minimumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat {
-        guard imageSize.width > 0 && imageSize.height > 0 else {
+        guard imageSize.width > 0, imageSize.height > 0 else {
             return 1
         }
 
@@ -353,7 +355,7 @@ extension EditStickerViewModel {
     func zoomScale(visibleRect: CGRect, boundsSize: CGSize) -> CGFloat {
         let visibleRectSize = visibleRect.size
 
-        guard visibleRectSize.width > 0 && visibleRectSize.height > 0 else {
+        guard visibleRectSize.width > 0, visibleRectSize.height > 0 else {
             return 1
         }
 

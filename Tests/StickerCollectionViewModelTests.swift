@@ -6,19 +6,18 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import Quick
 import Nimble
-import RxSwift
-import RxCocoa
-import RxNimble
-import RxBlocking
 @testable
 import PhotoStickers
+import Quick
+import RxBlocking
+import RxCocoa
+import RxNimble
+import RxSwift
 
 class StickerCollectionViewModelTests: QuickSpec {
     override func spec() {
         describe("the sticker collection view model") {
-
             var subject: StickerCollectionViewModelType!
             var stickerService: StickerServiceMock!
             var imageStoreService: ImageStoreServiceMock!
@@ -39,7 +38,7 @@ class StickerCollectionViewModelTests: QuickSpec {
                 subject.presentFirstStickerAlert
                     .map { true }
                     .drive(didShowAlert)
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             afterEach {

@@ -6,37 +6,36 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import UIKit
-import RxSwift
-import RxCocoa
 import Log
+import RxCocoa
+import RxSwift
+import UIKit
 
 class EditStickerViewController: UIViewController {
-
     var viewModel: EditStickerViewModelType?
     fileprivate let disposeBag = DisposeBag()
 
-    @IBOutlet weak var saveButtonItem: UIBarButtonItem!
-    @IBOutlet weak var cancelButtonItem: UIBarButtonItem!
-    @IBOutlet weak var photosButtonItem: UIBarButtonItem!
-    @IBOutlet weak var deleteButtonItem: UIBarButtonItem!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var stickerPlaceholder: AppIconView!
-    @IBOutlet weak var coverView: UIView!
-    @IBOutlet weak var stickerTitleTextField: UITextField!
+    @IBOutlet var saveButtonItem: UIBarButtonItem!
+    @IBOutlet var cancelButtonItem: UIBarButtonItem!
+    @IBOutlet var photosButtonItem: UIBarButtonItem!
+    @IBOutlet var deleteButtonItem: UIBarButtonItem!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var stickerPlaceholder: AppIconView!
+    @IBOutlet var coverView: UIView!
+    @IBOutlet var stickerTitleTextField: UITextField!
 
-    @IBOutlet weak var circleButton: UIButton!
-    @IBOutlet weak var rectangleButton: UIButton!
-    @IBOutlet weak var starButton: UIButton!
-    @IBOutlet weak var multiStarButton: UIButton!
+    @IBOutlet var circleButton: UIButton!
+    @IBOutlet var rectangleButton: UIButton!
+    @IBOutlet var starButton: UIButton!
+    @IBOutlet var multiStarButton: UIButton!
 
     @IBOutlet var portraitConstraints: [NSLayoutConstraint]!
     @IBOutlet var landscapeConstraints: [NSLayoutConstraint]!
 
     fileprivate lazy var maskLayer: CAShapeLayer = {
         let maskLayer = CAShapeLayer()
-        maskLayer.fillRule = kCAFillRuleEvenOdd
+        maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
         return maskLayer
     }()
 
@@ -75,13 +74,14 @@ extension EditStickerViewController {
         coordinator.animate(alongsideTransition: { _ in
             self.configureLayoutConstraints()
         },
-        completion: { _ in
+                            completion: { _ in
         })
         super.viewWillTransition(to: size, with: coordinator)
     }
 }
 
 // MARK: - UIScrollViewDelegate
+
 extension EditStickerViewController: UIScrollViewDelegate {
     func viewForZooming(in _: UIScrollView) -> UIView? {
         return imageView
@@ -89,7 +89,8 @@ extension EditStickerViewController: UIScrollViewDelegate {
 }
 
 // MARK: - Bindings
-fileprivate extension EditStickerViewController {
+
+private extension EditStickerViewController {
     func setupBindings() {
         guard let viewModel = self.viewModel else {
             Logger.shared.error("View Model not set!")
@@ -143,7 +144,7 @@ fileprivate extension EditStickerViewController {
 
         scrollView.rx
             .didEndDragging.filter { willDecelerate in
-                return !willDecelerate
+                !willDecelerate
             }
             .map { _ in Void() }
             .bind(to: didEndDraggingWithoutDecelaration)
@@ -152,7 +153,7 @@ fileprivate extension EditStickerViewController {
         scrollView.rx
             .didScroll
             .filter { _ in
-                return self.scrollView.isDragging || self.scrollView.isDecelerating
+                self.scrollView.isDragging || self.scrollView.isDecelerating
             }
             .bind(to: didScroll)
             .disposed(by: disposeBag)
@@ -160,7 +161,7 @@ fileprivate extension EditStickerViewController {
         scrollView.rx
             .didZoom
             .filter { _ in
-                return self.scrollView.isZooming || self.scrollView.isZoomBouncing
+                self.scrollView.isZooming || self.scrollView.isZoomBouncing
             }
             .bind(to: didZoom)
             .disposed(by: disposeBag)
@@ -170,7 +171,7 @@ fileprivate extension EditStickerViewController {
                 didZoom)
             .merge()
             .filter { _ in
-                return self.imageView.image != nil
+                self.imageView.image != nil
             }
             .map { self.visibleRect }
             .bind(to: viewModel.visibleRectDidChange)
@@ -273,10 +274,10 @@ fileprivate extension EditStickerViewController {
 
         viewModel.presentImagePicker
             .filter { sourceType in
-                return UIImagePickerController.isSourceTypeAvailable(sourceType)
+                UIImagePickerController.isSourceTypeAvailable(sourceType)
             }
             .flatMapLatest { sourceType in
-                return UIImagePickerController.rx.createWithParent(self) { picker in
+                UIImagePickerController.rx.createWithParent(self) { picker in
                     picker.sourceType = sourceType
                     picker.allowsEditing = false
                 }
@@ -287,7 +288,7 @@ fileprivate extension EditStickerViewController {
                 .asDriver(onErrorJustReturn: [:])
             }
             .map { info in
-                let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+                let image = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage
                 return image?.fixOrientation()
             }
             .filter { $0 != nil }
@@ -306,7 +307,7 @@ fileprivate extension EditStickerViewController {
                 let deleteAction = UIAlertAction(title: "Delete".localized,
                                                  style: .destructive,
                                                  handler: { _ in
-                                                     viewModel.deleteAlertDidConfirm.onNext()
+                                                     viewModel.deleteAlertDidConfirm.onNext(())
                 })
                 alertController.addAction(deleteAction)
 
@@ -316,7 +317,7 @@ fileprivate extension EditStickerViewController {
                 alertController.addAction(cancelAction)
                 self.present(alertController, animated: true, completion: nil)
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         viewModel.presentImageSourceAlert
             .drive(onNext: { [weak self, weak viewModel] sourceTypes in
@@ -337,15 +338,12 @@ fileprivate extension EditStickerViewController {
                         case .photoLibrary:
                             title = "ImagePickerSourceTypePhotoLibrary".localized
                             accessibilityLabel = "ImageSourceAlertButtonPhotoLibrary"
-                            break
                         case .camera:
                             title = "ImagePickerSourceTypeCamera".localized
                             accessibilityLabel = "ImageSourceAlertButtonCamera"
-                            break
                         default:
                             title = nil
                             accessibilityLabel = nil
-                            break
                         }
 
                         let handler: (UIAlertAction) -> Void = { _ in
@@ -367,21 +365,20 @@ fileprivate extension EditStickerViewController {
                 }
                 self.present(alertController, animated: true, completion: nil)
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         viewModel.dismiss
             .drive(onNext: { [weak self] in
                 self?.dismiss(animated: true, completion: nil)
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 
 // MARK: - Layout
-fileprivate extension EditStickerViewController {
 
+private extension EditStickerViewController {
     func configureLayoutConstraints() {
-
         guard let portraitConstraints = self.portraitConstraints else {
             return
         }
@@ -403,46 +400,49 @@ fileprivate extension EditStickerViewController {
     }
 }
 
-fileprivate extension EditStickerViewController {
+private extension EditStickerViewController {
     func setupButtons() {
         let lineWidth = CGFloat(3)
 
-        circleButton.setTitle(nil, for: UIControlState())
+        circleButton.setTitle(nil, for: UIControl.State())
         circleButton.titleLabel?.isHidden = true
         circleButton.setBackgroundImages { selected, highlighted in
-            return StyleKit.imageOfCircleButton(lineWidth: lineWidth,
-                                                selected: selected,
-                                                highlighted: highlighted)
+            StyleKit.imageOfCircleButton(lineWidth: lineWidth,
+                                         selected: selected,
+                                         highlighted: highlighted)
         }
 
-        rectangleButton.setTitle(nil, for: UIControlState())
+        rectangleButton.setTitle(nil, for: UIControl.State())
         rectangleButton.setBackgroundImages { selected, highlighted in
-            return StyleKit.imageOfRectangleButton(
+            StyleKit.imageOfRectangleButton(
                 lineWidth: lineWidth,
                 selected: selected,
-                highlighted: highlighted)
+                highlighted: highlighted
+            )
         }
 
-        multiStarButton.setTitle(nil, for: UIControlState())
+        multiStarButton.setTitle(nil, for: UIControl.State())
         multiStarButton.setBackgroundImages { selected, highlighted in
-            return StyleKit.imageOfMultiStarButton(
+            StyleKit.imageOfMultiStarButton(
                 lineWidth: lineWidth,
                 selected: selected,
-                highlighted: highlighted)
+                highlighted: highlighted
+            )
         }
 
-        starButton.setTitle(nil, for: UIControlState())
+        starButton.setTitle(nil, for: UIControl.State())
         starButton.setBackgroundImages { selected, highlighted in
-            return StyleKit.imageOfStarButton(
+            StyleKit.imageOfStarButton(
                 lineWidth: lineWidth,
                 selected: selected,
-                highlighted: highlighted)
+                highlighted: highlighted
+            )
         }
     }
 }
 
 // todo: move to view model
-fileprivate extension EditStickerViewController {
+private extension EditStickerViewController {
     var imageSize: CGSize {
         return imageView.image?.size ?? .zero
     }

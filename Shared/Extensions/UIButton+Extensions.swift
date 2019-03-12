@@ -10,10 +10,10 @@ import UIKit
 
 extension UIButton {
     func setBackgroundImages(image: @escaping (_ selected: Bool, _ highlighted: Bool) -> UIImage?) {
-        setBackgroundImage(image(false, false), for: UIControlState())
-        setBackgroundImage(image(false, false), for: UIControlState.normal)
-        setBackgroundImage(image(false, true), for: UIControlState.highlighted)
-        setBackgroundImage(image(true, false), for: UIControlState.selected)
-        setBackgroundImage(image(true, true), for: [UIControlState.selected, UIControlState.highlighted])
+        setBackgroundImage(image(false, false), for: UIControl.State())
+        setBackgroundImage(image(false, false), for: UIControl.State.normal)
+        setBackgroundImage(image(false, true), for: UIControl.State.highlighted)
+        setBackgroundImage(image(true, false), for: UIControl.State.selected)
+        setBackgroundImage(image(true, true), for: [UIControl.State.selected, UIControl.State.highlighted])
     }
 }

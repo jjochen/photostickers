@@ -24,7 +24,6 @@ protocol DataFolderServiceType {
 }
 
 struct DataFolderService: DataFolderServiceType {
-
     fileprivate let appGroupID = "group.com.jochen-pfeiffer.photo-stickers"
 
     fileprivate let type: DataFolderType
@@ -35,14 +34,11 @@ struct DataFolderService: DataFolderServiceType {
         switch type {
         case .appGroup:
             url = appGroupFolderURL()
-            break
         case let .appGroupPrefilled(subfolder: subfolder):
             url = appGroupFolderURL(subfolder: subfolder)
             prefill()
-            break
         case .temporary:
             url = temporaryDirectoryURL(subfolder: NSUUID().uuidString)
-            break
         }
 
         Logger.shared.info("Data Folder: \(url?.path ?? "not set!")")
@@ -64,10 +60,10 @@ struct DataFolderService: DataFolderServiceType {
     }
 }
 
-fileprivate extension DataFolderService {
+private extension DataFolderService {
     func appGroupFolderURL(subfolder: String? = nil) -> URL? {
         var url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupID)
-        if let subfolder = subfolder, subfolder.characters.count > 0 {
+        if let subfolder = subfolder, subfolder.count > 0 {
             url?.appendPathComponent(subfolder)
         }
         guard createDirectory(at: url) else {
@@ -78,7 +74,7 @@ fileprivate extension DataFolderService {
 
     func temporaryDirectoryURL(subfolder: String? = nil) -> URL? {
         var url = URL(fileURLWithPath: NSTemporaryDirectory())
-        if let subfolder = subfolder, subfolder.characters.count > 0 {
+        if let subfolder = subfolder, subfolder.count > 0 {
             url.appendPathComponent(subfolder)
         }
         guard createDirectory(at: url) else {
@@ -112,7 +108,7 @@ fileprivate extension DataFolderService {
     }
 }
 
-fileprivate extension DataFolderService {
+private extension DataFolderService {
     func prefill() {
         let errorMessage = "Could not prefill data folder!"
         guard let destination = url else {

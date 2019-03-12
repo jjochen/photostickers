@@ -10,10 +10,10 @@ import Foundation
 import RxSwift
 
 class StickerInfo {
-
     let uuid: String
 
     // MARK: initial values
+
     let initialTitle: String?
     let initialOriginalImage: UIImage?
     let initialRenderedSticker: UIImage?
@@ -22,6 +22,7 @@ class StickerInfo {
     let initialSortOrder: Int
 
     // MARK: updated values
+
     let title: Variable<String?>
     let originalImage: Variable<UIImage?>
     let renderedSticker: Variable<UIImage?>
@@ -30,6 +31,7 @@ class StickerInfo {
     let sortOrder: Variable<Int>
 
     // MARK: initilizer
+
     init(uuid: String,
          title: String?,
          originalImage: UIImage?,
@@ -37,7 +39,6 @@ class StickerInfo {
          cropBounds: CGRect,
          mask: Mask,
          sortOrder: Int) {
-
         self.uuid = uuid
 
         initialTitle = title
@@ -66,6 +67,7 @@ class StickerInfo {
     }
 
     // MARK: Observers
+
     var originalImageIsNil: Observable<Bool> {
         return originalImage
             .asObservable()

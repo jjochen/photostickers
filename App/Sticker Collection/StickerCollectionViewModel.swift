@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 protocol StickerCollectionViewModelType: class {
     var stickerCellModels: Driver<[StickerCollectionCellModel]> { get }
@@ -19,8 +19,8 @@ protocol StickerCollectionViewModelType: class {
 }
 
 class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType {
-
     // MARK: Dependencies
+
     fileprivate let imageStoreService: ImageStoreServiceType
     fileprivate let stickerService: StickerServiceType
     fileprivate let stickerRenderService: StickerRenderServiceType
@@ -28,6 +28,7 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
     // MARK: Input
 
     // MARK: Output
+
     let stickerCellModels: Driver<[StickerCollectionCellModel]>
     let arrowHidden: Driver<Bool>
     let presentFirstStickerAlert: Driver<Void>
@@ -35,18 +36,17 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
     init(imageStoreService: ImageStoreServiceType,
          stickerService: StickerServiceType,
          stickerRenderService: StickerRenderServiceType) {
-
         self.imageStoreService = imageStoreService
         self.stickerService = stickerService
         self.stickerRenderService = stickerRenderService
 
         let stickers = stickerService
             .fetchStickers()
-            .shareReplay(1)
+            .share(replay: 1)
 
         let stickerCount = stickers
             .map { allStickers in
-                return allStickers.count
+                allStickers.count
             }
             .distinctUntilChanged()
 
@@ -56,7 +56,7 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
 
         presentFirstStickerAlert = stickerCount // might change to: sticker was added and message was not shown yet
             .scan([]) { lastSlice, newValue -> [Int] in
-                return Array(Array(lastSlice + [newValue]).suffix(2))
+                Array(Array(lastSlice + [newValue]).suffix(2))
             }
             .filter { $0 == [0, 1] }
             .map { _ in Void() }
@@ -65,7 +65,7 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
         stickerCellModels = stickers
             .map { listOfStickers in
                 let listOfViewModels = listOfStickers.map { sticker in
-                    return StickerCollectionCellModel(sticker: sticker, imageStoreService: imageStoreService)
+                    StickerCollectionCellModel(sticker: sticker, imageStoreService: imageStoreService)
                 }
                 return listOfViewModels
             }
@@ -77,7 +77,6 @@ class StickerCollectionViewModel: BaseViewModel, StickerCollectionViewModelType 
     // MARK: - View Models
 
     func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType {
-
         return EditStickerViewModel(sticker: sticker,
                                     imageStoreService: imageStoreService,
                                     stickerService: stickerService,

@@ -15,13 +15,11 @@ protocol StickerCollectionCellModelType: class {
 }
 
 class StickerCollectionCellModel: BaseViewModel, StickerCollectionCellModelType {
-
     let sticker: Sticker
     let image: UIImage?
     let placeholderHidden: Bool
 
     init(sticker: Sticker, imageStoreService: ImageStoreServiceType) {
-
         self.sticker = sticker
         image = sticker.renderedImage(from: imageStoreService)
         placeholderHidden = image != nil

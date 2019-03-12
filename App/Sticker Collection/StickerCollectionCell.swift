@@ -7,15 +7,14 @@
 //
 
 import Foundation
-import UIKit
-import RxSwift
-import RxCocoa
 import Log
+import RxCocoa
+import RxSwift
+import UIKit
 
 class StickerCollectionCell: UICollectionViewCell {
-
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var placeholderView: AppIconView!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var placeholderView: AppIconView!
 
     var viewModel: StickerCollectionCellModelType? {
         didSet {

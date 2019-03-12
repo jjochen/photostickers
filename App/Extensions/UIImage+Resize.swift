@@ -10,16 +10,15 @@
 import UIKit
 
 public extension UIImage {
-
     // Returns a copy of this image that is cropped to the given bounds.
     // The bounds will be adjusted using CGRectIntegral.
     // This method ignores the image's imageOrientation setting.
-    public func croppedImage(_ bounds: CGRect) -> UIImage {
+    func croppedImage(_ bounds: CGRect) -> UIImage {
         let imageRef: CGImage = cgImage!.cropping(to: bounds)!
         return UIImage(cgImage: imageRef)
     }
 
-    public func thumbnailImage(_ thumbnailSize: Int, transparentBorder borderSize: Int, cornerRadius: Int, interpolationQuality quality: CGInterpolationQuality) -> UIImage {
+    func thumbnailImage(_ thumbnailSize: Int, transparentBorder borderSize: Int, cornerRadius: Int, interpolationQuality quality: CGInterpolationQuality) -> UIImage {
         let resizedImage = resizedImageWithContentMode(.scaleAspectFill, bounds: CGSize(width: CGFloat(thumbnailSize), height: CGFloat(thumbnailSize)), interpolationQuality: quality)
 
         // Crop out any part of the image that's larger than the thumbnail size
@@ -40,7 +39,7 @@ public extension UIImage {
 
     // Returns a rescaled copy of the image, taking into account its orientation
     // The image will be scaled disproportionately if necessary to fit the bounds specified by the parameter
-    public func resizedImage(_ newSize: CGSize, interpolationQuality quality: CGInterpolationQuality) -> UIImage {
+    func resizedImage(_ newSize: CGSize, interpolationQuality quality: CGInterpolationQuality) -> UIImage {
         var drawTransposed: Bool
 
         switch imageOrientation {
@@ -58,7 +57,7 @@ public extension UIImage {
         )
     }
 
-    public func resizedImageWithContentMode(_ contentMode: UIViewContentMode, bounds: CGSize, interpolationQuality quality: CGInterpolationQuality) -> UIImage {
+    func resizedImageWithContentMode(_ contentMode: UIView.ContentMode, bounds: CGSize, interpolationQuality quality: CGInterpolationQuality) -> UIImage {
         let horizontalRatio = bounds.width / size.width
         let verticalRatio = bounds.height / size.height
         var ratio: CGFloat = 1

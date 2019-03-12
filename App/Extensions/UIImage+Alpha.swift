@@ -10,8 +10,7 @@
 import UIKit
 
 public extension UIImage {
-
-    public func hasAlpha() -> Bool {
+    func hasAlpha() -> Bool {
         let alpha: CGImageAlphaInfo = cgImage!.alphaInfo
         return
             alpha == CGImageAlphaInfo.first ||
@@ -20,7 +19,7 @@ public extension UIImage {
             alpha == CGImageAlphaInfo.premultipliedLast
     }
 
-    public func imageWithAlpha() -> UIImage {
+    func imageWithAlpha() -> UIImage {
         if hasAlpha() {
             return self
         }
@@ -43,7 +42,7 @@ public extension UIImage {
         return UIImage(cgImage: imageRefWithAlpha)
     }
 
-    public func transparentBorderImage(_ borderSize: Int) -> UIImage {
+    func transparentBorderImage(_ borderSize: Int) -> UIImage {
         let image = imageWithAlpha()
 
         let newRect = CGRect(
@@ -96,8 +95,8 @@ public extension UIImage {
             x: CGFloat(borderSize),
             y: CGFloat(borderSize),
             width: size.width - CGFloat(borderSize) * 2,
-            height: size.height - CGFloat(borderSize) * 2)
-        )
+            height: size.height - CGFloat(borderSize) * 2
+        ))
 
         // Get an image of the context
         return maskContext.makeImage()!

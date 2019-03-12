@@ -7,21 +7,20 @@
 //
 
 import Foundation
-import UIKit
-import Messages
 import Log
-import RxSwift
+import Messages
 import RxCocoa
 import RxDataSources
+import RxSwift
+import UIKit
 
 class PhotoStickerBrowserViewController: UIViewController {
-
     var viewModel: PhotoStickerBrowserViewModelType?
     fileprivate let disposeBag = DisposeBag()
 
     // MARK: Outlets / Actions
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,14 +35,22 @@ class PhotoStickerBrowserViewController: UIViewController {
     // MARK: - Bindings
 
     fileprivate func setupBindings() {
-
         guard let viewModel = self.viewModel else {
             Logger.shared.error("View Model not set!")
             return
         }
 
-        let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>()
-        skinTableViewDataSource(dataSource)
+        let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>(configureCell: { dataSource, collectionView, indexPath, _ in
+            switch dataSource[indexPath] {
+            case .openAppItem:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.AddMoreCell.rawValue, for: indexPath)
+                return cell
+            case let .stickerItem(viewModel: cellViewModel):
+                let cell: StickerBrowserCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.StickerBrowserCell.rawValue, for: indexPath) as! StickerBrowserCell
+                cell.viewModel = cellViewModel
+                return cell
+            }
+        })
 
         viewModel.sectionItems
             .map { items in
@@ -74,21 +81,8 @@ extension PhotoStickerBrowserViewController {
 }
 
 // MARK: Skinning
-extension PhotoStickerBrowserViewController {
-    func skinTableViewDataSource(_ dataSource: RxCollectionViewSectionedReloadDataSource<StickerSection>) {
-        dataSource.configureCell = { dataSource, collectionView, indexPath, _ in
-            switch dataSource[indexPath] {
-            case .openAppItem:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.AddMoreCell.rawValue, for: indexPath)
-                return cell
-            case let .stickerItem(viewModel: cellViewModel):
-                let cell: StickerBrowserCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.StickerBrowserCell.rawValue, for: indexPath) as! StickerBrowserCell
-                cell.viewModel = cellViewModel
-                return cell
-            }
-        }
-    }
-}
+
+extension PhotoStickerBrowserViewController {}
 
 extension PhotoStickerBrowserViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

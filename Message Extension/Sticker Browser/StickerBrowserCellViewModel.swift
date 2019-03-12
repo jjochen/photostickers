@@ -6,9 +6,9 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import UIKit
-import Messages
 import Log
+import Messages
+import UIKit
 
 protocol StickerBrowserCellViewModelType: class {
     var sticker: Sticker { get }
@@ -17,7 +17,6 @@ protocol StickerBrowserCellViewModelType: class {
 }
 
 class StickerBrowserCellViewModel: BaseViewModel, StickerBrowserCellViewModelType {
-
     let sticker: Sticker
     let msSticker: MSSticker?
     let placeholderHidden: Bool

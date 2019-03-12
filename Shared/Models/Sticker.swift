@@ -24,17 +24,18 @@ enum StickerProperty: String {
 }
 
 // MARK: Realm Object
+
 class Sticker: Object {
-    dynamic var uuid = ""
-    dynamic var title: String?
-    dynamic var hasOriginalImage: Bool = false
-    dynamic var hasRenderedImage: Bool = false
-    dynamic var cropBoundsX: Double = 0
-    dynamic var cropBoundsY: Double = 0
-    dynamic var cropBoundsWidth: Double = 0
-    dynamic var cropBoundsHeight: Double = 0
-    dynamic var maskType: Int = Mask.circle.rawValue
-    dynamic var sortOrder = 0
+    @objc dynamic var uuid = ""
+    @objc dynamic var title: String?
+    @objc dynamic var hasOriginalImage: Bool = false
+    @objc dynamic var hasRenderedImage: Bool = false
+    @objc dynamic var cropBoundsX: Double = 0
+    @objc dynamic var cropBoundsY: Double = 0
+    @objc dynamic var cropBoundsWidth: Double = 0
+    @objc dynamic var cropBoundsHeight: Double = 0
+    @objc dynamic var maskType: Int = Mask.circle.rawValue
+    @objc dynamic var sortOrder = 0
 
     override static func primaryKey() -> String? {
         return StickerProperty.uuid.rawValue
@@ -56,6 +57,7 @@ class Sticker: Object {
 }
 
 // MARK: Equitable
+
 func == (lhs: Sticker, rhs: Sticker) -> Bool {
     return lhs.uuid == rhs.uuid
 }
@@ -66,8 +68,8 @@ extension Sticker {
 }
 
 // MARK: Bounds
-extension Sticker {
 
+extension Sticker {
     var cropBounds: CGRect {
         get {
             return CGRect(x: cropBoundsX, y: cropBoundsY, width: cropBoundsWidth, height: cropBoundsHeight)
@@ -82,19 +84,20 @@ extension Sticker {
 }
 
 // MARK: Mask
-extension Sticker {
 
+extension Sticker {
     var mask: Mask {
         get {
-            return Mask(rawValue: self.maskType) ?? .circle
+            return Mask(rawValue: maskType) ?? .circle
         }
         set(mask) {
-            self.maskType = mask.rawValue
+            maskType = mask.rawValue
         }
     }
 }
 
 // MARK: RxDataSource Methods
+
 extension Sticker: IdentifiableType {
     typealias Identity = String
 

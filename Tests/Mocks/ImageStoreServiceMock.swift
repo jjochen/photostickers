@@ -6,11 +6,10 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import UIKit
 @testable import PhotoStickers
+import UIKit
 
 class ImageStoreServiceMock: ImageStoreServiceType {
-
     fileprivate var bundle: Bundle {
         return Bundle(for: type(of: self))
     }
