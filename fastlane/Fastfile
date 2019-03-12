@@ -12,47 +12,44 @@ lane :test do
 end
 
 desc "Submit a new Beta Build to Apple TestFlight"
-lane :beta do
-
+lane :beta do |options|
+  
+  version = options[:version]
+  increment_version_number version_number: version unless version.nil? || version.scan(/\d+\.\d+\.\d+/).length == 0
   increment_build_number
-    
+
   sync_code_signing
-    
+
   build_ios_app
-    
+
   upload_to_testflight({
     skip_submission: false,
     distribute_external: true,
     changelog: "New build",
-    skip_waiting_for_build_processing: false,
+    skip_waiting_for_build_processing: true,
   })
 end
 
 desc "Deploy a new version to the App Store"
 lane :release do |options|
-    
+
   version = options[:version]
   raise "You must specify a version in A.B.X format to deploy." if version.nil? || version.scan(/\d+\.\d+\.\d+/).length == 0
-    
-  # Make sure we start off with a clean slate
+
   ensure_git_status_clean
-    
+
+  increment_version_number version_number: version
   increment_build_number
-    
+
   # Generate release notes from CHANGELOG
   changelog_filename = '../CHANGELOG.yml'
   changelog_yaml = YAML.load_file(changelog_filename)
   release_notes = changelog_yaml['upcoming'].map{ |note| note.prepend '- ' }.join("\n")
-    
-  # Increment to the specified version number
-  increment_version_number version_number: version
-    
-  # Add a changelog entry for this version
-    
-    changelog_contents = File.read(changelog_filename)
-    existing_releases = changelog_contents.split('releases:').last
-    this_release = changelog_yaml['upcoming'].map{ |note| note.prepend '  ' }.join("\n")
-    changelog_contents = <<-EOS
+
+  changelog_contents = File.read(changelog_filename)
+  existing_releases = changelog_contents.split('releases:').last
+  this_release = changelog_yaml['upcoming'].map{ |note| note.prepend '  ' }.join("\n")
+  changelog_contents = <<-EOS
 upcoming:
 
 releases:
@@ -64,16 +61,16 @@ releases:
 EOS
 
   File.open(changelog_filename, 'w') { |file| file.puts changelog_contents }
-  
+
   sync_code_signing
-    
+
   build_ios_app
-    
+
   upload_to_app_store({
     force: true
   })
   # frameit
-    
+
   # Make sure our directory is clean, except for changes Fastlane has made
   #clean_build_artifacts
 
