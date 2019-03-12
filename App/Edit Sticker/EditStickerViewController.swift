@@ -288,7 +288,7 @@ private extension EditStickerViewController {
                 .asDriver(onErrorJustReturn: [:])
             }
             .map { info in
-                let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage
+                let image = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage
                 return image?.fixOrientation()
             }
             .filter { $0 != nil }
@@ -450,9 +450,4 @@ private extension EditStickerViewController {
     var visibleRect: CGRect {
         return scrollView.convertBounds(to: imageView)
     }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-private func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-    return input.rawValue
 }
