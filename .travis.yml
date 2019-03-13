@@ -11,8 +11,6 @@ env:
   global:
     - LC_CTYPE=en_US.UTF-8
     - LANG=en_US.UTF-8
-before_install:
-  - rvm use $(< .ruby-version) --install --binary --fuzzy --create
 install:
   - gem install bundler
   - bundle install
