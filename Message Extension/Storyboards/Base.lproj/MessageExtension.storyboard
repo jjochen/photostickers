@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,14 +14,11 @@
         <scene sceneID="7MM-of-jgj">
             <objects>
                 <viewController storyboardIdentifier="MessagesViewController" id="ObA-dk-sSI" customClass="MessagesViewController" customModule="MessageExtension" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qkL-Od-lgU"/>
-                        <viewControllerLayoutGuide type="bottom" id="n38-gi-rB5"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zMn-AG-sqS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="5pI-Ps-dgk"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="528"/>
@@ -33,10 +31,6 @@
         <scene sceneID="OhS-TE-fuZ">
             <objects>
                 <viewController storyboardIdentifier="PhotoStickerBrowserViewController" id="je6-JZ-ceA" customClass="PhotoStickerBrowserViewController" customModule="MessageExtension" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Rn6-TW-X6L"/>
-                        <viewControllerLayoutGuide type="bottom" id="3zq-oq-fpS"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rkq-Vv-FBG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -87,10 +81,10 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="Iyb-XD-XMs" customClass="AddStickerCell" customModule="MessageExtension" customModuleProvider="target">
-                                        <rect key="frame" x="142" y="10" width="91" height="90"/>
+                                        <rect key="frame" x="142.5" y="10" width="90" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="91" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="56" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="zcV-wh-1zh">
@@ -122,6 +116,7 @@
                             <constraint firstAttribute="right" secondItem="pWq-rX-ruZ" secondAttribute="right" id="Y0y-PP-0lh"/>
                             <constraint firstItem="pWq-rX-ruZ" firstAttribute="top" secondItem="rkq-Vv-FBG" secondAttribute="top" id="tT5-he-ElM"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="Wid-BX-1hF"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="pWq-rX-ruZ" id="uCl-4D-INS"/>

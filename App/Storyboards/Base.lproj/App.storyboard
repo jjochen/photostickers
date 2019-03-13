@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7oO-ML-e6r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7oO-ML-e6r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,10 +14,6 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="StickerCollectionViewController" id="BYZ-38-t0r" userLabel="Sticker Collection Controller" customClass="StickerCollectionViewController" customModule="PhotoStickers" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -91,12 +85,13 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Hbw-nh-cGe" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="1UH-yu-tc0"/>
-                            <constraint firstItem="Hbw-nh-cGe" firstAttribute="left" secondItem="8bC-Xf-vdC" secondAttribute="left" id="GrN-TL-7pR"/>
-                            <constraint firstItem="eml-zk-8dU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="4" id="M0K-Nr-Ooc"/>
-                            <constraint firstItem="Hbw-nh-cGe" firstAttribute="right" secondItem="8bC-Xf-vdC" secondAttribute="right" id="PeS-2W-JHe"/>
+                            <constraint firstItem="Hbw-nh-cGe" firstAttribute="left" secondItem="dx3-dF-gDm" secondAttribute="left" id="GrN-TL-7pR"/>
+                            <constraint firstItem="eml-zk-8dU" firstAttribute="top" secondItem="dx3-dF-gDm" secondAttribute="top" constant="4" id="M0K-Nr-Ooc"/>
+                            <constraint firstItem="Hbw-nh-cGe" firstAttribute="right" secondItem="dx3-dF-gDm" secondAttribute="right" id="PeS-2W-JHe"/>
                             <constraint firstItem="eml-zk-8dU" firstAttribute="right" secondItem="8bC-Xf-vdC" secondAttribute="rightMargin" constant="4" id="c0j-A3-TcD"/>
-                            <constraint firstItem="Hbw-nh-cGe" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="trK-z2-CVx"/>
+                            <constraint firstItem="Hbw-nh-cGe" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="trK-z2-CVx"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="dx3-dF-gDm"/>
                     </view>
                     <navigationItem key="navigationItem" title="Photo Stickers" id="tGu-nI-cYD" userLabel="Sticker Collection Navigation Bar">
                         <barButtonItem key="rightBarButtonItem" id="SxV-cq-Vib" userLabel="Add Button Item">
@@ -129,7 +124,7 @@
             <objects>
                 <navigationController storyboardIdentifier="EditStickerNavigationController" toolbarHidden="NO" id="mHK-wh-jhb" userLabel="Edit Sticker Navigation Controller" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ezs-dE-6ca" userLabel="Edit Sticker Navigation Bar">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="EditStickerNavigationBar"/>
@@ -154,10 +149,6 @@
         <scene sceneID="fky-Nl-cnS">
             <objects>
                 <viewController storyboardIdentifier="EditStickerViewController" automaticallyAdjustsScrollViewInsets="NO" id="xY5-ie-FY6" userLabel="Edit Sticker Controller" customClass="EditStickerViewController" customModule="PhotoStickers" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="asa-D8-eDb"/>
-                        <viewControllerLayoutGuide type="bottom" id="EuG-up-7tU"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="63h-fZ-lFi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -229,7 +220,7 @@
                                 <rect key="frame" x="0.0" y="439" width="375" height="184"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBL-rL-8h5" userLabel="Button Layout Guide">
-                                        <rect key="frame" x="40.5" y="74.5" width="295" height="34"/>
+                                        <rect key="frame" x="40" y="75" width="295" height="34"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKM-gO-hz8">
                                                 <rect key="frame" x="0.0" y="0.0" width="47" height="34"/>
@@ -286,16 +277,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="aBM-ze-byb" firstAttribute="leading" secondItem="Zd7-Ok-AEC" secondAttribute="trailing" priority="999" id="2IQ-K9-yM6" userLabel="L: Control Layout Guide.leading = Sticker Layout Guide.trailing"/>
-                            <constraint firstItem="aBM-ze-byb" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" priority="750" id="F7K-xB-9qp"/>
-                            <constraint firstItem="Zd7-Ok-AEC" firstAttribute="trailing" secondItem="63h-fZ-lFi" secondAttribute="trailing" priority="750" id="IDl-es-lF7"/>
-                            <constraint firstItem="Zd7-Ok-AEC" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" id="MnT-bi-hqY"/>
-                            <constraint firstItem="aBM-ze-byb" firstAttribute="top" secondItem="asa-D8-eDb" secondAttribute="bottom" priority="750" id="S8a-M9-bSI"/>
-                            <constraint firstItem="Zd7-Ok-AEC" firstAttribute="leading" secondItem="63h-fZ-lFi" secondAttribute="leading" id="fbf-q4-d8M"/>
+                            <constraint firstItem="aBM-ze-byb" firstAttribute="leading" secondItem="aiO-i3-Rmc" secondAttribute="leading" priority="750" id="F7K-xB-9qp"/>
+                            <constraint firstItem="Zd7-Ok-AEC" firstAttribute="trailing" secondItem="aiO-i3-Rmc" secondAttribute="trailing" priority="750" id="IDl-es-lF7"/>
+                            <constraint firstItem="Zd7-Ok-AEC" firstAttribute="top" secondItem="aiO-i3-Rmc" secondAttribute="top" id="MnT-bi-hqY"/>
+                            <constraint firstItem="aBM-ze-byb" firstAttribute="top" secondItem="aiO-i3-Rmc" secondAttribute="top" priority="750" id="S8a-M9-bSI"/>
+                            <constraint firstItem="Zd7-Ok-AEC" firstAttribute="leading" secondItem="aiO-i3-Rmc" secondAttribute="leading" id="fbf-q4-d8M"/>
                             <constraint firstItem="aBM-ze-byb" firstAttribute="top" secondItem="Zd7-Ok-AEC" secondAttribute="bottom" priority="999" id="nNB-7c-cMT" userLabel="P: Control Layout Guide.top = Sticker Layout Guide.bottom"/>
-                            <constraint firstItem="aBM-ze-byb" firstAttribute="bottom" secondItem="EuG-up-7tU" secondAttribute="top" id="pY2-P2-4FA"/>
-                            <constraint firstItem="Zd7-Ok-AEC" firstAttribute="bottom" secondItem="EuG-up-7tU" secondAttribute="top" priority="750" id="sMr-4k-1PW"/>
-                            <constraint firstItem="aBM-ze-byb" firstAttribute="trailing" secondItem="63h-fZ-lFi" secondAttribute="trailing" id="tu1-35-Jkh"/>
+                            <constraint firstItem="aBM-ze-byb" firstAttribute="bottom" secondItem="aiO-i3-Rmc" secondAttribute="bottom" id="pY2-P2-4FA"/>
+                            <constraint firstItem="Zd7-Ok-AEC" firstAttribute="bottom" secondItem="aiO-i3-Rmc" secondAttribute="bottom" priority="750" id="sMr-4k-1PW"/>
+                            <constraint firstItem="aBM-ze-byb" firstAttribute="trailing" secondItem="aiO-i3-Rmc" secondAttribute="trailing" id="tu1-35-Jkh"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="aiO-i3-Rmc"/>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="2IQ-K9-yM6"/>
@@ -323,7 +315,7 @@
                             </userDefinedRuntimeAttributes>
                         </barButtonItem>
                         <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Photo Sticker" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" id="dt1-g2-TIx" userLabel="Sticker Title Text Field">
-                            <rect key="frame" x="75" y="7" width="239" height="30"/>
+                            <rect key="frame" x="78" y="7" width="238" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <accessibility key="accessibilityConfiguration" identifier="StickerTitleTextField"/>
                             <nil key="textColor"/>
@@ -370,7 +362,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MainNavigationController" id="7oO-ML-e6r" userLabel="Sticker Collection Navigation Controller" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AEa-As-IWY" userLabel="Sticker Collection Navigtion Bar">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="StickerCollectionNavigtionBar"/>
