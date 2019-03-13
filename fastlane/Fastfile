@@ -3,61 +3,53 @@ fastlane_version "2.3.0"
 #xcversion(version: "8.3.1")
 
 before_all do
-    ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "2"
+  ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "2"
 end
 
 desc "Runs all the tests"
 lane :test do
-    scan
+  scan
 end
 
 desc "Submit a new Beta Build to Apple TestFlight"
-lane :beta do
-    
-    increment_build_number
-    
-    sigh(
-         adhoc: false,
-         force: true
-    )
-    
-    ENV["PROFILE_UDID"] = lane_context[SharedValues::SIGH_UDID]
-    
-    gym
-    
-    pilot(
-          skip_submission: false,
-          distribute_external: true,
-          changelog: "New build",
-          skip_waiting_for_build_processing: false,
-    )
+lane :beta do |options|
+  
+  version = options[:version]
+  increment_version_number version_number: version unless version.nil? || version.scan(/\d+\.\d+\.\d+/).length == 0
+  increment_build_number
+
+  sync_code_signing
+
+  build_ios_app
+
+  upload_to_testflight({
+    skip_submission: false,
+    distribute_external: true,
+    changelog: "New build",
+    skip_waiting_for_build_processing: true,
+  })
 end
 
 desc "Deploy a new version to the App Store"
 lane :release do |options|
-    
-    version = options[:version]
-    raise "You must specify a version in A.B.X format to deploy." if version.nil? || version.scan(/\d+\.\d+\.\d+/).length == 0
-    
-    # Make sure we start off with a clean slate
-    ensure_git_status_clean
-    
-    increment_build_number
-    
-    # Generate release notes from CHANGELOG
-    changelog_filename = '../CHANGELOG.yml'
-    changelog_yaml = YAML.load_file(changelog_filename)
-    release_notes = changelog_yaml['upcoming'].map{ |note| note.prepend '- ' }.join("\n")
-    
-    # Increment to the specified version number
-    increment_version_number version_number: version
-    
-    # Add a changelog entry for this version
-    
-    changelog_contents = File.read(changelog_filename)
-    existing_releases = changelog_contents.split('releases:').last
-    this_release = changelog_yaml['upcoming'].map{ |note| note.prepend '  ' }.join("\n")
-    changelog_contents = <<-EOS
+
+  version = options[:version]
+  raise "You must specify a version in A.B.X format to deploy." if version.nil? || version.scan(/\d+\.\d+\.\d+/).length == 0
+
+  ensure_git_status_clean
+
+  increment_version_number version_number: version
+  increment_build_number
+
+  # Generate release notes from CHANGELOG
+  changelog_filename = '../CHANGELOG.yml'
+  changelog_yaml = YAML.load_file(changelog_filename)
+  release_notes = changelog_yaml['upcoming'].map{ |note| note.prepend '- ' }.join("\n")
+
+  changelog_contents = File.read(changelog_filename)
+  existing_releases = changelog_contents.split('releases:').last
+  this_release = changelog_yaml['upcoming'].map{ |note| note.prepend '  ' }.join("\n")
+  changelog_contents = <<-EOS
 upcoming:
 
 releases:
@@ -68,79 +60,74 @@ releases:
 #{existing_releases}
 EOS
 
-    File.open(changelog_filename, 'w') { |file| file.puts changelog_contents }
-    
-    # Test
-    #scan
-    
-    # Grab the latest profiles from Apple
-    sigh
-    
-    ENV["PROFILE_UDID"] = lane_context[SharedValues::SIGH_UDID]
-    
-    # Build
-    gym
-    
-    deliver(force: true)
-    # frameit
-    
-    # Make sure our directory is clean, except for changes Fastlane has made
-    #clean_build_artifacts
+  File.open(changelog_filename, 'w') { |file| file.puts changelog_contents }
 
-    # Tag release and push to GitHub
-    sh "git add .. ; git commit -m 'Deploying version #{version}.'" # Can't use commit_version_bump to include changelog changes
-    add_git_tag tag: version
-    push_to_git_remote
+  sync_code_signing
+
+  build_ios_app
+
+  upload_to_app_store({
+    force: true
+  })
+  # frameit
+
+  # Make sure our directory is clean, except for changes Fastlane has made
+  #clean_build_artifacts
+
+  # Tag release and push to GitHub
+  sh "git add .. ; git commit -m 'Deploying version #{version}.'" # Can't use commit_version_bump to include changelog changes
+  add_git_tag tag: version
+  push_to_git_remote
 end
 
 
 desc "Deploy a new version to the App Store"
 lane :upload_metadata do
-    deliver(
-            skip_binary_upload: true,
-            force: true,
-            )
+  upload_to_app_store({
+    skip_binary_upload: true,
+    force: true
+  })
 end
 
 
 desc "Updates the storyboard identifier Swift values."
 lane :storyboard_ids do
-    sh "cd .. ; bundle exec sbconstants ./Shared/Services/StoryboardIdentifiers.swift --source-dir ./ --swift"
+  sh "cd .. ; bundle exec sbconstants ./Shared/Services/StoryboardIdentifiers.swift --source-dir ./ --swift"
 end
 
 desc "Reorganizes Xcode project folder to match Xcode groups."
 lane :reorganize_project_folder do
-    sh "cd .. ; bundle exec synx --exclusion Metadata --exclusion Deployment --exclusion Config --no-sort-by-name PhotoStickers.xcodeproj"
+  sh "cd .. ; bundle exec synx --exclusion Metadata --exclusion Deployment --exclusion Config --no-sort-by-name PhotoStickers.xcodeproj"
 end
 
 desc "Install dependencies (gems, cocoapods)"
 lane :install_dependencies do
-    bundle_install
-    cocoapods(
-        repo_update: true,
-    )
+  bundle_install
+  cocoapods({
+    repo_update: true
+  })
 end
 
 desc "Update dependencies (bundler, gems, cocoapods)"
 lane :update_dependencies do
-    sh "gem install bundler"
-    sh "bundle update"
-    sh "bundle exec pod update"
+  sh "gem install bundler"
+  sh "bundle update"
+  sh "bundle exec pod update"
 end
 
 desc "Delete cocoapods from the project and reinstall"
 lane :reintegrate do
-    sh "bundle update"
-    sh "cd ..; bundle exec pod deintegrate PhotoStickers.xcodeproj"
-    #sh "bundle exec pod clean"
-    cocoapods
+  sh "bundle update"
+  sh "cd ..; bundle exec pod deintegrate PhotoStickers.xcodeproj"
+  #sh "bundle exec pod clean"
+  cocoapods
 end
 
 
 error do |lane, exception|
-    if lane == :release
-        puts "Unable to release, resetting git repository."
-        clean_build_artifacts
-        reset_git_repo
-    end
+  if lane == :release
+    puts "Unable to release, resetting git repository."
+    clean_build_artifacts
+    reset_git_repo
+  end
 end
