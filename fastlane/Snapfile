@@ -17,15 +17,16 @@ languages([
 scheme "PhotoStickers"
 workspace "./PhotoStickers.xcworkspace"
 
-clear_previous_screenshots false
+clear_previous_screenshots true
 reinstall_app true
 localize_simulator true
+concurrent_simulators true
+erase_simulator true
+clean true
+stop_after_first_error true
+number_of_retries 1
 
 #launch_arguments([]) # See https://github.com/fastlane/snapshot#launch-arguments
 #output_simulator_logs false
 #skip_open_summary false
 #skip_helper_version_check false
-#erase_simulator false
-#clean false
-#number_of_retries 1
-#stop_after_first_error false
