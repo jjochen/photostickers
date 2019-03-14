@@ -21,7 +21,7 @@ class PhotoStickersUITests: XCTestCase {
         let collectionView = app.collectionViews["StickerCollectionView"]
         XCTAssert(collectionView.exists)
 
-        snapshot("1_Sticker_Collection")
+        snapshot("4_Sticker_Collection")
 
         let addButtonItem = stickerCollectionNavigtionBar.buttons["AddButtonItem"]
         XCTAssert(addButtonItem.exists)
@@ -111,8 +111,8 @@ class PhotoStickersUITests: XCTestCase {
 
         messageApp.terminate()
 
-        setupSnapshot(messageApp)
         messageApp.launchArguments += ["-RunningUITests", "true"]
+        setupSnapshot(messageApp)
         messageApp.launch()
 
         var continueButton = messageApp.buttons["Fortfahren"]
@@ -129,7 +129,8 @@ class PhotoStickersUITests: XCTestCase {
         sleep(1)
 
         messageApp.textFields["messageBodyField"].tap()
-        messageApp.typeText("🎉🎉🎉 Party?")
+        let messageText = "🎉🎉🎉 Party?"
+        messageApp.typeText(messageText)
 
         sleep(1)
 
@@ -150,14 +151,17 @@ class PhotoStickersUITests: XCTestCase {
         sleep(1)
 
         let sticker = messageApp.collectionViews["StickerBrowserCollectionView"].cells.element(boundBy: 5)
-        let message = messageApp.collectionViews["TranscriptCollectionView"].cells.element(boundBy: 1)
+        let messageCell = messageApp.collectionViews["TranscriptCollectionView"].cells.matching(NSPredicate(format: "label CONTAINS[c] %@", messageText)).firstMatch
+        let cellWidth = messageCell.frame.size.width
+        let rightDX = CGFloat(130)
+        let relativeDX = 1 - rightDX / cellWidth
         let sourceCoordinate: XCUICoordinate = sticker.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.1))
-        let destCorodinate: XCUICoordinate = message.coordinate(withNormalizedOffset: CGVector(dx: 0.7, dy: 0.9))
+        let destCorodinate: XCUICoordinate = messageCell.coordinate(withNormalizedOffset: CGVector(dx: relativeDX, dy: 0.5))
         sourceCoordinate.press(forDuration: 0.5, thenDragTo: destCorodinate)
 
         sleep(1)
 
-        snapshot("4_Messages")
+        snapshot("1_Messages", timeWaitingForIdle: 40)
     }
 }
 
