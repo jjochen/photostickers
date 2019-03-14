@@ -9,7 +9,7 @@
 import XCTest
 
 class PhotoStickersUITests: XCTestCase {
-    func testAppUI() {
+    func testUI() {
         let app = XCUIApplication()
         app.launchArguments += ["-RunningUITests", "true"]
         setupSnapshot(app)
@@ -102,9 +102,7 @@ class PhotoStickersUITests: XCTestCase {
         circleButton.tap()
 
         saveButtonItem.tap()
-    }
 
-    func testMessageAppUI() {
         guard let messageApp = XCUIApplication.eps_iMessagesApp() else {
             fatalError()
         }
