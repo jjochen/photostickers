@@ -11,7 +11,6 @@ import XCTest
 class PhotoStickersUITests: XCTestCase {
     func testUI() {
         let app = XCUIApplication()
-
         app.launchArguments += ["-RunningUITests", "true"]
         setupSnapshot(app)
         app.launch()
@@ -22,12 +21,14 @@ class PhotoStickersUITests: XCTestCase {
         let collectionView = app.collectionViews["StickerCollectionView"]
         XCTAssert(collectionView.exists)
 
-        snapshot("1_Sticker_Collection")
+        snapshot("4_Sticker_Collection")
 
         let addButtonItem = stickerCollectionNavigtionBar.buttons["AddButtonItem"]
         XCTAssert(addButtonItem.exists)
 
         addButtonItem.tap()
+
+        sleep(1)
 
         let sheetsQuery = app.sheets
 
@@ -37,6 +38,8 @@ class PhotoStickersUITests: XCTestCase {
         let imageSourceAlertButtonCamera = sheetsQuery.buttons["ImageSourceAlertButtonCamera"]
         XCTAssert(imageSourceAlertButtonCamera.exists)
 
+        snapshot("2_Sticker_Source")
+
         if isIPad() {
             let appWindow = app.children(matching: .window).element(boundBy: 0)
             appWindow.tap()
@@ -45,6 +48,8 @@ class PhotoStickersUITests: XCTestCase {
             XCTAssert(imageSourceAlertButtonCancel.exists)
             imageSourceAlertButtonCancel.tap()
         }
+
+        sleep(1)
 
         let circleButton = app.buttons["CircleButton"]
         XCTAssert(circleButton.exists)
@@ -78,7 +83,7 @@ class PhotoStickersUITests: XCTestCase {
 
         cancelButtonItem.tap()
 
-        XCTAssert(collectionView.exists)
+        sleep(1)
 
         let stickerCells = collectionView.cells.matching(identifier: "StickerCollectionCell")
         let firstStickerCell = stickerCells.element(boundBy: 0)
@@ -86,32 +91,69 @@ class PhotoStickersUITests: XCTestCase {
 
         firstStickerCell.tap()
 
+        sleep(1)
+
         starButton.tap()
         multiStarButton.tap()
         rectangleButton.tap()
 
-        snapshot("2_Edit_Sticker")
+        snapshot("3_Edit_Sticker")
 
         circleButton.tap()
 
         saveButtonItem.tap()
-    }
 
-    func MessagesSnapshot() {
         guard let messageApp = XCUIApplication.eps_iMessagesApp() else {
             fatalError()
         }
+
+        messageApp.terminate()
 
         messageApp.launchArguments += ["-RunningUITests", "true"]
         setupSnapshot(messageApp)
         messageApp.launch()
 
-        messageApp.tables.cells.element(boundBy: 0).tap()
+        var continueButton = messageApp.buttons["Fortfahren"]
+        if continueButton.exists {
+            continueButton.tap()
+        }
+        continueButton = messageApp.buttons["Continue"]
+        if continueButton.exists {
+            continueButton.tap()
+        }
 
-        messageApp.buttons["browserButton"].tap()
-        messageApp.children(matching: .window).element(boundBy: 0).tap()
+        messageApp.tables["ConversationList"].cells.firstMatch.tap()
 
-        snapshot("3_Messages")
+        sleep(1)
+
+        messageApp.textFields["messageBodyField"].tap()
+        let messageText = "🎉🎉🎉 Party?"
+        messageApp.typeText(messageText)
+
+        sleep(1)
+
+        messageApp.buttons["sendButton"].tap()
+
+        sleep(1)
+
+        let appCells = messageApp.collectionViews["appSelectionBrowserIdentifier"].cells
+        let photoStickersCell = appCells.matching(NSPredicate(format: "label CONTAINS[c] 'Photo Stickers'")).firstMatch
+        photoStickersCell.tap()
+
+        sleep(2)
+
+        let sticker = messageApp.collectionViews["StickerBrowserCollectionView"].cells.element(boundBy: 5)
+        let messageCell = messageApp.collectionViews["TranscriptCollectionView"].cells.matching(NSPredicate(format: "label CONTAINS[c] %@", messageText)).firstMatch
+        let cellWidth = messageCell.frame.size.width
+        let rightDX = CGFloat(130)
+        let relativeDX = 1 - rightDX / cellWidth
+        let sourceCoordinate: XCUICoordinate = sticker.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.1))
+        let destCorodinate: XCUICoordinate = messageCell.coordinate(withNormalizedOffset: CGVector(dx: relativeDX, dy: 0.5))
+        sourceCoordinate.press(forDuration: 0.5, thenDragTo: destCorodinate)
+
+        sleep(1)
+
+        snapshot("1_Messages", timeWaitingForIdle: 40)
     }
 }
 
@@ -140,5 +182,13 @@ extension XCUIElement {
         UIPasteboard.general.string = text
         doubleTap()
         application.menuItems["Paste"].tap()
+    }
+
+    func dragAndDropUsingCenterPos(forDuration duration: TimeInterval, thenDragTo destElement: XCUIElement) {
+        let sourceCoordinate: XCUICoordinate = coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+
+        let destCorodinate: XCUICoordinate = destElement.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+
+        sourceCoordinate.press(forDuration: duration, thenDragTo: destCorodinate)
     }
 }

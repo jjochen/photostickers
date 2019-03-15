@@ -30,6 +30,11 @@ Submit a new Beta Build to Apple TestFlight
 fastlane release
 ```
 Deploy a new version to the App Store
+### screenshots
+```
+fastlane screenshots
+```
+capture screenshots
 ### upload_metadata
 ```
 fastlane upload_metadata

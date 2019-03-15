@@ -13,7 +13,13 @@ import UIKit
 
 class MessagesViewController: MSMessagesAppViewController {
     lazy var viewModel: MessagesViewModelType = {
-        let dataFolderType = DataFolderType.appGroup
+        #if DEBUG
+            let isRunningUITests = true
+        #else
+            // TODO:
+            let isRunningUITests = UserDefaults.standard.bool(forKey: "RunningUITests")
+        #endif
+        let dataFolderType: DataFolderType = isRunningUITests ? .appGroupPrefilled(subfolder: "UITests") : .appGroup
         let dataFolder: DataFolderServiceType = DataFolderService(type: dataFolderType)
         let imageStoreService: ImageStoreServiceType = ImageStoreService(url: dataFolder.imagesURL)
         let stickerService: StickerServiceType = StickerService(realmType: .onDisk(url: dataFolder.realmURL), imageStoreService: imageStoreService)

@@ -8,7 +8,12 @@ end
 
 desc "Runs all the tests"
 lane :test do
-  scan
+  scan({
+    devices: ["iPhone XS"]
+  })
+  scan({
+    devices: ["iPad Pro (12.9-inch) (3rd generation)"]
+  })
 end
 
 desc "Submit a new Beta Build to Apple TestFlight"
@@ -78,6 +83,38 @@ EOS
   sh "git add .. ; git commit -m 'Deploying version #{version}.'" # Can't use commit_version_bump to include changelog changes
   add_git_tag tag: version
   push_to_git_remote
+end
+
+desc "capture screenshots"
+lane :screenshots do
+  capture_screenshots({
+    devices: ["iPad Pro (12.9-inch) (3rd generation)"], 
+    clear_previous_screenshots: false
+  })
+  capture_screenshots({
+    devices: ["iPad Pro (9.7-inch)"], 
+    clear_previous_screenshots: false
+  })
+  capture_screenshots({
+    devices: ["iPhone SE"], 
+    clear_previous_screenshots: false
+  })
+  capture_screenshots({
+    devices: ["iPhone 8"], 
+    clear_previous_screenshots: false
+  })
+  capture_screenshots({
+    devices: ["iPhone 8 Plus"], 
+    clear_previous_screenshots: false
+  })
+  capture_screenshots({
+    devices: ["iPhone XS"], 
+    clear_previous_screenshots: false
+  })
+  capture_screenshots({
+    devices: ["iPhone XS Max"], 
+    clear_previous_screenshots: false
+  })
 end
 
 
