@@ -6,13 +6,6 @@ Create iMessage Stickers from your own Photo Library.
 
 ![Screenshot](Screenshot.jpg)
 
-
-## Build Requirements
-
-* Xcode 8.0+
-* Swift 3.0
-
-
 ## License
 
 Photo Stickers is available under the MIT license. See the LICENSE file for more info.

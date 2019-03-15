@@ -1,1 +1,1 @@
-Erster Release
+Support für iOS 12 und neue Geräte
