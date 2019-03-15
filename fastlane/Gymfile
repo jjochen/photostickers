@@ -14,4 +14,4 @@ scheme "PhotoStickers"
 
 clean true
 
-output_directory "./"
+output_directory "./Build/"

@@ -137,16 +137,10 @@ class PhotoStickersUITests: XCTestCase {
         sleep(1)
 
         let appCells = messageApp.collectionViews["appSelectionBrowserIdentifier"].cells
-        var photoStickersCell = appCells["Photo Stickers"]
-        if !photoStickersCell.exists {
-            photoStickersCell = appCells["Photo Stickers, New"]
-        }
-        if !photoStickersCell.exists {
-            photoStickersCell = appCells.element(boundBy: 4)
-        }
+        let photoStickersCell = appCells.matching(NSPredicate(format: "label CONTAINS[c] 'Photo Stickers'")).firstMatch
         photoStickersCell.tap()
 
-        sleep(1)
+        sleep(2)
 
         let sticker = messageApp.collectionViews["StickerBrowserCollectionView"].cells.element(boundBy: 5)
         let messageCell = messageApp.collectionViews["TranscriptCollectionView"].cells.matching(NSPredicate(format: "label CONTAINS[c] %@", messageText)).firstMatch
