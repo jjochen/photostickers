@@ -2,7 +2,7 @@ workspace "PhotoStickers.xcworkspace"
 scheme "PhotoStickers"
 configuration "Debug"
 sdk "iphonesimulator"
-devices ["iPad Pro (12.9-inch) (3rd generation)", "iPhone XS Max"]
+devices ["iPhone XS Max"]
 code_coverage true
 clean true
 output_types "html"
