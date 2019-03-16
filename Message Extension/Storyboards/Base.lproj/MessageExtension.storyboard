@@ -101,7 +101,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="zcV-wh-1zh" id="VKP-Jl-t26"/>
-                                            <segue destination="zWP-2x-fud" kind="showDetail" identifier="AddStickerSeque" id="v44-oX-9hc"/>
+                                            <segue destination="zWP-2x-fud" kind="showDetail" identifier="AddStickerSegue" id="v44-oX-9hc"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

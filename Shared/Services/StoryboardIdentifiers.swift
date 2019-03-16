@@ -12,7 +12,7 @@ public enum NavigationControllerStoryboardIdentifier: String {
 }
 
 public enum SegueIdentifier: String {
-    case AddStickerSeque
+    case AddStickerSegue
     case EditStickerSegue
 }
 

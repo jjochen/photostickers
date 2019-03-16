@@ -208,7 +208,7 @@ extension StickerCollectionViewController {
             let viewController = getEditStickerViewController(from: segue)
             viewController.viewModel = viewModel.editStickerViewModel(for: sticker)
 
-        } else if segue == .AddStickerSeque {
+        } else if segue == .AddStickerSegue {
             let viewController = getEditStickerViewController(from: segue)
             viewController.viewModel = viewModel.addStickerViewModel()
         }

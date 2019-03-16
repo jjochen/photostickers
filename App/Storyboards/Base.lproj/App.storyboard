@@ -99,7 +99,7 @@
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="AddButtonItem"/>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <segue destination="mHK-wh-jhb" kind="showDetail" identifier="AddStickerSeque" id="jbz-Sz-vci"/>
+                                <segue destination="mHK-wh-jhb" kind="showDetail" identifier="AddStickerSegue" id="jbz-Sz-vci"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

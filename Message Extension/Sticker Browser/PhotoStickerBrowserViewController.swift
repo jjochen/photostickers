@@ -79,7 +79,7 @@ extension PhotoStickerBrowserViewController {
         return viewController
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let viewModel = self.viewModel else {
             Logger.shared.error("View Model not set!")
             return
@@ -91,7 +91,7 @@ extension PhotoStickerBrowserViewController {
             return viewController
         }
 
-        if segue == .AddStickerSeque {
+        if segue == .AddStickerSegue {
             let viewController = getEditStickerViewController(from: segue)
             viewController.viewModel = viewModel.addStickerViewModel()
         }
