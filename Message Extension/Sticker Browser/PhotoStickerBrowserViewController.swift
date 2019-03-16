@@ -63,13 +63,13 @@ class PhotoStickerBrowserViewController: UIViewController {
             .setDelegate(self)
             .disposed(by: disposeBag)
 
-        collectionView.rx
-            .modelSelected(StickerSectionItem.self)
-            .filter { $0 == .openAppItem }
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel?.openApp()
-            })
-            .disposed(by: disposeBag)
+//        collectionView.rx
+//            .modelSelected(StickerSectionItem.self)
+//            .filter { $0 == .openAppItem }
+//            .subscribe(onNext: { [weak self] _ in
+//                self?.viewModel?.openApp()
+//            })
+//            .disposed(by: disposeBag)
     }
 }
 
@@ -77,6 +77,24 @@ extension PhotoStickerBrowserViewController {
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> PhotoStickerBrowserViewController {
         let viewController = storyboard.viewController(withID: .PhotoStickerBrowserViewController) as! PhotoStickerBrowserViewController
         return viewController
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
+        guard let viewModel = self.viewModel else {
+            Logger.shared.error("View Model not set!")
+            return
+        }
+
+        func getEditStickerViewController(from segue: UIStoryboardSegue) -> EditStickerViewController {
+            let navigationController = segue.destination as! UINavigationController
+            let viewController = navigationController.topViewController as! EditStickerViewController
+            return viewController
+        }
+
+        if segue == .AddStickerSeque {
+            let viewController = getEditStickerViewController(from: segue)
+            viewController.viewModel = viewModel.addStickerViewModel()
+        }
     }
 }
 

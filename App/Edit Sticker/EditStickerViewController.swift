@@ -390,7 +390,7 @@ private extension EditStickerViewController {
         view.removeConstraints(portraitConstraints)
         view.removeConstraints(landscapeConstraints)
 
-        if UIApplication.shared.statusBarOrientation.isPortrait {
+        if true { // UIApplication.shared.statusBarOrientation.isPortrait {
             view.addConstraints(portraitConstraints)
         } else {
             view.addConstraints(landscapeConstraints)

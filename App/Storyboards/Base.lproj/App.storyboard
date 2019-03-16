@@ -148,7 +148,7 @@
         <!--Edit Sticker Controller-->
         <scene sceneID="fky-Nl-cnS">
             <objects>
-                <viewController storyboardIdentifier="EditStickerViewController" automaticallyAdjustsScrollViewInsets="NO" id="xY5-ie-FY6" userLabel="Edit Sticker Controller" customClass="EditStickerViewController" customModule="PhotoStickers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditStickerViewController" automaticallyAdjustsScrollViewInsets="NO" id="xY5-ie-FY6" userLabel="Edit Sticker Controller" customClass="EditStickerViewController" customModule="MessageExtension" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="63h-fZ-lFi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

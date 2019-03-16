@@ -15,6 +15,8 @@ protocol PhotoStickerBrowserViewModelType {
     var stickerService: StickerServiceType { get }
     var sectionItems: Observable<[StickerSectionItem]> { get }
     func openApp()
+    func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType
+    func addStickerViewModel() -> EditStickerViewModelType
 }
 
 class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelType {
@@ -23,14 +25,19 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
     let extensionContext: NSExtensionContext?
     let stickerService: StickerServiceType
     let imageStoreService: ImageStoreServiceType
+    fileprivate let stickerRenderService: StickerRenderServiceType
 
     // MARK: Output
 
     var sectionItems: Observable<[StickerSectionItem]>
 
-    init(stickerService: StickerServiceType, imageStoreService: ImageStoreServiceType, extensionContext: NSExtensionContext?) {
+    init(stickerService: StickerServiceType,
+         imageStoreService: ImageStoreServiceType,
+         stickerRenderService: StickerRenderServiceType,
+         extensionContext: NSExtensionContext?) {
         self.stickerService = stickerService
         self.imageStoreService = imageStoreService
+        self.stickerRenderService = stickerRenderService
         self.extensionContext = extensionContext
 
         let predicate = NSPredicate(format: "\(StickerProperty.hasRenderedImage.rawValue) == true")
@@ -52,5 +59,18 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
         if let url = URL(string: "photosticker://create") {
             extensionContext?.open(url, completionHandler: nil)
         }
+    }
+
+    // MARK: - View Models
+
+    func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType {
+        return EditStickerViewModel(sticker: sticker,
+                                    imageStoreService: imageStoreService,
+                                    stickerService: stickerService,
+                                    stickerRenderService: stickerRenderService)
+    }
+
+    func addStickerViewModel() -> EditStickerViewModelType {
+        return editStickerViewModel(for: Sticker.newSticker())
     }
 }

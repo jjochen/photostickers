@@ -17,10 +17,15 @@ class MessagesViewModel: BaseViewModel, MessagesViewModelType {
     let extensionContext: NSExtensionContext?
     let stickerService: StickerServiceType
     let imageStoreService: ImageStoreServiceType
+    let stickerRenderService: StickerRenderServiceType
 
-    init(stickerService: StickerServiceType, imageStoreService: ImageStoreServiceType, extensionContext: NSExtensionContext?) {
+    init(stickerService: StickerServiceType,
+         imageStoreService: ImageStoreServiceType,
+         stickerRenderService: StickerRenderServiceType,
+         extensionContext: NSExtensionContext?) {
         self.stickerService = stickerService
         self.imageStoreService = imageStoreService
+        self.stickerRenderService = stickerRenderService
         self.extensionContext = extensionContext
         super.init()
     }
@@ -28,6 +33,6 @@ class MessagesViewModel: BaseViewModel, MessagesViewModelType {
     // MARK: - View Models
 
     func photoStickerBrowserViewModel() -> PhotoStickerBrowserViewModelType {
-        return PhotoStickerBrowserViewModel(stickerService: stickerService, imageStoreService: imageStoreService, extensionContext: extensionContext)
+        return PhotoStickerBrowserViewModel(stickerService: stickerService, imageStoreService: imageStoreService, stickerRenderService: stickerRenderService, extensionContext: extensionContext)
     }
 }

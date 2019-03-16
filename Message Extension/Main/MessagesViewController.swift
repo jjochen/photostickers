@@ -23,11 +23,14 @@ class MessagesViewController: MSMessagesAppViewController {
         let dataFolder: DataFolderServiceType = DataFolderService(type: dataFolderType)
         let imageStoreService: ImageStoreServiceType = ImageStoreService(url: dataFolder.imagesURL)
         let stickerService: StickerServiceType = StickerService(realmType: .onDisk(url: dataFolder.realmURL), imageStoreService: imageStoreService)
-        return MessagesViewModel(stickerService: stickerService, imageStoreService: imageStoreService, extensionContext: self.extensionContext)
+        let stickerRenderService: StickerRenderServiceType = StickerRenderService()
+
+        return MessagesViewModel(stickerService: stickerService, imageStoreService: imageStoreService, stickerRenderService: stickerRenderService, extensionContext: self.extensionContext)
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        RxImagePickerDelegateProxy.register { RxImagePickerDelegateProxy(imagePicker: $0) }
         view.tintColor = StyleKit.appColor
     }
 
