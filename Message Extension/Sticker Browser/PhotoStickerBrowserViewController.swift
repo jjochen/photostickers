@@ -94,6 +94,14 @@ extension PhotoStickerBrowserViewController {
         if segue == .AddStickerSegue {
             let viewController = getEditStickerViewController(from: segue)
             viewController.viewModel = viewModel.addStickerViewModel()
+        } else if segue == .EditStickerSegue {
+            let cell = sender as! StickerBrowserCell
+            guard let sticker = cell.viewModel?.sticker else {
+                Logger.shared.error("Cell has no sticker!")
+                return
+            }
+            let viewController = getEditStickerViewController(from: segue)
+            viewController.viewModel = viewModel.editStickerViewModel(for: sticker)
         }
     }
 }

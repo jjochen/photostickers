@@ -78,6 +78,7 @@
                                         <connections>
                                             <outlet property="placeholderView" destination="OdC-Rn-AuH" id="7O5-BA-KD7"/>
                                             <outlet property="stickerView" destination="jdh-Ws-RIn" id="v4i-hC-vdd"/>
+                                            <segue destination="zWP-2x-fud" kind="showDetail" identifier="EditStickerSegue" id="OFF-LG-fBC"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="Iyb-XD-XMs" customClass="AddStickerCell" customModule="MessageExtension" customModuleProvider="target">
@@ -367,4 +368,7 @@
             <point key="canvasLocation" x="1580" y="859"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="OFF-LG-fBC"/>
+    </inferredMetricsTieBreakers>
 </document>
