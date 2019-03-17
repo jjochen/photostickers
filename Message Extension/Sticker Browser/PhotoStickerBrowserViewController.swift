@@ -149,39 +149,6 @@ extension PhotoStickerBrowserViewController {
     }
 }
 
-// MARK: Child view controller presentation
-
-// extension PhotoStickerBrowserViewController {
-//    fileprivate func instantiatePhotoStickerBrowserViewController() -> PhotoStickerBrowserViewController {
-//        let viewController = PhotoStickerBrowserViewController.instantiateFromStoryboard(UIStoryboard.messageExtension())
-//        viewController.viewModel = viewModel.photoStickerBrowserViewModel()
-//        return viewController
-//    }
-//
-//    fileprivate func presentViewController(for _: MSMessagesAppPresentationStyle) {
-//        let controller = instantiatePhotoStickerBrowserViewController()
-//
-//        for child in children {
-//            child.willMove(toParent: nil)
-//            child.view.removeFromSuperview()
-//            child.removeFromParent()
-//        }
-//
-//        addChild(controller)
-//
-//        controller.view.frame = view.bounds
-//        controller.view.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(controller.view)
-//
-//        controller.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-//        controller.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-//        controller.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-//        controller.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-//
-//        controller.didMove(toParent: self)
-//    }
-// }
-
 // MARK: Skinning
 
 extension PhotoStickerBrowserViewController {}

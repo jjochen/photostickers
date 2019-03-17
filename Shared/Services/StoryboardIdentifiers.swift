@@ -24,7 +24,6 @@ public enum StoryboardNames: String {
 
 public enum ViewControllerStoryboardIdentifier: String {
     case EditStickerViewController
-    case MessagesViewController
     case PhotoStickerBrowserViewController
     case StickerCollectionViewController
 }
