@@ -505,8 +505,6 @@
 			isa = PBXGroup;
 			children = (
 				194621651E3CFE55000F09CE /* Sticker Browser */,
-				19F6DC9D1E55F99400CAE9D0 /* Services */,
-				194621931E40E727000F09CE /* Extensions */,
 				194621751E3CFE66000F09CE /* Storyboards */,
 				1946216A1E3CFE55000F09CE /* Supporting Files */,
 			);
@@ -590,13 +588,6 @@
 				1918E6391E72CC2A007DFFE7 /* Mask.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		194621931E40E727000F09CE /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		1946219A1E4350C6000F09CE /* Services */ = {
@@ -810,13 +801,6 @@
 				19F6DC7E1E4F238F00CAE9D0 /* BaseViewModel.swift */,
 			);
 			path = "Base Classes";
-			sourceTree = "<group>";
-		};
-		19F6DC9D1E55F99400CAE9D0 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		245D4B3B78B2CC4E2754C844 /* Pods */ = {
