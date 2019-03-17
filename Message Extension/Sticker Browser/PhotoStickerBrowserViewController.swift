@@ -14,8 +14,23 @@ import RxDataSources
 import RxSwift
 import UIKit
 
-class PhotoStickerBrowserViewController: UIViewController {
-    var viewModel: PhotoStickerBrowserViewModelType?
+class PhotoStickerBrowserViewController: MSMessagesAppViewController {
+    lazy var viewModel: PhotoStickerBrowserViewModelType = {
+        #if DEBUG
+            let isRunningUITests = true
+        #else
+            // TODO:
+            let isRunningUITests = UserDefaults.standard.bool(forKey: "RunningUITests")
+        #endif
+        let dataFolderType: DataFolderType = isRunningUITests ? .appGroupPrefilled(subfolder: "UITests") : .appGroup
+        let dataFolder: DataFolderServiceType = DataFolderService(type: dataFolderType)
+        let imageStoreService: ImageStoreServiceType = ImageStoreService(url: dataFolder.imagesURL)
+        let stickerService: StickerServiceType = StickerService(realmType: .onDisk(url: dataFolder.realmURL), imageStoreService: imageStoreService)
+        let stickerRenderService: StickerRenderServiceType = StickerRenderService()
+
+        return PhotoStickerBrowserViewModel(stickerService: stickerService, imageStoreService: imageStoreService, stickerRenderService: stickerRenderService, extensionContext: self.extensionContext)
+    }()
+
     fileprivate let disposeBag = DisposeBag()
 
     // MARK: Outlets / Actions
@@ -24,7 +39,13 @@ class PhotoStickerBrowserViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        RxImagePickerDelegateProxy.register { RxImagePickerDelegateProxy(imagePicker: $0) }
+        view.tintColor = StyleKit.appColor
         setupBindings()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
 
     override func viewDidLayoutSubviews() {
@@ -35,11 +56,6 @@ class PhotoStickerBrowserViewController: UIViewController {
     // MARK: - Bindings
 
     fileprivate func setupBindings() {
-        guard let viewModel = self.viewModel else {
-            Logger.shared.error("View Model not set!")
-            return
-        }
-
         let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>(configureCell: { dataSource, collectionView, indexPath, _ in
             switch dataSource[indexPath] {
             case .openAppItem:
@@ -73,6 +89,38 @@ class PhotoStickerBrowserViewController: UIViewController {
     }
 }
 
+// MARK: - Conversation Handling
+
+extension PhotoStickerBrowserViewController {
+    override func willBecomeActive(with conversation: MSConversation) {
+        super.willBecomeActive(with: conversation)
+    }
+
+    override func didResignActive(with conversation: MSConversation) {
+        super.didResignActive(with: conversation)
+    }
+
+    override func didReceive(_ message: MSMessage, conversation: MSConversation) {
+        super.didReceive(message, conversation: conversation)
+    }
+
+    override func didStartSending(_ message: MSMessage, conversation: MSConversation) {
+        super.didStartSending(message, conversation: conversation)
+    }
+
+    override func didCancelSending(_ message: MSMessage, conversation: MSConversation) {
+        super.didCancelSending(message, conversation: conversation)
+    }
+
+    override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
+        super.willTransition(to: presentationStyle)
+    }
+
+    override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
+        super.didTransition(to: presentationStyle)
+    }
+}
+
 extension PhotoStickerBrowserViewController {
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> PhotoStickerBrowserViewController {
         let viewController = storyboard.viewController(withID: .PhotoStickerBrowserViewController) as! PhotoStickerBrowserViewController
@@ -80,11 +128,6 @@ extension PhotoStickerBrowserViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let viewModel = self.viewModel else {
-            Logger.shared.error("View Model not set!")
-            return
-        }
-
         func getEditStickerViewController(from segue: UIStoryboardSegue) -> EditStickerViewController {
             let navigationController = segue.destination as! UINavigationController
             let viewController = navigationController.topViewController as! EditStickerViewController
@@ -105,6 +148,39 @@ extension PhotoStickerBrowserViewController {
         }
     }
 }
+
+// MARK: Child view controller presentation
+
+// extension PhotoStickerBrowserViewController {
+//    fileprivate func instantiatePhotoStickerBrowserViewController() -> PhotoStickerBrowserViewController {
+//        let viewController = PhotoStickerBrowserViewController.instantiateFromStoryboard(UIStoryboard.messageExtension())
+//        viewController.viewModel = viewModel.photoStickerBrowserViewModel()
+//        return viewController
+//    }
+//
+//    fileprivate func presentViewController(for _: MSMessagesAppPresentationStyle) {
+//        let controller = instantiatePhotoStickerBrowserViewController()
+//
+//        for child in children {
+//            child.willMove(toParent: nil)
+//            child.view.removeFromSuperview()
+//            child.removeFromParent()
+//        }
+//
+//        addChild(controller)
+//
+//        controller.view.frame = view.bounds
+//        controller.view.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(controller.view)
+//
+//        controller.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+//        controller.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+//        controller.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//        controller.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//
+//        controller.didMove(toParent: self)
+//    }
+// }
 
 // MARK: Skinning
 

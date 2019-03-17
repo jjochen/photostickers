@@ -9,7 +9,7 @@
 import XCTest
 
 class PhotoStickersUITests: XCTestCase {
-    func testUI() {
+    func doNotTestUI() {
         let app = XCUIApplication()
         app.launchArguments += ["-RunningUITests", "true"]
         setupSnapshot(app)
