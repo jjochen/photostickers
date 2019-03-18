@@ -10,12 +10,9 @@ import Foundation
 import RxDataSources
 
 struct StickerSection {
-    var header: String
-
     var stickers: [StickerSectionItem]
 
-    init(header: String, stickers: [StickerSectionItem]) {
-        self.header = header
+    init(stickers: [StickerSectionItem]) {
         self.stickers = stickers
     }
 }
@@ -27,11 +24,6 @@ enum StickerSectionItem {
 
 extension StickerSection: SectionModelType {
     typealias Item = StickerSectionItem
-    typealias Identity = String
-
-    var identity: String {
-        return header
-    }
 
     var items: [StickerSectionItem] {
         return stickers

@@ -79,6 +79,8 @@
 		199F5673223D162E003CE86B /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199546511E980F4C00B2E236 /* UIDevice+Extensions.swift */; };
 		199F5674223D1657003CE86B /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1EB3F1E792F0E005637C4 /* UIView+Extensions.swift */; };
 		199F5675223D166F003CE86B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199546601E9997BF00B2E236 /* String+Extensions.swift */; };
+		199F56A1223E9527003CE86B /* StickerBrowserFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199F56A0223E9527003CE86B /* StickerBrowserFooterView.swift */; };
+		199F56A3223E955A003CE86B /* StickerBrowserFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199F56A2223E955A003CE86B /* StickerBrowserFooterViewModel.swift */; };
 		19A6C5FB1E5EFCE2009B8922 /* EditStickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C5FA1E5EFCE2009B8922 /* EditStickerViewController.swift */; };
 		19A6C5FD1E5EFCEE009B8922 /* EditStickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C5FC1E5EFCEE009B8922 /* EditStickerViewModel.swift */; };
 		19A6C5FF1E604474009B8922 /* Observable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6C5FE1E604474009B8922 /* Observable+Operators.swift */; };
@@ -246,6 +248,8 @@
 		199546731E9A825000B2E236 /* AddStickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStickerCell.swift; sourceTree = "<group>"; };
 		1997E34F1E852D51008DA2A7 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		199A78921E264480002B058E /* CHANGELOG.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.yml; sourceTree = "<group>"; };
+		199F56A0223E9527003CE86B /* StickerBrowserFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerBrowserFooterView.swift; sourceTree = "<group>"; };
+		199F56A2223E955A003CE86B /* StickerBrowserFooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerBrowserFooterViewModel.swift; sourceTree = "<group>"; };
 		19A6C5FA1E5EFCE2009B8922 /* EditStickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditStickerViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		19A6C5FC1E5EFCEE009B8922 /* EditStickerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditStickerViewModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		19A6C5FE1E604474009B8922 /* Observable+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Observable+Operators.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -519,6 +523,8 @@
 				194621681E3CFE55000F09CE /* StickerBrowserCell.swift */,
 				19784B0E1EA140CB00F8FB7D /* StickerBrowserCellViewModel.swift */,
 				199546731E9A825000B2E236 /* AddStickerCell.swift */,
+				199F56A0223E9527003CE86B /* StickerBrowserFooterView.swift */,
+				199F56A2223E955A003CE86B /* StickerBrowserFooterViewModel.swift */,
 				194621691E3CFE55000F09CE /* StickerSection.swift */,
 			);
 			path = "Sticker Browser";
@@ -1253,6 +1259,8 @@
 			files = (
 				19F6DC971E4F23BD00CAE9D0 /* StoryboardIdentifiers.swift in Sources */,
 				199100B01E97745200972602 /* UIButton+Extensions.swift in Sources */,
+				199F56A3223E955A003CE86B /* StickerBrowserFooterViewModel.swift in Sources */,
+				199F56A1223E9527003CE86B /* StickerBrowserFooterView.swift in Sources */,
 				19F6DC8F1E4F23BD00CAE9D0 /* UIImagePickerController+Rx.swift in Sources */,
 				199F566E223D117E003CE86B /* UIScrollView+Rx.swift in Sources */,
 				199F5670223D1191003CE86B /* UIImage+Resize.swift in Sources */,

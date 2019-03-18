@@ -24,7 +24,7 @@
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="I9I-p4-h0H">
                                     <size key="itemSize" width="90" height="90"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="50" height="50"/>
                                     <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
@@ -89,6 +89,35 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StickerBrowserButtonView" id="vih-ZZ-ehb" userLabel="StickerBrowserButtonView" customClass="StickerBrowserButtonView" customModule="MessageExtension" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="110" width="375" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Z0E-73-2bc">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5b-pY-sME" userLabel="EditButton">
+                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="50"/>
+                                                    <state key="normal" title="Edit"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="waZ-5l-kM9" userLabel="AddButton">
+                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="50"/>
+                                                    <state key="normal" title="Add"/>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Z0E-73-2bc" secondAttribute="bottom" id="Hrt-C1-PNg"/>
+                                        <constraint firstItem="Z0E-73-2bc" firstAttribute="top" secondItem="vih-ZZ-ehb" secondAttribute="top" id="afr-ug-Gjb"/>
+                                        <constraint firstItem="Z0E-73-2bc" firstAttribute="leading" secondItem="vih-ZZ-ehb" secondAttribute="leading" id="rIg-AX-14M"/>
+                                        <constraint firstAttribute="trailing" secondItem="Z0E-73-2bc" secondAttribute="trailing" id="uHb-tW-Z0g"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="AddButton" destination="waZ-5l-kM9" id="NEj-6p-4GR"/>
+                                        <outlet property="EditButton" destination="n5b-pY-sME" id="RzS-IC-Y9k"/>
+                                    </connections>
+                                </collectionReusableView>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="StickerBrowserCollectionView"/>
                                 </userDefinedRuntimeAttributes>
@@ -136,12 +165,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kWl-2D-yy8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="761" y="859"/>
+            <point key="canvasLocation" x="1535" y="107"/>
         </scene>
         <!--Edit Sticker Controller-->
         <scene sceneID="pgP-1M-rFp">
             <objects>
-                <viewController storyboardIdentifier="EditStickerViewController" automaticallyAdjustsScrollViewInsets="NO" id="Sfm-qp-wnb" userLabel="Edit Sticker Controller" customClass="EditStickerViewController" customModule="PhotoStickers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditStickerViewController" automaticallyAdjustsScrollViewInsets="NO" id="Sfm-qp-wnb" userLabel="Edit Sticker Controller" customClass="EditStickerViewController" customModule="MessageExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Krq-IY-bxv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,7 +178,7 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YAe-Yb-u73" userLabel="Sticker Layout Guide">
                                 <rect key="frame" x="0.0" y="64" width="375" height="375"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8f-4R-EU9" userLabel="Sticker Placeholder" customClass="AppIconView" customModule="PhotoStickers" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8f-4R-EU9" userLabel="Sticker Placeholder" customClass="AppIconView" customModule="MessageExtension" customModuleProvider="target">
                                         <rect key="frame" x="28" y="28" width="319" height="319"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <accessibility key="accessibilityConfiguration" identifier="StickerPlaceholderView">
@@ -341,14 +370,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="daw-rH-eYD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="6Nx-xJ-mrd" customClass="StyleKit" customModule="PhotoStickers" customModuleProvider="target">
+                <customObject id="6Nx-xJ-mrd" customClass="StyleKit" customModule="MessageExtension" customModuleProvider="target">
                     <connections>
                         <outletCollection property="photoToolbarIconTargets" destination="QHW-0w-our" collectionClass="NSMutableArray" id="JKk-CX-hGB"/>
                         <outletCollection property="trashToolbarIconTargets" destination="1GL-aR-0hK" collectionClass="NSMutableArray" id="v7x-nU-oFv"/>
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="1580" y="859"/>
+            <point key="canvasLocation" x="2306" y="108"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
