@@ -81,14 +81,6 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
         collectionView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
-
-//        collectionView.rx
-//            .modelSelected(StickerSectionItem.self)
-//            .filter { $0 == .openAppItem }
-//            .subscribe(onNext: { [weak self] _ in
-//                self?.viewModel?.openApp()
-//            })
-//            .disposed(by: disposeBag)
     }
 }
 

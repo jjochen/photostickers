@@ -5,7 +5,6 @@ public enum CollectionReusableViewReuseIdentifier: String {
 }
 
 public enum CollectionViewCellReuseIdentifier: String {
-    case AddMoreCell
     case StickerBrowserCell
     case StickerCollectionCell
 }

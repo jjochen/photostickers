@@ -14,7 +14,6 @@ import RxSwift
 protocol PhotoStickerBrowserViewModelType {
     var stickerService: StickerServiceType { get }
     var sectionItems: Observable<[StickerSectionItem]> { get }
-    func openApp()
     func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType
     func addStickerViewModel() -> EditStickerViewModelType
 }
