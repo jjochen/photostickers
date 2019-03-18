@@ -61,10 +61,7 @@
                                         <connections>
                                             <outlet property="placeholderView" destination="OdC-Rn-AuH" id="7O5-BA-KD7"/>
                                             <outlet property="stickerView" destination="jdh-Ws-RIn" id="v4i-hC-vdd"/>
-                                            <segue destination="zWP-2x-fud" kind="showDetail" identifier="EditStickerSegue" id="OFF-LG-fBC">
-                                                <segue key="commit" inheritsFrom="parent" id="uiV-QT-PRK"/>
-                                                <segue key="preview" inheritsFrom="commit" id="C4X-Iv-BeS"/>
-                                            </segue>
+                                            <segue destination="zWP-2x-fud" kind="showDetail" identifier="EditStickerSegue" id="OFF-LG-fBC"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -98,6 +95,8 @@
                                     <connections>
                                         <outlet property="AddButton" destination="waZ-5l-kM9" id="NEj-6p-4GR"/>
                                         <outlet property="EditButton" destination="n5b-pY-sME" id="RzS-IC-Y9k"/>
+                                        <outlet property="addButton" destination="waZ-5l-kM9" id="EHW-MP-9wN"/>
+                                        <outlet property="editButton" destination="n5b-pY-sME" id="204-Qc-6hn"/>
                                     </connections>
                                 </collectionReusableView>
                                 <userDefinedRuntimeAttributes>
@@ -363,6 +362,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XE3-ST-X8l"/>
+        <segue reference="OFF-LG-fBC"/>
     </inferredMetricsTieBreakers>
 </document>

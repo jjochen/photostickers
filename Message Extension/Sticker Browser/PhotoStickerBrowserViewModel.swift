@@ -7,24 +7,32 @@
 //
 
 import Foundation
+import Log
 import RealmSwift
 import RxRealm
 import RxSwift
 
 protocol PhotoStickerBrowserViewModelType {
     var stickerService: StickerServiceType { get }
+    var editButtonDidTap: PublishSubject<Void> { get }
     var sectionItems: Observable<[StickerSectionItem]> { get }
     func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType
     func addStickerViewModel() -> EditStickerViewModelType
 }
 
 class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelType {
+    let disposeBag = DisposeBag()
+
     // MARK: Dependencies
 
     let extensionContext: NSExtensionContext?
     let stickerService: StickerServiceType
     let imageStoreService: ImageStoreServiceType
     fileprivate let stickerRenderService: StickerRenderServiceType
+
+    // MARK: Input
+
+    let editButtonDidTap = PublishSubject<Void>()
 
     // MARK: Output
 
@@ -51,12 +59,12 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
             }
 
         super.init()
-    }
 
-    func openApp() {
-        if let url = URL(string: "photosticker://create") {
-            extensionContext?.open(url, completionHandler: nil)
-        }
+        editButtonDidTap
+            .subscribe(onNext: { _ in
+                Logger.shared.info("Edit button tapped")
+            })
+            .disposed(by: disposeBag)
     }
 
     // MARK: - View Models

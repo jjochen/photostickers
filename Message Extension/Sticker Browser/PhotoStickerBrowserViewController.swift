@@ -68,6 +68,10 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
         )
         dataSource.configureSupplementaryView = { _, collectionView, kind, indexPath in
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionReusableViewReuseIdentifier.StickerBrowserButtonView.rawValue, for: indexPath) as! StickerBrowserButtonView
+            view.editButton.rx.tap
+                .bind(to: self.viewModel.editButtonDidTap)
+                .disposed(by: self.disposeBag)
+
             return view
         }
 
@@ -132,6 +136,7 @@ extension PhotoStickerBrowserViewController {
         if segue == .AddStickerSegue {
             let viewController = getEditStickerViewController(from: segue)
             viewController.viewModel = viewModel.addStickerViewModel()
+            requestPresentationStyle(.expanded)
         } else if segue == .EditStickerSegue {
             let cell = sender as! StickerBrowserCell
             guard let sticker = cell.viewModel?.sticker else {
@@ -140,6 +145,7 @@ extension PhotoStickerBrowserViewController {
             }
             let viewController = getEditStickerViewController(from: segue)
             viewController.viewModel = viewModel.editStickerViewModel(for: sticker)
+            requestPresentationStyle(.expanded)
         }
     }
 }
