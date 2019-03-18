@@ -59,18 +59,15 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
         let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>(
             configureCell: { _, collectionView, indexPath, item in
                 switch item {
-                case .openAppItem:
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.AddMoreCell.rawValue, for: indexPath)
-                    return cell
                 case let .stickerItem(viewModel: cellViewModel):
-                    let cell: StickerBrowserCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.StickerBrowserCell.rawValue, for: indexPath) as! StickerBrowserCell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.StickerBrowserCell.rawValue, for: indexPath) as! StickerBrowserCell
                     cell.viewModel = cellViewModel
                     return cell
                 }
             }
         )
         dataSource.configureSupplementaryView = { _, collectionView, kind, indexPath in
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionReusableViewReuseIdentifier.StickerBrowserButtonView.rawValue, for: indexPath)
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionReusableViewReuseIdentifier.StickerBrowserButtonView.rawValue, for: indexPath) as! StickerBrowserButtonView
             return view
         }
 

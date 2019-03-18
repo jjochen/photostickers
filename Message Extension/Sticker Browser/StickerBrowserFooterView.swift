@@ -10,8 +10,8 @@ import UIKit
 
 class StickerBrowserButtonView: UICollectionReusableView {
     // Outlets
-    @IBOutlet var EditButton: UIButton!
-    @IBOutlet var AddButton: UIButton!
+    @IBOutlet var editButton: UIButton!
+    @IBOutlet var addButton: UIButton!
 
     var viewModel: StickerBrowserCellViewModelType? {
         didSet {

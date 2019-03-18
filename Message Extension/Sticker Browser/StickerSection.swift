@@ -19,7 +19,6 @@ struct StickerSection {
 
 enum StickerSectionItem {
     case stickerItem(viewModel: StickerBrowserCellViewModelType)
-    case openAppItem
 }
 
 extension StickerSection: SectionModelType {
@@ -40,8 +39,6 @@ extension StickerSectionItem: IdentifiableType, Equatable {
 
     var identity: String {
         switch self {
-        case .openAppItem:
-            return "OpenAppItem"
         case let .stickerItem(viewModel: viewModel):
             return viewModel.sticker.uuid
         }
