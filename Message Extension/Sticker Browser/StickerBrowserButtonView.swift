@@ -11,5 +11,4 @@ import UIKit
 class StickerBrowserButtonView: UICollectionReusableView {
     // Outlets
     @IBOutlet var editButton: UIButton!
-    @IBOutlet var addButton: UIButton!
 }

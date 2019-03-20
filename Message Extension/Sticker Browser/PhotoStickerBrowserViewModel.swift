@@ -51,10 +51,11 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
         sectionItems = stickerService
             .fetchStickers(withPredicate: predicate)
             .map { allStickers in
-                let items = allStickers.map { sticker -> StickerSectionItem in
+                var items = allStickers.map { sticker -> StickerSectionItem in
                     let cellViewModel: StickerBrowserCellViewModelType = StickerBrowserCellViewModel(sticker: sticker, imageStore: imageStoreService)
                     return StickerSectionItem.stickerItem(viewModel: cellViewModel)
                 }
+                items.append(StickerSectionItem.openAppItem)
                 return items
             }
 

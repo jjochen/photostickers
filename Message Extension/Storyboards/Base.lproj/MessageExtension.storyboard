@@ -64,6 +64,30 @@
                                             <segue destination="zWP-2x-fud" kind="showDetail" identifier="EditStickerSegue" id="OFF-LG-fBC"/>
                                         </connections>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="Iyb-XD-XMs" customClass="AddStickerCell" customModule="MessageExtension" customModuleProvider="target">
+                                        <rect key="frame" x="142.5" y="10" width="90" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="56" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="zcV-wh-1zh">
+                                                    <rect key="frame" x="17" y="17" width="56" height="56"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                                                    </accessibility>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="zcV-wh-1zh" firstAttribute="centerY" secondItem="Iyb-XD-XMs" secondAttribute="centerY" id="2HT-fA-tG8"/>
+                                            <constraint firstItem="zcV-wh-1zh" firstAttribute="centerX" secondItem="Iyb-XD-XMs" secondAttribute="centerX" id="VAc-Dh-qyj"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="zcV-wh-1zh" id="VKP-Jl-t26"/>
+                                            <segue destination="zWP-2x-fud" kind="showDetail" identifier="AddStickerSegue" id="v44-oX-9hc"/>
+                                        </connections>
+                                    </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StickerBrowserButtonView" id="vih-ZZ-ehb" userLabel="StickerBrowserButtonView" customClass="StickerBrowserButtonView" customModule="MessageExtension" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="110" width="375" height="50"/>
@@ -73,15 +97,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5b-pY-sME" userLabel="EditButton">
-                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                     <state key="normal" title="Edit"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="waZ-5l-kM9" userLabel="AddButton">
-                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="50"/>
-                                                    <state key="normal" title="Add"/>
-                                                    <connections>
-                                                        <segue destination="zWP-2x-fud" kind="showDetail" identifier="AddStickerSegue" id="XE3-ST-X8l"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -93,9 +110,7 @@
                                         <constraint firstAttribute="trailing" secondItem="Z0E-73-2bc" secondAttribute="trailing" id="uHb-tW-Z0g"/>
                                     </constraints>
                                     <connections>
-                                        <outlet property="AddButton" destination="waZ-5l-kM9" id="NEj-6p-4GR"/>
                                         <outlet property="EditButton" destination="n5b-pY-sME" id="RzS-IC-Y9k"/>
-                                        <outlet property="addButton" destination="waZ-5l-kM9" id="EHW-MP-9wN"/>
                                         <outlet property="editButton" destination="n5b-pY-sME" id="204-Qc-6hn"/>
                                     </connections>
                                 </collectionReusableView>
