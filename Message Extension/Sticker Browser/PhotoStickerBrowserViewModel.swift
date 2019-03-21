@@ -8,7 +8,9 @@
 
 import Foundation
 import Log
+import Messages
 import RealmSwift
+import RxCocoa
 import RxRealm
 import RxSwift
 
@@ -16,13 +18,12 @@ protocol PhotoStickerBrowserViewModelType {
     var stickerService: StickerServiceType { get }
     var editButtonDidTap: PublishSubject<Void> { get }
     var sectionItems: Observable<[StickerSectionItem]> { get }
+    var requestPresentationStyle: Driver<MSMessagesAppPresentationStyle> { get }
     func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType
     func addStickerViewModel() -> EditStickerViewModelType
 }
 
 class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelType {
-    let disposeBag = DisposeBag()
-
     // MARK: Dependencies
 
     let extensionContext: NSExtensionContext?
@@ -36,7 +37,8 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
 
     // MARK: Output
 
-    var sectionItems: Observable<[StickerSectionItem]>
+    let sectionItems: Observable<[StickerSectionItem]>
+    let requestPresentationStyle: Driver<MSMessagesAppPresentationStyle>
 
     init(stickerService: StickerServiceType,
          imageStoreService: ImageStoreServiceType,
@@ -59,13 +61,11 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
                 return items
             }
 
-        super.init()
+        requestPresentationStyle = editButtonDidTap
+            .map { .expanded }
+            .asDriver(onErrorDriveWith: Driver.empty())
 
-        editButtonDidTap
-            .subscribe(onNext: { _ in
-                Logger.shared.info("Edit button tapped")
-            })
-            .disposed(by: disposeBag)
+        super.init()
     }
 
     // MARK: - View Models

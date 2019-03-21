@@ -65,7 +65,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="Iyb-XD-XMs" customClass="AddStickerCell" customModule="MessageExtension" customModuleProvider="target">
-                                        <rect key="frame" x="142.5" y="10" width="90" height="90"/>
+                                        <rect key="frame" x="143" y="10" width="90" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>

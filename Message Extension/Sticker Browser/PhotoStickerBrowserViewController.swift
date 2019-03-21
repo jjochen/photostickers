@@ -72,10 +72,14 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
         dataSource.configureSupplementaryView = { _, collectionView, kind, indexPath in
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionReusableViewReuseIdentifier.StickerBrowserButtonView.rawValue, for: indexPath) as! StickerBrowserButtonView
             view.editButton.rx.tap
-                .bind(to: self.viewModel.editButtonDidTap)
+                .bind(to: self.viewModel.editButtonDidTap) // binds multiple times
                 .disposed(by: self.disposeBag)
             return view
         }
+
+        /* TODO:
+         * check https://github.com/sergdort/CleanArchitectureRxSwift
+         */
 
         viewModel.sectionItems
             .map { items in
@@ -86,6 +90,12 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
 
         collectionView.rx
             .setDelegate(self)
+            .disposed(by: disposeBag)
+
+        viewModel.requestPresentationStyle
+            .drive(onNext: { style in
+                self.requestPresentationStyle(style)
+            })
             .disposed(by: disposeBag)
     }
 }
@@ -138,7 +148,7 @@ extension PhotoStickerBrowserViewController {
         if segue == .AddStickerSegue {
             let viewController = getEditStickerViewController(from: segue)
             viewController.viewModel = viewModel.addStickerViewModel()
-            requestPresentationStyle(.expanded)
+            requestPresentationStyle(.expanded) // ToDo: should come from view model
         } else if segue == .EditStickerSegue {
             let cell = sender as! StickerBrowserCell
             guard let sticker = cell.viewModel?.sticker else {
@@ -147,7 +157,7 @@ extension PhotoStickerBrowserViewController {
             }
             let viewController = getEditStickerViewController(from: segue)
             viewController.viewModel = viewModel.editStickerViewModel(for: sticker)
-            requestPresentationStyle(.expanded)
+            requestPresentationStyle(.expanded) // ToDo: should come from view model
         }
     }
 }
