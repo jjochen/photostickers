@@ -72,7 +72,7 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
         dataSource.configureSupplementaryView = { _, collectionView, kind, indexPath in
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionReusableViewReuseIdentifier.StickerBrowserButtonView.rawValue, for: indexPath) as! StickerBrowserButtonView
             view.editButton.rx.tap
-                .bind(to: self.viewModel.editButtonDidTap) // binds multiple times
+                .bind(to: self.viewModel.editButtonDidTap) // binds multiple times -> use view model for button view
                 .disposed(by: self.disposeBag)
             return view
         }
