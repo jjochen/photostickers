@@ -15,10 +15,12 @@ import RxRealm
 import RxSwift
 
 protocol PhotoStickerBrowserViewModelType {
-    var stickerService: StickerServiceType { get }
     var editButtonDidTap: PublishSubject<Void> { get }
+    var currentPresentationSytle: PublishSubject<MSMessagesAppPresentationStyle> { get }
+
     var sectionItems: Observable<[StickerSectionItem]> { get }
     var requestPresentationStyle: Driver<MSMessagesAppPresentationStyle> { get }
+
     func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType
     func addStickerViewModel() -> EditStickerViewModelType
     func stickerBrowserButtonViewModel() -> StickerBrowserButtonViewModelType
@@ -35,6 +37,7 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
     // MARK: Input
 
     let editButtonDidTap = PublishSubject<Void>()
+    let currentPresentationSytle = PublishSubject<MSMessagesAppPresentationStyle>()
 
     // MARK: Output
 

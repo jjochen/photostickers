@@ -14,7 +14,6 @@ import RxDataSources
 import RxSwift
 import UIKit
 
-
 /* TODO:
  * check https://github.com/sergdort/CleanArchitectureRxSwift
  */
@@ -49,10 +48,6 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
         setupBindings()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.collectionViewLayout.invalidateLayout()
@@ -61,6 +56,10 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
     // MARK: - Bindings
 
     fileprivate func setupBindings() {
+        rx.willTransition
+            .bind(to: viewModel.currentPresentationSytle)
+            .disposed(by: disposeBag)
+
         let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>(
             configureCell: { _, collectionView, indexPath, item in
                 switch item {
@@ -92,42 +91,8 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
             .disposed(by: disposeBag)
 
         viewModel.requestPresentationStyle
-            .drive(onNext: { style in
-                self.requestPresentationStyle(style)
-            })
+            .drive(rx.requestPresentationStyle)
             .disposed(by: disposeBag)
-    }
-}
-
-// MARK: - Conversation Handling
-
-extension PhotoStickerBrowserViewController {
-    override func willBecomeActive(with conversation: MSConversation) {
-        super.willBecomeActive(with: conversation)
-    }
-
-    override func didResignActive(with conversation: MSConversation) {
-        super.didResignActive(with: conversation)
-    }
-
-    override func didReceive(_ message: MSMessage, conversation: MSConversation) {
-        super.didReceive(message, conversation: conversation)
-    }
-
-    override func didStartSending(_ message: MSMessage, conversation: MSConversation) {
-        super.didStartSending(message, conversation: conversation)
-    }
-
-    override func didCancelSending(_ message: MSMessage, conversation: MSConversation) {
-        super.didCancelSending(message, conversation: conversation)
-    }
-
-    override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        super.willTransition(to: presentationStyle)
-    }
-
-    override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        super.didTransition(to: presentationStyle)
     }
 }
 
@@ -160,10 +125,6 @@ extension PhotoStickerBrowserViewController {
         }
     }
 }
-
-// MARK: Skinning
-
-extension PhotoStickerBrowserViewController {}
 
 extension PhotoStickerBrowserViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
