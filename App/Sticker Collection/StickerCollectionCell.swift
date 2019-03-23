@@ -32,6 +32,7 @@ class StickerCollectionCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         viewModel = nil
         imageView.image = nil
         placeholderView.isHidden = true

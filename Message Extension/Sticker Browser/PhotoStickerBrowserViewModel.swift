@@ -21,6 +21,7 @@ protocol PhotoStickerBrowserViewModelType {
     var requestPresentationStyle: Driver<MSMessagesAppPresentationStyle> { get }
     func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType
     func addStickerViewModel() -> EditStickerViewModelType
+    func stickerBrowserButtonViewModel() -> StickerBrowserButtonViewModelType
 }
 
 class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelType {
@@ -79,5 +80,9 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
 
     func addStickerViewModel() -> EditStickerViewModelType {
         return editStickerViewModel(for: Sticker.newSticker())
+    }
+
+    func stickerBrowserButtonViewModel() -> StickerBrowserButtonViewModelType {
+        return StickerBrowserButtonViewModel(editButtonDidTap: editButtonDidTap)
     }
 }

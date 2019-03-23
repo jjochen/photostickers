@@ -31,6 +31,7 @@ class StickerBrowserCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         viewModel = nil
         stickerView.sticker = nil
         placeholderView.isHidden = true

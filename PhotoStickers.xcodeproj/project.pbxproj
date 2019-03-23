@@ -48,6 +48,7 @@
 		194621AF1E4928C8000F09CE /* StickerCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621AE1E4928C8000F09CE /* StickerCollectionViewModel.swift */; };
 		194621B11E4BC528000F09CE /* StickerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621B01E4BC527000F09CE /* StickerCollectionCell.swift */; };
 		194621B31E4BC97B000F09CE /* StickerCollectionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621B21E4BC97B000F09CE /* StickerCollectionCellModel.swift */; };
+		196C15C4224658C4003FB98A /* StickerBrowserButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196C15C2224658C4003FB98A /* StickerBrowserButtonViewModel.swift */; };
 		19784B0C1EA0F92F00F8FB7D /* Sticker+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19784B0B1EA0F92F00F8FB7D /* Sticker+Images.swift */; };
 		19784B0D1EA0F92F00F8FB7D /* Sticker+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19784B0B1EA0F92F00F8FB7D /* Sticker+Images.swift */; };
 		19784B0F1EA140CB00F8FB7D /* StickerBrowserCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19784B0E1EA140CB00F8FB7D /* StickerBrowserCellViewModel.swift */; };
@@ -232,6 +233,7 @@
 		194621AE1E4928C8000F09CE /* StickerCollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerCollectionViewModel.swift; sourceTree = "<group>"; };
 		194621B01E4BC527000F09CE /* StickerCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = StickerCollectionCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		194621B21E4BC97B000F09CE /* StickerCollectionCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerCollectionCellModel.swift; sourceTree = "<group>"; };
+		196C15C2224658C4003FB98A /* StickerBrowserButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerBrowserButtonViewModel.swift; sourceTree = "<group>"; };
 		19784B0B1EA0F92F00F8FB7D /* Sticker+Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sticker+Images.swift"; sourceTree = "<group>"; };
 		19784B0E1EA140CB00F8FB7D /* StickerBrowserCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerBrowserCellViewModel.swift; sourceTree = "<group>"; };
 		199100AA1E9599A600972602 /* UIImage+Orientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Orientation.swift"; sourceTree = "<group>"; };
@@ -520,8 +522,9 @@
 				194621671E3CFE55000F09CE /* PhotoStickerBrowserViewModel.swift */,
 				194621681E3CFE55000F09CE /* StickerBrowserCell.swift */,
 				19784B0E1EA140CB00F8FB7D /* StickerBrowserCellViewModel.swift */,
-				199F56A0223E9527003CE86B /* StickerBrowserButtonView.swift */,
 				199546731E9A825000B2E236 /* AddStickerCell.swift */,
+				199F56A0223E9527003CE86B /* StickerBrowserButtonView.swift */,
+				196C15C2224658C4003FB98A /* StickerBrowserButtonViewModel.swift */,
 				194621691E3CFE55000F09CE /* StickerSection.swift */,
 			);
 			path = "Sticker Browser";
@@ -1265,6 +1268,7 @@
 				1997E3511E852D51008DA2A7 /* UIViewController+Rx.swift in Sources */,
 				194621711E3CFE56000F09CE /* PhotoStickerBrowserViewModel.swift in Sources */,
 				194621701E3CFE56000F09CE /* PhotoStickerBrowserViewController.swift in Sources */,
+				196C15C4224658C4003FB98A /* StickerBrowserButtonViewModel.swift in Sources */,
 				19E1EB3E1E7819C5005637C4 /* StyleKit.swift in Sources */,
 				199F5675223D166F003CE86B /* String+Extensions.swift in Sources */,
 				19F6DC8E1E4F23BD00CAE9D0 /* RxImagePickerDelegateProxy.swift in Sources */,
