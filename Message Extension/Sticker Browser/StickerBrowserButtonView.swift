@@ -14,7 +14,7 @@ class StickerBrowserButtonView: UICollectionReusableView {
     // Outlets
     @IBOutlet var editButton: UIButton!
 
-    fileprivate var disposeBag: DisposeBag?
+    fileprivate var disposeBag = DisposeBag()
 
     var viewModel: StickerBrowserButtonViewModelType? {
         didSet {
@@ -23,7 +23,7 @@ class StickerBrowserButtonView: UICollectionReusableView {
     }
 
     func configure() {
-        guard let viewModel = viewModel, let disposeBag = disposeBag else {
+        guard let viewModel = viewModel else {
             return
         }
 

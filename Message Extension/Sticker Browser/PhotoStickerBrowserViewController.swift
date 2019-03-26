@@ -16,6 +16,8 @@ import UIKit
 
 /* TODO:
  * check https://github.com/sergdort/CleanArchitectureRxSwift
+ * show toolbar with edit/done button only in expanded mode
+ * only in edit mode: edit, sort, delete sticker
  */
 
 class PhotoStickerBrowserViewController: MSMessagesAppViewController {
@@ -56,9 +58,9 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
     // MARK: - Bindings
 
     fileprivate func setupBindings() {
-        rx.willTransition
-            .bind(to: viewModel.currentPresentationSytle)
-            .disposed(by: disposeBag)
+//        rx.willTransition
+//            .bind(to: viewModel.currentPresentationSytle)
+//            .disposed(by: disposeBag)
 
         let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>(
             configureCell: { _, collectionView, indexPath, item in

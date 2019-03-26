@@ -53,12 +53,19 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
         self.stickerRenderService = stickerRenderService
         self.extensionContext = extensionContext
 
+        let isEditing = editButtonDidTap
+            .scan(false) { previous, _ in !previous }
+            .startWith(false)
+            .asDriver(onErrorJustReturn: false)
+
         let predicate = NSPredicate(format: "\(StickerProperty.hasRenderedImage.rawValue) == true")
         sectionItems = stickerService
             .fetchStickers(withPredicate: predicate)
             .map { allStickers in
                 var items = allStickers.map { sticker -> StickerSectionItem in
-                    let cellViewModel: StickerBrowserCellViewModelType = StickerBrowserCellViewModel(sticker: sticker, imageStore: imageStoreService)
+                    let cellViewModel: StickerBrowserCellViewModelType = StickerBrowserCellViewModel(sticker: sticker,
+                                                                                                     editing: isEditing,
+                                                                                                     imageStore: imageStoreService)
                     return StickerSectionItem.stickerItem(viewModel: cellViewModel)
                 }
                 items.append(StickerSectionItem.openAppItem)

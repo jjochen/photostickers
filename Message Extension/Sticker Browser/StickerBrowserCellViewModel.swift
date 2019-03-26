@@ -8,27 +8,44 @@
 
 import Log
 import Messages
+import RxCocoa
+import RxSwift
 import UIKit
 
 protocol StickerBrowserCellViewModelType: class {
     var sticker: Sticker { get }
     var msSticker: MSSticker? { get }
     var placeholderHidden: Bool { get }
+    var shake: Driver<Bool> { get }
+    var hideDeleteButton: Driver<Bool> { get }
+    var hideSticker: Driver<Bool> { get }
+    var hideImageView: Driver<Bool> { get }
 }
 
 class StickerBrowserCellViewModel: BaseViewModel, StickerBrowserCellViewModelType {
     let sticker: Sticker
     let msSticker: MSSticker?
     let placeholderHidden: Bool
+    let isEditing: Driver<Bool>
 
-    init(sticker: Sticker, imageStore: ImageStoreServiceType) {
+    var shake: Driver<Bool>
+    var hideDeleteButton: Driver<Bool>
+    var hideSticker: Driver<Bool>
+    var hideImageView: Driver<Bool>
+
+    init(sticker: Sticker, editing: Driver<Bool>, imageStore: ImageStoreServiceType) {
         self.sticker = sticker
+        isEditing = editing
 
         let imageURL = sticker.renderedImageURL(in: imageStore)
         let title = sticker.title
-
         msSticker = StickerBrowserCellViewModel.msSticker(imageURL: imageURL, title: title)
         placeholderHidden = msSticker != nil
+
+        shake = isEditing
+        hideDeleteButton = isEditing.map { !$0 }
+        hideSticker = isEditing
+        hideImageView = isEditing.map { !$0 }
 
         super.init()
     }
