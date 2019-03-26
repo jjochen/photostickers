@@ -39,6 +39,10 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wXO-lG-VFa" userLabel="Sticker Image View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdC-Rn-AuH" userLabel="Sticker Placeholder View" customClass="AppIconView" customModule="MessageExtension" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -47,25 +51,30 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="jdh-Ws-RIn" firstAttribute="bottom" secondItem="SPh-I8-apT" secondAttribute="bottom" id="5eF-T7-dSM"/>
+                                            <constraint firstItem="wXO-lG-VFa" firstAttribute="top" secondItem="SPh-I8-apT" secondAttribute="top" id="7cg-xY-gdm"/>
                                             <constraint firstItem="jdh-Ws-RIn" firstAttribute="top" secondItem="SPh-I8-apT" secondAttribute="top" id="Gmv-oc-cqs"/>
                                             <constraint firstItem="jdh-Ws-RIn" firstAttribute="trailing" secondItem="SPh-I8-apT" secondAttribute="trailing" id="IX5-Vk-OSo"/>
+                                            <constraint firstItem="wXO-lG-VFa" firstAttribute="bottom" secondItem="SPh-I8-apT" secondAttribute="bottom" id="Iba-Bu-DKL"/>
                                             <constraint firstItem="OdC-Rn-AuH" firstAttribute="top" secondItem="SPh-I8-apT" secondAttribute="top" id="J3R-BB-bBz"/>
+                                            <constraint firstItem="wXO-lG-VFa" firstAttribute="leading" secondItem="SPh-I8-apT" secondAttribute="leading" id="NhZ-SN-xRK"/>
                                             <constraint firstItem="OdC-Rn-AuH" firstAttribute="bottom" secondItem="SPh-I8-apT" secondAttribute="bottom" id="Psi-Wz-8Nu"/>
                                             <constraint firstItem="OdC-Rn-AuH" firstAttribute="trailing" secondItem="SPh-I8-apT" secondAttribute="trailing" id="S6i-Xe-zTj"/>
                                             <constraint firstItem="jdh-Ws-RIn" firstAttribute="leading" secondItem="SPh-I8-apT" secondAttribute="leading" id="X8L-7z-uKz"/>
+                                            <constraint firstItem="wXO-lG-VFa" firstAttribute="trailing" secondItem="SPh-I8-apT" secondAttribute="trailing" id="pWh-fN-3cK"/>
                                             <constraint firstItem="OdC-Rn-AuH" firstAttribute="leading" secondItem="SPh-I8-apT" secondAttribute="leading" id="ukF-lM-dSY"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="StickerBrowserCell"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <outlet property="imageView" destination="wXO-lG-VFa" id="3jv-hA-Gj5"/>
                                             <outlet property="placeholderView" destination="OdC-Rn-AuH" id="7O5-BA-KD7"/>
                                             <outlet property="stickerView" destination="jdh-Ws-RIn" id="v4i-hC-vdd"/>
                                             <segue destination="zWP-2x-fud" kind="showDetail" identifier="EditStickerSegue" id="OFF-LG-fBC"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="Iyb-XD-XMs" customClass="AddStickerCell" customModule="MessageExtension" customModuleProvider="target">
-                                        <rect key="frame" x="143" y="10" width="90" height="90"/>
+                                        <rect key="frame" x="142.5" y="10" width="90" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>

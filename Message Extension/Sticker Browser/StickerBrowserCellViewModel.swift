@@ -15,6 +15,7 @@ import UIKit
 protocol StickerBrowserCellViewModelType: class {
     var sticker: Sticker { get }
     var msSticker: MSSticker? { get }
+    var image: UIImage? { get }
     var placeholderHidden: Bool { get }
     var shake: Driver<Bool> { get }
     var hideDeleteButton: Driver<Bool> { get }
@@ -25,6 +26,7 @@ protocol StickerBrowserCellViewModelType: class {
 class StickerBrowserCellViewModel: BaseViewModel, StickerBrowserCellViewModelType {
     let sticker: Sticker
     let msSticker: MSSticker?
+    let image: UIImage?
     let placeholderHidden: Bool
     let isEditing: Driver<Bool>
 
@@ -41,6 +43,8 @@ class StickerBrowserCellViewModel: BaseViewModel, StickerBrowserCellViewModelTyp
         let title = sticker.title
         msSticker = StickerBrowserCellViewModel.msSticker(imageURL: imageURL, title: title)
         placeholderHidden = msSticker != nil
+
+        image = sticker.renderedImage(from: imageStore)
 
         shake = isEditing
         hideDeleteButton = isEditing.map { !$0 }

@@ -15,6 +15,7 @@ import UIKit
 
 class StickerBrowserCell: UICollectionViewCell {
     @IBOutlet var stickerView: MSStickerView!
+    @IBOutlet var imageView: UIImageView!
     @IBOutlet var placeholderView: AppIconView!
 
     fileprivate var disposeBag = DisposeBag()
@@ -31,13 +32,15 @@ class StickerBrowserCell: UICollectionViewCell {
         }
 
         stickerView.sticker = viewModel.msSticker
+        imageView.image = viewModel.image
+        placeholderView.isHidden = viewModel.placeholderHidden
 
         viewModel.hideSticker
             .drive(stickerView.rx.isHidden)
             .disposed(by: disposeBag)
 
         viewModel.hideImageView
-            .drive(placeholderView.rx.isHidden)
+            .drive(imageView.rx.isHidden)
             .disposed(by: disposeBag)
     }
 
