@@ -59,9 +59,9 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
     // MARK: - Bindings
 
     fileprivate func setupBindings() {
-//        rx.willTransition
-//            .bind(to: viewModel.currentPresentationSytle)
-//            .disposed(by: disposeBag)
+        rx.willTransition
+            .bind(to: viewModel.currentPresentationStyle)
+            .disposed(by: disposeBag)
 
         editBarButtonItem.rx
             .tap
@@ -100,6 +100,12 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
 
         viewModel.requestPresentationStyle
             .drive(rx.requestPresentationStyle)
+            .disposed(by: disposeBag)
+
+        viewModel.navigationBarHidden
+            .drive(onNext: { hidden in
+                self.navigationController?.setNavigationBarHidden(hidden, animated: true)
+            })
             .disposed(by: disposeBag)
     }
 }

@@ -16,10 +16,11 @@ import RxSwift
 
 protocol PhotoStickerBrowserViewModelType {
     var editButtonDidTap: PublishSubject<Void> { get }
-    var currentPresentationSytle: PublishSubject<MSMessagesAppPresentationStyle> { get }
+    var currentPresentationStyle: PublishSubject<MSMessagesAppPresentationStyle> { get }
 
     var sectionItems: Observable<[StickerSectionItem]> { get }
     var requestPresentationStyle: Driver<MSMessagesAppPresentationStyle> { get }
+    var navigationBarHidden: Driver<Bool> { get }
 
     func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType
     func addStickerViewModel() -> EditStickerViewModelType
@@ -37,12 +38,13 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
     // MARK: Input
 
     let editButtonDidTap = PublishSubject<Void>()
-    let currentPresentationSytle = PublishSubject<MSMessagesAppPresentationStyle>()
+    let currentPresentationStyle = PublishSubject<MSMessagesAppPresentationStyle>()
 
     // MARK: Output
 
     let sectionItems: Observable<[StickerSectionItem]>
     let requestPresentationStyle: Driver<MSMessagesAppPresentationStyle>
+    let navigationBarHidden: Driver<Bool>
 
     init(stickerService: StickerServiceType,
          imageStoreService: ImageStoreServiceType,
@@ -57,6 +59,11 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
             .scan(false) { previous, _ in !previous }
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
+
+        navigationBarHidden = currentPresentationStyle
+            .map { $0 != .expanded }
+            .startWith(true)
+            .asDriver(onErrorJustReturn: true)
 
         let predicate = NSPredicate(format: "\(StickerProperty.hasRenderedImage.rawValue) == true")
         sectionItems = stickerService
