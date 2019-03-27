@@ -15,6 +15,7 @@
 		191372381EA4ABB700626085 /* ImageRenderServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191372371EA4ABB700626085 /* ImageRenderServiceMock.swift */; };
 		1918E63A1E72CC2A007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
 		1918E63B1E72CC4C007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
+		191C02F4224C0761001A2B85 /* MSMessagesAppViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196C15C52246B595003FB98A /* MSMessagesAppViewController+Rx.swift */; };
 		191FC7CD1E8AFC990075A9FB /* UIScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */; };
 		193003661EA54DA7002CA5F4 /* .swift-version in Resources */ = {isa = PBXBuildFile; fileRef = 193003651EA54DA6002CA5F4 /* .swift-version */; };
 		193003701EA61B7D002CA5F4 /* XCUIApplication+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1930036F1EA61B7D002CA5F4 /* XCUIApplication+Extensions.m */; };
@@ -49,7 +50,6 @@
 		194621B11E4BC528000F09CE /* StickerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621B01E4BC527000F09CE /* StickerCollectionCell.swift */; };
 		194621B31E4BC97B000F09CE /* StickerCollectionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194621B21E4BC97B000F09CE /* StickerCollectionCellModel.swift */; };
 		196C15C4224658C4003FB98A /* StickerBrowserButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196C15C2224658C4003FB98A /* StickerBrowserButtonViewModel.swift */; };
-		196C15C62246B595003FB98A /* MSMessagesAppViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196C15C52246B595003FB98A /* MSMessagesAppViewController+Rx.swift */; };
 		19784B0C1EA0F92F00F8FB7D /* Sticker+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19784B0B1EA0F92F00F8FB7D /* Sticker+Images.swift */; };
 		19784B0D1EA0F92F00F8FB7D /* Sticker+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19784B0B1EA0F92F00F8FB7D /* Sticker+Images.swift */; };
 		19784B0F1EA140CB00F8FB7D /* StickerBrowserCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19784B0E1EA140CB00F8FB7D /* StickerBrowserCellViewModel.swift */; };
@@ -967,6 +967,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				de,
@@ -1303,7 +1304,7 @@
 				19A6C60A1E633DEE009B8922 /* ImageStoreService.swift in Sources */,
 				199F566D223D1168003CE86B /* StickerRenderService.swift in Sources */,
 				19F6DC901E4F23BD00CAE9D0 /* UIImagePickerController+RxCreate.swift in Sources */,
-				196C15C62246B595003FB98A /* MSMessagesAppViewController+Rx.swift in Sources */,
+				191C02F4224C0761001A2B85 /* MSMessagesAppViewController+Rx.swift in Sources */,
 				194621721E3CFE56000F09CE /* StickerBrowserCell.swift in Sources */,
 				19F6DC951E4F23BD00CAE9D0 /* DataFolderService.swift in Sources */,
 				199F566C223D115B003CE86B /* EditStickerViewModel.swift in Sources */,
