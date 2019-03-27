@@ -168,6 +168,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="pWq-rX-ruZ" id="uCl-4D-INS"/>
+                        <outlet property="editBarButtonItem" destination="Edz-x6-g4r" id="LeA-hX-Gbn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YdD-4C-CXR" userLabel="First Responder" sceneMemberID="firstResponder"/>

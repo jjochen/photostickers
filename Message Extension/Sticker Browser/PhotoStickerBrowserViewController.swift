@@ -42,6 +42,7 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
     // MARK: Outlets / Actions
 
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var editBarButtonItem: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +62,11 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
 //        rx.willTransition
 //            .bind(to: viewModel.currentPresentationSytle)
 //            .disposed(by: disposeBag)
+
+        editBarButtonItem.rx
+            .tap
+            .bind(to: viewModel.editButtonDidTap)
+            .disposed(by: disposeBag)
 
         let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>(
             configureCell: { _, collectionView, indexPath, item in
