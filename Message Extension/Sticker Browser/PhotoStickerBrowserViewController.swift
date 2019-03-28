@@ -28,6 +28,7 @@ class PhotoStickerBrowserViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var editBarButtonItem: UIBarButtonItem!
+    @IBOutlet var doneBarButtonItem: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +48,6 @@ class PhotoStickerBrowserViewController: UIViewController {
             return
         }
 
-//        rx.willTransition
-//            .bind(to: viewModel.currentPresentationStyle)
-//            .disposed(by: disposeBag)
-
         editBarButtonItem.rx
             .tap
             .bind(to: viewModel.editButtonDidTap)
@@ -69,11 +66,6 @@ class PhotoStickerBrowserViewController: UIViewController {
                 }
             }
         )
-        dataSource.configureSupplementaryView = { _, collectionView, kind, indexPath in
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionReusableViewReuseIdentifier.StickerBrowserButtonView.rawValue, for: indexPath) as! StickerBrowserButtonView
-            view.viewModel = viewModel.stickerBrowserButtonViewModel()
-            return view
-        }
 
         viewModel.sectionItems
             .map { items in
@@ -95,6 +87,7 @@ class PhotoStickerBrowserViewController: UIViewController {
                 self.navigationController?.setNavigationBarHidden(hidden, animated: true)
             })
             .disposed(by: disposeBag)
+
     }
 }
 

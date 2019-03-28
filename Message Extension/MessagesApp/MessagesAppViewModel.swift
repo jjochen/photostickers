@@ -65,6 +65,7 @@ class MessagesAppViewModel: BaseViewModel, MessagesAppViewModelType {
         return PhotoStickerBrowserViewModel(stickerService: stickerService,
                                             imageStoreService: imageStoreService,
                                             stickerRenderService: stickerRenderService,
-                                            extensionContext: extensionContext)
+                                            extensionContext: extensionContext,
+                                            currentPresentationStyle: currentPresentationStyle)
     }
 }

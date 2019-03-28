@@ -72,7 +72,7 @@
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="I9I-p4-h0H">
                                     <size key="itemSize" width="90" height="90"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="50" height="50"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
@@ -146,31 +146,6 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StickerBrowserButtonView" id="vih-ZZ-ehb" userLabel="StickerBrowserButtonView" customClass="StickerBrowserButtonView" customModule="MessageExtension" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="110" width="375" height="50"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Z0E-73-2bc">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5b-pY-sME" userLabel="EditButton">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                                    <state key="normal" title="Edit"/>
-                                                </button>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="Z0E-73-2bc" secondAttribute="bottom" id="Hrt-C1-PNg"/>
-                                        <constraint firstItem="Z0E-73-2bc" firstAttribute="top" secondItem="vih-ZZ-ehb" secondAttribute="top" id="afr-ug-Gjb"/>
-                                        <constraint firstItem="Z0E-73-2bc" firstAttribute="leading" secondItem="vih-ZZ-ehb" secondAttribute="leading" id="rIg-AX-14M"/>
-                                        <constraint firstAttribute="trailing" secondItem="Z0E-73-2bc" secondAttribute="trailing" id="uHb-tW-Z0g"/>
-                                    </constraints>
-                                    <connections>
-                                        <outlet property="EditButton" destination="n5b-pY-sME" id="RzS-IC-Y9k"/>
-                                        <outlet property="editButton" destination="n5b-pY-sME" id="204-Qc-6hn"/>
-                                    </connections>
-                                </collectionReusableView>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="StickerBrowserCollectionView"/>
                                 </userDefinedRuntimeAttributes>
@@ -187,16 +162,15 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="m21-ci-ERi">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="Edz-x6-g4r"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="6qi-pe-ifc">
-                            <connections>
-                                <segue destination="zWP-2x-fud" kind="showDetail" identifier="AddStickerSegue" id="fGW-Xv-xRu"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="done" id="1IQ-TM-wnW"/>
+                            <barButtonItem systemItem="edit" id="Edz-x6-g4r"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="pWq-rX-ruZ" id="uCl-4D-INS"/>
+                        <outlet property="doneBarButtonItem" destination="1IQ-TM-wnW" id="5GO-r0-3dY"/>
                         <outlet property="editBarButtonItem" destination="Edz-x6-g4r" id="LeA-hX-Gbn"/>
                     </connections>
                 </viewController>

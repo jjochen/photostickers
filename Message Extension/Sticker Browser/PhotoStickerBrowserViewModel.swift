@@ -21,10 +21,11 @@ protocol PhotoStickerBrowserViewModelType {
     var sectionItems: Observable<[StickerSectionItem]> { get }
     var requestPresentationStyle: Driver<MSMessagesAppPresentationStyle> { get }
     var navigationBarHidden: Driver<Bool> { get }
+    var editButtonHidden: Driver<Bool> { get }
+    var doneButtonHidden: Driver<Bool> { get }
 
     func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType
     func addStickerViewModel() -> EditStickerViewModelType
-    func stickerBrowserButtonViewModel() -> StickerBrowserButtonViewModelType
 }
 
 class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelType {
@@ -38,22 +39,27 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
     // MARK: Input
 
     let editButtonDidTap = PublishSubject<Void>()
-    let currentPresentationStyle = PublishSubject<MSMessagesAppPresentationStyle>()
+    let doneButtonDidTap = PublishSubject<Void>()
+    let currentPresentationStyle: PublishSubject<MSMessagesAppPresentationStyle>
 
     // MARK: Output
 
     let sectionItems: Observable<[StickerSectionItem]>
     let requestPresentationStyle: Driver<MSMessagesAppPresentationStyle>
     let navigationBarHidden: Driver<Bool>
+    let editButtonHidden: Driver<Bool>
+    let doneButtonHidden: Driver<Bool>
 
     init(stickerService: StickerServiceType,
          imageStoreService: ImageStoreServiceType,
          stickerRenderService: StickerRenderServiceType,
-         extensionContext: NSExtensionContext?) {
+         extensionContext: NSExtensionContext?,
+         currentPresentationStyle: PublishSubject<MSMessagesAppPresentationStyle>) {
         self.stickerService = stickerService
         self.imageStoreService = imageStoreService
         self.stickerRenderService = stickerRenderService
         self.extensionContext = extensionContext
+        self.currentPresentationStyle = currentPresentationStyle
 
         let isEditing = editButtonDidTap
             .scan(false) { previous, _ in !previous }
@@ -64,6 +70,10 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
             .map { $0 != .expanded }
             .startWith(true)
             .asDriver(onErrorJustReturn: true)
+
+        editButtonHidden = isEditing
+
+        doneButtonHidden = isEditing.map { !$0 }
 
         let predicate = NSPredicate(format: "\(StickerProperty.hasRenderedImage.rawValue) == true")
         sectionItems = stickerService
@@ -97,9 +107,5 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
 
     func addStickerViewModel() -> EditStickerViewModelType {
         return editStickerViewModel(for: Sticker.newSticker())
-    }
-
-    func stickerBrowserButtonViewModel() -> StickerBrowserButtonViewModelType {
-        return StickerBrowserButtonViewModel(editButtonDidTap: editButtonDidTap)
     }
 }

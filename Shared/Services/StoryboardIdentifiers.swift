@@ -1,9 +1,5 @@
 // Auto generated file from SBConstants - any changes may be lost
 
-public enum CollectionReusableViewReuseIdentifier: String {
-    case StickerBrowserButtonView
-}
-
 public enum CollectionViewCellReuseIdentifier: String {
     case AddMoreCell
     case StickerBrowserCell
