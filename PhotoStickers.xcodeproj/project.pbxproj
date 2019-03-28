@@ -16,6 +16,8 @@
 		1918E63A1E72CC2A007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
 		1918E63B1E72CC4C007DFFE7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918E6391E72CC2A007DFFE7 /* Mask.swift */; };
 		191C02F4224C0761001A2B85 /* MSMessagesAppViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196C15C52246B595003FB98A /* MSMessagesAppViewController+Rx.swift */; };
+		191C02F6224CB852001A2B85 /* MessagesAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191C02F5224CB852001A2B85 /* MessagesAppViewController.swift */; };
+		191C02F9224CB8B2001A2B85 /* MessagesAppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191C02F8224CB8B2001A2B85 /* MessagesAppViewModel.swift */; };
 		191FC7CD1E8AFC990075A9FB /* UIScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */; };
 		193003661EA54DA7002CA5F4 /* .swift-version in Resources */ = {isa = PBXBuildFile; fileRef = 193003651EA54DA6002CA5F4 /* .swift-version */; };
 		193003701EA61B7D002CA5F4 /* XCUIApplication+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1930036F1EA61B7D002CA5F4 /* XCUIApplication+Extensions.m */; };
@@ -176,6 +178,8 @@
 		191372351EA4A95D00626085 /* ImageStoreServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStoreServiceMock.swift; sourceTree = "<group>"; };
 		191372371EA4ABB700626085 /* ImageRenderServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRenderServiceMock.swift; sourceTree = "<group>"; };
 		1918E6391E72CC2A007DFFE7 /* Mask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
+		191C02F5224CB852001A2B85 /* MessagesAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesAppViewController.swift; sourceTree = "<group>"; };
+		191C02F8224CB8B2001A2B85 /* MessagesAppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesAppViewModel.swift; sourceTree = "<group>"; };
 		191FC7CC1E8AFC990075A9FB /* UIScrollView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Rx.swift"; sourceTree = "<group>"; };
 		193003621EA51884002CA5F4 /* Icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Icon.jpg; sourceTree = "<group>"; };
 		193003631EA51884002CA5F4 /* Screenshot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Screenshot.jpg; sourceTree = "<group>"; };
@@ -359,6 +363,15 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		191C02F7224CB85A001A2B85 /* MessagesApp */ = {
+			isa = PBXGroup;
+			children = (
+				191C02F5224CB852001A2B85 /* MessagesAppViewController.swift */,
+				191C02F8224CB8B2001A2B85 /* MessagesAppViewModel.swift */,
+			);
+			path = MessagesApp;
+			sourceTree = "<group>";
+		};
 		193003711EA61FDD002CA5F4 /* ObjC */ = {
 			isa = PBXGroup;
 			children = (
@@ -510,6 +523,7 @@
 		1946215F1E3CFE55000F09CE /* Message Extension */ = {
 			isa = PBXGroup;
 			children = (
+				191C02F7224CB85A001A2B85 /* MessagesApp */,
 				194621651E3CFE55000F09CE /* Sticker Browser */,
 				196C15C72246B5A1003FB98A /* Rx */,
 				194621751E3CFE66000F09CE /* Storyboards */,
@@ -1292,11 +1306,13 @@
 				19A6C6071E631101009B8922 /* StickerInfo.swift in Sources */,
 				199546741E9A825000B2E236 /* AddStickerCell.swift in Sources */,
 				199F5671223D1194003CE86B /* UIImage+RoundedCorner.swift in Sources */,
+				191C02F9224CB8B2001A2B85 /* MessagesAppViewModel.swift in Sources */,
 				19A6C6001E604474009B8922 /* Observable+Operators.swift in Sources */,
 				199F5674223D1657003CE86B /* UIView+Extensions.swift in Sources */,
 				19BD46AA1E89560D003D1BA1 /* CGGeometry+Extensions.swift in Sources */,
 				194621731E3CFE56000F09CE /* StickerSection.swift in Sources */,
 				199F566B223D1155003CE86B /* EditStickerViewController.swift in Sources */,
+				191C02F6224CB852001A2B85 /* MessagesAppViewController.swift in Sources */,
 				19F6DC8C1E4F23BD00CAE9D0 /* UIStoryboardSegue+Extensions.swift in Sources */,
 				19F6DC931E4F23BD00CAE9D0 /* StickerService.swift in Sources */,
 				199F566F223D118B003CE86B /* UIImage+Alpha.swift in Sources */,

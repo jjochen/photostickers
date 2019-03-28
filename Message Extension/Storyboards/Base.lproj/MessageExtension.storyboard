@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="je6-JZ-ceA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HcW-W7-QaD">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,6 +10,35 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Messages App View Controller-->
+        <scene sceneID="zvB-ov-t5y">
+            <objects>
+                <viewController storyboardIdentifier="MessagesAppViewController" id="HcW-W7-QaD" customClass="MessagesAppViewController" customModule="MessageExtension" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AjF-ci-m4d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EFw-SD-Zrz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="jMo-bB-Dlw" kind="embed" identifier="EmbedStickerBrowserSegue" id="Eog-op-iGA"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="EFw-SD-Zrz" firstAttribute="left" secondItem="AjF-ci-m4d" secondAttribute="left" id="3nX-vt-MbC"/>
+                            <constraint firstItem="EFw-SD-Zrz" firstAttribute="top" secondItem="AjF-ci-m4d" secondAttribute="top" id="45s-GT-gQF"/>
+                            <constraint firstItem="EFw-SD-Zrz" firstAttribute="bottom" secondItem="AjF-ci-m4d" secondAttribute="bottom" id="7ft-TC-6uE"/>
+                            <constraint firstItem="EFw-SD-Zrz" firstAttribute="right" secondItem="AjF-ci-m4d" secondAttribute="right" id="pvj-zD-CFd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OHz-z4-LIY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0ug-mK-Z8U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-849" y="107"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="IPm-rI-mOO">
             <objects>
@@ -93,7 +122,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="Iyb-XD-XMs" customClass="AddStickerCell" customModule="MessageExtension" customModuleProvider="target">
-                                        <rect key="frame" x="142.5" y="10" width="90" height="90"/>
+                                        <rect key="frame" x="143" y="10" width="90" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
@@ -416,6 +445,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="v44-oX-9hc"/>
+        <segue reference="OFF-LG-fBC"/>
     </inferredMetricsTieBreakers>
 </document>

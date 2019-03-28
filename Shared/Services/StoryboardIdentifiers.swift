@@ -18,6 +18,7 @@ public enum NavigationControllerStoryboardIdentifier: String {
 public enum SegueIdentifier: String {
     case AddStickerSegue
     case EditStickerSegue
+    case EmbedStickerBrowserSegue
 }
 
 public enum StoryboardNames: String {
@@ -28,6 +29,7 @@ public enum StoryboardNames: String {
 
 public enum ViewControllerStoryboardIdentifier: String {
     case EditStickerViewController
+    case MessagesAppViewController
     case PhotoStickerBrowserViewController
     case StickerCollectionViewController
 }

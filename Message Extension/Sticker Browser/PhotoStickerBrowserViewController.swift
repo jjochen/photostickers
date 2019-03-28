@@ -20,23 +20,8 @@ import UIKit
  * only in edit mode: edit, sort, delete sticker
  */
 
-class PhotoStickerBrowserViewController: MSMessagesAppViewController {
-    lazy var viewModel: PhotoStickerBrowserViewModelType = {
-        #if DEBUG
-            let isRunningUITests = true
-        #else
-            // TODO:
-            let isRunningUITests = UserDefaults.standard.bool(forKey: "RunningUITests")
-        #endif
-        let dataFolderType: DataFolderType = isRunningUITests ? .appGroupPrefilled(subfolder: "UITests") : .appGroup
-        let dataFolder: DataFolderServiceType = DataFolderService(type: dataFolderType)
-        let imageStoreService: ImageStoreServiceType = ImageStoreService(url: dataFolder.imagesURL)
-        let stickerService: StickerServiceType = StickerService(realmType: .onDisk(url: dataFolder.realmURL), imageStoreService: imageStoreService)
-        let stickerRenderService: StickerRenderServiceType = StickerRenderService()
-
-        return PhotoStickerBrowserViewModel(stickerService: stickerService, imageStoreService: imageStoreService, stickerRenderService: stickerRenderService, extensionContext: self.extensionContext)
-    }()
-
+class PhotoStickerBrowserViewController: UIViewController {
+    var viewModel: PhotoStickerBrowserViewModelType?
     fileprivate let disposeBag = DisposeBag()
 
     // MARK: Outlets / Actions
@@ -46,8 +31,6 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        RxImagePickerDelegateProxy.register { RxImagePickerDelegateProxy(imagePicker: $0) }
-        view.tintColor = StyleKit.appColor
         setupBindings()
     }
 
@@ -59,9 +42,14 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
     // MARK: - Bindings
 
     fileprivate func setupBindings() {
-        rx.willTransition
-            .bind(to: viewModel.currentPresentationStyle)
-            .disposed(by: disposeBag)
+        guard let viewModel = self.viewModel else {
+            Logger.shared.error("View Model not set!")
+            return
+        }
+
+//        rx.willTransition
+//            .bind(to: viewModel.currentPresentationStyle)
+//            .disposed(by: disposeBag)
 
         editBarButtonItem.rx
             .tap
@@ -83,7 +71,7 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
         )
         dataSource.configureSupplementaryView = { _, collectionView, kind, indexPath in
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionReusableViewReuseIdentifier.StickerBrowserButtonView.rawValue, for: indexPath) as! StickerBrowserButtonView
-            view.viewModel = self.viewModel.stickerBrowserButtonViewModel()
+            view.viewModel = viewModel.stickerBrowserButtonViewModel()
             return view
         }
 
@@ -98,9 +86,9 @@ class PhotoStickerBrowserViewController: MSMessagesAppViewController {
             .setDelegate(self)
             .disposed(by: disposeBag)
 
-        viewModel.requestPresentationStyle
-            .drive(rx.requestPresentationStyle)
-            .disposed(by: disposeBag)
+//        viewModel.requestPresentationStyle
+//            .drive(rx.requestPresentationStyle)
+//            .disposed(by: disposeBag)
 
         viewModel.navigationBarHidden
             .drive(onNext: { hidden in
@@ -123,10 +111,14 @@ extension PhotoStickerBrowserViewController {
             return viewController
         }
 
+        guard let viewModel = self.viewModel else {
+            Logger.shared.error("View Model not set!")
+            return
+        }
+
         if segue == .AddStickerSegue {
             let viewController = getEditStickerViewController(from: segue)
             viewController.viewModel = viewModel.addStickerViewModel()
-            requestPresentationStyle(.expanded) // ToDo: should come from view model
         } else if segue == .EditStickerSegue {
             let cell = sender as! StickerBrowserCell
             guard let sticker = cell.viewModel?.sticker else {
@@ -135,7 +127,6 @@ extension PhotoStickerBrowserViewController {
             }
             let viewController = getEditStickerViewController(from: segue)
             viewController.viewModel = viewModel.editStickerViewModel(for: sticker)
-            requestPresentationStyle(.expanded) // ToDo: should come from view model
         }
     }
 }
