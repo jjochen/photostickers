@@ -16,7 +16,7 @@ import RxSwift
 
 protocol MessagesAppViewModelType {
     var currentPresentationStyle: PublishSubject<MSMessagesAppPresentationStyle> { get }
-    // var requestPresentationStyle: Driver<MSMessagesAppPresentationStyle> { get }
+    var presentationStyleRequested: Driver<MSMessagesAppPresentationStyle> { get }
     func stickerBrowserViewModel() -> PhotoStickerBrowserViewModelType
 }
 
@@ -31,10 +31,11 @@ class MessagesAppViewModel: BaseViewModel, MessagesAppViewModelType {
     // MARK: Input
 
     let currentPresentationStyle = PublishSubject<MSMessagesAppPresentationStyle>()
+    let requestPresentationStyle = PublishRelay<MSMessagesAppPresentationStyle>()
 
     // MARK: Output
 
-    // let requestPresentationStyle: Driver<MSMessagesAppPresentationStyle>
+    let presentationStyleRequested: Driver<MSMessagesAppPresentationStyle>
 
     init(stickerService: StickerServiceType,
          imageStoreService: ImageStoreServiceType,
@@ -44,6 +45,8 @@ class MessagesAppViewModel: BaseViewModel, MessagesAppViewModelType {
         self.imageStoreService = imageStoreService
         self.stickerRenderService = stickerRenderService
         self.extensionContext = extensionContext
+
+        presentationStyleRequested = requestPresentationStyle.asSharedSequence(onErrorDriveWith: Driver.empty())
 
         super.init()
     }
@@ -66,6 +69,7 @@ class MessagesAppViewModel: BaseViewModel, MessagesAppViewModelType {
                                             imageStoreService: imageStoreService,
                                             stickerRenderService: stickerRenderService,
                                             extensionContext: extensionContext,
-                                            currentPresentationStyle: currentPresentationStyle)
+                                            currentPresentationStyle: currentPresentationStyle,
+                                            requestPresentationStyle: requestPresentationStyle)
     }
 }

@@ -58,9 +58,9 @@ class MessagesAppViewController: MSMessagesAppViewController {
             .bind(to: viewModel.currentPresentationStyle)
             .disposed(by: disposeBag)
 
-//        viewModel.requestPresentationStyle
-//            .drive(rx.requestPresentationStyle)
-//            .disposed(by: disposeBag)
+        viewModel.presentationStyleRequested
+            .drive(rx.requestPresentationStyle)
+            .disposed(by: disposeBag)
     }
 }
 

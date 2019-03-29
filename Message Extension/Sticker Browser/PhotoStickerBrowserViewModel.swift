@@ -16,10 +16,8 @@ import RxSwift
 
 protocol PhotoStickerBrowserViewModelType {
     var editButtonDidTap: PublishSubject<Void> { get }
-    var currentPresentationStyle: PublishSubject<MSMessagesAppPresentationStyle> { get }
 
     var sectionItems: Observable<[StickerSectionItem]> { get }
-    var requestPresentationStyle: Driver<MSMessagesAppPresentationStyle> { get }
     var navigationBarHidden: Driver<Bool> { get }
     var editButtonHidden: Driver<Bool> { get }
     var doneButtonHidden: Driver<Bool> { get }
@@ -45,21 +43,23 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
     // MARK: Output
 
     let sectionItems: Observable<[StickerSectionItem]>
-    let requestPresentationStyle: Driver<MSMessagesAppPresentationStyle>
     let navigationBarHidden: Driver<Bool>
     let editButtonHidden: Driver<Bool>
     let doneButtonHidden: Driver<Bool>
+    let requestPresentationStyle: PublishRelay<MSMessagesAppPresentationStyle>
 
     init(stickerService: StickerServiceType,
          imageStoreService: ImageStoreServiceType,
          stickerRenderService: StickerRenderServiceType,
          extensionContext: NSExtensionContext?,
-         currentPresentationStyle: PublishSubject<MSMessagesAppPresentationStyle>) {
+         currentPresentationStyle: PublishSubject<MSMessagesAppPresentationStyle>,
+         requestPresentationStyle: PublishRelay<MSMessagesAppPresentationStyle>) {
         self.stickerService = stickerService
         self.imageStoreService = imageStoreService
         self.stickerRenderService = stickerRenderService
         self.extensionContext = extensionContext
         self.currentPresentationStyle = currentPresentationStyle
+        self.requestPresentationStyle = requestPresentationStyle
 
         let isEditing = editButtonDidTap
             .scan(false) { previous, _ in !previous }
@@ -89,9 +89,8 @@ class PhotoStickerBrowserViewModel: BaseViewModel, PhotoStickerBrowserViewModelT
                 return items
             }
 
-        requestPresentationStyle = editButtonDidTap
-            .map { .expanded }
-            .asDriver(onErrorDriveWith: Driver.empty())
+        editButtonDidTap.map { .expanded }
+            .bind(to: requestPresentationStyle)
 
         super.init()
     }

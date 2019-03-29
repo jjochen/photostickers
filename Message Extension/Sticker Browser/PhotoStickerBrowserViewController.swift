@@ -87,7 +87,6 @@ class PhotoStickerBrowserViewController: UIViewController {
                 self.navigationController?.setNavigationBarHidden(hidden, animated: true)
             })
             .disposed(by: disposeBag)
-
     }
 }
 
