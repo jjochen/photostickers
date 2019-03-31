@@ -14,28 +14,20 @@ import RxCocoa
 import RxRealm
 import RxSwift
 
-protocol MessagesAppViewModelType {
-    var currentPresentationStyle: PublishSubject<MSMessagesAppPresentationStyle> { get }
-    var presentationStyleRequested: Driver<MSMessagesAppPresentationStyle> { get }
-    func stickerBrowserViewModel() -> PhotoStickerBrowserViewModelType
-}
+final class MessagesAppViewModel: ViewModelType {
+    struct Input {
+       // let currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>
+    }
+    struct Output {
+       let presentationStyleRequested: Driver<MSMessagesAppPresentationStyle>
+    }
 
-class MessagesAppViewModel: BaseViewModel, MessagesAppViewModelType {
-    // MARK: Dependencies
+    private let extensionContext: NSExtensionContext?
+    private let stickerService: StickerServiceType
+    private let imageStoreService: ImageStoreServiceType
+    private let stickerRenderService: StickerRenderServiceType
 
-    fileprivate let extensionContext: NSExtensionContext?
-    fileprivate let stickerService: StickerServiceType
-    fileprivate let imageStoreService: ImageStoreServiceType
-    fileprivate let stickerRenderService: StickerRenderServiceType
-
-    // MARK: Input
-
-    let currentPresentationStyle = PublishSubject<MSMessagesAppPresentationStyle>()
-    let requestPresentationStyle = PublishRelay<MSMessagesAppPresentationStyle>()
-
-    // MARK: Output
-
-    let presentationStyleRequested: Driver<MSMessagesAppPresentationStyle>
+    private let presentationStyleSubject = PublishSubject<MSMessagesAppPresentationStyle>()
 
     init(stickerService: StickerServiceType,
          imageStoreService: ImageStoreServiceType,
@@ -45,31 +37,20 @@ class MessagesAppViewModel: BaseViewModel, MessagesAppViewModelType {
         self.imageStoreService = imageStoreService
         self.stickerRenderService = stickerRenderService
         self.extensionContext = extensionContext
-
-        presentationStyleRequested = requestPresentationStyle.asSharedSequence(onErrorDriveWith: Driver.empty())
-
-        super.init()
     }
 
-    // MARK: - View Models
-
-    func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType {
-        return EditStickerViewModel(sticker: sticker,
-                                    imageStoreService: imageStoreService,
-                                    stickerService: stickerService,
-                                    stickerRenderService: stickerRenderService)
+    func transform(input: Input) -> Output {
+        let presentationStyleRequested = presentationStyleSubject.asDriver(onErrorDriveWith: Driver.empty())
+        return Output(presentationStyleRequested: presentationStyleRequested)
     }
+}
 
-    func addStickerViewModel() -> EditStickerViewModelType {
-        return editStickerViewModel(for: Sticker.newSticker())
-    }
-
-    func stickerBrowserViewModel() -> PhotoStickerBrowserViewModelType {
-        return PhotoStickerBrowserViewModel(stickerService: stickerService,
-                                            imageStoreService: imageStoreService,
-                                            stickerRenderService: stickerRenderService,
-                                            extensionContext: extensionContext,
-                                            currentPresentationStyle: currentPresentationStyle,
-                                            requestPresentationStyle: requestPresentationStyle)
+// MARK: - View Models
+extension MessagesAppViewModel {
+    func stickerBrowserViewModel() -> StickerBrowserViewModel {
+        return StickerBrowserViewModel(stickerService: stickerService,
+                                       imageStoreService: imageStoreService,
+                                       stickerRenderService: stickerRenderService,
+                                       extensionContext: extensionContext)
     }
 }

@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HcW-W7-QaD">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,11 +11,11 @@
             <objects>
                 <viewController storyboardIdentifier="MessagesAppViewController" id="HcW-W7-QaD" customClass="MessagesAppViewController" customModule="MessageExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AjF-ci-m4d">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EFw-SD-Zrz">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
                                     <segue destination="jMo-bB-Dlw" kind="embed" identifier="EmbedStickerBrowserSegue" id="Eog-op-iGA"/>
                                 </connections>
@@ -48,6 +44,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fp2-mY-3G9">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -58,10 +55,10 @@
             </objects>
             <point key="canvasLocation" x="-36" y="108"/>
         </scene>
-        <!--Photo Sticker Browser View Controller-->
+        <!--Sticker Browser View Controller-->
         <scene sceneID="OhS-TE-fuZ">
             <objects>
-                <viewController storyboardIdentifier="PhotoStickerBrowserViewController" id="je6-JZ-ceA" customClass="PhotoStickerBrowserViewController" customModule="MessageExtension" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StickerBrowserViewController" id="je6-JZ-ceA" customClass="StickerBrowserViewController" customModule="MessageExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rkq-Vv-FBG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -122,7 +119,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="Iyb-XD-XMs" customClass="AddStickerCell" customModule="MessageExtension" customModuleProvider="target">
-                                        <rect key="frame" x="143" y="10" width="90" height="90"/>
+                                        <rect key="frame" x="142.5" y="10" width="90" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>

@@ -7,7 +7,13 @@
 //
 
 import Foundation
-import RxCocoa
-import RxSwift
 
+protocol ViewModelType {
+    associatedtype Input
+    associatedtype Output
+
+    func transform(input: Input) -> Output
+}
+
+// ToDo: remove
 class BaseViewModel: NSObject {}

@@ -20,11 +20,9 @@ import UIKit
  * only in edit mode: edit, sort, delete sticker
  */
 
-class PhotoStickerBrowserViewController: UIViewController {
-    var viewModel: PhotoStickerBrowserViewModelType?
+class StickerBrowserViewController: UIViewController {
+    var viewModel: StickerBrowserViewModel?
     fileprivate let disposeBag = DisposeBag()
-
-    // MARK: Outlets / Actions
 
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var editBarButtonItem: UIBarButtonItem!
@@ -32,7 +30,7 @@ class PhotoStickerBrowserViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBindings()
+        bindViewModel()
     }
 
     override func viewDidLayoutSubviews() {
@@ -42,16 +40,21 @@ class PhotoStickerBrowserViewController: UIViewController {
 
     // MARK: - Bindings
 
-    fileprivate func setupBindings() {
+    fileprivate func bindViewModel() {
         guard let viewModel = self.viewModel else {
-            Logger.shared.error("View Model not set!")
-            return
+            fatalError("View Model not set!")
         }
 
-        editBarButtonItem.rx
-            .tap
-            .bind(to: viewModel.editButtonDidTap)
-            .disposed(by: disposeBag)
+        let editTrigger = editBarButtonItem.rx.tap.asDriver()
+        let editDoneTrigger = doneBarButtonItem.rx.tap.asDriver()
+        let currentPresentationStyle = nil // from init?
+
+
+        let input = StickerBrowserViewModel.Input(editButtonDidTap: editTrigger,
+                                                  doneButtonDidTap: editDoneTrigger,
+                                                  currentPresentationStyle: currentPresentationStyle)
+
+        let output = viewModel.transform(input: input)
 
         let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>(
             configureCell: { _, collectionView, indexPath, item in
@@ -67,7 +70,7 @@ class PhotoStickerBrowserViewController: UIViewController {
             }
         )
 
-        viewModel.sectionItems
+        output.sectionItems
             .map { items in
                 [StickerSection(stickers: items)]
             }
@@ -77,12 +80,12 @@ class PhotoStickerBrowserViewController: UIViewController {
         collectionView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
-
-//        viewModel.requestPresentationStyle
+//
+//        output.requestPresentationStyle
 //            .drive(rx.requestPresentationStyle)
 //            .disposed(by: disposeBag)
 
-        viewModel.navigationBarHidden
+        output.navigationBarHidden
             .drive(onNext: { hidden in
                 self.navigationController?.setNavigationBarHidden(hidden, animated: true)
             })
@@ -90,9 +93,9 @@ class PhotoStickerBrowserViewController: UIViewController {
     }
 }
 
-extension PhotoStickerBrowserViewController {
-    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> PhotoStickerBrowserViewController {
-        let viewController = storyboard.viewController(withID: .PhotoStickerBrowserViewController) as! PhotoStickerBrowserViewController
+extension StickerBrowserViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> StickerBrowserViewController {
+        let viewController = storyboard.viewController(withID: .StickerBrowserViewController) as! StickerBrowserViewController
         return viewController
     }
 
@@ -123,13 +126,13 @@ extension PhotoStickerBrowserViewController {
     }
 }
 
-extension PhotoStickerBrowserViewController: UICollectionViewDelegate {
+extension StickerBrowserViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
-extension PhotoStickerBrowserViewController: UICollectionViewDelegateFlowLayout {
+extension StickerBrowserViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
         return StickerFlowLayout.itemSize(in: collectionView.bounds)
     }

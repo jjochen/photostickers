@@ -20,7 +20,9 @@ import UIKit
  */
 
 class MessagesAppViewController: MSMessagesAppViewController {
-    lazy var viewModel: MessagesAppViewModelType = {
+
+    // ToDo: move to Application
+    lazy var viewModel: MessagesAppViewModel = {
         #if DEBUG
             let isRunningUITests = true
         #else
@@ -40,25 +42,24 @@ class MessagesAppViewController: MSMessagesAppViewController {
                                     extensionContext: extensionContext)
     }()
 
-    fileprivate let disposeBag = DisposeBag()
-
-    // MARK: Outlets / Actions
+    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         RxImagePickerDelegateProxy.register { RxImagePickerDelegateProxy(imagePicker: $0) }
         view.tintColor = StyleKit.appColor
-        setupBindings()
+        bindViewModel()
     }
 
-    // MARK: - Bindings
 
-    fileprivate func setupBindings() {
-        rx.willTransition
-            .bind(to: viewModel.currentPresentationStyle)
-            .disposed(by: disposeBag)
+    private func bindViewModel() {
+        //let presentationStyleWillChange = rx.willTransition.asDriver()
 
-        viewModel.presentationStyleRequested
+        let input = MessagesAppViewModel.Input()
+
+        let output = viewModel.transform(input: input)
+
+        output.presentationStyleRequested
             .drive(rx.requestPresentationStyle)
             .disposed(by: disposeBag)
     }
@@ -71,14 +72,14 @@ extension MessagesAppViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
-        func getPhotoStickerBrowserViewController(from segue: UIStoryboardSegue) -> PhotoStickerBrowserViewController {
+        func getStickerBrowserViewController(from segue: UIStoryboardSegue) -> StickerBrowserViewController {
             let navigationController: UINavigationController = castOrFatalError(segue.destination)
-            let viewController: PhotoStickerBrowserViewController = castOrFatalError(navigationController.topViewController)
+            let viewController: StickerBrowserViewController = castOrFatalError(navigationController.topViewController)
             return viewController
         }
 
         if segue == .EmbedStickerBrowserSegue {
-            let viewController = getPhotoStickerBrowserViewController(from: segue)
+            let viewController = getStickerBrowserViewController(from: segue)
             viewController.viewModel = viewModel.stickerBrowserViewModel()
         }
     }
