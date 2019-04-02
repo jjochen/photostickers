@@ -15,6 +15,11 @@ protocol StickerRenderServiceType {
     func render(_ stickerInfo: StickerInfo) -> Observable<UIImage?>
 }
 
+
+protocol HasStickerRenderService {
+    var stickerRenderService: StickerRenderService { get }
+}
+
 class StickerRenderService: StickerRenderServiceType {
     func render(_ stickerInfo: StickerInfo) -> Observable<UIImage?> {
         return Observable.combineLatest(stickerInfo.originalImage.asObservable(), stickerInfo.cropBounds.asObservable(), stickerInfo.mask.asObservable()) { [weak self] (originalImage, cropBounds, mask) -> UIImage? in

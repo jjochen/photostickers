@@ -58,6 +58,10 @@ protocol ImageStoreServiceType {
     func deleteImage(forKey key: String, inCategory category: ImageCategory) -> Bool
 }
 
+protocol HasImageStoreService {
+    var imageStoreService: ImageStoreService { get }
+}
+
 class ImageStoreService: ImageStoreServiceType {
     fileprivate let storeURL: URL?
 

@@ -24,6 +24,10 @@ protocol StickerServiceType {
     func deleteSticker(withUUID uuid: String) -> Observable<Void>
 }
 
+protocol HasStickerService {
+    var stickerService: StickerService { get }
+}
+
 class StickerService: StickerServiceType {
     fileprivate let imageStoreService: ImageStoreServiceType
     fileprivate let realmType: RealmType

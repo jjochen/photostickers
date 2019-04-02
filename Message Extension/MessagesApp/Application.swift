@@ -8,22 +8,25 @@
 
 import Foundation
 
+// todo: move?
+protocol HasExtensionContext {
+    var extensionContext: NSExtensionContext { get }
+}
+
 final class Application {
+    fileprivate let extensionContext: NSExtensionContext
+    fileprivate let stickerService: StickerService
+    fileprivate let imageStoreService: ImageStoreService
+    fileprivate let stickerRenderService: StickerRenderService
 
-    fileprivate let extensionContext: NSExtensionContext?
-    fileprivate let stickerService: StickerServiceType
-    fileprivate let imageStoreService: ImageStoreServiceType
-    fileprivate let stickerRenderService: StickerRenderServiceType
-
-    init(extensionContext: NSExtensionContext?) {
+    init(extensionContext: NSExtensionContext) {
         #if DEBUG
-        let isRunningUITests = true
+        // todo
+        let dataFolderType = DataFolderType.appGroupPrefilled(subfolder: "UITests")
         #else
-        // TODO:
-        let isRunningUITests = UserDefaults.standard.bool(forKey: "RunningUITests")
+        let dataFolderType = DataFolderType.appGroup
         #endif
-        let dataFolderType: DataFolderType = isRunningUITests ? .appGroupPrefilled(subfolder: "UITests") : .appGroup
-        let dataFolder: DataFolderServiceType = DataFolderService(type: dataFolderType)
+        let dataFolder = DataFolderService(type: dataFolderType)
 
         self.extensionContext = extensionContext
         self.imageStoreService = ImageStoreService(url: dataFolder.imagesURL)
@@ -31,6 +34,14 @@ final class Application {
         self.stickerRenderService = StickerRenderService()
     }
 
-    
+    lazy var appServices = {
+        AppServices(extensionContext: self.extensionContext, stickerService: self.stickerService, imageStoreService: self.imageStoreService, stickerRenderService: self.stickerRenderService)
+    }()
+}
 
+struct AppServices: HasExtensionContext, HasStickerService, HasImageStoreService, HasStickerRenderService {
+    let extensionContext: NSExtensionContext
+    let stickerService: StickerService
+    let imageStoreService: ImageStoreService
+    let stickerRenderService: StickerRenderService
 }

@@ -15,7 +15,9 @@ import RxRealm
 import RxSwift
 
 
-final class StickerBrowserViewModel: ViewModelType {
+final class StickerBrowserViewModel: ServicesViewModel {
+    typealias Services = AppServices
+    var services: AppServices!
 
     struct Input {
         let editButtonDidTap: Driver<Void>
@@ -29,22 +31,6 @@ final class StickerBrowserViewModel: ViewModelType {
         let doneButtonHidden: Driver<Bool>
         let requestPresentationStyle: Driver<MSMessagesAppPresentationStyle>
     }
-
-    private let extensionContext: NSExtensionContext?
-    private let stickerService: StickerServiceType
-    private let imageStoreService: ImageStoreServiceType
-    private let stickerRenderService: StickerRenderServiceType
-
-    init(stickerService: StickerServiceType,
-         imageStoreService: ImageStoreServiceType,
-         stickerRenderService: StickerRenderServiceType,
-         extensionContext: NSExtensionContext?) {
-        self.stickerService = stickerService
-        self.imageStoreService = imageStoreService
-        self.stickerRenderService = stickerRenderService
-        self.extensionContext = extensionContext
-    }
-
 
     func transform(input: StickerBrowserViewModel.Input) -> StickerBrowserViewModel.Output {
 
@@ -63,13 +49,13 @@ final class StickerBrowserViewModel: ViewModelType {
         let doneButtonHidden = isEditing.map { !$0 }
 
         let predicate = NSPredicate(format: "\(StickerProperty.hasRenderedImage.rawValue) == true")
-        let sectionItems = stickerService
+        let sectionItems = services.stickerService
             .fetchStickers(withPredicate: predicate)
             .map { allStickers -> [StickerSectionItem] in
                 var items = allStickers.map { sticker -> StickerSectionItem in
                     let cellViewModel: StickerBrowserCellViewModelType = StickerBrowserCellViewModel(sticker: sticker,
                                                                                                      editing: isEditing,
-                                                                                                     imageStore: self.imageStoreService)
+                                                                                                     imageStore: self.services.imageStoreService)
                     return StickerSectionItem.stickerItem(viewModel: cellViewModel)
                 }
                 items.append(StickerSectionItem.openAppItem)
@@ -85,19 +71,5 @@ final class StickerBrowserViewModel: ViewModelType {
                       doneButtonHidden: doneButtonHidden,
                       requestPresentationStyle: requestPresentationStyle)
 
-    }
-}
-
-// MARK: - View Models
-extension StickerBrowserViewModel {
-    func editStickerViewModel(for sticker: Sticker) -> EditStickerViewModelType {
-        return EditStickerViewModel(sticker: sticker,
-                                    imageStoreService: imageStoreService,
-                                    stickerService: stickerService,
-                                    stickerRenderService: stickerRenderService)
-    }
-
-    func addStickerViewModel() -> EditStickerViewModelType {
-        return editStickerViewModel(for: Sticker.newSticker())
     }
 }

@@ -14,43 +14,19 @@ import RxCocoa
 import RxRealm
 import RxSwift
 
-final class MessagesAppViewModel: ViewModelType {
+final class MessagesAppViewModel: ServicesViewModel {
+    typealias Services = AppServices
     struct Input {
-       // let currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>
+       let currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>
     }
     struct Output {
        let presentationStyleRequested: Driver<MSMessagesAppPresentationStyle>
     }
 
-    private let extensionContext: NSExtensionContext?
-    private let stickerService: StickerServiceType
-    private let imageStoreService: ImageStoreServiceType
-    private let stickerRenderService: StickerRenderServiceType
-
-    private let presentationStyleSubject = PublishSubject<MSMessagesAppPresentationStyle>()
-
-    init(stickerService: StickerServiceType,
-         imageStoreService: ImageStoreServiceType,
-         stickerRenderService: StickerRenderServiceType,
-         extensionContext: NSExtensionContext?) {
-        self.stickerService = stickerService
-        self.imageStoreService = imageStoreService
-        self.stickerRenderService = stickerRenderService
-        self.extensionContext = extensionContext
-    }
+    var services: AppServices!
 
     func transform(input: Input) -> Output {
-        let presentationStyleRequested = presentationStyleSubject.asDriver(onErrorDriveWith: Driver.empty())
-        return Output(presentationStyleRequested: presentationStyleRequested)
+        return Output(presentationStyleRequested: nil)
     }
 }
 
-// MARK: - View Models
-extension MessagesAppViewModel {
-    func stickerBrowserViewModel() -> StickerBrowserViewModel {
-        return StickerBrowserViewModel(stickerService: stickerService,
-                                       imageStoreService: imageStoreService,
-                                       stickerRenderService: stickerRenderService,
-                                       extensionContext: extensionContext)
-    }
-}

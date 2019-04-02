@@ -23,6 +23,10 @@ protocol DataFolderServiceType {
     var realmURL: URL? { get }
 }
 
+protocol HasDataFolderService {
+    var dataFolderService: DataFolderService { get }
+}
+
 struct DataFolderService: DataFolderServiceType {
     fileprivate let appGroupID = "group.com.jochen-pfeiffer.photo-stickers"
 

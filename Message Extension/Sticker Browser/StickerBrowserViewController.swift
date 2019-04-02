@@ -13,6 +13,7 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 import UIKit
+import Reusable
 
 /* TODO:
  * check https://github.com/sergdort/CleanArchitectureRxSwift
@@ -20,8 +21,8 @@ import UIKit
  * only in edit mode: edit, sort, delete sticker
  */
 
-class StickerBrowserViewController: UIViewController {
-    var viewModel: StickerBrowserViewModel?
+class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModelBased {
+    var viewModel: StickerBrowserViewModel!
     fileprivate let disposeBag = DisposeBag()
 
     @IBOutlet var collectionView: UICollectionView!
@@ -47,12 +48,11 @@ class StickerBrowserViewController: UIViewController {
 
         let editTrigger = editBarButtonItem.rx.tap.asDriver()
         let editDoneTrigger = doneBarButtonItem.rx.tap.asDriver()
-        let currentPresentationStyle = nil // from init?
 
 
         let input = StickerBrowserViewModel.Input(editButtonDidTap: editTrigger,
                                                   doneButtonDidTap: editDoneTrigger,
-                                                  currentPresentationStyle: currentPresentationStyle)
+                                                  currentPresentationStyle: nil)
 
         let output = viewModel.transform(input: input)
 
@@ -90,39 +90,6 @@ class StickerBrowserViewController: UIViewController {
                 self.navigationController?.setNavigationBarHidden(hidden, animated: true)
             })
             .disposed(by: disposeBag)
-    }
-}
-
-extension StickerBrowserViewController {
-    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> StickerBrowserViewController {
-        let viewController = storyboard.viewController(withID: .StickerBrowserViewController) as! StickerBrowserViewController
-        return viewController
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        func getEditStickerViewController(from segue: UIStoryboardSegue) -> EditStickerViewController {
-            let navigationController = segue.destination as! UINavigationController
-            let viewController = navigationController.topViewController as! EditStickerViewController
-            return viewController
-        }
-
-        guard let viewModel = self.viewModel else {
-            Logger.shared.error("View Model not set!")
-            return
-        }
-
-        if segue == .AddStickerSegue {
-            let viewController = getEditStickerViewController(from: segue)
-            viewController.viewModel = viewModel.addStickerViewModel()
-        } else if segue == .EditStickerSegue {
-            let cell = sender as! StickerBrowserCell
-            guard let sticker = cell.viewModel?.sticker else {
-                Logger.shared.error("Cell has no sticker!")
-                return
-            }
-            let viewController = getEditStickerViewController(from: segue)
-            viewController.viewModel = viewModel.editStickerViewModel(for: sticker)
-        }
     }
 }
 

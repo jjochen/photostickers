@@ -41,6 +41,8 @@ target 'MessageExtension' do
     pod 'RxRealm'
     pod 'Log'
     pod 'Zip'
+    pod 'RxFlow'
+    pod 'Reusable'
 end
 
 

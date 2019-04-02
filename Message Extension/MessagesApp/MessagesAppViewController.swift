@@ -12,6 +12,7 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 import UIKit
+import Reusable
 
 /* TODO:
  * check https://github.com/sergdort/CleanArchitectureRxSwift
@@ -19,27 +20,19 @@ import UIKit
  * only in edit mode: edit, sort, delete sticker
  */
 
-class MessagesAppViewController: MSMessagesAppViewController {
+class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased, ViewModelBased {
 
-    // ToDo: move to Application
-    lazy var viewModel: MessagesAppViewModel = {
-        #if DEBUG
-            let isRunningUITests = true
-        #else
-            // TODO:
-            let isRunningUITests = UserDefaults.standard.bool(forKey: "RunningUITests")
-        #endif
-        let dataFolderType: DataFolderType = isRunningUITests ? .appGroupPrefilled(subfolder: "UITests") : .appGroup
-        let dataFolder: DataFolderServiceType = DataFolderService(type: dataFolderType)
-        let imageStoreService: ImageStoreServiceType = ImageStoreService(url: dataFolder.imagesURL)
-        let stickerService: StickerServiceType = StickerService(realmType: .onDisk(url: dataFolder.realmURL), imageStoreService: imageStoreService)
-        let stickerRenderService: StickerRenderServiceType = StickerRenderService()
-        let extensionContext = self.extensionContext
+    lazy var application: Application = {
+        guard let extensionContext = self.extensionContext else {
+            fatalError("Extension Context not available")
+        }
+        return Application(extensionContext: extensionContext)
+    }()
 
-        return MessagesAppViewModel(stickerService: stickerService,
-                                    imageStoreService: imageStoreService,
-                                    stickerRenderService: stickerRenderService,
-                                    extensionContext: extensionContext)
+    lazy var viewModel: MessagesAppViewModel! = {
+        let viewModel = MessagesAppViewModel()
+        viewModel.services = application.appServices
+        return viewModel
     }()
 
     private let disposeBag = DisposeBag()
@@ -53,34 +46,14 @@ class MessagesAppViewController: MSMessagesAppViewController {
 
 
     private func bindViewModel() {
-        //let presentationStyleWillChange = rx.willTransition.asDriver()
+        let presentationStyleWillChange = rx.willTransition.asDriver()
 
-        let input = MessagesAppViewModel.Input()
+        let input = MessagesAppViewModel.Input(currentPresentationStyle: presentationStyleWillChange)
 
         let output = viewModel.transform(input: input)
 
         output.presentationStyleRequested
             .drive(rx.requestPresentationStyle)
             .disposed(by: disposeBag)
-    }
-}
-
-extension MessagesAppViewController {
-    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> MessagesAppViewController {
-        let viewController = storyboard.viewController(withID: .MessagesAppViewController) as! MessagesAppViewController
-        return viewController
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
-        func getStickerBrowserViewController(from segue: UIStoryboardSegue) -> StickerBrowserViewController {
-            let navigationController: UINavigationController = castOrFatalError(segue.destination)
-            let viewController: StickerBrowserViewController = castOrFatalError(navigationController.topViewController)
-            return viewController
-        }
-
-        if segue == .EmbedStickerBrowserSegue {
-            let viewController = getStickerBrowserViewController(from: segue)
-            viewController.viewModel = viewModel.stickerBrowserViewModel()
-        }
     }
 }
