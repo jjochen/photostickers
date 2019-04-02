@@ -27,7 +27,7 @@
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionMainStoryboard</key>
-		<string>Messages</string>
+		<string>MessagesApp</string>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.message-payload-provider</string>
 	</dict>

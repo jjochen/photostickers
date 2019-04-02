@@ -48,10 +48,10 @@ class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased, V
 
         let input = MessagesAppViewModel.Input(currentPresentationStyle: presentationStyleWillChange)
 
-        let output = viewModel.transform(input: input)
+        _ = viewModel.transform(input: input)
 
-        output.presentationStyleRequested
-            .drive(rx.requestPresentationStyle)
-            .disposed(by: disposeBag)
+//        output.presentationStyleRequested
+//            .drive(rx.requestPresentationStyle)
+//            .disposed(by: disposeBag)
     }
 }

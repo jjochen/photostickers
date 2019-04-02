@@ -21,12 +21,12 @@ final class MessagesAppViewModel: ServicesViewModel {
     }
 
     struct Output {
-        let presentationStyleRequested: Driver<MSMessagesAppPresentationStyle>
+//        let presentationStyleRequested: Driver<MSMessagesAppPresentationStyle>
     }
 
     var services: AppServices!
 
     func transform(input _: Input) -> Output {
-        return Output(presentationStyleRequested: nil)
+        return Output()
     }
 }

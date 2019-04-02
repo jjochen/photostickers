@@ -50,8 +50,7 @@ class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModel
         let editDoneTrigger = doneBarButtonItem.rx.tap.asDriver()
 
         let input = StickerBrowserViewModel.Input(editButtonDidTap: editTrigger,
-                                                  doneButtonDidTap: editDoneTrigger,
-                                                  currentPresentationStyle: nil)
+                                                  doneButtonDidTap: editDoneTrigger)
 
         let output = viewModel.transform(input: input)
 
@@ -84,11 +83,11 @@ class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModel
 //            .drive(rx.requestPresentationStyle)
 //            .disposed(by: disposeBag)
 
-        output.navigationBarHidden
-            .drive(onNext: { hidden in
-                self.navigationController?.setNavigationBarHidden(hidden, animated: true)
-            })
-            .disposed(by: disposeBag)
+//        output.navigationBarHidden
+//            .drive(onNext: { hidden in
+//                self.navigationController?.setNavigationBarHidden(hidden, animated: true)
+//            })
+//            .disposed(by: disposeBag)
     }
 }
 
