@@ -103,7 +103,7 @@
 		19DE76832253766600CF29AB /* App */ = {
 			isa = PBXGroup;
 			children = (
-				19DE76842253766700CF29AB /* Assets.xcassets */,
+				19DE76AD2253830F00CF29AB /* Resources */,
 				19DE76AB22537E2300CF29AB /* Supporting Files */,
 			);
 			path = App;
@@ -124,7 +124,7 @@
 			children = (
 				19DE76932253766700CF29AB /* MessagesViewController.swift */,
 				19DE76952253766700CF29AB /* MainInterface.storyboard */,
-				19DE76982253766700CF29AB /* Assets.xcassets */,
+				19DE76AE2253832A00CF29AB /* Resources */,
 				19DE76A622537C9F00CF29AB /* Supporting Files */,
 			);
 			path = MessagesExtension;
@@ -144,6 +144,22 @@
 				19DE76862253766700CF29AB /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		19DE76AD2253830F00CF29AB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				19DE76842253766700CF29AB /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		19DE76AE2253832A00CF29AB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				19DE76982253766700CF29AB /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		43035F314911C7D9455D2FFD /* Pods */ = {
