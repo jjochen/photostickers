@@ -22,18 +22,18 @@ target 'PhotoStickers' do
     # pod 'SnapKit'
     # pod 'Toaster'
 
-    target 'PhotoStickersTests' do
-        inherit! :search_paths
-        
-        pod 'RxTest'
-        pod 'RxBlocking'
-        pod 'Quick'
-        pod 'Nimble'
-        pod 'RxNimble'
-    end
+    # target 'PhotoStickersTests' do
+    #     inherit! :search_paths
+    #
+    #     pod 'RxTest'
+    #     pod 'RxBlocking'
+    #     pod 'Quick'
+    #     pod 'Nimble'
+    #     pod 'RxNimble'
+    # end
 end
 
-target 'MessageExtension' do
+target 'MessagesExtension' do
     pod 'SwiftFormat/CLI'
     pod 'RxSwift'
     pod 'RxCocoa'
