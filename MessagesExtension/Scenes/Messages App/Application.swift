@@ -22,9 +22,9 @@ final class Application {
     init(extensionContext: NSExtensionContext) {
         #if DEBUG
             // todo
-            let dataFolderType = DataFolderType.appGroupPrefilled(subfolder: "UITests")
+            let dataFolderType = DataFolderType.documentsPrefilled(subfolder: "UITests")
         #else
-            let dataFolderType = DataFolderType.appGroup
+            let dataFolderType = DataFolderType.documents
         #endif
         let dataFolder = DataFolderService(type: dataFolderType)
 
@@ -40,7 +40,7 @@ final class Application {
 }
 
 struct AppServices: HasExtensionContext, HasStickerService, HasImageStoreService, HasStickerRenderService {
-    let extensionContext: NSExtensionContext
+    let extensionContext: NSExtensionContext // todo: needed?
     let stickerService: StickerService
     let imageStoreService: ImageStoreService
     let stickerRenderService: StickerRenderService

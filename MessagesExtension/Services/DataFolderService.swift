@@ -11,6 +11,8 @@ import Log
 import Zip
 
 enum DataFolderType {
+    case documents
+    case documentsPrefilled(subfolder: String)
     case appGroup
     case temporary
     case appGroupPrefilled(subfolder: String)
@@ -33,9 +35,14 @@ struct DataFolderService: DataFolderServiceType {
     fileprivate let type: DataFolderType
     var url: URL?
 
-    init(type: DataFolderType = .appGroup) {
+    init(type: DataFolderType = .documents) {
         self.type = type
         switch type {
+        case .documents:
+            url = documentsFolderURL()
+        case let .documentsPrefilled(subfolder: subfolder):
+            url = documentsFolderURL(subfolder: subfolder)
+            prefill()
         case .appGroup:
             url = appGroupFolderURL()
         case let .appGroupPrefilled(subfolder: subfolder):
@@ -65,6 +72,17 @@ struct DataFolderService: DataFolderServiceType {
 }
 
 private extension DataFolderService {
+    func documentsFolderURL(subfolder: String? = nil) -> URL? {
+        var url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        if let subfolder = subfolder, subfolder.count > 0 {
+            url?.appendPathComponent(subfolder)
+        }
+        guard createDirectory(at: url) else {
+            return nil
+        }
+        return url
+    }
+
     func appGroupFolderURL(subfolder: String? = nil) -> URL? {
         var url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupID)
         if let subfolder = subfolder, subfolder.count > 0 {
