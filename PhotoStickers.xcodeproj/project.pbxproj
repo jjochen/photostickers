@@ -61,10 +61,12 @@
 		19DE774122538F6700CF29AB /* StickerBrowserCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE772F22538DFE00CF29AB /* StickerBrowserCellViewModel.swift */; };
 		19DE774222538F6F00CF29AB /* StickerBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE773122538DFE00CF29AB /* StickerBrowserViewController.swift */; };
 		19DE774322538F6F00CF29AB /* StickerBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE773022538DFE00CF29AB /* StickerBrowserViewModel.swift */; };
-		19DE774422538F6F00CF29AB /* StickerBrowser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DE773222538DFE00CF29AB /* StickerBrowser.storyboard */; };
+		19DE774422538F6F00CF29AB /* StickerBrowserViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DE773222538DFE00CF29AB /* StickerBrowserViewController.storyboard */; };
 		19DE774522538F7300CF29AB /* EditStickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE772422538DF000CF29AB /* EditStickerViewController.swift */; };
 		19DE774622538F7300CF29AB /* EditStickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE772522538DF000CF29AB /* EditStickerViewModel.swift */; };
-		19DE774722538F7300CF29AB /* EditSticker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DE772622538DF000CF29AB /* EditSticker.storyboard */; };
+		19DE774722538F7300CF29AB /* EditStickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DE772622538DF000CF29AB /* EditStickerViewController.storyboard */; };
+		19DE774B2253F12100CF29AB /* StickerBrowserFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE774A2253F12100CF29AB /* StickerBrowserFlow.swift */; };
+		19DE774D2253F2D900CF29AB /* EditStickerFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE774C2253F2D900CF29AB /* EditStickerFlow.swift */; };
 		75899F2FCE8ECC2A4FD9FBBA /* Pods_PhotoStickers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B954D5DAE75F01F82C678320 /* Pods_PhotoStickers.framework */; };
 		CE42A88ECC9BF65E160BBE4F /* Pods_MessagesExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1056ED50A6BB83946FB40332 /* Pods_MessagesExtension.framework */; };
 /* End PBXBuildFile section */
@@ -150,16 +152,18 @@
 		19DE771F22538C5500CF29AB /* PhotoStickerStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStickerStep.swift; sourceTree = "<group>"; };
 		19DE772422538DF000CF29AB /* EditStickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditStickerViewController.swift; sourceTree = "<group>"; };
 		19DE772522538DF000CF29AB /* EditStickerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditStickerViewModel.swift; sourceTree = "<group>"; };
-		19DE772622538DF000CF29AB /* EditSticker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditSticker.storyboard; sourceTree = "<group>"; };
+		19DE772622538DF000CF29AB /* EditStickerViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditStickerViewController.storyboard; sourceTree = "<group>"; };
 		19DE772C22538DFE00CF29AB /* StickerBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerBrowserCell.swift; sourceTree = "<group>"; };
 		19DE772D22538DFE00CF29AB /* AddStickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStickerCell.swift; sourceTree = "<group>"; };
 		19DE772E22538DFE00CF29AB /* StickerSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerSection.swift; sourceTree = "<group>"; };
 		19DE772F22538DFE00CF29AB /* StickerBrowserCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerBrowserCellViewModel.swift; sourceTree = "<group>"; };
 		19DE773022538DFE00CF29AB /* StickerBrowserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerBrowserViewModel.swift; sourceTree = "<group>"; };
 		19DE773122538DFE00CF29AB /* StickerBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerBrowserViewController.swift; sourceTree = "<group>"; };
-		19DE773222538DFE00CF29AB /* StickerBrowser.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StickerBrowser.storyboard; sourceTree = "<group>"; };
+		19DE773222538DFE00CF29AB /* StickerBrowserViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StickerBrowserViewController.storyboard; sourceTree = "<group>"; };
 		19DE773A22538E0A00CF29AB /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		19DE773C22538E3E00CF29AB /* MessagesAppViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesAppViewModel.swift; sourceTree = "<group>"; };
+		19DE774A2253F12100CF29AB /* StickerBrowserFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerBrowserFlow.swift; sourceTree = "<group>"; };
+		19DE774C2253F2D900CF29AB /* EditStickerFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStickerFlow.swift; sourceTree = "<group>"; };
 		325A088209BF78EB19F38DB5 /* Pods-PhotoStickers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickers.release.xcconfig"; path = "Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers.release.xcconfig"; sourceTree = "<group>"; };
 		B954D5DAE75F01F82C678320 /* Pods_PhotoStickers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoStickers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2B1FD638D084F4933920672 /* Pods-MessagesExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.release.xcconfig"; path = "Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.release.xcconfig"; sourceTree = "<group>"; };
@@ -389,6 +393,8 @@
 			isa = PBXGroup;
 			children = (
 				19DE771F22538C5500CF29AB /* PhotoStickerStep.swift */,
+				19DE774A2253F12100CF29AB /* StickerBrowserFlow.swift */,
+				19DE774C2253F2D900CF29AB /* EditStickerFlow.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -398,7 +404,7 @@
 			children = (
 				19DE772422538DF000CF29AB /* EditStickerViewController.swift */,
 				19DE772522538DF000CF29AB /* EditStickerViewModel.swift */,
-				19DE772622538DF000CF29AB /* EditSticker.storyboard */,
+				19DE772622538DF000CF29AB /* EditStickerViewController.storyboard */,
 			);
 			path = "Edit Sticker";
 			sourceTree = "<group>";
@@ -409,7 +415,7 @@
 				19DE772B22538DFE00CF29AB /* Cells */,
 				19DE773122538DFE00CF29AB /* StickerBrowserViewController.swift */,
 				19DE773022538DFE00CF29AB /* StickerBrowserViewModel.swift */,
-				19DE773222538DFE00CF29AB /* StickerBrowser.storyboard */,
+				19DE773222538DFE00CF29AB /* StickerBrowserViewController.storyboard */,
 			);
 			path = "Sticker Browser";
 			sourceTree = "<group>";
@@ -530,10 +536,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				19DE76BE2253847E00CF29AB /* prefillContent.zip in Resources */,
-				19DE774422538F6F00CF29AB /* StickerBrowser.storyboard in Resources */,
+				19DE774422538F6F00CF29AB /* StickerBrowserViewController.storyboard in Resources */,
 				19DE76C3225384F800CF29AB /* Localizable.strings in Resources */,
 				19DE76CA2253876F00CF29AB /* MessagesApp.storyboard in Resources */,
-				19DE774722538F7300CF29AB /* EditSticker.storyboard in Resources */,
+				19DE774722538F7300CF29AB /* EditStickerViewController.storyboard in Resources */,
 				19DE76992253766700CF29AB /* Assets.xcassets in Resources */,
 				19DE76C4225384F800CF29AB /* InfoPlist.strings in Resources */,
 			);
@@ -659,6 +665,7 @@
 				19DE76EA225389A600CF29AB /* AppIconView.swift in Sources */,
 				19DE770E22538A8200CF29AB /* UIViewController+Extensions.swift in Sources */,
 				19DE771922538A8200CF29AB /* CGGeometry+Extensions.swift in Sources */,
+				19DE774B2253F12100CF29AB /* StickerBrowserFlow.swift in Sources */,
 				19DE76D42253898900CF29AB /* ViewModelBased.swift in Sources */,
 				19DE76F9225389A600CF29AB /* ImageStoreService.swift in Sources */,
 				19DE773D22538E3E00CF29AB /* MessagesAppViewModel.swift in Sources */,
@@ -691,6 +698,7 @@
 				19DE76F3225389A600CF29AB /* StickerFlowLayout.swift in Sources */,
 				19DE771422538A8200CF29AB /* UIStoryboardSegue+Extensions.swift in Sources */,
 				19DE76EC225389A600CF29AB /* Observable+Operators.swift in Sources */,
+				19DE774D2253F2D900CF29AB /* EditStickerFlow.swift in Sources */,
 				19DE774322538F6F00CF29AB /* StickerBrowserViewModel.swift in Sources */,
 				19DE771722538A8200CF29AB /* UIStoryboard+Extensions.swift in Sources */,
 				19DE774522538F7300CF29AB /* EditStickerViewController.swift in Sources */,

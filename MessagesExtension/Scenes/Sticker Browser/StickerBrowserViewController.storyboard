@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3W7-9r-vBM">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,7 +12,7 @@
         <!--Sticker Browser View Controller-->
         <scene sceneID="waH-rg-vBx">
             <objects>
-                <viewController storyboardIdentifier="StickerBrowserViewController" id="3W7-9r-vBM" customClass="StickerBrowserViewController" customModule="MessageExtension" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StickerBrowserViewController" id="3W7-9r-vBM" customClass="StickerBrowserViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ExS-X3-v8E">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,7 +27,7 @@
                                     <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StickerBrowserCell" id="S3C-ts-3kb" userLabel="StickerBrowserCell" customClass="StickerBrowserCell" customModule="MessageExtension" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StickerBrowserCell" id="S3C-ts-3kb" userLabel="StickerBrowserCell" customClass="StickerBrowserCell" customModule="MessagesExtension" customModuleProvider="target">
                                         <rect key="frame" x="10" y="10" width="90" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -43,7 +42,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
-                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R5U-6w-tJf" userLabel="Sticker Placeholder View" customClass="AppIconView" customModule="MessageExtension" customModuleProvider="target">
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R5U-6w-tJf" userLabel="Sticker Placeholder View" customClass="AppIconView" customModule="MessagesExtension" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -72,7 +71,7 @@
                                             <outlet property="stickerView" destination="VZE-xp-4zO" id="xxk-0S-JMB"/>
                                         </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="dI8-17-nN2" customClass="AddStickerCell" customModule="MessageExtension" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="dI8-17-nN2" customClass="AddStickerCell" customModule="MessagesExtension" customModuleProvider="target">
                                         <rect key="frame" x="111.5" y="10" width="90" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -126,7 +125,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yck-uZ-ZwR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="YNg-fQ-c7G" customClass="StyleKit" customModule="MessageExtension" customModuleProvider="target"/>
+                <customObject id="YNg-fQ-c7G" customClass="StyleKit" customModule="MessagesExtension" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="760.79999999999995" y="108.39580209895054"/>
         </scene>

@@ -11,6 +11,7 @@ import Messages
 import Reusable
 import RxCocoa
 import RxDataSources
+import RxFlow
 import RxSwift
 import UIKit
 
@@ -21,7 +22,7 @@ import UIKit
  */
 
 class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased, ViewModelBased {
-    lazy var application: Application = {
+    private lazy var application: Application = {
         guard let extensionContext = self.extensionContext else {
             fatalError("Extension Context not available")
         }
@@ -35,17 +36,35 @@ class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased, V
     }()
 
     private let disposeBag = DisposeBag()
+    private let coordinator = FlowCoordinator()
 
-    @IBOutlet var containerView: UIView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         RxImagePickerDelegateProxy.register { RxImagePickerDelegateProxy(imagePicker: $0) }
         view.tintColor = StyleKit.appColor
-        bindViewModel()
+
+        setupBindings()
+
+        let appFlow = StickerBrowserFlow(withServices: application.appServices)
+        let appStepper = OneStepper(withSingleStep: PhotoStickerStep.stickerBrowserIsRequired)
+
+        Flows.whenReady(flow1: appFlow) { [unowned self] root in
+            self.embed(viewController: root)
+        }
+
+        coordinator.coordinate(flow: appFlow, with: appStepper)
     }
 
-    private func bindViewModel() {
+    private func setupBindings() {
+        coordinator.rx.willNavigate.subscribe(onNext: { flow, step in
+            print("will navigate to flow=\(flow) and step=\(step)")
+        }).disposed(by: disposeBag)
+
+        coordinator.rx.didNavigate.subscribe(onNext: { flow, step in
+            print("did navigate to flow=\(flow) and step=\(step)")
+        }).disposed(by: disposeBag)
+
         let presentationStyleWillChange = rx.willTransition.asDriver()
 
         let input = MessagesAppViewModel.Input(currentPresentationStyle: presentationStyleWillChange)
@@ -55,5 +74,28 @@ class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased, V
 //        output.presentationStyleRequested
 //            .drive(rx.requestPresentationStyle)
 //            .disposed(by: disposeBag)
+    }
+}
+
+extension MessagesAppViewController {
+    private func embed(viewController: UIViewController) {
+        for child in children {
+            child.willMove(toParent: nil)
+            child.view.removeFromSuperview()
+            child.removeFromParent()
+        }
+
+        addChild(viewController)
+
+        viewController.view.frame = view.bounds
+        viewController.view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(viewController.view)
+
+        viewController.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        viewController.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        viewController.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        viewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+
+        viewController.didMove(toParent: self)
     }
 }

@@ -8,4 +8,6 @@
 
 import RxFlow
 
-enum PhotoStickerStep: Step {}
+enum PhotoStickerStep: Step {
+    case stickerBrowserIsRequired
+}

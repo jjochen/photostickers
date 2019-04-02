@@ -11,12 +11,15 @@ import Log
 import Messages
 import RealmSwift
 import RxCocoa
+import RxFlow
 import RxRealm
 import RxSwift
 
-final class StickerBrowserViewModel: ServicesViewModel {
+final class StickerBrowserViewModel: ServicesViewModel, Stepper {
     typealias Services = AppServices
     var services: AppServices!
+
+    let steps = PublishRelay<Step>()
 
     struct Input {
         let editButtonDidTap: Driver<Void>
