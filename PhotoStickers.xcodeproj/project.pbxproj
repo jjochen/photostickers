@@ -11,11 +11,11 @@
 		19DE768C2253766700CF29AB /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19DE768B2253766700CF29AB /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		19DE76912253766700CF29AB /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DE76902253766700CF29AB /* Messages.framework */; };
 		19DE76942253766700CF29AB /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76932253766700CF29AB /* MessagesViewController.swift */; };
-		19DE76972253766700CF29AB /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DE76952253766700CF29AB /* MainInterface.storyboard */; };
 		19DE76992253766700CF29AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19DE76982253766700CF29AB /* Assets.xcassets */; };
 		19DE76BE2253847E00CF29AB /* prefillContent.zip in Resources */ = {isa = PBXBuildFile; fileRef = 19DE76B92253847E00CF29AB /* prefillContent.zip */; };
 		19DE76C3225384F800CF29AB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 19DE76BF225384F800CF29AB /* Localizable.strings */; };
 		19DE76C4225384F800CF29AB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 19DE76C1225384F800CF29AB /* InfoPlist.strings */; };
+		19DE76CA2253876F00CF29AB /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DE76C92253876F00CF29AB /* Messages.storyboard */; };
 		75899F2FCE8ECC2A4FD9FBBA /* Pods_PhotoStickers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B954D5DAE75F01F82C678320 /* Pods_PhotoStickers.framework */; };
 		CE42A88ECC9BF65E160BBE4F /* Pods_MessagesExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1056ED50A6BB83946FB40332 /* Pods_MessagesExtension.framework */; };
 /* End PBXBuildFile section */
@@ -52,7 +52,6 @@
 		19DE768B2253766700CF29AB /* MessagesExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessagesExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		19DE76902253766700CF29AB /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 		19DE76932253766700CF29AB /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
-		19DE76962253766700CF29AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		19DE76982253766700CF29AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19DE76A822537C9F00CF29AB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19DE76B92253847E00CF29AB /* prefillContent.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = prefillContent.zip; sourceTree = "<group>"; };
@@ -60,6 +59,7 @@
 		19DE76C2225384F800CF29AB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		19DE76C52253850C00CF29AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		19DE76C62253851000CF29AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		19DE76C92253876F00CF29AB /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		325A088209BF78EB19F38DB5 /* Pods-PhotoStickers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickers.release.xcconfig"; path = "Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers.release.xcconfig"; sourceTree = "<group>"; };
 		B954D5DAE75F01F82C678320 /* Pods_PhotoStickers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoStickers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2B1FD638D084F4933920672 /* Pods-MessagesExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.release.xcconfig"; path = "Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.release.xcconfig"; sourceTree = "<group>"; };
@@ -130,8 +130,7 @@
 		19DE76922253766700CF29AB /* MessagesExtension */ = {
 			isa = PBXGroup;
 			children = (
-				19DE76932253766700CF29AB /* MessagesViewController.swift */,
-				19DE76952253766700CF29AB /* MainInterface.storyboard */,
+				19DE76C8225385FF00CF29AB /* Scenes */,
 				19DE76AE2253832A00CF29AB /* Resources */,
 				19DE76A622537C9F00CF29AB /* Supporting Files */,
 			);
@@ -171,6 +170,23 @@
 				19DE76982253766700CF29AB /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		19DE76C7225385C000CF29AB /* Messages App */ = {
+			isa = PBXGroup;
+			children = (
+				19DE76932253766700CF29AB /* MessagesViewController.swift */,
+				19DE76C92253876F00CF29AB /* Messages.storyboard */,
+			);
+			path = "Messages App";
+			sourceTree = "<group>";
+		};
+		19DE76C8225385FF00CF29AB /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				19DE76C7225385C000CF29AB /* Messages App */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		43035F314911C7D9455D2FFD /* Pods */ = {
@@ -279,8 +295,8 @@
 			files = (
 				19DE76BE2253847E00CF29AB /* prefillContent.zip in Resources */,
 				19DE76C3225384F800CF29AB /* Localizable.strings in Resources */,
+				19DE76CA2253876F00CF29AB /* Messages.storyboard in Resources */,
 				19DE76992253766700CF29AB /* Assets.xcassets in Resources */,
-				19DE76972253766700CF29AB /* MainInterface.storyboard in Resources */,
 				19DE76C4225384F800CF29AB /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,14 +432,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		19DE76952253766700CF29AB /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				19DE76962253766700CF29AB /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
 		19DE76BF225384F800CF29AB /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
