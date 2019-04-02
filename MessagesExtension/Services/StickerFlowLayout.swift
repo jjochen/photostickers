@@ -9,7 +9,7 @@
 import UIKit
 
 struct StickerFlowLayout {
-    fileprivate static func minimumItemWidth(in _: CGRect) -> CGFloat {
+    private static func minimumItemWidth(in _: CGRect) -> CGFloat {
         return 90
     }
 

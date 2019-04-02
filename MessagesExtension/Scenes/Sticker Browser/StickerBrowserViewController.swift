@@ -9,11 +9,11 @@
 import Foundation
 import Log
 import Messages
+import Reusable
 import RxCocoa
 import RxDataSources
 import RxSwift
 import UIKit
-import Reusable
 
 /* TODO:
  * check https://github.com/sergdort/CleanArchitectureRxSwift
@@ -48,7 +48,6 @@ class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModel
 
         let editTrigger = editBarButtonItem.rx.tap.asDriver()
         let editDoneTrigger = doneBarButtonItem.rx.tap.asDriver()
-
 
         let input = StickerBrowserViewModel.Input(editButtonDidTap: editTrigger,
                                                   doneButtonDidTap: editDoneTrigger,

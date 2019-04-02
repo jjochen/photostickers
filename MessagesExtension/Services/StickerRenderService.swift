@@ -15,7 +15,6 @@ protocol StickerRenderServiceType {
     func render(_ stickerInfo: StickerInfo) -> Observable<UIImage?>
 }
 
-
 protocol HasStickerRenderService {
     var stickerRenderService: StickerRenderService { get }
 }

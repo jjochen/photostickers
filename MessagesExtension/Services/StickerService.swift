@@ -119,7 +119,7 @@ extension StickerService {
 
     func deleteSticker(withUUID uuid: String) -> Observable<Void> {
         return Observable.create { [weak self] observer in
-            guard let `self` = self else {
+            guard let self = self else {
                 observer.on(.error(PSError.unknown))
                 // TODO: new error types
                 return Disposables.create()

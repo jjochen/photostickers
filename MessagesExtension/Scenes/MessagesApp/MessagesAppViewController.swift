@@ -8,11 +8,11 @@
 
 import Log
 import Messages
+import Reusable
 import RxCocoa
 import RxDataSources
 import RxSwift
 import UIKit
-import Reusable
 
 /* TODO:
  * check https://github.com/sergdort/CleanArchitectureRxSwift
@@ -21,7 +21,6 @@ import Reusable
  */
 
 class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased, ViewModelBased {
-
     lazy var application: Application = {
         guard let extensionContext = self.extensionContext else {
             fatalError("Extension Context not available")
@@ -43,7 +42,6 @@ class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased, V
         view.tintColor = StyleKit.appColor
         bindViewModel()
     }
-
 
     private func bindViewModel() {
         let presentationStyleWillChange = rx.willTransition.asDriver()

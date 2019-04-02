@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-protocol StickerBrowserCellViewModelType: class {
+protocol StickerBrowserCellViewModelType: AnyObject {
     var sticker: Sticker { get }
     var msSticker: MSSticker? { get }
     var image: UIImage? { get }

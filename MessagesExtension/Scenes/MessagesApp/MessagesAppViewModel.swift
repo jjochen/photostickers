@@ -17,16 +17,16 @@ import RxSwift
 final class MessagesAppViewModel: ServicesViewModel {
     typealias Services = AppServices
     struct Input {
-       let currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>
+        let currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>
     }
+
     struct Output {
-       let presentationStyleRequested: Driver<MSMessagesAppPresentationStyle>
+        let presentationStyleRequested: Driver<MSMessagesAppPresentationStyle>
     }
 
     var services: AppServices!
 
-    func transform(input: Input) -> Output {
+    func transform(input _: Input) -> Output {
         return Output(presentationStyleRequested: nil)
     }
 }
-

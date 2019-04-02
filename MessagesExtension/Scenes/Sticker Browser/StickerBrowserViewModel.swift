@@ -14,7 +14,6 @@ import RxCocoa
 import RxRealm
 import RxSwift
 
-
 final class StickerBrowserViewModel: ServicesViewModel {
     typealias Services = AppServices
     var services: AppServices!
@@ -24,6 +23,7 @@ final class StickerBrowserViewModel: ServicesViewModel {
         let doneButtonDidTap: Driver<Void>
         let currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>
     }
+
     struct Output {
         let sectionItems: Observable<[StickerSectionItem]>
         let navigationBarHidden: Driver<Bool>
@@ -33,7 +33,6 @@ final class StickerBrowserViewModel: ServicesViewModel {
     }
 
     func transform(input: StickerBrowserViewModel.Input) -> StickerBrowserViewModel.Output {
-
         let isEditing = input.editButtonDidTap
             .scan(false) { previous, _ in !previous }
             .startWith(false)
@@ -60,7 +59,7 @@ final class StickerBrowserViewModel: ServicesViewModel {
                 }
                 items.append(StickerSectionItem.openAppItem)
                 return items
-        }
+            }
 
         let requestPresentationStyle = input.editButtonDidTap
             .map { MSMessagesAppPresentationStyle.expanded }
@@ -70,6 +69,5 @@ final class StickerBrowserViewModel: ServicesViewModel {
                       editButtonHidden: editButtonHidden,
                       doneButtonHidden: doneButtonHidden,
                       requestPresentationStyle: requestPresentationStyle)
-
     }
 }

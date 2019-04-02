@@ -14,24 +14,24 @@ protocol HasExtensionContext {
 }
 
 final class Application {
-    fileprivate let extensionContext: NSExtensionContext
-    fileprivate let stickerService: StickerService
-    fileprivate let imageStoreService: ImageStoreService
-    fileprivate let stickerRenderService: StickerRenderService
+    private let extensionContext: NSExtensionContext
+    private let stickerService: StickerService
+    private let imageStoreService: ImageStoreService
+    private let stickerRenderService: StickerRenderService
 
     init(extensionContext: NSExtensionContext) {
         #if DEBUG
-        // todo
-        let dataFolderType = DataFolderType.appGroupPrefilled(subfolder: "UITests")
+            // todo
+            let dataFolderType = DataFolderType.appGroupPrefilled(subfolder: "UITests")
         #else
-        let dataFolderType = DataFolderType.appGroup
+            let dataFolderType = DataFolderType.appGroup
         #endif
         let dataFolder = DataFolderService(type: dataFolderType)
 
         self.extensionContext = extensionContext
-        self.imageStoreService = ImageStoreService(url: dataFolder.imagesURL)
-        self.stickerService = StickerService(realmType: .onDisk(url: dataFolder.realmURL), imageStoreService: imageStoreService)
-        self.stickerRenderService = StickerRenderService()
+        imageStoreService = ImageStoreService(url: dataFolder.imagesURL)
+        stickerService = StickerService(realmType: .onDisk(url: dataFolder.realmURL), imageStoreService: imageStoreService)
+        stickerRenderService = StickerRenderService()
     }
 
     lazy var appServices = {

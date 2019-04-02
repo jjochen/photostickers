@@ -219,7 +219,7 @@ private extension EditStickerViewController {
 
         viewModel.visibleRect
             .drive(onNext: { [weak self, weak viewModel] rect in
-                guard let `self` = self, let viewModel = viewModel else { return }
+                guard let self = self, let viewModel = viewModel else { return }
                 let boundsSize = self.scrollView.bounds.size
                 self.scrollView.zoomScale = viewModel.zoomScale(visibleRect: rect, boundsSize: boundsSize)
                 self.scrollView.contentOffset = viewModel.contentOffset(visibleRect: rect, boundsSize: boundsSize)
@@ -228,7 +228,7 @@ private extension EditStickerViewController {
 
         viewModel.image
             .drive(onNext: { [weak self, weak viewModel] image in
-                guard let `self` = self, let viewModel = viewModel else { return }
+                guard let self = self, let viewModel = viewModel else { return }
                 let imageSize = image?.size ?? .zero
                 self.scrollView.zoomScale = 1
                 self.scrollView.contentOffset = .zero
@@ -246,7 +246,7 @@ private extension EditStickerViewController {
 
         viewModel.mask
             .drive(onNext: { [weak self] mask in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 let maskRect = self.scrollView.convertBounds(to: self.coverView)
                 let maskPath = mask.maskPath(in: self.coverView.bounds, maskRect: maskRect)
                 self.maskLayer.path = maskPath.cgPath
@@ -259,7 +259,7 @@ private extension EditStickerViewController {
 
         viewModel.coverViewTransparentAnimated
             .drive(onNext: { [weak self] transparent, animated in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 if animated {
                     UIView.beginAnimations("CoverViewAlpha", context: nil)
                     UIView.setAnimationDuration(0.3)
@@ -297,7 +297,7 @@ private extension EditStickerViewController {
 
         viewModel.presentDeleteAlert
             .drive(onNext: { [weak self, weak viewModel] in
-                guard let `self` = self, let viewModel = viewModel else { return }
+                guard let self = self, let viewModel = viewModel else { return }
                 let alertController = UIAlertController(
                     title: nil,
                     message: nil,
@@ -321,7 +321,7 @@ private extension EditStickerViewController {
 
         viewModel.presentImageSourceAlert
             .drive(onNext: { [weak self, weak viewModel] sourceTypes in
-                guard let `self` = self, let viewModel = viewModel else { return }
+                guard let self = self, let viewModel = viewModel else { return }
 
                 let alertController = UIAlertController(
                     title: nil,

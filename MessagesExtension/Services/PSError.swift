@@ -8,9 +8,9 @@
 
 import Foundation
 
-public enum PSError
-    : Swift.Error
-    , CustomDebugStringConvertible {
+public enum PSError:
+    Swift.Error,
+    CustomDebugStringConvertible {
     /// Unknown error has occurred.
     case unknown
     /// Invalid operation was attempted.

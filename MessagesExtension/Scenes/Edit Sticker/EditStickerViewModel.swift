@@ -11,7 +11,7 @@ import Log
 import RxCocoa
 import RxSwift
 
-protocol EditStickerViewModelType: class {
+protocol EditStickerViewModelType: AnyObject {
     func maximumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat
     func minimumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat
     func zoomScale(visibleRect: CGRect, boundsSize: CGSize) -> CGFloat
