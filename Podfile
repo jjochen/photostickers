@@ -6,21 +6,21 @@ use_frameworks!
 inhibit_all_warnings!
 
 target 'PhotoStickers' do
-    pod 'RxSwift'
-    pod 'RxCocoa'
-    pod 'RxDataSources'
-    pod 'RealmSwift'
-    pod 'RxRealm'
-    pod 'Log'
-    pod 'SwiftFormat/CLI'
-    pod 'Zip'
+    # pod 'RxSwift'
+    # pod 'RxCocoa'
+    # pod 'RxDataSources'
+    # pod 'RealmSwift'
+    # pod 'RxRealm'
+    # pod 'Log'
+    # pod 'SwiftFormat/CLI'
+    # pod 'Zip'
     
-    #pod 'RxSwiftExt'
-    #pod 'RxCoreData'
-    #pod 'RxViewModel'
-    #pod 'RxOptional'
-    #pod 'SnapKit'
-    #pod 'Toaster'
+    # pod 'RxSwiftExt'
+    # pod 'RxCoreData'
+    # pod 'RxViewModel'
+    # pod 'RxOptional'
+    # pod 'SnapKit'
+    # pod 'Toaster'
 
     target 'PhotoStickersTests' do
         inherit! :search_paths
@@ -34,6 +34,7 @@ target 'PhotoStickers' do
 end
 
 target 'MessageExtension' do
+    pod 'SwiftFormat/CLI'
     pod 'RxSwift'
     pod 'RxCocoa'
     pod 'RxDataSources'

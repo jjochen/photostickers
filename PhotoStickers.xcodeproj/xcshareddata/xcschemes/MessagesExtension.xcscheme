@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "1020"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "19B7A4EE1E13C1F00074B6B1"
-               BuildableName = "MessageExtension.appex"
-               BlueprintName = "MessageExtension"
+               BlueprintIdentifier = "19DE768A2253766700CF29AB"
+               BuildableName = "MessagesExtension.appex"
+               BlueprintName = "MessagesExtension"
                ReferencedContainer = "container:PhotoStickers.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,7 +29,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "19B7A4B61E13C14B0074B6B1"
+               BlueprintIdentifier = "19DE76802253766600CF29AB"
                BuildableName = "PhotoStickers.app"
                BlueprintName = "PhotoStickers"
                ReferencedContainer = "container:PhotoStickers.xcodeproj">
@@ -47,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "19B7A4EE1E13C1F00074B6B1"
-            BuildableName = "MessageExtension.appex"
-            BlueprintName = "MessageExtension"
+            BlueprintIdentifier = "19DE768A2253766700CF29AB"
+            BuildableName = "MessagesExtension.appex"
+            BlueprintName = "MessagesExtension"
             ReferencedContainer = "container:PhotoStickers.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -72,18 +72,18 @@
          BundleIdentifier = "com.apple.MobileSMS">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "19B7A4EE1E13C1F00074B6B1"
-            BuildableName = "MessageExtension.appex"
-            BlueprintName = "MessageExtension"
+            BlueprintIdentifier = "19DE768A2253766700CF29AB"
+            BuildableName = "MessagesExtension.appex"
+            BlueprintName = "MessagesExtension"
             ReferencedContainer = "container:PhotoStickers.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "19B7A4EE1E13C1F00074B6B1"
-            BuildableName = "MessageExtension.appex"
-            BlueprintName = "MessageExtension"
+            BlueprintIdentifier = "19DE768A2253766700CF29AB"
+            BuildableName = "MessagesExtension.appex"
+            BlueprintName = "MessagesExtension"
             ReferencedContainer = "container:PhotoStickers.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -101,7 +101,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "19B7A4B61E13C14B0074B6B1"
+            BlueprintIdentifier = "19DE76802253766600CF29AB"
             BuildableName = "PhotoStickers.app"
             BlueprintName = "PhotoStickers"
             ReferencedContainer = "container:PhotoStickers.xcodeproj">
