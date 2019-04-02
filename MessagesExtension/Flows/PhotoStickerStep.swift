@@ -8,4 +8,4 @@
 
 import RxFlow
 
-enum PhotoSticker: Step {}
+enum PhotoStickerStep: Step {}
