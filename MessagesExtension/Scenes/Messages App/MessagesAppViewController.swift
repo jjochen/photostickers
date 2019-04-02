@@ -36,6 +36,8 @@ class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased, V
 
     private let disposeBag = DisposeBag()
 
+    @IBOutlet var containerView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         RxImagePickerDelegateProxy.register { RxImagePickerDelegateProxy(imagePicker: $0) }
