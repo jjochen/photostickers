@@ -110,18 +110,11 @@
                         <viewLayoutGuide key="safeArea" id="t0Z-jR-2ZG"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="Muy-P4-GqP">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="done" id="y7G-4A-VdQ"/>
-                            <barButtonItem systemItem="edit" id="Knz-Tf-XHT"/>
-                        </rightBarButtonItems>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Muy-P4-GqP"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="dQE-mC-GAk" id="q7L-B0-ygP"/>
-                        <outlet property="doneBarButtonItem" destination="y7G-4A-VdQ" id="GXA-il-3Al"/>
-                        <outlet property="editBarButtonItem" destination="Knz-Tf-XHT" id="EDU-ck-F9j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yck-uZ-ZwR" userLabel="First Responder" sceneMemberID="firstResponder"/>

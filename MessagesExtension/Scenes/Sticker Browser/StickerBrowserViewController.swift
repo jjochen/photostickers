@@ -21,13 +21,19 @@ import UIKit
  * only in edit mode: edit, sort, delete sticker
  */
 
+enum StickerBrowserActionButtonType {
+    case edit
+    case done
+}
+
 class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModelBased {
     var viewModel: StickerBrowserViewModel!
     fileprivate let disposeBag = DisposeBag()
 
     @IBOutlet var collectionView: UICollectionView!
-    @IBOutlet var editBarButtonItem: UIBarButtonItem!
-    @IBOutlet var doneBarButtonItem: UIBarButtonItem!
+
+    let editBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
+    let doneBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
 
     var requestPresentationStyle: PublishSubject<MSMessagesAppPresentationStyle>?
     var currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>?
@@ -55,11 +61,13 @@ class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModel
             fatalError("Request Presentation Style not set up!")
         }
 
-        let editTrigger = editBarButtonItem.rx.tap.asDriver()
-        let editDoneTrigger = doneBarButtonItem.rx.tap.asDriver()
+        let editTrigger = editBarButtonItem.rx.tap.map { StickerBrowserActionButtonType.edit }
+        let doneTrigger = doneBarButtonItem.rx.tap.map { StickerBrowserActionButtonType.done }
+        let actionButtonTrigger = Observable.of(editTrigger, doneTrigger)
+            .merge()
+            .asDriver(onErrorDriveWith: Driver.empty())
 
-        let input = StickerBrowserViewModel.Input(editButtonDidTap: editTrigger,
-                                                  doneButtonDidTap: editDoneTrigger,
+        let input = StickerBrowserViewModel.Input(actionButtonDidTap: actionButtonTrigger,
                                                   currentPresentationStyle: currentPresentationStyle)
 
         let output = viewModel.transform(input: input)
@@ -98,6 +106,23 @@ class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModel
                 self.navigationController?.setNavigationBarHidden(hidden, animated: true)
             })
             .disposed(by: disposeBag)
+
+        output.actionButtonType
+            .drive(onNext: { type in
+                self.showActionButton(forType: type)
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+extension StickerBrowserViewController {
+    func showActionButton(forType type: StickerBrowserActionButtonType) {
+        switch type {
+        case .edit:
+            navigationItem.rightBarButtonItem = editBarButtonItem
+        case .done:
+            navigationItem.rightBarButtonItem = doneBarButtonItem
+        }
     }
 }
 

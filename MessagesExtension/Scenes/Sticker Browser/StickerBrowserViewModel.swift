@@ -22,22 +22,20 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
     let steps = PublishRelay<Step>()
 
     struct Input {
-        let editButtonDidTap: Driver<Void>
-        let doneButtonDidTap: Driver<Void>
+        let actionButtonDidTap: Driver<StickerBrowserActionButtonType>
         let currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>
     }
 
     struct Output {
         let sectionItems: Observable<[StickerSectionItem]>
         let navigationBarHidden: Driver<Bool>
-        let editButtonHidden: Driver<Bool>
-        let doneButtonHidden: Driver<Bool>
+        let actionButtonType: Driver<StickerBrowserActionButtonType>
         let requestPresentationStyle: Driver<MSMessagesAppPresentationStyle>
     }
 
     func transform(input: StickerBrowserViewModel.Input) -> StickerBrowserViewModel.Output {
-        let isEditing = input.editButtonDidTap
-            .scan(false) { previous, _ in !previous }
+        let isEditing = input.actionButtonDidTap
+            .map { $0 == .edit }
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
 
@@ -46,9 +44,9 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
             .startWith(true)
             .asDriver(onErrorJustReturn: true)
 
-        let editButtonHidden = isEditing
-
-        let doneButtonHidden = isEditing.map { !$0 }
+        let actionButtonType = isEditing
+            .map { $0 ? StickerBrowserActionButtonType.done : StickerBrowserActionButtonType.edit }
+            .debug()
 
         let predicate = NSPredicate(format: "\(StickerProperty.hasRenderedImage.rawValue) == true")
         let sectionItems = services.stickerService
@@ -73,8 +71,7 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
 
         return Output(sectionItems: sectionItems,
                       navigationBarHidden: navigationBarHidden,
-                      editButtonHidden: editButtonHidden,
-                      doneButtonHidden: doneButtonHidden,
+                      actionButtonType: actionButtonType,
                       requestPresentationStyle: requestPresentationStyle)
     }
 }

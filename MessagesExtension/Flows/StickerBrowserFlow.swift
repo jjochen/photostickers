@@ -45,6 +45,8 @@ class StickerBrowserFlow: Flow {
         switch step {
         case .stickerBrowserIsRequired:
             return navigateToStickerBrowser()
+        default:
+            return .none
         }
     }
 
