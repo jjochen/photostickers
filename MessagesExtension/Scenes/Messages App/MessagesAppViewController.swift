@@ -23,10 +23,7 @@ import UIKit
 
 class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased {
     private lazy var application: Application = {
-        guard let extensionContext = self.extensionContext else {
-            fatalError("Extension Context not available")
-        }
-        return Application(extensionContext: extensionContext)
+        Application()
     }()
 
     private let disposeBag = DisposeBag()

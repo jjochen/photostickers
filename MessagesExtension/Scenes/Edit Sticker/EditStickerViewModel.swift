@@ -9,181 +9,129 @@
 import Foundation
 import Log
 import RxCocoa
+import RxFlow
+import RxOptional
 import RxSwift
 
-protocol EditStickerViewModelType: AnyObject {
-    func maximumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat
-    func minimumZoomScale(imageSize: CGSize, boundsSize: CGSize) -> CGFloat
-    func zoomScale(visibleRect: CGRect, boundsSize: CGSize) -> CGFloat
-    func contentOffset(visibleRect: CGRect, boundsSize: CGSize) -> CGPoint
+final class EditStickerViewModel: ServicesViewModel {
+    typealias Services = AppServices
+    var services: AppServices!
 
-    var saveButtonItemDidTap: PublishSubject<Void> { get }
-    var cancelButtonItemDidTap: PublishSubject<Void> { get }
-    var deleteButtonItemDidTap: PublishSubject<Void> { get }
-    var photosButtonItemDidTap: PublishSubject<Void> { get }
-    var circleButtonDidTap: PublishSubject<Void> { get }
-    var rectangleButtonDidTap: PublishSubject<Void> { get }
-    var starButtonDidTap: PublishSubject<Void> { get }
-    var multiStarButtonDidTap: PublishSubject<Void> { get }
-    var didPickImage: PublishSubject<UIImage?> { get }
-    var visibleRectDidChange: PublishSubject<CGRect> { get }
-    var viewDidLayoutSubviews: PublishSubject<Void> { get }
-    var viewWillTransitionToSize: PublishSubject<CGSize> { get }
-    var stickerTitleDidChange: PublishSubject<String?> { get }
-    var deleteAlertDidConfirm: PublishSubject<Void> { get }
-    var imageSourceAlertDidSelect: PublishSubject<UIImagePickerController.SourceType> { get }
+    private let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
 
-    var stickerTitlePlaceholder: String { get }
-    var stickerTitle: String? { get }
-    var saveButtonItemEnabled: Driver<Bool> { get }
-    var deleteButtonItemEnabled: Driver<Bool> { get }
-    var stickerPlaceholderHidden: Driver<Bool> { get }
-    var coverViewHidden: Driver<Bool> { get }
-    var circleButtonSelected: Driver<Bool> { get }
-    var rectangleButtonSelected: Driver<Bool> { get }
-    var multiStarButtonSelected: Driver<Bool> { get }
-    var starButtonSelected: Driver<Bool> { get }
-    var image: Driver<UIImage?> { get }
-    var visibleRect: Driver<CGRect> { get }
-    var mask: Driver<Mask> { get }
-    var coverViewTransparentAnimated: Driver<(Bool, Bool)> { get }
-    var presentImagePicker: Driver<UIImagePickerController.SourceType> { get }
-    var presentDeleteAlert: Driver<Void> { get }
-    var presentImageSourceAlert: Driver<[UIImagePickerController.SourceType]> { get }
-    var dismiss: Driver<Void> { get }
-}
+    struct Input {
+        let saveButtonItemDidTap: Driver<Void>
+        let cancelButtonItemDidTap: Driver<Void>
+        let deleteButtonItemDidTap: Driver<Void>
+        let photosButtonItemDidTap: Driver<Void>
+        let circleButtonDidTap: Driver<Void>
+        let rectangleButtonDidTap: Driver<Void>
+        let starButtonDidTap: Driver<Void>
+        let multiStarButtonDidTap: Driver<Void>
+        let didPickImage: Driver<UIImage>
+        let visibleRectDidChange: Driver<CGRect>
+        let viewDidLayoutSubviews: Driver<Void>
+        let stickerTitleDidChange: Driver<String?>
+        let deleteAlertDidConfirm: Driver<Void>
+        let imageSourceAlertDidSelect: Driver<UIImagePickerController.SourceType>
+    }
 
-class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
-    let disposeBag = DisposeBag()
-    let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
+    struct Output {
+        let stickerTitlePlaceholder: String
+        let stickerTitle: String?
+        let saveButtonItemEnabled: Driver<Bool>
+        let deleteButtonItemEnabled: Driver<Bool>
+        let stickerPlaceholderHidden: Driver<Bool>
+        let coverViewHidden: Driver<Bool>
+        let circleButtonSelected: Driver<Bool>
+        let rectangleButtonSelected: Driver<Bool>
+        let multiStarButtonSelected: Driver<Bool>
+        let starButtonSelected: Driver<Bool>
+        let image: Driver<UIImage?>
+        let visibleRect: Driver<CGRect>
+        let mask: Driver<Mask>
+        let coverViewTransparentAnimated: Driver<(Bool, Bool)>
+        let presentImagePicker: Driver<UIImagePickerController.SourceType>
+        let presentDeleteAlert: Driver<Void>
+        let presentImageSourceAlert: Driver<[UIImagePickerController.SourceType]>
+        let setCropInfo: Driver<UIImage>
+        let dismiss: Driver<Void>
+    }
 
-    // MARK: Dependencies
+    private let sticker: Sticker
+    init(withSticker sticker: Sticker) {
+        self.sticker = sticker
+    }
 
-    fileprivate let stickerInfo: StickerInfo
-    fileprivate let imageStoreService: ImageStoreServiceType
-    fileprivate let stickerService: StickerServiceType
-    fileprivate let stickerRenderService: StickerRenderServiceType
+    lazy var stickerInfo: StickerInfo = {
+        StickerInfo(uuid: sticker.uuid,
+                    title: sticker.title,
+                    originalImage: sticker.originalImage(from: services.imageStoreService),
+                    renderedSticker: sticker.renderedImage(from: services.imageStoreService),
+                    cropBounds: sticker.cropBounds,
+                    mask: sticker.mask,
+                    sortOrder: sticker.sortOrder)
+    }()
 
-    // MARK: Input
+    private let removeThisDisposeBag = DisposeBag()
+    func transform(input: Input) -> Output {
+        let stickerTitlePlaceholder = Sticker.titlePlaceholder
+        let stickerTitle = stickerInfo.initialTitle
 
-    let saveButtonItemDidTap = PublishSubject<Void>()
-    let cancelButtonItemDidTap = PublishSubject<Void>()
-    let deleteButtonItemDidTap = PublishSubject<Void>()
-    let photosButtonItemDidTap = PublishSubject<Void>()
-    let circleButtonDidTap = PublishSubject<Void>()
-    let rectangleButtonDidTap = PublishSubject<Void>()
-    let starButtonDidTap = PublishSubject<Void>()
-    let multiStarButtonDidTap = PublishSubject<Void>()
-    let didPickImage = PublishSubject<UIImage?>()
-    let visibleRectDidChange = PublishSubject<CGRect>()
-    let viewDidLayoutSubviews = PublishSubject<Void>()
-    let viewWillTransitionToSize = PublishSubject<CGSize>()
-    let stickerTitleDidChange = PublishSubject<String?>()
-    let deleteAlertDidConfirm = PublishSubject<Void>()
-    let imageSourceAlertDidSelect = PublishSubject<UIImagePickerController.SourceType>()
-
-    // MARK: Output
-
-    let stickerTitlePlaceholder: String
-    let stickerTitle: String?
-    let saveButtonItemEnabled: Driver<Bool>
-    let deleteButtonItemEnabled: Driver<Bool>
-    let stickerPlaceholderHidden: Driver<Bool>
-    let coverViewHidden: Driver<Bool>
-    let circleButtonSelected: Driver<Bool>
-    let rectangleButtonSelected: Driver<Bool>
-    let multiStarButtonSelected: Driver<Bool>
-    let starButtonSelected: Driver<Bool>
-    let image: Driver<UIImage?>
-    let visibleRect: Driver<CGRect>
-    let mask: Driver<Mask>
-    let coverViewTransparentAnimated: Driver<(Bool, Bool)>
-    let presentImagePicker: Driver<UIImagePickerController.SourceType>
-    let presentDeleteAlert: Driver<Void>
-    let presentImageSourceAlert: Driver<[UIImagePickerController.SourceType]>
-    let dismiss: Driver<Void>
-
-    // MARK: Internal
-
-    fileprivate let _stickerWasDeleted = PublishSubject<Void>()
-    fileprivate let _originalImageWasSetToNil: Driver<Void>
-    fileprivate let _stickerWasRendered: Driver<Void>
-    fileprivate let _stickerWasSaved: Driver<Void>
-
-    init(sticker: Sticker,
-         imageStoreService: ImageStoreServiceType,
-         stickerService: StickerServiceType,
-         stickerRenderService: StickerRenderServiceType) {
-        let stickerInfo = StickerInfo(uuid: sticker.uuid,
-                                      title: sticker.title,
-                                      originalImage: sticker.originalImage(from: imageStoreService),
-                                      renderedSticker: sticker.renderedImage(from: imageStoreService),
-                                      cropBounds: sticker.cropBounds,
-                                      mask: sticker.mask,
-                                      sortOrder: sticker.sortOrder)
-        self.stickerInfo = stickerInfo
-        self.imageStoreService = imageStoreService
-        self.stickerService = stickerService
-        self.stickerRenderService = stickerRenderService
-
-        stickerTitlePlaceholder = Sticker.titlePlaceholder
-        stickerTitle = stickerInfo.initialTitle
-
-        _originalImageWasSetToNil = stickerInfo
+        let _originalImageWasSetToNil = stickerInfo
             .originalImageIsNil
             .asDriver(onErrorJustReturn: true)
             .filter { $0 }
             .map { _ in Void() }
 
-        _stickerWasRendered = stickerInfo
+        let _stickerWasRendered = stickerInfo
             .renderedSticker
             .asDriver()
             .skip(1)
             .map { _ in Void() }
 
-        _stickerWasSaved = _stickerWasRendered
+        let _stickerWasSaved = _stickerWasRendered
             .flatMap {
-                stickerService.storeSticker(withInfo: stickerInfo).asDriver(onErrorDriveWith: Driver.empty())
+                self.services.stickerService.storeSticker(withInfo: self.stickerInfo).asDriver(onErrorDriveWith: Driver.empty())
                 // TODO: use showErrorMessageDriver
             }
             .map { _ in Void() }
 
-        saveButtonItemEnabled = Observable
+        let saveButtonItemEnabled = Observable
             .combineLatest(stickerInfo.originalImageIsNil, stickerInfo.cropBoundsAreEmpty) { !$0 && !$1 }
             .startWith(false)
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: false)
 
-        deleteButtonItemEnabled = stickerInfo
+        let deleteButtonItemEnabled = stickerInfo
             .renderedStickerIsNil
             .map { !$0 }
             .startWith(false)
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: false)
 
-        stickerPlaceholderHidden = stickerInfo
+        let stickerPlaceholderHidden = stickerInfo
             .originalImageIsNil
             .map { !$0 }
             .startWith(true)
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: false)
 
-        coverViewHidden = stickerPlaceholderHidden
+        let coverViewHidden = stickerPlaceholderHidden
             .map { !$0 }
 
-        image = stickerInfo.originalImage
+        let image = stickerInfo.originalImage
             .asDriver()
 
-        visibleRect = Observable.of(viewDidLayoutSubviews,
-                                    stickerInfo.originalImage.asObservable().map { _ in Void() })
+        let visibleRect = Driver.of(input.viewDidLayoutSubviews,
+                                    stickerInfo.originalImage.asDriver().map { _ in Void() })
             .merge()
-            .withLatestFrom(stickerInfo.cropBounds.asObservable())
+            .withLatestFrom(stickerInfo.cropBounds.asDriver())
             .filter { !$0.isEmpty }
-            .asDriver(onErrorDriveWith: Driver.empty())
+            .asDriver()
 
-        let _shouldSelectImage = Driver
-            .of(photosButtonItemDidTap.asDriver(onErrorDriveWith: Driver.empty()),
-                _originalImageWasSetToNil)
+        let _shouldSelectImage = Driver.of(input.photosButtonItemDidTap,
+                                           _originalImageWasSetToNil)
             .merge()
 
         let availableTypes: [UIImagePickerController.SourceType] = [.camera, .photoLibrary]
@@ -191,11 +139,12 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
                 UIImagePickerController.isSourceTypeAvailable(sourceType) || UIDevice.isSimulator
             }
 
+        let presentImageSourceAlert: Driver<[UIImagePickerController.SourceType]>
+        let presentImagePicker: Driver<UIImagePickerController.SourceType>
         if availableTypes.count > 1 {
             presentImageSourceAlert = _shouldSelectImage
                 .map { availableTypes }
-            presentImagePicker = imageSourceAlertDidSelect
-                .asDriver(onErrorDriveWith: Driver.empty())
+            presentImagePicker = input.imageSourceAlertDidSelect
         } else if let sourceType = availableTypes.first {
             presentImageSourceAlert = Driver.empty()
             presentImagePicker = _shouldSelectImage
@@ -206,52 +155,56 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             presentImagePicker = Driver.empty()
         }
 
-        presentDeleteAlert = deleteButtonItemDidTap
+        let presentDeleteAlert = input.deleteButtonItemDidTap
             .withLatestFrom(deleteButtonItemEnabled)
             .filter { isEnabled in isEnabled }
             .map { _ in Void() }
-            .asDriver(onErrorDriveWith: Driver.empty())
 
-        dismiss = Driver
-            .of(cancelButtonItemDidTap.asDriver(onErrorJustReturn: ()),
+        let _stickerWasDeleted = input.deleteAlertDidConfirm.asObservable()
+            .observeOn(backgroundScheduler)
+            .flatMap { _ in
+                self.services.stickerService.deleteSticker(withUUID: self.stickerInfo.uuid)
+            }
+
+        let dismiss = Driver
+            .of(input.cancelButtonItemDidTap,
                 _stickerWasSaved,
-                _stickerWasDeleted.asDriver(onErrorJustReturn: ()))
+                _stickerWasDeleted.asDriver(onErrorDriveWith: Driver.empty()))
             .merge()
 
-        mask = Observable.of(viewDidLayoutSubviews,
-                             stickerInfo.mask.asObservable().map { _ in Void() })
+        let mask = Driver.of(input.viewDidLayoutSubviews,
+                             stickerInfo.mask.asDriver().map { _ in Void() })
             .merge()
-            .withLatestFrom(stickerInfo.mask.asObservable())
-            .asDriver(onErrorJustReturn: .circle)
+            .withLatestFrom(stickerInfo.mask.asDriver())
 
-        circleButtonSelected = stickerInfo.mask
+        let circleButtonSelected = stickerInfo.mask
             .asDriver()
             .map { $0 == .circle }
             .distinctUntilChanged()
 
-        rectangleButtonSelected = stickerInfo.mask
+        let rectangleButtonSelected = stickerInfo.mask
             .asDriver()
             .map { $0 == .rectangle }
             .distinctUntilChanged()
 
-        multiStarButtonSelected = stickerInfo.mask
+        let multiStarButtonSelected = stickerInfo.mask
             .asDriver()
             .map { $0 == .multiStar }
             .distinctUntilChanged()
 
-        starButtonSelected = stickerInfo.mask
+        let starButtonSelected = stickerInfo.mask
             .asDriver()
             .map { $0 == .star }
             .distinctUntilChanged()
 
-        let transparent = visibleRectDidChange
+        let transparent = input.visibleRectDidChange.asObservable()
             .map { _ in (true, false) }
 
-        let opaque = visibleRectDidChange
+        let opaque = input.visibleRectDidChange.asObservable()
             .debounce(1, scheduler: MainScheduler.asyncInstance)
             .map { _ in (false, true) }
 
-        coverViewTransparentAnimated = Observable
+        let coverViewTransparentAnimated = Observable
             .of(transparent, opaque)
             .merge()
             .startWith((false, false))
@@ -260,11 +213,8 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
             }
             .asDriver(onErrorJustReturn: (false, false))
 
-        super.init()
-
-        didPickImage
-            .filterNil()
-            .subscribe(onNext: { image in
+        let setCropInfo = input.didPickImage
+            .do(onNext: { image in
                 var initialRect = CGRect()
                 let imageSize = image.size
                 let sideLength = imageSize.minSideLength
@@ -275,46 +225,57 @@ class EditStickerViewModel: BaseViewModel, EditStickerViewModelType {
                 self.stickerInfo.cropBounds.value = initialRect
                 self.stickerInfo.originalImage.value = image
             })
-            .disposed(by: disposeBag)
 
-        stickerTitleDidChange
+        input.stickerTitleDidChange
             .map { title in
                 title?.trimmingCharacters(in: .whitespaces)
             }
-            .bind(to: stickerInfo.title)
-            .disposed(by: disposeBag)
+            .drive(stickerInfo.title)
+            .disposed(by: removeThisDisposeBag)
 
-        visibleRectDidChange
-            .bind(to: stickerInfo.cropBounds)
-            .disposed(by: disposeBag)
+        input.visibleRectDidChange
+            .drive(stickerInfo.cropBounds)
+            .disposed(by: removeThisDisposeBag)
 
-        saveButtonItemDidTap
+        input.saveButtonItemDidTap.asObservable()
             .withLatestFrom(saveButtonItemEnabled)
             .filter { isEnabled in isEnabled }
             .observeOn(backgroundScheduler)
             .flatMap { _ in
-                stickerRenderService.render(stickerInfo)
+                self.services.stickerRenderService.render(self.stickerInfo)
             }
             .filterNil()
             .bind(to: stickerInfo.renderedSticker)
-            .disposed(by: disposeBag)
+            .disposed(by: removeThisDisposeBag)
 
-        deleteAlertDidConfirm
-            .observeOn(backgroundScheduler)
-            .flatMap { _ in
-                stickerService.deleteSticker(withUUID: stickerInfo.uuid)
-            }
-            .bind(to: _stickerWasDeleted)
-            .disposed(by: disposeBag)
-
-        Observable
-            .of(circleButtonDidTap.map { Mask.circle },
-                rectangleButtonDidTap.map { Mask.rectangle },
-                starButtonDidTap.map { Mask.star },
-                multiStarButtonDidTap.map { Mask.multiStar })
+        Driver
+            .of(input.circleButtonDidTap.map { Mask.circle },
+                input.rectangleButtonDidTap.map { Mask.rectangle },
+                input.starButtonDidTap.map { Mask.star },
+                input.multiStarButtonDidTap.map { Mask.multiStar })
             .merge()
-            .bind(to: stickerInfo.mask)
-            .disposed(by: disposeBag)
+            .drive(stickerInfo.mask)
+            .disposed(by: removeThisDisposeBag)
+
+        return Output(stickerTitlePlaceholder: stickerTitlePlaceholder,
+                      stickerTitle: stickerTitle,
+                      saveButtonItemEnabled: saveButtonItemEnabled,
+                      deleteButtonItemEnabled: deleteButtonItemEnabled,
+                      stickerPlaceholderHidden: stickerPlaceholderHidden,
+                      coverViewHidden: coverViewHidden,
+                      circleButtonSelected: circleButtonSelected,
+                      rectangleButtonSelected: rectangleButtonSelected,
+                      multiStarButtonSelected: multiStarButtonSelected,
+                      starButtonSelected: starButtonSelected,
+                      image: image,
+                      visibleRect: visibleRect,
+                      mask: mask,
+                      coverViewTransparentAnimated: coverViewTransparentAnimated,
+                      presentImagePicker: presentImagePicker,
+                      presentDeleteAlert: presentDeleteAlert,
+                      presentImageSourceAlert: presentImageSourceAlert,
+                      setCropInfo: setCropInfo,
+                      dismiss: dismiss)
     }
 }
 

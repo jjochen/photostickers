@@ -35,7 +35,7 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
         let openStickerItem: Driver<StickerSectionItem>
     }
 
-    func transform(input: StickerBrowserViewModel.Input) -> StickerBrowserViewModel.Output {
+    func transform(input: Input) -> Output {
         let isEditing = input.actionButtonDidTap
             .map { $0 == .edit }
             .startWith(false)
@@ -80,7 +80,8 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
                 case .openAppItem:
                     self.addSticker()
                 case let .stickerItem(viewModel: model):
-                    self.pickSticker(with: model)
+                    let sticker = model.sticker
+                    self.pickSticker(sticker)
                 }
             })
 
@@ -97,7 +98,7 @@ extension StickerBrowserViewModel {
         steps.accept(PhotoStickerStep.addStickerIsPicked)
     }
 
-    public func pickSticker(with model: StickerBrowserCellViewModelType) {
-        steps.accept(PhotoStickerStep.stickerIsPicked(viewModel: model))
+    public func pickSticker(_ sticker: Sticker) {
+        steps.accept(PhotoStickerStep.stickerIsPicked(sticker))
     }
 }

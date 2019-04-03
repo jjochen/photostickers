@@ -45,6 +45,10 @@ class StickerBrowserFlow: Flow {
         switch step {
         case .stickerBrowserIsRequired:
             return navigateToStickerBrowser()
+        case .addStickerIsPicked:
+            return navigateToEditStickerScreen()
+        case let .stickerIsPicked(sticker):
+            return navigateToEditStickerScreen(with: sticker)
         default:
             return .none
         }
@@ -70,5 +74,13 @@ class StickerBrowserFlow: Flow {
 //                                               animated: false)
 //        }
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
+    }
+
+    private func navigateToEditStickerScreen(with sticker: Sticker? = nil) -> FlowContributors {
+        let sticker = sticker ?? Sticker()
+        let viewController = EditStickerViewController.instantiate(withViewModel: EditStickerViewModel(withSticker: sticker),
+                                                                   andServices: services)
+        rootViewController.present(viewController, animated: true)
+        return .none
     }
 }

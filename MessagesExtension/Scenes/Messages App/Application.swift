@@ -8,18 +8,12 @@
 
 import Foundation
 
-// todo: move?
-protocol HasExtensionContext {
-    var extensionContext: NSExtensionContext { get }
-}
-
 final class Application {
-    private let extensionContext: NSExtensionContext
     private let stickerService: StickerService
     private let imageStoreService: ImageStoreService
     private let stickerRenderService: StickerRenderService
 
-    init(extensionContext: NSExtensionContext) {
+    init() {
         #if DEBUG
             // todo
             let dataFolderType = DataFolderType.documentsPrefilled(subfolder: "UITests")
@@ -28,19 +22,17 @@ final class Application {
         #endif
         let dataFolder = DataFolderService(type: dataFolderType)
 
-        self.extensionContext = extensionContext
         imageStoreService = ImageStoreService(url: dataFolder.imagesURL)
         stickerService = StickerService(realmType: .onDisk(url: dataFolder.realmURL), imageStoreService: imageStoreService)
         stickerRenderService = StickerRenderService()
     }
 
     lazy var appServices = {
-        AppServices(extensionContext: self.extensionContext, stickerService: self.stickerService, imageStoreService: self.imageStoreService, stickerRenderService: self.stickerRenderService)
+        AppServices(stickerService: self.stickerService, imageStoreService: self.imageStoreService, stickerRenderService: self.stickerRenderService)
     }()
 }
 
-struct AppServices: HasExtensionContext, HasStickerService, HasImageStoreService, HasStickerRenderService {
-    let extensionContext: NSExtensionContext // todo: needed?
+struct AppServices: HasStickerService, HasImageStoreService, HasStickerRenderService {
     let stickerService: StickerService
     let imageStoreService: ImageStoreService
     let stickerRenderService: StickerRenderService

@@ -7,13 +7,16 @@
 //
 
 import Log
+import Reusable
 import RxCocoa
+import RxOptional
 import RxSwift
+import RxViewController
 import UIKit
 
-class EditStickerViewController: UIViewController {
-    var viewModel: EditStickerViewModelType?
-    fileprivate let disposeBag = DisposeBag()
+class EditStickerViewController: UIViewController, StoryboardBased, ViewModelBased {
+    var viewModel: EditStickerViewModel!
+    private let disposeBag = DisposeBag()
 
     @IBOutlet var saveButtonItem: UIBarButtonItem!
     @IBOutlet var cancelButtonItem: UIBarButtonItem!
@@ -24,12 +27,10 @@ class EditStickerViewController: UIViewController {
     @IBOutlet var stickerPlaceholder: AppIconView!
     @IBOutlet var coverView: UIView!
     @IBOutlet var stickerTitleTextField: UITextField!
-
     @IBOutlet var circleButton: UIButton!
     @IBOutlet var rectangleButton: UIButton!
     @IBOutlet var starButton: UIButton!
     @IBOutlet var multiStarButton: UIButton!
-
     @IBOutlet var portraitConstraints: [NSLayoutConstraint]!
     @IBOutlet var landscapeConstraints: [NSLayoutConstraint]!
 
@@ -47,11 +48,6 @@ class EditStickerViewController: UIViewController {
         shadowLayer.shadowRadius = 6
         return shadowLayer
     }()
-
-    fileprivate let didEndDecelerating = PublishSubject<Void>()
-    fileprivate let didEndDraggingWithoutDecelaration = PublishSubject<Void>()
-    fileprivate let didZoom = PublishSubject<Void>()
-    fileprivate let didScroll = PublishSubject<Void>()
 }
 
 // MASK: - UIViewController override
@@ -93,131 +89,114 @@ extension EditStickerViewController: UIScrollViewDelegate {
 private extension EditStickerViewController {
     func setupBindings() {
         guard let viewModel = self.viewModel else {
-            Logger.shared.error("View Model not set!")
-            return
+            fatalError("View Model not set!")
         }
 
-        rx.viewDidLayoutSubviews
-            .bind(to: viewModel.viewDidLayoutSubviews)
-            .disposed(by: disposeBag)
+        let _deleteAlertRelay = PublishRelay<Void>()
+        let deleteAlertDidConfirm = _deleteAlertRelay.asDriver(onErrorDriveWith: Driver.empty())
 
-        rx.viewWillTransitionToSize
-            .bind(to: viewModel.viewWillTransitionToSize)
-            .disposed(by: disposeBag)
+        let _imageSourceAlertRelay = PublishRelay<UIImagePickerController.SourceType>()
+        let imageSourceAlertDidSelect = _imageSourceAlertRelay.asDriver(onErrorDriveWith: Driver.empty())
 
-        saveButtonItem.rx.tap
-            .bind(to: viewModel.saveButtonItemDidTap)
-            .disposed(by: disposeBag)
+        let viewDidLayoutSubviews = rx.viewDidLayoutSubviews.asDriver()
 
-        cancelButtonItem.rx.tap
-            .bind(to: viewModel.cancelButtonItemDidTap)
-            .disposed(by: disposeBag)
+        let saveButtonItemDidTap = saveButtonItem.rx.tap.asDriver()
 
-        deleteButtonItem.rx.tap
-            .bind(to: viewModel.deleteButtonItemDidTap)
-            .disposed(by: disposeBag)
+        let cancelButtonItemDidTap = cancelButtonItem.rx.tap.asDriver()
 
-        photosButtonItem.rx.tap
-            .bind(to: viewModel.photosButtonItemDidTap)
-            .disposed(by: disposeBag)
+        let deleteButtonItemDidTap = deleteButtonItem.rx.tap.asDriver()
 
-        circleButton.rx.tap
-            .bind(to: viewModel.circleButtonDidTap)
-            .disposed(by: disposeBag)
+        let photosButtonItemDidTap = photosButtonItem.rx.tap.asDriver()
 
-        rectangleButton.rx.tap
-            .bind(to: viewModel.rectangleButtonDidTap)
-            .disposed(by: disposeBag)
+        let circleButtonDidTap = circleButton.rx.tap.asDriver()
 
-        starButton.rx.tap
-            .bind(to: viewModel.starButtonDidTap)
-            .disposed(by: disposeBag)
+        let rectangleButtonDidTap = rectangleButton.rx.tap.asDriver()
 
-        multiStarButton.rx.tap
-            .bind(to: viewModel.multiStarButtonDidTap)
-            .disposed(by: disposeBag)
+        let starButtonDidTap = starButton.rx.tap.asDriver()
 
-        scrollView.rx
-            .didEndDecelerating
-            .bind(to: didEndDecelerating)
-            .disposed(by: disposeBag)
+        let multiStarButtonDidTap = multiStarButton.rx.tap.asDriver()
 
-        scrollView.rx
-            .didEndDragging.filter { willDecelerate in
-                !willDecelerate
-            }
-            .map { _ in Void() }
-            .bind(to: didEndDraggingWithoutDecelaration)
-            .disposed(by: disposeBag)
+        let _didPickImage = PublishSubject<UIImage>()
+        let didPickImage = _didPickImage.asDriver(onErrorDriveWith: Driver.empty())
 
-        scrollView.rx
+        let _didScroll = scrollView.rx
             .didScroll
+            .asDriver()
             .filter { _ in
                 self.scrollView.isDragging || self.scrollView.isDecelerating
             }
-            .bind(to: didScroll)
-            .disposed(by: disposeBag)
 
-        scrollView.rx
+        let _didZoom = scrollView.rx
             .didZoom
+            .asDriver()
             .filter { _ in
                 self.scrollView.isZooming || self.scrollView.isZoomBouncing
             }
-            .bind(to: didZoom)
-            .disposed(by: disposeBag)
 
-        Observable
-            .of(didScroll,
-                didZoom)
+        let visibleRectDidChange = Driver.of(_didScroll, _didZoom)
             .merge()
             .filter { _ in
                 self.imageView.image != nil
             }
             .map { self.visibleRect }
-            .bind(to: viewModel.visibleRectDidChange)
-            .disposed(by: disposeBag)
 
-        stickerTitleTextField.rx.text
+        let stickerTitleDidChange = stickerTitleTextField.rx.text
+            .asDriver()
             .skip(1)
-            .bind(to: viewModel.stickerTitleDidChange)
-            .disposed(by: disposeBag)
 
-        stickerTitleTextField.text = viewModel.stickerTitle
-        stickerTitleTextField.placeholder = viewModel.stickerTitlePlaceholder
+        let input = ViewModelType.Input(saveButtonItemDidTap: saveButtonItemDidTap,
+                                        cancelButtonItemDidTap: cancelButtonItemDidTap,
+                                        deleteButtonItemDidTap: deleteButtonItemDidTap,
+                                        photosButtonItemDidTap: photosButtonItemDidTap,
+                                        circleButtonDidTap: circleButtonDidTap,
+                                        rectangleButtonDidTap: rectangleButtonDidTap,
+                                        starButtonDidTap: starButtonDidTap,
+                                        multiStarButtonDidTap: multiStarButtonDidTap,
+                                        didPickImage: didPickImage,
+                                        visibleRectDidChange: visibleRectDidChange,
+                                        viewDidLayoutSubviews: viewDidLayoutSubviews,
+                                        stickerTitleDidChange: stickerTitleDidChange,
+                                        deleteAlertDidConfirm: deleteAlertDidConfirm,
+                                        imageSourceAlertDidSelect: imageSourceAlertDidSelect)
 
-        viewModel.saveButtonItemEnabled
+        let output = viewModel.transform(input: input)
+
+        stickerTitleTextField.text = output.stickerTitle
+        stickerTitleTextField.placeholder = output.stickerTitlePlaceholder
+
+        output.saveButtonItemEnabled
             .drive(saveButtonItem.rx.isEnabled)
             .disposed(by: disposeBag)
 
-        viewModel.deleteButtonItemEnabled
+        output.deleteButtonItemEnabled
             .drive(deleteButtonItem.rx.isEnabled)
             .disposed(by: disposeBag)
 
-        viewModel.stickerPlaceholderHidden
+        output.stickerPlaceholderHidden
             .drive(stickerPlaceholder.rx.isHidden)
             .disposed(by: disposeBag)
 
-        viewModel.coverViewHidden
+        output.coverViewHidden
             .drive(coverView.rx.isHidden)
             .disposed(by: disposeBag)
 
-        viewModel.circleButtonSelected
+        output.circleButtonSelected
             .drive(circleButton.rx.isSelected)
             .disposed(by: disposeBag)
 
-        viewModel.rectangleButtonSelected
+        output.rectangleButtonSelected
             .drive(rectangleButton.rx.isSelected)
             .disposed(by: disposeBag)
 
-        viewModel.multiStarButtonSelected
+        output.multiStarButtonSelected
             .drive(multiStarButton.rx.isSelected)
             .disposed(by: disposeBag)
 
-        viewModel.starButtonSelected
+        output.starButtonSelected
             .drive(starButton.rx.isSelected)
             .disposed(by: disposeBag)
 
-        viewModel.visibleRect
+        output.visibleRect
             .drive(onNext: { [weak self, weak viewModel] rect in
                 guard let self = self, let viewModel = viewModel else { return }
                 let boundsSize = self.scrollView.bounds.size
@@ -226,9 +205,8 @@ private extension EditStickerViewController {
             })
             .disposed(by: disposeBag)
 
-        viewModel.image
-            .drive(onNext: { [weak self, weak viewModel] image in
-                guard let self = self, let viewModel = viewModel else { return }
+        output.image
+            .drive(onNext: { [unowned self] image in
                 let imageSize = image?.size ?? .zero
                 self.scrollView.zoomScale = 1
                 self.scrollView.contentOffset = .zero
@@ -244,9 +222,8 @@ private extension EditStickerViewController {
             })
             .disposed(by: disposeBag)
 
-        viewModel.mask
-            .drive(onNext: { [weak self] mask in
-                guard let self = self else { return }
+        output.mask
+            .drive(onNext: { [unowned self] mask in
                 let maskRect = self.scrollView.convertBounds(to: self.coverView)
                 let maskPath = mask.maskPath(in: self.coverView.bounds, maskRect: maskRect)
                 self.maskLayer.path = maskPath.cgPath
@@ -257,9 +234,8 @@ private extension EditStickerViewController {
             })
             .disposed(by: disposeBag)
 
-        viewModel.coverViewTransparentAnimated
-            .drive(onNext: { [weak self] transparent, animated in
-                guard let self = self else { return }
+        output.coverViewTransparentAnimated
+            .drive(onNext: { [unowned self] transparent, animated in
                 if animated {
                     UIView.beginAnimations("CoverViewAlpha", context: nil)
                     UIView.setAnimationDuration(0.3)
@@ -272,7 +248,7 @@ private extension EditStickerViewController {
             })
             .disposed(by: disposeBag)
 
-        viewModel.presentImagePicker
+        output.presentImagePicker
             .filter { sourceType in
                 UIImagePickerController.isSourceTypeAvailable(sourceType)
             }
@@ -287,17 +263,16 @@ private extension EditStickerViewController {
                 .take(1)
                 .asDriver(onErrorJustReturn: [:])
             }
-            .map { info in
+            .map { info -> UIImage? in
                 let image = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage
                 return image?.fixOrientation()
             }
-            .filter { $0 != nil }
-            .drive(viewModel.didPickImage)
+            .filterNil()
+            .drive(_didPickImage)
             .disposed(by: disposeBag)
 
-        viewModel.presentDeleteAlert
-            .drive(onNext: { [weak self, weak viewModel] in
-                guard let self = self, let viewModel = viewModel else { return }
+        output.presentDeleteAlert
+            .drive(onNext: { [unowned self] in
                 let alertController = UIAlertController(
                     title: nil,
                     message: nil,
@@ -307,7 +282,7 @@ private extension EditStickerViewController {
                 let deleteAction = UIAlertAction(title: "Delete".localized,
                                                  style: .destructive,
                                                  handler: { _ in
-                                                     viewModel.deleteAlertDidConfirm.onNext(())
+                                                     _deleteAlertRelay.accept(Void())
                 })
                 alertController.addAction(deleteAction)
 
@@ -319,10 +294,8 @@ private extension EditStickerViewController {
             })
             .disposed(by: disposeBag)
 
-        viewModel.presentImageSourceAlert
-            .drive(onNext: { [weak self, weak viewModel] sourceTypes in
-                guard let self = self, let viewModel = viewModel else { return }
-
+        output.presentImageSourceAlert
+            .drive(onNext: { [unowned self] sourceTypes in
                 let alertController = UIAlertController(
                     title: nil,
                     message: nil,
@@ -347,7 +320,7 @@ private extension EditStickerViewController {
                         }
 
                         let handler: (UIAlertAction) -> Void = { _ in
-                            viewModel.imageSourceAlertDidSelect.onNext(type)
+                            _imageSourceAlertRelay.accept(type)
                         }
                         let action = UIAlertAction(title: title, style: .default, handler: handler)
                         action.accessibilityLabel = accessibilityLabel
@@ -367,10 +340,14 @@ private extension EditStickerViewController {
             })
             .disposed(by: disposeBag)
 
-        viewModel.dismiss
+        output.dismiss
             .drive(onNext: { [weak self] in
                 self?.dismiss(animated: true, completion: nil)
             })
+            .disposed(by: disposeBag)
+
+        output.setCropInfo
+            .drive()
             .disposed(by: disposeBag)
     }
 }

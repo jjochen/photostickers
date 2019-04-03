@@ -14,11 +14,7 @@ target 'PhotoStickers' do
     # pod 'Log'
     # pod 'SwiftFormat/CLI'
     # pod 'Zip'
-    
-    # pod 'RxSwiftExt'
-    # pod 'RxCoreData'
-    # pod 'RxViewModel'
-    # pod 'RxOptional'
+
     # pod 'SnapKit'
     # pod 'Toaster'
 
@@ -40,9 +36,13 @@ target 'MessagesExtension' do
     pod 'RxDataSources'
     pod 'RealmSwift'
     pod 'RxRealm'
+    pod 'RxFlow', '>= 2.0.0'
+    pod 'RxOptional'
+    pod 'RxViewController'
+#    pod 'RxMediaPicker'
+    pod 'RxSwiftExt'
     pod 'Log'
     pod 'Zip'
-    pod 'RxFlow'
     pod 'Reusable'
 end
 

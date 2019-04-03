@@ -26,7 +26,6 @@
 		19DE76EC225389A600CF29AB /* Observable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76DA225389A600CF29AB /* Observable+Operators.swift */; };
 		19DE76ED225389A600CF29AB /* MSMessagesAppViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76DB225389A600CF29AB /* MSMessagesAppViewController+Rx.swift */; };
 		19DE76EE225389A600CF29AB /* UIImagePickerController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76DC225389A600CF29AB /* UIImagePickerController+Rx.swift */; };
-		19DE76EF225389A600CF29AB /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76DD225389A600CF29AB /* UIViewController+Rx.swift */; };
 		19DE76F0225389A600CF29AB /* RxImagePickerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76DE225389A600CF29AB /* RxImagePickerDelegateProxy.swift */; };
 		19DE76F1225389A600CF29AB /* UIImagePickerController+RxCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76DF225389A600CF29AB /* UIImagePickerController+RxCreate.swift */; };
 		19DE76F2225389A600CF29AB /* StickerRenderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76E1225389A600CF29AB /* StickerRenderService.swift */; };
@@ -120,7 +119,6 @@
 		19DE76DA225389A600CF29AB /* Observable+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Operators.swift"; sourceTree = "<group>"; };
 		19DE76DB225389A600CF29AB /* MSMessagesAppViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MSMessagesAppViewController+Rx.swift"; sourceTree = "<group>"; };
 		19DE76DC225389A600CF29AB /* UIImagePickerController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImagePickerController+Rx.swift"; sourceTree = "<group>"; };
-		19DE76DD225389A600CF29AB /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		19DE76DE225389A600CF29AB /* RxImagePickerDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxImagePickerDelegateProxy.swift; sourceTree = "<group>"; };
 		19DE76DF225389A600CF29AB /* UIImagePickerController+RxCreate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImagePickerController+RxCreate.swift"; sourceTree = "<group>"; };
 		19DE76E1225389A600CF29AB /* StickerRenderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerRenderService.swift; sourceTree = "<group>"; };
@@ -339,7 +337,6 @@
 				19DE76DA225389A600CF29AB /* Observable+Operators.swift */,
 				19DE76DB225389A600CF29AB /* MSMessagesAppViewController+Rx.swift */,
 				19DE76DC225389A600CF29AB /* UIImagePickerController+Rx.swift */,
-				19DE76DD225389A600CF29AB /* UIViewController+Rx.swift */,
 				19DE76DE225389A600CF29AB /* RxImagePickerDelegateProxy.swift */,
 				19DE76DF225389A600CF29AB /* UIImagePickerController+RxCreate.swift */,
 			);
@@ -466,8 +463,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19DE769D2253766700CF29AB /* Build configuration list for PBXNativeTarget "MessagesExtension" */;
 			buildPhases = (
-				19DE76AC2253803700CF29AB /* Run swiftformat */,
 				136098A931A323C20B55596F /* [CP] Check Pods Manifest.lock */,
+				19DE76AC2253803700CF29AB /* Run swiftformat */,
 				19DE76872253766700CF29AB /* Sources */,
 				19DE76882253766700CF29AB /* Frameworks */,
 				19DE76892253766700CF29AB /* Resources */,
@@ -599,12 +596,14 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
-				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxFlow/RxFlow.framework",
+				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRealm/RxRealm.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwiftExt/RxSwiftExt.framework",
+				"${BUILT_PRODUCTS_DIR}/RxViewController/RxViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Zip/Zip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -616,12 +615,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxFlow.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRealm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwiftExt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Zip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -687,7 +688,6 @@
 				19DE773F22538F6700CF29AB /* AddStickerCell.swift in Sources */,
 				19DE76F4225389A600CF29AB /* StickerService.swift in Sources */,
 				19DE76E9225389A600CF29AB /* AddIconView.swift in Sources */,
-				19DE76EF225389A600CF29AB /* UIViewController+Rx.swift in Sources */,
 				19DE771822538A8200CF29AB /* Logger+Shared.swift in Sources */,
 				19DE771A22538A8200CF29AB /* UIImage+Alpha.swift in Sources */,
 				19DE774122538F6700CF29AB /* StickerBrowserCellViewModel.swift in Sources */,
