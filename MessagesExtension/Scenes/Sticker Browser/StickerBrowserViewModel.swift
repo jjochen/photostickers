@@ -64,7 +64,11 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
                 return items
             }
 
-        let requestPresentationStyle = input.editButtonDidTap
+        let shouldExpand = isEditing
+            .filter { $0 }
+            .map { _ in Void() }
+
+        let requestPresentationStyle = shouldExpand
             .map { MSMessagesAppPresentationStyle.expanded }
 
         return Output(sectionItems: sectionItems,

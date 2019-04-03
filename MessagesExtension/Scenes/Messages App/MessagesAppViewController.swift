@@ -51,6 +51,10 @@ class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased {
             print("did navigate to flow=\(flow) and step=\(step)")
         }).disposed(by: disposeBag)
 
+        requestPresentationStyle.asDriver(onErrorDriveWith: Driver.empty())
+            .drive(rx.requestPresentationStyle)
+            .disposed(by: disposeBag)
+
         let appFlow = StickerBrowserFlow(withServices: application.appServices,
                                          requestPresentationStyle: requestPresentationStyle,
                                          currentPresentationStyle: rx.willTransitionToPresentationStyle.asDriver())
@@ -78,11 +82,12 @@ extension MessagesAppViewController {
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(viewController.view)
 
-        viewController.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        viewController.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        viewController.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        viewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-
+        NSLayoutConstraint.activate([
+            viewController.view.leftAnchor.constraint(equalTo: view.leftAnchor),
+            viewController.view.rightAnchor.constraint(equalTo: view.rightAnchor),
+            viewController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            viewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
         viewController.didMove(toParent: self)
     }
 }
