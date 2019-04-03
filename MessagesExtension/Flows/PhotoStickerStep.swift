@@ -12,7 +12,7 @@ enum PhotoStickerStep: Step {
     case stickerBrowserIsRequired
 
     case addStickerIsPicked
-    case stickerIsPicked(sticker: Sticker)
+    case stickerIsPicked(viewModel: StickerBrowserCellViewModelType)
 
     case editStickerComplete
 }

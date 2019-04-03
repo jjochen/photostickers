@@ -24,13 +24,15 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
     struct Input {
         let actionButtonDidTap: Driver<StickerBrowserActionButtonType>
         let currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>
+        let indexPathSelected: Driver<IndexPath>
     }
 
     struct Output {
-        let sectionItems: Observable<[StickerSectionItem]>
+        let sectionItems: Driver<[StickerSectionItem]>
         let navigationBarHidden: Driver<Bool>
         let actionButtonType: Driver<StickerBrowserActionButtonType>
         let requestPresentationStyle: Driver<MSMessagesAppPresentationStyle>
+        let openStickerItem: Driver<StickerSectionItem>
     }
 
     func transform(input: StickerBrowserViewModel.Input) -> StickerBrowserViewModel.Output {
@@ -60,7 +62,7 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
                 }
                 items.append(StickerSectionItem.openAppItem)
                 return items
-            }
+            }.asDriver(onErrorDriveWith: Driver.empty())
 
         let shouldExpand = isEditing
             .filter { $0 }
@@ -69,9 +71,33 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
         let requestPresentationStyle = shouldExpand
             .map { MSMessagesAppPresentationStyle.expanded }
 
+        let openStickerItem = input.indexPathSelected
+            .withLatestFrom(sectionItems) { indexPath, items in
+                items[indexPath.row]
+            }
+            .do(onNext: { item in
+                switch item {
+                case .openAppItem:
+                    self.addSticker()
+                case let .stickerItem(viewModel: model):
+                    self.pickSticker(with: model)
+                }
+            })
+
         return Output(sectionItems: sectionItems,
                       navigationBarHidden: navigationBarHidden,
                       actionButtonType: actionButtonType,
-                      requestPresentationStyle: requestPresentationStyle)
+                      requestPresentationStyle: requestPresentationStyle,
+                      openStickerItem: openStickerItem)
+    }
+}
+
+extension StickerBrowserViewModel {
+    public func addSticker() {
+        steps.accept(PhotoStickerStep.addStickerIsPicked)
+    }
+
+    public func pickSticker(with model: StickerBrowserCellViewModelType) {
+        steps.accept(PhotoStickerStep.stickerIsPicked(viewModel: model))
     }
 }

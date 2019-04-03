@@ -61,17 +61,6 @@ class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModel
             fatalError("Request Presentation Style not set up!")
         }
 
-        let editTrigger = editBarButtonItem.rx.tap.map { StickerBrowserActionButtonType.edit }
-        let doneTrigger = doneBarButtonItem.rx.tap.map { StickerBrowserActionButtonType.done }
-        let actionButtonTrigger = Observable.of(editTrigger, doneTrigger)
-            .merge()
-            .asDriver(onErrorDriveWith: Driver.empty())
-
-        let input = StickerBrowserViewModel.Input(actionButtonDidTap: actionButtonTrigger,
-                                                  currentPresentationStyle: currentPresentationStyle)
-
-        let output = viewModel.transform(input: input)
-
         let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>(
             configureCell: { _, collectionView, indexPath, item in
                 switch item {
@@ -86,11 +75,29 @@ class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModel
             }
         )
 
+        let editTrigger = editBarButtonItem.rx.tap.map { StickerBrowserActionButtonType.edit }
+        let doneTrigger = doneBarButtonItem.rx.tap.map { StickerBrowserActionButtonType.done }
+        let actionButtonTrigger = Observable.of(editTrigger, doneTrigger)
+            .merge()
+            .asDriver(onErrorDriveWith: Driver.empty())
+
+        let indexPathSelected = collectionView.rx.itemSelected.asDriver()
+
+        let input = StickerBrowserViewModel.Input(actionButtonDidTap: actionButtonTrigger,
+                                                  currentPresentationStyle: currentPresentationStyle,
+                                                  indexPathSelected: indexPathSelected)
+
+        let output = viewModel.transform(input: input)
+
         output.sectionItems
             .map { items in
                 [StickerSection(stickers: items)]
             }
-            .bind(to: collectionView.rx.items(dataSource: dataSource))
+            .drive(collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+
+        output.openStickerItem
+            .drive()
             .disposed(by: disposeBag)
 
         collectionView.rx
