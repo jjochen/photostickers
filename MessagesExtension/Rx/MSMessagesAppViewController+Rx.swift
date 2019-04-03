@@ -23,7 +23,7 @@ public extension Reactive where Base: MSMessagesAppViewController {
         }
     }
 
-    var willBecomeActive: ControlEvent<MSConversation> {
+    var conversationWillBecomeActive: ControlEvent<MSConversation> {
         let source = methodInvoked(#selector(Base.willBecomeActive(with:)))
             .map { a in
                 try castOrThrow(MSConversation.self, a[0])
@@ -31,7 +31,7 @@ public extension Reactive where Base: MSMessagesAppViewController {
         return ControlEvent(events: source)
     }
 
-    var didBecomeActive: ControlEvent<MSConversation> {
+    var conversationDidBecomeActive: ControlEvent<MSConversation> {
         let source = methodInvoked(#selector(Base.didBecomeActive(with:)))
             .map { a in
                 try castOrThrow(MSConversation.self, a[0])
@@ -39,7 +39,7 @@ public extension Reactive where Base: MSMessagesAppViewController {
         return ControlEvent(events: source)
     }
 
-    var willResignActive: ControlEvent<MSConversation> {
+    var conversationWillResignActive: ControlEvent<MSConversation> {
         let source = methodInvoked(#selector(Base.willResignActive(with:)))
             .map { a in
                 try castOrThrow(MSConversation.self, a[0])
@@ -47,7 +47,7 @@ public extension Reactive where Base: MSMessagesAppViewController {
         return ControlEvent(events: source)
     }
 
-    var didResignActive: ControlEvent<MSConversation> {
+    var conversationDidResignActive: ControlEvent<MSConversation> {
         let source = methodInvoked(#selector(Base.didResignActive(with:)))
             .map { a in
                 try castOrThrow(MSConversation.self, a[0])
@@ -55,7 +55,7 @@ public extension Reactive where Base: MSMessagesAppViewController {
         return ControlEvent(events: source)
     }
 
-    var willSelect: ControlEvent<WillSelectMessageEvent> {
+    var conversationWillSelectMessage: ControlEvent<WillSelectMessageEvent> {
         let source: Observable<WillSelectMessageEvent> = methodInvoked(#selector(Base.willSelect(_:conversation:)))
             .map { a in
                 (try castOrThrow(MSMessage.self, a[0]), try castOrThrow(MSConversation.self, a[1]))
@@ -63,7 +63,7 @@ public extension Reactive where Base: MSMessagesAppViewController {
         return ControlEvent(events: source)
     }
 
-    var didSelect: ControlEvent<DidSelectMessageEvent> {
+    var conversationDidSelectMessage: ControlEvent<DidSelectMessageEvent> {
         let source: Observable<DidSelectMessageEvent> = methodInvoked(#selector(Base.didSelect(_:conversation:)))
             .map { a in
                 (try castOrThrow(MSMessage.self, a[0]), try castOrThrow(MSConversation.self, a[1]))
@@ -71,7 +71,7 @@ public extension Reactive where Base: MSMessagesAppViewController {
         return ControlEvent(events: source)
     }
 
-    var didReceive: ControlEvent<DidReceiveMessageEvent> {
+    var conversationDidReceiveconversationDidCancelSendingMessage: ControlEvent<DidReceiveMessageEvent> {
         let source: Observable<DidReceiveMessageEvent> = methodInvoked(#selector(Base.didReceive(_:conversation:)))
             .map { a in
                 (try castOrThrow(MSMessage.self, a[0]), try castOrThrow(MSConversation.self, a[1]))
@@ -79,7 +79,7 @@ public extension Reactive where Base: MSMessagesAppViewController {
         return ControlEvent(events: source)
     }
 
-    var didStartSending: ControlEvent<DidStartSendingMessageEvent> {
+    var conversationDidStartSendingconversationDidCancelSendingMessage: ControlEvent<DidStartSendingMessageEvent> {
         let source: Observable<DidStartSendingMessageEvent> = methodInvoked(#selector(Base.didStartSending(_:conversation:)))
             .map { a in
                 (try castOrThrow(MSMessage.self, a[0]), try castOrThrow(MSConversation.self, a[1]))
@@ -87,7 +87,7 @@ public extension Reactive where Base: MSMessagesAppViewController {
         return ControlEvent(events: source)
     }
 
-    var didCancelSending: ControlEvent<DidCancelSendingMessageEvent> {
+    var conversationDidCancelSendingMessage: ControlEvent<DidCancelSendingMessageEvent> {
         let source: Observable<DidCancelSendingMessageEvent> = methodInvoked(#selector(Base.didCancelSending(_:conversation:)))
             .map { a in
                 (try castOrThrow(MSMessage.self, a[0]), try castOrThrow(MSConversation.self, a[1]))
@@ -95,7 +95,7 @@ public extension Reactive where Base: MSMessagesAppViewController {
         return ControlEvent(events: source)
     }
 
-    var willTransition: ControlEvent<MSMessagesAppPresentationStyle> {
+    var willTransitionToPresentationStyle: ControlEvent<MSMessagesAppPresentationStyle> {
         let source = methodInvoked(#selector(Base.willTransition(to:)))
             .map { a in
                 MSMessagesAppPresentationStyle(rawValue: try castOrThrow(UInt.self, a[0]))!
@@ -103,7 +103,7 @@ public extension Reactive where Base: MSMessagesAppViewController {
         return ControlEvent(events: source)
     }
 
-    var didTransition: ControlEvent<MSMessagesAppPresentationStyle> {
+    var didTransitionToPresentationStyle: ControlEvent<MSMessagesAppPresentationStyle> {
         let source = methodInvoked(#selector(Base.didTransition))
             .map { a in
                 MSMessagesAppPresentationStyle(rawValue: try castOrThrow(UInt.self, a[0]))!

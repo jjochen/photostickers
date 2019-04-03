@@ -21,7 +21,7 @@ import UIKit
  * only in edit mode: edit, sort, delete sticker
  */
 
-class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased, ViewModelBased {
+class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased {
     private lazy var application: Application = {
         guard let extensionContext = self.extensionContext else {
             fatalError("Extension Context not available")
@@ -29,14 +29,9 @@ class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased, V
         return Application(extensionContext: extensionContext)
     }()
 
-    lazy var viewModel: MessagesAppViewModel! = {
-        let viewModel = MessagesAppViewModel()
-        viewModel.services = application.appServices
-        return viewModel
-    }()
-
     private let disposeBag = DisposeBag()
     private let coordinator = FlowCoordinator()
+    private let requestPresentationStyle = PublishSubject<MSMessagesAppPresentationStyle>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,19 +39,10 @@ class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased, V
         RxImagePickerDelegateProxy.register { RxImagePickerDelegateProxy(imagePicker: $0) }
         view.tintColor = StyleKit.appColor
 
-        setupBindings()
-
-        let appFlow = StickerBrowserFlow(withServices: application.appServices)
-        let appStepper = OneStepper(withSingleStep: PhotoStickerStep.stickerBrowserIsRequired)
-
-        Flows.whenReady(flow1: appFlow) { [unowned self] root in
-            self.embed(viewController: root)
-        }
-
-        coordinator.coordinate(flow: appFlow, with: appStepper)
+        setupFlow()
     }
 
-    private func setupBindings() {
+    private func setupFlow() {
         coordinator.rx.willNavigate.subscribe(onNext: { flow, step in
             print("will navigate to flow=\(flow) and step=\(step)")
         }).disposed(by: disposeBag)
@@ -65,15 +51,16 @@ class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased, V
             print("did navigate to flow=\(flow) and step=\(step)")
         }).disposed(by: disposeBag)
 
-        let presentationStyleWillChange = rx.willTransition.asDriver()
+        let appFlow = StickerBrowserFlow(withServices: application.appServices,
+                                         requestPresentationStyle: requestPresentationStyle,
+                                         currentPresentationStyle: rx.willTransitionToPresentationStyle.asDriver())
+        let appStepper = OneStepper(withSingleStep: PhotoStickerStep.stickerBrowserIsRequired)
 
-        let input = MessagesAppViewModel.Input(currentPresentationStyle: presentationStyleWillChange)
+        Flows.whenReady(flow1: appFlow) { [unowned self] root in
+            self.embed(viewController: root)
+        }
 
-        _ = viewModel.transform(input: input)
-
-//        output.presentationStyleRequested
-//            .drive(rx.requestPresentationStyle)
-//            .disposed(by: disposeBag)
+        coordinator.coordinate(flow: appFlow, with: appStepper)
     }
 }
 

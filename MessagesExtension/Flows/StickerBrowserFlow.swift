@@ -6,6 +6,7 @@
 //  Copyright © 2019 Jochen Pfeiffer. All rights reserved.
 //
 
+import Messages
 import RxCocoa
 import RxFlow
 import RxSwift
@@ -18,14 +19,20 @@ class StickerBrowserFlow: Flow {
 
     private lazy var rootViewController: UINavigationController = {
         let viewController = UINavigationController()
-        viewController.setNavigationBarHidden(false, animated: false) // todo: hide by default
+        viewController.setNavigationBarHidden(true, animated: false)
         return viewController
     }()
 
     private let services: AppServices
+    private let requestPresentationStyle: PublishSubject<MSMessagesAppPresentationStyle>
+    private let currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>
 
-    init(withServices services: AppServices) {
+    init(withServices services: AppServices,
+         requestPresentationStyle: PublishSubject<MSMessagesAppPresentationStyle>,
+         currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>) {
         self.services = services
+        self.requestPresentationStyle = requestPresentationStyle
+        self.currentPresentationStyle = currentPresentationStyle
     }
 
     deinit {
@@ -43,6 +50,9 @@ class StickerBrowserFlow: Flow {
 
     private func navigateToStickerBrowser() -> FlowContributors {
         let viewController = StickerBrowserViewController.instantiate(withViewModel: StickerBrowserViewModel(), andServices: services)
+        viewController.requestPresentationStyle = requestPresentationStyle
+        viewController.currentPresentationStyle = currentPresentationStyle
+
         rootViewController.pushViewController(viewController, animated: false)
 
 //        if let navigationBarItem = self.rootViewController.navigationBar.items?[0] {

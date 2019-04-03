@@ -54,7 +54,6 @@
 		19DE771A22538A8200CF29AB /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE770A22538A8200CF29AB /* UIImage+Alpha.swift */; };
 		19DE772122538C5500CF29AB /* PhotoStickerStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE771F22538C5500CF29AB /* PhotoStickerStep.swift */; };
 		19DE773B22538E0A00CF29AB /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE773A22538E0A00CF29AB /* Application.swift */; };
-		19DE773D22538E3E00CF29AB /* MessagesAppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE773C22538E3E00CF29AB /* MessagesAppViewModel.swift */; };
 		19DE773E22538F6700CF29AB /* StickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE772E22538DFE00CF29AB /* StickerSection.swift */; };
 		19DE773F22538F6700CF29AB /* AddStickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE772D22538DFE00CF29AB /* AddStickerCell.swift */; };
 		19DE774022538F6700CF29AB /* StickerBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE772C22538DFE00CF29AB /* StickerBrowserCell.swift */; };
@@ -161,7 +160,6 @@
 		19DE773122538DFE00CF29AB /* StickerBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerBrowserViewController.swift; sourceTree = "<group>"; };
 		19DE773222538DFE00CF29AB /* StickerBrowserViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StickerBrowserViewController.storyboard; sourceTree = "<group>"; };
 		19DE773A22538E0A00CF29AB /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
-		19DE773C22538E3E00CF29AB /* MessagesAppViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesAppViewModel.swift; sourceTree = "<group>"; };
 		19DE774A2253F12100CF29AB /* StickerBrowserFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerBrowserFlow.swift; sourceTree = "<group>"; };
 		19DE774C2253F2D900CF29AB /* EditStickerFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStickerFlow.swift; sourceTree = "<group>"; };
 		325A088209BF78EB19F38DB5 /* Pods-PhotoStickers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickers.release.xcconfig"; path = "Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers.release.xcconfig"; sourceTree = "<group>"; };
@@ -289,7 +287,6 @@
 			children = (
 				19DE773A22538E0A00CF29AB /* Application.swift */,
 				19DE76932253766700CF29AB /* MessagesAppViewController.swift */,
-				19DE773C22538E3E00CF29AB /* MessagesAppViewModel.swift */,
 				19DE76C92253876F00CF29AB /* MessagesApp.storyboard */,
 			);
 			path = "Messages App";
@@ -668,7 +665,6 @@
 				19DE774B2253F12100CF29AB /* StickerBrowserFlow.swift in Sources */,
 				19DE76D42253898900CF29AB /* ViewModelBased.swift in Sources */,
 				19DE76F9225389A600CF29AB /* ImageStoreService.swift in Sources */,
-				19DE773D22538E3E00CF29AB /* MessagesAppViewModel.swift in Sources */,
 				19DE76F6225389A600CF29AB /* StoryboardIdentifiers.swift in Sources */,
 				19DE770D22538A8200CF29AB /* UIImage+RoundedCorner.swift in Sources */,
 				19DE773B22538E0A00CF29AB /* Application.swift in Sources */,

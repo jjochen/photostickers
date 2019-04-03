@@ -24,12 +24,12 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
     struct Input {
         let editButtonDidTap: Driver<Void>
         let doneButtonDidTap: Driver<Void>
-//        let currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>
+        let currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>
     }
 
     struct Output {
         let sectionItems: Observable<[StickerSectionItem]>
-//        let navigationBarHidden: Driver<Bool>
+        let navigationBarHidden: Driver<Bool>
         let editButtonHidden: Driver<Bool>
         let doneButtonHidden: Driver<Bool>
         let requestPresentationStyle: Driver<MSMessagesAppPresentationStyle>
@@ -41,10 +41,10 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
 
-//        let navigationBarHidden = input.currentPresentationStyle
-//            .map { $0 != .expanded }
-//            .startWith(true)
-//            .asDriver(onErrorJustReturn: true)
+        let navigationBarHidden = input.currentPresentationStyle
+            .map { $0 != .expanded }
+            .startWith(true)
+            .asDriver(onErrorJustReturn: true)
 
         let editButtonHidden = isEditing
 
@@ -68,6 +68,7 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
             .map { MSMessagesAppPresentationStyle.expanded }
 
         return Output(sectionItems: sectionItems,
+                      navigationBarHidden: navigationBarHidden,
                       editButtonHidden: editButtonHidden,
                       doneButtonHidden: doneButtonHidden,
                       requestPresentationStyle: requestPresentationStyle)

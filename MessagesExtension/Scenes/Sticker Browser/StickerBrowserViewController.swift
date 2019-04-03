@@ -29,6 +29,9 @@ class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModel
     @IBOutlet var editBarButtonItem: UIBarButtonItem!
     @IBOutlet var doneBarButtonItem: UIBarButtonItem!
 
+    var requestPresentationStyle: PublishSubject<MSMessagesAppPresentationStyle>?
+    var currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
@@ -45,12 +48,19 @@ class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModel
         guard let viewModel = self.viewModel else {
             fatalError("View Model not set!")
         }
+        guard let currentPresentationStyle = self.currentPresentationStyle else {
+            fatalError("Current Presentation Style not set up!")
+        }
+        guard let requestPresentationStyle = self.requestPresentationStyle else {
+            fatalError("Request Presentation Style not set up!")
+        }
 
         let editTrigger = editBarButtonItem.rx.tap.asDriver()
         let editDoneTrigger = doneBarButtonItem.rx.tap.asDriver()
 
         let input = StickerBrowserViewModel.Input(editButtonDidTap: editTrigger,
-                                                  doneButtonDidTap: editDoneTrigger)
+                                                  doneButtonDidTap: editDoneTrigger,
+                                                  currentPresentationStyle: currentPresentationStyle)
 
         let output = viewModel.transform(input: input)
 
@@ -78,16 +88,16 @@ class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModel
         collectionView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
-//
-//        output.requestPresentationStyle
-//            .drive(rx.requestPresentationStyle)
-//            .disposed(by: disposeBag)
 
-//        output.navigationBarHidden
-//            .drive(onNext: { hidden in
-//                self.navigationController?.setNavigationBarHidden(hidden, animated: true)
-//            })
-//            .disposed(by: disposeBag)
+        output.requestPresentationStyle
+            .drive(requestPresentationStyle)
+            .disposed(by: disposeBag)
+
+        output.navigationBarHidden
+            .drive(onNext: { hidden in
+                self.navigationController?.setNavigationBarHidden(hidden, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
