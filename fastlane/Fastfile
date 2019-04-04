@@ -75,7 +75,6 @@ EOS
     skip_binary_upload: false,
     skip_screenshots: true,
     skip_metadata: true,
-    include_in_app_purchases: false,
     force: true
   })
   # frameit
@@ -128,7 +127,6 @@ lane :upload_metadata do
     skip_binary_upload: true,
     skip_screenshots: true,
     skip_metadata: false,
-    include_in_app_purchases: false,
     force: true
   })
 end
@@ -140,7 +138,6 @@ lane :upload_screenshots do
     skip_binary_upload: true,
     skip_screenshots: false,
     skip_metadata: true,
-    include_in_app_purchases: false,
     force: true
   })
 end
