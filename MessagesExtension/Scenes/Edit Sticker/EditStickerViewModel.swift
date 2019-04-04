@@ -55,6 +55,10 @@ final class EditStickerViewModel: ServicesViewModel {
         let presentDeleteAlert: Driver<Void>
         let presentImageSourceAlert: Driver<[UIImagePickerController.SourceType]>
         let setCropInfo: Driver<UIImage>
+        let setTitle: Driver<String?>
+        let setCropBounds: Driver<CGRect>
+        let setRenderedSticker: Driver<UIImage>
+        let setMask: Driver<Mask>
         let dismiss: Driver<Void>
     }
 
@@ -73,7 +77,6 @@ final class EditStickerViewModel: ServicesViewModel {
                     sortOrder: sticker.sortOrder)
     }()
 
-    private let removeThisDisposeBag = DisposeBag()
     func transform(input: Input) -> Output {
         let stickerTitlePlaceholder = Sticker.titlePlaceholder
         let stickerTitle = stickerInfo.initialTitle
@@ -226,36 +229,34 @@ final class EditStickerViewModel: ServicesViewModel {
                 self.stickerInfo.originalImage.accept(image)
             })
 
-        input.stickerTitleDidChange
+        let setTitle = input.stickerTitleDidChange
             .map { title in
                 title?.trimmingCharacters(in: .whitespaces)
             }
-            .drive(stickerInfo.title)
-            .disposed(by: removeThisDisposeBag)
+            .do(onNext: { self.stickerInfo.title.accept($0) })
 
-        input.visibleRectDidChange
-            .drive(stickerInfo.cropBounds)
-            .disposed(by: removeThisDisposeBag)
+        let setCropBounds = input.visibleRectDidChange
+            .do(onNext: { self.stickerInfo.cropBounds.accept($0) })
 
-        input.saveButtonItemDidTap.asObservable()
+        let setRenderedSticker = input.saveButtonItemDidTap
             .withLatestFrom(saveButtonItemEnabled)
             .filter { isEnabled in isEnabled }
+            .asObservable()
             .observeOn(backgroundScheduler)
             .flatMap { _ in
                 self.services.stickerRenderService.render(self.stickerInfo)
             }
             .filterNil()
-            .bind(to: stickerInfo.renderedSticker)
-            .disposed(by: removeThisDisposeBag)
+            .do(onNext: { self.stickerInfo.renderedSticker.accept($0) })
+            .asDriver(onErrorDriveWith: Driver.empty())
 
-        Driver
+        let setMask = Driver
             .of(input.circleButtonDidTap.map { Mask.circle },
                 input.rectangleButtonDidTap.map { Mask.rectangle },
                 input.starButtonDidTap.map { Mask.star },
                 input.multiStarButtonDidTap.map { Mask.multiStar })
             .merge()
-            .drive(stickerInfo.mask)
-            .disposed(by: removeThisDisposeBag)
+            .do(onNext: { self.stickerInfo.mask.accept($0) })
 
         return Output(stickerTitlePlaceholder: stickerTitlePlaceholder,
                       stickerTitle: stickerTitle,
@@ -275,6 +276,10 @@ final class EditStickerViewModel: ServicesViewModel {
                       presentDeleteAlert: presentDeleteAlert,
                       presentImageSourceAlert: presentImageSourceAlert,
                       setCropInfo: setCropInfo,
+                      setTitle: setTitle,
+                      setCropBounds: setCropBounds,
+                      setRenderedSticker: setRenderedSticker,
+                      setMask: setMask,
                       dismiss: dismiss)
     }
 }

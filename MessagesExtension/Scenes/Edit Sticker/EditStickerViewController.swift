@@ -340,14 +340,30 @@ private extension EditStickerViewController {
             })
             .disposed(by: disposeBag)
 
-        output.dismiss
-            .drive(onNext: { [weak self] in
-                self?.dismiss(animated: true, completion: nil)
-            })
-            .disposed(by: disposeBag)
-
         output.setCropInfo
             .drive()
+            .disposed(by: disposeBag)
+
+        output.setCropBounds
+            .drive()
+            .disposed(by: disposeBag)
+
+        output.setTitle
+            .drive()
+            .disposed(by: disposeBag)
+
+        output.setRenderedSticker
+            .drive()
+            .disposed(by: disposeBag)
+
+        output.setMask
+            .drive()
+            .disposed(by: disposeBag)
+
+        output.dismiss
+            .drive(onNext: { [unowned self] in
+                self.dismiss(animated: true, completion: nil)
+            })
             .disposed(by: disposeBag)
     }
 }
