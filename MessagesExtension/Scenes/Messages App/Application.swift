@@ -18,7 +18,7 @@ final class Application {
             // todo
             let dataFolderType = DataFolderType.documentsPrefilled(subfolder: "UITests")
         #else
-            let dataFolderType = DataFolderType.documents
+            let dataFolderType = DataFolderType.appGroup
         #endif
         let dataFolder = DataFolderService(type: dataFolderType)
 
