@@ -20,6 +20,7 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
     var services: AppServices!
 
     let steps = PublishRelay<Step>()
+    let presentationStyle = PublishRelay<MSMessagesAppPresentationStyle>()
 
     struct Input {
         let actionButtonDidTap: Driver<StickerBrowserActionButtonType>
@@ -64,12 +65,7 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
                 return items
             }.asDriver(onErrorDriveWith: Driver.empty())
 
-        let shouldExpand = isEditing
-            .filter { $0 }
-            .map { _ in Void() }
-
-        let requestPresentationStyle = shouldExpand
-            .map { MSMessagesAppPresentationStyle.expanded }
+        let requestPresentationStyle = presentationStyle.asDriver(onErrorDriveWith: Driver.empty())
 
         let openStickerItem = input.indexPathSelected
             .withLatestFrom(sectionItems) { indexPath, items in
@@ -95,10 +91,12 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
 
 extension StickerBrowserViewModel {
     public func addSticker() {
+        presentationStyle.accept(.expanded)
         steps.accept(PhotoStickerStep.addStickerIsPicked)
     }
 
     public func pickSticker(_ sticker: Sticker) {
+        presentationStyle.accept(.expanded)
         steps.accept(PhotoStickerStep.stickerIsPicked(sticker))
     }
 }
