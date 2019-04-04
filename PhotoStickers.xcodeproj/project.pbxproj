@@ -881,9 +881,9 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.photo-stickers.message-extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.photo-stickers.extension-only.message-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.jochen-pfeiffer.photo-stickers.message-extension";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.jochen-pfeiffer.photo-stickers.extension-only.message-extension";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -906,9 +906,9 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.photo-stickers.message-extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.photo-stickers.extension-only.message-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.jochen-pfeiffer.photo-stickers.message-extension";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.jochen-pfeiffer.photo-stickers.extension-only.message-extension";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -925,9 +925,9 @@
 				CURRENT_PROJECT_VERSION = 2026;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = "App/Supporting Files/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.photo-stickers";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.photo-stickers.extension-only";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.jochen-pfeiffer.photo-stickers";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.jochen-pfeiffer.photo-stickers.extension-only";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -943,9 +943,9 @@
 				CURRENT_PROJECT_VERSION = 2026;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = "App/Supporting Files/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.photo-stickers";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.photo-stickers.extension-only";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.jochen-pfeiffer.photo-stickers";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.jochen-pfeiffer.photo-stickers.extension-only";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
