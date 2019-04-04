@@ -16,7 +16,7 @@ extension StickerService {
 
         let disposeBag = DisposeBag()
         let stickerInfo = StickerInfo()
-        stickerInfo.originalImage.value = UIImage(named: "original.jpg")
+        stickerInfo.originalImage.accept(UIImage(named: "original.jpg"))
         storeSticker(withInfo: stickerInfo).debug().subscribe {}.disposed(by: disposeBag)
     }
 }

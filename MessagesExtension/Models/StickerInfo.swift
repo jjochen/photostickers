@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxCocoa
 import RxSwift
 
 class StickerInfo {
@@ -23,12 +24,12 @@ class StickerInfo {
 
     // MARK: updated values
 
-    let title: Variable<String?>
-    let originalImage: Variable<UIImage?>
-    let renderedSticker: Variable<UIImage?>
-    let cropBounds: Variable<CGRect>
-    let mask: Variable<Mask>
-    let sortOrder: Variable<Int>
+    let title: BehaviorRelay<String?>
+    let originalImage: BehaviorRelay<UIImage?>
+    let renderedSticker: BehaviorRelay<UIImage?>
+    let cropBounds: BehaviorRelay<CGRect>
+    let mask: BehaviorRelay<Mask>
+    let sortOrder: BehaviorRelay<Int>
 
     // MARK: initilizer
 
@@ -48,12 +49,12 @@ class StickerInfo {
         initialMask = mask
         initialSortOrder = sortOrder
 
-        self.title = Variable(title)
-        self.originalImage = Variable(originalImage)
-        self.renderedSticker = Variable(renderedSticker)
-        self.cropBounds = Variable(cropBounds)
-        self.mask = Variable(mask)
-        self.sortOrder = Variable(sortOrder)
+        self.title = BehaviorRelay(value: title)
+        self.originalImage = BehaviorRelay(value: originalImage)
+        self.renderedSticker = BehaviorRelay(value: renderedSticker)
+        self.cropBounds = BehaviorRelay(value: cropBounds)
+        self.mask = BehaviorRelay(value: mask)
+        self.sortOrder = BehaviorRelay(value: sortOrder)
     }
 
     convenience init() {

@@ -222,8 +222,8 @@ final class EditStickerViewModel: ServicesViewModel {
                 initialRect.size.height = sideLength
                 initialRect.origin.x = (imageSize.width - sideLength) / 2
                 initialRect.origin.y = (imageSize.height - sideLength) / 2
-                self.stickerInfo.cropBounds.value = initialRect
-                self.stickerInfo.originalImage.value = image
+                self.stickerInfo.cropBounds.accept(initialRect)
+                self.stickerInfo.originalImage.accept(image)
             })
 
         input.stickerTitleDidChange
