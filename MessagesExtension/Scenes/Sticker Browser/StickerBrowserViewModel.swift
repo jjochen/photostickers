@@ -36,8 +36,9 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
     }
 
     func transform(input: Input) -> Output {
-        let isEditing = input.actionButtonDidTap
-            .map { $0 == .edit }
+        let isEditing = Driver.combineLatest(input.actionButtonDidTap.map { $0 == .edit },
+                                             input.currentPresentationStyle.map { $0 == .expanded }.startWith(false))
+            .map { $0 && $1 }
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
 
@@ -48,7 +49,6 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
 
         let actionButtonType = isEditing
             .map { $0 ? StickerBrowserActionButtonType.done : StickerBrowserActionButtonType.edit }
-            .debug()
 
         let predicate = NSPredicate(format: "\(StickerProperty.hasRenderedImage.rawValue) == true")
         let sectionItems = services.stickerService
