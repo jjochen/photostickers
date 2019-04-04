@@ -1,5 +1,5 @@
 //
-//  UIView+Wiggle.swift
+//  WiggleEffect.swift
 //  MessagesExtension
 //
 //  Created by Jochen on 04.04.19.

@@ -65,7 +65,7 @@
 		19DE774722538F7300CF29AB /* EditStickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DE772622538DF000CF29AB /* EditStickerViewController.storyboard */; };
 		19DE774B2253F12100CF29AB /* StickerBrowserFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE774A2253F12100CF29AB /* StickerBrowserFlow.swift */; };
 		19DE774D2253F2D900CF29AB /* EditStickerFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE774C2253F2D900CF29AB /* EditStickerFlow.swift */; };
-		19DE774F2255F61300CF29AB /* UIView+Wiggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE774E2255F61300CF29AB /* UIView+Wiggle.swift */; };
+		19DE774F2255F61300CF29AB /* WiggleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE774E2255F61300CF29AB /* WiggleEffect.swift */; };
 		75899F2FCE8ECC2A4FD9FBBA /* Pods_PhotoStickers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B954D5DAE75F01F82C678320 /* Pods_PhotoStickers.framework */; };
 		CE42A88ECC9BF65E160BBE4F /* Pods_MessagesExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1056ED50A6BB83946FB40332 /* Pods_MessagesExtension.framework */; };
 /* End PBXBuildFile section */
@@ -161,7 +161,7 @@
 		19DE773A22538E0A00CF29AB /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		19DE774A2253F12100CF29AB /* StickerBrowserFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerBrowserFlow.swift; sourceTree = "<group>"; };
 		19DE774C2253F2D900CF29AB /* EditStickerFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStickerFlow.swift; sourceTree = "<group>"; };
-		19DE774E2255F61300CF29AB /* UIView+Wiggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Wiggle.swift"; sourceTree = "<group>"; };
+		19DE774E2255F61300CF29AB /* WiggleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiggleEffect.swift; sourceTree = "<group>"; };
 		325A088209BF78EB19F38DB5 /* Pods-PhotoStickers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickers.release.xcconfig"; path = "Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers.release.xcconfig"; sourceTree = "<group>"; };
 		B954D5DAE75F01F82C678320 /* Pods_PhotoStickers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoStickers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2B1FD638D084F4933920672 /* Pods-MessagesExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.release.xcconfig"; path = "Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.release.xcconfig"; sourceTree = "<group>"; };
@@ -274,10 +274,10 @@
 		19DE76AE2253832A00CF29AB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				19DE76982253766700CF29AB /* Assets.xcassets */,
 				19DE76C1225384F800CF29AB /* InfoPlist.strings */,
 				19DE76BF225384F800CF29AB /* Localizable.strings */,
 				19DE76B92253847E00CF29AB /* prefillContent.zip */,
-				19DE76982253766700CF29AB /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -309,18 +309,17 @@
 				19DE76CD2253897D00CF29AB /* Sticker.swift */,
 				19DE76CE2253897D00CF29AB /* Mask.swift */,
 			);
-			name = Models;
-			path = MessagesExtension/Models;
-			sourceTree = SOURCE_ROOT;
+			path = Models;
+			sourceTree = "<group>";
 		};
 		19DE76D22253898900CF29AB /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				19DE76D32253898900CF29AB /* ViewModelBased.swift */,
+				19DE774E2255F61300CF29AB /* WiggleEffect.swift */,
 			);
-			name = Protocols;
-			path = MessagesExtension/Protocols;
-			sourceTree = SOURCE_ROOT;
+			path = Protocols;
+			sourceTree = "<group>";
 		};
 		19DE76D5225389A600CF29AB /* Views */ = {
 			isa = PBXGroup;
@@ -328,60 +327,56 @@
 				19DE76D6225389A600CF29AB /* AddIconView.swift */,
 				19DE76D7225389A600CF29AB /* AppIconView.swift */,
 			);
-			name = Views;
-			path = MessagesExtension/Views;
-			sourceTree = SOURCE_ROOT;
+			path = Views;
+			sourceTree = "<group>";
 		};
 		19DE76D8225389A600CF29AB /* Rx */ = {
 			isa = PBXGroup;
 			children = (
-				19DE76D9225389A600CF29AB /* UIScrollView+Rx.swift */,
-				19DE76DA225389A600CF29AB /* Observable+Operators.swift */,
 				19DE76DB225389A600CF29AB /* MSMessagesAppViewController+Rx.swift */,
-				19DE76DC225389A600CF29AB /* UIImagePickerController+Rx.swift */,
+				19DE76DA225389A600CF29AB /* Observable+Operators.swift */,
 				19DE76DE225389A600CF29AB /* RxImagePickerDelegateProxy.swift */,
+				19DE76DC225389A600CF29AB /* UIImagePickerController+Rx.swift */,
 				19DE76DF225389A600CF29AB /* UIImagePickerController+RxCreate.swift */,
+				19DE76D9225389A600CF29AB /* UIScrollView+Rx.swift */,
 			);
-			name = Rx;
-			path = MessagesExtension/Rx;
-			sourceTree = SOURCE_ROOT;
+			path = Rx;
+			sourceTree = "<group>";
 		};
 		19DE76E0225389A600CF29AB /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				19DE76E1225389A600CF29AB /* StickerRenderService.swift */,
-				19DE76E2225389A600CF29AB /* StickerFlowLayout.swift */,
-				19DE76E3225389A600CF29AB /* StickerService.swift */,
-				19DE76E4225389A600CF29AB /* PSError.swift */,
-				19DE76E5225389A600CF29AB /* StoryboardIdentifiers.swift */,
-				19DE76E6225389A600CF29AB /* StyleKit.swift */,
 				19DE76E7225389A600CF29AB /* DataFolderService.swift */,
 				19DE76E8225389A600CF29AB /* ImageStoreService.swift */,
+				19DE76E4225389A600CF29AB /* PSError.swift */,
+				19DE76E2225389A600CF29AB /* StickerFlowLayout.swift */,
+				19DE76E1225389A600CF29AB /* StickerRenderService.swift */,
+				19DE76E3225389A600CF29AB /* StickerService.swift */,
+				19DE76E5225389A600CF29AB /* StoryboardIdentifiers.swift */,
+				19DE76E6225389A600CF29AB /* StyleKit.swift */,
 			);
-			name = Services;
-			path = MessagesExtension/Services;
-			sourceTree = SOURCE_ROOT;
+			path = Services;
+			sourceTree = "<group>";
 		};
 		19DE76FA22538A8200CF29AB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				19DE76FB22538A8200CF29AB /* StickerService+UITestSetup.swift */,
+				19DE770922538A8200CF29AB /* CGGeometry+Extensions.swift */,
+				19DE770822538A8200CF29AB /* Logger+Shared.swift */,
 				19DE76FC22538A8200CF29AB /* Sticker+Images.swift */,
-				19DE76FD22538A8200CF29AB /* UIImage+RoundedCorner.swift */,
-				19DE76FE22538A8200CF29AB /* UIViewController+Extensions.swift */,
-				19DE76FF22538A8200CF29AB /* UIButton+Extensions.swift */,
-				19DE770022538A8200CF29AB /* UIView+Extensions.swift */,
-				19DE770122538A8200CF29AB /* UIImage+Resize.swift */,
+				19DE76FB22538A8200CF29AB /* StickerService+UITestSetup.swift */,
 				19DE770222538A8200CF29AB /* String+Extensions.swift */,
+				19DE76FF22538A8200CF29AB /* UIButton+Extensions.swift */,
 				19DE770322538A8200CF29AB /* UIDevice+Extensions.swift */,
-				19DE770422538A8200CF29AB /* UIStoryboardSegue+Extensions.swift */,
+				19DE770A22538A8200CF29AB /* UIImage+Alpha.swift */,
 				19DE770522538A8200CF29AB /* UIImage+Average.swift */,
 				19DE770622538A8200CF29AB /* UIImage+Orientation.swift */,
+				19DE770122538A8200CF29AB /* UIImage+Resize.swift */,
+				19DE76FD22538A8200CF29AB /* UIImage+RoundedCorner.swift */,
 				19DE770722538A8200CF29AB /* UIStoryboard+Extensions.swift */,
-				19DE770822538A8200CF29AB /* Logger+Shared.swift */,
-				19DE770922538A8200CF29AB /* CGGeometry+Extensions.swift */,
-				19DE770A22538A8200CF29AB /* UIImage+Alpha.swift */,
-				19DE774E2255F61300CF29AB /* UIView+Wiggle.swift */,
+				19DE770422538A8200CF29AB /* UIStoryboardSegue+Extensions.swift */,
+				19DE770022538A8200CF29AB /* UIView+Extensions.swift */,
+				19DE76FE22538A8200CF29AB /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -690,7 +685,7 @@
 				19DE76CF2253897D00CF29AB /* StickerInfo.swift in Sources */,
 				19DE773F22538F6700CF29AB /* AddStickerCell.swift in Sources */,
 				19DE76F4225389A600CF29AB /* StickerService.swift in Sources */,
-				19DE774F2255F61300CF29AB /* UIView+Wiggle.swift in Sources */,
+				19DE774F2255F61300CF29AB /* WiggleEffect.swift in Sources */,
 				19DE76E9225389A600CF29AB /* AddIconView.swift in Sources */,
 				19DE771822538A8200CF29AB /* Logger+Shared.swift in Sources */,
 				19DE771A22538A8200CF29AB /* UIImage+Alpha.swift in Sources */,
@@ -732,6 +727,7 @@
 				19DE76C62253851000CF29AB /* en */,
 			);
 			name = Localizable.strings;
+			path = .;
 			sourceTree = "<group>";
 		};
 		19DE76C1225384F800CF29AB /* InfoPlist.strings */ = {
@@ -741,6 +737,7 @@
 				19DE76C52253850C00CF29AB /* en */,
 			);
 			name = InfoPlist.strings;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
