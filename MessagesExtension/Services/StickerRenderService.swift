@@ -48,11 +48,10 @@ private extension StickerRenderService {
             return nil
         }
 
-        guard let context = context(for: croppedImageRef) else {
+        guard let context = context() else {
             Logger.shared.error("Couldn't create image context")
             return nil
         }
-        context.interpolationQuality = .high
 
         let clipPath = mask.path(in: imageDrawRect, flipped: true).cgPath
 
@@ -87,21 +86,17 @@ private extension StickerRenderService {
         context.restoreGState()
     }
 
-    func context(for imageRef: CGImage) -> CGContext? {
-        guard let colorSpace = imageRef.colorSpace else {
-            Logger.shared.error("Couldn't get color space")
-            return nil
-        }
-
+    func context() -> CGContext? {
         let context = CGContext(
             data: nil,
             width: Int(renderedImageRect.size.width),
             height: Int(renderedImageRect.size.height),
             bitsPerComponent: 8,
             bytesPerRow: 0,
-            space: colorSpace,
+            space: CGColorSpaceCreateDeviceRGB(),
             bitmapInfo: 0 | CGImageAlphaInfo.premultipliedFirst.rawValue
         )
+        context?.interpolationQuality = .high
         return context
     }
 
