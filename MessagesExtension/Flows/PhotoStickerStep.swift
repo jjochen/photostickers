@@ -10,9 +10,9 @@ import RxFlow
 
 enum PhotoStickerStep: Step {
     case stickerBrowserIsRequired
-
     case addStickerIsPicked
     case stickerIsPicked(_ sticker: Sticker)
 
+    case editStickerIsRequired(_ sticker: Sticker)
     case editStickerComplete
 }

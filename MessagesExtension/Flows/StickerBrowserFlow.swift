@@ -44,7 +44,7 @@ class StickerBrowserFlow: Flow {
 
         switch step {
         case .stickerBrowserIsRequired:
-            return navigateToStickerBrowser()
+            return navigateToStickerBrowserScreen()
         case .addStickerIsPicked:
             return navigateToEditStickerScreen()
         case let .stickerIsPicked(sticker):
@@ -54,33 +54,25 @@ class StickerBrowserFlow: Flow {
         }
     }
 
-    private func navigateToStickerBrowser() -> FlowContributors {
+    private func navigateToStickerBrowserScreen() -> FlowContributors {
         let viewController = StickerBrowserViewController.instantiate(withViewModel: StickerBrowserViewModel(), andServices: services)
         viewController.requestPresentationStyle = requestPresentationStyle
         viewController.currentPresentationStyle = currentPresentationStyle
 
         rootViewController.pushViewController(viewController, animated: false)
-
-//        if let navigationBarItem = self.rootViewController.navigationBar.items?[0] {
-//            navigationBarItem.setRightBarButton(UIBarButtonItem(image: UIImage(named: "settings"),
-//                                                                style: UIBarButtonItem.Style.plain,
-//                                                                target: self.wishlistStepper,
-//                                                                action: #selector(WishlistStepper.settingsAreRequired)),
-//                                                animated: false)
-//            navigationBarItem.setLeftBarButton(UIBarButtonItem(title: "Logout",
-//                                                               style: UIBarButtonItem.Style.plain,
-//                                                               target: self,
-//                                                               action: #selector(WishlistFlow.logoutIsRequired)),
-//                                               animated: false)
-//        }
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
     }
 
     private func navigateToEditStickerScreen(with sticker: Sticker? = nil) -> FlowContributors {
-        let sticker = sticker ?? Sticker()
-        let viewController = EditStickerViewController.instantiate(withViewModel: EditStickerViewModel(withSticker: sticker),
-                                                                   andServices: services)
-        rootViewController.present(viewController, animated: true)
-        return .none
+        let existingOrNewSticker = sticker ?? Sticker()
+
+        let editStickerFlow = EditStickerFlow(withServices: services)
+
+        Flows.whenReady(flow1: editStickerFlow) { [unowned self] root in
+            self.rootViewController.present(root, animated: true, completion: nil)
+        }
+
+        return .one(flowContributor: .contribute(withNextPresentable: editStickerFlow,
+                                                 withNextStepper: OneStepper(withSingleStep: PhotoStickerStep.editStickerIsRequired(existingOrNewSticker))))
     }
 }

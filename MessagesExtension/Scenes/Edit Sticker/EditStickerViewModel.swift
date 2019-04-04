@@ -13,9 +13,11 @@ import RxFlow
 import RxOptional
 import RxSwift
 
-final class EditStickerViewModel: ServicesViewModel {
+final class EditStickerViewModel: ServicesViewModel, Stepper {
     typealias Services = AppServices
     var services: AppServices!
+
+    let steps = PublishRelay<Step>()
 
     private let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
 

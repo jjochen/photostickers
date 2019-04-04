@@ -16,7 +16,13 @@ class EditStickerFlow: Flow {
         return rootViewController
     }
 
-    private let rootViewController = UINavigationController()
+    private lazy var rootViewController: UINavigationController = {
+        let viewController = UINavigationController()
+        viewController.setNavigationBarHidden(false, animated: false)
+        viewController.setToolbarHidden(false, animated: false)
+        return viewController
+    }()
+
     private let services: AppServices
 
     init(withServices services: AppServices) {
@@ -31,8 +37,18 @@ class EditStickerFlow: Flow {
         guard let step = step as? PhotoStickerStep else { return .none }
 
         switch step {
+        case let .editStickerIsRequired(sticker):
+            return navigateToEditStickerScreen(withSticker: sticker)
         default:
             return .none
         }
+    }
+
+    private func navigateToEditStickerScreen(withSticker sticker: Sticker) -> FlowContributors {
+        let viewController = EditStickerViewController.instantiate(withViewModel: EditStickerViewModel(withSticker: sticker),
+                                                                   andServices: services)
+
+        rootViewController.pushViewController(viewController, animated: false)
+        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
     }
 }
