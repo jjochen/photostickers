@@ -1,7 +1,7 @@
 source 'https://github.com/jjochen/podspecs.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '12.0'
+platform :ios, '11.4'
 use_frameworks!
 inhibit_all_warnings!
 
@@ -45,5 +45,4 @@ target 'MessagesExtension' do
     pod 'Zip'
     pod 'Reusable'
 end
-
 

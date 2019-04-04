@@ -15,7 +15,7 @@ protocol WiggleEffect {
 
 extension WiggleEffect where Self: UIView {
     func startWiggle() {
-        let wiggleBounceY = 1.0
+        let wiggleBounceY = 1.5
         let wiggleBounceDuration = 0.18
         let wiggleBounceDurationVariance = 0.025
 
