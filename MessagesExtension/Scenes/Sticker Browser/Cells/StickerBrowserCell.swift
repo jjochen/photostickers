@@ -13,7 +13,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-class StickerBrowserCell: UICollectionViewCell {
+class StickerBrowserCell: UICollectionViewCell, WiggleEffect {
     @IBOutlet var stickerView: MSStickerView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var placeholderView: AppIconView!
@@ -41,6 +41,17 @@ class StickerBrowserCell: UICollectionViewCell {
 
         viewModel.hideImageView
             .drive(imageView.rx.isHidden)
+            .disposed(by: disposeBag)
+
+        viewModel.wiggle
+            .distinctUntilChanged()
+            .drive(onNext: { [weak self] shouldWobble in
+                if shouldWobble {
+                    self?.startWiggle()
+                } else {
+                    self?.stopWiggle()
+                }
+            })
             .disposed(by: disposeBag)
     }
 

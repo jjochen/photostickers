@@ -17,7 +17,7 @@ protocol StickerBrowserCellViewModelType: AnyObject {
     var msSticker: MSSticker? { get }
     var image: UIImage? { get }
     var placeholderHidden: Bool { get }
-    var shake: Driver<Bool> { get }
+    var wiggle: Driver<Bool> { get }
     var hideDeleteButton: Driver<Bool> { get }
     var hideSticker: Driver<Bool> { get }
     var hideImageView: Driver<Bool> { get }
@@ -30,7 +30,7 @@ class StickerBrowserCellViewModel: BaseViewModel, StickerBrowserCellViewModelTyp
     let placeholderHidden: Bool
     let isEditing: Driver<Bool>
 
-    var shake: Driver<Bool>
+    var wiggle: Driver<Bool>
     var hideDeleteButton: Driver<Bool>
     var hideSticker: Driver<Bool>
     var hideImageView: Driver<Bool>
@@ -46,7 +46,7 @@ class StickerBrowserCellViewModel: BaseViewModel, StickerBrowserCellViewModelTyp
 
         image = sticker.renderedImage(from: imageStore)
 
-        shake = isEditing
+        wiggle = isEditing
         hideDeleteButton = isEditing.map { !$0 }
         hideSticker = isEditing
         hideImageView = isEditing.map { !$0 }
