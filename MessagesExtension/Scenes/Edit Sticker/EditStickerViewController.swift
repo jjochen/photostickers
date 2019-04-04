@@ -361,9 +361,7 @@ private extension EditStickerViewController {
             .disposed(by: disposeBag)
 
         output.dismiss
-            .drive(onNext: { [unowned self] in
-                self.dismiss(animated: true, completion: nil)
-            })
+            .drive()
             .disposed(by: disposeBag)
     }
 }

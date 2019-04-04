@@ -176,6 +176,9 @@ final class EditStickerViewModel: ServicesViewModel, Stepper {
                 _stickerWasSaved,
                 _stickerWasDeleted.asDriver(onErrorDriveWith: Driver.empty()))
             .merge()
+            .do(onNext: {
+                self.steps.accept(PhotoStickerStep.editStickerComplete)
+            })
 
         let mask = Driver.of(input.viewDidLayoutSubviews,
                              stickerInfo.mask.asDriver().map { _ in Void() })

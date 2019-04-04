@@ -39,6 +39,8 @@ class EditStickerFlow: Flow {
         switch step {
         case let .editStickerIsRequired(sticker):
             return navigateToEditStickerScreen(withSticker: sticker)
+        case .editStickerComplete:
+            return dismissViewController()
         default:
             return .none
         }
@@ -50,5 +52,10 @@ class EditStickerFlow: Flow {
 
         rootViewController.pushViewController(viewController, animated: false)
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
+    }
+
+    private func dismissViewController() -> FlowContributors {
+        rootViewController.dismiss(animated: true)
+        return .none
     }
 }
