@@ -1,11 +1,11 @@
 PODS:
   - Differentiator (3.1.0)
   - Log (1.0)
-  - Realm (3.14.0):
-    - Realm/Headers (= 3.14.0)
-  - Realm/Headers (3.14.0)
-  - RealmSwift (3.14.0):
-    - Realm (= 3.14.0)
+  - Realm (3.14.1):
+    - Realm/Headers (= 3.14.1)
+  - Realm/Headers (3.14.1)
+  - RealmSwift (3.14.1):
+    - Realm (= 3.14.1)
   - Reusable (4.0.5):
     - Reusable/Storyboard (= 4.0.5)
     - Reusable/View (= 4.0.5)
@@ -17,9 +17,9 @@ PODS:
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxFlow (2.0.0):
-    - RxCocoa (>= 4.4.0)
-    - RxSwift (>= 4.4.0)
+  - RxFlow (2.1.0):
+    - RxCocoa (>= 4.5.0)
+    - RxSwift (>= 4.5.0)
   - RxOptional (3.6.2):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
@@ -77,12 +77,12 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   Log: 5e368c9528db07517d18d2d04ff5fe2b6f5a1e21
-  Realm: 221b25919bb5a010a3c597d707f8df3492dcd93a
-  RealmSwift: 28f22dfa6a27b9a778cfb09471558b6afcf1022c
+  Realm: e12c9c2387d05c5bba3a9c394838f5870e85763b
+  RealmSwift: a82eab9b04c3e1616082c7e17aa300740847769c
   Reusable: 188be1a54ac0691bc66e5bb24ec6eb91971b315b
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
-  RxFlow: f0212025e3747431b3be09c6be04bfde0a3bf5a4
+  RxFlow: 78df76493bd7fc6a0181014cc2be3f29a2cd54fb
   RxOptional: 80426a0ddbd092573e4c482d8cc13302078c4d5e
   RxRealm: 5379eddd74f8d617ca7681d1f8d144af25b432b0
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
