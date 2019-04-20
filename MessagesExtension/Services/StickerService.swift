@@ -29,7 +29,7 @@ protocol HasStickerService {
 }
 
 class StickerService: StickerServiceType {
-    fileprivate let imageStoreService: ImageStoreServiceType
+    fileprivate let imageStoreService: ImageStoreService
     fileprivate let realmType: RealmType
 
     fileprivate lazy var mainThreadRealm: Realm = {
@@ -37,7 +37,7 @@ class StickerService: StickerServiceType {
         return realm
     }()
 
-    init(realmType: RealmType, imageStoreService: ImageStoreServiceType) {
+    init(realmType: RealmType, imageStoreService: ImageStoreService) {
         self.realmType = realmType
         self.imageStoreService = imageStoreService
 
@@ -133,8 +133,8 @@ extension StickerService {
                 return Disposables.create()
             }
 
-            _ = sticker.deleteOrigianlImage(in: self.imageStoreService)
-            _ = sticker.deleteRenderedImage(in: self.imageStoreService)
+            sticker.deleteOriginalImage()
+            sticker.deleteRenderedImage()
 
             do {
                 try realm.write {
@@ -178,12 +178,10 @@ private extension StickerService {
                 sticker.title = info.title.value
             }
             if info.originalImageDidChange {
-                let url = sticker.store(originalImage: info.originalImage.value, in: imageStoreService)
-                sticker.hasOriginalImage = (url != nil)
+                sticker.store(originalImage: info.originalImage.value, in: imageStoreService)
             }
             if info.renderedStickerDidChange {
-                let url = sticker.store(renderedImage: info.renderedSticker.value, in: imageStoreService)
-                sticker.hasRenderedImage = (url != nil)
+                sticker.store(renderedImage: info.renderedSticker.value, in: imageStoreService)
             }
             if info.cropBoundsDidChange {
                 sticker.cropBounds = info.cropBounds.value
@@ -194,6 +192,39 @@ private extension StickerService {
             if info.sortOrderDidChange {
                 sticker.sortOrder = info.sortOrder.value
             }
+        }
+    }
+}
+
+private extension Sticker {
+    func store(originalImage image: UIImage?, in imageStoreService: ImageStoreService) {
+        guard let image = image else {
+            // handle error
+            return
+        }
+        guard let url = imageStoreService.store(originalImage: image, forKey: uuid) else {
+            // handle error
+            return
+        }
+        originalImageFilePath = url.path
+    }
+
+    func store(renderedImage image: UIImage?, in imageStoreService: ImageStoreService) {
+        guard let image = image else {
+            // handle error
+            return
+        }
+        let previousFilePath = renderedImageFilePath
+        let newVersion = renderedImageVersion + 1
+        guard let url = imageStoreService.store(renderedImage: image, forKey: uuid, version: newVersion) else {
+            // handle error
+            return
+        }
+        renderedImageVersion = newVersion
+        renderedImageFilePath = url.path
+
+        if let path = previousFilePath {
+            try? FileManager.default.removeItem(atPath: path)
         }
     }
 }
@@ -231,7 +262,7 @@ private extension Realm {
     static func stickerConfiguration(with fileURL: URL?) -> Configuration {
         return Configuration(
             fileURL: fileURL,
-            schemaVersion: 3,
+            schemaVersion: 4,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 1 {
                     Realm.performMigrationToVersion1(migration)
@@ -243,6 +274,10 @@ private extension Realm {
 
                 if oldSchemaVersion < 3 {
                     Realm.performMigrationToVersion3(migration)
+                }
+
+                if oldSchemaVersion < 4 {
+                    Realm.performMigrationToVersion4(migration, fileURL: fileURL)
                 }
             }
         )
@@ -274,12 +309,64 @@ private extension Realm {
 
     static func performMigrationToVersion3(_ migration: Migration) {
         migration.enumerateObjects(ofType: Sticker.className()) { oldObject, newObject in
-            let originalImagePath: String? = oldObject!["originalImageFilePath"] as! String?
-            let renderedImagePath: String? = oldObject!["renderedStickerFilePath"] as! String?
-            let hasOriginalImage: Bool = !(originalImagePath?.isEmpty ?? true)
-            let hasRenderedImage: Bool = !(renderedImagePath?.isEmpty ?? true)
+            let originalImageFilePath: String? = oldObject!["originalImageFilePath"] as! String?
+            let renderedImageFilePath: String? = oldObject!["renderedStickerFilePath"] as! String?
+            let hasOriginalImage: Bool = !(originalImageFilePath?.isEmpty ?? true)
+            let hasRenderedImage: Bool = !(renderedImageFilePath?.isEmpty ?? true)
             newObject!["hasOriginalImage"] = hasOriginalImage
             newObject!["hasRenderedImage"] = hasRenderedImage
         }
+    }
+
+    static func performMigrationToVersion4(_ migration: Migration, fileURL: URL?) {
+        guard let baseURL = fileURL?.deletingLastPathComponent().appendingPathComponent("images") else {
+            #if DEBUG
+                fatalError()
+            #else
+                return
+            #endif
+        }
+        let imageStore = ImageStoreService(url: baseURL)
+
+        migration.enumerateObjects(ofType: Sticker.className()) { oldObject, newObject in
+            newObject!["originalImageFilePath"] = originalImageFilePath(fromOldObject: oldObject, imageStore: imageStore)
+            newObject!["renderedImageFilePath"] = renderedImageFilePath(fromOldObject: oldObject, imageStore: imageStore)
+        }
+    }
+
+    static func originalImageFilePath(fromOldObject oldObject: MigrationObject?, imageStore: ImageStoreService) -> String? {
+        let hasOriginalImage: Bool = oldObject!["hasOriginalImage"] as? Bool ?? false
+        guard hasOriginalImage else {
+            return nil
+        }
+
+        guard let uuid: String = oldObject!["uuid"] as? String else {
+            #if DEBUG
+                fatalError()
+            #else
+                return nil
+            #endif
+        }
+
+        let url = imageStore.originalImageURL(forKey: uuid)
+        return url?.path
+    }
+
+    static func renderedImageFilePath(fromOldObject oldObject: MigrationObject?, imageStore: ImageStoreService) -> String? {
+        let hasRenderedImage: Bool = oldObject!["hasRenderedImage"] as? Bool ?? false
+        guard hasRenderedImage else {
+            return nil
+        }
+
+        guard let uuid: String = oldObject!["uuid"] as? String else {
+            #if DEBUG
+                fatalError()
+            #else
+                return nil
+            #endif
+        }
+
+        let url = imageStore.renderedImageURL(forKey: uuid, version: nil) // didn't have versioning yet
+        return url?.path
     }
 }

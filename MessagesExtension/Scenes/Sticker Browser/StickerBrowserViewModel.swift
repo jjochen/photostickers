@@ -51,14 +51,13 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
         let actionButtonType = isEditing
             .map { $0 ? StickerBrowserActionButtonType.done : StickerBrowserActionButtonType.edit }
 
-        let predicate = NSPredicate(format: "\(StickerProperty.hasRenderedImage.rawValue) == true")
+        let predicate = NSPredicate(format: "\(StickerProperty.renderedImageFilePath) != nil")
         let sectionItems = services.stickerService
             .fetchStickers(withPredicate: predicate)
             .map { allStickers -> [StickerSectionItem] in
                 var items = allStickers.map { sticker -> StickerSectionItem in
                     let cellViewModel: StickerBrowserCellViewModelType = StickerBrowserCellViewModel(sticker: sticker,
-                                                                                                     editing: isEditing,
-                                                                                                     imageStore: self.services.imageStoreService)
+                                                                                                     editing: isEditing)
                     return StickerSectionItem.stickerItem(viewModel: cellViewModel)
                 }
                 items.append(StickerSectionItem.openAppItem)

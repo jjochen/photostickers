@@ -72,8 +72,8 @@ final class EditStickerViewModel: ServicesViewModel, Stepper {
     lazy var stickerInfo: StickerInfo = {
         StickerInfo(uuid: sticker.uuid,
                     title: sticker.title,
-                    originalImage: sticker.originalImage(from: services.imageStoreService),
-                    renderedSticker: sticker.renderedImage(from: services.imageStoreService),
+                    originalImage: sticker.originalImage,
+                    renderedSticker: sticker.renderedImage,
                     cropBounds: sticker.cropBounds,
                     mask: sticker.mask,
                     sortOrder: sticker.sortOrder)
