@@ -37,7 +37,6 @@
 		19DE76F8225389A600CF29AB /* DataFolderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76E7225389A600CF29AB /* DataFolderService.swift */; };
 		19DE76F9225389A600CF29AB /* ImageStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76E8225389A600CF29AB /* ImageStoreService.swift */; };
 		19DE770B22538A8200CF29AB /* StickerService+UITestSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76FB22538A8200CF29AB /* StickerService+UITestSetup.swift */; };
-		19DE770C22538A8200CF29AB /* Sticker+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76FC22538A8200CF29AB /* Sticker+Images.swift */; };
 		19DE770D22538A8200CF29AB /* UIImage+RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76FD22538A8200CF29AB /* UIImage+RoundedCorner.swift */; };
 		19DE770E22538A8200CF29AB /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76FE22538A8200CF29AB /* UIViewController+Extensions.swift */; };
 		19DE770F22538A8200CF29AB /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE76FF22538A8200CF29AB /* UIButton+Extensions.swift */; };
@@ -131,7 +130,6 @@
 		19DE76E7225389A600CF29AB /* DataFolderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFolderService.swift; sourceTree = "<group>"; };
 		19DE76E8225389A600CF29AB /* ImageStoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStoreService.swift; sourceTree = "<group>"; };
 		19DE76FB22538A8200CF29AB /* StickerService+UITestSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StickerService+UITestSetup.swift"; sourceTree = "<group>"; };
-		19DE76FC22538A8200CF29AB /* Sticker+Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sticker+Images.swift"; sourceTree = "<group>"; };
 		19DE76FD22538A8200CF29AB /* UIImage+RoundedCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+RoundedCorner.swift"; sourceTree = "<group>"; };
 		19DE76FE22538A8200CF29AB /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		19DE76FF22538A8200CF29AB /* UIButton+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -365,7 +363,6 @@
 			children = (
 				19DE770922538A8200CF29AB /* CGGeometry+Extensions.swift */,
 				19DE770822538A8200CF29AB /* Logger+Shared.swift */,
-				19DE76FC22538A8200CF29AB /* Sticker+Images.swift */,
 				19DE76FB22538A8200CF29AB /* StickerService+UITestSetup.swift */,
 				19DE770222538A8200CF29AB /* String+Extensions.swift */,
 				19DE76FF22538A8200CF29AB /* UIButton+Extensions.swift */,
@@ -707,7 +704,6 @@
 				19DE771122538A8200CF29AB /* UIImage+Resize.swift in Sources */,
 				19DE76F0225389A600CF29AB /* RxImagePickerDelegateProxy.swift in Sources */,
 				19DE774022538F6700CF29AB /* StickerBrowserCell.swift in Sources */,
-				19DE770C22538A8200CF29AB /* Sticker+Images.swift in Sources */,
 				19DE771622538A8200CF29AB /* UIImage+Orientation.swift in Sources */,
 				19DE771322538A8200CF29AB /* UIDevice+Extensions.swift in Sources */,
 				19DE76F7225389A600CF29AB /* StyleKit.swift in Sources */,

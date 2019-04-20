@@ -35,16 +35,16 @@ class StickerBrowserCellViewModel: BaseViewModel, StickerBrowserCellViewModelTyp
     var hideSticker: Driver<Bool>
     var hideImageView: Driver<Bool>
 
-    init(sticker: Sticker, editing: Driver<Bool>, imageStore: ImageStoreServiceType) {
+    init(sticker: Sticker, editing: Driver<Bool>) {
         self.sticker = sticker
         isEditing = editing
 
-        let imageURL = sticker.renderedImageURL(in: imageStore)
+        let imageURL = sticker.renderedImageURL
         let title = sticker.title
         msSticker = StickerBrowserCellViewModel.msSticker(imageURL: imageURL, title: title)
         placeholderHidden = msSticker != nil
 
-        image = sticker.renderedImage(from: imageStore)
+        image = sticker.renderedImage
 
         wiggle = isEditing
         hideDeleteButton = isEditing.map { !$0 }

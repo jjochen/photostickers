@@ -6,15 +6,16 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import Foundation
 import RealmSwift
 import RxDataSources
+import UIKit
 
 enum StickerProperty: String {
     case uuid
     case title
-    case hasOriginalImage
-    case hasRenderedImage
+    case originalImageFilePath
+    case renderedImageFilePath
+    case renderedImageVersion
     case cropBoundsX
     case cropBoundsY
     case cropBoundsWidth
@@ -28,8 +29,9 @@ enum StickerProperty: String {
 class Sticker: Object {
     @objc dynamic var uuid = ""
     @objc dynamic var title: String?
-    @objc dynamic var hasOriginalImage: Bool = false
-    @objc dynamic var hasRenderedImage: Bool = false
+    @objc dynamic var originalImageFilePath: String?
+    @objc dynamic var renderedImageFilePath: String?
+    @objc dynamic var renderedImageVersion: Int = 0
     @objc dynamic var cropBoundsX: Double = 0
     @objc dynamic var cropBoundsY: Double = 0
     @objc dynamic var cropBoundsWidth: Double = 0
@@ -93,6 +95,66 @@ extension Sticker {
         set(mask) {
             maskType = mask.rawValue
         }
+    }
+}
+
+// MARK: Images
+
+extension Sticker {
+    var originalImage: UIImage? {
+        guard let filePath = originalImageFilePath else {
+            return nil
+        }
+        return UIImage(contentsOfFile: filePath)
+    }
+
+    var renderedImage: UIImage? {
+        guard let filePath = renderedImageFilePath else {
+            return nil
+        }
+        return UIImage(contentsOfFile: filePath)
+    }
+
+    var originalImageURL: URL? {
+        guard let path = originalImageFilePath else {
+            return nil
+        }
+        return URL(fileURLWithPath: path)
+    }
+
+    var renderedImageURL: URL? {
+        guard let path = renderedImageFilePath else {
+            return nil
+        }
+        return URL(fileURLWithPath: path)
+    }
+
+    var hasOriginalImage: Bool {
+        guard let path = originalImageFilePath else {
+            return false
+        }
+        return FileManager.default.fileExists(atPath: path)
+    }
+
+    var hasRenderedImage: Bool {
+        guard let path = renderedImageFilePath else {
+            return false
+        }
+        return FileManager.default.fileExists(atPath: path)
+    }
+
+    func deleteOriginalImage() {
+        guard let path = originalImageFilePath else {
+            return
+        }
+        try? FileManager.default.removeItem(atPath: path)
+    }
+
+    func deleteRenderedImage() {
+        guard let path = renderedImageFilePath else {
+            return
+        }
+        try? FileManager.default.removeItem(atPath: path)
     }
 }
 

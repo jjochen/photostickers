@@ -9,7 +9,7 @@
 import Log
 import UIKit
 
-enum ImageCategory: String {
+private enum ImageCategory: String {
     case originals
     case stickers
 
@@ -27,7 +27,7 @@ enum ImageCategory: String {
     }
 }
 
-enum ImageFileType: String {
+private enum ImageFileType: String {
     case jpg
     case png
 
@@ -50,34 +50,42 @@ enum ImageFileType: String {
     }
 }
 
-protocol ImageStoreServiceType {
-    func storeImage(_ image: UIImage, forKey key: String, inCategory category: ImageCategory) -> URL?
-    func image(forKey key: String, inCategory category: ImageCategory) -> UIImage?
-    func imageExists(forKey key: String, inCategory category: ImageCategory) -> Bool
-    func imageURL(forKey key: String, inCategory category: ImageCategory) -> URL?
-    func deleteImage(forKey key: String, inCategory category: ImageCategory) -> Bool
-}
-
 protocol HasImageStoreService {
     var imageStoreService: ImageStoreService { get }
 }
 
-class ImageStoreService: ImageStoreServiceType {
-    fileprivate let storeURL: URL?
+class ImageStoreService {
+    private let storeURL: URL?
 
     init(url: URL?) {
         storeURL = url
     }
+
+    func store(originalImage image: UIImage, forKey key: String) -> URL? {
+        return storeImage(image, forKey: key, inCategory: .originals, version: nil)
+    }
+
+    func store(renderedImage image: UIImage, forKey key: String, version: Int) -> URL? {
+        return storeImage(image, forKey: key, inCategory: .stickers, version: version)
+    }
+
+    func originalImageURL(forKey key: String) -> URL? {
+        return constructImageURL(forKey: key, inCategory: .originals, version: nil)
+    }
+
+    func renderedImageURL(forKey key: String, version: Int?) -> URL? {
+        return constructImageURL(forKey: key, inCategory: .stickers, version: version)
+    }
 }
 
-extension ImageStoreService {
-    func storeImage(_ image: UIImage, forKey key: String, inCategory category: ImageCategory) -> URL? {
+private extension ImageStoreService {
+    func storeImage(_ image: UIImage, forKey key: String, inCategory category: ImageCategory, version: Int?) -> URL? {
         guard let data = category.fileType.data(for: image) else {
             Logger.shared.error("PNG/JPG representation not possible: \(image)")
             return nil
         }
 
-        guard let url = self.constructImageURL(forKey: key, inCategory: category) else {
+        guard let url = self.constructImageURL(forKey: key, inCategory: category, version: version) else {
             Logger.shared.error("No image url for key \(key) in category \(category)")
             return nil
         }
@@ -95,50 +103,6 @@ extension ImageStoreService {
             Logger.shared.error(error)
         }
         return result
-    }
-
-    func image(forKey key: String, inCategory category: ImageCategory) -> UIImage? {
-        guard let url = self.constructImageURL(forKey: key, inCategory: category) else {
-            Logger.shared.error("No image url for key \(key) in category \(category)")
-            return nil
-        }
-        return UIImage(contentsOfFile: url.path)
-    }
-
-    func imageExists(forKey key: String, inCategory category: ImageCategory) -> Bool {
-        guard let url = self.constructImageURL(forKey: key, inCategory: category) else {
-            Logger.shared.error("No image url for key \(key) in category \(category)")
-            return false
-        }
-        return FileManager.default.fileExists(atPath: url.path)
-    }
-
-    func imageURL(forKey key: String, inCategory category: ImageCategory) -> URL? {
-        guard imageExists(forKey: key, inCategory: category) else {
-            return nil
-        }
-        return constructImageURL(forKey: key, inCategory: category)
-    }
-
-    func deleteImage(forKey key: String, inCategory category: ImageCategory) -> Bool {
-        guard let url = self.constructImageURL(forKey: key, inCategory: category) else {
-            Logger.shared.error("No image url for key \(key) in category \(category)")
-            return false
-        }
-
-        guard FileManager.default.fileExists(atPath: url.path) else {
-            Logger.shared.warning("No image at url \(url)")
-            return false
-        }
-
-        do {
-            try FileManager.default.removeItem(at: url)
-        } catch {
-            Logger.shared.error(error)
-            return false
-        }
-
-        return true
     }
 }
 
@@ -162,7 +126,17 @@ private extension ImageStoreService {
         return storeURL?.appendingPathComponent(category.subFolder, isDirectory: true)
     }
 
-    func constructImageURL(forKey key: String, inCategory category: ImageCategory) -> URL? {
-        return constructCategoryURL(category)?.appendingPathComponent(key).appendingPathExtension(category.fileType.fileExtension)
+    func constructImageURL(forKey key: String, inCategory category: ImageCategory, version: Int?) -> URL? {
+        let fileName = constructImageName(forKey: key, version: version)
+        return constructCategoryURL(category)?
+            .appendingPathComponent(fileName)
+            .appendingPathExtension(category.fileType.fileExtension)
+    }
+
+    func constructImageName(forKey key: String, version: Int?) -> String {
+        guard let version = version else {
+            return key
+        }
+        return "\(key)_\(version)"
     }
 }
