@@ -873,7 +873,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CODE_SIGN_ENTITLEMENTS = "MessagesExtension/Supporting Files/MessagesExtension.entitlements";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2032;
+				CURRENT_PROJECT_VERSION = 2035;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = "MessagesExtension/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -898,7 +898,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CODE_SIGN_ENTITLEMENTS = "MessagesExtension/Supporting Files/MessagesExtension.entitlements";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2032;
+				CURRENT_PROJECT_VERSION = 2035;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = "MessagesExtension/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -922,7 +922,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2032;
+				CURRENT_PROJECT_VERSION = 2035;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = "App/Supporting Files/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.photo-stickers.extension-only";
@@ -940,7 +940,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2032;
+				CURRENT_PROJECT_VERSION = 2035;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
 				INFOPLIST_FILE = "App/Supporting Files/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.photo-stickers.extension-only";
