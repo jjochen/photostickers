@@ -59,7 +59,7 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
                                                                                                      editing: isEditing)
                     return StickerSectionItem.stickerItem(viewModel: cellViewModel)
                 }
-                items.append(StickerSectionItem.openAppItem)
+                items.append(StickerSectionItem.addStickerItem)
                 return items
             }.asDriver(onErrorDriveWith: Driver.empty())
 
@@ -71,7 +71,7 @@ final class StickerBrowserViewModel: ServicesViewModel, Stepper {
             }
             .do(onNext: { item in
                 switch item {
-                case .openAppItem:
+                case .addStickerItem:
                     self.addSticker()
                 case let .stickerItem(viewModel: model):
                     let sticker = model.sticker

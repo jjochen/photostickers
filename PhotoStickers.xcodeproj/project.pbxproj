@@ -65,6 +65,7 @@
 		19DE774B2253F12100CF29AB /* StickerBrowserFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE774A2253F12100CF29AB /* StickerBrowserFlow.swift */; };
 		19DE774D2253F2D900CF29AB /* EditStickerFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE774C2253F2D900CF29AB /* EditStickerFlow.swift */; };
 		19DE774F2255F61300CF29AB /* WiggleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE774E2255F61300CF29AB /* WiggleEffect.swift */; };
+		19FBF5EE226E283C008125D0 /* UIColor+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBF5ED226E283C008125D0 /* UIColor+Image.swift */; };
 		75899F2FCE8ECC2A4FD9FBBA /* Pods_PhotoStickers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B954D5DAE75F01F82C678320 /* Pods_PhotoStickers.framework */; };
 		CE42A88ECC9BF65E160BBE4F /* Pods_MessagesExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1056ED50A6BB83946FB40332 /* Pods_MessagesExtension.framework */; };
 /* End PBXBuildFile section */
@@ -161,6 +162,7 @@
 		19DE774C2253F2D900CF29AB /* EditStickerFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStickerFlow.swift; sourceTree = "<group>"; };
 		19DE774E2255F61300CF29AB /* WiggleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiggleEffect.swift; sourceTree = "<group>"; };
 		19DE7750225619A000CF29AB /* MessagesExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessagesExtension.entitlements; sourceTree = "<group>"; };
+		19FBF5ED226E283C008125D0 /* UIColor+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Image.swift"; sourceTree = "<group>"; };
 		325A088209BF78EB19F38DB5 /* Pods-PhotoStickers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickers.release.xcconfig"; path = "Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers.release.xcconfig"; sourceTree = "<group>"; };
 		B954D5DAE75F01F82C678320 /* Pods_PhotoStickers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoStickers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2B1FD638D084F4933920672 /* Pods-MessagesExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.release.xcconfig"; path = "Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.release.xcconfig"; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 				19DE770622538A8200CF29AB /* UIImage+Orientation.swift */,
 				19DE770122538A8200CF29AB /* UIImage+Resize.swift */,
 				19DE76FD22538A8200CF29AB /* UIImage+RoundedCorner.swift */,
+				19FBF5ED226E283C008125D0 /* UIColor+Image.swift */,
 				19DE770722538A8200CF29AB /* UIStoryboard+Extensions.swift */,
 				19DE770422538A8200CF29AB /* UIStoryboardSegue+Extensions.swift */,
 				19DE770022538A8200CF29AB /* UIView+Extensions.swift */,
@@ -708,6 +711,7 @@
 				19DE771322538A8200CF29AB /* UIDevice+Extensions.swift in Sources */,
 				19DE76F7225389A600CF29AB /* StyleKit.swift in Sources */,
 				19DE76F5225389A600CF29AB /* PSError.swift in Sources */,
+				19FBF5EE226E283C008125D0 /* UIColor+Image.swift in Sources */,
 				19DE774222538F6F00CF29AB /* StickerBrowserViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,12 +9,20 @@
 import UIKit
 
 class AddStickerCell: UICollectionViewCell {
+    @IBOutlet var backgroundImageView: UIImageView!
     @IBOutlet var imageView: UIImageView!
 
     override func awakeFromNib() {
-        // todo: use StickerRenderService
+        // use dependency injection for render service
+        let renderService = StickerRenderService()
+        let mask = Mask.circle
+        let backgroundPixelNormal = StyleKit.plusBackgroundColorNormal.image()
+        let backgroundPixelHighlighted = StyleKit.plusBackgroundColorHighlighted.image()
 
-        imageView.image = StyleKit.imageOfAddIcon(highlighted: false)
-        imageView.highlightedImage = StyleKit.imageOfAddIcon(highlighted: true)
+        backgroundImageView.image = renderService.render(backgroundPixelNormal, mask: mask)
+        backgroundImageView.highlightedImage = renderService.render(backgroundPixelHighlighted, mask: mask)
+
+        imageView.image = StyleKit.imageOfPlusIcon(highlighted: false)
+        imageView.highlightedImage = StyleKit.imageOfPlusIcon(highlighted: true)
     }
 }

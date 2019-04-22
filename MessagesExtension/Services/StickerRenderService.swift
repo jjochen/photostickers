@@ -15,25 +15,21 @@ protocol HasStickerRenderService {
 }
 
 class StickerRenderService {
-    let renderedImageSize: CGSize
-
-    init(renderedImageSize: CGSize) {
-        self.renderedImageSize = renderedImageSize
-    }
-
+    private let renderedImageSize = Sticker.renderedSize
     private let shadowOffset = CGSize(width: 0, height: -4)
     private let shadowBlur = CGFloat(12)
     private let shadowColor = UIColor.black
+    private let backgroundColor = UIColor.white
 }
 
 extension StickerRenderService {
     func render(_ stickerInfo: StickerInfo) -> Observable<UIImage?> {
         return Observable.combineLatest(stickerInfo.originalImage.asObservable(), stickerInfo.cropBounds.asObservable(), stickerInfo.mask.asObservable()) { [weak self] (originalImage, cropBounds, mask) -> UIImage? in
-            self?.render(originalImage, cropBounds: cropBounds, mask: mask)
+            self?.render(originalImage, mask: mask, cropBounds: cropBounds)
         }
     }
 
-    func render(_ originalImage: UIImage?, cropBounds: CGRect, mask: Mask) -> UIImage? {
+    func render(_ originalImage: UIImage?, mask: Mask, cropBounds: CGRect? = nil) -> UIImage? {
         guard let image = originalImage else {
             fatalErrorWhileDebugging("Couldn't render empty image")
             return nil
@@ -48,7 +44,10 @@ extension StickerRenderService {
             return nil
         }
 
-        guard let croppedImageRef = imageRef.cropping(to: cropBounds) else {
+        let bounds = cropBounds ?? CGRect(origin: .zero, size: image.size)
+        let scaledBounds = bounds.applying(CGAffineTransform(scaleX: image.scale, y: image.scale))
+
+        guard let croppedImageRef = imageRef.cropping(to: scaledBounds) else {
             fatalErrorWhileDebugging("Couldn't crop image to new bounds")
             return nil
         }
@@ -60,7 +59,7 @@ extension StickerRenderService {
 
         let clipPath = mask.path(in: imageDrawRect, flipped: true).cgPath
 
-        drawShadow(path: clipPath, in: context)
+        drawBackgroundAndShadow(path: clipPath, in: context)
         drawImage(croppedImageRef, clipPath: clipPath, in: context)
 
         guard let renderedImageRef = context.makeImage() else {
@@ -73,11 +72,12 @@ extension StickerRenderService {
 }
 
 private extension StickerRenderService {
-    func drawShadow(path: CGPath, in context: CGContext) {
+    func drawBackgroundAndShadow(path: CGPath, in context: CGContext) {
         context.saveGState()
         context.beginPath()
         context.addPath(path)
         context.closePath()
+        context.setFillColor(backgroundColor.cgColor)
         context.setShadow(offset: shadowOffset, blur: shadowBlur, color: shadowColor.cgColor)
         context.drawPath(using: .fill)
         context.restoreGState()
@@ -96,8 +96,8 @@ private extension StickerRenderService {
     var context: CGContext? {
         let context = CGContext(
             data: nil,
-            width: Int(renderedImageRect.size.width),
-            height: Int(renderedImageRect.size.height),
+            width: Int(renderedImageSize.width),
+            height: Int(renderedImageSize.height),
             bitsPerComponent: 8,
             bytesPerRow: 0,
             space: CGColorSpaceCreateDeviceRGB(),
@@ -107,28 +107,24 @@ private extension StickerRenderService {
         return context
     }
 
-    var renderedImageRect: CGRect {
-        return CGRect(origin: .zero, size: renderedImageSize).integral
-    }
-
     var imageDrawRect: CGRect {
         let leftShadowInset = max(0, shadowBlur - shadowOffset.width)
         let rightShadowInset = max(0, shadowBlur + shadowOffset.width)
         let bottomShadowInset = max(0, shadowBlur - shadowOffset.height)
         let topShadowInset = max(0, shadowBlur + shadowOffset.height)
 
-        let maxWidth = renderedImageRect.width - leftShadowInset - rightShadowInset
-        let maxHeight = renderedImageRect.height - bottomShadowInset - topShadowInset
+        let maxWidth = renderedImageSize.width - leftShadowInset - rightShadowInset
+        let maxHeight = renderedImageSize.height - bottomShadowInset - topShadowInset
 
-        let xScale = maxWidth / renderedImageRect.width
-        let yScale = maxHeight / renderedImageRect.height
+        let xScale = maxWidth / renderedImageSize.width
+        let yScale = maxHeight / renderedImageSize.height
         let scale = min(xScale, yScale)
 
         var imageDrawRect = CGRect()
         imageDrawRect.origin.x = leftShadowInset
         imageDrawRect.origin.y = bottomShadowInset
-        imageDrawRect.size.width = renderedImageRect.width * scale
-        imageDrawRect.size.height = renderedImageRect.height * scale
+        imageDrawRect.size.width = renderedImageSize.width * scale
+        imageDrawRect.size.height = renderedImageSize.height * scale
         return imageDrawRect.integral
     }
 }

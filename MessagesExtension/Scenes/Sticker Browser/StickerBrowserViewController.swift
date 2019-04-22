@@ -63,8 +63,8 @@ class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModel
         let dataSource = RxCollectionViewSectionedReloadDataSource<StickerSection>(
             configureCell: { _, collectionView, indexPath, item in
                 switch item {
-                case .openAppItem:
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.AddMoreCell.rawValue, for: indexPath)
+                case .addStickerItem:
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.AddStickerCell.rawValue, for: indexPath)
                     return cell
                 case let .stickerItem(viewModel: cellViewModel):
                     let cell: StickerBrowserCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellReuseIdentifier.StickerBrowserCell.rawValue, for: indexPath) as! StickerBrowserCell

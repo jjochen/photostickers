@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -71,15 +72,18 @@
                                             <outlet property="stickerView" destination="VZE-xp-4zO" id="xxk-0S-JMB"/>
                                         </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddMoreCell" id="dI8-17-nN2" customClass="AddStickerCell" customModule="MessagesExtension" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddStickerCell" id="dI8-17-nN2" customClass="AddStickerCell" customModule="MessagesExtension" customModuleProvider="target">
                                         <rect key="frame" x="111.5" y="10" width="90" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="56" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="flT-g4-hgs">
-                                                    <rect key="frame" x="17" y="17" width="56" height="56"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rpn-rr-YFQ" userLabel="Background Image View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="56" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="flT-g4-hgs">
+                                                    <rect key="frame" x="17" y="15.5" width="56" height="56"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                                     </accessibility>
@@ -87,10 +91,15 @@
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="flT-g4-hgs" firstAttribute="centerY" secondItem="dI8-17-nN2" secondAttribute="centerY" id="01B-g4-vu5"/>
-                                            <constraint firstItem="flT-g4-hgs" firstAttribute="centerX" secondItem="dI8-17-nN2" secondAttribute="centerX" id="fgo-Mp-b5k"/>
+                                            <constraint firstItem="flT-g4-hgs" firstAttribute="centerX" secondItem="dI8-17-nN2" secondAttribute="centerX" id="V14-BF-Bap"/>
+                                            <constraint firstItem="rpn-rr-YFQ" firstAttribute="bottom" secondItem="dI8-17-nN2" secondAttribute="bottom" id="XM2-qk-ruO"/>
+                                            <constraint firstItem="rpn-rr-YFQ" firstAttribute="trailing" secondItem="dI8-17-nN2" secondAttribute="trailing" id="m7H-x5-DPl"/>
+                                            <constraint firstItem="flT-g4-hgs" firstAttribute="centerY" secondItem="dI8-17-nN2" secondAttribute="centerY" multiplier="0.97" id="rWx-QC-eDp"/>
+                                            <constraint firstItem="rpn-rr-YFQ" firstAttribute="leading" secondItem="dI8-17-nN2" secondAttribute="leading" id="sxD-CM-81w"/>
+                                            <constraint firstItem="rpn-rr-YFQ" firstAttribute="top" secondItem="dI8-17-nN2" secondAttribute="top" id="wcS-dJ-Pfc"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="backgroundImageView" destination="rpn-rr-YFQ" id="KAC-3y-5vU"/>
                                             <outlet property="imageView" destination="flT-g4-hgs" id="jVa-AC-kiL"/>
                                         </connections>
                                     </collectionViewCell>
