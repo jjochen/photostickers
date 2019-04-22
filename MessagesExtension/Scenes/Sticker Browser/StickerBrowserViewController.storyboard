@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3W7-9r-vBM">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Sticker Browser View Controller-->
+        <scene sceneID="waH-rg-vBx">
+            <objects>
+                <viewController storyboardIdentifier="StickerBrowserViewController" id="3W7-9r-vBM" customClass="StickerBrowserViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ExS-X3-v8E">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dQE-mC-GAk" userLabel="StickerBrowserCollectionView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3Se-bC-niW">
+                                    <size key="itemSize" width="90" height="90"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StickerBrowserCell" id="S3C-ts-3kb" userLabel="StickerBrowserCell" customClass="StickerBrowserCell" customModule="MessagesExtension" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="10" width="90" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VZE-xp-4zO" customClass="MSStickerView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s8M-D7-1ZB" userLabel="Sticker Image View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R5U-6w-tJf" userLabel="Sticker Placeholder View" customClass="AppIconView" customModule="MessagesExtension" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="VZE-xp-4zO" firstAttribute="top" secondItem="S3C-ts-3kb" secondAttribute="top" id="9GC-gZ-VrO"/>
+                                            <constraint firstItem="s8M-D7-1ZB" firstAttribute="top" secondItem="S3C-ts-3kb" secondAttribute="top" id="HyL-e9-KUy"/>
+                                            <constraint firstItem="R5U-6w-tJf" firstAttribute="trailing" secondItem="S3C-ts-3kb" secondAttribute="trailing" id="Kj8-w3-yrH"/>
+                                            <constraint firstItem="s8M-D7-1ZB" firstAttribute="bottom" secondItem="S3C-ts-3kb" secondAttribute="bottom" id="RQ4-of-eXV"/>
+                                            <constraint firstItem="R5U-6w-tJf" firstAttribute="leading" secondItem="S3C-ts-3kb" secondAttribute="leading" id="W0p-IW-xS2"/>
+                                            <constraint firstItem="VZE-xp-4zO" firstAttribute="bottom" secondItem="S3C-ts-3kb" secondAttribute="bottom" id="c0e-M2-bXh"/>
+                                            <constraint firstItem="s8M-D7-1ZB" firstAttribute="leading" secondItem="S3C-ts-3kb" secondAttribute="leading" id="fF8-P7-BDu"/>
+                                            <constraint firstItem="VZE-xp-4zO" firstAttribute="trailing" secondItem="S3C-ts-3kb" secondAttribute="trailing" id="iAt-ak-8Hx"/>
+                                            <constraint firstItem="R5U-6w-tJf" firstAttribute="top" secondItem="S3C-ts-3kb" secondAttribute="top" id="pJA-X2-bwU"/>
+                                            <constraint firstItem="VZE-xp-4zO" firstAttribute="leading" secondItem="S3C-ts-3kb" secondAttribute="leading" id="rfk-Qb-WNe"/>
+                                            <constraint firstItem="R5U-6w-tJf" firstAttribute="bottom" secondItem="S3C-ts-3kb" secondAttribute="bottom" id="rg0-u9-Iya"/>
+                                            <constraint firstItem="s8M-D7-1ZB" firstAttribute="trailing" secondItem="S3C-ts-3kb" secondAttribute="trailing" id="sBX-8Y-guU"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="StickerBrowserCell"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="imageView" destination="s8M-D7-1ZB" id="zph-6p-QaQ"/>
+                                            <outlet property="placeholderView" destination="R5U-6w-tJf" id="dJ9-ZU-cIA"/>
+                                            <outlet property="stickerView" destination="VZE-xp-4zO" id="xxk-0S-JMB"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddStickerCell" id="dI8-17-nN2" customClass="AddStickerCell" customModule="MessagesExtension" customModuleProvider="target">
+                                        <rect key="frame" x="111.5" y="10" width="90" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rpn-rr-YFQ" userLabel="Background Image View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="56" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="flT-g4-hgs">
+                                                    <rect key="frame" x="17" y="15.5" width="56" height="56"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                                                    </accessibility>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="flT-g4-hgs" firstAttribute="centerX" secondItem="dI8-17-nN2" secondAttribute="centerX" id="V14-BF-Bap"/>
+                                            <constraint firstItem="rpn-rr-YFQ" firstAttribute="bottom" secondItem="dI8-17-nN2" secondAttribute="bottom" id="XM2-qk-ruO"/>
+                                            <constraint firstItem="rpn-rr-YFQ" firstAttribute="trailing" secondItem="dI8-17-nN2" secondAttribute="trailing" id="m7H-x5-DPl"/>
+                                            <constraint firstItem="flT-g4-hgs" firstAttribute="centerY" secondItem="dI8-17-nN2" secondAttribute="centerY" multiplier="0.97" id="rWx-QC-eDp"/>
+                                            <constraint firstItem="rpn-rr-YFQ" firstAttribute="leading" secondItem="dI8-17-nN2" secondAttribute="leading" id="sxD-CM-81w"/>
+                                            <constraint firstItem="rpn-rr-YFQ" firstAttribute="top" secondItem="dI8-17-nN2" secondAttribute="top" id="wcS-dJ-Pfc"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="backgroundImageView" destination="rpn-rr-YFQ" id="KAC-3y-5vU"/>
+                                            <outlet property="imageView" destination="flT-g4-hgs" id="jVa-AC-kiL"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="StickerBrowserCollectionView"/>
+                                </userDefinedRuntimeAttributes>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="right" secondItem="dQE-mC-GAk" secondAttribute="right" id="4E2-Wb-HAc"/>
+                            <constraint firstAttribute="bottom" secondItem="dQE-mC-GAk" secondAttribute="bottom" id="LhU-en-p9W"/>
+                            <constraint firstItem="dQE-mC-GAk" firstAttribute="left" secondItem="ExS-X3-v8E" secondAttribute="left" id="Nqx-ao-9Si"/>
+                            <constraint firstItem="dQE-mC-GAk" firstAttribute="top" secondItem="ExS-X3-v8E" secondAttribute="top" id="b7h-h2-W8e"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="t0Z-jR-2ZG"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Muy-P4-GqP"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="collectionView" destination="dQE-mC-GAk" id="q7L-B0-ygP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yck-uZ-ZwR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="YNg-fQ-c7G" customClass="StyleKit" customModule="MessagesExtension" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="760.79999999999995" y="108.39580209895054"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,4 +1,7 @@
 upcoming:
+- move edit sticker workflow into extension
+- make standalone imessage extension
+- use flow coordinator for navigation logic
 
 releases:
 - version: 1.1.0

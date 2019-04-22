@@ -27,11 +27,11 @@ lane :beta do |options|
 
   build_ios_app
 
-  upload_to_testflight({
-    skip_submission: false,
-    distribute_external: true,
-    changelog: "New build",
-    skip_waiting_for_build_processing: true,
+  upload_to_app_store({
+    skip_binary_upload: false,
+    skip_screenshots: true,
+    skip_metadata: true,
+    force: true
   })
 end
 
@@ -72,6 +72,9 @@ EOS
   build_ios_app
 
   upload_to_app_store({
+    skip_binary_upload: false,
+    skip_screenshots: true,
+    skip_metadata: true,
     force: true
   })
   # frameit
@@ -118,14 +121,26 @@ lane :screenshots do
 end
 
 
-desc "Deploy a new version to the App Store"
+desc "Upload metadata"
 lane :upload_metadata do
   upload_to_app_store({
     skip_binary_upload: true,
+    skip_screenshots: true,
+    skip_metadata: false,
     force: true
   })
 end
 
+
+desc "Upload screenshots"
+lane :upload_screenshots do
+  upload_to_app_store({
+    skip_binary_upload: true,
+    skip_screenshots: false,
+    skip_metadata: true,
+    force: true
+  })
+end
 
 desc "Updates the storyboard identifier Swift values."
 lane :storyboard_ids do

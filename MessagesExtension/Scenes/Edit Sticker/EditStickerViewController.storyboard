@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eAM-Qd-D3J">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Edit Sticker Controller-->
+        <scene sceneID="uh9-aX-eS8">
+            <objects>
+                <viewController storyboardIdentifier="EditStickerViewController" automaticallyAdjustsScrollViewInsets="NO" id="eAM-Qd-D3J" userLabel="Edit Sticker Controller" customClass="EditStickerViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nAF-2H-hXy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NRz-ix-xWI" userLabel="Sticker Layout Guide">
+                                <rect key="frame" x="0.0" y="44" width="414" height="414"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyv-se-BRx" userLabel="Sticker Placeholder" customClass="AppIconView" customModule="MessagesExtension" customModuleProvider="target">
+                                        <rect key="frame" x="31" y="31" width="352" height="352"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="StickerPlaceholderView">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
+                                    </view>
+                                    <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.10000000149011612" maximumZoomScale="1.1000000238418579" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="C7u-Cq-gUr">
+                                        <rect key="frame" x="31" y="31" width="352" height="352"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="375" translatesAutoresizingMaskIntoConstraints="NO" id="5dP-bm-Qhu">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="StickerImageView">
+                                                    <bool key="isElement" value="YES"/>
+                                                </accessibility>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="5dP-bm-Qhu" firstAttribute="leading" secondItem="C7u-Cq-gUr" secondAttribute="leading" id="TIf-k0-Tu4"/>
+                                            <constraint firstAttribute="trailing" secondItem="5dP-bm-Qhu" secondAttribute="trailing" id="U9Q-KJ-bWr"/>
+                                            <constraint firstItem="5dP-bm-Qhu" firstAttribute="top" secondItem="C7u-Cq-gUr" secondAttribute="top" id="Vpl-Di-Jm9"/>
+                                            <constraint firstAttribute="bottom" secondItem="5dP-bm-Qhu" secondAttribute="bottom" id="W42-qy-5fn"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="alwaysBounceVertical" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="alwaysBounceHorizontal" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="decelerationRate">
+                                                <real key="value" value="0.98999999999999999"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="StickerScrollView"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="eAM-Qd-D3J" id="hL4-WN-eAk"/>
+                                        </connections>
+                                    </scrollView>
+                                    <view userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iH5-k1-1fD" userLabel="Cover View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="StickerCoverView">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="C7u-Cq-gUr" firstAttribute="centerX" secondItem="NRz-ix-xWI" secondAttribute="centerX" id="03Z-XW-ISv"/>
+                                    <constraint firstAttribute="width" secondItem="NRz-ix-xWI" secondAttribute="height" multiplier="1:1" id="8DR-Th-LSe"/>
+                                    <constraint firstItem="C7u-Cq-gUr" firstAttribute="centerY" secondItem="NRz-ix-xWI" secondAttribute="centerY" id="9Hh-mN-xTG"/>
+                                    <constraint firstItem="dyv-se-BRx" firstAttribute="centerX" secondItem="C7u-Cq-gUr" secondAttribute="centerX" id="9aD-WD-Mep"/>
+                                    <constraint firstItem="iH5-k1-1fD" firstAttribute="bottom" secondItem="NRz-ix-xWI" secondAttribute="bottom" id="CMW-N8-6Ge"/>
+                                    <constraint firstItem="iH5-k1-1fD" firstAttribute="trailing" secondItem="NRz-ix-xWI" secondAttribute="trailing" id="CRY-kp-cv4"/>
+                                    <constraint firstItem="C7u-Cq-gUr" firstAttribute="height" secondItem="NRz-ix-xWI" secondAttribute="height" multiplier="0.85" id="GNf-Xp-Yvp"/>
+                                    <constraint firstItem="dyv-se-BRx" firstAttribute="height" secondItem="C7u-Cq-gUr" secondAttribute="height" id="OiE-Qn-qZN"/>
+                                    <constraint firstItem="dyv-se-BRx" firstAttribute="centerY" secondItem="C7u-Cq-gUr" secondAttribute="centerY" id="T6S-R0-8Gf"/>
+                                    <constraint firstItem="C7u-Cq-gUr" firstAttribute="width" secondItem="NRz-ix-xWI" secondAttribute="width" multiplier="0.85" id="a7N-dp-eoT"/>
+                                    <constraint firstItem="iH5-k1-1fD" firstAttribute="top" secondItem="NRz-ix-xWI" secondAttribute="top" id="aVa-k0-pm6"/>
+                                    <constraint firstItem="iH5-k1-1fD" firstAttribute="leading" secondItem="NRz-ix-xWI" secondAttribute="leading" id="gvf-LG-ZvT"/>
+                                    <constraint firstItem="dyv-se-BRx" firstAttribute="width" secondItem="C7u-Cq-gUr" secondAttribute="width" id="rUJ-an-zhP"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2s4-tM-Oeu" userLabel="Control Layout Guide">
+                                <rect key="frame" x="0.0" y="458" width="414" height="355"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Xx-qM-Oyj" userLabel="Button Layout Guide">
+                                        <rect key="frame" x="59.5" y="160.5" width="295" height="34"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkP-RL-77I">
+                                                <rect key="frame" x="0.0" y="0.0" width="47" height="34"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="CircleButton"/>
+                                                <state key="normal" title="Circle">
+                                                    <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rjy-iJ-gej">
+                                                <rect key="frame" x="67" y="0.0" width="81" height="34"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="RectangleButton"/>
+                                                <state key="normal" title="Rectangle">
+                                                    <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5R-Uf-FlD" userLabel="Multi Star Button">
+                                                <rect key="frame" x="168" y="0.0" width="73" height="34"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="MultiStarButton"/>
+                                                <state key="normal" title="MultiStar">
+                                                    <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgg-19-X4s">
+                                                <rect key="frame" x="261" y="0.0" width="34" height="34"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="StarButton"/>
+                                                <state key="normal" title="Star">
+                                                    <color key="titleColor" red="0.72550197959999996" green="0.0" blue="0.034184741300000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="c5R-Uf-FlD" firstAttribute="leading" secondItem="Rjy-iJ-gej" secondAttribute="trailing" constant="20" id="881-xq-7Mh"/>
+                                            <constraint firstItem="hkP-RL-77I" firstAttribute="bottom" secondItem="8Xx-qM-Oyj" secondAttribute="bottom" id="IB1-bh-PBe"/>
+                                            <constraint firstItem="hkP-RL-77I" firstAttribute="leading" secondItem="8Xx-qM-Oyj" secondAttribute="leading" id="Jk9-fa-Zzb"/>
+                                            <constraint firstItem="c5R-Uf-FlD" firstAttribute="bottom" secondItem="8Xx-qM-Oyj" secondAttribute="bottom" id="O10-ND-jeY"/>
+                                            <constraint firstItem="hkP-RL-77I" firstAttribute="top" secondItem="8Xx-qM-Oyj" secondAttribute="top" id="PXO-Yp-Qwc"/>
+                                            <constraint firstItem="Rjy-iJ-gej" firstAttribute="bottom" secondItem="8Xx-qM-Oyj" secondAttribute="bottom" id="Sau-Db-Qca"/>
+                                            <constraint firstItem="c5R-Uf-FlD" firstAttribute="top" secondItem="8Xx-qM-Oyj" secondAttribute="top" id="XX7-33-oKZ"/>
+                                            <constraint firstItem="lgg-19-X4s" firstAttribute="leading" secondItem="c5R-Uf-FlD" secondAttribute="trailing" constant="20" id="ZW5-qh-CNC"/>
+                                            <constraint firstItem="Rjy-iJ-gej" firstAttribute="leading" secondItem="hkP-RL-77I" secondAttribute="trailing" constant="20" id="ZfM-sz-hCT"/>
+                                            <constraint firstItem="lgg-19-X4s" firstAttribute="top" secondItem="8Xx-qM-Oyj" secondAttribute="top" id="alE-om-3Wa"/>
+                                            <constraint firstItem="lgg-19-X4s" firstAttribute="bottom" secondItem="8Xx-qM-Oyj" secondAttribute="bottom" id="iW5-qW-4XF"/>
+                                            <constraint firstItem="lgg-19-X4s" firstAttribute="trailing" secondItem="8Xx-qM-Oyj" secondAttribute="trailing" id="nHo-M7-zzj"/>
+                                            <constraint firstItem="Rjy-iJ-gej" firstAttribute="top" secondItem="8Xx-qM-Oyj" secondAttribute="top" id="qa8-Uz-De4"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="8Xx-qM-Oyj" firstAttribute="centerY" secondItem="2s4-tM-Oeu" secondAttribute="centerY" id="8Ti-c5-1Mm"/>
+                                    <constraint firstItem="8Xx-qM-Oyj" firstAttribute="centerX" secondItem="2s4-tM-Oeu" secondAttribute="centerX" id="jhg-1e-lkH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2s4-tM-Oeu" firstAttribute="leading" secondItem="NRz-ix-xWI" secondAttribute="trailing" priority="999" id="2eW-Ez-XpX" userLabel="L: Control Layout Guide.leading = Sticker Layout Guide.trailing"/>
+                            <constraint firstItem="2s4-tM-Oeu" firstAttribute="trailing" secondItem="C0A-bQ-EHf" secondAttribute="trailing" id="69t-fT-dfQ"/>
+                            <constraint firstItem="NRz-ix-xWI" firstAttribute="leading" secondItem="C0A-bQ-EHf" secondAttribute="leading" id="6on-Pp-bc6"/>
+                            <constraint firstItem="2s4-tM-Oeu" firstAttribute="leading" secondItem="C0A-bQ-EHf" secondAttribute="leading" priority="750" id="Jxt-wP-PEd"/>
+                            <constraint firstItem="2s4-tM-Oeu" firstAttribute="top" secondItem="NRz-ix-xWI" secondAttribute="bottom" priority="999" id="Lsq-Qs-jXn" userLabel="P: Control Layout Guide.top = Sticker Layout Guide.bottom"/>
+                            <constraint firstItem="NRz-ix-xWI" firstAttribute="trailing" secondItem="C0A-bQ-EHf" secondAttribute="trailing" priority="750" id="TfF-wk-SsS"/>
+                            <constraint firstItem="2s4-tM-Oeu" firstAttribute="top" secondItem="C0A-bQ-EHf" secondAttribute="top" priority="750" id="aYx-U7-oyv"/>
+                            <constraint firstItem="2s4-tM-Oeu" firstAttribute="bottom" secondItem="C0A-bQ-EHf" secondAttribute="bottom" id="eJH-Kq-HD9"/>
+                            <constraint firstItem="NRz-ix-xWI" firstAttribute="bottom" secondItem="C0A-bQ-EHf" secondAttribute="bottom" priority="750" id="qwX-Dl-alR"/>
+                            <constraint firstItem="NRz-ix-xWI" firstAttribute="top" secondItem="C0A-bQ-EHf" secondAttribute="top" id="vp9-KB-HWS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="C0A-bQ-EHf"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2eW-Ez-XpX"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem id="FCY-Cz-cME" userLabel="Delete Button Item">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="DeleteButtonItem"/>
+                            </userDefinedRuntimeAttributes>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="PbX-8H-sAE"/>
+                        <barButtonItem id="jZj-az-O0R" userLabel="Photo Button Item">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="PhotoButtonItem"/>
+                            </userDefinedRuntimeAttributes>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="Was-el-Q87" userLabel="Edit Sticker Navigation Bar">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gcp-im-xWX" userLabel="Cancel Button Item">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="CancelButtonItem"/>
+                            </userDefinedRuntimeAttributes>
+                        </barButtonItem>
+                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Photo Sticker" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" id="rkT-Xu-tMV" userLabel="Sticker Title Text Field">
+                            <rect key="frame" x="88" y="7" width="238" height="30"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <accessibility key="accessibilityConfiguration" identifier="StickerTitleTextField"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
+                        </textField>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Uyd-eq-aoo" userLabel="Save Button Item">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="SaveButtonItem"/>
+                            </userDefinedRuntimeAttributes>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="cancelButtonItem" destination="gcp-im-xWX" id="xdp-Ie-ClV"/>
+                        <outlet property="circleButton" destination="hkP-RL-77I" id="lll-2T-Ykl"/>
+                        <outlet property="coverView" destination="iH5-k1-1fD" id="CxB-Mk-cOf"/>
+                        <outlet property="deleteButtonItem" destination="FCY-Cz-cME" id="CWG-xg-M1F"/>
+                        <outlet property="imageView" destination="5dP-bm-Qhu" id="P5R-mC-41D"/>
+                        <outlet property="multiStarButton" destination="c5R-Uf-FlD" id="Zq6-F6-FSB"/>
+                        <outlet property="photosButtonItem" destination="jZj-az-O0R" id="Rg4-be-6Jo"/>
+                        <outlet property="rectangleButton" destination="Rjy-iJ-gej" id="9u5-qv-JHA"/>
+                        <outlet property="saveButtonItem" destination="Uyd-eq-aoo" id="HcD-gJ-3uB"/>
+                        <outlet property="scrollView" destination="C7u-Cq-gUr" id="0rG-SI-toN"/>
+                        <outlet property="starButton" destination="lgg-19-X4s" id="Iz8-Gw-vUO"/>
+                        <outlet property="stickerPlaceholder" destination="dyv-se-BRx" id="ieZ-el-8U5"/>
+                        <outlet property="stickerTitleTextField" destination="rkT-Xu-tMV" id="8Cx-RG-Lty"/>
+                        <outletCollection property="landscapeConstraints" destination="2eW-Ez-XpX" collectionClass="NSMutableArray" id="Utd-eZ-Yy6"/>
+                        <outletCollection property="portraitConstraints" destination="Lsq-Qs-jXn" collectionClass="NSMutableArray" id="DMo-CX-FTY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fEb-ht-8Om" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="cEQ-g3-bfk" customClass="StyleKit" customModule="MessagesExtension" customModuleProvider="target">
+                    <connections>
+                        <outletCollection property="photoToolbarIconTargets" destination="jZj-az-O0R" collectionClass="NSMutableArray" id="ng7-6D-VuO"/>
+                        <outletCollection property="trashToolbarIconTargets" destination="FCY-Cz-cME" collectionClass="NSMutableArray" id="Rdl-hO-ByK"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="2306" y="108"/>
+        </scene>
+    </scenes>
+</document>

@@ -73,7 +73,10 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
-fastlane/metadata/review_information
+
+# do not track private info
+fastlane/metadata/trade_representative_contact_information/
+fastlane/metadata/review_information/
 
 
 ### Xcode ###

@@ -1,5 +1,5 @@
 workspace "PhotoStickers.xcworkspace"
-scheme "PhotoStickers"
+scheme "MessagesExtension"
 configuration "Debug"
 sdk "iphonesimulator"
 devices ["iPhone XS Max"]

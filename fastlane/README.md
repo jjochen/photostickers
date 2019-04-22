@@ -39,7 +39,12 @@ capture screenshots
 ```
 fastlane upload_metadata
 ```
-Deploy a new version to the App Store
+Upload metadata
+### upload_screenshots
+```
+fastlane upload_screenshots
+```
+Upload screenshots
 ### storyboard_ids
 ```
 fastlane storyboard_ids

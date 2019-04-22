@@ -1,4 +1,4 @@
-app_identifier "com.jochen-pfeiffer.photo-stickers" # The bundle identifier of your app
+app_identifier "com.jochen-pfeiffer.photo-stickers.extension-only" # The bundle identifier of your app
 apple_id "apple@jochen-pfeiffer.com" # Your Apple email address
 
 team_id "2TV9GXC7CB"  # Developer Portal Team ID

@@ -4,7 +4,7 @@ storage_mode("git")
 
 type("appstore") # The default type, can be: appstore, adhoc, enterprise or development
 
-app_identifier(["com.jochen-pfeiffer.photo-stickers", "com.jochen-pfeiffer.photo-stickers.message-extension"])
+app_identifier(["com.jochen-pfeiffer.photo-stickers.extension-only", "com.jochen-pfeiffer.photo-stickers.extension-only.message-extension"])
 username("apple@jochen-pfeiffer.com") # Your Apple Developer Portal username
 
 # For all available options run `fastlane match --help`

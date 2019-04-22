@@ -10,7 +10,7 @@
 
 configuration "Release"
 
-scheme "PhotoStickers"
+scheme "MessagesExtension"
 
 clean true
 
