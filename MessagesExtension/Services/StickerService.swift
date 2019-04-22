@@ -46,7 +46,7 @@ class StickerService: StickerServiceType {
             Logger.shared.warning("Realm in memory only")
         case let .onDisk(url: url):
             if url == nil {
-                Logger.shared.error("Realm: URL not set!")
+                fatalErrorWhileDebugging("Realm: URL not set!")
             }
         }
     }
@@ -168,7 +168,7 @@ private extension StickerService {
 
     func update(sticker: Sticker, withInfo info: StickerInfo) throws {
         guard let realm = sticker.realm else {
-            Logger.shared.error("update sticker only works with stickers in realm")
+            fatalErrorWhileDebugging("update sticker only works with stickers in realm")
             throw PSError.unknown
             // TODO: new error types
         }

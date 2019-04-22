@@ -6,7 +6,6 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import Log
 import UIKit
 
 private enum ImageCategory: String {
@@ -81,17 +80,17 @@ class ImageStoreService {
 private extension ImageStoreService {
     func storeImage(_ image: UIImage, forKey key: String, inCategory category: ImageCategory, version: Int?) -> URL? {
         guard let data = category.fileType.data(for: image) else {
-            Logger.shared.error("PNG/JPG representation not possible: \(image)")
+            fatalErrorWhileDebugging("PNG/JPG representation not possible: \(image)")
             return nil
         }
 
         guard let url = self.constructImageURL(forKey: key, inCategory: category, version: version) else {
-            Logger.shared.error("No image url for key \(key) in category \(category)")
+            fatalErrorWhileDebugging("No image url for key \(key) in category \(category)")
             return nil
         }
 
         if !createSubfolderForCategory(category) {
-            Logger.shared.error("Could not create subfolder for category \(category)")
+            fatalErrorWhileDebugging("Could not create subfolder for category \(category)")
             return nil
         }
 
@@ -100,7 +99,7 @@ private extension ImageStoreService {
             try data.write(to: url, options: .atomic)
             result = url
         } catch {
-            Logger.shared.error(error)
+            fatalErrorWhileDebugging(error.localizedDescription)
         }
         return result
     }
@@ -109,7 +108,7 @@ private extension ImageStoreService {
 private extension ImageStoreService {
     func createSubfolderForCategory(_ category: ImageCategory) -> Bool {
         guard let url = self.constructCategoryURL(category) else {
-            Logger.shared.error("No category url for \(category)")
+            fatalErrorWhileDebugging("No category url for \(category)")
             return false
         }
 
@@ -117,7 +116,7 @@ private extension ImageStoreService {
             try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
             return true
         } catch {
-            Logger.shared.error(error)
+            fatalErrorWhileDebugging(error.localizedDescription)
             return false
         }
     }

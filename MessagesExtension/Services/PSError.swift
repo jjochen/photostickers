@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Log
 
 public enum PSError:
     Swift.Error,
@@ -86,4 +87,12 @@ func castOrFatalError<T>(_ value: Any!) -> T {
 
 func psFatalError(_ lastMessage: String) -> Never {
     fatalError(lastMessage)
+}
+
+func fatalErrorWhileDebugging(_ lastMessage: String) {
+    #if DEBUG
+        fatalError(lastMessage)
+    #else
+        Logger.shared.error(lastMessage)
+    #endif
 }

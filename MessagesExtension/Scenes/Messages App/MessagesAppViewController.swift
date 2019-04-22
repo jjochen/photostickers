@@ -6,7 +6,6 @@
 //  Copyright © 2019 Jochen Pfeiffer. All rights reserved.
 //
 
-import Log
 import Messages
 import Reusable
 import RxCocoa

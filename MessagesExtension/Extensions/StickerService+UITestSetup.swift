@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Log
 import RxSwift
 
 extension StickerService {

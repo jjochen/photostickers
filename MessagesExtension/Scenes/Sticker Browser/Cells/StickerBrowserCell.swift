@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Log
 import Messages
 import RxCocoa
 import RxSwift

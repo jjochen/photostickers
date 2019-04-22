@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Log
 import RxCocoa
 import RxFlow
 import RxOptional
@@ -155,7 +154,7 @@ final class EditStickerViewModel: ServicesViewModel, Stepper {
             presentImagePicker = _shouldSelectImage
                 .map { sourceType }
         } else {
-            Logger.shared.error("No UIImagePickerControllerSourceType available")
+            fatalErrorWhileDebugging("No UIImagePickerControllerSourceType available")
             presentImageSourceAlert = Driver.empty()
             presentImagePicker = Driver.empty()
         }

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Log
 import RxSwift
 import UIKit
 
@@ -30,26 +29,26 @@ class StickerRenderService: StickerRenderServiceType {
 private extension StickerRenderService {
     func renderedImage(_ originalImage: UIImage?, cropBounds: CGRect, mask: Mask) -> UIImage? {
         guard let image = originalImage else {
-            Logger.shared.error("Couldn't render empty image")
+            fatalErrorWhileDebugging("Couldn't render empty image")
             return nil
         }
 
         if image.imageOrientation != .up {
-            Logger.shared.warning("UIImageOrientation.up is only allowed image orientation!")
+            fatalErrorWhileDebugging("UIImageOrientation.up is only allowed image orientation!")
         }
 
         guard let imageRef = originalImage?.cgImage else {
-            Logger.shared.error("Couldn't get CGImageRef")
+            fatalErrorWhileDebugging("Couldn't get CGImageRef")
             return nil
         }
 
         guard let croppedImageRef = imageRef.cropping(to: cropBounds) else {
-            Logger.shared.error("Couldn't crop image to new bounds")
+            fatalErrorWhileDebugging("Couldn't crop image to new bounds")
             return nil
         }
 
         guard let context = context() else {
-            Logger.shared.error("Couldn't create image context")
+            fatalErrorWhileDebugging("Couldn't create image context")
             return nil
         }
 
@@ -59,7 +58,7 @@ private extension StickerRenderService {
         drawImage(croppedImageRef, clipPath: clipPath, in: context)
 
         guard let renderedImageRef = context.makeImage() else {
-            Logger.shared.error("Couldn't make image from context")
+            fatalErrorWhileDebugging("Couldn't make image from context")
             return nil
         }
 

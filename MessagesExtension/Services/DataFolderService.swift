@@ -106,10 +106,10 @@ private extension DataFolderService {
     }
 
     func createDirectory(at url: URL?) -> Bool {
-        let errorMessage = "Could not create data folder!"
+        let errorMessage = "Could not create data folder: "
 
         guard let url = url else {
-            Logger.shared.error(errorMessage, "URL is nil.")
+            fatalErrorWhileDebugging(errorMessage + "URL is nil.")
             return false
         }
 
@@ -122,7 +122,7 @@ private extension DataFolderService {
         do {
             try fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
         } catch {
-            Logger.shared.error(errorMessage, error)
+            fatalErrorWhileDebugging(errorMessage + error.localizedDescription)
             return false
         }
 
@@ -132,13 +132,13 @@ private extension DataFolderService {
 
 private extension DataFolderService {
     func prefill() {
-        let errorMessage = "Could not prefill data folder!"
+        let errorMessage = "Could not prefill data folder: "
         guard let destination = url else {
-            Logger.shared.error(errorMessage, "URL is nil.")
+            fatalErrorWhileDebugging(errorMessage + "URL is nil.")
             return
         }
         guard let prefillContent = Bundle.main.url(forResource: "prefillContent", withExtension: "zip") else {
-            Logger.shared.error(errorMessage, "No zip file available.")
+            fatalErrorWhileDebugging(errorMessage + "No zip file available.")
             return
         }
 
@@ -148,7 +148,7 @@ private extension DataFolderService {
             try fileManager.createDirectory(at: destination, withIntermediateDirectories: true, attributes: nil)
             try Zip.unzipFile(prefillContent, destination: destination, overwrite: true, password: nil, progress: nil)
         } catch {
-            Logger.shared.error(errorMessage, error)
+            fatalErrorWhileDebugging(errorMessage + error.localizedDescription)
             return
         }
     }

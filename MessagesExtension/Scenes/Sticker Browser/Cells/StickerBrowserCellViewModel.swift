@@ -6,7 +6,6 @@
 //  Copyright © 2017 Jochen Pfeiffer. All rights reserved.
 //
 
-import Log
 import Messages
 import RxCocoa
 import RxSwift
@@ -56,7 +55,7 @@ class StickerBrowserCellViewModel: BaseViewModel, StickerBrowserCellViewModelTyp
 
     fileprivate static func msSticker(imageURL: URL?, title: String?) -> MSSticker? {
         guard let url = imageURL else {
-            Logger.shared.error("Couldn't create a sticker from url: nil")
+            fatalErrorWhileDebugging("Couldn't create a sticker from url: nil")
             return nil
         }
         let description = title ?? Sticker.titlePlaceholder
@@ -65,7 +64,7 @@ class StickerBrowserCellViewModel: BaseViewModel, StickerBrowserCellViewModelTyp
         do {
             try msSticker = MSSticker(contentsOfFileURL: url, localizedDescription: description)
         } catch {
-            Logger.shared.error(error)
+            fatalErrorWhileDebugging(error.localizedDescription)
         }
         return msSticker
     }
