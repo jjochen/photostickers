@@ -24,7 +24,7 @@ final class Application {
 
         imageStoreService = ImageStoreService(url: dataFolder.imagesURL)
         stickerService = StickerService(realmType: .onDisk(url: dataFolder.realmURL), imageStoreService: imageStoreService)
-        stickerRenderService = StickerRenderService()
+        stickerRenderService = StickerRenderService(renderedImageSize: Sticker.renderedSize)
     }
 
     lazy var appServices = {

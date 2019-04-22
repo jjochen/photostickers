@@ -10,24 +10,30 @@ import Foundation
 import RxSwift
 import UIKit
 
-protocol StickerRenderServiceType {
-    func render(_ stickerInfo: StickerInfo) -> Observable<UIImage?>
-}
-
 protocol HasStickerRenderService {
     var stickerRenderService: StickerRenderService { get }
 }
 
-class StickerRenderService: StickerRenderServiceType {
-    func render(_ stickerInfo: StickerInfo) -> Observable<UIImage?> {
-        return Observable.combineLatest(stickerInfo.originalImage.asObservable(), stickerInfo.cropBounds.asObservable(), stickerInfo.mask.asObservable()) { [weak self] (originalImage, cropBounds, mask) -> UIImage? in
-            self?.renderedImage(originalImage, cropBounds: cropBounds, mask: mask)
-        }
+class StickerRenderService {
+    let renderedImageSize: CGSize
+
+    init(renderedImageSize: CGSize) {
+        self.renderedImageSize = renderedImageSize
     }
+
+    private let shadowOffset = CGSize(width: 0, height: -4)
+    private let shadowBlur = CGFloat(12)
+    private let shadowColor = UIColor.black
 }
 
-private extension StickerRenderService {
-    func renderedImage(_ originalImage: UIImage?, cropBounds: CGRect, mask: Mask) -> UIImage? {
+extension StickerRenderService {
+    func render(_ stickerInfo: StickerInfo) -> Observable<UIImage?> {
+        return Observable.combineLatest(stickerInfo.originalImage.asObservable(), stickerInfo.cropBounds.asObservable(), stickerInfo.mask.asObservable()) { [weak self] (originalImage, cropBounds, mask) -> UIImage? in
+            self?.render(originalImage, cropBounds: cropBounds, mask: mask)
+        }
+    }
+
+    func render(_ originalImage: UIImage?, cropBounds: CGRect, mask: Mask) -> UIImage? {
         guard let image = originalImage else {
             fatalErrorWhileDebugging("Couldn't render empty image")
             return nil
@@ -47,7 +53,7 @@ private extension StickerRenderService {
             return nil
         }
 
-        guard let context = context() else {
+        guard let context = context else {
             fatalErrorWhileDebugging("Couldn't create image context")
             return nil
         }
@@ -64,7 +70,9 @@ private extension StickerRenderService {
 
         return UIImage(cgImage: renderedImageRef)
     }
+}
 
+private extension StickerRenderService {
     func drawShadow(path: CGPath, in context: CGContext) {
         context.saveGState()
         context.beginPath()
@@ -85,7 +93,7 @@ private extension StickerRenderService {
         context.restoreGState()
     }
 
-    func context() -> CGContext? {
+    var context: CGContext? {
         let context = CGContext(
             data: nil,
             width: Int(renderedImageRect.size.width),
@@ -99,20 +107,8 @@ private extension StickerRenderService {
         return context
     }
 
-    var shadowOffset: CGSize {
-        return CGSize(width: 0, height: -4)
-    }
-
-    var shadowBlur: CGFloat {
-        return CGFloat(12)
-    }
-
-    var shadowColor: UIColor {
-        return UIColor.black
-    }
-
     var renderedImageRect: CGRect {
-        return CGRect(origin: .zero, size: Sticker.renderedSize).integral
+        return CGRect(origin: .zero, size: renderedImageSize).integral
     }
 
     var imageDrawRect: CGRect {

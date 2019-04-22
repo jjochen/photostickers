@@ -12,6 +12,8 @@ class AddStickerCell: UICollectionViewCell {
     @IBOutlet var imageView: UIImageView!
 
     override func awakeFromNib() {
+        // todo: use StickerRenderService
+
         imageView.image = StyleKit.imageOfAddIcon(highlighted: false)
         imageView.highlightedImage = StyleKit.imageOfAddIcon(highlighted: true)
     }
