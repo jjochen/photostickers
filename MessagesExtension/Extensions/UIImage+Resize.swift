@@ -68,7 +68,7 @@ public extension UIImage {
         case .scaleAspectFit:
             ratio = min(horizontalRatio, verticalRatio)
         default:
-            fatalError("Unsupported content mode \(contentMode)")
+            fatalErrorWhileDebugging("Unsupported content mode \(contentMode)")
         }
 
         let newSize: CGSize = CGSize(width: size.width * ratio, height: size.height * ratio)

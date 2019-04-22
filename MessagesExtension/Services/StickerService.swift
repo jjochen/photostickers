@@ -320,11 +320,8 @@ private extension Realm {
 
     static func performMigrationToVersion4(_ migration: Migration, fileURL: URL?) {
         guard let baseURL = fileURL?.deletingLastPathComponent().appendingPathComponent("images") else {
-            #if DEBUG
-                fatalError()
-            #else
-                return
-            #endif
+            fatalErrorWhileDebugging("could not create base url")
+            return
         }
         let imageStore = ImageStoreService(url: baseURL)
 
@@ -341,11 +338,7 @@ private extension Realm {
         }
 
         guard let uuid: String = oldObject!["uuid"] as? String else {
-            #if DEBUG
-                fatalError()
-            #else
-                return nil
-            #endif
+            fatalErrorWhileDebugging("sticker has no uuid")
         }
 
         let url = imageStore.originalImageURL(forKey: uuid)
