@@ -339,6 +339,7 @@ private extension Realm {
 
         guard let uuid: String = oldObject!["uuid"] as? String else {
             fatalErrorWhileDebugging("sticker has no uuid")
+            return nil
         }
 
         let url = imageStore.originalImageURL(forKey: uuid)
@@ -352,11 +353,8 @@ private extension Realm {
         }
 
         guard let uuid: String = oldObject!["uuid"] as? String else {
-            #if DEBUG
-                fatalError()
-            #else
-                return nil
-            #endif
+            fatalErrorWhileDebugging("sticker has no uuid")
+            return nil
         }
 
         let url = imageStore.renderedImageURL(forKey: uuid, version: nil) // didn't have versioning yet
