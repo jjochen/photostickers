@@ -208,7 +208,7 @@ final class EditStickerViewModel: ServicesViewModel, Stepper {
             .map { _ in (true, false) }
 
         let opaque = input.visibleRectDidChange.asObservable()
-            .debounce(1, scheduler: MainScheduler.asyncInstance)
+            .debounce(.seconds(1), scheduler: MainScheduler.asyncInstance)
             .map { _ in (false, true) }
 
         let coverViewTransparentAnimated = Observable

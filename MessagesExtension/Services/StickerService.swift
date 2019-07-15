@@ -243,7 +243,7 @@ private extension Realm {
         sticker.uuid = NSUUID().uuidString
         sticker.sortOrder = nextSortOrder()
         try write {
-            add(sticker, update: false)
+            add(sticker, update: .error)
         }
         return sticker
     }
