@@ -8,12 +8,13 @@ end
 
 desc "Runs all the tests"
 lane :test do
+  
   scan({
-    devices: ["iPhone XS"]
+    devices: ["iPhone Xs"]
   })
-  scan({
-    devices: ["iPad Pro (12.9-inch) (3rd generation)"]
-  })
+  # scan({
+  #   devices: ["iPad Pro (12.9-inch) (3rd generation)"]
+  # })
 end
 
 desc "Submit a new Beta Build to Apple TestFlight"
@@ -111,11 +112,11 @@ lane :screenshots do
     clear_previous_screenshots: false
   })
   capture_screenshots({
-    devices: ["iPhone XS"], 
+    devices: ["iPhone Xs"], 
     clear_previous_screenshots: false
   })
   capture_screenshots({
-    devices: ["iPhone XS Max"], 
+    devices: ["iPhone Xs Max"], 
     clear_previous_screenshots: false
   })
 end

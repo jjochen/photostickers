@@ -2,7 +2,7 @@ workspace "PhotoStickers.xcworkspace"
 scheme "MessagesExtension"
 configuration "Debug"
 sdk "iphonesimulator"
-devices ["iPhone XS Max"]
+devices ["iPhone Xs Max"]
 code_coverage true
 clean true
 output_types "html"
