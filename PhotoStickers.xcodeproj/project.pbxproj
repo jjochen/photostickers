@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		196130D422DF0E6F00CE044F /* UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196130D322DF0E6F00CE044F /* UITests.swift */; };
+		196130DE22DF0FE400CE044F /* MessagesExtension.appex in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = 19DE768B2253766700CF29AB /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		19DE76852253766700CF29AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19DE76842253766700CF29AB /* Assets.xcassets */; };
 		19DE768C2253766700CF29AB /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19DE768B2253766700CF29AB /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		19DE76912253766700CF29AB /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DE76902253766700CF29AB /* Messages.framework */; };
@@ -71,6 +73,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		196130DF22DF137B00CE044F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 19DE767B2253766600CF29AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19DE76802253766600CF29AB;
+			remoteInfo = PhotoStickers;
+		};
 		19DE768D2253766700CF29AB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 19DE767B2253766600CF29AB /* Project object */;
@@ -81,6 +90,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		196130DD22DF0FDA00CE044F /* Copy Files (1 item) */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				196130DE22DF0FE400CE044F /* MessagesExtension.appex in Copy Files (1 item) */,
+			);
+			name = "Copy Files (1 item)";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19DE76A02253766700CF29AB /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -96,6 +116,9 @@
 
 /* Begin PBXFileReference section */
 		1056ED50A6BB83946FB40332 /* Pods_MessagesExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessagesExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		196130D122DF0E6F00CE044F /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		196130D322DF0E6F00CE044F /* UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITests.swift; sourceTree = "<group>"; };
+		196130D522DF0E6F00CE044F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19DE76812253766600CF29AB /* PhotoStickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19DE76842253766700CF29AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19DE76862253766700CF29AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -171,6 +194,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		196130CE22DF0E6F00CE044F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19DE76882253766700CF29AB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -191,11 +221,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		196130D222DF0E6F00CE044F /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				196130D322DF0E6F00CE044F /* UITests.swift */,
+				196130D522DF0E6F00CE044F /* Info.plist */,
+			);
+			path = UITests;
+			sourceTree = "<group>";
+		};
 		19DE767A2253766600CF29AB = {
 			isa = PBXGroup;
 			children = (
 				19DE76832253766600CF29AB /* App */,
 				19DE76922253766700CF29AB /* MessagesExtension */,
+				196130D222DF0E6F00CE044F /* UITests */,
 				19DE768F2253766700CF29AB /* Frameworks */,
 				19DE76822253766600CF29AB /* Products */,
 				43035F314911C7D9455D2FFD /* Pods */,
@@ -207,6 +247,7 @@
 			children = (
 				19DE76812253766600CF29AB /* PhotoStickers.app */,
 				19DE768B2253766700CF29AB /* MessagesExtension.appex */,
+				196130D122DF0E6F00CE044F /* UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -439,6 +480,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		196130D022DF0E6F00CE044F /* UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 196130D822DF0E6F00CE044F /* Build configuration list for PBXNativeTarget "UITests" */;
+			buildPhases = (
+				196130CD22DF0E6F00CE044F /* Sources */,
+				196130CE22DF0E6F00CE044F /* Frameworks */,
+				196130CF22DF0E6F00CE044F /* Resources */,
+				196130DD22DF0FDA00CE044F /* Copy Files (1 item) */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				196130E022DF137B00CE044F /* PBXTargetDependency */,
+			);
+			name = UITests;
+			productName = UITests;
+			productReference = 196130D122DF0E6F00CE044F /* UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		19DE76802253766600CF29AB /* PhotoStickers */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19DE76A12253766700CF29AB /* Build configuration list for PBXNativeTarget "PhotoStickers" */;
@@ -488,6 +548,9 @@
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Jochen Pfeiffer";
 				TargetAttributes = {
+					196130D022DF0E6F00CE044F = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 					19DE76802253766600CF29AB = {
 						CreatedOnToolsVersion = 10.2;
 					};
@@ -517,11 +580,19 @@
 			targets = (
 				19DE76802253766600CF29AB /* PhotoStickers */,
 				19DE768A2253766700CF29AB /* MessagesExtension */,
+				196130D022DF0E6F00CE044F /* UITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		196130CF22DF0E6F00CE044F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19DE767F2253766600CF29AB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -629,6 +700,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		196130CD22DF0E6F00CE044F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				196130D422DF0E6F00CE044F /* UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19DE76872253766700CF29AB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -688,6 +767,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		196130E022DF137B00CE044F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 19DE76802253766600CF29AB /* PhotoStickers */;
+			targetProxy = 196130DF22DF137B00CE044F /* PBXContainerItemProxy */;
+		};
 		19DE768E2253766700CF29AB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 19DE768A2253766700CF29AB /* MessagesExtension */;
@@ -719,6 +803,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		196130D622DF0E6F00CE044F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2TV9GXC7CB;
+				INFOPLIST_FILE = UITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		196130D722DF0E6F00CE044F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2TV9GXC7CB;
+				INFOPLIST_FILE = UITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		19DE769B2253766700CF29AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -924,6 +1048,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		196130D822DF0E6F00CE044F /* Build configuration list for PBXNativeTarget "UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				196130D622DF0E6F00CE044F /* Debug */,
+				196130D722DF0E6F00CE044F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		19DE767E2253766600CF29AB /* Build configuration list for PBXProject "PhotoStickers" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
