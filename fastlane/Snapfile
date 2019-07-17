@@ -17,12 +17,13 @@ languages([
 scheme "PhotoStickers"
 workspace "./PhotoStickers.xcworkspace"
 
-clear_previous_screenshots true
-reinstall_app true
+clear_previous_screenshots false
+test_without_building true
+reinstall_app false
 localize_simulator true
-concurrent_simulators true
-erase_simulator true
-clean true
+concurrent_simulators false
+erase_simulator false
+clean false
 stop_after_first_error true
 number_of_retries 1
 

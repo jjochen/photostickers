@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		196130D422DF0E6F00CE044F /* UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196130D322DF0E6F00CE044F /* UITests.swift */; };
-		196130DE22DF0FE400CE044F /* MessagesExtension.appex in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = 19DE768B2253766700CF29AB /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		196130E922DF388000CE044F /* PhotoStickers.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 19DE76812253766600CF29AB /* PhotoStickers.app */; };
+		196130EB22DF38DD00CE044F /* MessagesExtension.appex in CopyFiles */ = {isa = PBXBuildFile; fileRef = 19DE768B2253766700CF29AB /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		19DE76852253766700CF29AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19DE76842253766700CF29AB /* Assets.xcassets */; };
 		19DE768C2253766700CF29AB /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19DE768B2253766700CF29AB /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		19DE76912253766700CF29AB /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DE76902253766700CF29AB /* Messages.framework */; };
@@ -73,7 +74,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		196130DF22DF137B00CE044F /* PBXContainerItemProxy */ = {
+		196130E122DF1F8D00CE044F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 19DE767B2253766600CF29AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19DE768A2253766700CF29AB;
+			remoteInfo = MessagesExtension;
+		};
+		196130E622DF386B00CE044F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 19DE767B2253766600CF29AB /* Project object */;
 			proxyType = 1;
@@ -90,15 +98,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		196130DD22DF0FDA00CE044F /* Copy Files (1 item) */ = {
+		196130E822DF387000CE044F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				196130E922DF388000CE044F /* PhotoStickers.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		196130EA22DF38D200CE044F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				196130DE22DF0FE400CE044F /* MessagesExtension.appex in Copy Files (1 item) */,
+				196130EB22DF38DD00CE044F /* MessagesExtension.appex in CopyFiles */,
 			);
-			name = "Copy Files (1 item)";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		19DE76A02253766700CF29AB /* Embed App Extensions */ = {
@@ -487,12 +504,14 @@
 				196130CD22DF0E6F00CE044F /* Sources */,
 				196130CE22DF0E6F00CE044F /* Frameworks */,
 				196130CF22DF0E6F00CE044F /* Resources */,
-				196130DD22DF0FDA00CE044F /* Copy Files (1 item) */,
+				196130E822DF387000CE044F /* CopyFiles */,
+				196130EA22DF38D200CE044F /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				196130E022DF137B00CE044F /* PBXTargetDependency */,
+				196130E722DF386B00CE044F /* PBXTargetDependency */,
+				196130E222DF1F8D00CE044F /* PBXTargetDependency */,
 			);
 			name = UITests;
 			productName = UITests;
@@ -767,10 +786,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		196130E022DF137B00CE044F /* PBXTargetDependency */ = {
+		196130E222DF1F8D00CE044F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 19DE768A2253766700CF29AB /* MessagesExtension */;
+			targetProxy = 196130E122DF1F8D00CE044F /* PBXContainerItemProxy */;
+		};
+		196130E722DF386B00CE044F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 19DE76802253766600CF29AB /* PhotoStickers */;
-			targetProxy = 196130DF22DF137B00CE044F /* PBXContainerItemProxy */;
+			targetProxy = 196130E622DF386B00CE044F /* PBXContainerItemProxy */;
 		};
 		19DE768E2253766700CF29AB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

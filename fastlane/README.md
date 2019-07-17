@@ -15,6 +15,11 @@ Install _fastlane_ using
 or alternatively using `brew cask install fastlane`
 
 # Available Actions
+### simulator_build
+```
+fastlane simulator_build
+```
+Build for Simulator
 ### test
 ```
 fastlane test
