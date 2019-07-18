@@ -1,6 +1,6 @@
 fastlane_require 'yaml'
+fastlane_require 'plist'
 fastlane_version "2.3.0"
-#xcversion(version: "8.3.1")
 
 before_all do
   ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "2"
@@ -8,6 +8,11 @@ end
 
 desc "Build for Simulator"
 lane :simulator_build do
+  
+  devices = ['iPhone Xs', 'iPhone Xs Max']
+  languages = ['en-US', 'de-DE']
+  os_version = '12.2'
+  
   Dir.mktmpdir do |tmp_dir|
     xcodebuild({
       workspace: "PhotoStickers.xcworkspace",
@@ -18,43 +23,45 @@ lane :simulator_build do
     })
     app_path = sh("find #{tmp_dir} -name *.app -type d").strip()
     
-    sim_names = ['iPhone Xs', 'iPhone Xs Max']
-    os_version = '12.2'
     available_sims = FastlaneCore::Simulator.all
 
-    sim_names.each do |sim_name|
-      sim = available_sims.detect { |d| sim_name == d.name && os_version == d.os_version }
-      if sim.nil?
-        UI.error "Device not found: #{sim_name}"
-        next
-      end
-      sim_full_name = "#{sim.name} (#{sim.os_version})"
+    languages.each do |lang|
+      devices.each do |sim_name|
+        sim = available_sims.detect { |d| sim_name == d.name && os_version == d.os_version }
+        if sim.nil?
+          UI.error "Device not found: #{sim_name}"
+          next
+        end
+        sim_full_name = "#{sim.name} (#{sim.os_version})"
 
-      sim.reset
+        reset_simulator(sim, lang)
 
-      UI.message "Boot #{sim_full_name}"
-      sh("xcrun simctl boot #{sim.udid} > /dev/null 2>&1")
+        UI.message "Boot #{sim_full_name}"
+        sh("xcrun simctl boot #{sim.udid} > /dev/null 2>&1")
       
-      UI.message "Install App on #{sim_full_name}"
-      sh("xcrun simctl install #{sim.udid} #{app_path}")
+        UI.message "Install App on #{sim_full_name}"
+        sh("xcrun simctl install #{sim.udid} #{app_path}")
+      end
+
+
+      capture_screenshots({
+        devices: devices,
+        scheme: "UITestHost",
+        workspace: "./PhotoStickers.xcworkspace",
+        clear_previous_screenshots: false,
+        reinstall_app: false,
+        localize_simulator: false,
+        languages: [lang],
+        concurrent_simulators: true,
+        erase_simulator: false,
+        clean: false,
+        stop_after_first_error: true,
+        number_of_retries: 1,
+      })
     end
-
-
-    capture_screenshots({
-      devices: sim_names,
-      scheme: "UITestHost",
-      workspace: "./PhotoStickers.xcworkspace",
-      clear_previous_screenshots: true,
-      reinstall_app: false,
-      localize_simulator: false,
-      concurrent_simulators: true,
-      erase_simulator: false,
-      clean: false,
-      stop_after_first_error: true,
-      number_of_retries: 1,
-    })
   end
 end
+
 
 desc "Runs all the tests"
 lane :test do
@@ -234,4 +241,19 @@ error do |lane, exception|
     clean_build_artifacts
     reset_git_repo
   end
+end
+
+
+def reset_simulator(simulator, language)
+  UI.message("Erasing #{simulator.name}")
+  `xcrun simctl erase #{simulator.udid} &> /dev/null`
+  
+  locale = language.sub("-", "_")
+  plist = {
+    AppleLocale: locale,
+    AppleLanguages: [language]
+  }
+  UI.message("Localizing #{simulator.name} (AppleLocale=#{locale} AppleLanguages=[#{language}])")
+  plist_path = "#{ENV['HOME']}/Library/Developer/CoreSimulator/Devices/#{simulator.udid}/data/Library/Preferences/.GlobalPreferences.plist"
+  File.write(plist_path, Plist::Emit.dump(plist))
 end
