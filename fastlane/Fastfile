@@ -8,38 +8,52 @@ end
 
 desc "Build for Simulator"
 lane :simulator_build do
-  
-  sim_name = 'iPhone Xs'
-  output_dir = '../Builds'
-  
-  sh("xcrun simctl boot '#{sim_name}' || true")
-  
   Dir.mktmpdir do |tmp_dir|
     xcodebuild({
       workspace: "PhotoStickers.xcworkspace",
       scheme: "MessagesExtension",
       configuration: "Debug",
       derivedDataPath: tmp_dir,
-      xcargs: "-sdk iphonesimulator -destination 'platform=iOS Simulator,name=#{sim_name}' SYMROOT=#{tmp_dir}"
+      xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' SYMROOT=#{tmp_dir}"
     })
     app_path = sh("find #{tmp_dir} -name *.app -type d").strip()
-    sh("xcrun simctl install booted #{app_path}")
+    
+    sim_names = ['iPhone Xs', 'iPhone Xs Max']
+    os_version = '12.2'
+    available_sims = FastlaneCore::Simulator.all
+
+    sim_names.each do |sim_name|
+      sim = available_sims.detect { |d| sim_name == d.name && os_version == d.os_version }
+      if sim.nil?
+        UI.error "Device not found: #{sim_name}"
+        next
+      end
+      sim_full_name = "#{sim.name} (#{sim.os_version})"
+
+      sim.reset
+
+      UI.message "Boot #{sim_full_name}"
+      sh("xcrun simctl boot #{sim.udid} > /dev/null 2>&1")
+      
+      UI.message "Install App on #{sim_full_name}"
+      sh("xcrun simctl install #{sim.udid} #{app_path}")
+    end
+
 
     capture_screenshots({
-      devices: [sim_name],
-      scheme: "MessagesExtension",
+      devices: sim_names,
+      scheme: "UITestHost",
       workspace: "./PhotoStickers.xcworkspace",
-      clear_previous_screenshots: false,
+      clear_previous_screenshots: true,
       reinstall_app: false,
       localize_simulator: false,
-      concurrent_simulators: false,
+      concurrent_simulators: true,
       erase_simulator: false,
       clean: false,
       stop_after_first_error: true,
       number_of_retries: 1,
     })
   end
-
 end
 
 desc "Runs all the tests"
