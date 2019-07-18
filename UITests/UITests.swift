@@ -15,7 +15,7 @@ class UITests: XCTestCase {
         messageApp.terminate()
 
         messageApp.launchArguments += ["-RunningUITests", "true"]
-        // setupSnapshot(messageApp)
+        setupSnapshot(messageApp)
         messageApp.launch()
 
         var continueButton = messageApp.buttons["Fortfahren"]
@@ -44,5 +44,7 @@ class UITests: XCTestCase {
         let appCells = messageApp.collectionViews["appSelectionBrowserIdentifier"].cells
         let photoStickersCell = appCells.matching(NSPredicate(format: "label CONTAINS[c] 'Photo Stickers'")).firstMatch
         photoStickersCell.tap()
+
+        snapshot("0_Test")
     }
 }

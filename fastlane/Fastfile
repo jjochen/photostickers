@@ -8,20 +8,38 @@ end
 
 desc "Build for Simulator"
 lane :simulator_build do
-  xcodebuild({
-    clean: false,
-    build: true,
-    install: true,
-    workspace: "PhotoStickers.xcworkspace",
-    scheme: "MessagesExtension",
-    configuration: 'Debug',
-    xcargs: "-sdk 'iphonesimulator' -destination 'platform=iOS Simulator,id=27A31DD6-C495-4A23-A987-50071F08F836'",
-  })
   
-  scan({
-    devices: ["iPhone Xs"],
-    clean: false,
-  })
+  sim_name = 'iPhone Xs'
+  output_dir = '../Builds'
+  
+  sh("xcrun simctl boot '#{sim_name}' || true")
+  
+  Dir.mktmpdir do |tmp_dir|
+    xcodebuild({
+      workspace: "PhotoStickers.xcworkspace",
+      scheme: "MessagesExtension",
+      configuration: "Debug",
+      derivedDataPath: tmp_dir,
+      xcargs: "-sdk iphonesimulator -destination 'platform=iOS Simulator,name=#{sim_name}' SYMROOT=#{tmp_dir}"
+    })
+    app_path = sh("find #{tmp_dir} -name *.app -type d").strip()
+    sh("xcrun simctl install booted #{app_path}")
+
+    capture_screenshots({
+      devices: [sim_name],
+      scheme: "MessagesExtension",
+      workspace: "./PhotoStickers.xcworkspace",
+      clear_previous_screenshots: false,
+      reinstall_app: false,
+      localize_simulator: false,
+      concurrent_simulators: false,
+      erase_simulator: false,
+      clean: false,
+      stop_after_first_error: true,
+      number_of_retries: 1,
+    })
+  end
+
 end
 
 desc "Runs all the tests"

@@ -14,7 +14,7 @@ languages([
   "de-DE",
 ])
 
-scheme "PhotoStickers"
+scheme "MessagesExtension"
 workspace "./PhotoStickers.xcworkspace"
 
 clear_previous_screenshots false
