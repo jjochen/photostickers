@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		196130D422DF0E6F00CE044F /* UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196130D322DF0E6F00CE044F /* UITests.swift */; };
-		19A9DFF122E08F41003EEF17 /* XCUIApplication+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A9DFEA22E08F41003EEF17 /* XCUIApplication+Extensions.m */; };
 		19A9DFF322E08F41003EEF17 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9DFEE22E08F41003EEF17 /* SnapshotHelper.swift */; };
 		19A9DFFC22E0A165003EEF17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9DFFB22E0A165003EEF17 /* AppDelegate.swift */; };
 		19A9DFFE22E0A165003EEF17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9DFFD22E0A165003EEF17 /* ViewController.swift */; };
 		19A9E00122E0A165003EEF17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19A9DFFF22E0A165003EEF17 /* Main.storyboard */; };
 		19A9E00322E0A165003EEF17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19A9E00222E0A165003EEF17 /* Assets.xcassets */; };
 		19A9E00622E0A165003EEF17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19A9E00422E0A165003EEF17 /* LaunchScreen.storyboard */; };
+		19A9E00E22E1A7E5003EEF17 /* PhotoStickersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9DFEC22E08F41003EEF17 /* PhotoStickersUITests.swift */; };
+		19A9E01322E1A83F003EEF17 /* XCUIApplication+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A9E01122E1A83F003EEF17 /* XCUIApplication+Extensions.m */; };
 		19DE76852253766700CF29AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19DE76842253766700CF29AB /* Assets.xcassets */; };
 		19DE768C2253766700CF29AB /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19DE768B2253766700CF29AB /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		19DE76912253766700CF29AB /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DE76902253766700CF29AB /* Messages.framework */; };
@@ -112,11 +112,8 @@
 /* Begin PBXFileReference section */
 		1056ED50A6BB83946FB40332 /* Pods_MessagesExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessagesExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		196130D122DF0E6F00CE044F /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		196130D322DF0E6F00CE044F /* UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITests.swift; sourceTree = "<group>"; };
 		196130D522DF0E6F00CE044F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		19A9DFE922E08F41003EEF17 /* XCUIApplication+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCUIApplication+Extensions.h"; sourceTree = "<group>"; };
-		19A9DFEA22E08F41003EEF17 /* XCUIApplication+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCUIApplication+Extensions.m"; sourceTree = "<group>"; };
-		19A9DFEB22E08F41003EEF17 /* PhotoStickersUITests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PhotoStickersUITests-Bridging-Header.h"; sourceTree = "<group>"; };
+		19A9DFEB22E08F41003EEF17 /* UITests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		19A9DFEC22E08F41003EEF17 /* PhotoStickersUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStickersUITests.swift; sourceTree = "<group>"; };
 		19A9DFEE22E08F41003EEF17 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		19A9DFF922E0A165003EEF17 /* UITestHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITestHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +123,8 @@
 		19A9E00222E0A165003EEF17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19A9E00522E0A165003EEF17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19A9E00722E0A165003EEF17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19A9E01122E1A83F003EEF17 /* XCUIApplication+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCUIApplication+Extensions.m"; sourceTree = "<group>"; };
+		19A9E01222E1A83F003EEF17 /* XCUIApplication+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCUIApplication+Extensions.h"; sourceTree = "<group>"; };
 		19DE76812253766600CF29AB /* PhotoStickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19DE76842253766700CF29AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19DE76862253766700CF29AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -238,11 +237,10 @@
 		196130D222DF0E6F00CE044F /* UITests */ = {
 			isa = PBXGroup;
 			children = (
+				19A9E01822E1AD7D003EEF17 /* Tests */,
 				19A9DFE822E08F41003EEF17 /* ObjC */,
-				19A9DFEC22E08F41003EEF17 /* PhotoStickersUITests.swift */,
 				19A9DFED22E08F41003EEF17 /* Snapshots */,
-				196130D322DF0E6F00CE044F /* UITests.swift */,
-				196130D522DF0E6F00CE044F /* Info.plist */,
+				19A9E00D22E1A7C3003EEF17 /* Supporting Files */,
 			);
 			path = UITests;
 			sourceTree = "<group>";
@@ -250,9 +248,9 @@
 		19A9DFE822E08F41003EEF17 /* ObjC */ = {
 			isa = PBXGroup;
 			children = (
-				19A9DFE922E08F41003EEF17 /* XCUIApplication+Extensions.h */,
-				19A9DFEA22E08F41003EEF17 /* XCUIApplication+Extensions.m */,
-				19A9DFEB22E08F41003EEF17 /* PhotoStickersUITests-Bridging-Header.h */,
+				19A9E01222E1A83F003EEF17 /* XCUIApplication+Extensions.h */,
+				19A9E01122E1A83F003EEF17 /* XCUIApplication+Extensions.m */,
+				19A9DFEB22E08F41003EEF17 /* UITests-Bridging-Header.h */,
 			);
 			path = ObjC;
 			sourceTree = "<group>";
@@ -268,14 +266,54 @@
 		19A9DFFA22E0A165003EEF17 /* UITestHost */ = {
 			isa = PBXGroup;
 			children = (
-				19A9DFFB22E0A165003EEF17 /* AppDelegate.swift */,
-				19A9DFFD22E0A165003EEF17 /* ViewController.swift */,
-				19A9DFFF22E0A165003EEF17 /* Main.storyboard */,
-				19A9E00222E0A165003EEF17 /* Assets.xcassets */,
-				19A9E00422E0A165003EEF17 /* LaunchScreen.storyboard */,
-				19A9E00722E0A165003EEF17 /* Info.plist */,
+				19A9E01522E1AD10003EEF17 /* Classes */,
+				19A9E01622E1AD2B003EEF17 /* Resources */,
+				19A9E01422E1ACBE003EEF17 /* Supporting Files */,
 			);
 			path = UITestHost;
+			sourceTree = "<group>";
+		};
+		19A9E00D22E1A7C3003EEF17 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				196130D522DF0E6F00CE044F /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		19A9E01422E1ACBE003EEF17 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				19A9E00722E0A165003EEF17 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		19A9E01522E1AD10003EEF17 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				19A9DFFB22E0A165003EEF17 /* AppDelegate.swift */,
+				19A9DFFD22E0A165003EEF17 /* ViewController.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19A9E01622E1AD2B003EEF17 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				19A9DFFF22E0A165003EEF17 /* Main.storyboard */,
+				19A9E00422E0A165003EEF17 /* LaunchScreen.storyboard */,
+				19A9E00222E0A165003EEF17 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		19A9E01822E1AD7D003EEF17 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				19A9DFEC22E08F41003EEF17 /* PhotoStickersUITests.swift */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		19DE767A2253766600CF29AB = {
@@ -616,6 +654,7 @@
 				TargetAttributes = {
 					196130D022DF0E6F00CE044F = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 19A9DFF822E0A165003EEF17;
 					};
 					19A9DFF822E0A165003EEF17 = {
@@ -785,9 +824,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				196130D422DF0E6F00CE044F /* UITests.swift in Sources */,
-				19A9DFF122E08F41003EEF17 /* XCUIApplication+Extensions.m in Sources */,
+				19A9E00E22E1A7E5003EEF17 /* PhotoStickersUITests.swift in Sources */,
 				19A9DFF322E08F41003EEF17 /* SnapshotHelper.swift in Sources */,
+				19A9E01322E1A83F003EEF17 /* XCUIApplication+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -914,9 +953,10 @@
 		196130D622DF0E6F00CE044F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
-				INFOPLIST_FILE = UITests/Info.plist;
+				INFOPLIST_FILE = "UITests/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -926,6 +966,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "UITests/ObjC/UITests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = UITestHost;
@@ -935,9 +977,10 @@
 		196130D722DF0E6F00CE044F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
-				INFOPLIST_FILE = UITests/Info.plist;
+				INFOPLIST_FILE = "UITests/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -947,6 +990,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jochen-pfeiffer.UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "UITests/ObjC/UITests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = UITestHost;
@@ -959,7 +1003,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
-				INFOPLIST_FILE = UITestHost/Info.plist;
+				INFOPLIST_FILE = "UITestHost/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -978,7 +1022,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
-				INFOPLIST_FILE = UITestHost/Info.plist;
+				INFOPLIST_FILE = "UITestHost/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

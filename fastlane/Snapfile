@@ -1,0 +1,12 @@
+
+scheme "UITestHost"
+workspace "./PhotoStickers.xcworkspace"
+clear_previous_screenshots false
+reinstall_app false
+localize_simulator false
+concurrent_simulators true
+erase_simulator false
+clean false
+stop_after_first_error true
+number_of_retries 1
+skip_open_summary true

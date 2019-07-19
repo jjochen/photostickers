@@ -1,6 +1,5 @@
 fastlane_require 'yaml'
 fastlane_require 'plist'
-fastlane_version "2.3.0"
 
 before_all do
   ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "2"
@@ -19,44 +18,18 @@ lane :simulator_build do
       scheme: "MessagesExtension",
       configuration: "Debug",
       derivedDataPath: tmp_dir,
-      xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' SYMROOT=#{tmp_dir}"
+      xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' SYMROOT=#{tmp_dir} PREFILL_STICKERS=YES"
     })
     app_path = sh("find #{tmp_dir} -name *.app -type d").strip()
     
-    available_sims = FastlaneCore::Simulator.all
 
     languages.each do |lang|
-      devices.each do |sim_name|
-        sim = available_sims.detect { |d| sim_name == d.name && os_version == d.os_version }
-        if sim.nil?
-          UI.error "Device not found: #{sim_name}"
-          next
-        end
-        sim_full_name = "#{sim.name} (#{sim.os_version})"
 
-        reset_simulator(sim, lang)
-
-        UI.message "Boot #{sim_full_name}"
-        sh("xcrun simctl boot #{sim.udid} > /dev/null 2>&1")
-      
-        UI.message "Install App on #{sim_full_name}"
-        sh("xcrun simctl install #{sim.udid} #{app_path}")
-      end
-
+      prepare_simulators(devices, os_version, app_path, lang)
 
       capture_screenshots({
         devices: devices,
-        scheme: "UITestHost",
-        workspace: "./PhotoStickers.xcworkspace",
-        clear_previous_screenshots: false,
-        reinstall_app: false,
-        localize_simulator: false,
         languages: [lang],
-        concurrent_simulators: true,
-        erase_simulator: false,
-        clean: false,
-        stop_after_first_error: true,
-        number_of_retries: 1,
       })
     end
   end
@@ -221,14 +194,14 @@ end
 
 desc "Update dependencies (bundler, gems, cocoapods)"
 lane :update_dependencies do
-  sh "gem install bundler"
-  sh "bundle update"
-  sh "bundle exec pod update"
+  sh "cd ..; gem install bundler"
+  sh "cd ..; bundle update"
+  sh "cd ..; bundle exec pod update"
 end
 
 desc "Delete cocoapods from the project and reinstall"
 lane :reintegrate do
-  sh "bundle update"
+  sh "cd ..; bundle update"
   sh "cd ..; bundle exec pod deintegrate PhotoStickers.xcodeproj"
   #sh "bundle exec pod clean"
   cocoapods
@@ -244,7 +217,31 @@ error do |lane, exception|
 end
 
 
+def prepare_simulators(devices, os_version, app_path, lang)
+  UI.message("Installing App")
+  available_sims = FastlaneCore::Simulator.all
+  devices.each do |sim_name|
+    sim = available_sims.detect { |d| sim_name == d.name && os_version == d.os_version }
+    if sim.nil?
+      UI.error("Device not found: #{sim_name}")
+      next
+    end
+    sim_full_name = "#{sim.name} (#{sim.os_version})"
+
+    reset_simulator(sim, lang)
+
+    UI.message("Boot #{sim_full_name}")
+    `xcrun simctl boot #{sim.udid} > /dev/null 2>&1`
+  
+    UI.message("Install App on #{sim_full_name}")
+    `xcrun simctl install #{sim.udid} #{app_path}`
+  end
+  
+end
+
 def reset_simulator(simulator, language)
+  simulator.reset
+  
   UI.message("Erasing #{simulator.name}")
   `xcrun simctl erase #{simulator.udid} &> /dev/null`
   

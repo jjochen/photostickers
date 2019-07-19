@@ -87,6 +87,13 @@
             ReferencedContainer = "container:PhotoStickers.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "PREFILL_STICKERS"
+            value = "$(PREFILL_STICKERS)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

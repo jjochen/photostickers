@@ -9,99 +9,95 @@
 import XCTest
 
 class PhotoStickersUITests: XCTestCase {
-    func doNotTestUI() {
-        let app = XCUIApplication()
-        app.launchArguments += ["-RunningUITests", "true"]
-        setupSnapshot(app)
-        app.launch()
-
-        let stickerCollectionNavigtionBar = app.navigationBars["StickerCollectionNavigtionBar"]
-        XCTAssert(stickerCollectionNavigtionBar.exists)
-
-        let collectionView = app.collectionViews["StickerCollectionView"]
-        XCTAssert(collectionView.exists)
-
-        snapshot("4_Sticker_Collection")
-
-        let addButtonItem = stickerCollectionNavigtionBar.buttons["AddButtonItem"]
-        XCTAssert(addButtonItem.exists)
-
-        addButtonItem.tap()
-
-        sleep(1)
-
-        let sheetsQuery = app.sheets
-
-        let imageSourceAlertButtonPhotoLibrary = sheetsQuery.buttons["ImageSourceAlertButtonPhotoLibrary"]
-        XCTAssert(imageSourceAlertButtonPhotoLibrary.exists)
-
-        let imageSourceAlertButtonCamera = sheetsQuery.buttons["ImageSourceAlertButtonCamera"]
-        XCTAssert(imageSourceAlertButtonCamera.exists)
-
-        snapshot("2_Sticker_Source")
-
-        if isIPad() {
-            let appWindow = app.children(matching: .window).element(boundBy: 0)
-            appWindow.tap()
-        } else {
-            let imageSourceAlertButtonCancel = sheetsQuery.buttons["ImageSourceAlertButtonCancel"]
-            XCTAssert(imageSourceAlertButtonCancel.exists)
-            imageSourceAlertButtonCancel.tap()
-        }
-
-        sleep(1)
-
-        let circleButton = app.buttons["CircleButton"]
-        XCTAssert(circleButton.exists)
-
-        let rectangleButton = app.buttons["RectangleButton"]
-        XCTAssert(rectangleButton.exists)
-
-        let multiStarButton = app.buttons["MultiStarButton"]
-        XCTAssert(multiStarButton.exists)
-
-        let starButton = app.buttons["StarButton"]
-        XCTAssert(starButton.exists)
-
-        let editStickerNavigationBar = app.navigationBars["EditStickerNavigationBar"]
-        XCTAssert(editStickerNavigationBar.exists)
-
-        let editStickerToolbar = app.toolbars["EditStickerToolbar"]
-        XCTAssert(editStickerToolbar.exists)
-
-        let saveButtonItem = editStickerNavigationBar.buttons["SaveButtonItem"]
-        XCTAssert(saveButtonItem.exists)
-
-        let cancelButtonItem = editStickerNavigationBar.buttons["CancelButtonItem"]
-        XCTAssert(cancelButtonItem.exists)
-
-        let deleteButtonItem = editStickerToolbar.buttons["DeleteButtonItem"]
-        XCTAssert(deleteButtonItem.exists)
-
-        let photoButtonItem = editStickerToolbar.buttons["PhotoButtonItem"]
-        XCTAssert(photoButtonItem.exists)
-
-        cancelButtonItem.tap()
-
-        sleep(1)
-
-        let stickerCells = collectionView.cells.matching(identifier: "StickerCollectionCell")
-        let firstStickerCell = stickerCells.element(boundBy: 0)
-        XCTAssert(firstStickerCell.exists)
-
-        firstStickerCell.tap()
-
-        sleep(1)
-
-        starButton.tap()
-        multiStarButton.tap()
-        rectangleButton.tap()
-
-        snapshot("3_Edit_Sticker")
-
-        circleButton.tap()
-
-        saveButtonItem.tap()
+    func testMessagesExtension() {
+//
+//        let stickerCollectionNavigtionBar = app.navigationBars["StickerCollectionNavigtionBar"]
+//        XCTAssert(stickerCollectionNavigtionBar.exists)
+//
+//        let collectionView = app.collectionViews["StickerCollectionView"]
+//        XCTAssert(collectionView.exists)
+//
+//        snapshot("4_Sticker_Collection")
+//
+//        let addButtonItem = stickerCollectionNavigtionBar.buttons["AddButtonItem"]
+//        XCTAssert(addButtonItem.exists)
+//
+//        addButtonItem.tap()
+//
+//        sleep(1)
+//
+//        let sheetsQuery = app.sheets
+//
+//        let imageSourceAlertButtonPhotoLibrary = sheetsQuery.buttons["ImageSourceAlertButtonPhotoLibrary"]
+//        XCTAssert(imageSourceAlertButtonPhotoLibrary.exists)
+//
+//        let imageSourceAlertButtonCamera = sheetsQuery.buttons["ImageSourceAlertButtonCamera"]
+//        XCTAssert(imageSourceAlertButtonCamera.exists)
+//
+//        snapshot("2_Sticker_Source")
+//
+//        if isIPad() {
+//            let appWindow = app.children(matching: .window).element(boundBy: 0)
+//            appWindow.tap()
+//        } else {
+//            let imageSourceAlertButtonCancel = sheetsQuery.buttons["ImageSourceAlertButtonCancel"]
+//            XCTAssert(imageSourceAlertButtonCancel.exists)
+//            imageSourceAlertButtonCancel.tap()
+//        }
+//
+//        sleep(1)
+//
+//        let circleButton = app.buttons["CircleButton"]
+//        XCTAssert(circleButton.exists)
+//
+//        let rectangleButton = app.buttons["RectangleButton"]
+//        XCTAssert(rectangleButton.exists)
+//
+//        let multiStarButton = app.buttons["MultiStarButton"]
+//        XCTAssert(multiStarButton.exists)
+//
+//        let starButton = app.buttons["StarButton"]
+//        XCTAssert(starButton.exists)
+//
+//        let editStickerNavigationBar = app.navigationBars["EditStickerNavigationBar"]
+//        XCTAssert(editStickerNavigationBar.exists)
+//
+//        let editStickerToolbar = app.toolbars["EditStickerToolbar"]
+//        XCTAssert(editStickerToolbar.exists)
+//
+//        let saveButtonItem = editStickerNavigationBar.buttons["SaveButtonItem"]
+//        XCTAssert(saveButtonItem.exists)
+//
+//        let cancelButtonItem = editStickerNavigationBar.buttons["CancelButtonItem"]
+//        XCTAssert(cancelButtonItem.exists)
+//
+//        let deleteButtonItem = editStickerToolbar.buttons["DeleteButtonItem"]
+//        XCTAssert(deleteButtonItem.exists)
+//
+//        let photoButtonItem = editStickerToolbar.buttons["PhotoButtonItem"]
+//        XCTAssert(photoButtonItem.exists)
+//
+//        cancelButtonItem.tap()
+//
+//        sleep(1)
+//
+//        let stickerCells = collectionView.cells.matching(identifier: "StickerCollectionCell")
+//        let firstStickerCell = stickerCells.element(boundBy: 0)
+//        XCTAssert(firstStickerCell.exists)
+//
+//        firstStickerCell.tap()
+//
+//        sleep(1)
+//
+//        starButton.tap()
+//        multiStarButton.tap()
+//        rectangleButton.tap()
+//
+//        snapshot("3_Edit_Sticker")
+//
+//        circleButton.tap()
+//
+//        saveButtonItem.tap()
 
         guard let messageApp = XCUIApplication.eps_iMessagesApp() else {
             fatalError()
