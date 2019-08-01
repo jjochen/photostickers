@@ -25,7 +25,7 @@ extension Reactive where Base: UIImagePickerController {
     /**
      Reactive wrapper for `delegate` message.
      */
-    public var didCancel: Observable<()> {
+    public var didCancel: Observable<Void> {
         return delegate
             .methodInvoked(#selector(UIImagePickerControllerDelegate.imagePickerControllerDidCancel(_:)))
             .map { _ in () }
