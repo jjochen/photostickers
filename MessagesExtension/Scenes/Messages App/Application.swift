@@ -15,7 +15,7 @@ final class Application {
 
     init() {
         #if DEBUG
-            let shouldPrefillDataFolder = ProcessInfo.processInfo.environment["PREFILL_STICKERS"] == "YES"
+            let shouldPrefillDataFolder = true // ProcessInfo.processInfo.environment["PREFILL_STICKERS"] == "YES"
             let dataFolderType = shouldPrefillDataFolder ? DataFolderType.documentsPrefilled(subfolder: "UITests") : DataFolderType.appGroup
         #else
             let dataFolderType = DataFolderType.appGroup
