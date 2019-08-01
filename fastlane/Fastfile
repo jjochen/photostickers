@@ -5,37 +5,6 @@ before_all do
   ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "2"
 end
 
-desc "Build for Simulator"
-lane :simulator_build do
-  
-  devices = ['iPhone Xs', 'iPhone Xs Max']
-  languages = ['en-US', 'de-DE']
-  os_version = '12.2'
-  
-  Dir.mktmpdir do |tmp_dir|
-    xcodebuild({
-      workspace: "PhotoStickers.xcworkspace",
-      scheme: "MessagesExtension",
-      configuration: "Debug",
-      derivedDataPath: tmp_dir,
-      xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' SYMROOT=#{tmp_dir} PREFILL_STICKERS=YES"
-    })
-    app_path = sh("find #{tmp_dir} -name *.app -type d").strip()
-    
-
-    languages.each do |lang|
-
-      prepare_simulators(devices, os_version, app_path, lang)
-
-      capture_screenshots({
-        devices: devices,
-        languages: [lang],
-      })
-    end
-  end
-end
-
-
 desc "Runs all the tests"
 lane :test do
   
@@ -120,36 +89,54 @@ EOS
   push_to_git_remote
 end
 
-desc "capture screenshots"
+
+desc "Capture Screenshots"
 lane :screenshots do
-  capture_screenshots({
-    devices: ["iPad Pro (12.9-inch) (3rd generation)"], 
-    clear_previous_screenshots: false
-  })
-  capture_screenshots({
-    devices: ["iPad Pro (9.7-inch)"], 
-    clear_previous_screenshots: false
-  })
-  capture_screenshots({
-    devices: ["iPhone SE"], 
-    clear_previous_screenshots: false
-  })
-  capture_screenshots({
-    devices: ["iPhone 8"], 
-    clear_previous_screenshots: false
-  })
-  capture_screenshots({
-    devices: ["iPhone 8 Plus"], 
-    clear_previous_screenshots: false
-  })
-  capture_screenshots({
-    devices: ["iPhone Xs"], 
-    clear_previous_screenshots: false
-  })
-  capture_screenshots({
-    devices: ["iPhone Xs Max"], 
-    clear_previous_screenshots: false
-  })
+  devices = ['iPhone Xs', 'iPhone Xs Max']
+  languages = ['en-US', 'de-DE']
+  os_version = '12.4'
+  
+  Dir.mktmpdir do |tmp_dir|
+    xcodebuild({
+      workspace: "PhotoStickers.xcworkspace",
+      scheme: "MessagesExtension",
+      configuration: "Debug",
+      derivedDataPath: tmp_dir,
+      xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' SYMROOT=#{tmp_dir} PREFILL_STICKERS=YES"
+    })
+    app_path = sh("find #{tmp_dir} -name *.app -type d").strip()
+    
+
+    languages.each do |lang|
+
+      prepare_simulators(devices, os_version, app_path, lang)
+
+      capture_screenshots({
+        devices: devices,
+        languages: [lang],
+      })
+    end
+  end
+end
+
+
+desc "Prebuild for Simulator"
+lane :simulator_build do
+  devices = ['iPhone Xs']
+  lang = 'en-US'
+  os_version = '12.4'
+
+  Dir.mktmpdir do |tmp_dir|
+    xcodebuild({
+      workspace: "PhotoStickers.xcworkspace",
+      scheme: "MessagesExtension",
+      configuration: "Debug",
+      derivedDataPath: tmp_dir,
+      xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' SYMROOT=#{tmp_dir} PREFILL_STICKERS=YES"
+    })
+    app_path = sh("find #{tmp_dir} -name *.app -type d").strip()
+    prepare_simulators(devices, os_version, app_path, lang)
+  end
 end
 
 

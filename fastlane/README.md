@@ -15,11 +15,6 @@ Install _fastlane_ using
 or alternatively using `brew cask install fastlane`
 
 # Available Actions
-### simulator_build
-```
-fastlane simulator_build
-```
-Build for Simulator
 ### test
 ```
 fastlane test
@@ -39,7 +34,12 @@ Deploy a new version to the App Store
 ```
 fastlane screenshots
 ```
-capture screenshots
+Capture Screenshots
+### simulator_build
+```
+fastlane simulator_build
+```
+Prebuild for Simulator
 ### upload_metadata
 ```
 fastlane upload_metadata

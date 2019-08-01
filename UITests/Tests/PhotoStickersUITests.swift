@@ -144,7 +144,7 @@ class PhotoStickersUITests: XCTestCase {
         let rightDX = CGFloat(130)
         let relativeDX = 1 - rightDX / cellWidth
         let sourceCoordinate: XCUICoordinate = sticker.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.1))
-        let destCorodinate: XCUICoordinate = messageCell.coordinate(withNormalizedOffset: CGVector(dx: relativeDX, dy: 0.5))
+        let destCorodinate: XCUICoordinate = messageCell.coordinate(withNormalizedOffset: CGVector(dx: relativeDX, dy: 0.0))
         sourceCoordinate.press(forDuration: 0.5, thenDragTo: destCorodinate)
 
         sleep(1)
