@@ -10,7 +10,6 @@ import XCTest
 
 class PhotoStickersUITests: XCTestCase {
     func testMessagesExtension() {
-
         guard let messageApp = XCUIApplication.eps_iMessagesApp() else {
             fatalError()
         }
@@ -67,14 +66,6 @@ class PhotoStickersUITests: XCTestCase {
 
         snapshot("2_Sticker_Collection", timeWaitingForIdle: 40)
 
-
-        let stickerCollectionNavigtionBar = messageApp.navigationBars["StickerCollectionNavigtionBar"]
-        XCTAssert(stickerCollectionNavigtionBar.exists)
-
-        let collectionView = messageApp.collectionViews["StickerCollectionView"]
-        XCTAssert(collectionView.exists)
-
-
         let addButtonItem = messageApp.collectionViews["StickerBrowserCollectionView"].cells.element(boundBy: 8)
         XCTAssert(addButtonItem.exists)
 
@@ -90,70 +81,29 @@ class PhotoStickersUITests: XCTestCase {
         let imageSourceAlertButtonCamera = sheetsQuery.buttons["ImageSourceAlertButtonCamera"]
         XCTAssert(imageSourceAlertButtonCamera.exists)
 
-        snapshot("2_Sticker_Source")
+        snapshot("3_Sticker_Source")
 
-        if isIPad() {
-            let appWindow = messageApp.children(matching: .window).element(boundBy: 0)
-            appWindow.tap()
-        } else {
-            let imageSourceAlertButtonCancel = messageApp.buttons["ImageSourceAlertButtonCancel"]
-            imageSourceAlertButtonCancel.tap()
-        }
+        let appWindow = messageApp.children(matching: .window).element(boundBy: 0)
+        appWindow.tap()
 
         sleep(1)
 
-        let circleButton = messageApp.buttons["CircleButton"]
-        XCTAssert(circleButton.exists)
-
-        let rectangleButton = messageApp.buttons["RectangleButton"]
-        XCTAssert(rectangleButton.exists)
-
-        let multiStarButton = messageApp.buttons["MultiStarButton"]
-        XCTAssert(multiStarButton.exists)
-
-        let starButton = messageApp.buttons["StarButton"]
-        XCTAssert(starButton.exists)
-
-        let editStickerNavigationBar = messageApp.navigationBars["EditStickerNavigationBar"]
-        XCTAssert(editStickerNavigationBar.exists)
-
-        let editStickerToolbar = messageApp.toolbars["EditStickerToolbar"]
-        XCTAssert(editStickerToolbar.exists)
-
-        let saveButtonItem = editStickerNavigationBar.buttons["SaveButtonItem"]
-        XCTAssert(saveButtonItem.exists)
-
-        let cancelButtonItem = editStickerNavigationBar.buttons["CancelButtonItem"]
+        let cancelButtonItem = messageApp.buttons["CancelButtonItem"]
         XCTAssert(cancelButtonItem.exists)
-
-        let deleteButtonItem = editStickerToolbar.buttons["DeleteButtonItem"]
-        XCTAssert(deleteButtonItem.exists)
-
-        let photoButtonItem = editStickerToolbar.buttons["PhotoButtonItem"]
-        XCTAssert(photoButtonItem.exists)
 
         cancelButtonItem.tap()
 
         sleep(1)
 
-        let stickerCells = collectionView.cells.matching(identifier: "StickerCollectionCell")
-        let firstStickerCell = stickerCells.element(boundBy: 0)
-        XCTAssert(firstStickerCell.exists)
+        messageApp.buttons["StickerBrowserEditBarButtonItem"].tap()
 
-        firstStickerCell.tap()
+        messageApp.collectionViews["StickerBrowserCollectionView"].cells.element(boundBy: 0).tap()
 
         sleep(1)
 
-        starButton.tap()
-        multiStarButton.tap()
-        rectangleButton.tap()
+        messageApp.buttons["RectangleButton"].tap()
 
-        snapshot("3_Edit_Sticker")
-
-        circleButton.tap()
-
-        saveButtonItem.tap()
-
+        snapshot("4_Edit_Sticker")
     }
 }
 
