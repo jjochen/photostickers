@@ -7,14 +7,25 @@ end
 
 desc "Runs all the tests"
 lane :test do
+  devices = ['iPhone Xs', 'iPad Pro (12.9-inch) (3rd generation)']
+  os_version = '12.4'
   
-  scan({
-    devices: ["iPhone Xs"],
-    clean: false,
-  })
-  # scan({
-  #   devices: ["iPad Pro (12.9-inch) (3rd generation)"]
-  # })
+  Dir.mktmpdir do |tmp_dir|
+    xcodebuild({
+      workspace: "PhotoStickers.xcworkspace",
+      scheme: "MessagesExtension",
+      configuration: "Debug",
+      derivedDataPath: tmp_dir,
+      xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' SYMROOT=#{tmp_dir} PREFILL_STICKERS=YES"
+    })
+    app_path = sh("find #{tmp_dir} -name *.app -type d").strip()
+    
+    prepare_simulators(devices, os_version, app_path, 'en_US')
+
+    scan({
+      devices: devices,
+    })
+  end
 end
 
 desc "Submit a new Beta Build to Apple TestFlight"

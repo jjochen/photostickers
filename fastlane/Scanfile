@@ -1,8 +1,7 @@
 workspace "PhotoStickers.xcworkspace"
-scheme "UITestsHost"
+scheme "UITestHost"
 configuration "Debug"
 sdk "iphonesimulator"
-devices ["iPhone Xs"]
 code_coverage true
 clean true
 output_types "html"
