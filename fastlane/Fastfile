@@ -7,7 +7,7 @@ end
 
 desc "Runs all the tests"
 lane :test do
-  devices = ['iPhone Xs', 'iPad Pro (12.9-inch) (3rd generation)']
+  devices = ['iPhone Xs']
   os_version = '12.4'
   
   Dir.mktmpdir do |tmp_dir|

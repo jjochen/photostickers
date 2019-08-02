@@ -13,4 +13,4 @@ install:
   - bundle install
   - bundle exec pod install --repo-update
 script:
-  - bundle exec fastlane test
+  - bundle exec fastlane test --verbose
