@@ -15,4 +15,6 @@ jobs:
         bundle install
         bundle exec pod install --repo-update
     - name: Test
-      run: bundle exec fastlane test --verbose
+      run: |
+        xcrun simctl list
+        bundle exec fastlane test --verbose
