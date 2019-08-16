@@ -14,14 +14,15 @@ final class Application {
     private let stickerRenderService: StickerRenderService
 
     init() {
-        #if false
-            // todo
-            let dataFolderType = DataFolderType.documentsPrefilled(subfolder: "UITests")
+        #if DEBUG
+            // todo: fix prefill toggle
+            let shouldPrefillDataFolder = true // ProcessInfo.processInfo.environment["PREFILL_STICKERS"] == "YES"
+            let dataFolderType = shouldPrefillDataFolder ? DataFolderType.documentsPrefilled(subfolder: "UITests") : DataFolderType.appGroup
         #else
             let dataFolderType = DataFolderType.appGroup
         #endif
-        let dataFolder = DataFolderService(type: dataFolderType)
 
+        let dataFolder = DataFolderService(type: dataFolderType)
         imageStoreService = ImageStoreService(url: dataFolder.imagesURL)
         stickerService = StickerService(realmType: .onDisk(url: dataFolder.realmURL), imageStoreService: imageStoreService)
         stickerRenderService = StickerRenderService()

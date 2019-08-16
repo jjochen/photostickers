@@ -1,32 +1,12 @@
 
-devices([
-  "iPhone SE",
-  "iPhone 8",
-  "iPhone 8 Plus",
-  "iPhone Xs",
-  "iPhone Xs Max",
-  "iPad Pro (12.9-inch) (3rd generation)",
-  "iPad Pro (9.7-inch)",
-])
-
-languages([
-  "en-US",
-  "de-DE",
-])
-
-scheme "PhotoStickers"
+scheme "UITestHost"
 workspace "./PhotoStickers.xcworkspace"
-
-clear_previous_screenshots true
-reinstall_app true
-localize_simulator true
+clear_previous_screenshots false
+reinstall_app false
+localize_simulator false
 concurrent_simulators true
-erase_simulator true
-clean true
+erase_simulator false
+clean false
 stop_after_first_error true
 number_of_retries 1
-
-#launch_arguments([]) # See https://github.com/fastlane/snapshot#launch-arguments
-#output_simulator_logs false
-#skip_open_summary false
-#skip_helper_version_check false
+skip_open_summary true

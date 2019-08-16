@@ -34,7 +34,12 @@ Deploy a new version to the App Store
 ```
 fastlane screenshots
 ```
-capture screenshots
+Capture Screenshots
+### simulator_build
+```
+fastlane simulator_build
+```
+Prebuild for Simulator
 ### upload_metadata
 ```
 fastlane upload_metadata

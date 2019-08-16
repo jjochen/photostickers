@@ -31,8 +31,17 @@ class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModel
 
     @IBOutlet var collectionView: UICollectionView!
 
-    let editBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
-    let doneBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
+    lazy var editBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
+        item.accessibilityIdentifier = "StickerBrowserEditBarButtonItem"
+        return item
+    }()
+
+    lazy var doneBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
+        item.accessibilityIdentifier = "StickerBrowserDoneBarButtonItem"
+        return item
+    }()
 
     var requestPresentationStyle: PublishSubject<MSMessagesAppPresentationStyle>?
     var currentPresentationStyle: Driver<MSMessagesAppPresentationStyle>?
