@@ -67,19 +67,10 @@ class PhotoStickersUITests: XCTestCase {
         snapshot("2_Sticker_Collection", timeWaitingForIdle: 40)
 
         let addButtonItem = messageApp.collectionViews["StickerBrowserCollectionView"].cells.element(boundBy: 8)
-        XCTAssert(addButtonItem.exists)
 
         addButtonItem.tap()
 
         sleep(1)
-
-        let sheetsQuery = messageApp.sheets
-
-        let imageSourceAlertButtonPhotoLibrary = sheetsQuery.buttons["ImageSourceAlertButtonPhotoLibrary"]
-        XCTAssert(imageSourceAlertButtonPhotoLibrary.exists)
-
-        let imageSourceAlertButtonCamera = sheetsQuery.buttons["ImageSourceAlertButtonCamera"]
-        XCTAssert(imageSourceAlertButtonCamera.exists)
 
         snapshot("3_Sticker_Source")
 
@@ -89,7 +80,6 @@ class PhotoStickersUITests: XCTestCase {
         sleep(1)
 
         let cancelButtonItem = messageApp.buttons["CancelButtonItem"]
-        XCTAssert(cancelButtonItem.exists)
 
         cancelButtonItem.tap()
 
