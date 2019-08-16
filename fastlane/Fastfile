@@ -230,9 +230,13 @@ def prepare_simulators(devices, os_version, app_path, lang)
 
     UI.message("Boot #{sim_full_name}")
     `xcrun simctl boot #{sim.udid} > /dev/null 2>&1`
-  
+
+    sleep 3
+
     UI.message("Install App on #{sim_full_name}")
     `xcrun simctl install #{sim.udid} #{app_path}`
+
+    sleep 2
   end
   
 end
