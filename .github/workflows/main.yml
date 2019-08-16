@@ -1,0 +1,18 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: macOS-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install
+      run: |
+        gem install bundler
+        bundle install
+        bundle exec pod install --repo-update
+    - name: Test
+      run: bundle exec fastlane test --verbose
