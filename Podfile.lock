@@ -18,7 +18,7 @@ PODS:
     - Differentiator (~> 4.0)
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
-  - RxFlow (2.3.0):
+  - RxFlow (2.4.0):
     - RxCocoa (>= 5.0.0)
     - RxSwift (>= 5.0.0)
   - RxOptional (4.0.0):
@@ -86,7 +86,7 @@ SPEC CHECKSUMS:
   Reusable: 82be188f29d96dc5eff0db7b2393bcc08d2cdd5b
   RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
-  RxFlow: ee6f1fdbacfa4ca8926122e466dfba32e3edf73f
+  RxFlow: d8342d7ba30f78f509f84cf1d801fbd540406870
   RxOptional: 9904e2219d59260c3c171273d475b2126de187e8
   RxRealm: 1e81dcfca1fb50c3e9b3e1f8102bc875c5156a2e
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
