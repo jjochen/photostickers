@@ -11,15 +11,13 @@ lane :test do
   os_version = '12.4'
   
   Dir.mktmpdir do |tmp_dir|
-    sh("cd .. ; xcodebuild -workspace 'PhotoStickers.xcworkspace' -scheme 'MessagesExtension' -configuration 'Debug' -derivedDataPath #{tmp_dir} -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' SYMROOT=#{tmp_dir} PREFILL_STICKERS=YES CODE_SIGN_IDENTITY='' CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO")
-    
-    # xcodebuild({
-    #   workspace: "PhotoStickers.xcworkspace",
-    #   scheme: "MessagesExtension",
-    #   configuration: "Debug",
-    #   derivedDataPath: tmp_dir,
-    #   xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' SYMROOT=#{tmp_dir} PREFILL_STICKERS=YES CODE_SIGN_IDENTITY='' CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO"
-    # })
+    xcodebuild({
+      workspace: "PhotoStickers.xcworkspace",
+      scheme: "MessagesExtension",
+      configuration: "Debug",
+      derivedDataPath: tmp_dir,
+      xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' PREFILL_STICKERS=YES CODE_SIGN_IDENTITY='' CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO"
+    })
     app_path = sh("find #{tmp_dir} -name *.app -type d").strip()
     
     prepare_simulators(devices, os_version, app_path, 'en_US')
