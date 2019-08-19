@@ -198,11 +198,9 @@ private extension EditStickerViewController {
             .disposed(by: disposeBag)
 
         output.visibleRect
-            .drive(onNext: { [weak self, weak viewModel] rect in
-                guard let self = self, let viewModel = viewModel else { return }
-                let boundsSize = self.scrollView.bounds.size
-                self.scrollView.zoomScale = viewModel.zoomScale(visibleRect: rect, boundsSize: boundsSize)
-                self.scrollView.contentOffset = viewModel.contentOffset(visibleRect: rect, boundsSize: boundsSize)
+            .drive(onNext: { [weak self] rect in
+                guard let self = self else { return }
+                self.visibleRect = rect
             })
             .disposed(by: disposeBag)
 
@@ -440,6 +438,14 @@ private extension EditStickerViewController {
     }
 
     var visibleRect: CGRect {
-        return scrollView.convertBounds(to: imageView)
+        get {
+            return scrollView.convertBounds(to: imageView)
+        }
+        set(rect) {
+            guard let viewModel = viewModel else { return }
+            let boundsSize = scrollView.bounds.size
+            scrollView.zoomScale = viewModel.zoomScale(visibleRect: rect, boundsSize: boundsSize)
+            scrollView.contentOffset = viewModel.contentOffset(visibleRect: rect, boundsSize: boundsSize)
+        }
     }
 }
