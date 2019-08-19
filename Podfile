@@ -1,7 +1,8 @@
 source 'https://github.com/jjochen/podspecs.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '11.4'
+deployment_target = '11.4'
+platform :ios, deployment_target
 use_frameworks!
 inhibit_all_warnings!
 
@@ -46,3 +47,11 @@ target 'MessagesExtension' do
     pod 'Reusable'
 end
 
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = deployment_target
+    end
+  end
+end
