@@ -138,7 +138,7 @@ final class EditStickerViewModel: ServicesViewModel, Stepper {
                                            _originalImageWasSetToNil)
             .merge()
 
-        let availableTypes: [UIImagePickerController.SourceType] = [.camera, .photoLibrary]
+        let availableTypes: [UIImagePickerController.SourceType] = [.photoLibrary]
             .filter { sourceType in
                 UIImagePickerController.isSourceTypeAvailable(sourceType) || UIDevice.isSimulator
             }
