@@ -59,41 +59,17 @@ class PhotoStickersUITests: XCTestCase {
         sourceCoordinate.press(forDuration: 0.5, thenDragTo: destCorodinate)
 
         sleep(1)
-
         snapshot("1_Messages", timeWaitingForIdle: 40)
 
         messageApp.otherElements["collapseButtonIdentifier"].tap()
-
+        sleep(1)
         snapshot("2_Sticker_Collection", timeWaitingForIdle: 40)
 
-        let addButtonItem = messageApp.collectionViews["StickerBrowserCollectionView"].cells.element(boundBy: 8)
-
-        addButtonItem.tap()
-
-        sleep(1)
-
-        snapshot("3_Sticker_Source")
-
-        let appWindow = messageApp.children(matching: .window).element(boundBy: 0)
-        appWindow.tap()
-
-        sleep(1)
-
-        let cancelButtonItem = messageApp.buttons["CancelButtonItem"]
-
-        cancelButtonItem.tap()
-
-        sleep(1)
-
         messageApp.buttons["StickerBrowserEditBarButtonItem"].tap()
-
         messageApp.collectionViews["StickerBrowserCollectionView"].cells.element(boundBy: 0).tap()
-
         sleep(1)
-
         messageApp.buttons["RectangleButton"].tap()
-
-        snapshot("4_Edit_Sticker")
+        snapshot("3_Edit_Sticker")
     }
 }
 
