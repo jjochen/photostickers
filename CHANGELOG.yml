@@ -2,6 +2,7 @@ upcoming:
 - move edit sticker workflow into extension
 - make standalone imessage extension
 - use flow coordinator for navigation logic
+- remove camera as image source
 
 releases:
 - version: 1.1.0
