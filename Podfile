@@ -1,7 +1,7 @@
 source 'https://github.com/jjochen/podspecs.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
-deployment_target = '11.4'
+deployment_target = '13.0'
 platform :ios, deployment_target
 use_frameworks!
 inhibit_all_warnings!
