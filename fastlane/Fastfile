@@ -103,7 +103,7 @@ end
 
 desc "Capture Screenshots"
 lane :screenshots do
-  devices = ['iPhone 8 Plus', 'iPhone 11 Pro', 'iPhone 11 Pro Max', 'iPad Pro (12.9-inch) (2nd generation)', 'iPad Pro (12.9-inch) (3rd generation)']
+  devices = ['iPhone 8 Plus', 'iPhone 11 Pro', 'iPhone 11 Pro Max', 'iPad Pro (12.9-inch) (3rd generation)']
   languages = ['en-US', 'de-DE']
   os_version = '13.1'
   
