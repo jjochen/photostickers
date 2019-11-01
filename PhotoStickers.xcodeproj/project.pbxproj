@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		195F00F7236C2A86001CA33A /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F00F6236C2A86001CA33A /* UIView+Animations.swift */; };
 		19A9DFF322E08F41003EEF17 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9DFEE22E08F41003EEF17 /* SnapshotHelper.swift */; };
 		19A9DFFC22E0A165003EEF17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9DFFB22E0A165003EEF17 /* AppDelegate.swift */; };
 		19A9DFFE22E0A165003EEF17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9DFFD22E0A165003EEF17 /* ViewController.swift */; };
@@ -111,6 +112,7 @@
 
 /* Begin PBXFileReference section */
 		0DF8AFFCFA6C5CF8E063A117 /* Pods-PhotoStickers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoStickers.release.xcconfig"; path = "Target Support Files/Pods-PhotoStickers/Pods-PhotoStickers.release.xcconfig"; sourceTree = "<group>"; };
+		195F00F6236C2A86001CA33A /* UIView+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
 		196130D122DF0E6F00CE044F /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		196130D522DF0E6F00CE044F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19A9DFEB22E08F41003EEF17 /* UITests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 				19FBF5ED226E283C008125D0 /* UIColor+Image.swift */,
 				19DE770722538A8200CF29AB /* UIStoryboard+Extensions.swift */,
 				19DE770422538A8200CF29AB /* UIStoryboardSegue+Extensions.swift */,
+				195F00F6236C2A86001CA33A /* UIView+Animations.swift */,
 				19DE770022538A8200CF29AB /* UIView+Extensions.swift */,
 				19DE76FE22538A8200CF29AB /* UIViewController+Extensions.swift */,
 			);
@@ -890,6 +893,7 @@
 				19DE771322538A8200CF29AB /* UIDevice+Extensions.swift in Sources */,
 				19DE76F7225389A600CF29AB /* StyleKit.swift in Sources */,
 				19DE76F5225389A600CF29AB /* PSError.swift in Sources */,
+				195F00F7236C2A86001CA33A /* UIView+Animations.swift in Sources */,
 				19FBF5EE226E283C008125D0 /* UIColor+Image.swift in Sources */,
 				19DE774222538F6F00CF29AB /* StickerBrowserViewController.swift in Sources */,
 			);

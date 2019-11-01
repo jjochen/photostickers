@@ -9,7 +9,7 @@
 import Reusable
 import UIKit
 
-// ToDo: remove
+// TODO: remove
 class BaseViewModel: NSObject {}
 
 protocol ViewModel {

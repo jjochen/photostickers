@@ -11,7 +11,7 @@ import RxSwift
 
 extension StickerService {
     func setupUITests() {
-        deleteAll() //todo: doesn't delete images
+        deleteAll() // TODO: doesn't delete images
 
         let disposeBag = DisposeBag()
         let stickerInfo = StickerInfo()

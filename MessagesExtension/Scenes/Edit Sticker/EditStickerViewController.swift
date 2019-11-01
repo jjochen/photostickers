@@ -423,14 +423,14 @@ private extension EditStickerViewController {
     }
 
     func setCoverView(transparent: Bool, animated: Bool) {
-        UIView.animatex(withDuration: 0.3, animated: animated) {
+        UIView.animate(withDuration: 0.3, animated: animated) {
             self.coverView.alpha = transparent ? 0.75 : 1
             self.shadowLayer.isHidden = transparent
         }
     }
 }
 
-// todo: move to view model
+// TODO: move to view model
 private extension EditStickerViewController {
     var imageSize: CGSize {
         return imageView.image?.size ?? .zero

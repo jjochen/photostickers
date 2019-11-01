@@ -9,9 +9,9 @@
 import UIKit
 
 extension UIView {
-    class func animatex(withDuration duration: TimeInterval, animated: Bool, animations: @escaping () -> Void) {
+    class func animate(withDuration duration: TimeInterval, animated: Bool, animations: @escaping () -> Void) {
         if animated {
-            UIView.animate(withDuration: duration, animations: animations)
+            animate(withDuration: duration, animations: animations)
         } else {
             animations()
         }
