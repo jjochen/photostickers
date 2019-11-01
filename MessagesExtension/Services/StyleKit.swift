@@ -15,11 +15,11 @@ public class StyleKit: NSObject {
     //// Cache
 
     private struct Cache {
-        static let appColor: UIColor = UIColor(red: 0.030, green: 0.490, blue: 0.860, alpha: 1.000)
-        static let plusColorNormal: UIColor = UIColor(red: 0.867, green: 0.867, blue: 0.867, alpha: 1.000)
-        static let plusColorHighlighted: UIColor = StyleKit.plusColorNormal.withBrightness(0.95)
-        static let plusBackgroundColorNormal: UIColor = UIColor(red: 0.980, green: 0.980, blue: 0.980, alpha: 1.000)
-        static let plusBackgroundColorHighlighted: UIColor = StyleKit.plusBackgroundColorNormal.withBrightness(0.85)
+        static let appColor: UIColor = .systemPink
+        static let plusColorNormal: UIColor = .systemGray5
+        static let plusColorHighlighted: UIColor = .systemGray3
+        static let plusBackgroundColorNormal: UIColor = .systemGray3
+        static let plusBackgroundColorHighlighted: UIColor = .systemGray5
         static let stickerShadow: NSShadow = NSShadow(color: UIColor.black, offset: CGSize(width: 0, height: 3), blurRadius: 12)
         static var imageOfTrashToolbarIcon: UIImage?
         static var trashToolbarIconTargets: [AnyObject]?
