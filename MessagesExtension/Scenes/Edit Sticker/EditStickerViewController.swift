@@ -235,15 +235,7 @@ private extension EditStickerViewController {
 
         output.coverViewTransparentAnimated
             .drive(onNext: { [unowned self] transparent, animated in
-                if animated {
-                    UIView.beginAnimations("CoverViewAlpha", context: nil)
-                    UIView.setAnimationDuration(0.3)
-                }
-                self.coverView.alpha = transparent ? 0.75 : 1
-                self.shadowLayer.isHidden = transparent
-                if animated {
-                    UIView.commitAnimations()
-                }
+                self.setCoverView(transparent: transparent, animated: animated)
             })
             .disposed(by: disposeBag)
 
@@ -427,6 +419,13 @@ private extension EditStickerViewController {
                 selected: selected,
                 highlighted: highlighted
             )
+        }
+    }
+
+    func setCoverView(transparent: Bool, animated: Bool) {
+        UIView.animatex(withDuration: 0.3, animated: animated) {
+            self.coverView.alpha = transparent ? 0.75 : 1
+            self.shadowLayer.isHidden = transparent
         }
     }
 }
