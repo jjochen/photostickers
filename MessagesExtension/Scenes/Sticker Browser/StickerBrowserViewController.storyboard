@@ -112,6 +112,7 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="right" secondItem="dQE-mC-GAk" secondAttribute="right" id="4E2-Wb-HAc"/>
                             <constraint firstAttribute="bottom" secondItem="dQE-mC-GAk" secondAttribute="bottom" id="LhU-en-p9W"/>
