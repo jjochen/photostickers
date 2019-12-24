@@ -33,18 +33,18 @@ class PhotoStickersUITests: XCTestCase {
 
         sleep(1)
 
-        continueButton = messageApp.buttons["Fortfahren"]
-        if continueButton.exists {
-            continueButton.tap()
-        }
-        continueButton = messageApp.buttons["Continue"]
-        if continueButton.exists {
-            continueButton.tap()
-        }
+        messageApp.textFields["messageBodyField"].tap()
+
+        sleep(1)
+
+        let start = messageApp.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        let finish = messageApp.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.6))
+        start.press(forDuration: 0.05, thenDragTo: finish)
 
         sleep(1)
 
         messageApp.textFields["messageBodyField"].tap()
+
         let messageText = "🎉🎉🎉 Party?"
         messageApp.typeText(messageText)
 
