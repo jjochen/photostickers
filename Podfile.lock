@@ -1,11 +1,11 @@
 PODS:
   - Differentiator (4.0.1)
-  - Log (1.0)
-  - Realm (3.20.0):
-    - Realm/Headers (= 3.20.0)
-  - Realm/Headers (3.20.0)
-  - RealmSwift (3.20.0):
-    - Realm (= 3.20.0)
+  - Log (2.0)
+  - Realm (4.3.0):
+    - Realm/Headers (= 4.3.0)
+  - Realm/Headers (4.3.0)
+  - RealmSwift (4.3.0):
+    - Realm (= 4.3.0)
   - Reusable (4.1.0):
     - Reusable/Storyboard (= 4.1.0)
     - Reusable/View (= 4.1.0)
@@ -18,30 +18,30 @@ PODS:
     - Differentiator (~> 4.0)
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
-  - RxFlow (2.5.0):
+  - RxFlow (2.6.0):
     - RxCocoa (>= 5.0.0)
     - RxSwift (>= 5.0.0)
   - RxOptional (4.1.0):
     - RxCocoa (~> 5)
     - RxSwift (~> 5)
-  - RxRealm (1.0.0):
-    - RealmSwift (~> 3.14)
+  - RxRealm (2.0.0):
+    - RealmSwift (~> 4.0)
     - RxSwift (~> 5.0)
   - RxRelay (5.0.1):
     - RxSwift (~> 5)
   - RxSwift (5.0.1)
-  - RxSwiftExt (5.1.1):
-    - RxSwiftExt/Core (= 5.1.1)
-    - RxSwiftExt/RxCocoa (= 5.1.1)
-  - RxSwiftExt/Core (5.1.1):
+  - RxSwiftExt (5.2.0):
+    - RxSwiftExt/Core (= 5.2.0)
+    - RxSwiftExt/RxCocoa (= 5.2.0)
+  - RxSwiftExt/Core (5.2.0):
     - RxSwift (~> 5.0)
-  - RxSwiftExt/RxCocoa (5.1.1):
+  - RxSwiftExt/RxCocoa (5.2.0):
     - RxCocoa (~> 5.0)
     - RxSwiftExt/Core
   - RxViewController (1.0.0):
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
-  - SwiftFormat/CLI (0.40.14)
+  - SwiftFormat/CLI (0.43.1)
   - Zip (1.1.0)
 
 DEPENDENCIES:
@@ -80,20 +80,20 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
-  Log: 5e368c9528db07517d18d2d04ff5fe2b6f5a1e21
-  Realm: 8b2ca5bc6479a91f379b6b42b5922e396cd5ba5a
-  RealmSwift: 1949ef26a279e1845bd51d591b9103adfcd121df
+  Log: 73fab10e8b88f15cef5f322b12c9be87cf19ee6e
+  Realm: 9357c3589555793e1860a7104a7412bca4a48d99
+  RealmSwift: 402f1e379a8ef82c635313037b043f0f06de880c
   Reusable: 82be188f29d96dc5eff0db7b2393bcc08d2cdd5b
   RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
-  RxFlow: 1beb3ef121e2c58620fd4f8445c855ca1dbfc8c7
+  RxFlow: f89ea40232813062f5e857fbe19a680a205a15ab
   RxOptional: b1fcd60856807a564c0215c2184b8d33e7826dc2
-  RxRealm: 1e81dcfca1fb50c3e9b3e1f8102bc875c5156a2e
+  RxRealm: 900f5c7e6f0a2d6527b56eaf7283f3035ec1e8ba
   RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
-  RxSwiftExt: 0d2fd77523a169d1459be34961b996a194bdef0e
+  RxSwiftExt: 4ca80336f43c28f11a2825cdd2fc61dd6c044697
   RxViewController: 7330a46e5c31cd680db169da4c9fc8676e975a81
-  SwiftFormat: 21c9c3c748d5fcece493d8610eee23df15393458
+  SwiftFormat: e73bae96d000ae07ffb9e3636929ca5e9d5c1efd
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
 PODFILE CHECKSUM: 836f9c98306152e99c8160faf51ef32db974ba63
