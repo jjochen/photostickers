@@ -52,7 +52,7 @@ class PhotoStickersUITests: XCTestCase {
         let photoStickersCell = appCells.matching(NSPredicate(format: "label CONTAINS[c] 'Photo Stickers'")).firstMatch
         photoStickersCell.tap()
 
-        sleep(3)
+        sleep(5)
 
         let partySticker = messageApp.collectionViews["StickerBrowserCollectionView"].cells.element(boundBy: 5)
         let messageCell = messageApp.collectionViews["TranscriptCollectionView"].cells.matching(NSPredicate(format: "label CONTAINS[c] %@", messageText)).firstMatch
