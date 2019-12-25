@@ -222,6 +222,7 @@ def prepare_simulators(devices, os_version, app_path, lang)
     sim = available_sims.detect { |d| sim_name == d.name && os_version == d.os_version }
     if sim.nil?
       UI.error("Device not found: #{sim_name}")
+      `xcrun simctl list`
       next
     end
     sim_full_name = "#{sim.name} (#{sim.os_version})"
@@ -232,11 +233,14 @@ def prepare_simulators(devices, os_version, app_path, lang)
     `xcrun simctl boot #{sim.udid} > /dev/null 2>&1`
 
     sleep 3
+    
+    UI.message("List of simulators")
+    `xcrun simctl list`
 
     UI.message("Install App on #{sim_full_name}")
     `xcrun simctl install #{sim.udid} #{app_path}`
 
-    sleep 2
+    sleep 3
   end
   
 end
