@@ -20,14 +20,8 @@ class PhotoStickersUITests: XCTestCase {
         setupSnapshot(messageApp)
         messageApp.launch()
 
-        var continueButton = messageApp.buttons["Fortfahren"]
-        if continueButton.exists {
-            continueButton.tap()
-        }
-        continueButton = messageApp.buttons["Continue"]
-        if continueButton.exists {
-            continueButton.tap()
-        }
+        tapButton(withLocalizations: ["Fortfahren", "Continue"], inApp: messageApp)
+        tapButton(withLocalizations: ["Abbrechen", "Cancel"], inApp: messageApp)
 
         messageApp.tables["ConversationList"].cells.firstMatch.tap()
 
@@ -66,8 +60,8 @@ class PhotoStickersUITests: XCTestCase {
         let rightDX = CGFloat(130)
         let relativeDX = 1 - rightDX / cellWidth
         let sourceCoordinate: XCUICoordinate = partySticker.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.1))
-        let destCorodinate: XCUICoordinate = messageCell.coordinate(withNormalizedOffset: CGVector(dx: relativeDX, dy: 0.0))
-        sourceCoordinate.press(forDuration: 0.5, thenDragTo: destCorodinate)
+        let destCoordinate: XCUICoordinate = messageCell.coordinate(withNormalizedOffset: CGVector(dx: relativeDX, dy: 0.0))
+        sourceCoordinate.press(forDuration: 0.5, thenDragTo: destCoordinate)
 
         sleep(1)
         snapshot("1_Messages", timeWaitingForIdle: 40)
@@ -90,6 +84,15 @@ private extension PhotoStickersUITests {
     func isIPad() -> Bool {
         let window = XCUIApplication().windows.element(boundBy: 0)
         return window.horizontalSizeClass == .regular && window.verticalSizeClass == .regular
+    }
+
+    func tapButton(withLocalizations localizations: [String], inApp app: XCUIApplication) {
+        localizations.forEach { title in
+            let button = app.buttons[title]
+            if button.exists {
+                button.tap()
+            }
+        }
     }
 }
 
