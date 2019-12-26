@@ -1,3 +1,7 @@
+branches:
+  only:
+    - master
+    - /^release.*$/
 language: objective-c
 os: osx
 osx_image: xcode11.3
