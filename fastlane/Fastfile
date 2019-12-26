@@ -14,9 +14,9 @@ lane :test do
     xcodebuild({
       workspace: "PhotoStickers.xcworkspace",
       scheme: "MessagesExtension",
-      configuration: "Debug",
+      configuration: "Prefilled",
       derivedDataPath: tmp_dir,
-      xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' PREFILL_STICKERS=YES CODE_SIGN_IDENTITY='' CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO"
+      xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGN_IDENTITY='' CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO"
     })
     app_path = sh("find #{tmp_dir} -name *.app -type d").strip()
     
@@ -111,9 +111,9 @@ lane :screenshots do
     xcodebuild({
       workspace: "PhotoStickers.xcworkspace",
       scheme: "MessagesExtension",
-      configuration: "Debug",
+      configuration: "Prefilled",
       derivedDataPath: tmp_dir,
-      xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' SYMROOT=#{tmp_dir} PREFILL_STICKERS=YES"
+      xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' SYMROOT=#{tmp_dir}"
     })
     app_path = sh("find #{tmp_dir} -name *.app -type d").strip()
     
@@ -141,9 +141,9 @@ lane :simulator_build do
     xcodebuild({
       workspace: "PhotoStickers.xcworkspace",
       scheme: "MessagesExtension",
-      configuration: "Debug",
+      configuration: "Prefilled",
       derivedDataPath: tmp_dir,
-      xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' SYMROOT=#{tmp_dir} PREFILL_STICKERS=YES"
+      xcargs: "-sdk iphonesimulator -destination 'generic/platform=iOS Simulator' SYMROOT=#{tmp_dir}"
     })
     app_path = sh("find #{tmp_dir} -name *.app -type d").strip()
     prepare_simulators(devices, os_version, app_path, lang)
