@@ -19,6 +19,7 @@ class StickerBrowserFlow: Flow {
 
     private lazy var rootViewController: UINavigationController = {
         let viewController = UINavigationController()
+        viewController.view.tintColor = StyleKit.appColor
         viewController.setNavigationBarHidden(true, animated: false)
         return viewController
     }()

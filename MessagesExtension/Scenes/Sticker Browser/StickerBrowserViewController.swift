@@ -48,6 +48,7 @@ class StickerBrowserViewController: UIViewController, StoryboardBased, ViewModel
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.tintColor = StyleKit.appColor
         bindViewModel()
     }
 

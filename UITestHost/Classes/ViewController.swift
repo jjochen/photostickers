@@ -9,12 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.tintColor = StyleKit.appColor
         // Do any additional setup after loading the view.
     }
-
-
 }
-

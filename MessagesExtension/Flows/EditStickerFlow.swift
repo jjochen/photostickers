@@ -18,6 +18,7 @@ class EditStickerFlow: Flow {
 
     private lazy var rootViewController: UINavigationController = {
         let viewController = UINavigationController()
+        viewController.view.tintColor = StyleKit.appColor
         viewController.setNavigationBarHidden(false, animated: false)
         viewController.setToolbarHidden(false, animated: false)
         return viewController
