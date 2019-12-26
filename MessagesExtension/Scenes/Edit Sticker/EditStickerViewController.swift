@@ -53,6 +53,8 @@ class EditStickerViewController: UIViewController, StoryboardBased, ViewModelBas
 extension EditStickerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        isModalInPresentation = true
+        view.tintColor = StyleKit.appColor
         coverView.layer.addSublayer(shadowLayer)
         setupButtons()
         setupBindings()
@@ -247,6 +249,7 @@ private extension EditStickerViewController {
                 UIImagePickerController.rx.createWithParent(self) { picker in
                     picker.sourceType = sourceType
                     picker.allowsEditing = false
+                    picker.view.tintColor = StyleKit.appColor
                 }
                 .flatMap { imagePicker in
                     imagePicker.rx.didFinishPickingMediaWithInfo
