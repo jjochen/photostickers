@@ -14,10 +14,8 @@ final class Application {
     private let stickerRenderService: StickerRenderService
 
     init() {
-        #if DEBUG
-            // TODO: fix prefill toggle
-            let shouldPrefillDataFolder = true // ProcessInfo.processInfo.environment["PREFILL_STICKERS"] == "YES"
-            let dataFolderType = shouldPrefillDataFolder ? DataFolderType.documentsPrefilled(subfolder: "UITests") : DataFolderType.appGroup
+        #if PREFILL_STICKERS
+            let dataFolderType = DataFolderType.documentsPrefilled(subfolder: "UITests")
         #else
             let dataFolderType = DataFolderType.appGroup
         #endif

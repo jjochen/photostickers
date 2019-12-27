@@ -77,13 +77,6 @@
             ReferencedContainer = "container:PhotoStickers.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "PREFILL_STICKERS"
-            value = "$(PREFILL_STICKERS)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
