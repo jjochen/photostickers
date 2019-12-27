@@ -33,7 +33,7 @@ class MessagesAppViewController: MSMessagesAppViewController, StoryboardBased {
         super.viewDidLoad()
 
         RxImagePickerDelegateProxy.register { RxImagePickerDelegateProxy(imagePicker: $0) }
-        view.window?.tintColor = StyleKit.appColor
+        view.tintColor = StyleKit.appColor
 
         setupFlow()
     }
