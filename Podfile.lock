@@ -41,7 +41,7 @@ PODS:
   - RxViewController (1.0.0):
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
-  - SwiftFormat/CLI (0.43.1)
+  - SwiftFormat/CLI (0.43.2)
   - Zip (1.1.0)
 
 DEPENDENCIES:
@@ -93,7 +93,7 @@ SPEC CHECKSUMS:
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
   RxSwiftExt: 4ca80336f43c28f11a2825cdd2fc61dd6c044697
   RxViewController: 7330a46e5c31cd680db169da4c9fc8676e975a81
-  SwiftFormat: e73bae96d000ae07ffb9e3636929ca5e9d5c1efd
+  SwiftFormat: b8c87c9341909d5b7f679f45e3535fc3e58cf13b
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
 PODFILE CHECKSUM: 836f9c98306152e99c8160faf51ef32db974ba63
