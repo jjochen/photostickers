@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		195F00F7236C2A86001CA33A /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F00F6236C2A86001CA33A /* UIView+Animations.swift */; };
+		1998BA7823B6934400D106CA /* MaskSelectionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1998BA7723B6934400D106CA /* MaskSelectionView.storyboard */; };
+		1998BA7A23B6937800D106CA /* MaskSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1998BA7923B6937800D106CA /* MaskSelectionViewController.swift */; };
+		1998BA7C23B6944100D106CA /* MaskSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1998BA7B23B6944100D106CA /* MaskSelectionViewModel.swift */; };
 		19A9DFF322E08F41003EEF17 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9DFEE22E08F41003EEF17 /* SnapshotHelper.swift */; };
 		19A9DFFC22E0A165003EEF17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9DFFB22E0A165003EEF17 /* AppDelegate.swift */; };
 		19A9DFFE22E0A165003EEF17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9DFFD22E0A165003EEF17 /* ViewController.swift */; };
@@ -114,6 +117,9 @@
 		195F00F6236C2A86001CA33A /* UIView+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
 		196130D122DF0E6F00CE044F /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		196130D522DF0E6F00CE044F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1998BA7723B6934400D106CA /* MaskSelectionView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MaskSelectionView.storyboard; sourceTree = "<group>"; };
+		1998BA7923B6937800D106CA /* MaskSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSelectionViewController.swift; sourceTree = "<group>"; };
+		1998BA7B23B6944100D106CA /* MaskSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSelectionViewModel.swift; sourceTree = "<group>"; };
 		19A9DFEB22E08F41003EEF17 /* UITests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		19A9DFEC22E08F41003EEF17 /* PhotoStickersUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStickersUITests.swift; sourceTree = "<group>"; };
 		19A9DFEE22E08F41003EEF17 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -533,6 +539,9 @@
 				19DE772422538DF000CF29AB /* EditStickerViewController.swift */,
 				19DE772522538DF000CF29AB /* EditStickerViewModel.swift */,
 				19DE772622538DF000CF29AB /* EditStickerViewController.storyboard */,
+				1998BA7723B6934400D106CA /* MaskSelectionView.storyboard */,
+				1998BA7923B6937800D106CA /* MaskSelectionViewController.swift */,
+				1998BA7B23B6944100D106CA /* MaskSelectionViewModel.swift */,
 			);
 			path = "Edit Sticker";
 			sourceTree = "<group>";
@@ -738,6 +747,7 @@
 				19DE76CA2253876F00CF29AB /* MessagesApp.storyboard in Resources */,
 				19DE774722538F7300CF29AB /* EditStickerViewController.storyboard in Resources */,
 				19DE76992253766700CF29AB /* Assets.xcassets in Resources */,
+				1998BA7823B6934400D106CA /* MaskSelectionView.storyboard in Resources */,
 				19DE76C4225384F800CF29AB /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -867,6 +877,7 @@
 				19DE771222538A8200CF29AB /* String+Extensions.swift in Sources */,
 				19DE76EE225389A600CF29AB /* UIImagePickerController+Rx.swift in Sources */,
 				19DE773E22538F6700CF29AB /* StickerSection.swift in Sources */,
+				1998BA7A23B6937800D106CA /* MaskSelectionViewController.swift in Sources */,
 				19DE76F1225389A600CF29AB /* UIImagePickerController+RxCreate.swift in Sources */,
 				19DE770B22538A8200CF29AB /* StickerService+UITestSetup.swift in Sources */,
 				19DE770F22538A8200CF29AB /* UIButton+Extensions.swift in Sources */,
@@ -894,6 +905,7 @@
 				19DE76F0225389A600CF29AB /* RxImagePickerDelegateProxy.swift in Sources */,
 				19DE774022538F6700CF29AB /* StickerBrowserCell.swift in Sources */,
 				19DE771622538A8200CF29AB /* UIImage+Orientation.swift in Sources */,
+				1998BA7C23B6944100D106CA /* MaskSelectionViewModel.swift in Sources */,
 				19DE771322538A8200CF29AB /* UIDevice+Extensions.swift in Sources */,
 				19DE76F7225389A600CF29AB /* StyleKit.swift in Sources */,
 				19DE76F5225389A600CF29AB /* PSError.swift in Sources */,
