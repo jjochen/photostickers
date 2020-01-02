@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1940077523BCD99A00413F82 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940077423BCD99A00413F82 /* MaskView.swift */; };
 		195F00F7236C2A86001CA33A /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F00F6236C2A86001CA33A /* UIView+Animations.swift */; };
 		19A9DFF322E08F41003EEF17 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9DFEE22E08F41003EEF17 /* SnapshotHelper.swift */; };
 		19A9DFFC22E0A165003EEF17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9DFFB22E0A165003EEF17 /* AppDelegate.swift */; };
@@ -111,6 +112,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1940077423BCD99A00413F82 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		195F00F6236C2A86001CA33A /* UIView+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
 		196130D122DF0E6F00CE044F /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		196130D522DF0E6F00CE044F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 			children = (
 				19DE76D6225389A600CF29AB /* AddIconView.swift */,
 				19DE76D7225389A600CF29AB /* AppIconView.swift */,
+				1940077423BCD99A00413F82 /* MaskView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -876,6 +879,7 @@
 				19DE76D02253897D00CF29AB /* Sticker.swift in Sources */,
 				19DE76EB225389A600CF29AB /* UIScrollView+Rx.swift in Sources */,
 				19DE76CF2253897D00CF29AB /* StickerInfo.swift in Sources */,
+				1940077523BCD99A00413F82 /* MaskView.swift in Sources */,
 				19DE773F22538F6700CF29AB /* AddStickerCell.swift in Sources */,
 				19DE76F4225389A600CF29AB /* StickerService.swift in Sources */,
 				19DE774F2255F61300CF29AB /* WiggleEffect.swift in Sources */,

@@ -24,7 +24,7 @@ class EditStickerViewController: UIViewController, StoryboardBased, ViewModelBas
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var stickerPlaceholder: AppIconView!
-    @IBOutlet var coverView: UIView!
+    @IBOutlet var coverView: MaskView!
     @IBOutlet var stickerTitleTextField: UITextField!
     @IBOutlet var circleButton: UIButton!
     @IBOutlet var rectangleButton: UIButton!
@@ -32,21 +32,6 @@ class EditStickerViewController: UIViewController, StoryboardBased, ViewModelBas
     @IBOutlet var multiStarButton: UIButton!
     @IBOutlet var portraitConstraints: [NSLayoutConstraint]!
     @IBOutlet var landscapeConstraints: [NSLayoutConstraint]!
-
-    fileprivate lazy var maskLayer: CAShapeLayer = {
-        let maskLayer = CAShapeLayer()
-        maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
-        return maskLayer
-    }()
-
-    fileprivate lazy var shadowLayer: CAShapeLayer = {
-        let shadowLayer = CAShapeLayer()
-        shadowLayer.shadowColor = UIColor.black.cgColor
-        shadowLayer.shadowOpacity = 1
-        shadowLayer.shadowOffset = CGSize(width: 0, height: 3)
-        shadowLayer.shadowRadius = 6
-        return shadowLayer
-    }()
 }
 
 // MASK: - UIViewController override
@@ -55,16 +40,9 @@ extension EditStickerViewController {
         super.viewDidLoad()
         isModalInPresentation = true
         view.tintColor = StyleKit.appColor
-        coverView.layer.addSublayer(shadowLayer)
         setupButtons()
         setupBindings()
         configureLayoutConstraints()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        maskLayer.frame = coverView.bounds
-        shadowLayer.frame = coverView.bounds
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -224,12 +202,8 @@ private extension EditStickerViewController {
         output.mask
             .drive(onNext: { [unowned self] mask in
                 let maskRect = self.scrollView.convertBounds(to: self.coverView)
-                let maskPath = mask.maskPath(in: self.coverView.bounds, maskRect: maskRect)
-                self.maskLayer.path = maskPath.cgPath
-                self.coverView.layer.mask = self.maskLayer
-
-                let shadowPath = mask.path(in: maskRect)
-                self.shadowLayer.shadowPath = shadowPath.cgPath
+                self.coverView.maskRect = maskRect
+                self.coverView.maskType = mask
             })
             .disposed(by: disposeBag)
 
@@ -426,7 +400,7 @@ private extension EditStickerViewController {
     func setCoverView(transparent: Bool, animated: Bool) {
         UIView.animate(withDuration: 0.3, animated: animated) {
             self.coverView.alpha = transparent ? 0.75 : 1
-            self.shadowLayer.isHidden = transparent
+            self.coverView.shadowHidden = transparent
         }
     }
 }
