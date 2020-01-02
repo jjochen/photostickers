@@ -40,6 +40,7 @@ extension EditStickerViewController {
         super.viewDidLoad()
         isModalInPresentation = true
         view.tintColor = StyleKit.appColor
+        coverView.delegate = self
         setupButtons()
         setupBindings()
         configureLayoutConstraints()
@@ -201,8 +202,6 @@ private extension EditStickerViewController {
 
         output.mask
             .drive(onNext: { [unowned self] mask in
-                let maskRect = self.scrollView.convertBounds(to: self.coverView)
-                self.coverView.maskRect = maskRect
                 self.coverView.maskType = mask
             })
             .disposed(by: disposeBag)
@@ -329,6 +328,15 @@ private extension EditStickerViewController {
         output.dismiss
             .drive()
             .disposed(by: disposeBag)
+    }
+}
+
+// MARK: - MaskViewDelegate
+
+extension EditStickerViewController: MaskViewDelegate {
+    // TODO: use rxswift
+    func maskRect(inMaskView maskView: MaskView) -> CGRect {
+        return scrollView.convertBounds(to: maskView)
     }
 }
 

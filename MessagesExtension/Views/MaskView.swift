@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol MaskViewDelegate: AnyObject {
+    func maskRect(inMaskView maskView: MaskView) -> CGRect
+}
+
 class MaskView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,13 +23,9 @@ class MaskView: UIView {
         commonInit()
     }
 
-    var maskType: Mask? {
-        didSet {
-            configureLayers()
-        }
-    }
+    weak var delegate: MaskViewDelegate?
 
-    var maskRect: CGRect? {
+    var maskType: Mask? {
         didSet {
             configureLayers()
         }
@@ -69,10 +69,16 @@ private extension MaskView {
     func commonInit() {
         layer.addSublayer(shadowLayer)
     }
+}
+
+private extension MaskView {
+    var maskRect: CGRect {
+        return delegate?.maskRect(inMaskView: self) ?? bounds
+    }
 
     func configureLayers() {
         guard let mask = maskType else { return }
-        guard let rect = maskRect else { return }
+        let rect = maskRect
 
         let maskPath = mask.maskPath(in: bounds, maskRect: rect)
         maskLayer.path = maskPath.cgPath
