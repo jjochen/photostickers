@@ -1,2 +1,3 @@
 --disable redundantReturn
 --exclude Pods
+--exclude MessagesExtension/Services/StyleKit.swift
