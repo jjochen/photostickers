@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ImageScrollView: UIScrollView {
+protocol ImageScrollViewDelegate: AnyObject {
+    func imageScrollView(_ imageScrollView: ImageScrollView, didChangeVisibleRect rect: CGRect)
+}
+
+class ImageScrollView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -19,6 +23,8 @@ class ImageScrollView: UIScrollView {
         commonInit()
     }
 
+    weak var delegate: ImageScrollViewDelegate?
+
     var minimumZoomSize = CGSize(width: 300, height: 300)
 
     var image: UIImage? {
@@ -28,42 +34,64 @@ class ImageScrollView: UIScrollView {
         set(image) {
             visibleRect = .zero
             imageView.image = image
-            contentSize = imageSize
+            scrollView.contentSize = imageSize
             configureZoomScaleLimits()
         }
     }
 
     var visibleRect: CGRect {
         get {
-            return convertBounds(to: imageView)
+            return scrollView.convertBounds(to: imageView)
         }
         set(rect) {
             visibleRectCache = rect
-            zoomScale = zoomScale(forVisibleRect: rect)
-            contentOffset = contentOffset(forVisibleRect: rect)
+            scrollView.zoomScale = zoomScale(forVisibleRect: rect)
+            scrollView.contentOffset = contentOffset(forVisibleRect: rect)
         }
     }
+
+    fileprivate lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .clear
+        scrollView.clipsToBounds = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.bouncesZoom = true
+        scrollView.alwaysBounceVertical = true
+        scrollView.alwaysBounceHorizontal = true
+        scrollView.decelerationRate = .normal
+        scrollView.delegate = self
+
+        addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        return scrollView
+    }()
 
     fileprivate lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .clear
         imageView.contentMode = .scaleAspectFit
-        addSubview(imageView)
+
+        scrollView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        imageView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         return imageView
     }()
 
-    fileprivate var previousSize = CGSize.zero
+    fileprivate var previousScrollViewSize = CGSize.zero
     fileprivate var visibleRectCache = CGRect.zero {
         didSet {
             if oldValue == visibleRectCache {
                 return
             }
-            // TODO: call delegate
+            delegate?.imageScrollView(self, didChangeVisibleRect: visibleRectCache)
         }
     }
 }
@@ -71,11 +99,11 @@ class ImageScrollView: UIScrollView {
 extension ImageScrollView {
     override func layoutSubviews() {
         super.layoutSubviews()
-        if previousSize != bounds.size {
+        if previousScrollViewSize != scrollView.bounds.size {
             configureZoomScaleLimits()
             resetVisibleRect()
         }
-        previousSize = bounds.size
+        previousScrollViewSize = scrollView.bounds.size
     }
 }
 
@@ -104,14 +132,8 @@ extension ImageScrollView: UIScrollViewDelegate {
 
 private extension ImageScrollView {
     func commonInit() {
+        backgroundColor = .clear
         clipsToBounds = false
-        showsVerticalScrollIndicator = false
-        showsHorizontalScrollIndicator = false
-        bouncesZoom = true
-        alwaysBounceVertical = true
-        alwaysBounceHorizontal = true
-        decelerationRate = .normal
-        delegate = self
     }
 }
 
@@ -131,8 +153,8 @@ private extension ImageScrollView {
     }
 
     func configureZoomScaleLimits() {
-        minimumZoomScale = minimumZoomScaleForCurrentImage
-        maximumZoomScale = maximumZoomScaleForCurrentImage
+        scrollView.minimumZoomScale = minimumZoomScaleForCurrentImage
+        scrollView.maximumZoomScale = maximumZoomScaleForCurrentImage
     }
 
     var imageSize: CGSize {
@@ -153,8 +175,8 @@ private extension ImageScrollView {
             return 1
         }
 
-        let xScale = bounds.width / minimumSize.width
-        let yScale = bounds.height / minimumSize.height
+        let xScale = scrollView.bounds.width / minimumSize.width
+        let yScale = scrollView.bounds.height / minimumSize.height
         let maxScale = min(xScale, yScale)
         return maxScale
     }
@@ -164,8 +186,8 @@ private extension ImageScrollView {
             return 1
         }
 
-        let xScale = bounds.width / imageSize.width
-        let yScale = bounds.height / imageSize.height
+        let xScale = scrollView.bounds.width / imageSize.width
+        let yScale = scrollView.bounds.height / imageSize.height
         let minScale = max(xScale, yScale)
         return minScale
     }
@@ -175,8 +197,8 @@ private extension ImageScrollView {
             return 1
         }
 
-        let xScale = bounds.width / rect.width
-        let yScale = bounds.height / rect.height
+        let xScale = scrollView.bounds.width / rect.width
+        let yScale = scrollView.bounds.height / rect.height
         let zoomScale = min(xScale, yScale)
         return zoomScale
     }
