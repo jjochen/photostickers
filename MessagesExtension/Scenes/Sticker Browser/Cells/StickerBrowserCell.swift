@@ -45,6 +45,7 @@ class StickerBrowserCell: UICollectionViewCell, WiggleEffect {
         viewModel.wiggle
             .distinctUntilChanged()
             .drive(onNext: { [weak self] shouldWobble in
+                // TODO: [unowned self]
                 if shouldWobble {
                     self?.startWiggle()
                 } else {

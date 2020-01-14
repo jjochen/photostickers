@@ -40,6 +40,7 @@ extension EditStickerViewController {
         isModalInPresentation = true
         view.tintColor = StyleKit.appColor
         coverView.delegate = self
+        scrollView.minimumZoomSize = Sticker.renderedSize
         setupButtons()
         setupBindings()
         configureLayoutConstraints()
@@ -155,6 +156,7 @@ private extension EditStickerViewController {
 
         output.visibleRect
             .drive(onNext: { [weak self] rect in
+                // TODO: [unowned self]
                 guard let self = self else { return }
                 self.scrollView.visibleRect = rect
             })

@@ -26,10 +26,9 @@ class ImageScrollView: UIScrollView {
             return imageView.image
         }
         set(image) {
-            zoomScale = 1
-            contentOffset = .zero
+            visibleRect = .zero
             imageView.image = image
-            contentSize = image?.size ?? .zero
+            contentSize = imageSize
             configureZoomScaleLimits()
         }
     }
@@ -50,6 +49,7 @@ class ImageScrollView: UIScrollView {
         imageView.backgroundColor = .clear
         imageView.contentMode = .scaleAspectFit
         addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
@@ -57,12 +57,13 @@ class ImageScrollView: UIScrollView {
         return imageView
     }()
 
-    fileprivate var previousFrame = CGRect.null
-    fileprivate var visibleRectCache = CGRect.null {
+    fileprivate var previousSize = CGSize.zero
+    fileprivate var visibleRectCache = CGRect.zero {
         didSet {
             if oldValue == visibleRectCache {
                 return
             }
+            // TODO: call delegate
         }
     }
 }
@@ -70,9 +71,11 @@ class ImageScrollView: UIScrollView {
 extension ImageScrollView {
     override func layoutSubviews() {
         super.layoutSubviews()
-        configureZoomScaleLimits()
-        resetVisibleRect()
-        previousFrame = frame
+        if previousSize != bounds.size {
+            configureZoomScaleLimits()
+            resetVisibleRect()
+        }
+        previousSize = bounds.size
     }
 }
 
@@ -114,10 +117,9 @@ private extension ImageScrollView {
 
 private extension ImageScrollView {
     func resetVisibleRect() {
-        guard image != nil, previousFrame != frame else {
+        guard image != nil else {
             return
         }
-
         visibleRect = visibleRectCache
     }
 
@@ -125,7 +127,6 @@ private extension ImageScrollView {
         guard image != nil else {
             return
         }
-
         visibleRectCache = visibleRect
     }
 
@@ -182,7 +183,7 @@ private extension ImageScrollView {
 
     func contentOffset(forVisibleRect rect: CGRect) -> CGPoint {
         let scale = zoomScale(forVisibleRect: rect)
-        var offset = visibleRect.origin
+        var offset = rect.origin
         offset.x *= scale
         offset.y *= scale
         return offset
