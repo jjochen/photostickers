@@ -23,7 +23,7 @@ class ImageScrollView: UIScrollView {
 
     var image: UIImage? {
         get {
-            return self.imageView.image
+            return imageView.image
         }
         set(image) {
             zoomScale = 1
@@ -63,7 +63,6 @@ class ImageScrollView: UIScrollView {
             if oldValue == visibleRectCache {
                 return
             }
-            
         }
     }
 }
@@ -84,18 +83,18 @@ extension ImageScrollView: UIScrollViewDelegate {
         return imageView
     }
 
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_: UIScrollView, willDecelerate decelerate: Bool) {
         if decelerate {
             return
         }
         cacheVisibleRect()
     }
 
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_: UIScrollView) {
         cacheVisibleRect()
     }
 
-    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+    func scrollViewDidEndZooming(_: UIScrollView, with _: UIView?, atScale _: CGFloat) {
         cacheVisibleRect()
     }
 }
@@ -130,8 +129,8 @@ private extension ImageScrollView {
     }
 
     func configureZoomScaleLimits() {
-        self.minimumZoomScale = minimumZoomScaleForCurrentImage
-        self.maximumZoomScale = maximumZoomScaleForCurrentImage
+        minimumZoomScale = minimumZoomScaleForCurrentImage
+        maximumZoomScale = maximumZoomScaleForCurrentImage
     }
 
     var imageSize: CGSize {

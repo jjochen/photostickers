@@ -84,7 +84,7 @@ private extension ImageStoreService {
             return nil
         }
 
-        guard let url = self.constructImageURL(forKey: key, inCategory: category, version: version) else {
+        guard let url = constructImageURL(forKey: key, inCategory: category, version: version) else {
             fatalErrorWhileDebugging("No image url for key \(key) in category \(category)")
             return nil
         }
@@ -107,7 +107,7 @@ private extension ImageStoreService {
 
 private extension ImageStoreService {
     func createSubfolderForCategory(_ category: ImageCategory) -> Bool {
-        guard let url = self.constructCategoryURL(category) else {
+        guard let url = constructCategoryURL(category) else {
             fatalErrorWhileDebugging("No category url for \(category)")
             return false
         }
