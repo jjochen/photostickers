@@ -107,6 +107,7 @@ private extension ImageScrollView {
         bouncesZoom = true
         alwaysBounceVertical = true
         alwaysBounceHorizontal = true
+        decelerationRate = .normal
         delegate = self
     }
 }

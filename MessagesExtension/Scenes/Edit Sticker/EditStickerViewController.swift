@@ -21,8 +21,7 @@ class EditStickerViewController: UIViewController, StoryboardBased, ViewModelBas
     @IBOutlet var cancelButtonItem: UIBarButtonItem!
     @IBOutlet var photosButtonItem: UIBarButtonItem!
     @IBOutlet var deleteButtonItem: UIBarButtonItem!
-    @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var scrollView: ImageScrollView!
     @IBOutlet var stickerPlaceholder: AppIconView!
     @IBOutlet var coverView: MaskView!
     @IBOutlet var stickerTitleTextField: UITextField!
@@ -53,14 +52,6 @@ extension EditStickerViewController {
                             completion: { _ in
         })
         super.viewWillTransition(to: size, with: coordinator)
-    }
-}
-
-// MARK: - UIScrollViewDelegate
-
-extension EditStickerViewController: UIScrollViewDelegate {
-    func viewForZooming(in _: UIScrollView) -> UIView? {
-        return imageView
     }
 }
 
@@ -99,26 +90,12 @@ private extension EditStickerViewController {
         let _didPickImage = PublishSubject<UIImage>()
         let didPickImage = _didPickImage.asDriver(onErrorDriveWith: Driver.empty())
 
-        let _didScroll = scrollView.rx
-            .didScroll
-            .asDriver()
+        // TODO:
+        let visibleRectDidChange = Driver.empty()
             .filter { _ in
-                self.scrollView.isDragging || self.scrollView.isDecelerating
+                self.scrollView.image != nil
             }
-
-        let _didZoom = scrollView.rx
-            .didZoom
-            .asDriver()
-            .filter { _ in
-                self.scrollView.isZooming || self.scrollView.isZoomBouncing
-            }
-
-        let visibleRectDidChange = Driver.of(_didScroll, _didZoom)
-            .merge()
-            .filter { _ in
-                self.imageView.image != nil
-            }
-            .map { self.visibleRect }
+            .map { self.scrollView.visibleRect }
 
         let stickerTitleDidChange = stickerTitleTextField.rx.text
             .asDriver()
@@ -179,24 +156,13 @@ private extension EditStickerViewController {
         output.visibleRect
             .drive(onNext: { [weak self] rect in
                 guard let self = self else { return }
-                self.visibleRect = rect
+                self.scrollView.visibleRect = rect
             })
             .disposed(by: disposeBag)
 
         output.image
             .drive(onNext: { [unowned self] image in
-                let imageSize = image?.size ?? .zero
-                self.scrollView.zoomScale = 1
-                self.scrollView.contentOffset = .zero
-                self.imageView.image = image
-                self.scrollView.contentSize = imageSize
-
-                self.view.setNeedsLayout()
-                self.view.layoutIfNeeded()
-
-                let boundsSize = self.scrollView.bounds.size
-                self.scrollView.minimumZoomScale = viewModel.minimumZoomScale(imageSize: imageSize, boundsSize: boundsSize)
-                self.scrollView.maximumZoomScale = viewModel.maximumZoomScale(imageSize: imageSize, boundsSize: boundsSize)
+                self.scrollView.image = image
             })
             .disposed(by: disposeBag)
 
@@ -409,25 +375,6 @@ private extension EditStickerViewController {
         UIView.animate(withDuration: 0.3, animated: animated) {
             self.coverView.alpha = transparent ? 0.75 : 1
             self.coverView.shadowHidden = transparent
-        }
-    }
-}
-
-// TODO: move to view model
-private extension EditStickerViewController {
-    var imageSize: CGSize {
-        return imageView.image?.size ?? .zero
-    }
-
-    var visibleRect: CGRect {
-        get {
-            return scrollView.convertBounds(to: imageView)
-        }
-        set(rect) {
-            guard let viewModel = viewModel else { return }
-            let boundsSize = scrollView.bounds.size
-            scrollView.zoomScale = viewModel.zoomScale(visibleRect: rect, boundsSize: boundsSize)
-            scrollView.contentOffset = viewModel.contentOffset(visibleRect: rect, boundsSize: boundsSize)
         }
     }
 }
