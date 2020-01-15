@@ -32,7 +32,8 @@ class ImageScrollView: UIView {
             return imageView.image
         }
         set(image) {
-            visibleRect = .zero
+            scrollView.zoomScale = 1
+            scrollView.contentOffset = .zero
             imageView.image = image
             scrollView.contentSize = imageSize
             configureZoomScaleLimits()
@@ -114,18 +115,11 @@ extension ImageScrollView: UIScrollViewDelegate {
         return imageView
     }
 
-    func scrollViewDidEndDragging(_: UIScrollView, willDecelerate decelerate: Bool) {
-        if decelerate {
-            return
-        }
+    func scrollViewDidZoom(_: UIScrollView) {
         cacheVisibleRect()
     }
 
-    func scrollViewDidEndDecelerating(_: UIScrollView) {
-        cacheVisibleRect()
-    }
-
-    func scrollViewDidEndZooming(_: UIScrollView, with _: UIView?, atScale _: CGFloat) {
+    func scrollViewDidScroll(_: UIScrollView) {
         cacheVisibleRect()
     }
 }

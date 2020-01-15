@@ -91,12 +91,11 @@ private extension EditStickerViewController {
         let _didPickImage = PublishSubject<UIImage>()
         let didPickImage = _didPickImage.asDriver(onErrorDriveWith: Driver.empty())
 
-        // TODO:
-        let visibleRectDidChange = Driver.empty()
+        let visibleRectDidChange = scrollView.rx.visibleRect.asDriver()
+            .debug()
             .filter { _ in
                 self.scrollView.image != nil
             }
-            .map { self.scrollView.visibleRect }
 
         let stickerTitleDidChange = stickerTitleTextField.rx.text
             .asDriver()

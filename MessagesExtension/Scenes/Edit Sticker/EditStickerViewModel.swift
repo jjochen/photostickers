@@ -127,9 +127,7 @@ final class EditStickerViewModel: ServicesViewModel, Stepper {
         let image = stickerInfo.originalImage
             .asDriver()
 
-        let visibleRect = Driver.of(input.viewDidLayoutSubviews,
-                                    stickerInfo.originalImage.asDriver().map { _ in Void() })
-            .merge()
+        let visibleRect = stickerInfo.originalImage.asDriver()
             .withLatestFrom(stickerInfo.cropBounds.asDriver())
             .filter { !$0.isEmpty }
             .asDriver()
